@@ -87,9 +87,9 @@ test('рыбалка, ведро 12→24 и ручная продажа торг
 });
 test('поражение, дом и возрождение без покупки лечения',async()=>{
  const p=c.freshProgress(),b=c.startFight(p);b.hp=1;b.enemyTimer=2.39;
- const page=await pageFor(p,b);await page.clock.runFor(900);
+ const page=await pageFor(p,b);for(let i=0;i<4;i++)await page.clock.runFor(500);
  assert.equal((await saved(page)).battleState.phase,'rest','defeat reaches rest phase');
- assert.ok((await page.locator('#surface').getAttribute('class')).includes('resting'));await shot(page,'fixture-rest');
+ assert.ok((await page.locator('#surface').getAttribute('class')).includes('resting'), 'UI must show resting state after defeat');await shot(page,'fixture-rest');
  await page.clock.runFor(7200);assert.ok(parseInt(await page.locator('#hero-hp-num').textContent(),10)>0);
  assert.equal((await page.locator('#surface').getAttribute('class')).includes('resting'),false);await shot(page,'fixture-respawn');
  assert.deepEqual(errors,[]);
