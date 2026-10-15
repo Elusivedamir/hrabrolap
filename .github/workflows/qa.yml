@@ -1,0 +1,39 @@
+name: Hrabrolap QA
+on: [push, pull_request, workflow_dispatch]
+permissions:
+  contents: read
+jobs:
+  gameplay:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: npm install --ignore-scripts
+      - run: npm test
+      - run: npm run qa:balance
+      - run: npx playwright install --with-deps chromium
+      - name: Real mobile Chromium tests
+        run: |
+          python3 -m http.server 8080 --bind 127.0.0.1 > /tmp/hrabrolap-http.log 2>&1 &
+          server_pid=$!
+          trap 'kill "$server_pid"' EXIT
+          python3 - <<'PY'
+          import urllib.request,time
+          for _ in range(50):
+            try:
+              urllib.request.urlopen('http://127.0.0.1:8080/', timeout=1)
+              break
+            except OSError:
+              time.sleep(.1)
+          else:
+            raise RuntimeError('Game HTTP server did not start')
+          PY
+          npm run qa:browser
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: hrabrolap-qa
+          path: qa/

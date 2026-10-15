@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#25344b">
+<title>Храбролап — тест удара v0.5</title>
+<style>
+:root{color-scheme:light;--ink:#242f42;--cream:#fff8e9;--sand:#efe2c9;--blue:#263b55;--orange:#eea94e}
+*{box-sizing:border-box}body{margin:0;background:#d9e9db;color:var(--ink);font:16px/1.4 system-ui,-apple-system,sans-serif}button{font:inherit;touch-action:manipulation}main{max-width:750px;margin:auto;background:var(--cream);min-height:100dvh;box-shadow:0 9px 32px #27394b25}header{padding:18px 18px 16px;background:var(--blue);color:#fff}header h1{font-size:23px;line-height:1.15;margin:0 0 7px}header p{font-size:13px;opacity:.88;margin:0}.chip{display:inline-block;background:#e3b770;color:#283047;border-radius:20px;padding:2px 9px;font-size:12px;font-weight:800;margin-bottom:6px}.intro{padding:13px 17px 3px;font-size:14px}.stage{position:relative;overflow:hidden;margin:12px 12px 0;border:3px solid #394a60;border-radius:16px;background:linear-gradient(180deg,#c0e8de 0%,#e2f1d9 75%,#8bba7a 76%,#8bba7a 81%,#90704f 81%,#90704f 100%);aspect-ratio:520/340;isolation:isolate}.stage:after{content:"";position:absolute;bottom:17%;left:-5%;right:-5%;height:5px;background:#526b4d;z-index:0}.stage img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;z-index:2;image-rendering:auto}.stage img.ghost{z-index:1;opacity:.21;filter:grayscale(1)}.corner{position:absolute;top:10px;left:10px;background:#1b3046d9;color:white;padding:5px 9px;border-radius:8px;font-weight:800;font-size:12px;z-index:3}.watermark{position:absolute;right:10px;top:10px;z-index:3;background:#fff7e5df;color:#364358;padding:4px 7px;border-radius:7px;font-size:10px}.details{text-align:center;padding:10px 16px 0}.details strong{display:block;font-size:19px}.details small{display:block;color:#5f6874;font-size:13px;margin-top:3px}.controls{padding:13px 13px 5px;display:grid;grid-template-columns:1fr 2fr 1fr;gap:8px}.controls button,.presets button,.toggle{padding:10px 7px;border:2px solid #34475b;border-radius:11px;background:#fff6e5;color:#23344a;font-weight:800;cursor:pointer;min-height:48px}.controls button.primary{background:#f5b551}.controls button:active,.presets button:active{transform:scale(.97)}.presets{padding:0 13px 10px;display:flex;gap:7px;flex-wrap:wrap;align-items:center;font-size:13px}.presets button{min-height:39px;padding:7px 14px}.presets button[aria-pressed="true"]{background:#304968;color:white}.toggle-row{padding:0 13px 10px;display:flex;gap:9px;align-items:center;font-size:13px}.toggle-row input{width:19px;height:19px;accent-color:#35577d}.title{font-size:16px;margin:10px 14px}.thumbs{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:7px;padding:0 12px 13px}.thumb{background:#e8eddc;border:2px solid #afbea9;border-radius:11px;overflow:hidden;min-height:94px;cursor:pointer;padding:3px;display:flex;flex-direction:column;align-items:center}.thumb img{width:100%;height:90px;object-fit:contain;mix-blend-mode:normal}.thumb span{font-size:11px;font-weight:750;margin:2px 0 4px}.thumb[aria-current="true"]{border-color:#e89b27;background:#fff0cc;box-shadow:0 0 0 2px #ffdd80 inset}.note{background:#fcf0d9;padding:12px 14px;margin:0 12px 14px;border-radius:10px;font-size:13px;border-left:4px solid #d28b37}.note strong{display:block;margin-bottom:5px}footer{padding:8px 14px 20px;font-size:12px;color:#67717f} @media(max-width:390px){.stage{margin:8px 8px 0}.thumb img{height:70px}.thumb{min-height:78px}.controls button{font-size:14px}}
+</style>
+</head>
+<body><main>
+<header><span class="chip">АНИМАЦИОННЫЙ СТЕНД · v0.5</span><h1>Храбролап — удар огромным мечом</h1><p>Шесть исходных кадров из утверждённого листа. Проверяем форму, непрерывность и попадание.</p></header>
+<div class="intro">Это <b>просмотр кадров</b>, не новая версия игры. Можешь остановить удар и выбрать любой кадр.</div>
+<div class="stage" role="img" aria-label="Просмотр движения котёнка-рыцаря"><div class="corner" id="frameNo">Кадр 1 / 6</div><div class="watermark">2D · ЭТАЛОН В ПРОВЕРКЕ</div><img class="ghost" id="ghost" src="assets/pose_01.png" alt="" hidden><img id="current" src="assets/pose_01.png" alt="Котёнок с большим мечом"></div>
+<div class="details"><strong id="phase">1 · Стойка</strong><small id="description">Стоит на земле, меч вертикально, готовится к удару.</small></div>
+<div class="controls"><button id="prev" aria-label="Предыдущий кадр">◀ Назад</button><button class="primary" id="play">▶ Воспроизвести</button><button id="next" aria-label="Следующий кадр">Вперёд ▶</button></div>
+<div class="presets"><b>Темп:</b><button data-speed="0.55" aria-pressed="false">Медленно</button><button data-speed="1" aria-pressed="true">Обычный</button><button data-speed="1.6" aria-pressed="false">Быстро</button></div>
+<label class="toggle-row"><input type="checkbox" id="ghostToggle"> <span>Показывать предыдущий кадр полупрозрачно (поиск скачков)</span></label>
+<h2 class="title">Все 6 кадров · нажми для просмотра</h2>
+<div class="thumbs" id="thumbs"></div>
+<div class="note"><strong>Что ещё не принято</strong>Кадры вырезаны из одного утверждённого художественного листа, но это ещё <b>не финальные игровые спрайты</b>: у меча и рук есть скачки между позами, а края эффектов местами обрезаны. Котёнок должен оставаться с двумя ушами, одинаковыми глазами, одним шлемом и тем же огромным мечом.</div>
+<footer>Для автономной проверки в Chrome на Android. Графика взята из ранее согласованного листа. Старая сборка v0.3 не изменяется.</footer>
+</main>
+<script>
+(()=>{
+ const phases=['Стойка','Замах','Разгон меча','Контакт','Проводка','Возврат в стойку'];
+ const descriptions=[
+ 'Стоит на земле, меч вертикально, готовится к удару.',
+ 'Отводит меч назад: корпус и лапы собираются для замаха.',
+ 'Начинается разгон клинка; здесь нужно проверить плавность положения рук.',
+ 'Низкий удар и визуальный контакт с противником.',
+ 'Проводка после удара, меч движется по дуге.',
+ 'Возвращается в ту же стойку, что и в первом кадре.'
+ ];
+ const files=Array.from({length:6},(_,i)=>`assets/pose_${String(i+1).padStart(2,'0')}.png`);
+ const baseDurations=[145,125,90,120,120,200];
+ let index=0, playing=false, speed=1, last=0, accumulated=0, timer=0;
+ const el=id=>document.getElementById(id), current=el('current'),ghost=el('ghost'),thumbs=el('thumbs'),play=el('play');
+ const setFrame=(idx,manual=false)=>{
+  index=(idx+6)%6; current.src=files[index];ghost.src=files[(index+5)%6];
+  el('frameNo').textContent=`Кадр ${index+1} / 6`;el('phase').textContent=`${index+1} · ${phases[index]}`;el('description').textContent=descriptions[index];
+  [...thumbs.children].forEach((b,i)=>b.setAttribute('aria-current',String(i===index)));
+  if(manual){stop();accumulated=0;}
+ };
+ const stop=()=>{playing=false;play.textContent='▶ Воспроизвести'; if(timer){cancelAnimationFrame(timer);timer=0;}};
+ const animate=t=>{if(!playing)return; if(!last)last=t; accumulated+=Math.min(t-last,70);last=t;let duration=baseDurations[index]/speed;if(accumulated>=duration){accumulated=accumulated%duration;setFrame(index+1);}timer=requestAnimationFrame(animate);};
+ const start=()=>{if(playing)return;playing=true;last=0;play.textContent='⏸ Пауза';timer=requestAnimationFrame(animate)};
+ files.forEach((file,i)=>{const b=document.createElement('button');b.className='thumb';b.type='button';b.setAttribute('aria-current',String(i===0));const im=document.createElement('img'); im.src=file;im.alt='';const txt=document.createElement('span');txt.textContent=`${i+1}. ${phases[i]}`;b.append(im,txt);b.addEventListener('click',()=>setFrame(i,true));thumbs.append(b);});
+ el('prev').addEventListener('click',()=>setFrame(index-1,true));el('next').addEventListener('click',()=>setFrame(index+1,true));
+ play.addEventListener('click',()=>playing?stop():start());
+ document.querySelectorAll('[data-speed]').forEach(b=>b.addEventListener('click',()=>{speed=Number(b.dataset.speed);document.querySelectorAll('[data-speed]').forEach(e=>e.setAttribute('aria-pressed',String(e===b)));}));
+ el('ghostToggle').addEventListener('change',e=>ghost.hidden=!e.target.checked);
+ document.addEventListener('visibilitychange',()=>{if(document.hidden)stop();});
+ setFrame(0); // manual preview starts paused so no motion surprises
+})();
+</script>
+</body></html>

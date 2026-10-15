@@ -1,0 +1,164 @@
+// Храбролап v0.8.1 — исправления HP, миграции и восстановления сохранений.
+export const VERSION=3;
+export const WAVE_COUNT=100;
+export const MONSTERS=[
+ {type:'slime',name:'Слизень',texture:'slime',move:'jump',attackName:'Прыжок телом'},
+ {type:'mouse',name:'Мышь',texture:'mouse',move:'bite',attackName:'Быстрый укус'},
+ {type:'mushroom',name:'Гриб',texture:'mushroom',move:'spores',attackName:'Ядовитые споры'},
+ {type:'bat',name:'Летучая мышь',texture:'bat',move:'swoop',attackName:'Налёт крыльями'},
+ {type:'spider',name:'Паук',texture:'spider',move:'leap',attackName:'Прыжок с паутиной'},
+ {type:'larva',name:'Личинка',texture:'larva',move:'wriggle',attackName:'Толчок головой'},
+ {type:'beetle',name:'Жук',texture:'beetle',move:'ram',attackName:'Удар панцирем'},
+ {type:'ghost',name:'Призрак',texture:'ghost',move:'pulse',attackName:'Призрачный импульс'}
+];
+export function monsterForWave(level){
+ const n=Math.max(1,Math.min(100,Math.floor(level))),boss=n%10===0;
+ // На каждой десятой волне усиленная версия обычного монстра: та же модель + корона.
+ const model=MONSTERS[(Math.floor((n-1)/10)*3+(n-1)%10)%8];
+ const hp=Math.round((17+4.8*n+1.0*n**1.34)*(boss?2.25:1));
+ return {...model,name:(boss?'Король · ':'')+model.name,boss,hp,attack:Math.ceil((1+n*.34)*(boss?1.42:1)),reward:Math.round((8+n*3.8+n**1.2*.38)*(boss?3:1))};
+}
+export const ENEMIES=Array.from({length:100},(_,i)=>monsterForWave(i+1));
+export const WEAPONS=[
+ {id:'iron',name:'Железный меч',price:0,damage:0,svg:'art/weapons/iron.svg'},
+ {id:'fishbone',name:'Рыбий позвоночник',price:160,damage:8,svg:'art/weapons/fishbone.svg'},
+ {id:'moon',name:'Лунный клинок',price:900,damage:20,svg:'art/weapons/moon.svg'}
+];
+export const ARMORS=[
+ {id:'none',name:'Без брони',price:0,health:0,svg:''},
+ {id:'steel',name:'Рыцарский панцирь',price:230,health:28,svg:'art/armor/steel.svg'},
+ {id:'leaf',name:'Лесная броня',price:1100,health:85,svg:'art/armor/leaf.svg'}
+];
+export const swordCost=n=>Math.round(20*1.17**n);
+export const armorCost=n=>Math.round(35*1.16**n);
+export const fishCost=n=>Math.round(45*1.24**n);
+export const homeCost=n=>Math.round(65*1.23**n);
+export const bucketCost=()=>320;
+export const bucketCapacity=p=>p.bucketLevel>0?24:12;
+const equipped=(arr,id)=>arr.find(x=>x.id===id)||arr[0];
+export const heroDamage=p=>8+3*p.sword+equipped(WEAPONS,p.weapon).damage;
+export const maxHealth=p=>65+14*p.armor+equipped(ARMORS,p.equippedArmor).health;
+export const restDuration=p=>Math.max(2.5,7-p.home*.35);
+export function battleRate(p){const m=monsterForWave(Math.max(1,Math.min(100,p.best||1)));return Math.floor(m.reward*60/Math.max(4,Math.ceil(m.hp/heroDamage(p))*1.3+1.1));}
+export function freshProgress(){return {version:VERSION,gold:0,sword:0,armor:0,fishLevel:0,home:0,bucketLevel:0,weapon:'iron',equippedArmor:'none',ownedWeapons:['iron'],ownedArmors:['none'],room:1,best:0,fails:0,farming:false,cleared:false,kills:0,totalGold:0,killedSlimes:0,caughtTotal:0,soldFish:0,soldPike:0,spentSword:0,fishBucket:[],catchPlan:[],nextCatchMs:0,merchantPhase:'away',merchantMs:300000,lastSeen:0,pendingOffline:0,questClaimed:[]};}
+const int=(v,lo,hi,d=lo)=>Number.isFinite(v)?Math.max(lo,Math.min(hi,Math.floor(v))):d;
+export function validateProgress(raw){
+ const p=freshProgress(); if(!raw||![1,2,3].includes(raw.version))return p;
+ for(const k of ['gold','sword','armor','fishLevel','home','room','best','fails','kills','totalGold','killedSlimes','caughtTotal','soldFish','soldPike','spentSword','pendingOffline','bucketLevel'])p[k]=int(raw[k],0,k==='gold'||k==='totalGold'?1e13:1e6,p[k]);
+ p.room=int(p.room,1,100);p.best=int(p.best,0,100);p.fails=int(p.fails,0,2);p.bucketLevel=int(p.bucketLevel,0,1);
+ p.farming=!!raw.farming;p.cleared=!!raw.cleared;
+ if(raw.version>=2){
+  p.fishBucket=fitFish(raw.fishBucket,bucketCapacity(p));
+  p.catchPlan=fitFish(raw.catchPlan,bucketCapacity(p)-bucketVolume(p));
+  p.nextCatchMs=int(raw.nextCatchMs,0,360000);
+  p.merchantPhase=['away','waiting'].includes(raw.merchantPhase)?raw.merchantPhase:'away';
+  p.merchantMs=int(raw.merchantMs,0,300000,300000);
+  p.lastSeen=Number.isFinite(raw.lastSeen)?Math.min(Date.now(),Math.max(0,raw.lastSeen)):0;
+  p.questClaimed=Array.isArray(raw.questClaimed)?raw.questClaimed.filter(x=>Number.isInteger(x)&&x>=0&&x<10).slice(0,10):[];
+ }
+ if(raw.version===3){
+  p.ownedWeapons=[...new Set(['iron',...(Array.isArray(raw.ownedWeapons)?raw.ownedWeapons:[]).filter(id=>WEAPONS.some(w=>w.id===id))])];
+  p.ownedArmors=[...new Set(['none',...(Array.isArray(raw.ownedArmors)?raw.ownedArmors:[]).filter(id=>ARMORS.some(w=>w.id===id))])];
+  p.weapon=p.ownedWeapons.includes(raw.weapon)?raw.weapon:'iron';
+  p.equippedArmor=p.ownedArmors.includes(raw.equippedArmor)?raw.equippedArmor:'none';
+ }
+ // В v1/v2 cleared означало прохождение десяти комнат, а не ста волн.
+ if(raw.version<3&&p.cleared&&p.best<100){p.cleared=false;p.room=Math.min(100,Math.max(p.room,p.best+1));}
+ return p;
+}
+function isFish(f){return f&&SPECIES.some(s=>s.species===f.species&&s.slots===f.slots)&&Number.isSafeInteger(f.price)&&f.price>0&&Number.isFinite(f.weight)&&f.weight>0&&Number.isFinite(f.length)&&f.length>0&&Number.isFinite(f.waitMs)&&f.waitMs>0}
+function fitFish(raw,capacity){const fish=[];if(!Array.isArray(raw))return fish;for(const f of raw){if(!isFish(f)||f.slots>capacity)continue;fish.push({...f});capacity-=f.slots;if(capacity===0)break;}return fish;}
+export function getRoom(p){return p.cleared?100:(p.farming?Math.max(1,p.room-1):p.room);}
+export function startFight(p,hp=maxHealth(p)){const level=getRoom(p),monster=monsterForWave(level);return {level,monster,hp:Math.min(maxHealth(p),hp),enemyHp:monster.hp,phase:'fight',heroTimer:0,enemyTimer:0,rest:0};}
+export function restoreFight(p,raw,completedLegacyChapter=false){
+ if(!raw||typeof raw!=='object')return startFight(p);
+ const finite=(value,min,max,fallback)=>Number.isFinite(value)?Math.max(min,Math.min(max,value)):fallback;
+ const level=int(raw.level,1,100,getRoom(p));
+ const hp=finite(raw.hp,0,maxHealth(p),maxHealth(p));
+ // Завершённый бой из старой главы не переносим на заново открытые волны.
+ if(completedLegacyChapter&&level<=p.best)return startFight(p,hp);
+ const monster=monsterForWave(level);
+ const phase=['fight','rest','transition'].includes(raw.phase)?raw.phase:'fight';
+ const b={level,monster,hp,enemyHp:finite(raw.enemyHp,0,monster.hp,monster.hp),phase,
+  heroTimer:finite(raw.heroTimer,0,1.3,0),enemyTimer:finite(raw.enemyTimer,0,2.4,0),rest:finite(raw.rest,0,phase==='rest'?restDuration(p):1.15,0)};
+ if(b.phase==='fight'&&b.hp===0){b.phase='rest';b.rest=restDuration(p);}
+ return b;
+}
+export function upgrade(p,kind){const info={sword:['sword',swordCost],armor:['armor',armorCost],fish:['fishLevel',fishCost],home:['home',homeCost],bucket:['bucketLevel',bucketCost]}[kind];if(!info)return {ok:false};const [field,priceFunc]=info;if(kind==='bucket'&&p.bucketLevel>0)return {ok:false,reason:'max'};
+ const cost=priceFunc(p[field]);if(p.gold<cost)return {ok:false,cost};p.gold-=cost;p[field]++;if(kind==='sword')p.spentSword++;
+ if(kind==='sword'||kind==='armor'){p.fails=0;p.farming=false;}
+ return {ok:true,cost};}
+export function buyEquipment(p,category,id){const arr=category==='weapon'?WEAPONS:category==='armor'?ARMORS:null;if(!arr)return {ok:false,reason:'category'};const item=arr.find(x=>x.id===id);if(!item)return {ok:false,reason:'missing'};
+ const owned=category==='weapon'?p.ownedWeapons:p.ownedArmors;
+ if(owned.includes(id))return {ok:false,reason:'owned'};
+ if(p.gold<item.price)return {ok:false,reason:'gold',cost:item.price};p.gold-=item.price;owned.push(id);return {ok:true,item};}
+export function equipEquipment(p,category,id,battle){const arr=category==='weapon'?WEAPONS:category==='armor'?ARMORS:null;if(!arr||!arr.some(x=>x.id===id))return false;
+ const own=category==='weapon'?p.ownedWeapons:p.ownedArmors;
+ if(!own.includes(id))return false;
+ const oldDamage=heroDamage(p),oldHealth=maxHealth(p);
+ if(category==='weapon')p.weapon=id;else p.equippedArmor=id;
+ if(battle&&category==='armor')battle.hp=Math.min(battle.hp,maxHealth(p));
+ if(heroDamage(p)>oldDamage||maxHealth(p)>oldHealth){p.fails=0;p.farming=false;}
+ return true;}
+export function stepFight(p,b,seconds){
+ const ev=[],dt=Math.min(Math.max(0,seconds),.25);
+ if(b.phase==='rest'||b.phase==='transition'){
+  b.rest-=dt;
+  if(b.rest<=0){const afterRest=b.phase==='rest',health=afterRest?maxHealth(p):b.hp;Object.assign(b,startFight(p,health));ev.push({kind:'spawn',afterRest,level:b.level});}
+  return ev;
+ }
+ if(b.phase!=='fight')return ev;
+ b.heroTimer+=dt;b.enemyTimer+=dt;
+ if(b.heroTimer>=1.3){b.heroTimer-=1.3;b.enemyHp=Math.max(0,b.enemyHp-heroDamage(p));ev.push({kind:'hero-hit',damage:heroDamage(p)});
+  if(b.enemyHp<=0){const gold=b.monster.reward;p.gold+=gold;p.totalGold+=gold;p.kills++;if(b.monster.type==='slime')p.killedSlimes++;
+   const firstClear=!p.farming&&!p.cleared&&b.level===p.room&&b.level>p.best;
+   if(firstClear){p.best=Math.max(p.best,b.level);p.fails=0;if(b.level===100){p.cleared=true;p.room=100;}else p.room=b.level+1;}
+   b.phase='transition';b.rest=1.15;ev.push({kind:'win',gold,level:b.level,firstClear});return ev;
+  }
+ }
+ if(b.enemyTimer>=2.4){b.enemyTimer-=2.4;b.hp=Math.max(0,b.hp-b.monster.attack);ev.push({kind:'enemy-hit',damage:b.monster.attack,move:b.monster.move});
+  if(b.hp===0){if(!p.farming&&!p.cleared){p.fails++;if(p.fails>=2&&p.room>1)p.farming=true;}
+   b.phase='rest';b.rest=restDuration(p);ev.push({kind:'defeat',farming:p.farming});}
+ }
+ return ev;
+}
+export function offlineReward(p,ms){const minutes=Math.min(480,Math.max(0,ms/60000)),raw=Math.floor(minutes*battleRate(p)*.5),next=Math.min(swordCost(p.sword),armorCost(p.armor));return Math.min(raw,Math.floor(next*1.1));}
+export const SPECIES=[
+ {species:'Плотва',slots:1,base:8,min:12,max:25,weight:[.12,.45],length:[14,27]},
+ {species:'Карась',slots:2,base:18,min:24,max:44,weight:[.45,1.2],length:[22,38]},
+ {species:'Окунь',slots:2,base:27,min:30,max:51,weight:[.40,1.4],length:[23,42]},
+ {species:'Щука',slots:3,base:85,min:58,max:95,weight:[1.6,4.1],length:[49,84]},
+ {species:'Золотой карп',slots:4,base:140,min:60,max:110,weight:[2.8,5.8],length:[55,92]}
+];
+export const bucketVolume=p=>p.fishBucket.reduce((n,f)=>n+f.slots,0);
+export const bucketGold=p=>p.fishBucket.reduce((n,f)=>n+f.price,0);
+const rand=(r,min,max)=>min+(max-min)*r();
+export function planFishing(p,r=Math.random){
+ const capacity=bucketCapacity(p)-bucketVolume(p);if(capacity<=0){p.catchPlan=[];p.nextCatchMs=0;return;}
+ const a=[];let remain=capacity;
+ while(remain>0){const available=SPECIES.filter(x=>x.slots<=remain && (x.species!=='Золотой карп' || p.fishLevel>=3));const weighted=available.map(f=>({f,w:f.slots===1?6:f.slots===2?4:f.slots===3?1.5:.3}));let hit=r()*weighted.reduce((s,x)=>s+x.w,0);let s=weighted.at(-1).f;for(const w of weighted){hit-=w.w;if(hit<=0){s=w.f;break;}}
+  const length=Math.round(rand(r,...s.length)),weight=+(rand(r,...s.weight)).toFixed(2);
+  const price=Math.max(1,Math.round(s.base*(.75+weight/s.weight[1]*.55)*(1+p.fishLevel*.11)));
+  a.push({species:s.species,slots:s.slots,weight,length,price,waitMs:rand(r,s.min,s.max)*1000});remain-=s.slots;
+ }
+ // Six active minutes for a fully empty baseline bucket, but randomized time between bites, weighted by fish size.
+ const duration=360000*capacity/12;
+ const sum=a.reduce((n,x)=>n+x.waitMs,0);
+ p.catchPlan=a.map(f=>({...f,waitMs:Math.max(800,Math.round(f.waitMs/sum*duration))}));
+ const delta=duration-p.catchPlan.reduce((n,f)=>n+f.waitMs,0);if(p.catchPlan.length)p.catchPlan.at(-1).waitMs+=delta;
+ p.nextCatchMs=p.catchPlan[0]?.waitMs||0;
+}
+export function stepFishing(p,ms,r=Math.random){
+ const events=[];if(bucketVolume(p)>=bucketCapacity(p))return events;
+ if(p.catchPlan.length===0)planFishing(p,r);
+ let remaining=Math.min(Math.max(0,ms),5000); // bounded active simulation
+ while(remaining>0 && p.catchPlan.length){const d=Math.min(remaining,p.nextCatchMs);remaining-=d;p.nextCatchMs-=d;
+ if(p.nextCatchMs<=.01){const f=p.catchPlan.shift();p.fishBucket.push(f);p.caughtTotal++;events.push({kind:'catch',fish:f});p.nextCatchMs=p.catchPlan[0]?.waitMs||0;
+  if(bucketVolume(p)>=bucketCapacity(p)){events.push({kind:'bucket-full'});p.nextCatchMs=0;break;}}
+ }
+ return events;
+}
+export function stepMerchant(p,ms,tradeOpen=false){if(tradeOpen)return [];
+ const ev=[];p.merchantMs=Math.max(0,p.merchantMs-Math.max(0,ms));if(p.merchantMs<=0){if(p.merchantPhase==='away'){p.merchantPhase='waiting';p.merchantMs=15000;ev.push({kind:'merchant-arrive'});}else {p.merchantPhase='away';p.merchantMs=300000;ev.push({kind:'merchant-leave'});}}return ev;
+}
+export function sellAll(p){if(p.merchantPhase!=='waiting'||p.fishBucket.length===0)return {ok:false};const sum=bucketGold(p),count=p.fishBucket.length,pikes=p.fishBucket.filter(f=>f.species==='Щука').length;p.gold+=sum;p.totalGold+=sum;p.soldFish+=count;p.soldPike+=pikes;p.fishBucket=[];p.catchPlan=[];p.nextCatchMs=0;p.merchantPhase='away';p.merchantMs=300000;return {ok:true,gold:sum,count,pikes};}

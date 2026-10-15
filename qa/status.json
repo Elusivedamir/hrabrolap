@@ -1,0 +1,51 @@
+{
+  "date": "2026-10-15",
+  "overall": "BLOCKED_BROWSER",
+  "logic": {
+    "status": "PASS",
+    "nodeTests": 20,
+    "failed": 0,
+    "balanceScenarios": 12,
+    "completedCampaigns": 9
+  },
+  "assets": {
+    "status": "PASS",
+    "unchangedFiles": 59,
+    "stylesheet": "unchanged",
+    "attackDefinitions": "unchanged"
+  },
+  "browser": {
+    "status": "BLOCKED",
+    "screenshots": [],
+    "attempts": [
+      {
+        "mode": "local Playwright Chromium",
+        "result": "Executable missing: chromium_headless_shell-1234/chrome-headless-shell-linux64/chrome-headless-shell"
+      },
+      {
+        "mode": "cloud browser http://127.0.0.1:8080/",
+        "result": "net::ERR_BLOCKED_BY_CLIENT"
+      },
+      {
+        "mode": "cloud browser file:///home/oai/share/.../index.html",
+        "result": "Browser URL policy: file protocol blocked; only http and https allowed"
+      }
+    ],
+    "mobileGameplay": "NOT_RUN",
+    "animations": "NOT_RUN",
+    "realLocalStorageReload": "NOT_RUN",
+    "pageJavaScriptConsole": "NOT_RUN"
+  },
+  "preparedBrowserTests": {
+    "syntax": "PASS",
+    "execution": "NOT_RUN"
+  },
+  "githubActions": {
+    "file": ".github/workflows/qa.yml",
+    "execution": "NOT_RUN"
+  },
+  "sitePreview": {
+    "status": "NOT_DEPLOYED",
+    "reason": "Managed Sites preview requires control-browser skill, unavailable in this session. No site created."
+  }
+}

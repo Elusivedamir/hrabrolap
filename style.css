@@ -1,0 +1,149 @@
+:root{font-family:system-ui,-apple-system,'Segoe UI',sans-serif;color:#fdf1db;background:#202a31}*{box-sizing:border-box}html,body{margin:0;min-height:100%;width:100%;overscroll-behavior:none}body{display:flex;align-items:center;justify-content:center;background:#202a31;overflow:hidden}button{font:inherit;cursor:pointer;touch-action:manipulation;-webkit-tap-highlight-color:transparent}button:focus-visible{outline:3px solid #ffcb70;outline-offset:2px}.game{position:relative;isolation:isolate;display:flex;flex-direction:column;overflow:hidden;width:min(100vw,48dvh);height:100dvh;max-height:940px;background:#382c32;box-shadow:0 0 0 3px #1d1a1c,0 0 28px #15151b80;font-size:clamp(12px,3vw,15px);user-select:none}.hud{flex:0 0 7.5%;min-height:0;background:#453b3c;border-bottom:3px solid #bd885b;display:flex;align-items:center;justify-content:space-between;gap:3px;padding:1% 3%;z-index:2}.brand,.wallet{display:flex;align-items:center;gap:7px}.brand img{width:33px;height:33px}.brand b{font-size:1.16em;color:#fff1d5;letter-spacing:.02em;font-family:Georgia,serif;text-shadow:0 1px 1px #261f1d}.brand small{display:block;font-size:.63em;white-space:nowrap;letter-spacing:.09em;color:#d7bba7}.wallet{background:#2b2d30;border:1px solid #967c69;border-radius:12px;padding:4px 8px;text-align:right}.wallet img{width:24px;height:24px}.wallet b{font-size:1.24em;font-variant-numeric:tabular-nums}.wallet small{display:block;color:#a6d7a2;font-size:.8em}.surface{flex:0 0 31.5%;position:relative;overflow:hidden;border-bottom:5px solid #836751;background:#7dabac}.scene-art,.house-cutaway,.fishing-rig{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}.scene-art,.house-cutaway{object-fit:fill}.house-cutaway{z-index:2;opacity:0;transition:opacity .45s ease}.rest-kitten{position:absolute;left:59%;top:48%;height:13%;width:12%;object-fit:contain;z-index:3;opacity:0;transition:opacity .35s}.rest-label{position:absolute;left:54%;top:30%;width:32%;z-index:5;background:#ffecbd;color:#614838;font-weight:850;text-align:center;padding:4px;border-radius:7px;opacity:0;pointer-events:none;box-shadow:0 2px 0 #926c4e}.surface.resting .house-cutaway,.surface.resting .rest-kitten,.surface.resting .rest-label{opacity:1}.knight{position:absolute;left:8%;bottom:12%;width:34%;height:61%;object-fit:contain;transform-origin:63% 85%;filter:drop-shadow(0 3px 1px #3f384555);z-index:3;animation:knightBreath 5s ease-in-out infinite}.fishing-rig{z-index:4;overflow:visible}.rod-group{transform-origin:143px 258px;animation:rodIdle 5s ease-in-out infinite}.bobber{transform-origin:66px 272px;animation:bobIdle 3.2s ease-in-out infinite}.fish-splash{opacity:0;transform-origin:66px 275px}.surface.biting .bobber{animation:bobBite .48s ease-in-out 3}.surface.biting .fish-splash{animation:splash 1.2s ease-out}.surface.reeling .rod-group{animation:rodReel 1.3s ease-in-out}.surface.reeling .bobber{animation:bobReel 1.3s ease-in-out}.surface.reeling .fish-splash{animation:splash 1.3s ease-out}.bucket{position:absolute;z-index:7;left:32%;bottom:9%;width:12%;height:21%;border:0;background:transparent;display:flex;flex-direction:column;align-items:center;gap:0;padding:0;filter:drop-shadow(0 3px 2px #503c3c55)}.bucket svg{width:100%;height:75%}.bucket span{padding:1px 4px;color:#fff1ce;background:#66513f;border-radius:4px;font-weight:900;font-size:.74em;white-space:nowrap}.merchant{position:absolute;display:none;z-index:8;right:3%;bottom:6%;height:58%;width:21%;background:transparent;border:0;padding:0;animation:merchantArrival .5s ease-out}.merchant.visible{display:block}.merchant img{width:100%;height:88%;object-fit:contain;filter:drop-shadow(0 3px 3px #28303b80)}.merchant span{position:absolute;bottom:75%;right:73%;width:175%;max-width:165px;border-radius:11px;background:#fff5df;color:#674c38;padding:7px;font-size:.83em;line-height:1.25;font-weight:700;border:2px solid #b68a60;box-shadow:0 3px 3px #0004}.merchant small{position:absolute;bottom:2%;left:7%;font-weight:900;padding:2px 5px;border-radius:5px;background:#4b433d;color:#fff4d5}.top-status{position:absolute;left:2%;right:2%;bottom:.7%;z-index:6;display:flex;justify-content:space-between;gap:4px;pointer-events:none}.top-status span{background:#3d4d4ecf;border-radius:7px;padding:3px 5px;font-size:.69em;font-weight:700;max-width:53%;text-align:center}.top-status span:nth-child(2){background:#584b47df}.dungeon{flex:0 0 34.5%;position:relative;overflow:hidden;background:#51434a;border-bottom:4px solid #be9062}.dungeon-title{position:absolute;z-index:5;top:3%;left:3%;right:3%;display:flex;align-items:flex-start;justify-content:space-between;gap:6px}.room-mark{padding:5px 8px;border-radius:10px;background:#3e3434eb;border:1px solid #c6a67c}.room-mark small{display:block;color:#f3cb93;font-size:.68em;letter-spacing:.06em}.room-mark b{display:block;margin-top:2px;font-size:1.03em}.battle-status{background:#9bc997;color:#294b3a;border:1px solid #c5e1ab;border-radius:7px;font-size:.7em;padding:5px 7px;font-weight:900;text-align:center}.battle-status.rest{background:#f3d2a0;color:#71523d}.arena{position:absolute;inset:17% 2.5% 13%;display:flex;align-items:flex-end;justify-content:space-between}.fighter{position:relative;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;width:43%;height:100%;min-width:0}.health-title{width:100%;display:flex;justify-content:space-between;gap:2px;white-space:nowrap;font-size:.79em;font-weight:800;text-shadow:0 2px 3px #1b1d23;min-width:0}.health-title span:first-child{min-width:0;text-overflow:ellipsis;overflow:hidden}.health-bar{height:10px;width:100%;border-radius:12px;background:#302c31;border:2px solid #f4e0ba;overflow:hidden;margin:3px 0}.health-bar>div{height:100%;width:100%;transition:width .18s linear}.hp-green{background:#7dcb85}.hp-red{background:#df7867}.hero-art{position:relative;width:100%;height:78%;display:flex;align-items:flex-end;justify-content:center;transform-origin:60% 84%;animation:heroIdle 2.1s ease-in-out infinite}.cat{height:99%;width:100%;object-fit:contain;filter:drop-shadow(0 3px 2px #13152166)}.weapon{position:absolute;width:37%;height:73%;top:19%;right:4%;transform-origin:48% 91%;transform:rotate(34deg);filter:drop-shadow(0 2px 1px #16162280)}.weapon img{width:100%;height:100%;object-fit:contain}.sword-2 .weapon img{filter:drop-shadow(0 0 3px #9cddde)}.sword-3 .weapon img{filter:drop-shadow(0 0 5px #ffcf79)}.armor-up .cat{filter:drop-shadow(0 0 4px #bbf0e4)}.slash{position:absolute;right:-2%;top:18%;width:62%;height:54%;opacity:0;border:6px solid transparent;border-top-color:#fff0c6;border-right-color:#ffcc7b;border-radius:50%;transform:rotate(28deg);filter:drop-shadow(0 0 5px #ffd69a);pointer-events:none}.hero-art.attack{animation:attackBody .46s cubic-bezier(.3,.1,.2,1) 1!important}.hero-art.attack .weapon{animation:weaponSwing .46s cubic-bezier(.28,.08,.27,1) 1}.hero-art.attack .slash{animation:slashArc .46s linear 1}.hero-art.hurt{animation:heroHurt .3s ease-out 1!important}.hero-art.resting-hero{opacity:0;pointer-events:none}.monster-art{height:72%;max-width:100%;width:100%;object-fit:contain;transform-origin:50% 85%;animation:monsterIdle 2.2s ease-in-out infinite;filter:drop-shadow(0 4px 2px #12172155)}.monster-art.boss{height:85%}.monster-art.hurt{animation:monsterHurt .32s ease-out!important}.monster-art.fade{animation:monsterFade .75s ease-out!important}.vs{align-self:center;margin-bottom:20%;font-size:1.6em;color:#ffdc95}.battle-message{position:absolute;z-index:4;bottom:11%;left:8%;right:8%;font-size:.83em;font-weight:750;text-align:center;background:#2f2a32b5;color:#ffdfb3;border-radius:10px;padding:4px}.progress-track{position:absolute;bottom:2%;left:4%;right:4%;display:flex;align-items:center;gap:8px;font-size:.72em;color:#f0e0c9;font-weight:850}.rail{flex:1;background:#302732;border:1px solid #a48a75;height:9px;border-radius:10px;overflow:hidden}.rail div{width:0;height:100%;background:#dfc388;transition:width .2s}.upgrades{flex:1;min-height:0;background:#423c40;display:flex;flex-direction:column;padding:2% 2.7% 1.4%;gap:3px}.upgrade-head{display:flex;justify-content:space-between;align-items:center;gap:4px;font-size:.86em;color:#f4d6a6}.upgrade-head>div{display:flex;gap:7px}.plain-btn{border:0;background:none;color:#f0dcc4;padding:4px 5px;font-weight:750}.upgrade-grid{flex:1;min-height:0;display:grid;grid-template-columns:1fr 1fr;grid-template-rows:1fr 1fr;gap:5px}.upgrade-card{border:2px solid #a48a6a;border-radius:12px;background:#62535b;display:flex;align-items:center;gap:5px;min-width:0;min-height:0;color:#fdf0d6;text-align:left;padding:5px;box-shadow:inset 0 2px 0 #fff3c018}.upgrade-card img{width:34%;max-width:44px;max-height:50px;object-fit:contain;flex:0 0 auto}.upgrade-card>span{display:flex;flex-direction:column;gap:2px;overflow:hidden;min-width:0}.upgrade-card b{font-size:.94em;white-space:nowrap}.upgrade-card b small{color:#e3dbd1;font-size:.78em;font-weight:450}.upgrade-card span>small{font-size:.73em;color:#e8cfb5;white-space:nowrap}.upgrade-card strong{font-size:.91em;color:#ffdc89;white-space:nowrap}.upgrade-card.can-buy{background:#5a7259;border-color:#b9dda2}.upgrade-card.cant-buy{opacity:.77}.footnote{display:flex;justify-content:space-between;color:#d3bdaa;font-size:.72em;padding:0 2px}.toast{position:absolute;z-index:30;top:9%;left:6%;right:6%;padding:10px;text-align:center;color:#432f32;background:#fff0cb;border:2px solid #b99162;border-radius:12px;font-weight:800;opacity:0;transform:translateY(-10px);transition:opacity .2s,transform .2s;pointer-events:none}.toast.show{opacity:1;transform:translateY(0)}.float-coin{position:absolute;z-index:7;top:61%;left:52%;color:#ffe09b;font-size:1.5em;font-weight:900;text-shadow:1px 2px 1px #372f32;animation:coins 1.1s ease-out forwards;pointer-events:none}.modal{position:absolute;z-index:20;inset:0;width:100%;height:100%;max-height:none;max-width:none;background:#1c2025d9;padding:5%;margin:0;border:0;color:#543b33}.modal:not([open]){display:none}.modal-card{position:relative;margin:auto;margin-top:22%;max-height:77%;overflow:auto;background:#f7e8cb;border:5px solid #9e7556;border-radius:20px;box-shadow:0 9px 25px #0007;padding:19px 13px 16px}.modal h2{font:800 1.35em Georgia,serif;margin:0 30px 14px 0;color:#744732}.modal-content{color:#64483a;line-height:1.5;font-size:.98em;white-space:pre-wrap}.modal-content p{margin:0 0 7px}.modal-x{position:absolute;right:9px;top:7px;border:0;background:#d4b495;color:#5b433c;border-radius:50%;font-size:1.8em;width:31px;height:31px;line-height:25px}.modal-buttons{display:flex;flex-direction:column;gap:8px;margin-top:12px}.modal-buttons button{border:2px solid #88633f;border-radius:10px;padding:12px 7px;background:#77a978;color:#203c2c;font-weight:850}.modal-buttons button.secondary{background:#d8bea4;color:#5b4034}.modal-buttons button:disabled{opacity:.5}.fish-row,.quest-row{display:flex;justify-content:space-between;gap:8px;padding:8px 4px;border-bottom:1px solid #c9b297}.fish-row b{color:#89663b}.quest-row>span{flex:1}.quest-row small{display:block;color:#88725e}.quest-row button{border-radius:7px;background:#77a978;border:0;padding:8px 10px;color:#203b30;font-weight:800}.quest-row button:disabled{opacity:.48}.empty{padding:15px 0;text-align:center;color:#927c64}.modal-info{background:#e8d7ba;padding:8px;border-radius:8px;font-size:.85em;margin-top:10px;color:#705340}@keyframes heroIdle{0%,100%{transform:translateY(0)}50%{transform:translateY(-2px)}}@keyframes monsterIdle{0%,100%{transform:translateY(0)}50%{transform:translateY(-4px)}}@keyframes attackBody{0%{transform:translateX(0) rotate(0)}20%{transform:translateX(-8%) rotate(-7deg)}52%{transform:translateX(20%) rotate(7deg)}65%{transform:translateX(18%) rotate(4deg)}100%{transform:translateX(0) rotate(0)}}@keyframes weaponSwing{0%{transform:rotate(40deg)}20%{transform:rotate(89deg)}54%{transform:rotate(-55deg)}75%{transform:rotate(-40deg)}100%{transform:rotate(34deg)}}@keyframes slashArc{0%,29%{opacity:0;transform:rotate(50deg) scale(.65)}51%{opacity:1;transform:rotate(12deg) scale(1.15)}71%,100%{opacity:0;transform:rotate(-20deg) scale(1)}}@keyframes heroHurt{0%,100%{transform:translateX(0);filter:brightness(1)}45%{transform:translateX(-10%);filter:brightness(1.8)}}@keyframes monsterHurt{0%,100%{filter:brightness(1);transform:translateX(0)}38%{filter:brightness(2);transform:translateX(9%)}}@keyframes monsterFade{0%{opacity:1;transform:scale(1)}100%{opacity:0;transform:scale(.72)}}@keyframes knightBreath{0%,100%{transform:translateY(0)}50%{transform:translateY(-2px)}}@keyframes rodIdle{0%,100%{transform:rotate(0)}50%{transform:rotate(.8deg)}}@keyframes rodReel{0%,100%{transform:rotate(0)}37%{transform:rotate(-23deg)}65%{transform:rotate(-13deg)}}@keyframes bobIdle{0%,100%{transform:translateY(0)}50%{transform:translateY(2px)}}@keyframes bobBite{0%,100%{transform:translateY(0)}36%{transform:translateY(7px)}57%{transform:translateY(-4px)}}@keyframes bobReel{0%{transform:translate(0,0)}45%{transform:translate(28px,-44px)}100%{transform:translate(64px,-74px)}}@keyframes splash{0%,10%,100%{opacity:0;transform:scale(.6)}32%,55%{opacity:1;transform:scale(1.3)}}@keyframes merchantArrival{from{opacity:0;transform:translateX(45px)}to{opacity:1;transform:translateX(0)}}@keyframes coins{0%{opacity:1;transform:translateY(0)}100%{opacity:0;transform:translateY(-70px)}}@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.001s!important;transition-duration:.001s!important}}
+
+/* Fishing is a staged motion: bite > rod set > fish arcs into the physical bucket. */
+.fish-flight{position:absolute;z-index:6;left:9%;bottom:20%;width:8.5%;height:13%;object-fit:contain;opacity:0;pointer-events:none;transform-origin:50% 50%}
+.surface.reeling .fish-flight{animation:fishArc 1.35s cubic-bezier(.25,.4,.4,1) forwards}
+.surface.reeling .knight{animation:knightReel 1.35s ease-in-out}
+@keyframes fishArc{0%,25%{opacity:0;transform:translate(0,0) rotate(-18deg) scale(.65)}38%{opacity:1;transform:translate(65%,-145%) rotate(-45deg) scale(.93)}64%{opacity:1;transform:translate(200%,-195%) rotate(12deg) scale(1.05)}87%{opacity:1;transform:translate(260%,0) rotate(75deg) scale(.8)}100%{opacity:0;transform:translate(295%,65%) rotate(98deg) scale(.5)}}
+@keyframes knightReel{0%,100%{transform:rotate(0deg)}40%{transform:rotate(-7deg) translateY(-4px)}70%{transform:rotate(4deg)}}
+
+/* v0.3: authored frame-by-frame sword movement, disable old fake whole-body rotation. */
+.hero-art .weapon,.hero-art .slash{display:none!important}
+.hero-art.attack,.hero-art.hurt{animation:none!important}
+.hero-art .cat{object-fit:contain;image-rendering:auto;filter:drop-shadow(0 3px 2px #17141b66)}
+
+/* v0.4: Approved painterly sprite pass. This is an art proof, not an accepted animation release. */
+.game{background:#46342c;}
+.hud,.upgrades{background:#49382f;}
+.surface{background:#8eb4a3;}
+.surface>.scene-art{object-fit:fill;filter:saturate(1.06);}
+.surface .knight{display:none!important;}
+.surface .fishing-rig{opacity:0!important;} /* fishing rod+float already painted, animation must be replaced with consistent frames */
+.surface .house-cutaway{left:53%;width:47%;object-fit:fill;height:100%;}
+.surface .rest-kitten{opacity:0!important;} /* inside kitten is already painted into house-interior image */
+.surface.resting .house-cutaway{opacity:1;}
+.dungeon{background:#342e2e;}
+.dungeon>.scene-art{object-fit:fill;opacity:.94;filter:brightness(.78);}
+.hero-art{transform-origin:50% 92%;}
+.hero-art .cat{object-fit:contain;filter:drop-shadow(0 7px 3px #120e112e);}
+.hero-art .weapon,.hero-art .slash{display:none!important;} /* Sword is contained in canonical painted sprite */
+.hero-art.canon-lunge{animation:canonLunge .48s cubic-bezier(.32,.12,.3,1) 1!important;}
+@keyframes canonLunge{0%{transform:translateX(0)}22%{transform:translateX(-7%) scale(1.02)}51%{transform:translateX(13%) scale(1.03)}100%{transform:translateX(0)}}
+.monster-art[src$="slime-painted.png"]{object-fit:contain;filter:drop-shadow(0 6px 2px #12171944);}
+.surface .bucket{left:41%;bottom:8%;width:10%;height:17%;}
+.surface .bucket svg{opacity:0;}
+
+/* v0.6 battle sprite frames: fixed base, with drawn movement within poses (no body rotation). */
+.hero-art{position:relative;animation:none!important;transform:none!important;overflow:visible;isolation:isolate;}
+.hero-art .cat{position:absolute;width:165%;max-width:none;height:116%;left:-23%;bottom:-11%;object-fit:contain;object-position:center bottom;image-rendering:auto;transform:none!important;filter:drop-shadow(0 3px 2px #17141b55);}
+.hero-art.battle-hurt{animation:heroHurt .26s ease-out 1!important;}
+.hero-art.canon-lunge{animation:none!important;}
+.hero-art .weapon,.hero-art .slash{display:none!important;}
+/* Mark playable attack phase without inventing extra swords. */
+.dungeon .battle-message{background:#262d35df;color:#fff4d5;}
+/* Prevent pseudo-3D filter overlays on approved character art. */
+.hero-art.armor-up .cat,.hero-art.sword-2 .cat,.hero-art.sword-3 .cat{filter:drop-shadow(0 3px 2px #17141b55);}
+
+/* Rest view is a localized interior reveal on the same surface image; never shifts house geometry. */
+.surface .house-cutaway{position:absolute;inset:0;left:0;top:0;width:100%;height:100%;object-fit:fill;z-index:2;}
+
+
+/* v0.7 canonical 2D pass: approved art only, no bearded fisherman or duplicate rods. */
+.game{background:#2f2b35}
+.hud{background:linear-gradient(#63412d,#3b2828);border-bottom:4px solid #2a252c;box-shadow:inset 0 3px 0 #8f6546}
+.brand b{font-family:system-ui,sans-serif;font-size:1.18em;font-weight:1000;color:#ffd982;text-shadow:1px 2px #62341d,-1px -1px #2c2634}
+.surface{flex-basis:27%;border-bottom:7px solid #252c3a;background:#7baaca}
+.surface>.scene-art,.surface>.house-cutaway{object-fit:fill;filter:none}
+.surface .house-cutaway{left:0;right:0;top:0;bottom:0;width:100%;height:100%;object-fit:fill;z-index:2}
+.surface .fishing-rig{display:none!important}
+.surface .fish-flight{z-index:6;left:39%;bottom:15%}
+.surface .bucket{left:47%;bottom:2%;height:48px;width:50px;z-index:7;border:2px solid #8a6b48;border-radius:7px;background:#473b34ef;padding:2px 4px;min-width:40px;min-height:24px}
+.surface .bucket svg{display:none}
+.surface .bucket span{background:none;color:#fff6db;font-size:.8em}
+.surface .rest-label{left:52%;top:5%;width:40%;font-size:.9em;z-index:6}
+.surface .top-status{bottom:0%;left:1%;right:1%;z-index:7}
+.surface .top-status span{font-size:.74em;background:#203b48e9;box-shadow:0 0 0 1px #597b8c50}
+.surface .top-status span:nth-child(2){background:#3b4a40eb}
+.surface.biting:after,.surface.reeling:after{content:"";position:absolute;left:39%;bottom:10%;width:25px;height:8px;border:2px solid #eafaff;border-radius:50%;z-index:5;animation:splash 1.2s ease-in-out}
+.dungeon{flex-basis:36.2%;background:#20364e;border-bottom:6px solid #805b3e}
+.dungeon>.scene-art{object-fit:fill;opacity:1;filter:none}
+.dungeon-title{top:2.2%;left:2.5%;right:2.5%}
+.room-mark{background:#242b35ed;border:2px solid #a67c52;box-shadow:0 2px 0 #151e30;border-radius:12px;padding:4px 7px}
+.room-mark small{color:#ffe1a1}
+.arena{inset:18% 2.5% 14%}
+.health-title{font-size:.83em;color:#fff6e8;text-shadow:1px 2px #161b29}
+.legacy-hero-hp{display:none}
+.hero-hearts{width:100%;height:24px;display:flex;align-items:center;gap:1px;margin-top:3px;justify-content:flex-start}
+.heart-shell{display:inline-block;position:relative;width:20%;max-width:27px;height:23px;filter:drop-shadow(0 2px 1px #1d2734a8)}
+.heart-shell img{width:100%;height:100%;position:absolute;inset:0}
+.heart-unfilled{filter:grayscale(1) brightness(.42)}
+.heart-filled{position:absolute;inset:0;overflow:hidden;display:block;max-height:100%;transition:width .15s linear}
+.heart-filled img{width:25px;max-width:none;object-fit:fill}
+.fighter{width:47%}
+.hero-art{height:80%}
+.hero-art .cat{width:187%;height:123%;left:-27%;bottom:-10%;filter:drop-shadow(0 5px 2px #111b31b0)}
+.monster-art{height:76%;max-width:98%;object-fit:contain;filter:drop-shadow(0 6px 1px #0f203777)}
+.monster-art.boss{height:82%}
+.boss-crown{position:absolute;top:25%;left:24%;width:65%;height:22%;pointer-events:none;filter:drop-shadow(0 2px 1px #242b3c)}
+.battle-message{left:7%;right:7%;bottom:10%;background:#172b40e0;border:1px solid #426079;padding:5px;font-size:.82em}
+.progress-track{bottom:2%}
+.upgrades{background:linear-gradient(#654530,#3b2926);padding:2.3% 2.5% 1.5%;gap:5px}
+.upgrade-head{font-size:.92em}
+.upgrade-card{border:2px solid #b99466;border-radius:14px;background:#715b63;box-shadow:inset 0 3px #e4bf8b44,0 3px #271b25;text-shadow:0 1px #4c3536}
+.upgrade-card.can-buy{background:#567252;border-color:#b5dca1}
+.upgrade-card img{width:31%;max-width:45px;max-height:55px}
+.footnote{font-size:.67em}
+@media(max-height:740px){.hud{flex-basis:7%}.surface{flex-basis:26%}.dungeon{flex-basis:37%}}
+
+/* v0.8 additive sprite rig & lamp shop controls */
+.hud{gap:3px;padding:1% 2%;}.hud .brand{flex:1;min-width:0}.hud .brand img{display:none}.hud .brand b{font-size:1.07em}.hud .brand small{font-size:.54em}.hud .wallet{padding:5px 7px}.hud .wallet img{width:20px;height:20px}.hud-action{flex:0 0 auto;min-width:37px;height:38px;border:2px solid #c9a579;border-radius:12px;background:linear-gradient(#876747,#644430);box-shadow:inset 0 2px #ebce9555;color:#fff0cf;font-size:19px;display:grid;place-items:center}
+.hero-art .hero-rig{width:175%;height:130%;min-height:0;overflow:visible;position:relative;left:0%;bottom:-9%;filter:drop-shadow(0 4px 2px #1326388f)}.hero-rig image{pointer-events:none}.hero-rig #hero-motion{transform-origin:240px 240px}
+.enemy-holder{width:100%;height:80%;position:relative;display:flex;align-items:flex-end;justify-content:center;transform-origin:center 82%}.enemy-holder .monster-art{height:87%;width:100%}.enemy-holder.boss{transform:scale(1.20);transform-origin:50% 95%}
+.enemy-effect{position:absolute;display:none;left:10%;top:12%;width:70%;height:70%;pointer-events:none}.enemy-holder.spores .enemy-effect{display:block;background:radial-gradient(circle at 20% 20%,#e4f5a5 0 6px,transparent 7px),radial-gradient(circle at 72% 36%,#b6e68b 0 8px,transparent 9px),radial-gradient(circle at 36% 80%,#d4df94 0 5px,transparent 6px);animation:sporesFx .65s ease-out}.enemy-holder.hurt{animation:enemyHurt .38s ease-out}.enemy-holder.dead{animation:enemyFade .65s ease-in forwards}
+.enemy-holder.attack-jump{animation:enemyJump .45s ease-in-out}.enemy-holder.attack-bite{animation:enemyBite .45s ease-in-out}.enemy-holder.attack-swoop{animation:enemySwoop .56s ease-in-out}.enemy-holder.attack-leap{animation:enemyLeap .52s ease-in-out}.enemy-holder.attack-spores{animation:enemySpore .68s ease-in-out}.enemy-holder.attack-wriggle{animation:enemyWriggle .48s ease-in-out}.enemy-holder.attack-ram{animation:enemyRam .47s ease-in-out}.enemy-holder.attack-pulse{animation:enemyPulse .7s ease-out}
+@keyframes enemyJump{0%,100%{transform:translate(0,0) scale(1)}40%{transform:translate(-17px,-22px) scale(1.04)}}
+@keyframes enemyBite{0%,100%{transform:translateX(0)}35%{transform:translateX(-23px) rotate(-9deg)}55%{transform:translateX(-11px) rotate(4deg)}}
+@keyframes enemySwoop{0%,100%{transform:translate(0,0)}36%{transform:translate(-27px,-25px) rotate(-12deg)}65%{transform:translate(-17px,0) rotate(9deg)}}
+@keyframes enemyLeap{0%,100%{transform:translate(0,0)}48%{transform:translate(-30px,-17px) rotate(8deg)}}
+@keyframes enemySpore{0%,100%{transform:scale(1)}35%{transform:scale(1.18,0.88)}57%{transform:scale(.95,1.1)}}
+@keyframes enemyWriggle{0%,100%{transform:translateX(0) skewX(0)}35%{transform:translateX(-14px) skewX(-18deg)}70%{transform:translateX(-4px) skewX(12deg)}}
+@keyframes enemyRam{0%,100%{transform:translateX(0)}28%{transform:translateX(7px) rotate(8deg)}50%{transform:translateX(-29px) rotate(-5deg)}}
+@keyframes enemyPulse{0%,100%{transform:scale(1);filter:brightness(1)}50%{transform:scale(1.21);filter:brightness(1.7)}}
+@keyframes sporesFx{from{opacity:.2;transform:translate(0,0)}to{opacity:0;transform:translate(-42px,-18px)}}
+@keyframes enemyHurt{0%,100%{filter:brightness(1);opacity:1}45%{transform:translateX(9px);filter:brightness(2.7)}}
+@keyframes enemyFade{to{opacity:0;transform:translateY(18px) scale(.72)}}
+.boss-crown{top:29%;left:44%;width:41%;height:17%;z-index:2}
+.mini-cave{position:absolute;z-index:4;right:4%;bottom:3%;width:16%;height:27%;filter:drop-shadow(0 2px 2px #2229)}
+.mini-shop{position:absolute;z-index:4;right:20%;bottom:4%;width:15%;height:32%;filter:drop-shadow(0 2px 2px #2229);cursor:pointer}
+.cave-call{position:absolute;right:6%;bottom:34%;z-index:8;color:#3e3943;background:#fff2c6;border:2px solid #8b6c4a;border-radius:10px;padding:5px;font-weight:800;display:none;box-shadow:0 2px 3px #3336}.surface.wake-up .cave-call{display:block;animation:callBubble 1.45s ease-out forwards}@keyframes callBubble{0%{opacity:0;transform:translateY(13px)}25%,70%{opacity:1}100%{opacity:0;transform:translateY(-12px)}}
+.surface .bucket img{width:100%;height:80%;object-fit:contain;filter:drop-shadow(0 2px 2px #30201a);display:block}
+.modal-card{background:linear-gradient(#ffefd5,#f5dfbd);border-color:#8d5d3c;box-shadow:0 8px 0 #483027,0 15px 28px #0008}.modal h2{font-family:Georgia,serif}
+.shop-item{display:flex;align-items:center;gap:8px;padding:7px 3px;border-bottom:1px dashed #c7a47e}.shop-item img{width:48px;height:58px;object-fit:contain;background:#ead5b2;border-radius:8px;padding:4px}.shop-item main{flex:1;min-width:0}.shop-item b{display:block}.shop-item small{display:block;color:#8a6247}.shop-item button{font:750 .82em system-ui;border-radius:9px;padding:7px 9px;background:#668c67;border:2px solid #4a6c4d;color:#fff}.shop-item button:disabled{opacity:.45}.section-title{font-weight:900;font-size:1.07em;margin:10px 0 2px}
+@media(max-width:365px){.hud-action{min-width:32px;width:32px;height:34px;font-size:17px}.hud .wallet b{font-size:1.06em}}
+
+.cave-runner{position:absolute;bottom:12%;left:55%;width:11%;height:21%;z-index:7;object-fit:contain;opacity:0;pointer-events:none}.surface.wake-up .cave-runner{animation:runIntoCave 1.75s ease-in forwards}@keyframes runIntoCave{0%{opacity:0;left:53%;transform:scale(.88)}18%{opacity:1}75%{opacity:1;left:79%;transform:scale(.71)}100%{opacity:0;left:83%;transform:scale(.48)}}
+.merchant.visible img{animation:merchantBob 2s ease-in-out infinite}@keyframes merchantBob{0%,100%{transform:translateY(0)}50%{transform:translateY(-2px)}}
+
+/* v0.8 each monster has its own reaction silhouette; styles keyed by the same immutable model. */
+.enemy-holder[data-monster="slime"].hurt{animation:slimeHurt .39s ease-out!important}
+.enemy-holder[data-monster="mouse"].hurt{animation:mouseHurt .39s ease-out!important}
+.enemy-holder[data-monster="mushroom"].hurt{animation:mushroomHurt .39s ease-out!important}
+.enemy-holder[data-monster="bat"].hurt{animation:batHurt .39s ease-out!important}
+.enemy-holder[data-monster="spider"].hurt{animation:spiderHurt .39s ease-out!important}
+.enemy-holder[data-monster="larva"].hurt{animation:larvaHurt .39s ease-out!important}
+.enemy-holder[data-monster="beetle"].hurt{animation:beetleHurt .39s ease-out!important}
+.enemy-holder[data-monster="ghost"].hurt{animation:ghostHurt .39s ease-out!important}
+@keyframes slimeHurt{0%,100%{transform:scale(1,1);filter:brightness(1)}45%{transform:scale(1.24,.68);filter:brightness(1.7)}}
+@keyframes mouseHurt{0%,100%{transform:translateX(0);filter:brightness(1)}35%{transform:translateX(15px) rotate(9deg);filter:brightness(1.9)}}
+@keyframes mushroomHurt{0%,100%{transform:rotate(0deg);filter:brightness(1)}45%{transform:rotate(13deg) scale(.92);filter:brightness(1.8)}}
+@keyframes batHurt{0%,100%{transform:translate(0,0) rotate(0deg);filter:brightness(1)}48%{transform:translate(9px,-12px) rotate(23deg);filter:brightness(1.6)}}
+@keyframes spiderHurt{0%,100%{transform:translateY(0) rotate(0deg);filter:brightness(1)}40%{transform:translateY(8px) rotate(-10deg);filter:brightness(1.6)}}
+@keyframes larvaHurt{0%,100%{transform:skewX(0) scaleX(1);filter:brightness(1)}35%{transform:skewX(17deg) scaleX(.75);filter:brightness(1.8)}}
+@keyframes beetleHurt{0%,100%{transform:rotate(0deg);filter:brightness(1)}42%{transform:translateX(8px) rotate(20deg);filter:brightness(1.5)}}
+@keyframes ghostHurt{0%,100%{transform:scale(1);opacity:1}45%{transform:scale(1.25);opacity:.35;filter:brightness(1.7)}}
+.enemy-holder[data-monster="ghost"].dead{animation:ghostFade .65s ease-out forwards}
+.enemy-holder[data-monster="spider"].dead{animation:spiderFade .65s ease-out forwards}
+@keyframes ghostFade{to{opacity:0;transform:translateY(-20px) scale(1.25)}}
+@keyframes spiderFade{to{opacity:0;transform:rotate(40deg) scale(.65)}}
+
+.hud-action img{display:block;width:27px;height:27px;object-fit:contain}

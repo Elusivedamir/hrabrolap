@@ -1,0 +1,111 @@
+[
+  {
+    "test": "Магазин, инвентарь и экипировка",
+    "status": "PASS",
+    "detail": "Покупка, инвентарь и SVG-замена работают; 0 ошибок",
+    "seconds": 1.12
+  },
+  {
+    "test": "Ведро и торговец",
+    "status": "PASS",
+    "detail": {
+      "bucket": "Улов: 0 рыб · 0/12 места · 0 монет\n\nВедро пока пустое\n\nПродать улов можно только серому коту-торговцу. Он приезжает каждые 5 минут",
+      "merchant_modal": "Серый кот-торговец",
+      "errors": []
+    },
+    "seconds": 0.89
+  },
+  {
+    "test": "Все 8 монстров и видимость корон",
+    "status": "PASS",
+    "detail": [
+      [
+        1,
+        "slime",
+        false
+      ],
+      [
+        2,
+        "mouse",
+        false
+      ],
+      [
+        3,
+        "mushroom",
+        false
+      ],
+      [
+        4,
+        "bat",
+        false
+      ],
+      [
+        5,
+        "spider",
+        false
+      ],
+      [
+        6,
+        "larva",
+        false
+      ],
+      [
+        7,
+        "beetle",
+        false
+      ],
+      [
+        8,
+        "ghost",
+        false
+      ],
+      [
+        10,
+        "mouse",
+        true
+      ],
+      [
+        20,
+        "spider",
+        true
+      ],
+      [
+        100,
+        "spider",
+        true
+      ]
+    ],
+    "seconds": 4.89
+  },
+  {
+    "test": "Три атаки через риг SVG",
+    "status": "PASS",
+    "detail": {
+      "weapon_poses": 69,
+      "distinct": 14,
+      "three_attacks": true
+    },
+    "seconds": 5.67
+  },
+  {
+    "test": "Продажа настоящей рыбы и улучшение ведра",
+    "status": "PASS",
+    "detail": {
+      "soldFish": 1,
+      "gold": 724,
+      "bucketCapacity": 24,
+      "errors": []
+    },
+    "seconds": 0.98
+  },
+  {
+    "test": "Поражение, отдых дома, возрождение",
+    "status": "PASS",
+    "detail": {
+      "rest_started": true,
+      "respawn_hp": "65/65",
+      "errors": []
+    },
+    "seconds": 2.66
+  }
+]

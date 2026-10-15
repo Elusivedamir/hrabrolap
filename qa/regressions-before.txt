@@ -1,0 +1,200 @@
+✖ снятие брони ограничивает текущее HP, надевание не лечит (3.119653ms)
+✖ сильное оружие выводит из фарма, текущее сражение не пересоздаётся (0.827679ms)
+✔ слабая экипировка не снимает режим фарма (0.189829ms)
+✖ победа над фарм-врагом после апгрейда не считается первым прохождением (0.498284ms)
+✖ перенос завершённой старой главы v1/v2 открывает 11-ю волну (0.356946ms)
+✔ перенос незавершённой 10-й волны не пропускает босса (0.2307ms)
+✖ старое battleState не возвращает в уже завершённую главу (0.188718ms)
+✖ повреждённый список вещей сохраняет монеты и исправные поля (0.26506ms)
+✖ встроенные предметы и повторные ID в сохранении не дублируются (2.363365ms)
+✖ невалидная рыба и переполнение из сохранения отбрасываются (0.722244ms)
+✔ план из сохранения не переполняет оставшееся место в ведре (0.352509ms)
+✖ восстановление боя очищает дробный уровень и нечисловые таймеры (0.280072ms)
+✖ сохранение/восстановление боя и отдыха через JSON без лечения (0.507387ms)
+✔ у всех восьми видов реально происходят атака, урон и победа (1.775334ms)
+✔ 100-я волна завершается единожды и прогресс не выходит за 100 (0.25119ms)
+✔ торговец: без него продажа невозможна, ожидание заморожено в открытой торговле (1.384899ms)
+ℹ tests 16
+ℹ suites 0
+ℹ pass 6
+ℹ fail 10
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 149.474344
+
+✖ failing tests:
+
+test at tests/regression.test.mjs:5:1
+✖ снятие брони ограничивает текущее HP, надевание не лечит (3.119653ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  150 !== 65
+  
+      at TestContext.<anonymous> (file:///workspace/scratch/b00c0e2a6c88/hrabrolap/tests/regression.test.mjs:9:9)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.start (node:internal/test_runner/test:1242:17)
+      at startSubtestAfterBootstrap (node:internal/test_runner/harness:387:17) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 150,
+    expected: 65,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests/regression.test.mjs:12:1
+✖ сильное оружие выводит из фарма, текущее сражение не пересоздаётся (0.827679ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  true !== false
+  
+      at TestContext.<anonymous> (file:///workspace/scratch/b00c0e2a6c88/hrabrolap/tests/regression.test.mjs:16:9)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:960:18)
+      at Test.postRun (node:internal/test_runner/test:1522:19)
+      at Test.run (node:internal/test_runner/test:1447:12)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:387:3) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: true,
+    expected: false,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests/regression.test.mjs:24:1
+✖ победа над фарм-врагом после апгрейда не считается первым прохождением (0.498284ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  true !== false
+  
+      at TestContext.<anonymous> (file:///workspace/scratch/b00c0e2a6c88/hrabrolap/tests/regression.test.mjs:28:9)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:960:18)
+      at Test.postRun (node:internal/test_runner/test:1522:19)
+      at Test.run (node:internal/test_runner/test:1447:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: true,
+    expected: false,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests/regression.test.mjs:32:1
+✖ перенос завершённой старой главы v1/v2 открывает 11-ю волну (0.356946ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  10 !== 11
+  
+      at TestContext.<anonymous> (file:///workspace/scratch/b00c0e2a6c88/hrabrolap/tests/regression.test.mjs:35:59)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:960:18)
+      at Test.postRun (node:internal/test_runner/test:1522:19)
+      at Test.run (node:internal/test_runner/test:1447:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 10,
+    expected: 11,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests/regression.test.mjs:43:1
+✖ старое battleState не возвращает в уже завершённую главу (0.188718ms)
+  TypeError: c.restoreFight is not a function
+      at TestContext.<anonymous> (file:///workspace/scratch/b00c0e2a6c88/hrabrolap/tests/regression.test.mjs:45:12)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:960:18)
+      at Test.postRun (node:internal/test_runner/test:1522:19)
+      at Test.run (node:internal/test_runner/test:1447:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7)
+
+test at tests/regression.test.mjs:48:1
+✖ повреждённый список вещей сохраняет монеты и исправные поля (0.26506ms)
+  TypeError: (raw.ownedWeapons || []).filter is not a function
+      at Module.validateProgress (file:///workspace/scratch/b00c0e2a6c88/hrabrolap/game-core.mjs:60:60)
+      at TestContext.<anonymous> (file:///workspace/scratch/b00c0e2a6c88/hrabrolap/tests/regression.test.mjs:50:13)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:960:18)
+      at Test.postRun (node:internal/test_runner/test:1522:19)
+      at Test.run (node:internal/test_runner/test:1447:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7)
+
+test at tests/regression.test.mjs:58:1
+✖ встроенные предметы и повторные ID в сохранении не дублируются (2.363365ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:
+  + actual - expected
+  
+    [
+      'iron',
+  +   'iron',
+      'moon'
+    ]
+  
+      at TestContext.<anonymous> (file:///workspace/scratch/b00c0e2a6c88/hrabrolap/tests/regression.test.mjs:60:9)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:960:18)
+      at Test.postRun (node:internal/test_runner/test:1522:19)
+      at Test.run (node:internal/test_runner/test:1447:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: [ 'iron', 'iron', 'moon' ],
+    expected: [ 'iron', 'moon' ],
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }
+
+test at tests/regression.test.mjs:62:1
+✖ невалидная рыба и переполнение из сохранения отбрасываются (0.722244ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  -66 !== 12
+  
+      at TestContext.<anonymous> (file:///workspace/scratch/b00c0e2a6c88/hrabrolap/tests/regression.test.mjs:65:9)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:960:18)
+      at Test.postRun (node:internal/test_runner/test:1522:19)
+      at Test.run (node:internal/test_runner/test:1447:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: -66,
+    expected: 12,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests/regression.test.mjs:74:1
+✖ восстановление боя очищает дробный уровень и нечисловые таймеры (0.280072ms)
+  TypeError: c.restoreFight is not a function
+      at TestContext.<anonymous> (file:///workspace/scratch/b00c0e2a6c88/hrabrolap/tests/regression.test.mjs:76:12)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:960:18)
+      at Test.postRun (node:internal/test_runner/test:1522:19)
+      at Test.run (node:internal/test_runner/test:1447:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7)
+
+test at tests/regression.test.mjs:80:1
+✖ сохранение/восстановление боя и отдыха через JSON без лечения (0.507387ms)
+  TypeError: c.restoreFight is not a function
+      at TestContext.<anonymous> (file:///workspace/scratch/b00c0e2a6c88/hrabrolap/tests/regression.test.mjs:84:49)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:960:18)
+      at Test.postRun (node:internal/test_runner/test:1522:19)
+      at Test.run (node:internal/test_runner/test:1447:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7)

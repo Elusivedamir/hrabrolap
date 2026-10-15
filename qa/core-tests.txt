@@ -1,0 +1,37 @@
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+
+> hrabrolap@0.8.1 test
+> node --check game.mjs && node --check game-core.mjs && node --test tests/core.test.mjs tests/regression.test.mjs tests/balance.test.mjs && python3 tests/asset-check.py && python3 tests/art_test.py && python3 tests/preserve-assets.py
+
+✔ фактический путь 1→100, все восемь моделей и десять боссов (20.364921ms)
+✔ сохранение каждые пять минут не меняет результат кампании (23.225655ms)
+v0.8 game-core tests: passed — 100 waves, 8 monsters, 3 weapon models, inventory, boss, fishing, saves, combat
+✔ tests/core.test.mjs (77.65378ms)
+✔ снятие брони ограничивает текущее HP, надевание не лечит (1.457617ms)
+✔ сильное оружие выводит из фарма, текущее сражение не пересоздаётся (0.296637ms)
+✔ слабая экипировка не снимает режим фарма (0.157963ms)
+✔ победа над фарм-врагом после апгрейда не считается первым прохождением (0.546746ms)
+✔ перенос завершённой старой главы v1/v2 открывает 11-ю волну (0.544072ms)
+✔ перенос незавершённой 10-й волны не пропускает босса (0.189809ms)
+✔ старое battleState не возвращает в уже завершённую главу (0.392998ms)
+✔ повреждённый список вещей сохраняет монеты и исправные поля (1.128873ms)
+✔ встроенные предметы и повторные ID в сохранении не дублируются (0.233314ms)
+✔ невалидная рыба и переполнение из сохранения отбрасываются (0.537532ms)
+✔ план из сохранения не переполняет оставшееся место в ведре (0.389284ms)
+✔ восстановление боя очищает дробный уровень и нечисловые таймеры (0.279502ms)
+✔ сохранение/восстановление боя и отдыха через JSON без лечения (0.395543ms)
+✔ перезагрузка сохраняет остаток перехода между волнами (0.145905ms)
+✔ у всех восьми видов реально происходят атака, урон и победа (3.919925ms)
+✔ 100-я волна завершается единожды и прогресс не выходит за 100 (0.372539ms)
+✔ торговец: без него продажа невозможна, ожидание заморожено в открытой торговле (1.06583ms)
+ℹ tests 20
+ℹ suites 0
+ℹ pass 20
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 147.044223
+Art/package tests: passed — 35 SVG, pure-vector weapons & armor, original six attack frames archived, no coin/min
+Rig tests: passed — 3 six-pose animation definitions, original face, separate weapon slot
+PASS: 59 original art/assets files match v0.8 byte for byte
