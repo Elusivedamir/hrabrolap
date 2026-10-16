@@ -46,7 +46,7 @@ jobs:
             equipment-catalog.mjs equipment-rig.mjs equipment-preview.html \
             canonical-sprites.mjs bucket-rest.mjs quests.mjs monster-rig.mjs preview-canonical.html preview-bucket-sleep.html \
             art assets
-          unzip -tq hrabrolap-v0.9.6.zip
+          unzip -tq hrabrolap-v0.9.7.zip
       - name: Upload playable HTML5 ZIP
         if: success()
         uses: actions/upload-artifact@v4
