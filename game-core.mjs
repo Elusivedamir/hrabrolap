@@ -40,13 +40,13 @@ export const heroDamage=p=>8+3*p.sword+equipped(WEAPONS,p.weapon).damage;
 export const maxHealth=p=>65+14*p.armor+equipped(ARMORS,p.equippedArmor).health;
 export const restDuration=p=>Math.max(2.5,7-p.home*.35);
 export function battleRate(p){const m=monsterForWave(Math.max(1,Math.min(100,p.best||1)));return Math.floor(m.reward*60/Math.max(4,Math.ceil(m.hp/heroDamage(p))*1.3+1.1));}
-export function freshProgress(){return {version:VERSION,gold:0,sword:0,armor:0,fishLevel:0,home:0,bucketLevel:0,weapon:'iron',equippedArmor:'none',ownedWeapons:['iron'],ownedArmors:['none'],room:1,best:0,fails:0,farming:false,cleared:false,kills:0,totalGold:0,killedSlimes:0,caughtTotal:0,soldFish:0,soldPike:0,spentSword:0,fishBucket:[],catchPlan:[],nextCatchMs:0,merchantPhase:'away',merchantMs:300000,lastSeen:0,pendingOffline:0,questClaimed:[]};}
+export function freshProgress(){return {version:VERSION,autoBattle:true,gold:0,sword:0,armor:0,fishLevel:0,home:0,bucketLevel:0,weapon:'iron',equippedArmor:'none',ownedWeapons:['iron'],ownedArmors:['none'],room:1,best:0,fails:0,farming:false,cleared:false,kills:0,totalGold:0,killedSlimes:0,caughtTotal:0,soldFish:0,soldPike:0,spentSword:0,fishBucket:[],catchPlan:[],nextCatchMs:0,merchantPhase:'away',merchantMs:300000,lastSeen:0,pendingOffline:0,questClaimed:[]};}
 const int=(v,lo,hi,d=lo)=>Number.isFinite(v)?Math.max(lo,Math.min(hi,Math.floor(v))):d;
 export function validateProgress(raw){
  const p=freshProgress(); if(!raw||![1,2,3].includes(raw.version))return p;
  for(const k of ['gold','sword','armor','fishLevel','home','room','best','fails','kills','totalGold','killedSlimes','caughtTotal','soldFish','soldPike','spentSword','pendingOffline','bucketLevel'])p[k]=int(raw[k],0,k==='gold'||k==='totalGold'?1e13:1e6,p[k]);
  p.room=int(p.room,1,100);p.best=int(p.best,0,100);p.fails=int(p.fails,0,2);p.bucketLevel=int(p.bucketLevel,0,1);
- p.farming=!!raw.farming;p.cleared=!!raw.cleared;
+ p.farming=!!raw.farming;p.cleared=!!raw.cleared;p.autoBattle=raw.autoBattle!==false;
  if(raw.version>=2){
   p.fishBucket=fitFish(raw.fishBucket,bucketCapacity(p));
   p.catchPlan=fitFish(raw.catchPlan,bucketCapacity(p)-bucketVolume(p));
@@ -100,7 +100,7 @@ export function equipEquipment(p,category,id,battle){const arr=category==='weapo
  if(battle&&category==='armor')battle.hp=Math.min(battle.hp,maxHealth(p));
  if(heroDamage(p)>oldDamage||maxHealth(p)>oldHealth){p.fails=0;p.farming=false;}
  return true;}
-export function stepFight(p,b,seconds){
+export function stepFight(p,b,seconds,allowHeroAttack=true){
  const ev=[],dt=Math.min(Math.max(0,seconds),.25);
  if(b.phase==='rest'||b.phase==='transition'){
   b.rest-=dt;
@@ -108,8 +108,8 @@ export function stepFight(p,b,seconds){
   return ev;
  }
  if(b.phase!=='fight')return ev;
- b.heroTimer+=dt;b.enemyTimer+=dt;
- if(b.heroTimer>=1.3){b.heroTimer-=1.3;b.enemyHp=Math.max(0,b.enemyHp-heroDamage(p));ev.push({kind:'hero-hit',damage:heroDamage(p)});
+ b.heroTimer=allowHeroAttack?b.heroTimer+dt:Math.min(1.3,b.heroTimer+dt);b.enemyTimer+=dt;
+ if(allowHeroAttack&&b.heroTimer>=1.3){b.heroTimer-=1.3;b.enemyHp=Math.max(0,b.enemyHp-heroDamage(p));ev.push({kind:'hero-hit',damage:heroDamage(p)});
   if(b.enemyHp<=0){const gold=b.monster.reward;p.gold+=gold;p.totalGold+=gold;p.kills++;if(b.monster.type==='slime')p.killedSlimes++;
    const firstClear=!p.farming&&!p.cleared&&b.level===p.room&&b.level>p.best;
    if(firstClear){p.best=Math.max(p.best,b.level);p.fails=0;if(b.level===100){p.cleared=true;p.room=100;}else p.room=b.level+1;}

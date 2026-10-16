@@ -1,0 +1,151 @@
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+
+> hrabrolap@0.9.2 qa:browser
+> node --test tests/browser.test.mjs
+
+✖ мобильный запуск, цикл трёх атак, ресурсы и отсутствие JS-ошибок (49.009418ms)
+✖ магазин, инвентарь, смена SVG и reload реального localStorage (1.392378ms)
+✖ каждый из трёх SVG-мечей остаётся единственным оружием во всех трёх атаках (1.601371ms)
+✖ восемь монстров атакуют/получают урон, короны всех десяти боссов (0.112913ms)
+✖ рыбалка, ведро 12→24 и ручная продажа торговцу (0.265248ms)
+✖ поражение, дом и возрождение без покупки лечения (0.093261ms)
+✖ ручной бой: смена текста, один удар, три атаки, reload и возврат автобоя (0.084884ms)
+✖ сцена на 390 и 320: ведро слева от рыцаря, рыбалка и 18 поз вправо (0.316045ms)
+ℹ tests 8
+ℹ suites 0
+ℹ pass 0
+ℹ fail 8
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 1374.726389
+
+✖ failing tests:
+
+test at tests/browser.test.mjs:31:1
+✖ мобильный запуск, цикл трёх атак, ресурсы и отсутствие JS-ошибок (49.009418ms)
+  browserType.launch: Executable doesn't exist at /root/.cache/ms-playwright/chromium_headless_shell-1234/chrome-headless-shell-linux64/chrome-headless-shell
+  ╔════════════════════════════════════════════════════════════╗
+  ║ Looks like Playwright was just installed or updated.       ║
+  ║ Please run the following command to download new browsers: ║
+  ║                                                            ║
+  ║     npx playwright install                                 ║
+  ║                                                            ║
+  ║ <3 Playwright Team                                         ║
+  ╚════════════════════════════════════════════════════════════╝
+      at TestContext.<anonymous> (/workspace/scratch/b695ee7e1f9a/hrabrolap/tests/browser.test.mjs:13:91) {
+    name: 'Error',
+    log: []
+  }
+
+test at tests/browser.test.mjs:39:1
+✖ магазин, инвентарь, смена SVG и reload реального localStorage (1.392378ms)
+  browserType.launch: Executable doesn't exist at /root/.cache/ms-playwright/chromium_headless_shell-1234/chrome-headless-shell-linux64/chrome-headless-shell
+  ╔════════════════════════════════════════════════════════════╗
+  ║ Looks like Playwright was just installed or updated.       ║
+  ║ Please run the following command to download new browsers: ║
+  ║                                                            ║
+  ║     npx playwright install                                 ║
+  ║                                                            ║
+  ║ <3 Playwright Team                                         ║
+  ╚════════════════════════════════════════════════════════════╝
+      at TestContext.<anonymous> (/workspace/scratch/b695ee7e1f9a/hrabrolap/tests/browser.test.mjs:13:91) {
+    name: 'Error',
+    log: []
+  }
+
+test at tests/browser.test.mjs:55:1
+✖ каждый из трёх SVG-мечей остаётся единственным оружием во всех трёх атаках (1.601371ms)
+  browserType.launch: Executable doesn't exist at /root/.cache/ms-playwright/chromium_headless_shell-1234/chrome-headless-shell-linux64/chrome-headless-shell
+  ╔════════════════════════════════════════════════════════════╗
+  ║ Looks like Playwright was just installed or updated.       ║
+  ║ Please run the following command to download new browsers: ║
+  ║                                                            ║
+  ║     npx playwright install                                 ║
+  ║                                                            ║
+  ║ <3 Playwright Team                                         ║
+  ╚════════════════════════════════════════════════════════════╝
+      at TestContext.<anonymous> (/workspace/scratch/b695ee7e1f9a/hrabrolap/tests/browser.test.mjs:13:91) {
+    name: 'Error',
+    log: []
+  }
+
+test at tests/browser.test.mjs:66:1
+✖ восемь монстров атакуют/получают урон, короны всех десяти боссов (0.112913ms)
+  browserType.launch: Executable doesn't exist at /root/.cache/ms-playwright/chromium_headless_shell-1234/chrome-headless-shell-linux64/chrome-headless-shell
+  ╔════════════════════════════════════════════════════════════╗
+  ║ Looks like Playwright was just installed or updated.       ║
+  ║ Please run the following command to download new browsers: ║
+  ║                                                            ║
+  ║     npx playwright install                                 ║
+  ║                                                            ║
+  ║ <3 Playwright Team                                         ║
+  ╚════════════════════════════════════════════════════════════╝
+      at TestContext.<anonymous> (/workspace/scratch/b695ee7e1f9a/hrabrolap/tests/browser.test.mjs:13:91) {
+    name: 'Error',
+    log: []
+  }
+
+test at tests/browser.test.mjs:82:1
+✖ рыбалка, ведро 12→24 и ручная продажа торговцу (0.265248ms)
+  browserType.launch: Executable doesn't exist at /root/.cache/ms-playwright/chromium_headless_shell-1234/chrome-headless-shell-linux64/chrome-headless-shell
+  ╔════════════════════════════════════════════════════════════╗
+  ║ Looks like Playwright was just installed or updated.       ║
+  ║ Please run the following command to download new browsers: ║
+  ║                                                            ║
+  ║     npx playwright install                                 ║
+  ║                                                            ║
+  ║ <3 Playwright Team                                         ║
+  ╚════════════════════════════════════════════════════════════╝
+      at TestContext.<anonymous> (/workspace/scratch/b695ee7e1f9a/hrabrolap/tests/browser.test.mjs:13:91) {
+    name: 'Error',
+    log: []
+  }
+
+test at tests/browser.test.mjs:92:1
+✖ поражение, дом и возрождение без покупки лечения (0.093261ms)
+  browserType.launch: Executable doesn't exist at /root/.cache/ms-playwright/chromium_headless_shell-1234/chrome-headless-shell-linux64/chrome-headless-shell
+  ╔════════════════════════════════════════════════════════════╗
+  ║ Looks like Playwright was just installed or updated.       ║
+  ║ Please run the following command to download new browsers: ║
+  ║                                                            ║
+  ║     npx playwright install                                 ║
+  ║                                                            ║
+  ║ <3 Playwright Team                                         ║
+  ╚════════════════════════════════════════════════════════════╝
+      at TestContext.<anonymous> (/workspace/scratch/b695ee7e1f9a/hrabrolap/tests/browser.test.mjs:13:91) {
+    name: 'Error',
+    log: []
+  }
+
+test at tests/browser.test.mjs:101:1
+✖ ручной бой: смена текста, один удар, три атаки, reload и возврат автобоя (0.084884ms)
+  browserType.launch: Executable doesn't exist at /root/.cache/ms-playwright/chromium_headless_shell-1234/chrome-headless-shell-linux64/chrome-headless-shell
+  ╔════════════════════════════════════════════════════════════╗
+  ║ Looks like Playwright was just installed or updated.       ║
+  ║ Please run the following command to download new browsers: ║
+  ║                                                            ║
+  ║     npx playwright install                                 ║
+  ║                                                            ║
+  ║ <3 Playwright Team                                         ║
+  ╚════════════════════════════════════════════════════════════╝
+      at TestContext.<anonymous> (/workspace/scratch/b695ee7e1f9a/hrabrolap/tests/browser.test.mjs:13:91) {
+    name: 'Error',
+    log: []
+  }
+
+test at tests/browser.test.mjs:127:1
+✖ сцена на 390 и 320: ведро слева от рыцаря, рыбалка и 18 поз вправо (0.316045ms)
+  browserType.launch: Executable doesn't exist at /root/.cache/ms-playwright/chromium_headless_shell-1234/chrome-headless-shell-linux64/chrome-headless-shell
+  ╔════════════════════════════════════════════════════════════╗
+  ║ Looks like Playwright was just installed or updated.       ║
+  ║ Please run the following command to download new browsers: ║
+  ║                                                            ║
+  ║     npx playwright install                                 ║
+  ║                                                            ║
+  ║ <3 Playwright Team                                         ║
+  ╚════════════════════════════════════════════════════════════╝
+      at TestContext.<anonymous> (/workspace/scratch/b695ee7e1f9a/hrabrolap/tests/browser.test.mjs:13:91) {
+    name: 'Error',
+    log: []
+  }

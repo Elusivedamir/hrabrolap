@@ -147,3 +147,37 @@
 @keyframes spiderFade{to{opacity:0;transform:rotate(40deg) scale(.65)}}
 
 .hud-action img{display:block;width:27px;height:27px;object-fit:contain}
+
+/* v0.9 sprite animation art proof: original cat hero animation remains untouched. */
+.monster-fighter .legacy-enemy-hp{display:none}
+.enemy-hearts{display:flex;gap:2px;width:100%;height:23px;justify-content:flex-start;align-items:center;margin:3px 0 2px;overflow:visible}
+.enemy-hearts .heart-shell{width:20%;height:100%;position:relative;display:inline-block;flex:none}
+.enemy-hearts .heart-shell img{height:100%;width:100%;object-fit:contain;display:block}
+.enemy-hearts .heart-unfilled{filter:grayscale(1) brightness(.38);opacity:.72}
+.enemy-hearts .heart-filled{position:absolute;left:0;top:0;bottom:0;overflow:hidden;display:block;white-space:nowrap;transition:width .1s}
+.enemy-hearts .heart-filled img{width:calc(var(--heart-size, 27px));max-width:none;object-fit:contain}
+.monster-fighter .boss-crown{display:none!important}
+.enemy-holder{overflow:visible}
+.enemy-holder .monster-art{height:100%!important;width:100%;object-fit:contain;animation:none!important;filter:drop-shadow(0 5px 2px #13182555)}
+.enemy-holder[class*="attack-"]{animation:none!important}
+.enemy-holder.hurt{animation:none!important}
+.surface .bucket{left:53.4%;bottom:3%;height:69px;width:63px;border:0;border-radius:0;padding:0;background:transparent;filter:drop-shadow(0 2px 1px #27323b8c)}
+.surface .bucket img{height:82%;width:100%;display:block;object-fit:contain}
+.surface .bucket span{position:absolute;left:50%;bottom:2px;transform:translateX(-50%);border-radius:6px;background:#413b39d9;min-width:32px;text-align:center;padding:2px 3px}
+.fishing-anim-overlay{position:absolute;inset:0;width:100%;height:100%;z-index:5;pointer-events:none;opacity:0;object-fit:fill}
+.fishing-anim-overlay.playing{opacity:1}
+.surface.animated-fishing .fish-flight{display:none!important}
+.merchant.visible img{animation:none!important}
+/* Keep the illustrated monster readable beside the kitten within the narrower mobile arena. */
+.enemy-holder .monster-art{transform:scale(1.37);transform-origin:50% 78%}
+
+/* v0.9.2: coordinates share the illustrated pier's 941 × 425 space. */
+.surface .bucket{left:1.5%;bottom:4%;width:9%;height:20%;min-width:32px;min-height:40px;z-index:8}
+.surface .bucket img{height:100%;width:100%;object-fit:fill}
+.surface .bucket span{bottom:-5px;font-size:10px;padding:1px 3px}
+.surface .fish-flight{display:none!important}
+.battle-status{font:inherit;font-size:.72em;cursor:pointer;touch-action:manipulation;min-height:36px}
+.battle-status:focus-visible,.manual-hit:focus-visible{outline:3px solid #fff3b5;outline-offset:2px}
+.manual-hit{position:absolute;right:3%;bottom:12%;z-index:10;padding:8px 15px;border:2px solid #ebca87;border-radius:12px;background:#70482f;color:#fff0c9;font-weight:800;min-height:44px;touch-action:manipulation}
+.manual-hit:disabled{opacity:.5}
+.manual-hit[hidden]{display:none}

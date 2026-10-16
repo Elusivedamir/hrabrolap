@@ -2,6 +2,17 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import * as c from '../game-core.mjs';
 
+test('manual mode waits for one command, enemy attacks continue, no stored burst',()=>{
+ const p=c.freshProgress(),b=c.startFight(p);p.autoBattle=false;
+ const events=[];for(let i=0;i<25;i++)events.push(...c.stepFight(p,b,.1,false));
+ assert.equal(b.enemyHp,b.monster.hp);assert.ok(b.hp<c.maxHealth(p));
+ assert.equal(events.filter(e=>e.kind==='hero-hit').length,0);
+ assert.equal(c.stepFight(p,b,.01,true).filter(e=>e.kind==='hero-hit').length,1);
+ assert.equal(c.stepFight(p,b,.01,true).filter(e=>e.kind==='hero-hit').length,0);
+ assert.equal(c.validateProgress(JSON.parse(JSON.stringify(p))).autoBattle,false);
+ assert.equal(c.validateProgress({version:3}).autoBattle,true);
+});
+
 test('снятие брони ограничивает текущее HP, надевание не лечит',()=>{
  const p=c.freshProgress();p.ownedArmors.push('leaf');p.equippedArmor='leaf';
  const b=c.startFight(p);assert.equal(b.hp,150);

@@ -1,0 +1,45 @@
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+
+> hrabrolap@0.9.2 test
+> node --check game.mjs && node --check game-core.mjs && node --test tests/core.test.mjs tests/regression.test.mjs tests/balance.test.mjs tests/animation-frames.test.mjs tests/hero-production.test.mjs && python3 tests/asset-check.py && python3 tests/art_test.py && python3 tests/preserve-assets.py
+
+✔ 8 монстров × (6 атака + 6 урон) × 2 варианта — 192 доступных кадра (88.509755ms)
+✔ 10 кадров рыбалки рыцаря и 10 кадров кота-торговца (3.31659ms)
+✔ Сохранены храбролаповский SVG-риг и точные игровые события (0.789437ms)
+✔ фактический путь 1→100, все восемь моделей и десять боссов (64.982944ms)
+✔ сохранение каждые пять минут не меняет результат кампании (58.469004ms)
+v0.8 game-core tests: passed — 100 waves, 8 monsters, 3 weapon models, inventory, boss, fishing, saves, combat
+✔ tests/core.test.mjs (209.074737ms)
+✔ three different attacks, six frames each, same ready pose and one contact at frame four (5.119776ms)
+✔ all 18 frames have same face, no embedded sword, and foreleg reaches transformed SVG hilt (81.00443ms)
+✔ game and animation studio use common poses + one replaceable SVG weapon (2.193187ms)
+✔ boss slime crown compensates pose tilt and stays attached on all 12 frames (1.268308ms)
+✔ manual mode waits for one command, enemy attacks continue, no stored burst (3.831174ms)
+✔ снятие брони ограничивает текущее HP, надевание не лечит (0.342564ms)
+✔ сильное оружие выводит из фарма, текущее сражение не пересоздаётся (0.353822ms)
+✔ слабая экипировка не снимает режим фарма (0.471292ms)
+✔ победа над фарм-врагом после апгрейда не считается первым прохождением (1.040203ms)
+✔ перенос завершённой старой главы v1/v2 открывает 11-ю волну (0.547791ms)
+✔ перенос незавершённой 10-й волны не пропускает босса (0.411774ms)
+✔ старое battleState не возвращает в уже завершённую главу (1.057649ms)
+✔ повреждённый список вещей сохраняет монеты и исправные поля (5.491589ms)
+✔ встроенные предметы и повторные ID в сохранении не дублируются (0.625736ms)
+✔ невалидная рыба и переполнение из сохранения отбрасываются (0.537713ms)
+✔ план из сохранения не переполняет оставшееся место в ведре (1.873875ms)
+✔ восстановление боя очищает дробный уровень и нечисловые таймеры (0.602131ms)
+✔ сохранение/восстановление боя и отдыха через JSON без лечения (0.937288ms)
+✔ перезагрузка сохраняет остаток перехода между волнами (0.239255ms)
+✔ у всех восьми видов реально происходят атака, урон и победа (2.792097ms)
+✔ 100-я волна завершается единожды и прогресс не выходит за 100 (0.786079ms)
+✔ торговец: без него продажа невозможна, ожидание заморожено в открытой торговле (2.047286ms)
+ℹ tests 28
+ℹ suites 0
+ℹ pass 28
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 549.141206
+Art/package tests: passed — 43 SVG, pure-vector weapons & armor, original six attack frames archived, no coin/min
+Rig tests: passed — 3 six-pose animation definitions, original face, separate weapon slot
+PASS: 59 original art/assets files match v0.8 byte for byte

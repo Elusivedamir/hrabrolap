@@ -1,0 +1,17 @@
+{
+  "version": "0.9.2",
+  "date": "2026-10-16",
+  "node_tests": {
+    "pass": 28,
+    "fail": 0
+  },
+  "asset_integrity": "PASS: 59 original files unchanged",
+  "balance": {
+    "scenarios": 12,
+    "cleared100": 9,
+    "timeLimitedControls": 3
+  },
+  "browser": "NOT RUN: executable missing; push blocked by automatic approval review",
+  "static_svg_review": "hero facing and 8 models inspected; not a live-game screenshot",
+  "github_push": "BLOCKED pending explicit user authorization"
+}
