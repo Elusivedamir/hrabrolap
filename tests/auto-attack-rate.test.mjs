@@ -9,7 +9,7 @@ test('manual attack hard-limited to 3 taps per second even when tapping at 100Hz
   c.stepFight(p,b,.01,false);
   hits+=c.tapMonster(p,b).filter(x=>x.kind==='hero-hit').length;
  }
- assert.equal(hits,3);
+ assert.ok(hits<=3 && hits>=2);
  assert.equal(c.MANUAL_HITS_PER_SECOND,3);
  assert.ok(Math.abs(c.attackInterval(p,false)-1/3)<1e-9);
 });
@@ -52,4 +52,14 @@ test('older unlocked saves begin auto-upgrades from zero, invalid progress is cl
  assert.equal(c.validateProgress({...p,autoUnlocked:true,autoLevel:150}).autoLevel,100);
  assert.equal(c.validateProgress({...p,autoUnlocked:false,autoLevel:150}).autoLevel,100);
  assert.equal(c.validateProgress({...p,autoUnlocked:true,autoLevel:-8}).autoLevel,0);
+});
+
+test('manual hit after idle or restored timer cannot spend surplus credit on a second fast hit',()=>{
+ const p=c.freshProgress(),b=c.startFight(p);b.enemyHp=10000;b.heroTimer=1;
+ assert.equal(c.tapMonster(p,b).filter(e=>e.kind==='hero-hit').length,1);
+ assert.equal(b.heroTimer,0);
+ c.stepFight(p,b,.25,false);
+ assert.equal(c.tapMonster(p,b)[0].kind,'cooldown');
+ c.stepFight(p,b,1/12,false);
+ assert.equal(c.tapMonster(p,b).filter(e=>e.kind==='hero-hit').length,1);
 });

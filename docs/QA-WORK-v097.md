@@ -20,3 +20,9 @@ Further browser checks and skeleton/golem acceptance remain in progress. No merg
 - Source pose 9 placed the free fish below the bucket rim. Added a sibling deposit pose: only the loose fish transform changes from (58,340) to (84,257), with every knight/rod/line/hand byte untouched. Other nine poses and all ten archived source SVGs remain exact.
 - Real browser geometry checks pass at 320×640, 390×844 and 430×932: last visible fish center lies in the bucket opening. Bucket occludes the submerged part; counter still increments after pose 10.
 - Additional browser checks pass: quest reward survives reload and cannot be claimed twice; level 100 gives six auto hits/s and rapid manual input is capped at three hits/s; max speed persists after reload.
+
+## Strict manual cooldown and simulation correction
+- Found leftover timer credit after idle/restored games could shorten the next manual interval. A successful manual hit now starts a fresh 1/3-second cooldown. Added a regression for a restored timer and a second click at 0.25 s.
+- The old balance runner called `stepFight` with its default auto=true even for an unpurchased auto mode. Runner now explicitly simulates manual input or pays the 1-gold auto unlock from earned gold. Gameplay prices/damage/HP are unchanged.
+- Updated 12 real-policy simulations: balanced manual (one purchase decision/s) clears 100 waves in 7.98 simulated minutes; level-0 paid auto (decisions/10s) in 20.04; equipment+fishing manual in 10.02. Every-five-minute reload auto scenario matches uninterrupted play exactly. Single-stat/no-upgrade policies stall as expected within the 180-minute limit.
+- All 55 core/regression tests plus art and pixel-fidelity gates pass. Browser rate checks use a primed RAF to measure a complete one-second interval rather than the first navigation frame.
