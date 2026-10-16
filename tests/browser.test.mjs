@@ -103,6 +103,11 @@ test('ручной бой: смена текста, один удар, три а
  const page=await pageFor(p);
  await page.locator('#status').click();
  assert.equal(await page.locator('#status').textContent(),'РУЧНОЙ БОЙ');
+ const hitBox=await page.locator('#manual-hit').boundingBox();
+ const modeBox=await page.locator('#status').boundingBox();
+ const messageBox=await page.locator('#battle-message').boundingBox();
+ assert.ok(hitBox.x+hitBox.width<=modeBox.x,'manual attack and mode controls must not overlap');
+ assert.ok(hitBox.y+hitBox.height<=messageBox.y,'manual attack must not cover battle messages');
  const before=await page.locator('#enemy-hp-num').textContent();
  await page.clock.runFor(3000);
  assert.equal(await page.locator('#enemy-hp-num').textContent(),before);

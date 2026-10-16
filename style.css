@@ -179,6 +179,8 @@
 .surface .fish-flight{display:none!important}
 .battle-status{font:inherit;font-size:.72em;cursor:pointer;touch-action:manipulation;min-height:36px}
 .battle-status:focus-visible,.manual-hit:focus-visible{outline:3px solid #fff3b5;outline-offset:2px}
-.manual-hit{position:absolute;right:3%;bottom:12%;z-index:10;padding:8px 15px;border:2px solid #ebca87;border-radius:12px;background:#70482f;color:#fff0c9;font-weight:800;min-height:44px;touch-action:manipulation}
+.manual-hit{position:absolute;right:calc(3% + 84px);top:2.2%;z-index:10;padding:8px 10px;border:2px solid #ebca87;border-radius:12px;background:#70482f;color:#fff0c9;font-size:12px;font-weight:800;min-height:36px;touch-action:manipulation}
 .manual-hit:disabled{opacity:.5}
 .manual-hit[hidden]{display:none}
+/* Preserve attack transforms while keeping blades behind the arena floor. */
+.arena{clip-path:inset(-50% -20% 0 -20%)}
