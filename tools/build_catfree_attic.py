@@ -30,9 +30,20 @@ outline=np.array([
 ],dtype=np.int32)
 cv2.fillPoly(mask,[outline],255)
 mask=cv2.dilate(mask,np.ones((3,3),np.uint8),iterations=1)
-# Restore the wood behind the old sprite using surrounding intact painted material.
-# Inpaint keeps every pixel outside the former sprite mask unchanged.
-out=cv2.inpaint(image,mask,7,cv2.INPAINT_TELEA)
+# Rebuild original wall from a CLEAN region of the SAME attic painting.
+# Clone gradients and wood grains, not a blurry 100px Telea hole.
+# The sample is above the helmet, inside the triangular timber interior.
+left,top,right,bottom=658,140,772,240
+texture=image[77:141,678:784]
+texture=cv2.resize(texture,(right-left,bottom-top),interpolation=cv2.INTER_CUBIC)
+local=mask[top:bottom,left:right]
+# Seamless clone avoids hard borders and preserves source lighting.
+out=cv2.seamlessClone(texture,image,local,(int((left+right)/2),int((top+bottom)/2)),cv2.NORMAL_CLONE)
+# Restore original white mattress ledge (only where the sleeping helmet sat):
+# Painted matching simple cushion from original colors under the new sleeping cat.
+cv2.ellipse(out,(719,230),(50,9),0,0,360,(184,204,217),-1,lineType=cv2.LINE_AA)
+cv2.ellipse(out,(719,230),(50,9),0,0,360,(49,51,60),2,lineType=cv2.LINE_AA)
+cv2.line(out,(668,234),(765,234),(198,206,205),2,cv2.LINE_AA)
 cv2.imwrite(str(DST),out,[cv2.IMWRITE_WEBP_QUALITY,97])
 if not DST.is_file() or DST.stat().st_size<10000:
     raise SystemExit("Attic output missing")
