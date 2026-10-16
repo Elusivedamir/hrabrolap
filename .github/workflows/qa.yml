@@ -37,3 +37,18 @@ jobs:
         with:
           name: hrabrolap-qa
           path: qa/
+
+      - name: Package tested HTML5 build
+        if: success()
+        run: |
+          zip -q -r hrabrolap-v0.9.4.zip \
+            index.html style.css game.mjs game-core.mjs \
+            equipment-catalog.mjs equipment-rig.mjs equipment-preview.html \
+            art assets
+          unzip -tq hrabrolap-v0.9.4.zip
+      - name: Upload playable HTML5 ZIP
+        if: success()
+        uses: actions/upload-artifact@v4
+        with:
+          name: hrabrolap-v0.9.4
+          path: hrabrolap-v0.9.4.zip
