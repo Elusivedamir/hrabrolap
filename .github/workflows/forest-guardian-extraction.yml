@@ -18,10 +18,13 @@ jobs:
         run: python3 -m pip install Pillow
       - name: Generate real diagnostic sheet from 12 original game files
         run: python3 qa/forest-guardian/make-original-contact-sheet.py
+      - name: Archive working project for exact rendering QA
+        run: tar --exclude=.git -czf hrabrolap-source.tar.gz .
       - uses: actions/upload-artifact@v4
         with:
           name: forest-guardian-original-12
           path: |
             qa/forest-guardian/original-contact-sheet.png
             qa/forest-guardian/manifest.json
+            hrabrolap-source.tar.gz
           retention-days: 30
