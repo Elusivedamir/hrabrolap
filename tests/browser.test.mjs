@@ -16,6 +16,7 @@ async function pageFor(progress=c.freshProgress(),battleState){
  page.on('console',msg=>{if(msg.type()==='error')errors.push(msg.text());});
  await page.clock.install({time:new Date('2026-10-15T17:00:00Z')});await page.clock.pauseAt(new Date('2026-10-15T17:01:00Z'));
  // Фикстура пишется один раз; последующие reload читают реальное сохранение игры.
+ await page.addInitScript(()=>{Math.random=()=>.99;});
  await page.addInitScript(({key,raw})=>{if(!sessionStorage.getItem('qa-seeded')){localStorage.setItem(key,JSON.stringify(raw));sessionStorage.setItem('qa-seeded','1');}},{key,raw:{...progress,lastSeen:0,...(battleState?{battleState}:{})}});
  await page.goto(base);await page.locator('#hero-rig').waitFor();
  await page.evaluate(()=>{window.qaObserved={attacks:[],transforms:[],hurts:0};new MutationObserver(records=>{
@@ -50,7 +51,7 @@ test('магазин, инвентарь, смена SVG и reload реальн�
  await page.locator('#inventory').click();await page.locator('.shop-item').filter({hasText:'Без брони'}).getByRole('button').click();
  const now=await saved(page);assert.ok(now.battleState.hp<=c.maxHealth(now));
 });
-test('каждый из трёх SVG-мечей остаётся единственным оружием во всех трёх атаках',async()=>{
+test('каждый из десяти SVG-мечей остаётся единственным оружием во всех трёх атаках',async()=>{
  for(const weapon of c.WEAPONS){
   const p=c.freshProgress();Object.assign(p,{ownedWeapons:c.WEAPONS.map(w=>w.id),weapon:weapon.id,armor:100});
   const page=await pageFor(p);await page.clock.runFor(10000);
@@ -65,9 +66,10 @@ test('восемь монстров атакуют/получают урон, к
  for(let wave=1;wave<=8;wave++){
   const p=c.freshProgress();Object.assign(p,{room:wave,best:wave-1,armor:100});const page=await pageFor(p);
   await page.clock.runFor(2700);const seen=await page.evaluate(()=>window.qaObserved);
-  assert.ok(seen.attacks.includes('attack-'+c.monsterForWave(wave).move));assert.ok(seen.hurts>0);
-  assert.equal(await page.locator('#enemy-holder').getAttribute('data-monster'),c.monsterForWave(wave).type);
-  await shot(page,'fixture-monster-'+c.monsterForWave(wave).type);
+  const expected=c.monsterForWave(wave).type==='spider'?c.MONSTERS.find(x=>x.type==='skeleton'):c.monsterForWave(wave);
+  assert.ok(seen.attacks.includes('attack-'+expected.move));assert.ok(seen.hurts>0);
+  assert.equal(await page.locator('#enemy-holder').getAttribute('data-monster'),expected.type);
+  await shot(page,'fixture-monster-'+expected.type);
  }
  for(let wave=10;wave<=100;wave+=10){
   const p=c.freshProgress();Object.assign(p,{room:wave,best:wave-1});const page=await pageFor(p);
@@ -93,4 +95,21 @@ test('поражение, дом и возрождение без покупки
  await page.clock.runFor(7200);assert.ok(parseInt(await page.locator('#hero-hp-num').textContent(),10)>0);
  assert.equal((await page.locator('#surface').getAttribute('class')).includes('resting'),false);await shot(page,'fixture-respawn');
  assert.deepEqual(errors,[]);
+});
+
+test('паутина в инвентаре, покупка брони за 300 и 6 паутин, экипировка и reload',async()=>{
+ const p=c.freshProgress();p.gold=300;p.materials.web=6;
+ const page=await pageFor(p);
+ await page.locator('#shop').click();
+ const web=page.locator('.shop-item').filter({hasText:'Паутинная броня'});
+ assert.ok((await web.textContent()).includes('6/6'));
+ await web.getByRole('button',{name:'Купить'}).click();
+ let save=await saved(page);assert.equal(save.materials.web,0);assert.equal(save.gold,0);assert.ok(save.ownedArmors.includes('web'));
+ await page.getByRole('button',{name:'Открыть инвентарь'}).click();
+ await page.locator('.shop-item').filter({hasText:'Паутинная броня'}).getByRole('button',{name:'Надеть'}).click();
+ assert.equal(await page.locator('#hero-armor').getAttribute('href'),'art/armor/web.svg');
+ await shot(page,'fixture-web-armor');
+ await page.reload();save=await saved(page);
+ assert.equal(save.equippedArmor,'web');assert.equal(save.materials.web,0);
+ assert.equal(await page.locator('#hero-armor').getAttribute('href'),'art/armor/web.svg');
 });

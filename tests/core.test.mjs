@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import {freshProgress,validateProgress,startFight,stepFight,upgrade,heroDamage,maxHealth,ENEMIES,MONSTERS,WEAPONS,ARMORS,buyEquipment,equipEquipment,bucketCapacity,bucketVolume,planFishing,stepFishing,stepMerchant,sellAll,offlineReward,monsterForWave,fishCost,swordCost,armorCost} from '../game-core.mjs';
 assert.equal(ENEMIES.length,100);
-assert.equal(MONSTERS.length,8);
+assert.equal(MONSTERS.length,9);
 assert.equal(new Set(ENEMIES.map(e=>e.type)).size,8);
 for (let n=1;n<=100;n++) {
  const e=monsterForWave(n);
@@ -28,4 +28,4 @@ f.gold=1000;assert.equal(upgrade(f,'bucket').ok,true);assert.equal(bucketCapacit
 stepMerchant(f,300000);assert.equal(f.merchantPhase,'waiting');const sale=sellAll(f);assert.equal(sale.ok,true);assert.equal(bucketVolume(f),0);
 const m=freshProgress();stepMerchant(m,300000);stepMerchant(m,12000,true);assert.equal(m.merchantMs,15000);stepMerchant(m,15000);assert.equal(m.merchantPhase,'away');
 const o=freshProgress();o.best=2;assert.ok(offlineReward(o,8*60*60*1000)<=Math.floor(Math.min(swordCost(0),armorCost(0))*1.1));
-console.log('v0.8 game-core tests: passed — 100 waves, 8 monsters, 3 weapon models, inventory, boss, fishing, saves, combat');
+console.log('game-core tests: passed — 100 waves, 9 monster definitions, 10 weapons, 10 purchasable armors, saves and combat');
