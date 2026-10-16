@@ -232,6 +232,7 @@ test('молния и вампиризм активируются без зам�
   const b=c.startFight(p);b.heroTimer=1.29;b.hp=40;
   const page=await pageFor(p,b);
   await page.clock.runFor(250);
+  await page.evaluate(()=>window.dispatchEvent(new Event('pagehide'))); // force persisted state for assertion
   if(effect==='lightning')assert.equal((await saved(page)).lightningHits>0,true);
   else assert.equal((await saved(page)).vampireHeals>0,true);
   assert.equal(await page.locator('#hero-weapon').getAttribute('href'),'art/weapons/iron.svg');
