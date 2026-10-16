@@ -12,12 +12,13 @@ export const MONSTERS=[
  {type:'larva',name:'Личинка',texture:'larva',move:'wriggle',attackName:'Толчок головой'},
  {type:'beetle',name:'Жук',texture:'beetle',move:'ram',attackName:'Удар панцирем'},
  {type:'ghost',name:'Призрак',texture:'ghost',move:'pulse',attackName:'Призрачный импульс'},
- {type:'skeleton',name:'Скелет',texture:'skeleton',move:'rattle',attackName:'Костяной взмах'}
+ {type:'skeleton',name:'Скелет',texture:'skeleton',move:'rattle',attackName:'Костяной взмах'},
+ {type:'golem',name:'Каменный голем',texture:'golem',move:'ram',attackName:'Каменный толчок'}
 ];
 export function monsterForWave(level){
  const n=Math.max(1,Math.min(100,Math.floor(level))),boss=n%10===0;
  // На каждой десятой волне усиленная версия обычного монстра: та же модель + корона.
- const model=MONSTERS[(Math.floor((n-1)/10)*3+(n-1)%10)%8];
+ const model=MONSTERS[(Math.floor((n-1)/10)*3+(n-1)%10)%10];
  const hp=Math.round((17+4.8*n+1.0*n**1.34)*(boss?2.25:1));
  return {...model,name:(boss?'Король · ':'')+model.name,boss,hp,attack:Math.ceil((1+n*.34)*(boss?1.42:1)),reward:Math.round((8+n*3.8+n**1.2*.38)*(boss?3:1))};
 }
@@ -41,13 +42,20 @@ export const heroDamage=p=>8+3*p.sword+equipped(WEAPONS,p.weapon).damage;
 export const maxHealth=p=>65+14*p.armor+equipped(ARMORS,p.equippedArmor).health;
 export const restDuration=p=>Math.max(2.5,7-p.home*.35);
 export function battleRate(p){const m=monsterForWave(Math.max(1,Math.min(100,p.best||1)));return Math.floor(m.reward*60/Math.max(4,Math.ceil(m.hp/heroDamage(p))*1.3+1.1));}
-export function freshProgress(){return {version:VERSION,gold:0,sword:0,armor:0,fishLevel:0,home:0,bucketLevel:0,weapon:'iron',equippedArmor:'none',ownedWeapons:['iron'],ownedArmors:['none'],room:1,best:0,fails:0,farming:false,cleared:false,kills:0,totalGold:0,killedSlimes:0,caughtTotal:0,soldFish:0,soldPike:0,spentSword:0,materials:Object.fromEntries(MATERIALS.map(m=>[m.id,0])),fishBucket:[],catchPlan:[],nextCatchMs:0,merchantPhase:'away',merchantMs:300000,lastSeen:0,pendingOffline:0,questClaimed:[]};}
+export function freshProgress(){return {version:VERSION,gold:0,sword:0,armor:0,fishLevel:0,home:0,bucketLevel:0,weapon:'iron',equippedArmor:'none',ownedWeapons:['iron'],ownedArmors:['none'],room:1,best:0,fails:0,farming:false,cleared:false,kills:0,totalGold:0,killedSlimes:0,caughtTotal:0,soldFish:0,soldPike:0,spentSword:0,autoUnlocked:false,autoEnabled:false,enchantment:'none',
+  monsterKills:Object.fromEntries(MONSTERS.map(m=>[m.type,0])),bossKills:0,lightningHits:0,poisonKills:0,vampireHeals:0,
+  materials:Object.fromEntries(MATERIALS.map(m=>[m.id,0])),fishBucket:[],catchPlan:[],nextCatchMs:0,merchantPhase:'away',merchantMs:300000,lastSeen:0,pendingOffline:0,questClaimed:[]};}
 const int=(v,lo,hi,d=lo)=>Number.isFinite(v)?Math.max(lo,Math.min(hi,Math.floor(v))):d;
 export function validateProgress(raw){
  const p=freshProgress(); if(!raw||![1,2,3,4].includes(raw.version))return p;
  for(const k of ['gold','sword','armor','fishLevel','home','room','best','fails','kills','totalGold','killedSlimes','caughtTotal','soldFish','soldPike','spentSword','pendingOffline','bucketLevel'])p[k]=int(raw[k],0,k==='gold'||k==='totalGold'?1e13:1e6,p[k]);
  p.room=int(p.room,1,100);p.best=int(p.best,0,100);p.fails=int(p.fails,0,2);p.bucketLevel=int(p.bucketLevel,0,1);
  p.farming=!!raw.farming;p.cleared=!!raw.cleared;
+ p.autoUnlocked=!!raw.autoUnlocked;
+ p.autoEnabled=p.autoUnlocked&&!!raw.autoEnabled;
+ p.enchantment=['none','poison','lightning','vampirism'].includes(raw.enchantment)?raw.enchantment:'none';
+ for(const monster of MONSTERS)p.monsterKills[monster.type]=int(raw.monsterKills?.[monster.type],0,1000000,0);
+ for(const key of ['bossKills','lightningHits','poisonKills','vampireHeals'])p[key]=int(raw[key],0,1000000,0);
  if(raw.version>=2){
   p.fishBucket=fitFish(raw.fishBucket,bucketCapacity(p));
   p.catchPlan=fitFish(raw.catchPlan,bucketCapacity(p)-bucketVolume(p));
@@ -55,7 +63,7 @@ export function validateProgress(raw){
   p.merchantPhase=['away','waiting'].includes(raw.merchantPhase)?raw.merchantPhase:'away';
   p.merchantMs=int(raw.merchantMs,0,300000,300000);
   p.lastSeen=Number.isFinite(raw.lastSeen)?Math.min(Date.now(),Math.max(0,raw.lastSeen)):0;
-  p.questClaimed=Array.isArray(raw.questClaimed)?raw.questClaimed.filter(x=>Number.isInteger(x)&&x>=0&&x<10).slice(0,10):[];
+  p.questClaimed=Array.isArray(raw.questClaimed)?raw.questClaimed.filter(x=>Number.isInteger(x)&&x>=0&&x<40).slice(0,40):[];
  }
  if(raw.version>=3){
   p.ownedWeapons=[...new Set(['iron',...(Array.isArray(raw.ownedWeapons)?raw.ownedWeapons:[]).filter(id=>WEAPONS.some(w=>w.id===id))])];
@@ -74,7 +82,7 @@ export function validateProgress(raw){
 function isFish(f){return f&&SPECIES.some(s=>s.species===f.species&&s.slots===f.slots)&&Number.isSafeInteger(f.price)&&f.price>0&&Number.isFinite(f.weight)&&f.weight>0&&Number.isFinite(f.length)&&f.length>0&&Number.isFinite(f.waitMs)&&f.waitMs>0}
 function fitFish(raw,capacity){const fish=[];if(!Array.isArray(raw))return fish;for(const f of raw){if(!isFish(f)||f.slots>capacity)continue;fish.push({...f});capacity-=f.slots;if(capacity===0)break;}return fish;}
 export function getRoom(p){return p.cleared?100:(p.farming?Math.max(1,p.room-1):p.room);}
-export function startFight(p,hp=maxHealth(p),r=Math.random){const level=getRoom(p),monster=spawnMonsterForWave(level,r);return {level,monster,hp:Math.min(maxHealth(p),hp),enemyHp:monster.hp,phase:'fight',heroTimer:0,enemyTimer:0,rest:0};}
+export function startFight(p,hp=maxHealth(p),r=Math.random){const level=getRoom(p),monster=spawnMonsterForWave(level,r);return {level,monster,hp:Math.min(maxHealth(p),hp),enemyHp:monster.hp,phase:'fight',heroTimer:0,enemyTimer:0,rest:0,poisonRemaining:0,poisonTick:0};}
 export function restoreFight(p,raw,completedLegacyChapter=false){
  if(!raw||typeof raw!=='object')return startFight(p);
  const finite=(value,min,max,fallback)=>Number.isFinite(value)?Math.max(min,Math.min(max,value)):fallback;
@@ -87,7 +95,8 @@ export function restoreFight(p,raw,completedLegacyChapter=false){
  const monster=!standard.boss&&custom?{...standard,...custom,name:custom.name,boss:false}:standard;
  const phase=['fight','rest','transition'].includes(raw.phase)?raw.phase:'fight';
  const b={level,monster,hp,enemyHp:finite(raw.enemyHp,0,monster.hp,monster.hp),phase,
-  heroTimer:finite(raw.heroTimer,0,1.3,0),enemyTimer:finite(raw.enemyTimer,0,2.4,0),rest:finite(raw.rest,0,phase==='rest'?restDuration(p):1.15,0)};
+  heroTimer:finite(raw.heroTimer,0,1.3,0),enemyTimer:finite(raw.enemyTimer,0,2.4,0),rest:finite(raw.rest,0,phase==='rest'?restDuration(p):1.15,0),
+  poisonRemaining:finite(raw.poisonRemaining,0,5,0),poisonTick:finite(raw.poisonTick,0,1,0)};
  if(b.phase==='fight'&&b.hp===0){b.phase='rest';b.rest=restDuration(p);}
  return b;
 }
@@ -119,7 +128,52 @@ export function equipEquipment(p,category,id,battle){const arr=category==='weapo
  if(battle&&category==='armor')battle.hp=Math.min(battle.hp,maxHealth(p));
  if(heroDamage(p)>oldDamage||maxHealth(p)>oldHealth){p.fails=0;p.farming=false;}
  return true;}
-export function stepFight(p,b,seconds){
+export function purchaseAutoBattle(p){
+ if(p.autoUnlocked){p.autoEnabled=!p.autoEnabled;return {ok:true,enabled:p.autoEnabled,alreadyOwned:true};}
+ if(p.gold<1)return {ok:false,reason:'gold',cost:1};
+ p.gold-=1;p.autoUnlocked=true;p.autoEnabled=true;
+ return {ok:true,enabled:true,cost:1};
+}
+export function setEnchantment(p,kind){
+ if(!['none','poison','lightning','vampirism'].includes(kind))return false;
+ p.enchantment=kind;return true;
+}
+function winFight(p,b,ev,source){
+ if(b.phase!=='fight'||b.enemyHp>0)return false;
+ const gold=b.monster.reward;p.gold+=gold;p.totalGold+=gold;p.kills++;
+ if(b.monster.type==='slime')p.killedSlimes++;
+ if(p.monsterKills && b.monster.type in p.monsterKills)p.monsterKills[b.monster.type]++;
+ if(b.monster.boss)p.bossKills++;
+ if(source==='poison')p.poisonKills++;
+ const materialByMonster={spider:'web',slime:'slime',skeleton:'bone',larva:'leaf',mushroom:'leaf',beetle:'chitin',ghost:'essence'};
+ const material=materialByMonster[b.monster.type]||null;
+ const loot=material?{id:material,amount:1}:null;
+ if(loot)p.materials[loot.id]=(p.materials[loot.id]||0)+loot.amount;
+ const firstClear=!p.farming&&!p.cleared&&b.level===p.room&&b.level>p.best;
+ if(firstClear){p.best=Math.max(p.best,b.level);p.fails=0;if(b.level===100){p.cleared=true;p.room=100;}else p.room=b.level+1;}
+ b.phase='transition';b.rest=1.15;b.poisonRemaining=0;
+ ev.push({kind:'win',gold,loot,level:b.level,firstClear});
+ return true;
+}
+function hitEnemy(p,b,ev){
+ const element=p.enchantment||'none',base=heroDamage(p);
+ const extra=element==='lightning'?Math.max(1,Math.ceil(base*.35)):0;
+ const damage=Math.min(b.enemyHp,base+extra);
+ b.enemyHp=Math.max(0,b.enemyHp-damage);
+ if(element==='poison'){b.poisonRemaining=Math.max(b.poisonRemaining||0,4);b.poisonTick=0;}
+ if(element==='lightning')p.lightningHits++;
+ let healed=0;
+ if(element==='vampirism'){healed=Math.min(maxHealth(p)-b.hp,Math.max(1,Math.floor(damage*.3)));b.hp+=healed;if(healed>0)p.vampireHeals++;}
+ ev.push({kind:'hero-hit',damage,element,healed});
+ winFight(p,b,ev,'sword');
+}
+export function tapMonster(p,b){
+ if(b.phase!=='fight'||p.autoEnabled)return [];
+ if(b.heroTimer<1.3)return [{kind:'cooldown',remaining:1.3-b.heroTimer}];
+ b.heroTimer=0;
+ const ev=[];hitEnemy(p,b,ev);return ev;
+}
+export function stepFight(p,b,seconds,auto=true){
  const ev=[],dt=Math.min(Math.max(0,seconds),.25);
  if(b.phase==='rest'||b.phase==='transition'){
   b.rest-=dt;
@@ -127,25 +181,24 @@ export function stepFight(p,b,seconds){
   return ev;
  }
  if(b.phase!=='fight')return ev;
- b.heroTimer+=dt;b.enemyTimer+=dt;
- if(b.heroTimer>=1.3){b.heroTimer-=1.3;b.enemyHp=Math.max(0,b.enemyHp-heroDamage(p));ev.push({kind:'hero-hit',damage:heroDamage(p)});
-  if(b.enemyHp<=0){const gold=b.monster.reward;p.gold+=gold;p.totalGold+=gold;p.kills++;if(b.monster.type==='slime')p.killedSlimes++;
-   const materialByMonster={spider:'web',slime:'slime',skeleton:'bone',larva:'leaf',mushroom:'leaf',beetle:'chitin',ghost:'essence'};
-   const material=materialByMonster[b.monster.type]||null;
-   const loot=material?{id:material,amount:1}:null;
-   if(loot)p.materials[loot.id]=(p.materials[loot.id]||0)+loot.amount;
-   const firstClear=!p.farming&&!p.cleared&&b.level===p.room&&b.level>p.best;
-   if(firstClear){p.best=Math.max(p.best,b.level);p.fails=0;if(b.level===100){p.cleared=true;p.room=100;}else p.room=b.level+1;}
-   b.phase='transition';b.rest=1.15;ev.push({kind:'win',gold,loot,level:b.level,firstClear});return ev;
+ b.heroTimer=Math.min(1.3,b.heroTimer+dt);b.enemyTimer+=dt;
+ if(b.poisonRemaining>0){
+  b.poisonRemaining=Math.max(0,b.poisonRemaining-dt);
+  b.poisonTick=(b.poisonTick||0)+dt;
+  if(b.poisonTick>=.5){
+   b.poisonTick-=.5;
+   const damage=Math.max(1,Math.ceil(heroDamage(p)*.10));
+   b.enemyHp=Math.max(0,b.enemyHp-damage);
+   ev.push({kind:'poison-tick',damage});
+   if(winFight(p,b,ev,'poison'))return ev;
   }
  }
+ if(auto&&b.heroTimer>=1.3){b.heroTimer=0;hitEnemy(p,b,ev);if(b.phase!=='fight')return ev;}
  if(b.enemyTimer>=2.4){b.enemyTimer-=2.4;b.hp=Math.max(0,b.hp-b.monster.attack);ev.push({kind:'enemy-hit',damage:b.monster.attack,move:b.monster.move});
-  if(b.hp===0){if(!p.farming&&!p.cleared){p.fails++;if(p.fails>=2&&p.room>1)p.farming=true;}
-   b.phase='rest';b.rest=restDuration(p);ev.push({kind:'defeat',farming:p.farming});}
+  if(b.hp===0){if(!p.farming&&!p.cleared){p.fails++;if(p.fails>=2&&p.room>1)p.farming=true;}b.phase='rest';b.rest=restDuration(p);ev.push({kind:'defeat',farming:p.farming});}
  }
  return ev;
 }
-export function offlineReward(p,ms){const minutes=Math.min(480,Math.max(0,ms/60000)),raw=Math.floor(minutes*battleRate(p)*.5),next=Math.min(swordCost(p.sword),armorCost(p.armor));return Math.min(raw,Math.floor(next*1.1));}
 export const SPECIES=[
  {species:'Плотва',slots:1,base:8,min:12,max:25,weight:[.12,.45],length:[14,27]},
  {species:'Карась',slots:2,base:18,min:24,max:44,weight:[.45,1.2],length:[22,38]},
