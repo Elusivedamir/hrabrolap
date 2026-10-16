@@ -241,17 +241,30 @@ function battleEvents(events){for(const ev of events){
  if(ev.kind==='spawn'){cancelMonsterFrames();}
  if(ev.kind==='spawn'&&ev.afterRest){cancelAttackPose();say('Мы справимся!');pulse($('surface'),'wake-up',1800);}
 }}
-function alignFishFlightWithBucket(){
- const fish=document.querySelector('#surface .fish-flight');
- const bucket=$('bucket-graphic');
- if(!fish||!bucket)return;
- const a=fish.getBoundingClientRect(),b=bucket.getBoundingClientRect();
- const x=(b.left+b.width*.5)-(a.left+a.width*.5);
- const y=(b.top+b.height*.32)-(a.top+a.height*.5);
- fish.style.setProperty('--fish-target-x',x.toFixed(2)+'px');
- fish.style.setProperty('--fish-target-y',y.toFixed(2)+'px');
+let fishAnimationToken=0,fishFrameIds=[];
+function playFishCatch(){
+ fishAnimationToken++;for(const t of fishFrameIds)clearTimeout(t);
+ fishFrameIds=[];
+ const token=fishAnimationToken,img=$('fishing-animation');
+ $('surface').classList.add('animated-fishing');
+ img.dataset.frame='01';
+ for(let i=0;i<10;i++)fishFrameIds.push(setTimeout(()=>{
+   if(token!==fishAnimationToken||document.hidden)return;
+   const n=String(i+1).padStart(2,'0');
+   img.setAttribute('src',`animations/fishing/${n}.svg`);
+   img.dataset.frame=n;
+ },i*135));
+ fishFrameIds.push(setTimeout(()=>{
+  if(token!==fishAnimationToken)return;
+  img.setAttribute('src','animations/fishing/01.svg');
+  img.dataset.frame='01';
+  $('surface').classList.remove('animated-fishing');
+ },1450));
 }
-function fishEvents(events){for(const e of events){if(e.kind==='catch'){pulse($('surface'),'biting',1400);setTimeout(()=>{alignFishFlightWithBucket();pulse($('surface'),'reeling',1400);},430);notify('Рыцарь поймал: '+e.fish.species+' · '+e.fish.weight+' кг');save();}if(e.kind==='bucket-full'){notify('Ведро заполнено! Ждём торговца.');save();}}}
+function fishEvents(events){for(const e of events){
+ if(e.kind==='catch'){playFishCatch();notify('Рыцарь поймал: '+e.fish.species+' · '+e.fish.weight+' кг');save();}
+ if(e.kind==='bucket-full'){notify('Ведро заполнено! Ждём торговца.');save();}
+}}
 function merchantEvents(events){for(const e of events){if(e.kind==='merchant-arrive'){notify('Хей, ребята привет, есть что-то для меня?');save();}if(e.kind==='merchant-leave'){notify('Скоро вернусь!');save();}}}
 function frame(now){const dt=Math.min(.12,Math.max(0,(now-last)/1000));last=now;
  if(!document.hidden){

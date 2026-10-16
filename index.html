@@ -2,8 +2,8 @@
 <body><main class="game" id="game" aria-label="Игра Храбролап">
 <header class="hud"><div class="brand"><img src="art/icons/house.svg" alt=""/><div><b>ХРАБРОЛАП</b><small>ТИХАЯ ПРИСТАНЬ · 2D</small></div></div><div class="wallet"><img src="art/icons/coin.svg" alt=""/><div><b id="gold">0</b></div></div><button id="inventory" class="hud-action" aria-label="Инвентарь"><img src="art/icons/inventory-bag.svg" alt=""/></button><button id="shop" class="hud-action" aria-label="Магазин"><img src="art/icons/shop-sign.svg" alt=""/></button></header>
 <section class="surface" id="surface" aria-label="Уютная пристань и домик">
- <img class="scene-art" src="art/approved/port_active.webp" alt="Рыцарь-человек в закрытом шлеме рыбачит у домика"/>
- <img class="house-cutaway" src="art/approved/port_rest.webp" alt="Тот же домик с раскрытым интерьером во время отдыха"/>
+ <img class="scene-art" src="art/animated/port_active_clean.webp" alt="Рыцарь-человек в закрытом шлеме рыбачит у домика"/>
+ <img class="house-cutaway" src="art/animated/port_rest_clean.webp" alt="Тот же домик с раскрытым интерьером во время отдыха"/>
  <img id="rest-sleep-sprite" class="rest-sleep-sprite" src="assets/rest/sleep_01.png" alt="Котёнок спит без брони и меча в существующем доме" aria-hidden="true"/>
  
  <div class="rest-label" id="rest-label">Храбролап отдыхает дома</div><img class="mini-cave" src="art/scenery/cave.svg" alt="Вход в подземелье"/><img class="mini-shop" id="mini-shop" src="art/scenery/shop.svg" alt="Магазин у дома"/><span class="cave-call" id="cave-call">Мы справимся!</span><img class="cave-runner" src="art/hero/bare-kitten.svg" alt="Храбролап идёт к пещере"/>
@@ -14,6 +14,7 @@
   <g class="bobber" id="bobber"><ellipse cx="66" cy="276" rx="10" ry="4" fill="#d6fff6" opacity=".45"/><path d="M60 273Q58 262 66 258Q74 260 72 274Z" fill="#f8faf1" stroke="#7b5953" stroke-width="2"/><path d="M60 270Q66 268 73 270V275Q66 279 60 275Z" fill="#dd6f65"/><path d="M66 257V252" stroke="#5f6c65" stroke-width="2"/></g>
   <g id="fish-splash" class="fish-splash"><path d="M34 275Q51 253 65 277Q81 258 98 275" fill="none" stroke="#ecfff4" stroke-width="4" stroke-linecap="round"/><circle cx="52" cy="252" r="3" fill="#f6fff2"/><circle cx="81" cy="252" r="3" fill="#f6fff2"/></g>
  </svg>
+  <img id="fishing-animation" class="fishing-anim-overlay" src="animations/fishing/01.svg" alt="Рыцарь-рыбак: десятикадровая анимация заброса, подсечки и помещения рыбы в ведро"/>
  <img class="fish-flight" src="art/fish.svg" alt="Пойманная рыба летит в ведро"/>
  <button class="bucket" id="bucket" aria-label="Открыть ведро с рыбой"><img id="bucket-graphic" src="art/scenery/bucket-empty.svg" alt="Ведро для рыбы"/><span id="bucket-indicator">0 рыб</span></button>
  <button class="merchant" id="merchant" aria-label="Рыбный торговец"><img src="art/merchant.svg" alt="Седой кот-торговец"/><span id="merchant-bubble">Хей, ребята привет, есть что-то для меня?</span><small id="merchant-visit">00:15</small></button>

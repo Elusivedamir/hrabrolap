@@ -195,3 +195,8 @@
 
 /* Original v0.9.3 SVG animation frames are 320×320, center the drawn monster. */
 .enemy-holder .monster-art.approved-monster-frame{height:111%;width:120%;max-width:120%;object-fit:contain;object-position:center bottom}
+
+/* v0.9.7 restore ORIGINAL 10-frame fishing knight art and the same two port scenes.
+   The painted knight was extracted into frames already, so avoid duplicate rods. */
+.surface .fishing-anim-overlay{position:absolute;inset:0;width:100%;height:100%;z-index:5;opacity:1;pointer-events:none;object-fit:fill}
+.surface .fishing-rig,.surface .fish-flight,.surface .knight{display:none!important}
