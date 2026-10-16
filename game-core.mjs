@@ -1,5 +1,7 @@
+import {WEAPONS,ARMORS,MATERIALS} from './equipment-catalog.mjs';
+export {WEAPONS,ARMORS,MATERIALS} from './equipment-catalog.mjs';
 // Храбролап v0.8.1 — исправления HP, миграции и восстановления сохранений.
-export const VERSION=3;
+export const VERSION=4;
 export const WAVE_COUNT=100;
 export const MONSTERS=[
  {type:'slime',name:'Слизень',texture:'slime',move:'jump',attackName:'Прыжок телом'},
@@ -9,7 +11,8 @@ export const MONSTERS=[
  {type:'spider',name:'Паук',texture:'spider',move:'leap',attackName:'Прыжок с паутиной'},
  {type:'larva',name:'Личинка',texture:'larva',move:'wriggle',attackName:'Толчок головой'},
  {type:'beetle',name:'Жук',texture:'beetle',move:'ram',attackName:'Удар панцирем'},
- {type:'ghost',name:'Призрак',texture:'ghost',move:'pulse',attackName:'Призрачный импульс'}
+ {type:'ghost',name:'Призрак',texture:'ghost',move:'pulse',attackName:'Призрачный импульс'},
+ {type:'skeleton',name:'Скелет',texture:'skeleton',move:'rattle',attackName:'Костяной взмах'}
 ];
 export function monsterForWave(level){
  const n=Math.max(1,Math.min(100,Math.floor(level))),boss=n%10===0;
@@ -18,17 +21,15 @@ export function monsterForWave(level){
  const hp=Math.round((17+4.8*n+1.0*n**1.34)*(boss?2.25:1));
  return {...model,name:(boss?'Король · ':'')+model.name,boss,hp,attack:Math.ceil((1+n*.34)*(boss?1.42:1)),reward:Math.round((8+n*3.8+n**1.2*.38)*(boss?3:1))};
 }
+// В обычных боях шанс паука 30%. Прежний регулярный слот паука
+// отдан скелету; боссы на каждой 10-й волне остаются без изменений.
+export function spawnMonsterForWave(level,r=Math.random){
+ const original=monsterForWave(level);
+ if(original.boss)return original;
+ const base=(r()<.30?MONSTERS.find(m=>m.type==='spider'):original.type==='spider'?MONSTERS.find(m=>m.type==='skeleton'):original);
+ return {...original,...base,name:base.name,boss:false};
+}
 export const ENEMIES=Array.from({length:100},(_,i)=>monsterForWave(i+1));
-export const WEAPONS=[
- {id:'iron',name:'Железный меч',price:0,damage:0,svg:'art/weapons/iron.svg'},
- {id:'fishbone',name:'Рыбий позвоночник',price:160,damage:8,svg:'art/weapons/fishbone.svg'},
- {id:'moon',name:'Лунный клинок',price:900,damage:20,svg:'art/weapons/moon.svg'}
-];
-export const ARMORS=[
- {id:'none',name:'Без брони',price:0,health:0,svg:''},
- {id:'steel',name:'Рыцарский панцирь',price:230,health:28,svg:'art/armor/steel.svg'},
- {id:'leaf',name:'Лесная броня',price:1100,health:85,svg:'art/armor/leaf.svg'}
-];
 export const swordCost=n=>Math.round(20*1.17**n);
 export const armorCost=n=>Math.round(35*1.16**n);
 export const fishCost=n=>Math.round(45*1.24**n);
@@ -40,10 +41,10 @@ export const heroDamage=p=>8+3*p.sword+equipped(WEAPONS,p.weapon).damage;
 export const maxHealth=p=>65+14*p.armor+equipped(ARMORS,p.equippedArmor).health;
 export const restDuration=p=>Math.max(2.5,7-p.home*.35);
 export function battleRate(p){const m=monsterForWave(Math.max(1,Math.min(100,p.best||1)));return Math.floor(m.reward*60/Math.max(4,Math.ceil(m.hp/heroDamage(p))*1.3+1.1));}
-export function freshProgress(){return {version:VERSION,gold:0,sword:0,armor:0,fishLevel:0,home:0,bucketLevel:0,weapon:'iron',equippedArmor:'none',ownedWeapons:['iron'],ownedArmors:['none'],room:1,best:0,fails:0,farming:false,cleared:false,kills:0,totalGold:0,killedSlimes:0,caughtTotal:0,soldFish:0,soldPike:0,spentSword:0,fishBucket:[],catchPlan:[],nextCatchMs:0,merchantPhase:'away',merchantMs:300000,lastSeen:0,pendingOffline:0,questClaimed:[]};}
+export function freshProgress(){return {version:VERSION,gold:0,sword:0,armor:0,fishLevel:0,home:0,bucketLevel:0,weapon:'iron',equippedArmor:'none',ownedWeapons:['iron'],ownedArmors:['none'],room:1,best:0,fails:0,farming:false,cleared:false,kills:0,totalGold:0,killedSlimes:0,caughtTotal:0,soldFish:0,soldPike:0,spentSword:0,materials:Object.fromEntries(MATERIALS.map(m=>[m.id,0])),fishBucket:[],catchPlan:[],nextCatchMs:0,merchantPhase:'away',merchantMs:300000,lastSeen:0,pendingOffline:0,questClaimed:[]};}
 const int=(v,lo,hi,d=lo)=>Number.isFinite(v)?Math.max(lo,Math.min(hi,Math.floor(v))):d;
 export function validateProgress(raw){
- const p=freshProgress(); if(!raw||![1,2,3].includes(raw.version))return p;
+ const p=freshProgress(); if(!raw||![1,2,3,4].includes(raw.version))return p;
  for(const k of ['gold','sword','armor','fishLevel','home','room','best','fails','kills','totalGold','killedSlimes','caughtTotal','soldFish','soldPike','spentSword','pendingOffline','bucketLevel'])p[k]=int(raw[k],0,k==='gold'||k==='totalGold'?1e13:1e6,p[k]);
  p.room=int(p.room,1,100);p.best=int(p.best,0,100);p.fails=int(p.fails,0,2);p.bucketLevel=int(p.bucketLevel,0,1);
  p.farming=!!raw.farming;p.cleared=!!raw.cleared;
@@ -56,20 +57,24 @@ export function validateProgress(raw){
   p.lastSeen=Number.isFinite(raw.lastSeen)?Math.min(Date.now(),Math.max(0,raw.lastSeen)):0;
   p.questClaimed=Array.isArray(raw.questClaimed)?raw.questClaimed.filter(x=>Number.isInteger(x)&&x>=0&&x<10).slice(0,10):[];
  }
- if(raw.version===3){
+ if(raw.version>=3){
   p.ownedWeapons=[...new Set(['iron',...(Array.isArray(raw.ownedWeapons)?raw.ownedWeapons:[]).filter(id=>WEAPONS.some(w=>w.id===id))])];
   p.ownedArmors=[...new Set(['none',...(Array.isArray(raw.ownedArmors)?raw.ownedArmors:[]).filter(id=>ARMORS.some(w=>w.id===id))])];
   p.weapon=p.ownedWeapons.includes(raw.weapon)?raw.weapon:'iron';
   p.equippedArmor=p.ownedArmors.includes(raw.equippedArmor)?raw.equippedArmor:'none';
  }
- // В v1/v2 cleared означало прохождение десяти комнат, а не ста волн.
+   // Миграция старых сохранений: новые ингредиенты с нулевого счётчика.
+  if(raw.version>=4&&raw.materials&&typeof raw.materials==='object'&&!Array.isArray(raw.materials)){
+   for(const item of MATERIALS)p.materials[item.id]=int(raw.materials[item.id],0,1000000,0);
+  }
+// В v1/v2 cleared означало прохождение десяти комнат, а не ста волн.
  if(raw.version<3&&p.cleared&&p.best<100){p.cleared=false;p.room=Math.min(100,Math.max(p.room,p.best+1));}
  return p;
 }
 function isFish(f){return f&&SPECIES.some(s=>s.species===f.species&&s.slots===f.slots)&&Number.isSafeInteger(f.price)&&f.price>0&&Number.isFinite(f.weight)&&f.weight>0&&Number.isFinite(f.length)&&f.length>0&&Number.isFinite(f.waitMs)&&f.waitMs>0}
 function fitFish(raw,capacity){const fish=[];if(!Array.isArray(raw))return fish;for(const f of raw){if(!isFish(f)||f.slots>capacity)continue;fish.push({...f});capacity-=f.slots;if(capacity===0)break;}return fish;}
 export function getRoom(p){return p.cleared?100:(p.farming?Math.max(1,p.room-1):p.room);}
-export function startFight(p,hp=maxHealth(p)){const level=getRoom(p),monster=monsterForWave(level);return {level,monster,hp:Math.min(maxHealth(p),hp),enemyHp:monster.hp,phase:'fight',heroTimer:0,enemyTimer:0,rest:0};}
+export function startFight(p,hp=maxHealth(p),r=Math.random){const level=getRoom(p),monster=spawnMonsterForWave(level,r);return {level,monster,hp:Math.min(maxHealth(p),hp),enemyHp:monster.hp,phase:'fight',heroTimer:0,enemyTimer:0,rest:0};}
 export function restoreFight(p,raw,completedLegacyChapter=false){
  if(!raw||typeof raw!=='object')return startFight(p);
  const finite=(value,min,max,fallback)=>Number.isFinite(value)?Math.max(min,Math.min(max,value)):fallback;
@@ -77,7 +82,9 @@ export function restoreFight(p,raw,completedLegacyChapter=false){
  const hp=finite(raw.hp,0,maxHealth(p),maxHealth(p));
  // Завершённый бой из старой главы не переносим на заново открытые волны.
  if(completedLegacyChapter&&level<=p.best)return startFight(p,hp);
- const monster=monsterForWave(level);
+ const standard=monsterForWave(level);
+ const custom=MONSTERS.find(m=>m.type===raw.monsterType);
+ const monster=!standard.boss&&custom?{...standard,...custom,name:custom.name,boss:false}:standard;
  const phase=['fight','rest','transition'].includes(raw.phase)?raw.phase:'fight';
  const b={level,monster,hp,enemyHp:finite(raw.enemyHp,0,monster.hp,monster.hp),phase,
   heroTimer:finite(raw.heroTimer,0,1.3,0),enemyTimer:finite(raw.enemyTimer,0,2.4,0),rest:finite(raw.rest,0,phase==='rest'?restDuration(p):1.15,0)};
@@ -88,10 +95,22 @@ export function upgrade(p,kind){const info={sword:['sword',swordCost],armor:['ar
  const cost=priceFunc(p[field]);if(p.gold<cost)return {ok:false,cost};p.gold-=cost;p[field]++;if(kind==='sword')p.spentSword++;
  if(kind==='sword'||kind==='armor'){p.fails=0;p.farming=false;}
  return {ok:true,cost};}
-export function buyEquipment(p,category,id){const arr=category==='weapon'?WEAPONS:category==='armor'?ARMORS:null;if(!arr)return {ok:false,reason:'category'};const item=arr.find(x=>x.id===id);if(!item)return {ok:false,reason:'missing'};
+export function buyEquipment(p,category,id){
+ const arr=category==='weapon'?WEAPONS:category==='armor'?ARMORS:null;
+ if(!arr)return {ok:false,reason:'category'};
+ const item=arr.find(x=>x.id===id);if(!item)return {ok:false,reason:'missing'};
  const owned=category==='weapon'?p.ownedWeapons:p.ownedArmors;
  if(owned.includes(id))return {ok:false,reason:'owned'};
- if(p.gold<item.price)return {ok:false,reason:'gold',cost:item.price};p.gold-=item.price;owned.push(id);return {ok:true,item};}
+ if(p.gold<item.price)return {ok:false,reason:'gold',cost:item.price};
+ for(const [material,need] of Object.entries(item.materials||{})){
+  const available=p.materials[material]||0;
+  if(available<need)return {ok:false,reason:'material',material,need,available};
+ }
+ p.gold-=item.price;
+ for(const [material,need] of Object.entries(item.materials||{}))p.materials[material]-=need;
+ owned.push(id);
+ return {ok:true,item};
+}
 export function equipEquipment(p,category,id,battle){const arr=category==='weapon'?WEAPONS:category==='armor'?ARMORS:null;if(!arr||!arr.some(x=>x.id===id))return false;
  const own=category==='weapon'?p.ownedWeapons:p.ownedArmors;
  if(!own.includes(id))return false;
@@ -111,9 +130,13 @@ export function stepFight(p,b,seconds){
  b.heroTimer+=dt;b.enemyTimer+=dt;
  if(b.heroTimer>=1.3){b.heroTimer-=1.3;b.enemyHp=Math.max(0,b.enemyHp-heroDamage(p));ev.push({kind:'hero-hit',damage:heroDamage(p)});
   if(b.enemyHp<=0){const gold=b.monster.reward;p.gold+=gold;p.totalGold+=gold;p.kills++;if(b.monster.type==='slime')p.killedSlimes++;
+   const materialByMonster={spider:'web',slime:'slime',skeleton:'bone',larva:'leaf',mushroom:'leaf',beetle:'chitin',ghost:'essence'};
+   const material=materialByMonster[b.monster.type]||null;
+   const loot=material?{id:material,amount:1}:null;
+   if(loot)p.materials[loot.id]=(p.materials[loot.id]||0)+loot.amount;
    const firstClear=!p.farming&&!p.cleared&&b.level===p.room&&b.level>p.best;
    if(firstClear){p.best=Math.max(p.best,b.level);p.fails=0;if(b.level===100){p.cleared=true;p.room=100;}else p.room=b.level+1;}
-   b.phase='transition';b.rest=1.15;ev.push({kind:'win',gold,level:b.level,firstClear});return ev;
+   b.phase='transition';b.rest=1.15;ev.push({kind:'win',gold,loot,level:b.level,firstClear});return ev;
   }
  }
  if(b.enemyTimer>=2.4){b.enemyTimer-=2.4;b.hp=Math.max(0,b.hp-b.monster.attack);ev.push({kind:'enemy-hit',damage:b.monster.attack,move:b.monster.move});
