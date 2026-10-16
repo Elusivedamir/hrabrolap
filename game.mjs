@@ -1,3 +1,4 @@
+import {armorAttackTransform,armorHurtTransform,hurtMotionTransform,hurtWeaponTransform,HURT_FRAMES,HURT_FRAME_MS} from './equipment-rig.mjs';
 import {WEAPONS,ARMORS,MATERIALS,freshProgress,validateProgress,restoreFight,swordCost,armorCost,fishCost,homeCost,bucketCost,bucketCapacity,heroDamage,maxHealth,startFight,stepFight,upgrade,buyEquipment,equipEquipment,offlineReward,bucketVolume,bucketGold,planFishing,stepFishing,stepMerchant,sellAll} from './game-core.mjs';
 const $=id=>document.getElementById(id), SAVE='hrabrolap-v0.2-save',OLD='hrabrolap-v0.1-save',fmt=n=>Math.floor(n).toLocaleString('ru-RU');
 let p,b,modalType='',last=performance.now(),lastSave=0,lastAutosave=0,msgTimeout=0,toastTimeout=0,lastFrameRest=false;
@@ -24,19 +25,45 @@ const ATTACKS=[
   [170,229,-18,0,0,0],[161,224,-64,-11,0,-10],[161,231,15,4,-5,-3],[227,227,88,22,-1,4],[236,226,84,26,-2,3],[170,229,-18,0,0,0]]}
 ];
 let poseSerial=0,poseTimeouts=[],attackPrepared=false,currentPose=-1,attackSerial=0,activeAttack=0;
-const heroMotion=$('hero-motion'),slot=$('weapon-slot');
+const heroMotion=$('hero-motion'),slot=$('weapon-slot'),armorSlot=$('armor-slot');
+let hurtSerial=0,hurtTimers=[],hurting=false;
+function cancelHurt(){
+ hurtSerial++;for(const t of hurtTimers)clearTimeout(t);hurtTimers=[];hurting=false;
+ delete $('hero-art').dataset.hurtFrame;
+}
+function hurtFrame(index){
+ heroMotion.setAttribute('transform',hurtMotionTransform(index));
+ armorSlot.setAttribute('transform',armorHurtTransform(index));
+ slot.setAttribute('transform',hurtWeaponTransform(index));
+ $('hero-art').dataset.hurtFrame=String(index+1);
+}
+function playHurt(){
+ // Реакция на урон имеет приоритет над движением меча,
+ // но не перерисовывает кота и не останавливает расчёт боя.
+ cancelPose();cancelHurt();
+ hurting=true;const serial=hurtSerial;hurtFrame(0);
+ for(let i=1;i<HURT_FRAMES.length;i++){
+  hurtTimers.push(setTimeout(()=>{if(serial===hurtSerial&&!document.hidden)hurtFrame(i);},i*HURT_FRAME_MS));
+ }
+ hurtTimers.push(setTimeout(()=>{
+  if(serial!==hurtSerial)return;
+  cancelHurt();if(b.phase==='rest')cancelAttackPose();else heroFrame(0);
+ },HURT_FRAMES.length*HURT_FRAME_MS));
+}
+
 function heroFrame(index=0){
  const [x,y,angle,dx,dy,lean]=ATTACKS[activeAttack].frames[Math.max(0,Math.min(5,index))];
  slot.setAttribute('transform',`translate(${x} ${y}) rotate(${angle})`);
  heroMotion.setAttribute('transform',`translate(${dx} ${dy}) rotate(${lean} 238 252)`);
+ armorSlot.setAttribute('transform',armorAttackTransform(activeAttack,index));
  currentPose=index;
 }
 function cancelPose(){poseSerial++;for(const t of poseTimeouts)clearTimeout(t);poseTimeouts=[];attackPrepared=false;}
 function queuePose(index,delay,serial=poseSerial){const t=setTimeout(()=>{if(serial===poseSerial&&b.phase!=='rest'&&!document.hidden)heroFrame(index);},delay);poseTimeouts.push(t);}
-function prepareAttack(){if(attackPrepared||b.phase!=='fight')return;cancelPose();attackPrepared=true;activeAttack=attackSerial++%3;const serial=poseSerial;heroFrame(0);queuePose(1,110,serial);queuePose(2,245,serial);}
-function contactAttack(){cancelPose();const serial=poseSerial;heroFrame(3);queuePose(4,125,serial);queuePose(5,245,serial);queuePose(0,425,serial);}
+function prepareAttack(){if(hurting||attackPrepared||b.phase!=='fight')return;cancelPose();attackPrepared=true;activeAttack=attackSerial++%3;const serial=poseSerial;heroFrame(0);queuePose(1,110,serial);queuePose(2,245,serial);}
+function contactAttack(){if(hurting)cancelHurt();cancelPose();const serial=poseSerial;heroFrame(3);queuePose(4,125,serial);queuePose(5,245,serial);queuePose(0,425,serial);}
 function cancelAttackPose(){cancelPose();activeAttack=0;heroFrame(0);}
-function syncHeroPose(){if(b.phase==='rest')cancelAttackPose();}
+function syncHeroPose(){if(b.phase==='rest'&&!hurting)cancelAttackPose();}
 function syncEquipment(){
  const weapon=WEAPONS.find(w=>w.id===p.weapon)||WEAPONS[0];$('hero-weapon').setAttribute('href',weapon.svg);
  const armor=ARMORS.find(a=>a.id===p.equippedArmor)||ARMORS[0];const art=$('hero-armor');art.style.display=armor.svg?'':'none';if(armor.svg)art.setAttribute('href',armor.svg);
@@ -104,7 +131,9 @@ function openModal(title,mode='info',text=''){modalType=mode;$('modal-title').te
     }
   };
   line('Мечи',WEAPONS,'weapon');line('Броня',ARMORS,'armor');
-  if(mode==='shop'){para('Качество меча и брони улучшается кнопками внизу экрана независимо от внешнего вида предметов.');action('Открыть инвентарь',()=>openModal('Инвентарь','inventory'));}
+  if(mode==='shop'){para('Качество меча и брони улучшается кнопками внизу экрана независимо от внешнего вида предметов.');
+   action('🎞 Ателье SVG — посмотреть 6 кадров',()=>{save();window.location.href='equipment-preview.html'});
+   action('Открыть инвентарь',()=>openModal('Инвентарь','inventory'));}
   else action('Открыть магазин',()=>openModal('Магазин','shop'));
  }else if(mode==='quests'){
   for(const q of QUESTS){const done=p.questClaimed.includes(q.id),count=p[q.field];const row=document.createElement('div');row.className='quest-row';const text=document.createElement('span');text.textContent=q.name;const mini=document.createElement('small');mini.textContent=Math.min(q.target,count)+'/'+q.target+' · награда '+q.reward+' 🪙';text.append(mini);const btn=document.createElement('button');btn.textContent=done?'✓':'+ 🪙';btn.disabled=done||count<q.target;btn.addEventListener('click',()=>{if(p.questClaimed.includes(q.id)||p[q.field]<q.target)return;p.questClaimed.push(q.id);p.gold+=q.reward;save();openModal('Задания','quests');notify('Награда за задание: +'+q.reward+' монет')});row.append(text,btn);content.append(row);}
@@ -120,7 +149,7 @@ function openModal(title,mode='info',text=''){modalType=mode;$('modal-title').te
 function closeModal(){const mode=modalType;modalType='';if($('modal').open)$('modal').close();last=performance.now();render()}
 function battleEvents(events){for(const ev of events){
  if(ev.kind==='hero-hit'){contactAttack();pulse($('enemy-holder'),'hurt',350);}
- if(ev.kind==='enemy-hit'){pulse($('hero-art'),'battle-hurt',260);enemyAttack(ev.move);}
+ if(ev.kind==='enemy-hit'){playHurt();pulse($('hero-art'),'battle-hurt',HURT_FRAMES.length*HURT_FRAME_MS);enemyAttack(ev.move);}
  if(ev.kind==='win'){coinFx(ev.gold);
    const lootName=MATERIALS.find(x=>x.id===ev.loot?.id);
    say(`Победа! +${ev.gold} монет`+(lootName?` · +1 ${lootName.name}`:''));pulse($('enemy-holder'),'dead',660);save();if(ev.level===100&&ev.firstClear)setTimeout(()=>openModal('100 волн пройдено!','info','Храбролап прошёл все сто волн! Можно продолжать сражаться и собирать монеты.'),600);}
@@ -150,7 +179,7 @@ $('help').addEventListener('click',()=>openModal('Как играть','info','�
 $('reset').addEventListener('click',()=>openModal('Начать заново?','reset'));
 $('modal-x').addEventListener('click',closeModal);
 $('modal').addEventListener('cancel',e=>{e.preventDefault();if(modalType!=='offline')closeModal()});
-function visibility(){if(document.hidden){cancelAttackPose();save();}else{cancelAttackPose();if(p.lastSeen){const elapsed=Date.now()-p.lastSeen;if(elapsed>20000){const award=offlineReward(p,elapsed);p.pendingOffline=Math.min(p.pendingOffline+award,Math.floor(Math.min(swordCost(p.sword),armorCost(p.armor))*1.1));if(award>0)setTimeout(()=>{if(!$('modal').open)openModal('Награда за отсутствие','offline')},250);}}last=performance.now();save();}}
+function visibility(){if(document.hidden){cancelHurt();cancelAttackPose();save();}else{cancelHurt();cancelAttackPose();if(p.lastSeen){const elapsed=Date.now()-p.lastSeen;if(elapsed>20000){const award=offlineReward(p,elapsed);p.pendingOffline=Math.min(p.pendingOffline+award,Math.floor(Math.min(swordCost(p.sword),armorCost(p.armor))*1.1));if(award>0)setTimeout(()=>{if(!$('modal').open)openModal('Награда за отсутствие','offline')},250);}}last=performance.now();save();}}
 document.addEventListener('visibilitychange',visibility);
 window.addEventListener('pagehide',save);
 setInterval(()=>{if(!document.hidden)save()},3000);
