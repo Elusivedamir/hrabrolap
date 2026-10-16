@@ -1,333 +1,166 @@
 {
-  "source": "user supplied 2309.png",
-  "frame_size": [
+  "source": "approved full-body Forest Guardian comparison reference 2308.png",
+  "method": "SIFT-verified fixed scale 1.16, x=-1 y=15, chroma+difference segmentation of outfit only; original kitten PNG not modified",
+  "reference_frame": [
     279,
     370
   ],
   "frames": [
     {
       "kind": "attack",
-      "index": 1,
-      "path": "assets/armor/forest_guardian/forest_attack_01.png",
-      "sha256": "3be26695ad7a9bcacfc2d7ef6bda730d5fedd9e00d8ad57bf023614cf1a9e437",
-      "size": [
-        279,
-        370
-      ],
-      "crop": [
-        0,
-        0,
-        279,
-        470
-      ],
-      "scale": 0.85,
-      "offset": [
-        21,
-        -45
-      ],
+      "frame": 1,
+      "png": "forest_attack_01.png",
       "alpha_bbox": [
-        42,
-        210,
-        258,
-        357
-      ]
+        37,
+        189,
+        265,
+        367
+      ],
+      "sha256": "c63bddf0034470653756d597720d31dd7ddf235a6500f8691a8c2bcb63da47a8",
+      "pixel_coverage": 19537
     },
     {
       "kind": "attack",
-      "index": 2,
-      "path": "assets/armor/forest_guardian/forest_attack_02.png",
-      "sha256": "265cbf663ea7c6ed952ec8e1723565474b7afbde1cde8ad13a2fe6e1544479da",
-      "size": [
-        279,
-        370
-      ],
-      "crop": [
-        279,
-        0,
-        557,
-        470
-      ],
-      "scale": 0.85,
-      "offset": [
-        22,
-        -45
-      ],
+      "frame": 2,
+      "png": "forest_attack_02.png",
       "alpha_bbox": [
-        22,
+        19,
         166,
-        248,
-        357
-      ]
-    },
-    {
-      "kind": "attack",
-      "index": 3,
-      "path": "assets/armor/forest_guardian/forest_attack_03.png",
-      "sha256": "d89b66c4de67c5714d7b7d023e90481f4d6f1ebc4d664f8de3aaf036bedefbb7",
-      "size": [
-        279,
-        370
-      ],
-      "crop": [
-        557,
-        0,
-        836,
-        470
-      ],
-      "scale": 0.85,
-      "offset": [
-        21,
-        -45
-      ],
-      "alpha_bbox": [
-        26,
-        172,
-        258,
-        357
-      ]
-    },
-    {
-      "kind": "attack",
-      "index": 4,
-      "path": "assets/armor/forest_guardian/forest_attack_04.png",
-      "sha256": "e66e4e63526e48263e0bf164d701df72665363f73c561b4cefc89dcf084d2016",
-      "size": [
-        279,
-        370
-      ],
-      "crop": [
-        836,
-        0,
-        1115,
-        470
-      ],
-      "scale": 0.85,
-      "offset": [
-        21,
-        -45
-      ],
-      "alpha_bbox": [
-        21,
-        217,
-        258,
-        357
-      ]
-    },
-    {
-      "kind": "attack",
-      "index": 5,
-      "path": "assets/armor/forest_guardian/forest_attack_05.png",
-      "sha256": "976fd3acf680a2a252e023dd40629baad280bbb778d3183c798f1b02b5aba5c1",
-      "size": [
-        279,
-        370
-      ],
-      "crop": [
-        1115,
-        0,
-        1393,
-        470
-      ],
-      "scale": 0.85,
-      "offset": [
-        22,
-        -45
-      ],
-      "alpha_bbox": [
-        22,
-        218,
         250,
-        357
-      ]
+        369
+      ],
+      "sha256": "f5d1669893a93ccf9401ac898724860f36faf66a102db41f93efffc9bf4cc493",
+      "pixel_coverage": 18611
     },
     {
       "kind": "attack",
-      "index": 6,
-      "path": "assets/armor/forest_guardian/forest_attack_06.png",
-      "sha256": "64212f960369cb6b22412ea6e6da4d3af37013c30ad18def30adc78250487356",
-      "size": [
-        279,
-        370
+      "frame": 3,
+      "png": "forest_attack_03.png",
+      "alpha_bbox": [
+        9,
+        153,
+        231,
+        368
       ],
-      "crop": [
-        1393,
+      "sha256": "b3f9cc7665bf7c5ae74124c9bc9667beb5851723439d8a927f1a75138a51d864",
+      "pixel_coverage": 17231
+    },
+    {
+      "kind": "attack",
+      "frame": 4,
+      "png": "forest_attack_04.png",
+      "alpha_bbox": [
         0,
-        1672,
-        470
+        197,
+        279,
+        368
       ],
-      "scale": 0.85,
-      "offset": [
-        21,
-        -45
-      ],
-      "alpha_bbox": [
-        25,
-        211,
-        240,
-        356
-      ]
+      "sha256": "2978f9ca1df901143a3212889a2db422530feac7f5341d62838e47800272af72",
+      "pixel_coverage": 17252
     },
     {
-      "kind": "hurt",
-      "index": 1,
-      "path": "assets/armor/forest_guardian/forest_hurt_01.png",
-      "sha256": "82ab8f087c307adf9c88ea0098e20b0b31a44c3498067117d5de749e10b2093c",
-      "size": [
-        279,
-        370
-      ],
-      "crop": [
+      "kind": "attack",
+      "frame": 5,
+      "png": "forest_attack_05.png",
+      "alpha_bbox": [
         0,
-        470,
-        279,
-        941
+        177,
+        233,
+        370
       ],
-      "scale": 0.85,
-      "offset": [
-        21,
-        46
-      ],
+      "sha256": "a1cde77fe7ed70ae74db65ba70a5a17ad96a85e57a80aec29f9c1b5cde2d568c",
+      "pixel_coverage": 17745
+    },
+    {
+      "kind": "attack",
+      "frame": 6,
+      "png": "forest_attack_06.png",
       "alpha_bbox": [
-        48,
-        207,
-        258,
-        356
-      ]
+        33,
+        168,
+        262,
+        367
+      ],
+      "sha256": "34dcf5be57b673fb221a5682971194221f7776bcae44ceefd38230a8cf26ac30",
+      "pixel_coverage": 19298
     },
     {
       "kind": "hurt",
-      "index": 2,
-      "path": "assets/armor/forest_guardian/forest_hurt_02.png",
-      "sha256": "77e31baf551b8deb01afe0e60166dd35e462bfcd468c0f5315f8aba86d66d4ce",
-      "size": [
-        279,
-        370
-      ],
-      "crop": [
-        279,
-        470,
-        557,
-        941
-      ],
-      "scale": 0.85,
-      "offset": [
-        22,
-        46
-      ],
+      "frame": 1,
+      "png": "forest_hurt_01.png",
       "alpha_bbox": [
-        22,
-        215,
-        258,
-        356
-      ]
+        53,
+        150,
+        268,
+        369
+      ],
+      "sha256": "75853877ba3693cb936ac6611609357045dbdfd05fd6e1660b82926173f6ed91",
+      "pixel_coverage": 15410
     },
     {
       "kind": "hurt",
-      "index": 3,
-      "path": "assets/armor/forest_guardian/forest_hurt_03.png",
-      "sha256": "c0167603f1625c47d3f5c712a1a39de751c194e2415eaa99ec011f2cd9a4a812",
-      "size": [
-        279,
-        370
-      ],
-      "crop": [
-        557,
-        470,
-        836,
-        941
-      ],
-      "scale": 0.85,
-      "offset": [
-        21,
-        46
-      ],
+      "frame": 2,
+      "png": "forest_hurt_02.png",
       "alpha_bbox": [
-        21,
-        221,
-        249,
-        356
-      ]
+        20,
+        155,
+        269,
+        369
+      ],
+      "sha256": "44e8fe749dc3b49276d58711a3ba9257da107dad361b8c9ee1c0413f0df537b0",
+      "pixel_coverage": 20005
     },
     {
       "kind": "hurt",
-      "index": 4,
-      "path": "assets/armor/forest_guardian/forest_hurt_04.png",
-      "sha256": "85b7fcf80648516bb7a1fcf6493fc1a4a635595e2493bad1b311401590fba366",
-      "size": [
-        279,
+      "frame": 3,
+      "png": "forest_hurt_03.png",
+      "alpha_bbox": [
+        37,
+        150,
+        257,
         370
       ],
-      "crop": [
-        836,
-        470,
-        1115,
-        941
-      ],
-      "scale": 0.85,
-      "offset": [
-        21,
-        46
-      ],
-      "alpha_bbox": [
-        25,
-        207,
-        258,
-        363
-      ]
+      "sha256": "dba2798f7cdcaf76ad58df0b569a186a271137fa00a7dc0fdbc87bc320da208d",
+      "pixel_coverage": 15857
     },
     {
       "kind": "hurt",
-      "index": 5,
-      "path": "assets/armor/forest_guardian/forest_hurt_05.png",
-      "sha256": "10ca01cd650fae60530714e2f1f9b1dedff3814bd0cf28c29317dc09d5f2b4fc",
-      "size": [
-        279,
+      "frame": 4,
+      "png": "forest_hurt_04.png",
+      "alpha_bbox": [
+        23,
+        150,
+        270,
         370
       ],
-      "crop": [
-        1115,
-        470,
-        1393,
-        941
-      ],
-      "scale": 0.85,
-      "offset": [
-        22,
-        46
-      ],
-      "alpha_bbox": [
-        22,
-        251,
-        258,
-        357
-      ]
+      "sha256": "aa3f7d6a89eb25b3bc697f6997b10f8c7993f6aeb29e0d3d019d9483ba7e22f9",
+      "pixel_coverage": 19101
     },
     {
       "kind": "hurt",
-      "index": 6,
-      "path": "assets/armor/forest_guardian/forest_hurt_06.png",
-      "sha256": "7fdfa328d2283a702a83b78214e4cdad831dfcba183cb4f5cd76447e84792fb0",
-      "size": [
-        279,
+      "frame": 5,
+      "png": "forest_hurt_05.png",
+      "alpha_bbox": [
+        1,
+        174,
+        268,
         370
       ],
-      "crop": [
-        1393,
-        470,
-        1672,
-        941
-      ],
-      "scale": 0.85,
-      "offset": [
-        21,
-        46
-      ],
+      "sha256": "42495e152c2ee25f7f8621e0877b29819892a989862a8421da8d57e45dd902b6",
+      "pixel_coverage": 17896
+    },
+    {
+      "kind": "hurt",
+      "frame": 6,
+      "png": "forest_hurt_06.png",
       "alpha_bbox": [
-        21,
-        205,
-        240,
-        356
-      ]
+        15,
+        165,
+        248,
+        369
+      ],
+      "sha256": "f86a9ad52d695cf3a8a15d107a6fd952b36c866699684078f327daa3f8af6d1b",
+      "pixel_coverage": 16217
     }
   ]
 }
