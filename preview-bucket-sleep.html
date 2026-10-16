@@ -1,0 +1,12 @@
+<!doctype html><html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Проверка ведра и сна — Храбролап</title><style>
+:root{font-family:system-ui;background:#272a30;color:#ffeccc}*{box-sizing:border-box}body{margin:0;padding:12px}main{max-width:650px;margin:auto}h1{font:700 1.35rem Georgia;margin:5px 0 10px}h2{font-size:1.08rem;margin:16px 0 7px}.panel{background:#3d3538;border:2px solid #94704e;border-radius:14px;padding:12px}.row{display:flex;gap:8px;align-items:center;justify-content:space-around;flex-wrap:wrap}.bucket{width:22%;min-width:65px;text-align:center}.bucket img{width:100%;aspect-ratio:1;object-fit:contain}.bucket span{display:block;font-size:.78rem}.cat{display:block;width:min(90%,310px);height:255px;object-fit:contain;margin:auto;background:#58483c;border-radius:12px}button,select{padding:9px;border:1px solid #b28c60;background:#e4c58e;color:#3e2e28;border-radius:9px;font:inherit}p{line-height:1.35;font-size:.92rem}</style></head>
+<body><main><h1>Храбролап — проверка ассетов v0.9.6</h1><p>Это отдельный стенд, не новый игровой экран. В самой игре ведро находится слева от рыцаря, а котёнок спит в разрезе существующего дома.</p>
+<h2>Ведро — состояния</h2><div class="panel row">
+<div class="bucket"><img src="art/scenery/bucket-empty.svg"><span>0 рыб</span></div><div class="bucket"><img src="art/scenery/bucket-low.svg"><span>1–4</span></div><div class="bucket"><img src="art/scenery/bucket-mid.svg"><span>5–7</span></div><div class="bucket"><img src="art/scenery/bucket-full.svg"><span>7–24 (улучшено)</span></div></div>
+<h2>Сон — 6 оригинальных поз без брони</h2><div class="panel"><img id="sleep" class="cat" src="assets/rest/sleep_01.png"><div class="row"><button id="play">▶ Проиграть</button><span id="counter">Кадр 1/6</span><button id="stop">■ Стоп</button></div></div><p><a style="color:#ffdda0" href="./">← Вернуться в настоящую игру</a></p></main><script type="module">
+import {SLEEP_FRAMES,sleepFrameIndex} from './bucket-rest.mjs';
+let timer=null,t0=0;const i=document.getElementById('sleep'),counter=document.getElementById('counter');
+function frame(n){i.src=SLEEP_FRAMES[n];counter.textContent='Кадр '+(n+1)+'/6'}
+document.getElementById('play').onclick=()=>{clearInterval(timer);t0=performance.now();frame(0);timer=setInterval(()=>frame(sleepFrameIndex(performance.now()-t0)),130)};
+document.getElementById('stop').onclick=()=>{clearInterval(timer);timer=null;frame(0)};
+</script></body></html>

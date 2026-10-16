@@ -1,3 +1,5 @@
+import {bucketArt,sleepFrameIndex,SLEEP_FRAMES} from './bucket-rest.mjs';
+import {applyCanonicalFrame} from './canonical-sprites.mjs';
 import {armorAttackTransform,armorHurtTransform,hurtMotionTransform,hurtWeaponTransform,HURT_FRAMES,HURT_FRAME_MS} from './equipment-rig.mjs';
 import {WEAPONS,ARMORS,MATERIALS,freshProgress,validateProgress,restoreFight,swordCost,armorCost,fishCost,homeCost,bucketCost,bucketCapacity,heroDamage,maxHealth,startFight,stepFight,upgrade,buyEquipment,equipEquipment,offlineReward,bucketVolume,bucketGold,planFishing,stepFishing,stepMerchant,sellAll} from './game-core.mjs';
 const $=id=>document.getElementById(id), SAVE='hrabrolap-v0.2-save',OLD='hrabrolap-v0.1-save',fmt=n=>Math.floor(n).toLocaleString('ru-RU');
@@ -32,9 +34,9 @@ function cancelHurt(){
  delete $('hero-art').dataset.hurtFrame;
 }
 function hurtFrame(index){
- heroMotion.setAttribute('transform',hurtMotionTransform(index));
- armorSlot.setAttribute('transform',armorHurtTransform(index));
- slot.setAttribute('transform',hurtWeaponTransform(index));
+ applyCanonicalFrame('hurt',index,{
+  body:$('hero-body'),heroMotion,weaponSlot:slot,armorSlot,armorImage:$('hero-armor')
+ });
  $('hero-art').dataset.hurtFrame=String(index+1);
 }
 function playHurt(){
@@ -52,10 +54,9 @@ function playHurt(){
 }
 
 function heroFrame(index=0){
- const [x,y,angle,dx,dy,lean]=ATTACKS[activeAttack].frames[Math.max(0,Math.min(5,index))];
- slot.setAttribute('transform',`translate(${x} ${y}) rotate(${angle})`);
- heroMotion.setAttribute('transform',`translate(${dx} ${dy}) rotate(${lean} 238 252)`);
- armorSlot.setAttribute('transform',armorAttackTransform(activeAttack,index));
+ applyCanonicalFrame('attack',index,{
+  body:$('hero-body'),heroMotion,weaponSlot:slot,armorSlot,armorImage:$('hero-armor')
+ });
  currentPose=index;
 }
 function cancelPose(){poseSerial++;for(const t of poseTimeouts)clearTimeout(t);poseTimeouts=[];attackPrepared=false;}
@@ -72,6 +73,23 @@ function enemyAttack(move){const holder=$('enemy-holder');for(const cl of [...ho
  void holder.getBoundingClientRect();holder.classList.add('attack-'+move);if(move==='spores')holder.classList.add('spores');setTimeout(()=>holder.classList.remove('attack-'+move,'spores'),710);}
 function coinFx(n){const c=document.createElement('span');c.className='float-coin';c.textContent='+'+fmt(n)+' 🪙';document.querySelector('.dungeon').append(c);setTimeout(()=>c.remove(),1100)}
 function fmtTimer(ms){const n=Math.ceil(ms/1000);return String(Math.floor(n/60)).padStart(2,'0')+':'+String(n%60).padStart(2,'0')}
+let sleepStartedAt=null;
+function updateBucketDrawing(){
+ const icon=$('bucket-graphic');
+ const n=p.fishBucket.length;
+ const next=bucketArt(n,p.bucketLevel>0);
+ if(icon.getAttribute('src')!==next)icon.setAttribute('src',next);
+ $('bucket-indicator').textContent=n+' рыб';
+ $('bucket').setAttribute('aria-label','Рыцарское ведро: '+n+' рыб. Открыть улов');
+}
+function updateSleepDrawing(rest){
+ const sprite=$('rest-sleep-sprite');
+ if(!rest){sleepStartedAt=null;return;}
+ const now=performance.now();
+ if(sleepStartedAt===null)sleepStartedAt=now;
+ const next=SLEEP_FRAMES[sleepFrameIndex(now-sleepStartedAt)];
+ if(sprite.getAttribute('src')!==next)sprite.setAttribute('src',next);
+}
 function render(){
  $('gold').textContent=fmt(p.gold);
  $('room').textContent=`ВОЛНА ${b.level}/100`; $('room-progress').textContent=`${p.best}/100`; $('room-fill').style.width=(p.best)+'%';
@@ -80,12 +98,12 @@ function render(){
  $('hero-hp').style.width=(100*b.hp/maxHealth(p))+'%';$('enemy-hp').style.width=(100*b.enemyHp/b.monster.hp)+'%';
  const heartCapacity=maxHealth(p)/5;heroHearts.forEach((e,i)=>{const filling=Math.max(0,Math.min(1,(b.hp-i*heartCapacity)/heartCapacity));e.querySelector('.heart-filled').style.width=(filling*100)+'%';});heartsRoot.setAttribute('aria-label',`Здоровье ${Math.ceil(b.hp)} из ${maxHealth(p)}`);
  $('boss-crown').style.display=b.monster.boss?'block':'none';
- const rest=b.phase==='rest';if(rest && !$('battle-message').textContent.includes('Котёнок'))$('battle-message').textContent='Котёнок отдыхает дома';$('surface').classList.toggle('resting',rest);$('hero-art').classList.toggle('resting-hero',rest);
+ const rest=b.phase==='rest';if(rest && !$('battle-message').textContent.includes('Котёнок'))$('battle-message').textContent='Котёнок отдыхает дома';$('surface').classList.toggle('resting',rest);$('hero-art').classList.toggle('resting-hero',rest);updateSleepDrawing(rest);
  const status=$('status');status.classList.toggle('rest',rest||p.farming);status.textContent=rest?'ОТДЫХ '+fmtTimer(b.rest*1000):p.cleared?'ГЛАВА ПРОЙДЕНА':p.farming?'ФАРМ МОНЕТ':'АВТОБОЙ';
  const info=[['sword',p.sword,swordCost(p.sword),'Меч','Урон '+heroDamage(p)+' → '+(heroDamage(p)+3)],['armor',p.armor,armorCost(p.armor),'Броня','HP '+maxHealth(p)+' → '+(maxHealth(p)+14)],['fish',p.fishLevel,fishCost(p.fishLevel),'Удочка','Более ценный улов'],['home',p.home,homeCost(p.home),'Домик','Быстрее отдых']];
  for(const [kind,lev,cost,label,description] of info){const id=kind==='home'?'home':kind;$(id+'-lvl').textContent='ур. '+lev;$(id+'-cost').textContent='🪙 '+fmt(cost);if(kind==='sword'||kind==='armor')$(kind+'-stat').textContent=description;const btn=$('buy-'+kind);btn.classList.toggle('can-buy',p.gold>=cost);btn.classList.toggle('cant-buy',p.gold<cost);btn.setAttribute('aria-label',`${label}: улучшить за ${cost} монет`);}
  syncEquipment();
- $('bucket-indicator').textContent=bucketVolume(p)+'/'+bucketCapacity(p);$('fish-status').textContent=bucketVolume(p)>=bucketCapacity(p)?'Ведро заполнено · рыбалка ждёт':`Поклёвка через ${fmtTimer(p.nextCatchMs)}`;
+ updateBucketDrawing();$('fish-status').textContent=bucketVolume(p)>=bucketCapacity(p)?'Ведро заполнено · рыбалка ждёт':`Поклёвка через ${fmtTimer(p.nextCatchMs)}`;
  const visiting=p.merchantPhase==='waiting';$('merchant').classList.toggle('visible',visiting);$('merchant-visit').textContent=fmtTimer(p.merchantMs);$('merchant-status').textContent=visiting?'Торговец приехал!':'Торговец через '+fmtTimer(p.merchantMs);
 }
 function onUpgrade(kind){const result=upgrade(p,kind);if(!result.ok){notify(result.reason==='max'?'Ведро максимально улучшено':'Не хватает '+fmt((result.cost||0)-p.gold)+' монет');return;}
