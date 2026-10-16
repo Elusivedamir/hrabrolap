@@ -42,14 +42,17 @@ export const MANUAL_HITS_PER_SECOND=3;
 export const autoHitsPerSecond=p=>1+Math.floor(Math.min(MAX_AUTO_LEVEL,Math.max(0,p.autoLevel||0))/20);
 export const autoUpgradeCost=level=>Math.round(12*1.06**Math.max(0,Math.min(99,level)));
 export const attackInterval=(p,auto=p.autoEnabled)=>1/(auto?autoHitsPerSecond(p):MANUAL_HITS_PER_SECOND);
-export function upgradeAutoBattle(p){
- if(!p.autoUnlocked)return {ok:false,reason:'locked'};
+// Attack speed is an independent upgrade, purchasable even before owning auto-combat.
+// Its bonus only affects auto attacks; manual tapping remains fixed at 3 hits/sec.
+export function upgradeAttackSpeed(p){
  if(p.autoLevel>=MAX_AUTO_LEVEL)return {ok:false,reason:'max'};
  const cost=autoUpgradeCost(p.autoLevel);
  if(p.gold<cost)return {ok:false,reason:'gold',cost};
  p.gold-=cost;p.autoLevel++;
  return {ok:true,cost,level:p.autoLevel,hitsPerSecond:autoHitsPerSecond(p)};
 }
+// Compatibility for existing tests and older clients; UI uses upgradeAttackSpeed.
+export const upgradeAutoBattle=upgradeAttackSpeed;
 export const bucketCapacity=p=>p.bucketLevel>0?24:12;
 const equipped=(arr,id)=>arr.find(x=>x.id===id)||arr[0];
 export const heroDamage=p=>8+3*p.sword+equipped(WEAPONS,p.weapon).damage;
@@ -67,7 +70,7 @@ export function validateProgress(raw){
  p.farming=!!raw.farming;p.cleared=!!raw.cleared;
  p.autoUnlocked=!!raw.autoUnlocked;
  p.autoEnabled=p.autoUnlocked&&!!raw.autoEnabled;
- p.autoLevel=p.autoUnlocked?int(raw.autoLevel,0,MAX_AUTO_LEVEL,0):0;
+ p.autoLevel=int(raw.autoLevel,0,MAX_AUTO_LEVEL,0);
  p.enchantment=['none','poison','lightning','vampirism'].includes(raw.enchantment)?raw.enchantment:'none';
  for(const monster of MONSTERS)p.monsterKills[monster.type]=int(raw.monsterKills?.[monster.type],0,1000000,0);
  for(const key of ['bossKills','lightningHits','poisonKills','vampireHeals'])p[key]=int(raw[key],0,1000000,0);

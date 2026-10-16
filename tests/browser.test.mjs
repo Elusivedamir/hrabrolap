@@ -265,9 +265,9 @@ test('автобой покупается за монету и двадцаты�
  const p=c.freshProgress();p.gold=100000;p.autoUnlocked=true;p.autoEnabled=true;p.autoLevel=19;
  const page=await pageFor(p);
  assert.match(await page.locator('#status').textContent(),/АВТОБОЙ 1\/с/);
- assert.match(await page.locator('#auto-upgrade').textContent(),/19\/100/);
+ assert.match(await page.locator('#attack-speed-lvl').textContent(),/19\/100/);
  const before=(await saved(page)).gold;
- await page.locator('#auto-upgrade').click();
+ await page.locator('#buy-attack-speed').click();
  const after=await saved(page);
  assert.equal(after.autoLevel,20);
  assert.equal(after.gold,before-c.autoUpgradeCost(19));
@@ -275,6 +275,20 @@ test('автобой покупается за монету и двадцаты�
  await page.reload();
  assert.match(await page.locator('#status').textContent(),/АВТОБОЙ 2\/с/);
  await shot(page,'auto-level-20-two-hits');
+});
+test('скорость атаки отдельна от покупки автобоя и доступна сразу',async()=>{
+ const p=c.freshProgress();p.gold=100;
+ const page=await pageFor(p,undefined,{manual:true});
+ assert.match(await page.locator('#status').textContent(),/АВТОБОЙ.*1/);
+ assert.equal(await page.locator('#buy-attack-speed').isVisible(),true);
+ assert.match(await page.locator('#attack-speed-lvl').textContent(),/0\/100/);
+ await page.locator('#buy-attack-speed').click();
+ const savedGame=await saved(page);
+ assert.equal(savedGame.autoUnlocked,false,'speed upgrade must not unlock autobattle');
+ assert.equal(savedGame.autoLevel,1);
+ assert.equal(savedGame.gold,100-c.autoUpgradeCost(0));
+ assert.match(await page.locator('#status').textContent(),/АВТОБОЙ.*1/);
+ await shot(page,'attack-speed-independent-upgrade');
 });
 test('таймер поклёвки скрыт, состояние рыцаря видно, магазин стоит левее текста торговца',async()=>{
  const p=c.freshProgress();p.nextCatchMs=157000;

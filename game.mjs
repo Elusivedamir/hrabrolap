@@ -3,7 +3,7 @@ import {monsterPose} from './monster-rig.mjs';
 import {bucketArt,sleepFrameIndex,SLEEP_FRAMES} from './bucket-rest.mjs';
 import {applyCanonicalFrame} from './canonical-sprites.mjs';
 import {armorAttackTransform,armorHurtTransform,hurtMotionTransform,hurtWeaponTransform,HURT_FRAMES,HURT_FRAME_MS} from './equipment-rig.mjs';
-import {WEAPONS,ARMORS,MATERIALS,freshProgress,validateProgress,restoreFight,swordCost,armorCost,fishCost,homeCost,bucketCost,bucketCapacity,heroDamage,maxHealth,startFight,stepFight,upgrade,buyEquipment,equipEquipment,offlineReward,bucketVolume,bucketGold,planFishing,stepFishing,stepMerchant,sellAll,purchaseAutoBattle,upgradeAutoBattle,autoHitsPerSecond,autoUpgradeCost,MAX_AUTO_LEVEL,attackInterval,setEnchantment,tapMonster} from './game-core.mjs';
+import {WEAPONS,ARMORS,MATERIALS,freshProgress,validateProgress,restoreFight,swordCost,armorCost,fishCost,homeCost,bucketCost,bucketCapacity,heroDamage,maxHealth,startFight,stepFight,upgrade,buyEquipment,equipEquipment,offlineReward,bucketVolume,bucketGold,planFishing,stepFishing,stepMerchant,sellAll,purchaseAutoBattle,upgradeAttackSpeed,autoHitsPerSecond,autoUpgradeCost,MAX_AUTO_LEVEL,attackInterval,setEnchantment,tapMonster} from './game-core.mjs';
 const $=id=>document.getElementById(id), SAVE='hrabrolap-v0.2-save',OLD='hrabrolap-v0.1-save',fmt=n=>Math.floor(n).toLocaleString('ru-RU');
 let p,b,modalType='',last=performance.now(),lastSave=0,lastAutosave=0,msgTimeout=0,toastTimeout=0,lastFrameRest=false;
 const heartsRoot=$('hero-hearts');
@@ -152,11 +152,14 @@ function render(){
  if(rest)$('battle-message').textContent='Котёнок отдыхает дома';
  else if(b.phase==='fight'&&performance.now()>lastBattleMessage)$('battle-message').textContent=p.autoEnabled?'Автобой · '+autoHitsPerSecond(p)+' ударов/с':'Нажми на монстра · ручной бой 3/с';$('surface').classList.toggle('resting',rest);$('hero-art').classList.toggle('resting-hero',rest);updateSleepDrawing(rest);
  const status=$('status');status.classList.toggle('rest',rest||p.farming);status.textContent=rest?'ОТДЫХ '+fmtTimer(b.rest*1000):p.cleared?'ГЛАВА ПРОЙДЕНА':p.autoEnabled?'АВТОБОЙ '+autoHitsPerSecond(p)+'/с':p.autoUnlocked?'РУЧНОЙ БОЙ 3/с':'АВТОБОЙ · 1 🪙';
- const autoBtn=$('auto-upgrade');
- autoBtn.hidden=!p.autoUnlocked;
- autoBtn.disabled=p.autoLevel>=MAX_AUTO_LEVEL||p.gold<autoUpgradeCost(p.autoLevel);
- autoBtn.textContent=p.autoLevel>=MAX_AUTO_LEVEL?'АВТО 100/100 · 6/с':('АВТО '+p.autoLevel+'/100 · 🪙'+fmt(autoUpgradeCost(p.autoLevel)));
- autoBtn.setAttribute('aria-label',p.autoLevel>=MAX_AUTO_LEVEL?'Автобой максимально улучшен':'Улучшить автобой до уровня '+(p.autoLevel+1)+' за '+autoUpgradeCost(p.autoLevel)+' монет. Скорость '+autoHitsPerSecond(p)+' ударов в секунду');
+ const speedBtn=$('buy-attack-speed');
+ speedBtn.disabled=p.autoLevel>=MAX_AUTO_LEVEL;
+ speedBtn.classList.toggle('can-buy',p.gold>=autoUpgradeCost(p.autoLevel)&&p.autoLevel<MAX_AUTO_LEVEL);
+ speedBtn.classList.toggle('cant-buy',p.gold<autoUpgradeCost(p.autoLevel)||p.autoLevel>=MAX_AUTO_LEVEL);
+ $('attack-speed-lvl').textContent='ур. '+p.autoLevel+'/100';
+ $('attack-speed-stat').textContent='Автоатака: '+autoHitsPerSecond(p)+' удар/с · след.: '+(p.autoLevel>=MAX_AUTO_LEVEL?'макс.':(1+Math.floor(Math.min(100,p.autoLevel+1)/20))+'/с');
+ $('attack-speed-cost').textContent=p.autoLevel>=MAX_AUTO_LEVEL?'МАКСИМУМ · 6/с':'🪙 '+fmt(autoUpgradeCost(p.autoLevel));
+ speedBtn.setAttribute('aria-label',p.autoLevel>=MAX_AUTO_LEVEL?'Скорость атаки максимально улучшена':'Улучшить скорость автоматической атаки до уровня '+(p.autoLevel+1)+' за '+autoUpgradeCost(p.autoLevel)+' монет');
  const info=[['sword',p.sword,swordCost(p.sword),'Меч','Урон '+heroDamage(p)+' → '+(heroDamage(p)+3)],['armor',p.armor,armorCost(p.armor),'Броня','HP '+maxHealth(p)+' → '+(maxHealth(p)+14)],['fish',p.fishLevel,fishCost(p.fishLevel),'Удочка','Более ценный улов'],['home',p.home,homeCost(p.home),'Домик','Быстрее отдых']];
  for(const [kind,lev,cost,label,description] of info){const id=kind==='home'?'home':kind;$(id+'-lvl').textContent='ур. '+lev;$(id+'-cost').textContent='🪙 '+fmt(cost);if(kind==='sword'||kind==='armor')$(kind+'-stat').textContent=description;const btn=$('buy-'+kind);btn.classList.toggle('can-buy',p.gold>=cost);btn.classList.toggle('cant-buy',p.gold<cost);btn.setAttribute('aria-label',`${label}: улучшить за ${cost} монет`);}
  syncEquipment();
@@ -293,10 +296,10 @@ $('status').addEventListener('click',()=>{
  notify(p.autoEnabled?'Автобой включён':'Ручной бой: нажимай на монстра');
  save();render();
 });
-$('auto-upgrade').addEventListener('click',()=>{
- const result=upgradeAutoBattle(p);
- if(!result.ok){notify(result.reason==='locked'?'Сначала купи автобой за 1 монету':result.reason==='max'?'Максимум — 100 уровней':'Нужно ещё '+fmt((result.cost||0)-p.gold)+' монет');return;}
- notify('Автобой '+result.level+'/100 · '+result.hitsPerSecond+' ударов/с');
+$('buy-attack-speed').addEventListener('click',()=>{
+ const result=upgradeAttackSpeed(p);
+ if(!result.ok){notify(result.reason==='max'?'Скорость атаки улучшена до максимума':'Для улучшения скорости нужно ещё '+fmt((result.cost||0)-p.gold)+' монет');return;}
+ notify('Скорость автоатаки: уровень '+result.level+'/100 · '+result.hitsPerSecond+' ударов/с');
  save();render();
 });
 $('enemy-holder').addEventListener('click',()=>{
@@ -312,7 +315,7 @@ $('quests').addEventListener('click',()=>openModal('Задания','quests'));
 $('inventory').addEventListener('click',()=>openModal('Инвентарь','inventory'));
 $('shop').addEventListener('click',()=>openModal('Магазин','shop'));
 $('mini-shop').addEventListener('click',()=>openModal('Магазин','shop'));
-$('help').addEventListener('click',()=>openModal('Как играть','info','Нажимай на монстра, чтобы атаковать вручную — не более 3 ударов/с. Автобой открывается за 1 монету и улучшается до 100 уровней (максимум 6 ударов/с). После победы здоровье НЕ восстанавливается. После поражения он отдыхает в домике и лечится. Рыбак сам ловит разную рыбу и складывает её в ведро. Каждые 5 минут приезжает торговец и ждёт 15 секунд. Нажми на торговца, чтобы продать улов. Рыбалка и визиты торговца полностью останавливаются, пока игра закрыта. Офлайн котёнок приносит только ограниченное количество монет.'));
+$('help').addEventListener('click',()=>openModal('Как играть','info','Нажимай на монстра, чтобы атаковать вручную — не более 3 ударов/с. Автобой покупается отдельно за 1 монету. Скорость автоатаки — самостоятельное улучшение в разделе «Улучшения», доступное сразу, даже до покупки автобоя: до 100 уровней и максимум 6 ударов/с. На ручной бой скорость не влияет. После победы здоровье НЕ восстанавливается. После поражения он отдыхает в домике и лечится. Рыбак сам ловит разную рыбу и складывает её в ведро. Каждые 5 минут приезжает торговец и ждёт 15 секунд. Нажми на торговца, чтобы продать улов. Рыбалка и визиты торговца полностью останавливаются, пока игра закрыта. Офлайн котёнок приносит только ограниченное количество монет.'));
 $('reset').addEventListener('click',()=>openModal('Начать заново?','reset'));
 $('modal-x').addEventListener('click',closeModal);
 $('modal').addEventListener('cancel',e=>{e.preventDefault();if(modalType!=='offline')closeModal()});

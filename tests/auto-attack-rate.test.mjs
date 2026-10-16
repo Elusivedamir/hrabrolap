@@ -25,19 +25,24 @@ test('auto attack rate at 0,20,40,60,80,100 levels is exactly 1–6 hits/second'
 });
 test('auto upgrades require purchase, charge only displayed price and stop at level 100',()=>{
  const p=c.freshProgress();p.gold=1000000;
- assert.equal(c.upgradeAutoBattle(p).reason,'locked');
+ // Speed upgrade can be bought immediately; no auto unlock required.
+ const firstPrice=c.autoUpgradeCost(0);const initialGold=p.gold;
+ const independent=c.upgradeAttackSpeed(p);
+ assert.equal(independent.ok,true);assert.equal(independent.level,1);
+ assert.equal(p.gold,initialGold-firstPrice);
+ assert.equal(p.autoUnlocked,false);
  assert.equal(c.purchaseAutoBattle(p).cost,1);
  let paid=0;
- for(let i=0;i<100;i++){
+ for(let i=1;i<100;i++){
   const cost=c.autoUpgradeCost(i);
-  const before=p.gold;const x=c.upgradeAutoBattle(p);
+  const before=p.gold;const x=c.upgradeAttackSpeed(p);
   assert.equal(x.ok,true);assert.equal(x.cost,cost);
   assert.equal(before-p.gold,cost);assert.equal(x.level,i+1);
   paid+=cost;
  }
  assert.equal(p.autoLevel,100);assert.equal(c.autoHitsPerSecond(p),6);
  assert.equal(c.upgradeAutoBattle(p).reason,'max');
- assert.equal(p.gold,1000000-1-paid);
+ assert.equal(p.gold,1000000-1-firstPrice-paid);
  const q=c.validateProgress(JSON.parse(JSON.stringify(p)));
  assert.equal(q.autoLevel,100);assert.equal(q.autoUnlocked,true);
 });
@@ -45,6 +50,6 @@ test('older unlocked saves begin auto-upgrades from zero, invalid progress is cl
  const p=c.freshProgress();p.gold=99;
  assert.equal(c.validateProgress({...p,autoUnlocked:true,autoEnabled:true}).autoLevel,0);
  assert.equal(c.validateProgress({...p,autoUnlocked:true,autoLevel:150}).autoLevel,100);
- assert.equal(c.validateProgress({...p,autoUnlocked:false,autoLevel:150}).autoLevel,0);
+ assert.equal(c.validateProgress({...p,autoUnlocked:false,autoLevel:150}).autoLevel,100);
  assert.equal(c.validateProgress({...p,autoUnlocked:true,autoLevel:-8}).autoLevel,0);
 });

@@ -19,7 +19,8 @@ Approved main layout remains **100 waves**, single surface with fishing knight t
 
 - Bite countdown remains in simulation, but is **never displayed** to players. Top status may say "Рыцарь рыбачит" or "Ведро заполнено", never show seconds to the next fish.
 - Manual tapping is strictly bounded by a 1/3 second interval: at most **3 attacks/s**. The cooldown must not store a large idle-time burst of clicks.
-- Autocombat purchase costs exactly **1 gold**. Auto upgrades cost gold, are a separate button, and persist in `autoLevel` (integer 0–100, default 0, clamp invalid saves). Current provisional per-level cost = `round(12 × 1.06^level)`; prices can be tuned without changing frequency.
+- Autocombat purchase costs exactly **1 gold** and permanently unlocks only the auto/manual mode switch. **«Скорость атаки» is a fifth upgrade card visible immediately, separate from buying autobattle, and purchasable before auto mode is unlocked**. Its bonuses apply solely to auto mode. Levels persist in `autoLevel` (integer 0–100, default 0, clamp invalid saves), independent of `autoUnlocked`. Current provisional per-level cost = `round(12 × 1.06^level)`; prices can be tuned without changing frequency.
+- Do not call the speed-upgrade card «Автобой» or «Улучшение автобоя». Call it **«Скорость атаки»**. Its upgrade price is distinct from the permanent 1-gold auto unlock.
 - Auto attack speed is stepwise: level 0–19 = 1/s; 20–39 = 2/s; 40–59 = 3/s; 60–79 = 4/s; 80–99 = 5/s; **100 = 6/s max**. This overrides the earlier preliminary cap of 5.
 - Shop icon stays as the SAME approved illustration, but grounded to the left of `#merchant-status` rather than floating over the text.
 - Fishing catch count/icon changes *after* the knight's 10-frame depositing animation, not on the first bite.
