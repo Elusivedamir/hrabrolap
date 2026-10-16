@@ -199,6 +199,7 @@ export function stepFight(p,b,seconds,auto=true){
  }
  return ev;
 }
+export function offlineReward(p,ms){const minutes=Math.min(480,Math.max(0,ms/60000)),raw=Math.floor(minutes*battleRate(p)*.5),next=Math.min(swordCost(p.sword),armorCost(p.armor));return Math.min(raw,Math.floor(next*1.1));}
 export const SPECIES=[
  {species:'Плотва',slots:1,base:8,min:12,max:25,weight:[.12,.45],length:[14,27]},
  {species:'Карась',slots:2,base:18,min:24,max:44,weight:[.45,1.2],length:[22,38]},

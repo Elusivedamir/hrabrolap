@@ -10,7 +10,10 @@ const key='hrabrolap-v0.2-save';let browser;
 const errors=[];const contexts=[];
 before(async()=>{await fs.mkdir('qa/screenshots',{recursive:true});browser=await chromium.launch({headless:true});});
 after(async()=>{for(const ctx of contexts)await ctx.close();await browser?.close();await fs.writeFile('qa/browser-errors.json',JSON.stringify(errors,null,2));});
-async function pageFor(progress=c.freshProgress(),battleState){
+async function pageFor(progress=c.freshProgress(),battleState,options={}){
+ // Existing 0.9.6 visual regression fixtures explicitly use unlocked auto mode.
+ // v0.9.7 default gameplay stays MANUAL until auto is purchased for 1 coin.
+ if(!options.manual)Object.assign(progress,{autoUnlocked:true,autoEnabled:true});
  const ctx=await browser.newContext({viewport:{width:390,height:844},deviceScaleFactor:1,isMobile:true,hasTouch:true});contexts.push(ctx);
  const page=await ctx.newPage();page.on('pageerror',e=>errors.push(e.message));
  page.on('console',msg=>{if(msg.type()==='error')errors.push(msg.text());});
