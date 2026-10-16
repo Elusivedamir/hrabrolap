@@ -21,7 +21,7 @@ test('game uses animated source scene and correct knight pose directory',async()
  const html=await readFile(new URL('index.html',root),'utf8');
  const js=await readFile(new URL('game.mjs',root),'utf8');
  assert.match(html,/port_active_clean\.webp/);
- assert.match(html,/port_rest_clean\.webp/);
+ assert.match(html,/port_rest_empty_attic\.png/);
  assert.match(html,/id="fishing-animation"/);
  assert.ok(js.includes("animations/fishing/"));
  assert.ok(js.includes("playFishCatch()"));
