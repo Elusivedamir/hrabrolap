@@ -197,7 +197,7 @@ export function stepFight(p,b,seconds,auto=true){
   return ev;
  }
  if(b.phase!=='fight')return ev;
- b.heroTimer=Math.min(1,b.heroTimer+dt);b.enemyTimer+=dt;
+ b.heroTimer=Math.min(attackInterval(p,auto)+dt,b.heroTimer+dt);b.enemyTimer+=dt;
  if(b.poisonRemaining>0){
   b.poisonRemaining=Math.max(0,b.poisonRemaining-dt);
   b.poisonTick=(b.poisonTick||0)+dt;
