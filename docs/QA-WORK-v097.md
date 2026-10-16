@@ -26,3 +26,7 @@ Further browser checks and skeleton/golem acceptance remain in progress. No merg
 - The old balance runner called `stepFight` with its default auto=true even for an unpurchased auto mode. Runner now explicitly simulates manual input or pays the 1-gold auto unlock from earned gold. Gameplay prices/damage/HP are unchanged.
 - Updated 12 real-policy simulations: balanced manual (one purchase decision/s) clears 100 waves in 7.98 simulated minutes; level-0 paid auto (decisions/10s) in 20.04; equipment+fishing manual in 10.02. Every-five-minute reload auto scenario matches uninterrupted play exactly. Single-stat/no-upgrade policies stall as expected within the 180-minute limit.
 - All 55 core/regression tests plus art and pixel-fidelity gates pass. Browser rate checks use a primed RAF to measure a complete one-second interval rather than the first navigation frame.
+
+## Packaging/CI correction
+- Old workflow ZIP omitted `animations/` and uploaded an obsolete v0.9.6 filename. New reproducible `tools/package_game.py` includes existing HTML/MJS/CSS, all art/assets/animations and the QA notes; checks CRC and critical runtime paths.
+- CI now installs Pillow for the pixel-fidelity gate and uses the npm lockfile. Builds remain visual-review candidates; main is untouched.

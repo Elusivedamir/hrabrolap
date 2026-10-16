@@ -11,7 +11,8 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
-      - run: npm install --ignore-scripts
+      - run: npm ci --ignore-scripts
+      - run: python3 -m pip install Pillow==11.3.0
       - run: npm test
       - run: npm run qa:balance
       - run: npx playwright install --with-deps chromium
@@ -41,24 +42,19 @@ jobs:
       - name: Package tested HTML5 build
         if: success()
         run: |
-          zip -q -r hrabrolap-v0.9.7.zip \
-            index.html style.css game.mjs game-core.mjs \
-            equipment-catalog.mjs equipment-rig.mjs equipment-preview.html \
-            canonical-sprites.mjs bucket-rest.mjs quests.mjs monster-rig.mjs preview-canonical.html preview-bucket-sleep.html \
-            art assets
-          unzip -tq hrabrolap-v0.9.7.zip
+          python3 tools/package_game.py hrabrolap-v0.9.7-visual-review.zip
       - name: Upload playable HTML5 ZIP
         if: success()
         uses: actions/upload-artifact@v4
         with:
           name: hrabrolap-v0.9.7
-          path: hrabrolap-v0.9.6.zip
+          path: hrabrolap-v0.9.7-visual-review.zip
 
       - name: Publish v0.9.7 tag after successful main QA
         if: success() && github.ref == 'refs/heads/main' && github.event_name == 'push'
         run: |
           if [ "$(node -p "require('./package.json').version")" != "0.9.7" ]; then
-            echo "Skip tagging: release version is not 0.9.6"
+            echo "Skip tagging: release version is not 0.9.7"
             exit 0
           fi
           if git ls-remote --exit-code --tags origin refs/tags/v0.9.7 >/dev/null 2>&1; then
