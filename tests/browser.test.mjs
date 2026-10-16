@@ -76,7 +76,7 @@ test('восемь монстров атакуют/получают урон, к
   const src=await page.locator('#enemy-art').getAttribute('src');assert.match(src,/\/boss\//);
   const svg=await (await page.request.get(new URL(src,base).href)).text();assert.ok((svg.match(/data:image\/svg\+xml;base64,/g)||[]).length>=2,'boss model and attached crown');
   assert.equal(await page.locator('#boss-crown').isVisible(),false);
-  if(wave===100)await shot(page,'fixture-boss-100');
+  await shot(page,'fixture-boss-'+wave);
  }
 });
 test('рыбалка, ведро 12→24 и ручная продажа торговцу',async()=>{
@@ -108,7 +108,8 @@ test('ручной бой: смена текста, один удар, три а
  assert.equal(await page.locator('#enemy-hp-num').textContent(),before);
  for(let i=0;i<3;i++){
   const old=Number((await page.locator('#enemy-hp-num').textContent()).split('/')[0]);
-  await page.locator('#manual-hit').click();await page.clock.runFor(500);
+  await page.locator('#manual-hit').click();await page.clock.runFor(360);
+  await shot(page,'manual-contact-'+ATTACKS[i].id);await page.clock.runFor(140);
   const now=Number((await page.locator('#enemy-hp-num').textContent()).split('/')[0]);
   assert.equal(old-now,c.heroDamage(p));
   await page.clock.runFor(1200);
@@ -132,6 +133,8 @@ test('сцена на 390 и 320: ведро слева от рыцаря, ры�
   const surface=await page.locator('#surface').boundingBox(),bucket=await page.locator('#bucket').boundingBox();
   assert.ok(bucket.x+bucket.width<surface.x+surface.width*.24);
   assert.ok(bucket.y+bucket.height>surface.y+surface.height*.9);
+  const status=await page.locator('.top-status').boundingBox();
+  assert.ok(status.x>=bucket.x+bucket.width,'bucket counter and fishing status must not overlap');
   assert.equal(await page.locator('#fishing-animation').getAttribute('class'),'fishing-anim-overlay playing');
   await shot(page,'fishing-'+width);
   const dimensions=await page.evaluate(()=>({scroll:document.documentElement.scrollWidth,width:innerWidth}));

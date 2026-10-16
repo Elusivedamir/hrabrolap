@@ -175,6 +175,7 @@
 .surface .bucket{left:1.5%;bottom:4%;width:9%;height:20%;min-width:32px;min-height:40px;z-index:8}
 .surface .bucket img{height:100%;width:100%;object-fit:fill}
 .surface .bucket span{bottom:-5px;font-size:10px;padding:1px 3px}
+.surface .top-status{left:12%}
 .surface .fish-flight{display:none!important}
 .battle-status{font:inherit;font-size:.72em;cursor:pointer;touch-action:manipulation;min-height:36px}
 .battle-status:focus-visible,.manual-hit:focus-visible{outline:3px solid #fff3b5;outline-offset:2px}

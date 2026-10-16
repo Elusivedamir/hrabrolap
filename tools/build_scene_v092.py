@@ -25,6 +25,9 @@ for kind,(palette,body) in models.items():
  for f in (ROOT/'animations'/kind).glob('*/*/*.svg'):
   tree=etree.parse(str(f));root=tree.getroot();root.set('data-model',kind+'-v2')
   model=root.find('.//{*}image');model.set('href',uri(svg))
+  if kind=='spider' and 'boss' in f.parts:
+   # Match the new carapace silhouette; the old model left a gap below the crown.
+   root.findall('.//{*}image')[1].set('y','110')
   f.write_bytes(etree.tostring(root))
 
 # The background already contains the knight, rod and line. Animate the catch
