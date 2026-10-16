@@ -1,0 +1,162 @@
+[
+  {
+    "id": "web",
+    "name": "Паутинный ткач",
+    "description": "Стёганый кафтан с плетением, длинными рукавами и фестонами.",
+    "file": "art/armor-designs/web.svg",
+    "stage": "standalone-design",
+    "slots": [
+      "helmet",
+      "collar",
+      "torso",
+      "leftSleeve",
+      "rightSleeve",
+      "leftBoot",
+      "rightBoot"
+    ]
+  },
+  {
+    "id": "steel",
+    "name": "Рыцарский панцирь",
+    "description": "Кольчужная рубаха, объёмная кираса, подвижные наплечники и поясные пластины.",
+    "file": "art/armor-designs/steel.svg",
+    "stage": "standalone-design",
+    "slots": [
+      "helmet",
+      "collar",
+      "torso",
+      "leftSleeve",
+      "rightSleeve",
+      "leftBoot",
+      "rightBoot"
+    ]
+  },
+  {
+    "id": "bone_slime",
+    "name": "Кость и слизь",
+    "description": "Органическая куртка, костяные рёбра и мягкие наплечники.",
+    "file": "art/armor-designs/bone_slime.svg",
+    "stage": "standalone-design",
+    "slots": [
+      "helmet",
+      "collar",
+      "torso",
+      "leftSleeve",
+      "rightSleeve",
+      "leftBoot",
+      "rightBoot"
+    ]
+  },
+  {
+    "id": "chitin",
+    "name": "Хитиновый страж",
+    "description": "Надкрылья на плечах, сегментированный корпус и высокий ворот.",
+    "file": "art/armor-designs/chitin.svg",
+    "stage": "standalone-design",
+    "slots": [
+      "helmet",
+      "collar",
+      "torso",
+      "leftSleeve",
+      "rightSleeve",
+      "leftBoot",
+      "rightBoot"
+    ]
+  },
+  {
+    "id": "leaf",
+    "name": "Лесной разведчик",
+    "description": "Короткая туника из перекрывающихся листьев с листовыми рукавами.",
+    "file": "art/armor-designs/leaf.svg",
+    "stage": "standalone-design",
+    "slots": [
+      "helmet",
+      "collar",
+      "torso",
+      "leftSleeve",
+      "rightSleeve",
+      "leftBoot",
+      "rightBoot"
+    ]
+  },
+  {
+    "id": "moss",
+    "name": "Мшистый хранитель",
+    "description": "Кафтан из гибких полос коры, асимметричные плечи и мшистая опушка.",
+    "file": "art/armor-designs/moss.svg",
+    "stage": "standalone-design",
+    "slots": [
+      "helmet",
+      "collar",
+      "torso",
+      "leftSleeve",
+      "rightSleeve",
+      "leftBoot",
+      "rightBoot"
+    ]
+  },
+  {
+    "id": "shadow",
+    "name": "Теневой странник",
+    "description": "Кожаная куртка с запахом, длинные рукава, ремни и разрезной подол.",
+    "file": "art/armor-designs/shadow.svg",
+    "stage": "standalone-design",
+    "slots": [
+      "helmet",
+      "collar",
+      "torso",
+      "leftSleeve",
+      "rightSleeve",
+      "leftBoot",
+      "rightBoot"
+    ]
+  },
+  {
+    "id": "moon_armor",
+    "name": "Лунный дозор",
+    "description": "Длинное облачение, серебряные дуги, разные наплечники и свободные рукава.",
+    "file": "art/armor-designs/moon_armor.svg",
+    "stage": "standalone-design",
+    "slots": [
+      "helmet",
+      "collar",
+      "torso",
+      "leftSleeve",
+      "rightSleeve",
+      "leftBoot",
+      "rightBoot"
+    ]
+  },
+  {
+    "id": "star",
+    "name": "Звёздный паладин",
+    "description": "Чешуйчатый доспех с лучевыми наплечниками и многослойным подолом.",
+    "file": "art/armor-designs/star.svg",
+    "stage": "standalone-design",
+    "slots": [
+      "helmet",
+      "collar",
+      "torso",
+      "leftSleeve",
+      "rightSleeve",
+      "leftBoot",
+      "rightBoot"
+    ]
+  },
+  {
+    "id": "king",
+    "name": "Королевский доспех",
+    "description": "Красный кафтан с золотой кирасой, короткой меховой пелериной и набедренниками.",
+    "file": "art/armor-designs/king.svg",
+    "stage": "standalone-design",
+    "slots": [
+      "helmet",
+      "collar",
+      "torso",
+      "leftSleeve",
+      "rightSleeve",
+      "leftBoot",
+      "rightBoot"
+    ]
+  }
+]
