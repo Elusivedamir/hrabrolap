@@ -200,3 +200,18 @@
    The painted knight was extracted into frames already, so avoid duplicate rods. */
 .surface .fishing-anim-overlay{position:absolute;inset:0;width:100%;height:100%;z-index:5;opacity:1;pointer-events:none;object-fit:fill}
 .surface .fishing-rig,.surface .fish-flight,.surface .knight{display:none!important}
+
+/* v0.9.7 manual + upgradeable autobattle controls, the fishing timer is internal only. */
+.dungeon-title .auto-controls{display:flex;flex-direction:column;align-items:flex-end;gap:4px;max-width:44%;min-width:112px}
+.auto-upgrade{font-weight:800;font-size:.67em;border-radius:7px;color:#ffebc0;background:#64503c;border:1px solid #bf935d;padding:4px 5px;min-height:26px;text-align:right;white-space:nowrap}
+.auto-upgrade[hidden]{display:none!important}
+.auto-upgrade:disabled{opacity:.52;cursor:not-allowed}
+.enemy-hearts .heart-unfilled{filter:grayscale(1) brightness(.35)!important}
+.enemy-hearts[data-monster="slime"] .heart-filled img{filter:hue-rotate(99deg) saturate(1.1)}
+.enemy-hearts[data-monster="mouse"] .heart-filled img{filter:hue-rotate(280deg)}
+.enemy-hearts[data-monster="spider"] .heart-filled img{filter:hue-rotate(280deg) saturate(.75)}
+.enemy-hearts[data-monster="ghost"] .heart-filled img{filter:hue-rotate(170deg)}
+.enemy-hearts[data-monster="beetle"] .heart-filled img,.enemy-hearts[data-monster="golem"] .heart-filled img{filter:hue-rotate(42deg)}
+/* Small existing shop icon is physically grounded LEFT of the merchant label. */
+.surface .mini-shop{position:absolute;left:auto!important;right:35%!important;top:auto!important;bottom:9%!important;width:11%!important;height:18%!important;max-height:66px!important;object-fit:contain!important;object-position:center bottom!important;z-index:8!important;transform:none!important}
+.surface .rest-label{left:61%!important;top:3%!important;width:33%!important;font-size:.65em!important;padding:2px 4px!important;max-height:32px;z-index:7;pointer-events:none}
