@@ -72,20 +72,36 @@ function syncEquipment(){
  const weapon=WEAPONS.find(w=>w.id===p.weapon)||WEAPONS[0];$('hero-weapon').setAttribute('href',weapon.svg);
  const armor=ARMORS.find(a=>a.id===p.equippedArmor)||ARMORS[0];const art=$('hero-armor');art.style.display=armor.svg?'':'none';if(armor.svg)art.setAttribute('href',armor.svg);
 }
+const APPROVED_MONSTER_TYPES=new Set(['slime','spider','mouse','mushroom','beetle','larva','bat','ghost']);
+const monsterSource=type=>APPROVED_MONSTER_TYPES.has(type)?'art/monsters-v2/'+type+'.svg':type==='golem'?'art/golem.svg':'art/monsters/'+type+'.svg';
 let monsterSequence=0,monsterTimers=[];
 function cancelMonsterFrames(){
  monsterSequence++;for(const t of monsterTimers)clearTimeout(t);monsterTimers=[];
  const art=$('enemy-art');art.style.animation='';art.style.transform='';
+ art.classList.remove('approved-monster-frame');delete art.dataset.playingAnimation;
+ if(b?.monster){const source=monsterSource(b.monster.texture);if(art.getAttribute('src')!==source)art.setAttribute('src',source);}
+ $('boss-crown').style.visibility='';
 }
 function playMonsterFrames(phase){
- cancelMonsterFrames();const sequence=monsterSequence,type=b.monster.type;
+ cancelMonsterFrames();const sequence=monsterSequence,type=b.monster.type,boss=!!b.monster.boss;
  const art=$('enemy-art'),holder=$('enemy-holder');
+ const archived=APPROVED_MONSTER_TYPES.has(type);
  art.style.animation='none';
+ if(archived){
+  art.classList.add('approved-monster-frame');art.dataset.playingAnimation='1';
+  // Archived boss frames ALREADY INCLUDE the original approved crown.
+  if(boss)$('boss-crown').style.visibility='hidden';
+ }
  for(let i=0;i<6;i++){
   monsterTimers.push(setTimeout(()=>{
-   if(sequence!==monsterSequence||b.monster.type!==type)return;
-   const pose=monsterPose(type,phase,i);
-   art.style.transform=pose.transform;holder.dataset.monsterPhase=phase;holder.dataset.monsterFrame=String(i+1);
+   if(sequence!==monsterSequence||b.monster.type!==type||!!b.monster.boss!==boss)return;
+   holder.dataset.monsterPhase=phase;holder.dataset.monsterFrame=String(i+1);
+   if(archived){
+    art.setAttribute('src',`animations/${type}/${boss?'boss':'normal'}/${phase}/0${i+1}.svg`);
+   }else{
+    const pose=monsterPose(type,phase,i);
+    art.style.transform=pose.transform;
+   }
   },i*64));
  }
  monsterTimers.push(setTimeout(()=>{if(sequence!==monsterSequence)return;cancelMonsterFrames();},6*64+15));
@@ -114,7 +130,14 @@ function updateSleepDrawing(rest){
 function render(){
  $('gold').textContent=fmt(p.gold);
  $('room').textContent=`ВОЛНА ${b.level}/100`; $('room-progress').textContent=`${p.best}/100`; $('room-fill').style.width=(p.best)+'%';
- $('enemy-name').textContent=b.monster.name;const approvedV2=new Set(['slime','spider','mouse','mushroom','beetle','larva','bat','ghost']);const enemySource=approvedV2.has(b.monster.texture)?'art/monsters-v2/'+b.monster.texture+'.svg':b.monster.texture==='golem'?'art/golem.svg':'art/monsters/'+b.monster.texture+'.svg';if($('enemy-art').getAttribute('src')!==enemySource){cancelMonsterFrames();$('enemy-art').src=enemySource;}$('enemy-holder').dataset.monster=b.monster.type;$('enemy-holder').classList.toggle('boss',b.monster.boss);$('enemy-art').classList.toggle('boss',b.monster.boss);
+ $('enemy-name').textContent=b.monster.name;const enemySource=monsterSource(b.monster.texture),art=$('enemy-art'),variant=b.monster.boss?'boss':'normal';
+ if(art.dataset.monsterType!==b.monster.type||art.dataset.monsterVariant!==variant){
+  cancelMonsterFrames();art.dataset.monsterType=b.monster.type;art.dataset.monsterVariant=variant;
+  art.setAttribute('src',enemySource);
+ }else if(!art.dataset.playingAnimation&&art.getAttribute('src')!==enemySource){
+  art.setAttribute('src',enemySource);
+ }
+ $('enemy-holder').dataset.monster=b.monster.type;$('enemy-holder').classList.toggle('boss',b.monster.boss);$('enemy-art').classList.toggle('boss',b.monster.boss);
  $('hero-hp-num').textContent=Math.ceil(b.hp)+'/'+maxHealth(p);$('enemy-hp-num').textContent=Math.ceil(b.enemyHp)+'/'+b.monster.hp;
  $('hero-hp').style.width=(100*b.hp/maxHealth(p))+'%';$('enemy-hp').style.width=(100*b.enemyHp/b.monster.hp)+'%';
  const monsterHeartCapacity=b.monster.hp/5;

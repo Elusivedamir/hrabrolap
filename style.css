@@ -192,3 +192,6 @@
 }
 /* Keep new rest art in the attic, not on lower floor. */
 .surface .rest-sleep-sprite{left:72%;top:18%;width:18%;height:35%;z-index:6;object-position:center bottom}
+
+/* Original v0.9.3 SVG animation frames are 320×320, center the drawn monster. */
+.enemy-holder .monster-art.approved-monster-frame{height:111%;width:120%;max-width:120%;object-fit:contain;object-position:center bottom}
