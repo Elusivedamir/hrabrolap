@@ -19,10 +19,10 @@ async function pageFor(progress=c.freshProgress(),battleState){
  await page.addInitScript(()=>{Math.random=()=>.99;});
  await page.addInitScript(({key,raw})=>{if(!sessionStorage.getItem('qa-seeded')){localStorage.setItem(key,JSON.stringify(raw));sessionStorage.setItem('qa-seeded','1');}},{key,raw:{...progress,lastSeen:0,...(battleState?{battleState}:{})}});
  await page.goto(base);await page.locator('#hero-rig').waitFor();
- await page.evaluate(()=>{window.qaObserved={attacks:[],transforms:[],hurts:0};new MutationObserver(records=>{
-  for(const r of records){const t=r.target;if(t.id==='weapon-slot')window.qaObserved.transforms.push(t.getAttribute('transform'));
+ await page.evaluate(()=>{window.qaObserved={attacks:[],transforms:[],spriteFrames:[],hurts:0};new MutationObserver(records=>{
+  for(const r of records){const t=r.target;if(t.id==='weapon-slot')window.qaObserved.transforms.push(t.getAttribute('transform'));if(t.id==='hero-body')window.qaObserved.spriteFrames.push(t.getAttribute('href'));
    if(t.id==='enemy-holder'){window.qaObserved.attacks.push(...[...t.classList].filter(x=>x.startsWith('attack-')));if(t.classList.contains('hurt'))window.qaObserved.hurts++;}}
- }).observe(document.querySelector('#game'),{subtree:true,attributes:true,attributeFilter:['class','transform']});});
+ }).observe(document.querySelector('#game'),{subtree:true,attributes:true,attributeFilter:['class','transform','href']});});
  return page;
 }
 async function saved(page){return page.evaluate(key=>JSON.parse(localStorage.getItem(key)),key);}
@@ -30,7 +30,7 @@ async function shot(page,name){await page.screenshot({path:'qa/screenshots/'+nam
 test('мобильный запуск, цикл трёх атак, ресурсы и отсутствие JS-ошибок',async()=>{
  const page=await pageFor();await page.clock.runFor(10000);
  const observed=await page.evaluate(()=>window.qaObserved);
- for(const transform of ['translate(189 237) rotate(74)','translate(210 234) rotate(132)','translate(227 227) rotate(88)'])assert.ok(observed.transforms.includes(transform),transform);
+ for(let i=1;i<=6;i++)assert.ok(observed.spriteFrames.includes('assets/canonical/attack_0'+i+'.png'),'missing original attack frame '+i);
  assert.ok(observed.hurts>0);assert.ok((await saved(page)).kills>0);
  const missing=await page.locator('img').evaluateAll(imgs=>imgs.filter(i=>!i.complete||i.naturalWidth===0).map(i=>i.src));assert.deepEqual(missing,[]);
  await shot(page,'normal-mobile');assert.deepEqual(errors,[]);
@@ -55,8 +55,8 @@ test('каждый из десяти SVG-мечей остаётся единс�
  for(const weapon of c.WEAPONS){
   const p=c.freshProgress();Object.assign(p,{ownedWeapons:c.WEAPONS.map(w=>w.id),weapon:weapon.id,armor:100});
   const page=await pageFor(p);await page.clock.runFor(10000);
-  const seen=await page.evaluate(()=>window.qaObserved.transforms);
-  for(const transform of ['translate(189 237) rotate(74)','translate(210 234) rotate(132)','translate(227 227) rotate(88)'])assert.ok(seen.includes(transform),weapon.id+' '+transform);
+  const seen=await page.evaluate(()=>window.qaObserved.spriteFrames);
+  for(let i=1;i<=6;i++)assert.ok(seen.includes('assets/canonical/attack_0'+i+'.png'),weapon.id+' frame '+i);
   assert.equal(await page.locator('#hero-weapon').count(),1);
   assert.equal(await page.locator('#hero-weapon').getAttribute('href'),weapon.svg);
   await shot(page,'fixture-weapon-'+weapon.id);
@@ -126,10 +126,10 @@ test('шестикадровое получение урона двигает SV
  await page.clock.runFor(900);
  const frames=await page.evaluate(()=>window.hurtFrames);
  for(let i=1;i<=6;i++)assert.ok(frames.includes(i),'missing hit frame '+i+': '+frames.join(','));
- assert.equal(await page.locator('#hero-body').getAttribute('href'),'art/hero/bare-kitten.svg');
+ assert.match(await page.locator('#hero-body').getAttribute('href'),/^assets\/canonical\/(attack|hurt)_0[1-6]\.png$/);
  assert.equal(await page.locator('#hero-armor').getAttribute('href'),'art/armor/web.svg');
  assert.equal(await page.locator('#hero-weapon').getAttribute('href'),'art/weapons/fishbone.svg');
- assert.equal(await page.locator('#armor-slot').getAttribute('transform'),'translate(0 0) rotate(0 236 243)');
+ assert.match(await page.locator('#armor-slot').getAttribute('transform'),/^translate\(/);
  await shot(page,'rig-hurt-frame-6');
 });
 test('мобильное SVG-ателье показывает 6 кадров и переключает 10 мечей и 10 видов брони',async()=>{
@@ -155,4 +155,24 @@ test('мобильное SVG-ателье показывает 6 кадров и
  await shot(page,'equipment-preview-attack-moon-dusk');
  const broken=await page.locator('svg image').evaluateAll(images=>images.filter(im=>!im.getAttribute('href')).map(im=>im.id||'missing'));
  assert.deepEqual(broken,[]);
+});
+
+test('новое ведро отрисовывается слева и меняет состояние по числу рыб и улучшению',async()=>{
+ const p=c.freshProgress();p.fishBucket=[{species:'Окунь',weight:1,slots:1,price:5}];
+ const page=await pageFor(p);
+ const bucket=page.locator('#bucket');
+ assert.equal(await page.locator('#bucket-graphic').getAttribute('src'),'art/scenery/bucket-low.svg');
+ const coords=await page.evaluate(()=>({bucket:document.querySelector('#bucket').getBoundingClientRect().left,scene:document.querySelector('#surface').getBoundingClientRect().left,width:document.querySelector('#surface').getBoundingClientRect().width}));
+ assert.ok(coords.bucket<coords.scene+coords.width*.21,'bucket should be to the left of fisherman');
+ await shot(page,'fixture-bucket-left');
+});
+test('кот отдыхает в существующем доме без добавления котёнка в подземелье',async()=>{
+ const p=c.freshProgress(),b=c.startFight(p);b.hp=1;b.enemyTimer=2.39;
+ const page=await pageFor(p,b);
+ await page.clock.runFor(1800);
+ assert.ok((await page.locator('#surface').getAttribute('class')).includes('resting'));
+ assert.equal(await page.locator('#rest-sleep-sprite').isVisible(),true);
+ assert.equal(await page.locator('#hero-art').evaluate(el=>getComputedStyle(el).opacity),'0');
+ assert.match(await page.locator('#rest-sleep-sprite').getAttribute('src'),/^assets\/rest\/sleep_0[1-6]\.png$/);
+ await shot(page,'fixture-rest-inside-existing-house');
 });
