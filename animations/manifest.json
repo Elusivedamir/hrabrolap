@@ -1,0 +1,82 @@
+[
+  {
+    "id": "slime",
+    "name": "Слизень",
+    "move": "jump",
+    "color": "#a3f56c",
+    "crown": [
+      0,
+      0
+    ]
+  },
+  {
+    "id": "mouse",
+    "name": "Мышь",
+    "move": "bite",
+    "color": "#f5aec9",
+    "crown": [
+      2,
+      -4
+    ]
+  },
+  {
+    "id": "mushroom",
+    "name": "Гриб",
+    "move": "spores",
+    "color": "#f3b368",
+    "crown": [
+      0,
+      -8
+    ]
+  },
+  {
+    "id": "bat",
+    "name": "Летучая мышь",
+    "move": "swoop",
+    "color": "#c393e8",
+    "crown": [
+      0,
+      0
+    ]
+  },
+  {
+    "id": "spider",
+    "name": "Паук",
+    "move": "leap",
+    "color": "#cb97e9",
+    "crown": [
+      0,
+      -4
+    ]
+  },
+  {
+    "id": "larva",
+    "name": "Личинка",
+    "move": "wriggle",
+    "color": "#f3d878",
+    "crown": [
+      0,
+      8
+    ]
+  },
+  {
+    "id": "beetle",
+    "name": "Жук",
+    "move": "ram",
+    "color": "#8de2d3",
+    "crown": [
+      0,
+      2
+    ]
+  },
+  {
+    "id": "ghost",
+    "name": "Призрак",
+    "move": "pulse",
+    "color": "#b9ecff",
+    "crown": [
+      0,
+      -2
+    ]
+  }
+]

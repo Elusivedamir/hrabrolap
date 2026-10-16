@@ -1,0 +1,180 @@
+
+> hrabrolap@0.9.1 test
+> node --check game.mjs && node --check game-core.mjs && node --test tests/core.test.mjs tests/regression.test.mjs tests/balance.test.mjs tests/animation-frames.test.mjs tests/hero-production.test.mjs && python3 tests/asset-check.py && python3 tests/art_test.py && python3 tests/preserve-assets.py
+
+TAP version 13
+# Subtest: 8 монстров × (6 атака + 6 урон) × 2 варианта — 192 доступных кадра
+ok 1 - 8 монстров × (6 атака + 6 урон) × 2 варианта — 192 доступных кадра
+  ---
+  duration_ms: 9.574589
+  type: 'test'
+  ...
+# Subtest: 10 кадров рыбалки рыцаря и 10 кадров кота-торговца
+ok 2 - 10 кадров рыбалки рыцаря и 10 кадров кота-торговца
+  ---
+  duration_ms: 0.437777
+  type: 'test'
+  ...
+# Subtest: Сохранены храбролаповский SVG-риг и точные игровые события
+ok 3 - Сохранены храбролаповский SVG-риг и точные игровые события
+  ---
+  duration_ms: 0.50035
+  type: 'test'
+  ...
+# Subtest: фактический путь 1→100, все восемь моделей и десять боссов
+ok 4 - фактический путь 1→100, все восемь моделей и десять боссов
+  ---
+  duration_ms: 32.925077
+  type: 'test'
+  ...
+# Subtest: сохранение каждые пять минут не меняет результат кампании
+ok 5 - сохранение каждые пять минут не меняет результат кампании
+  ---
+  duration_ms: 49.428898
+  type: 'test'
+  ...
+# v0.8 game-core tests: passed — 100 waves, 8 monsters, 3 weapon models, inventory, boss, fishing, saves, combat
+# Subtest: tests/core.test.mjs
+ok 3 - tests/core.test.mjs
+  ---
+  duration_ms: 48.756189
+  type: 'test'
+  ...
+# Subtest: three different attacks, six frames each, same ready pose and one contact at frame four
+ok 7 - three different attacks, six frames each, same ready pose and one contact at frame four
+  ---
+  duration_ms: 2.402533
+  type: 'test'
+  ...
+# Subtest: all 18 frames have same face, no embedded sword, and foreleg reaches transformed SVG hilt
+ok 8 - all 18 frames have same face, no embedded sword, and foreleg reaches transformed SVG hilt
+  ---
+  duration_ms: 14.99639
+  type: 'test'
+  ...
+# Subtest: game and animation studio use common poses + one replaceable SVG weapon
+ok 9 - game and animation studio use common poses + one replaceable SVG weapon
+  ---
+  duration_ms: 0.431117
+  type: 'test'
+  ...
+# Subtest: boss slime crown compensates pose tilt and stays attached on all 12 frames
+ok 10 - boss slime crown compensates pose tilt and stays attached on all 12 frames
+  ---
+  duration_ms: 0.71356
+  type: 'test'
+  ...
+# Subtest: снятие брони ограничивает текущее HP, надевание не лечит
+ok 11 - снятие брони ограничивает текущее HP, надевание не лечит
+  ---
+  duration_ms: 1.238888
+  type: 'test'
+  ...
+# Subtest: сильное оружие выводит из фарма, текущее сражение не пересоздаётся
+ok 12 - сильное оружие выводит из фарма, текущее сражение не пересоздаётся
+  ---
+  duration_ms: 0.380641
+  type: 'test'
+  ...
+# Subtest: слабая экипировка не снимает режим фарма
+ok 13 - слабая экипировка не снимает режим фарма
+  ---
+  duration_ms: 0.194742
+  type: 'test'
+  ...
+# Subtest: победа над фарм-врагом после апгрейда не считается первым прохождением
+ok 14 - победа над фарм-врагом после апгрейда не считается первым прохождением
+  ---
+  duration_ms: 0.43314
+  type: 'test'
+  ...
+# Subtest: перенос завершённой старой главы v1/v2 открывает 11-ю волну
+ok 15 - перенос завершённой старой главы v1/v2 открывает 11-ю волну
+  ---
+  duration_ms: 0.418097
+  type: 'test'
+  ...
+# Subtest: перенос незавершённой 10-й волны не пропускает босса
+ok 16 - перенос незавершённой 10-й волны не пропускает босса
+  ---
+  duration_ms: 0.129704
+  type: 'test'
+  ...
+# Subtest: старое battleState не возвращает в уже завершённую главу
+ok 17 - старое battleState не возвращает в уже завершённую главу
+  ---
+  duration_ms: 0.402204
+  type: 'test'
+  ...
+# Subtest: повреждённый список вещей сохраняет монеты и исправные поля
+ok 18 - повреждённый список вещей сохраняет монеты и исправные поля
+  ---
+  duration_ms: 0.90026
+  type: 'test'
+  ...
+# Subtest: встроенные предметы и повторные ID в сохранении не дублируются
+ok 19 - встроенные предметы и повторные ID в сохранении не дублируются
+  ---
+  duration_ms: 0.330356
+  type: 'test'
+  ...
+# Subtest: невалидная рыба и переполнение из сохранения отбрасываются
+ok 20 - невалидная рыба и переполнение из сохранения отбрасываются
+  ---
+  duration_ms: 0.639349
+  type: 'test'
+  ...
+# Subtest: план из сохранения не переполняет оставшееся место в ведре
+ok 21 - план из сохранения не переполняет оставшееся место в ведре
+  ---
+  duration_ms: 0.487541
+  type: 'test'
+  ...
+# Subtest: восстановление боя очищает дробный уровень и нечисловые таймеры
+ok 22 - восстановление боя очищает дробный уровень и нечисловые таймеры
+  ---
+  duration_ms: 1.422694
+  type: 'test'
+  ...
+# Subtest: сохранение/восстановление боя и отдыха через JSON без лечения
+ok 23 - сохранение/восстановление боя и отдыха через JSON без лечения
+  ---
+  duration_ms: 0.371246
+  type: 'test'
+  ...
+# Subtest: перезагрузка сохраняет остаток перехода между волнами
+ok 24 - перезагрузка сохраняет остаток перехода между волнами
+  ---
+  duration_ms: 0.220771
+  type: 'test'
+  ...
+# Subtest: у всех восьми видов реально происходят атака, урон и победа
+ok 25 - у всех восьми видов реально происходят атака, урон и победа
+  ---
+  duration_ms: 0.869524
+  type: 'test'
+  ...
+# Subtest: 100-я волна завершается единожды и прогресс не выходит за 100
+ok 26 - 100-я волна завершается единожды и прогресс не выходит за 100
+  ---
+  duration_ms: 0.310005
+  type: 'test'
+  ...
+# Subtest: торговец: без него продажа невозможна, ожидание заморожено в открытой торговле
+ok 27 - торговец: без него продажа невозможна, ожидание заморожено в открытой торговле
+  ---
+  duration_ms: 1.015113
+  type: 'test'
+  ...
+1..27
+# tests 27
+# suites 0
+# pass 27
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 160.801227
+Art/package tests: passed — 35 SVG, pure-vector weapons & armor, original six attack frames archived, no coin/min
+Rig tests: passed — 3 six-pose animation definitions, original face, separate weapon slot
+PASS: 59 original art/assets files match v0.8 byte for byte

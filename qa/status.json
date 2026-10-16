@@ -1,51 +1,42 @@
 {
-  "date": "2026-10-15",
-  "overall": "BLOCKED_BROWSER",
+  "version": "0.9.2",
+  "date": "2026-10-16",
+  "overall": "PASS_AUTOMATED_QA",
+  "tested_commit": "c2e9d7acd1a14f08c23cf1323cebaa168bb638b6",
+  "workflow_run": "https://github.com/Elusivedamir/hrabrolap/actions/runs/38857698004",
   "logic": {
     "status": "PASS",
-    "nodeTests": 20,
-    "failed": 0,
-    "balanceScenarios": 12,
-    "completedCampaigns": 9
+    "nodeTests": 28,
+    "failed": 0
+  },
+  "balance": {
+    "scenarios": 12,
+    "completed100Waves": 9,
+    "timeLimitedControlScenarios": 3,
+    "limitMinutes": 180,
+    "mode": "accelerated simulation; not real-time Android playthrough"
   },
   "assets": {
-    "status": "PASS",
-    "unchangedFiles": 59,
-    "stylesheet": "unchanged",
-    "attackDefinitions": "unchanged"
+    "originalFilesUnchanged": 59
   },
   "browser": {
-    "status": "BLOCKED",
-    "screenshots": [],
-    "attempts": [
-      {
-        "mode": "local Playwright Chromium",
-        "result": "Executable missing: chromium_headless_shell-1234/chrome-headless-shell-linux64/chrome-headless-shell"
-      },
-      {
-        "mode": "cloud browser http://127.0.0.1:8080/",
-        "result": "net::ERR_BLOCKED_BY_CLIENT"
-      },
-      {
-        "mode": "cloud browser file:///home/oai/share/.../index.html",
-        "result": "Browser URL policy: file protocol blocked; only http and https allowed"
-      }
+    "status": "PASS",
+    "tests": 8,
+    "failed": 0,
+    "engine": "Chromium 151 / Playwright 1.62.1 on GitHub Actions Linux",
+    "viewports": [
+      "390x844",
+      "320x700"
     ],
-    "mobileGameplay": "NOT_RUN",
-    "animations": "NOT_RUN",
-    "realLocalStorageReload": "NOT_RUN",
-    "pageJavaScriptConsole": "NOT_RUN"
+    "javascriptErrors": 0,
+    "screenshots": 32,
+    "artifact_id": 12027737768,
+    "artifact_sha256": "bb046846a96bebeca124ce8b90b70be064a7a820fff1562a248a525e8209faa9"
   },
-  "preparedBrowserTests": {
-    "syntax": "PASS",
-    "execution": "NOT_RUN"
-  },
-  "githubActions": {
-    "file": ".github/workflows/qa.yml",
-    "execution": "NOT_RUN"
-  },
-  "sitePreview": {
-    "status": "NOT_DEPLOYED",
-    "reason": "Managed Sites preview requires control-browser skill, unavailable in this session. No site created."
-  }
+  "visualReview": "Reviewed real gameplay screenshots: three attack contacts, eight monsters, ten bosses, fishing layout, inventory, merchant, defeat and respawn. Fixed label overlap, spider crown gap, manual button overlap and blade drawing over lower UI.",
+  "limitations": [
+    "No physical Android device test or FPS benchmark",
+    "Knight body remains part of the approved static background; catch is animated",
+    "Final artistic acceptance belongs to user"
+  ]
 }
