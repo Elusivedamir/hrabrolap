@@ -113,3 +113,46 @@ test('паутина в инвентаре, покупка брони за 300 �
  assert.equal(save.equippedArmor,'web');assert.equal(save.materials.web,0);
  assert.equal(await page.locator('#hero-armor').getAttribute('href'),'art/armor/web.svg');
 });
+
+test('шестикадровое получение урона двигает SVG-броню и меч без замены кота',async()=>{
+ const p=c.freshProgress();p.armor=150;p.ownedArmors.push('web');p.equippedArmor='web';
+ p.ownedWeapons.push('fishbone');p.weapon='fishbone';
+ const b=c.startFight(p);b.enemyTimer=2.39;
+ const page=await pageFor(p,b);
+ await page.evaluate(()=>{window.hurtFrames=[];
+  new MutationObserver(()=>{const n=document.querySelector('#hero-art').dataset.hurtFrame;if(n)window.hurtFrames.push(+n);})
+   .observe(document.querySelector('#hero-art'),{attributes:true,attributeFilter:['data-hurt-frame']});
+ });
+ await page.clock.runFor(900);
+ const frames=await page.evaluate(()=>window.hurtFrames);
+ for(let i=1;i<=6;i++)assert.ok(frames.includes(i),'missing hit frame '+i+': '+frames.join(','));
+ assert.equal(await page.locator('#hero-body').getAttribute('href'),'art/hero/bare-kitten.svg');
+ assert.equal(await page.locator('#hero-armor').getAttribute('href'),'art/armor/web.svg');
+ assert.equal(await page.locator('#hero-weapon').getAttribute('href'),'art/weapons/fishbone.svg');
+ assert.equal(await page.locator('#armor-slot').getAttribute('transform'),'translate(0 0) rotate(0 236 243)');
+ await shot(page,'rig-hurt-frame-6');
+});
+test('мобильное SVG-ателье показывает 6 кадров и переключает 10 мечей и 10 видов брони',async()=>{
+ const ctx=await browser.newContext({viewport:{width:390,height:844},isMobile:true,hasTouch:true});
+ contexts.push(ctx);
+ const page=await ctx.newPage();page.on('pageerror',e=>errors.push(e.message));
+ await page.goto(new URL('equipment-preview.html',base).href);
+ await page.locator('.sprite').first().waitFor();
+ assert.equal(await page.locator('.sprite').count(),6);
+ assert.equal(await page.locator('#weapon option').count(),10);
+ assert.equal(await page.locator('#armor option').count(),11);
+ await page.locator('#armor').selectOption('web');
+ await page.locator('#weapon').selectOption('spiderleg');
+ await page.locator('#kind').selectOption('hurt');
+ assert.equal(await page.locator('.sprite').count(),6);
+ assert.equal(await page.locator('#big image').count(),3);
+ await shot(page,'equipment-preview-hurt-web-spiderleg');
+ await page.locator('#kind').selectOption('overhead');
+ await page.locator('#armor').selectOption('moon_armor');
+ await page.locator('#weapon').selectOption('dusk');
+ await page.locator('.sprite').nth(3).click();
+ assert.equal(await page.locator('#current-frame').textContent(),'4/6');
+ await shot(page,'equipment-preview-attack-moon-dusk');
+ const broken=await page.locator('svg image').evaluateAll(images=>images.filter(im=>!im.getAttribute('href')).map(im=>im.id||'missing'));
+ assert.deepEqual(broken,[]);
+});

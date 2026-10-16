@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="ru"><head><meta charset="utf-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Храбролап — ателье SVG-экипировки</title>
+<style>
+:root{font-family:system-ui,sans-serif;color:#513b31;background:#efe3d0}*{box-sizing:border-box}
+body{margin:0}main{max-width:1100px;margin:auto;padding:16px}h1{font-family:Georgia,serif;font-size:clamp(1.4rem,3vw,2rem);margin:0 0 8px}
+p{line-height:1.45;margin:6px 0 14px}.controls{display:flex;flex-wrap:wrap;gap:8px;align-items:end;background:#fff5e6;border:2px solid #bc936b;border-radius:16px;padding:12px}
+label{display:grid;gap:4px;font-size:.84rem;font-weight:700;min-width:135px;flex:1}
+select,button{font:inherit;border-radius:10px;border:1px solid #97775e;padding:9px;color:#45312b;background:#fffaf0}
+button{cursor:pointer;font-weight:700;background:#f2d2a5}button:focus-visible,select:focus-visible{outline:3px solid #db9437}
+h2{font-family:Georgia,serif;margin:16px 0 8px}.grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+.sprite{position:relative;border:2px solid #caa67e;border-radius:14px;background:#fffdfa;overflow:hidden;cursor:pointer;padding:4px}
+.sprite[data-selected="true"]{border-color:#c27d30;box-shadow:0 0 0 3px #dfb45d}
+.sprite .num{position:absolute;top:7px;left:9px;font-size:.8rem;background:#f0d5a8;border-radius:20px;padding:2px 7px}
+.sprite svg{display:block;width:100%;aspect-ratio:488/305;height:auto}
+.stage{background:#fffbf6;border-radius:16px;border:2px solid #cba983;text-align:center}
+.stage svg{width:100%;max-width:650px;display:block;margin:auto}
+.notice{margin-top:14px;color:#705748;font-size:.9rem}small{font-size:.8rem}
+@media(max-width:560px){main{padding:10px}.controls{gap:7px}.grid{gap:5px}.sprite{border-radius:8px;padding:1px}.sprite .num{top:2px;left:2px;font-size:.7rem}}
+</style>
+</head><body><main>
+<h1>🎨 Ателье экипировки Храбролапа</h1>
+<p>Технический просмотр: одни и те же утверждённые SVG-кот, меч и броня комбинируются без перерисовки персонажа. Выберите снаряжение и проверьте все шесть положений.</p>
+<div class="controls">
+<label>Тип анимации<select id="kind">
+<option value="slash">Рубящий удар</option><option value="overhead">Сверху вниз</option>
+<option value="thrust">Колющий рывок</option><option value="hurt">Получение урона</option>
+</select></label>
+<label>Меч<select id="weapon"></select></label>
+<label>Броня<select id="armor"></select></label>
+<button id="play">▶ Проиграть</button><button id="stop">■ Стоп</button>
+</div>
+<h2>Выбранный кадр <span id="current-frame">1/6</span></h2>
+<div class="stage"><svg id="big" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 488 305" aria-label="Котёнок со сменными SVG-слоями"></svg></div>
+<h2>Шесть кадров</h2><div id="grid" class="grid"></div>
+<p class="notice">Это покадровый технический стенд наложения SVG на действующую игровую модель, а не замена одобренных референсных изображений. Исходные файлы кота и параметры атак не меняются.</p>
+<p><a href="./index.html">← Вернуться в игру</a></p>
+</main><script type="module">
+import {WEAPONS,ARMORS} from './equipment-catalog.mjs';
+import {REFERENCE_ATTACKS,armorAttackTransform,armorHurtTransform,hurtMotionTransform,hurtWeaponTransform} from './equipment-rig.mjs';
+const $=id=>document.getElementById(id),NS='http://www.w3.org/2000/svg';
+let current=0,timer=null;
+function node(name,attrs={}){const x=document.createElementNS(NS,name);for(const [k,v] of Object.entries(attrs))x.setAttribute(k,v);return x;}
+for(const [id,arr] of [['weapon',WEAPONS],['armor',ARMORS]]){
+ for(const item of arr){const option=document.createElement('option');option.value=item.id;option.textContent=item.name;$(id).append(option);}
+}
+$('armor').value='web';
+function build(frame){
+ const svg=node('svg',{viewBox:'0 0 488 305'});
+ const motion=node('g');
+ const base=node('image',{href:'art/hero/bare-kitten.svg',x:'0',y:'0',width:'488',height:'305'});
+ const armorSlot=node('g'),armor=node('image',{x:'190',y:'212',width:'92',height:'63'});
+ const weaponSlot=node('g'),weapon=node('image',{x:'-50',y:'-211',width:'100',height:'240'});
+ const weaponItem=WEAPONS.find(w=>w.id===$('weapon').value)||WEAPONS[0];
+ const armorItem=ARMORS.find(a=>a.id===$('armor').value)||ARMORS[0];
+ weapon.setAttribute('href',weaponItem.svg);
+ armor.setAttribute('href',armorItem.svg||'');
+ armor.style.display=armorItem.svg?'':'none';
+ const index=REFERENCE_ATTACKS.findIndex(a=>a.id===$('kind').value);
+ if(index<0){
+  motion.setAttribute('transform',hurtMotionTransform(frame));
+  armorSlot.setAttribute('transform',armorHurtTransform(frame));
+  weaponSlot.setAttribute('transform',hurtWeaponTransform(frame));
+ }else{
+  const [x,y,a,dx,dy,lean]=REFERENCE_ATTACKS[index].frames[frame];
+  motion.setAttribute('transform',`translate(${dx} ${dy}) rotate(${lean} 238 252)`);
+  armorSlot.setAttribute('transform',armorAttackTransform(index,frame));
+  weaponSlot.setAttribute('transform',`translate(${x} ${y}) rotate(${a})`);
+ }
+ armorSlot.append(armor);weaponSlot.append(weapon);motion.append(base,armorSlot,weaponSlot);svg.append(motion);
+ return svg;
+}
+function render(){
+ $('current-frame').textContent=(current+1)+'/6';
+ const big=build(current);
+ $('big').replaceChildren(...big.childNodes);
+ const grid=$('grid');grid.replaceChildren();
+ for(let f=0;f<6;f++){
+  const b=document.createElement('button');b.type='button';b.className='sprite';b.dataset.selected=String(f===current);
+  const num=document.createElement('span');num.className='num';num.textContent='Кадр '+(f+1);
+  b.append(num,build(f));b.addEventListener('click',()=>{stop();current=f;render();});grid.append(b);
+ }
+}
+function stop(){if(timer!==null){clearInterval(timer);timer=null;}$('play').textContent='▶ Проиграть';}
+$('play').addEventListener('click',()=>{
+ if(timer!==null){stop();return;}
+ $('play').textContent='⏸ Пауза';
+ timer=setInterval(()=>{current=(current+1)%6;render();},150);
+});
+$('stop').addEventListener('click',stop);
+for(const id of ['kind','weapon','armor'])$(id).addEventListener('change',()=>{stop();current=0;render();});
+render();
+</script></body></html>
