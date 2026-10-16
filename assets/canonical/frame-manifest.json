@@ -1,0 +1,119 @@
+{
+  "title": "Храбролап canon sprites",
+  "version": "0.9.5",
+  "extraction_method": "Exact source frames cropped and backdrop alpha-masked, no cat pose redraw",
+  "sources": {
+    "approved_attack_source.png": {
+      "sha256": "ff59a19edd41e99f9c68875b8e59e111ebe6c4fb344552ff35c360bef40e1499",
+      "size": [
+        1672,
+        941
+      ]
+    },
+    "approved_hurt_source.png": {
+      "sha256": "64d346567609dddba088cd42c7dea4f0b6bf0f6b35ffc0b45bff637d04433f51",
+      "size": [
+        1672,
+        941
+      ]
+    }
+  },
+  "frames": {
+    "attack_01.png": {
+      "sha256": "3fd9fd0d57d60d342bc026ad1d4ca434846c9ccdd3e09e2c67e3aa28ed362959",
+      "size": [
+        279,
+        370
+      ],
+      "mode": "RGBA"
+    },
+    "attack_02.png": {
+      "sha256": "cbaf083efb17f4b8bf261f5960c2cb697ce259f2437c52f9d06f9b1cd3729e91",
+      "size": [
+        278,
+        370
+      ],
+      "mode": "RGBA"
+    },
+    "attack_03.png": {
+      "sha256": "c5ab1c4cb8b4eb8f78559a44c5f578efb43f20dccb4a728933acb2cda4152b29",
+      "size": [
+        279,
+        370
+      ],
+      "mode": "RGBA"
+    },
+    "attack_04.png": {
+      "sha256": "d2d0c4e281aa1eec4b9f360fe4631d898641c67d0ca8eb8e3af09b407020c3d6",
+      "size": [
+        279,
+        370
+      ],
+      "mode": "RGBA"
+    },
+    "attack_05.png": {
+      "sha256": "4af7bf3f7adf1820733dbdf2cf7a82a79f5162d4d579bffc36ae8c95cb54b9a9",
+      "size": [
+        278,
+        370
+      ],
+      "mode": "RGBA"
+    },
+    "attack_06.png": {
+      "sha256": "c67774983db6a8cc209d6b7af671485f4e99da8f1cb152176f682c5e7b190557",
+      "size": [
+        279,
+        370
+      ],
+      "mode": "RGBA"
+    },
+    "hurt_01.png": {
+      "sha256": "24dec1060f21598c2dbafdccf2cb8159dc5b52bb02afcd2479dc236cd87fd998",
+      "size": [
+        279,
+        370
+      ],
+      "mode": "RGBA"
+    },
+    "hurt_02.png": {
+      "sha256": "e9ec64e8ed2a2faf659af2eeb4a2e6c26289cadd3d3398a3ddc276ac9875fc30",
+      "size": [
+        278,
+        370
+      ],
+      "mode": "RGBA"
+    },
+    "hurt_03.png": {
+      "sha256": "4b8c4a1b4146373e67782c2dace0b0e408cf282d8bd7fc0e00e3d3b6f49235bd",
+      "size": [
+        279,
+        370
+      ],
+      "mode": "RGBA"
+    },
+    "hurt_04.png": {
+      "sha256": "ed6fa754a76a840feb34f324ef7a8f399ad325afa6498564ea3c9864d69c51b4",
+      "size": [
+        279,
+        370
+      ],
+      "mode": "RGBA"
+    },
+    "hurt_05.png": {
+      "sha256": "7b4afc1a9c0e2f2029a08efcdbbff3d1ff87c88ff071d79049eb9f3f0cf0d710",
+      "size": [
+        278,
+        370
+      ],
+      "mode": "RGBA"
+    },
+    "hurt_06.png": {
+      "sha256": "59b81457f54bc84543db822860746ed0d28f85148dc9913c41ca63cb20011d58",
+      "size": [
+        279,
+        370
+      ],
+      "mode": "RGBA"
+    }
+  }
+}
