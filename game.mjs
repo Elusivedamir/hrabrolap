@@ -1,4 +1,4 @@
-import {WEAPONS,ARMORS,freshProgress,validateProgress,restoreFight,swordCost,armorCost,fishCost,homeCost,bucketCost,bucketCapacity,heroDamage,maxHealth,startFight,stepFight,upgrade,buyEquipment,equipEquipment,offlineReward,bucketVolume,bucketGold,planFishing,stepFishing,stepMerchant,sellAll} from './game-core.mjs';
+import {WEAPONS,ARMORS,MATERIALS,freshProgress,validateProgress,restoreFight,swordCost,armorCost,fishCost,homeCost,bucketCost,bucketCapacity,heroDamage,maxHealth,startFight,stepFight,upgrade,buyEquipment,equipEquipment,offlineReward,bucketVolume,bucketGold,planFishing,stepFishing,stepMerchant,sellAll} from './game-core.mjs';
 const $=id=>document.getElementById(id), SAVE='hrabrolap-v0.2-save',OLD='hrabrolap-v0.1-save',fmt=n=>Math.floor(n).toLocaleString('ru-RU');
 let p,b,modalType='',last=performance.now(),lastSave=0,lastAutosave=0,msgTimeout=0,toastTimeout=0,lastFrameRest=false;
 const heartsRoot=$('hero-hearts');
@@ -8,7 +8,7 @@ try {const raw=JSON.parse(localStorage.getItem(SAVE)||'null')||JSON.parse(localS
 }catch(e){p=freshProgress();b=startFight(p);console.warn('save recovery',e);}
 if(!b)b=startFight(p);
 if(!p.catchPlan.length && bucketVolume(p)<bucketCapacity(p))planFishing(p);
-function save(){try{p.lastSeen=Date.now();localStorage.setItem(SAVE,JSON.stringify({...p,battleState:{level:b.level,hp:b.hp,enemyHp:b.enemyHp,phase:b.phase,heroTimer:b.heroTimer,enemyTimer:b.enemyTimer,rest:b.rest}}));}catch(e){console.warn(e)}}
+function save(){try{p.lastSeen=Date.now();localStorage.setItem(SAVE,JSON.stringify({...p,battleState:{level:b.level,hp:b.hp,enemyHp:b.enemyHp,phase:b.phase,heroTimer:b.heroTimer,enemyTimer:b.enemyTimer,rest:b.rest,monsterType:b.monster.type}}));}catch(e){console.warn(e)}}
 function notify(t){const el=$('toast');el.textContent=t;el.classList.add('show');clearTimeout(toastTimeout);toastTimeout=setTimeout(()=>el.classList.remove('show'),2300)}
 function say(t,time=2200){$('battle-message').textContent=t;clearTimeout(msgTimeout);msgTimeout=setTimeout(()=>{$('battle-message').textContent=b.phase==='rest'?'Котёнок отдыхает в домике':'Котёнок сражается сам · покупай улучшения'},time)}
 function pulse(el,name,time=600){el.classList.remove(name);void el.offsetWidth;el.classList.add(name);setTimeout(()=>el.classList.remove(name),time)}
@@ -80,15 +80,26 @@ function openModal(title,mode='info',text=''){modalType=mode;$('modal-title').te
   if(mode==='trade'){const btn=action(`Продать всё · ${bucketGold(p)} 🪙`,()=>{const sale=sellAll(p);if(sale.ok){notify('Продано '+sale.count+' рыб · +'+sale.gold+' монет!');save();closeModal();}else notify('Ведро пустое');});btn.disabled=p.fishBucket.length===0;}
   else {para('Продать улов можно только серому коту-торговцу. Он приезжает каждые 5 минут активной игры и ждёт 15 секунд.');if(!p.bucketLevel)action('Улучшить ведро до 24 мест · '+bucketCost()+' 🪙',()=>{const r=upgrade(p,'bucket');if(!r.ok){notify('Не хватает монет');return;}p.catchPlan=[];planFishing(p);save();openModal('Ведро рыцаря','bucket');notify('Теперь вмещается 24!')});}
  }else if(mode==='shop'||mode==='inventory'){
-  para(mode==='shop'?'У торговца снаряжением покупаем новые SVG-предметы. Урон меча зависит от выбранного оружия.':'Выбирай любое приобретённое снаряжение. Меняется на котёнке сразу во всех трёх атаках.');
+  para(mode==='shop'?'Покупай SVG-экипировку за монеты и добычу с монстров. Рецепты проверяются перед покупкой.':'Выбирай приобретённые вещи. Меч и броня переключаются без изменения анимаций котёнка.');
+   const materials=document.createElement('div');materials.className='materials-summary';
+   const label=document.createElement('b');label.textContent='🎒 Материалы в инвентаре';materials.append(label);
+   const chips=document.createElement('div');chips.className='material-chips';
+   for(const material of MATERIALS){const chip=document.createElement('span');chip.textContent=`${material.icon} ${material.name}: ${p.materials[material.id]||0}`;chips.append(chip);}
+   materials.append(chips);content.append(materials);
   const line=(caption,items,category)=>{
     const title=document.createElement('div');title.className='section-title';title.textContent=caption;content.append(title);
     for(const item of items){const own=category==='weapon'?p.ownedWeapons:p.ownedArmors;
+       if(mode==='shop'&&!item.price)continue;
       if(mode==='inventory'&&!own.includes(item.id))continue;
       const row=document.createElement('div');row.className='shop-item';const im=document.createElement('img');if(item.svg)im.src=item.svg;else {im.src='art/hero/bare-kitten.svg';im.alt='Без брони';}
-      const main=document.createElement('main'),label=document.createElement('b');label.textContent=item.name;const stats=document.createElement('small');stats.textContent=category==='weapon'?'Урон +'+item.damage:'Здоровье +'+item.health;main.append(label,stats);
-      const button=document.createElement('button');const equipped=(category==='weapon'?p.weapon:p.equippedArmor)===item.id;const has=own.includes(item.id);button.textContent=equipped?'Надето':has?'Надеть':'🪙 '+fmt(item.price);button.disabled=equipped;
-      button.addEventListener('click',()=>{if(!has){const r=buyEquipment(p,category,item.id);if(!r.ok){notify('Не хватает монет');return;}notify('Куплено: '+item.name);}else{equipEquipment(p,category,item.id,b);notify('Надето: '+item.name);}save();openModal(mode==='shop'?'Магазин':'Инвентарь',mode);});
+      const main=document.createElement('main'),label=document.createElement('b');label.textContent=item.name;
+       const stats=document.createElement('small');stats.textContent=category==='weapon'?'Урон +'+item.damage:'Здоровье +'+item.health;
+       const recipe=document.createElement('small');recipe.className='item-recipe';
+       const names=Object.entries(item.materials||{}).map(([id,count])=>{const type=MATERIALS.find(m=>m.id===id);return `${type?.icon||'•'} ${type?.name||id} ${p.materials[id]||0}/${count}`;});
+       recipe.textContent='🪙 '+fmt(item.price)+(names.length?' · '+names.join(' · '):'');
+       main.append(label,stats,recipe);
+      const button=document.createElement('button');const equipped=(category==='weapon'?p.weapon:p.equippedArmor)===item.id;const has=own.includes(item.id);button.textContent=equipped?'Надето':has?'Надеть':'Купить';button.disabled=equipped;
+      button.addEventListener('click',()=>{if(!has){const r=buyEquipment(p,category,item.id);if(!r.ok){if(r.reason==='material'){const mat=MATERIALS.find(x=>x.id===r.material);notify('Не хватает: '+(mat?.name||r.material)+' '+r.available+'/'+r.need);}else notify('Не хватает монет');return;}notify('Куплено: '+item.name);}else{equipEquipment(p,category,item.id,b);notify('Надето: '+item.name);}save();openModal(mode==='shop'?'Магазин':'Инвентарь',mode);});
       row.append(im,main,button);content.append(row);
     }
   };
@@ -110,7 +121,9 @@ function closeModal(){const mode=modalType;modalType='';if($('modal').open)$('mo
 function battleEvents(events){for(const ev of events){
  if(ev.kind==='hero-hit'){contactAttack();pulse($('enemy-holder'),'hurt',350);}
  if(ev.kind==='enemy-hit'){pulse($('hero-art'),'battle-hurt',260);enemyAttack(ev.move);}
- if(ev.kind==='win'){coinFx(ev.gold);say(`Победа! +${ev.gold} монет`);pulse($('enemy-holder'),'dead',660);save();if(ev.level===100&&ev.firstClear)setTimeout(()=>openModal('100 волн пройдено!','info','Храбролап прошёл все сто волн! Можно продолжать сражаться и собирать монеты.'),600);}
+ if(ev.kind==='win'){coinFx(ev.gold);
+   const lootName=MATERIALS.find(x=>x.id===ev.loot?.id);
+   say(`Победа! +${ev.gold} монет`+(lootName?` · +1 ${lootName.name}`:''));pulse($('enemy-holder'),'dead',660);save();if(ev.level===100&&ev.firstClear)setTimeout(()=>openModal('100 волн пройдено!','info','Храбролап прошёл все сто волн! Можно продолжать сражаться и собирать монеты.'),600);}
  if(ev.kind==='defeat'){syncHeroPose();say('Котёнок возвращается домой отдохнуть');save();}
  if(ev.kind==='spawn'&&ev.afterRest){cancelAttackPose();say('Мы справимся!');pulse($('surface'),'wake-up',1800);}
 }}
