@@ -15,3 +15,8 @@ Further browser checks and skeleton/golem acceptance remain in progress. No merg
 - Both use the same 320×320 canvas as archived frames, with corrected idle scale. Crown is embedded on the moving head for boss and idle poses, so it cannot float at chest height or duplicate.
 - All ten species tested in real Chromium for every attack/hurt phase 1–6, five HP hearts and ten boss waves. Screenshots inspected, including skeleton/golem bosses. The two new SVG drawings remain subject to user visual acceptance.
 - Baseline browser run: all 22 scenarios passed assertions. Teardown exposed single-process Chromium closing all contexts when the first context closes; fixed by closing the browser once. Final suite rerun underway.
+
+## Fishing deposit and extra gameplay checks
+- Source pose 9 placed the free fish below the bucket rim. Added a sibling deposit pose: only the loose fish transform changes from (58,340) to (84,257), with every knight/rod/line/hand byte untouched. Other nine poses and all ten archived source SVGs remain exact.
+- Real browser geometry checks pass at 320×640, 390×844 and 430×932: last visible fish center lies in the bucket opening. Bucket occludes the submerged part; counter still increments after pose 10.
+- Additional browser checks pass: quest reward survives reload and cannot be claimed twice; level 100 gives six auto hits/s and rapid manual input is capped at three hits/s; max speed persists after reload.

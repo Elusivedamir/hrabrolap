@@ -1,3 +1,4 @@
+import {FISHING_FRAMES} from './fishing-frames.mjs';
 import {QUESTS,questProgress,claimQuest} from './quests.mjs';
 import {monsterPose} from './monster-rig.mjs';
 import {bucketArt,sleepFrameIndex,SLEEP_FRAMES} from './bucket-rest.mjs';
@@ -263,7 +264,7 @@ function playFishCatch(){
  for(let i=0;i<10;i++)fishFrameIds.push(setTimeout(()=>{
    if(token!==fishAnimationToken||document.hidden)return;
    const n=String(i+1).padStart(2,'0');
-   img.setAttribute('src',`animations/fishing/${n}.svg`);
+   img.setAttribute('src',FISHING_FRAMES[i]);
    img.dataset.frame=n;
  },i*135));
  fishFrameIds.push(setTimeout(()=>{

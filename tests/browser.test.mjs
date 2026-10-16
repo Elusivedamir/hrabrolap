@@ -5,6 +5,7 @@ import assert from 'node:assert/strict';
 import fs from 'node:fs/promises';
 import {chromium} from 'playwright';
 import * as c from '../game-core.mjs';
+import {FISHING_FRAMES} from '../fishing-frames.mjs';
 const base=process.env.HRABROLAP_BASE_URL||'http://127.0.0.1:8080/';
 const key='hrabrolap-v0.2-save';let browser;
 const errors=[];const contexts=[];
@@ -269,7 +270,7 @@ test('original 10-frame fisher keeps fish away from house and ends at bucket',as
  await page.clock.runFor(1550);
  const frames=await page.evaluate(()=>window.fisherFrames);
  for(let i=1;i<=10;i++)
-  assert.ok(frames.some(src=>src===`animations/fishing/${String(i).padStart(2,'0')}.svg`),'original fishing pose '+i+' missing');
+  assert.ok(frames.some(src=>src===FISHING_FRAMES[i-1]),'original fishing pose '+i+' missing');
  assert.ok(await page.locator('#fishing-animation').evaluate(img=>img.complete&&img.naturalWidth>0));
  assert.equal(await page.locator('.fishing-rig').evaluate(el=>getComputedStyle(el).display),'none');
  const bucket=await page.locator('#bucket').boundingBox();
@@ -358,3 +359,54 @@ test('рыба появляется на счётчике только посл�
  await shot(page,'fish-delivered-to-bucket');
 });
 
+test('рыба в девятой позе попадает в край физического ведра на трёх мобильных экранах',async()=>{
+ for(const viewport of [{width:320,height:640},{width:390,height:844},{width:430,height:932}]){
+  const page=await pageFor(c.freshProgress(),undefined,{manual:true,viewport});
+  const geometry=await page.evaluate(async()=>{
+   const scene=document.querySelector('#surface').getBoundingClientRect();
+   const img=document.querySelector('#bucket-graphic'),box=img.getBoundingClientRect();
+   const fit=Math.min(box.width/114,box.height/116);
+   const rim={x:box.x+box.width/2,y:box.y+(box.height-116*fit)/2+47*fit,rx:42*fit,ry:9*fit};
+   const svg=new DOMParser().parseFromString(await (await fetch('animations/fishing-deposit/09.svg')).text(),'image/svg+xml');
+   const transform=svg.querySelector('[data-part="catch"]').getAttribute('transform');
+   const [x,y]=transform.match(/translate\(([^)]+)\)/)[1].split(' ').map(Number);
+   const cx=x+(45-26)*Math.SQRT1_2*.66,cy=y+(45+26)*Math.SQRT1_2*.66;
+   return {rim,fish:{x:scene.x+cx/941*scene.width,y:scene.y+cy/425*(scene.height-5)}};
+  });
+  assert.ok(Math.abs(geometry.fish.x-geometry.rim.x)<geometry.rim.rx*.6,JSON.stringify(geometry));
+  assert.ok(Math.abs(geometry.fish.y-geometry.rim.y)<geometry.rim.ry+4,JSON.stringify(geometry));
+ }
+});
+test('награда задания сохраняется после reload и повторно не выдаётся',async()=>{
+ const p=c.freshProgress();p.killedSlimes=5;
+ const page=await pageFor(p,undefined,{manual:true});
+ await page.locator('#quests').click();
+ const row=page.locator('.quest-row').filter({hasText:'Победи 5 слизней'});
+ await row.getByRole('button').click();
+ assert.equal((await saved(page)).gold,60);
+ assert.deepEqual((await saved(page)).questClaimed,[0]);
+ assert.equal(await row.getByRole('button').isEnabled(),false);
+ await shot(page,'quests-claimed-once');await page.reload();
+ await page.locator('#quests').click();
+ assert.equal(await page.locator('.quest-row').filter({hasText:'Победи 5 слизней'}).getByRole('button').isEnabled(),false);
+ assert.equal((await saved(page)).gold,60);
+});
+test('уровень 100 даёт ровно 6 автоударов/с, ручной бой остаётся 3/с',async()=>{
+ for(const auto of [true,false]){
+  const p=c.freshProgress();Object.assign(p,{room:100,best:99,armor:100,autoUnlocked:true,autoEnabled:auto,autoLevel:100});
+  const b=c.startFight(p),page=await pageFor(p,b,{manual:true});
+  // Prime the first RAF. 1,000 ms from navigation ends at the previous 16 ms frame.
+  await page.clock.runFor(112);await page.evaluate(()=>window.dispatchEvent(new Event('pagehide')));
+  const before=(await saved(page)).battleState.enemyHp;
+  for(let i=0;i<20;i++){
+   await page.clock.runFor(50);
+   if(!auto)await page.locator('#enemy-holder').evaluate(el=>{for(let j=0;j<10;j++)el.click();});
+  }
+  await page.evaluate(()=>window.dispatchEvent(new Event('pagehide')));
+  const final=await saved(page);
+  assert.equal(before-final.battleState.enemyHp,(auto?6:3)*c.heroDamage(p));
+  assert.equal(final.autoLevel,100);assert.equal(await page.locator('#buy-attack-speed').isEnabled(),false);
+  await page.reload();assert.match(await page.locator('#attack-speed-lvl').textContent(),/100\/100/);
+  await shot(page,auto?'auto-level-100-six-hits':'manual-cap-three-hits');
+ }
+});

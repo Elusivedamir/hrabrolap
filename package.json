@@ -4,7 +4,7 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "test": "node --check game.mjs && node --check game-core.mjs && node --test tests/core.test.mjs tests/regression.test.mjs tests/loot.test.mjs tests/equipment-rig.test.mjs tests/canonical.test.mjs tests/bucket-rest.test.mjs tests/v097-combat.test.mjs tests/auto-attack-rate.test.mjs tests/locked-assets.test.mjs tests/approved-monsters.test.mjs tests/archived-monster-frames.test.mjs tests/archived-fishing.test.mjs tests/articulated-monsters.test.mjs tests/balance.test.mjs && python3 tests/asset-check.py && python3 tests/art_test.py && python3 tests/preserve-assets.py && python3 tests/attic-background.test.py",
+    "test": "node --check game.mjs && node --check game-core.mjs && node --test tests/core.test.mjs tests/regression.test.mjs tests/loot.test.mjs tests/equipment-rig.test.mjs tests/canonical.test.mjs tests/bucket-rest.test.mjs tests/v097-combat.test.mjs tests/auto-attack-rate.test.mjs tests/locked-assets.test.mjs tests/approved-monsters.test.mjs tests/archived-monster-frames.test.mjs tests/archived-fishing.test.mjs tests/articulated-monsters.test.mjs tests/fishing-deposit.test.mjs tests/balance.test.mjs && python3 tests/asset-check.py && python3 tests/art_test.py && python3 tests/preserve-assets.py && python3 tests/attic-background.test.py",
     "qa:balance": "node tests/simulate-balance.mjs",
     "qa:browser": "node --test tests/browser.test.mjs",
     "qa": "npm test && npm run qa:balance && npm run qa:browser"
