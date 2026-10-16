@@ -28,11 +28,13 @@ Approved main layout remains **100 waves**, single surface with fishing knight t
 - Manual combat message must never claim the kitten "fights on its own". Android touch highlights must not show translucent blue boxes over enemies.
 - Locked cat attack/hurt source PNGs, ten SVG swords, unchanged game scene composition. The house cutaway must show ONE sleeping kitten in the attic.
 
-## Visual defects still requiring approval (do not call complete)
-1. In `art/animated/port_rest_clean.webp`, the old helmeted sleeping kitten is **baked into the attic background**. A new sleeping character over it produces two cats. Must accurately remove only the embedded kitten without altering the existing rooms.
-2. Skeleton/golem remain dependent on interim/legacy artwork and require full visual acceptance at 6 attack + 6 hurt frames each (and fitted boss crown).
-3. Inspect pixel-accurate landing of the knight's catch into the grounded bucket and verify sprites/controls on the user's own Android, not only Playwright.
-4. Investigate residual large blue translucent rectangles if disabling native Android tap highlight does not fully fix the recorded issue.
+## Implementation verified; visual acceptance still required
+1. The live cutaway uses `port_rest_empty_attic.png`: embedded old kitten and Z erased locally; every pixel outside the erasure masks remains unchanged. Original scenes and sleep frames retained. Review the new attic restoration.
+2. Skeleton/golem now use new articulated SVG models and 6 attack + 6 hurt poses per normal/boss variant; crowns follow the moving heads. Review these two models before release.
+3. Fishing frame 9 has a separate deposit variant with only its loose fish transform corrected to the bucket rim. Ten original knight SVGs retained; geometry tested at three mobile sizes.
+4. All 25 mobile Chromium scenarios and 55 core/regression tests passed. Physical Android checks remain NOT RUN. Native touch highlight is disabled; no large blue rectangles appeared in tested Chromium captures.
+
+See `QA-WORK-v097.md` and `../qa/review/README.md` for evidence. Technical PASS does not grant artistic approval.
 
 ### Release gate
 Working commits always go to `fix/v0.9.7-approved-mobs-and-controls`. Keep `main` tagged v0.9.6 intact; do not merge/label v0.9.7 finished before green browser QA *and* explicit visual approval of the unresolved issues.

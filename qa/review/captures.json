@@ -1,0 +1,67 @@
+{
+  "browser": "153.0.8010.0",
+  "method": "Playwright mobile touch emulation; seeded gameplay fixtures; unaltered page screenshots",
+  "captures": [
+    {
+      "name": "attic-rest",
+      "file": "qa/review/attic-rest.png",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "monster": "slime",
+      "monsterPhase": null,
+      "monsterFrame": null,
+      "fishPose": "animations/fishing/01.svg"
+    },
+    {
+      "name": "skeleton-boss-attack",
+      "file": "qa/review/skeleton-boss-attack.png",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "monster": "skeleton",
+      "monsterPhase": "attack",
+      "monsterFrame": "4",
+      "fishPose": "animations/fishing/01.svg"
+    },
+    {
+      "name": "golem-boss-attack",
+      "file": "qa/review/golem-boss-attack.png",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "monster": "golem",
+      "monsterPhase": "attack",
+      "monsterFrame": "4",
+      "fishPose": "animations/fishing/01.svg"
+    },
+    {
+      "name": "fish-at-bucket",
+      "file": "qa/review/fish-at-bucket.png",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "monster": "slime",
+      "monsterPhase": null,
+      "monsterFrame": null,
+      "fishPose": "animations/fishing-deposit/09.svg"
+    },
+    {
+      "name": "auto-speed-100",
+      "file": "qa/review/auto-speed-100.png",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "monster": "beetle",
+      "monsterPhase": "hurt",
+      "monsterFrame": "3",
+      "fishPose": "animations/fishing/01.svg"
+    }
+  ],
+  "errors": []
+}

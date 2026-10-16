@@ -1,32 +1,54 @@
-# QA in Work — PR #5, 16 October 2026
+# Храбролап v0.9.7 — результат проверки PR №5
 
-## Attic correction
-- The live house cutaway now selects a separate `port_rest_empty_attic.png`.
-- Removed only the old helmeted kitten and its painted Z letters. Original scene, 6 sleep PNG frames, attack/hurt PNGs and ten swords retained byte-exact.
-- Used imagegen precise-object edit, then composited only two local masks into the original scene with ImageMagick. Prompt: remove only the helmeted attic kitten and three Z symbols; restore empty pillow and wooden wall; preserve all rooms, blanket, furniture and waterfront.
-- Pixel check confirms every pixel outside the two masks (+1px antialiased edge) is unchanged.
-- Real Chromium 153, Playwright 1.62.1, 390×844 touch viewport: rest shows a single animated kitten in the existing attic. This is desktop mobile emulation, not a physical Android acceptance.
-- `npm test`: 52 tests and art/pixel checks pass. `qa:balance`: 12 scenarios executed; balanced sword+armor reaches wave 100; exhaustive equipment purchasing stalls at 89 within 180 simulated minutes. No balance changes made.
+Рабочая ветка: `fix/v0.9.7-approved-mobs-and-controls`. Проверенный игровой код: `8b4dd34939869fccb61fe261f7150be0c55a22eb`. PR остаётся черновиком. `main` и релизные теги не менялись.
 
-Further browser checks and skeleton/golem acceptance remain in progress. No merge or release approval.
+## Исправления
 
-## Skeleton and golem
-- Added editable SVG models and 48 articulated frames (2 species × normal/boss × attack/hurt × 6). Independent head, jaw/stone head, shoulders, elbows and knees; golem has impact chips.
-- Both use the same 320×320 canvas as archived frames, with corrected idle scale. Crown is embedded on the moving head for boss and idle poses, so it cannot float at chest height or duplicate.
-- All ten species tested in real Chromium for every attack/hurt phase 1–6, five HP hearts and ten boss waves. Screenshots inspected, including skeleton/golem bosses. The two new SVG drawings remain subject to user visual acceptance.
-- Baseline browser run: all 22 scenarios passed assertions. Teardown exposed single-process Chromium closing all contexts when the first context closes; fixed by closing the browser once. Final suite rerun underway.
+| Область | Результат |
+| --- | --- |
+| Мансарда | Удалены только старый котёнок в шлеме и нарисованные Z. Игра подключает отдельный фон `port_rest_empty_attic.png`. Интерьер, одеяло и все пиксели вне двух локальных масок сохранены; исходник не перезаписан. Шесть утверждённых PNG сна неизменны. |
+| Скелет и голем | Добавлены два редактируемых SVG-рига и 48 кадров: 2 модели × обычный/босс × атака/урон × 6. Двигаются отдельные суставы и голова; у голема есть осколки при попадании. Масштаб покоя согласован с анимацией. Корона закреплена на голове и в покое, и в движении. |
+| Рыбалка | Сохранены все десять архивных кадров рыцаря. В отдельной копии девятого кадра изменена только позиция свободной рыбы: (58,340) → (84,257). Рыцарь, рука, удочка и леска побайтно совпадают. Рыба попадает в отверстие физического ведра; счётчик меняется после завершения укладки. |
+| Ручной бой | Устранён остаточный запас таймера после простоя/загрузки: каждый успешный клик запускает полный новый интервал ⅓ секунды. |
+| Автобой | Проверены покупка за 1 монету, бесплатное переключение и отдельная пятая нижняя карточка скорости. 100 уровней, ступени 1/2/3/4/5/6 ударов/с, независимое сохранение уровня. |
+| Симулятор | Больше не включает неоплаченный автобой по умолчанию. Явно моделирует ручные нажатия либо покупает автобой из заработанных монет. Игровые цены, HP и урон не менялись. |
+| Сборка | В ZIP включаются все динамически выбираемые анимации и модуль рыбалки. Исправлено старое имя файла при загрузке артефакта CI. Добавлена установка Pillow для проверки пикселей. |
 
-## Fishing deposit and extra gameplay checks
-- Source pose 9 placed the free fish below the bucket rim. Added a sibling deposit pose: only the loose fish transform changes from (58,340) to (84,257), with every knight/rod/line/hand byte untouched. Other nine poses and all ten archived source SVGs remain exact.
-- Real browser geometry checks pass at 320×640, 390×844 and 430×932: last visible fish center lies in the bucket opening. Bucket occludes the submerged part; counter still increments after pose 10.
-- Additional browser checks pass: quest reward survives reload and cannot be claimed twice; level 100 gives six auto hits/s and rapid manual input is capped at three hits/s; max speed persists after reload.
+Фон исправлен через imagegen (точечное удаление котёнка и Z, восстановление подушки и деревянной стены), затем только две области вставлены ImageMagick в оригинал. Проверка допускает один пиксель сглаживания по границе масок. Полный фон не заменён генерацией.
 
-## Strict manual cooldown and simulation correction
-- Found leftover timer credit after idle/restored games could shorten the next manual interval. A successful manual hit now starts a fresh 1/3-second cooldown. Added a regression for a restored timer and a second click at 0.25 s.
-- The old balance runner called `stepFight` with its default auto=true even for an unpurchased auto mode. Runner now explicitly simulates manual input or pays the 1-gold auto unlock from earned gold. Gameplay prices/damage/HP are unchanged.
-- Updated 12 real-policy simulations: balanced manual (one purchase decision/s) clears 100 waves in 7.98 simulated minutes; level-0 paid auto (decisions/10s) in 20.04; equipment+fishing manual in 10.02. Every-five-minute reload auto scenario matches uninterrupted play exactly. Single-stat/no-upgrade policies stall as expected within the 180-minute limit.
-- All 55 core/regression tests plus art and pixel-fidelity gates pass. Browser rate checks use a primed RAF to measure a complete one-second interval rather than the first navigation frame.
+## Фактические проверки
 
-## Packaging/CI correction
-- Old workflow ZIP omitted `animations/` and uploaded an obsolete v0.9.6 filename. New reproducible `tools/package_game.py` includes existing HTML/MJS/CSS, all art/assets/animations and the QA notes; checks CRC and critical runtime paths.
-- CI now installs Pillow for the pixel-fidelity gate and uses the npm lockfile. Builds remain visual-review candidates; main is untouched.
+| Проверка | Результат |
+| --- | --- |
+| `npm test` | **55/55 PASS**, затем проверки SVG, архивных кадров, исходных ассетов и неизменности фона вне масок |
+| Полный мобильный Chromium в GitHub Actions | **25/25 PASS**, 0 пропусков, JS-ошибок не обнаружено |
+| Локальный Chromium 153 / Playwright 1.62.1 | Игра реально запущена на 390×844 с touch; проверены и просмотрены скриншоты |
+| Монстры | Все 10 типов: последовательности 1–6 атаки и урона, 5 сердечек, тёмные пустые сердца, 10 волн боссов |
+| Магазин / инвентарь / мечи | Покупки, экипировка, все 10 SVG-мечей, броня, сохранение и реальный reload |
+| Задания | Награда сохраняется после reload и не выдаётся повторно |
+| Скорость боя | Реальный браузер: уровень 100 — 6 автоударов/с; ручной ввод ограничен 3/с; сохранение уровня после reload |
+| Рыбалка | 10 поз; отложенное появление рыбы на счётчике; попадание в край ведра на 320×640, 390×844 и 430×932 |
+| Дом | Один новый котёнок на втором этаже, исчезновение героя из подземелья, отдых и возрождение |
+| Распакованный ZIP | **3/3 PASS** в браузере: запуск, отдых в доме, геометрия укладки рыбы; CRC и обязательные пути анимаций проверены |
+
+Полный зелёный прогон: [GitHub Actions №38929631504](https://github.com/Elusivedamir/hrabrolap/actions/runs/38929631504). Все этапы, включая браузер и упаковку, успешны; публикация тега пропущена. Длительный локальный повтор полного набора остановлен после подтверждения полного зелёного CI; он не учитывается как завершённый локальный прогон.
+
+## Сто волн и баланс
+
+Ускоренная модель, шаг 0.1 игровой секунды, максимум 180 игровых минут. Покупки оплачиваются заработанными монетами. В ручных сценариях попытка клика идёт каждые 100 мс и подчиняется кулдауну; это не непрерывное идеальное нажатие ровно 3/с. Автоматические сценарии оплачивают разблокировку за 1 монету, скорость — базовый уровень 0, 1 удар/с.
+
+- Сбалансированные улучшения, решение каждую секунду, ручной бой: 100 волн за **7.98** моделируемой минуты.
+- Сбалансированные улучшения раз в 10 секунд, оплаченный автобой: **20.04** минуты.
+- Экипировка и рыбалка, ручной бой: **10.02–10.43** минуты на пяти вариантах случайности.
+- Перезагрузка каждые 5 минут совпадает с непрерывным автоматическим прохождением по времени, наградам и прогрессу.
+- Контрольные стратегии: только меч — 89 волн, только броня — 59, без улучшений — 19 за лимит 180 минут.
+
+Итого 12 сценариев. Полные результаты: `qa/balance-results.json`, `qa/balance-waves.csv`. Времена относятся к модели, а не к прохождению человеком.
+
+## Визуальная приёмка
+
+Пять неизменённых скриншотов реально работающей игры: [галерея](../qa/review/README.md). Метаданные поз и версия браузера: `qa/review/captures.json`. Снимки атак скелета и голема сделаны на четвёртой фазе.
+
+Утверждённые PNG котёнка, шесть кадров сна, десять мечей, восемь прежних моделей монстров и 192 архивных кадра не изменены. Скелет/голем — новые SVG-риги, а не 120 новых утверждённых рисованных кадров.
+
+**Осталось согласовать художественный результат мансарды и двух новых моделей.** Проверки выполнены в Chromium с мобильной эмуляцией, не на физическом Android. Визуальная приёмка не объявляется пройденной автоматически; слияние в `main` запрещено до её завершения.
