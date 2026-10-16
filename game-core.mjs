@@ -209,7 +209,7 @@ export function stepFight(p,b,seconds,auto=true){
    if(winFight(p,b,ev,'poison'))return ev;
   }
  }
- if(auto&&p.autoUnlocked&&b.heroTimer+1e-8>=attackInterval(p,true)){b.heroTimer=Math.max(0,b.heroTimer-attackInterval(p,true));hitEnemy(p,b,ev);if(b.phase!=='fight')return ev;}
+ if(auto&&b.heroTimer+1e-8>=attackInterval(p,true)){b.heroTimer=Math.max(0,b.heroTimer-attackInterval(p,true));hitEnemy(p,b,ev);if(b.phase!=='fight')return ev;}
  if(b.enemyTimer>=2.4){b.enemyTimer-=2.4;b.hp=Math.max(0,b.hp-b.monster.attack);ev.push({kind:'enemy-hit',damage:b.monster.attack,move:b.monster.move});
   if(b.hp===0){if(!p.farming&&!p.cleared){p.fails++;if(p.fails>=2&&p.room>1)p.farming=true;}b.phase='rest';b.rest=restDuration(p);ev.push({kind:'defeat',farming:p.farming});}
  }
