@@ -215,3 +215,7 @@
 /* Small existing shop icon is physically grounded LEFT of the merchant label. */
 .surface .mini-shop{position:absolute;left:auto!important;right:35%!important;top:auto!important;bottom:9%!important;width:11%!important;height:18%!important;max-height:66px!important;object-fit:contain!important;object-position:center bottom!important;z-index:8!important;transform:none!important}
 .surface .rest-label{left:61%!important;top:3%!important;width:33%!important;font-size:.65em!important;padding:2px 4px!important;max-height:32px;z-index:7;pointer-events:none}
+
+/* Never show native Android/WebKit blue touch rectangle over monsters. */
+#enemy-holder{-webkit-tap-highlight-color:transparent;tap-highlight-color:transparent;user-select:none;-webkit-user-select:none;outline:0;touch-action:manipulation}
+#enemy-holder:focus-visible{outline:3px solid #ffcd78;outline-offset:2px}
