@@ -12,13 +12,15 @@ const themes={
 };
 const g=(x,y,a,body)=>`<g transform="translate(${x} ${y}) rotate(${a})">${body}</g>`;
 function emblem(id,t){
- const [,trim,ink,accent]=t;
+ const [base,trim,ink,accent]=t;
  if(id==='web')return `<path d="M0 -62V-34M-23 -55L23 -39M23 -55L-23 -39M-20 -49Q0 -62 20 -49M-13 -40Q0 -48 13 -40" fill="none" stroke="${trim}" stroke-width="2.2"/>`;
  if(id==='steel')return `<path d="M-5 -64L-3 -35L5 -37L6 -62Z" fill="${trim}" stroke="${ink}" stroke-width="2"/><circle cx="-38" cy="-38" r="2.5" fill="${trim}"/><circle cx="39" cy="-42" r="2.5" fill="${trim}"/>`;
  if(id==='bone_slime')return `<path d="M-13 -52L10 -38M11 -54L-11 -37" stroke="${accent}" stroke-width="6" stroke-linecap="round"/><circle cx="0" cy="-47" r="8" fill="${trim}" stroke="${ink}" stroke-width="2"/>`;
  if(id==='chitin')return `<path d="M-32 -55L-24 -40L-9 -56L0 -42L13 -61L23 -47L36 -57" fill="none" stroke="${trim}" stroke-width="3.5" stroke-linejoin="round"/>`;
- if(id==='leaf'||id==='moss')return `<path d="M-3 -38Q-27 -63 3 -66Q25 -46 -3 -38Z" fill="${trim}" stroke="${ink}" stroke-width="2.5"/><path d="M0 -43L2 -61M1 -52L-8 -57M1 -48L9 -52" stroke="${themes[id][0]}" fill="none" stroke-width="2"/>`;
- if(id==='shadow'||id==='moon_armor')return `<path d="M10 -65Q-18 -53 3 -36Q-19 -33 -20 -49Q-20 -62 10 -65Z" fill="${trim}" stroke="${ink}" stroke-width="1.5"/><circle cx="18" cy="-57" r="3" fill="${accent}"/>`;
+ if(id==='moss')return `<path d="M-29 -48Q-34 -66 -19 -64Q-18 -79 -5 -67Q8 -80 16 -66Q34 -70 30 -50Q5 -63 -29 -48Z" fill="${trim}" stroke="${ink}" stroke-width="2.5"/><path d="M-19 -53L-17 -60M-5 -57L-4 -65M10 -58L12 -65M24 -55L24 -61" stroke="${base}" stroke-width="2.5"/>`;
+ if(id==='leaf')return `<path d="M-3 -38Q-27 -63 3 -66Q25 -46 -3 -38Z" fill="${trim}" stroke="${ink}" stroke-width="2.5"/><path d="M0 -43L2 -61M1 -52L-8 -57M1 -48L9 -52" stroke="${themes[id][0]}" fill="none" stroke-width="2"/>`;
+ if(id==='shadow')return `<path d="M0 -66L-14 -52L-5 -50L-10 -37L14 -53L5 -54L12 -66Z" fill="${accent}" stroke="${ink}" stroke-width="2"/><path d="M-29 -47L-24 -52M25 -49L31 -55" stroke="${trim}" stroke-width="3" stroke-linecap="round"/>`;
+ if(id==='moon_armor')return `<path d="M10 -65Q-18 -53 3 -36Q-19 -33 -20 -49Q-20 -62 10 -65Z" fill="${trim}" stroke="${ink}" stroke-width="1.5"/><circle cx="18" cy="-57" r="3" fill="${accent}"/>`;
  if(id==='star')return `<path d="M0 -67L5 -56L18 -54L9 -46L11 -34L0 -40L-11 -34L-9 -46L-18 -54L-5 -56Z" fill="${trim}" stroke="${ink}" stroke-width="2"/>`;
  return `<path d="M-20 -39L-25 -63L-10 -54L0 -68L10 -54L25 -63L20 -39Z" fill="${accent}" stroke="${ink}" stroke-width="3"/><circle cx="0" cy="-47" r="4" fill="#e57466"/>`;
 }

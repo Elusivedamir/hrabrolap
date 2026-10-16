@@ -40,11 +40,15 @@ test('ten armor sets survive equip, actual combat attack/hurt frames and localSt
  try{
   for(const armor of ARMORS.filter(a=>a.svg)){
    const ctx=await browser.newContext({viewport:{width:390,height:844},isMobile:true,hasTouch:true});const page=await ctx.newPage();page.on('pageerror',e=>errors.push(e.message));
-   const p=freshProgress();Object.assign(p,{gold:10000,armor:100,equippedArmor:armor.id,ownedArmors:ARMORS.map(a=>a.id),autoUnlocked:true,autoEnabled:true});
+   const p=freshProgress();Object.assign(p,{gold:10000,armor:100,equippedArmor:'none',ownedArmors:ARMORS.map(a=>a.id),autoUnlocked:true,autoEnabled:true});
    const b=startFight(p);b.enemyTimer=2.39;
    await page.clock.install({time:new Date('2026-10-16T16:00:00Z')});await page.clock.pauseAt(new Date('2026-10-16T16:01:00Z'));
    await page.addInitScript(({p,b})=>{Math.random=()=>.99;if(!sessionStorage.getItem('armor-seeded')){localStorage.setItem('hrabrolap-v0.2-save',JSON.stringify({...p,lastSeen:0,battleState:b}));sessionStorage.setItem('armor-seeded','1');}},{p,b});
    await page.goto(base);
+   await page.locator('#inventory').click();
+   await page.locator('.shop-item').filter({hasText:armor.name}).getByRole('button',{name:'Надеть',exact:true}).click();
+   await page.locator('#modal-x').click();
+   assert.equal(await page.locator('#hero-armor').getAttribute('data-armor-id'),armor.id);
    await page.evaluate(()=>{window.gearFrames=[];new MutationObserver(()=>{const a=document.querySelector('#hero-armor');window.gearFrames.push({body:document.querySelector('#hero-body').getAttribute('data-reference-frame'),armor:a.getAttribute('data-armor-pose'),href:a.getAttribute('href')});}).observe(document.querySelector('#hero-armor'),{attributes:true,attributeFilter:['href']});});
    await page.clock.runFor(1800);
    const seen=await page.evaluate(()=>window.gearFrames);
