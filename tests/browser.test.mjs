@@ -8,7 +8,7 @@ import * as c from '../game-core.mjs';
 const base=process.env.HRABROLAP_BASE_URL||'http://127.0.0.1:8080/';
 const key='hrabrolap-v0.2-save';let browser;
 const errors=[];const contexts=[];
-before(async()=>{await fs.mkdir('qa/screenshots',{recursive:true});browser=await chromium.launch({headless:true});});
+before(async()=>{await fs.mkdir('qa/screenshots',{recursive:true});browser=await chromium.launch({headless:true,...(process.env.HRABROLAP_CHROMIUM_EXECUTABLE?{executablePath:process.env.HRABROLAP_CHROMIUM_EXECUTABLE,args:['--no-zygote','--single-process','--use-gl=angle','--use-angle=swiftshader','--enable-unsafe-swiftshader']}:{})});});
 after(async()=>{for(const ctx of contexts)await ctx.close();await browser?.close();await fs.writeFile('qa/browser-errors.json',JSON.stringify(errors,null,2));});
 async function pageFor(progress=c.freshProgress(),battleState,options={}){
  // Existing 0.9.6 visual regression fixtures explicitly use unlocked auto mode.
