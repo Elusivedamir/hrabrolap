@@ -6,9 +6,11 @@
 <div id="frames" class="frames"></div><p class="note">На этом экране можно оценить фактическое движение кадров и расположение слоёв. Это контрольный стенд, не новая игра.</p></div>
 </main><script type="module">
 import {applyCanonicalFrame,CANONICAL_FRAME_PATHS} from './canonical-sprites.mjs';
+import {ARMORS} from './equipment-catalog.mjs';
 const $=id=>document.getElementById(id);let current=0,interval=null;
 const rig={body:$('hero-body'),heroMotion:$('hero-motion'),weaponSlot:$('weapon-slot'),armorSlot:$('armor-slot'),armorImage:$('hero-armor')};
-function render(){applyCanonicalFrame($('kind').value,current,rig);$('hero-armor').style.display=$('armor').value==='none'?'none':'';$('hero-weapon').style.display=$('weapon').value==='none'?'none':'';if($('weapon').value!=='none')$('hero-weapon').setAttribute('href','art/weapons/'+$('weapon').value+'.svg');document.querySelectorAll('.frames button').forEach((el,i)=>el.classList.toggle('selected',current===i));}
+$('armor').replaceChildren(...ARMORS.map(a=>{const o=document.createElement('option');o.value=a.id;o.textContent=a.name;return o;}));
+function render(){$('hero-armor').setAttribute('data-armor-id',$('armor').value);applyCanonicalFrame($('kind').value,current,rig);$('hero-armor').style.display=$('armor').value==='none'?'none':'';$('hero-weapon').style.display=$('weapon').value==='none'?'none':'';if($('weapon').value!=='none')$('hero-weapon').setAttribute('href','art/weapons/'+$('weapon').value+'.svg');document.querySelectorAll('.frames button').forEach((el,i)=>el.classList.toggle('selected',current===i));}
 function buildThumbs(){const box=$('frames');box.replaceChildren();CANONICAL_FRAME_PATHS[$('kind').value].forEach((src,i)=>{const b=document.createElement('button');b.textContent='Кадр '+(i+1);const im=document.createElement('img');im.src=src;b.append(im);b.onclick=()=>{current=i;render();};box.append(b);});}
 for(const id of ['kind','armor','weapon'])$(id).onchange=()=>{current=0;buildThumbs();render();};
 $('play').onclick=()=>{if(interval){clearInterval(interval);interval=null;$('play').textContent='▶ Анимация';return;}interval=setInterval(()=>{current=(current+1)%6;render();},135);$('play').textContent='⏸ Пауза';};

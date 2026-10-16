@@ -1,0 +1,1567 @@
+{
+  "browser": "153.0.8010.0",
+  "rendered": 120,
+  "errors": [],
+  "results": [
+    {
+      "path": "art/armor-frames/web/attack/01.svg",
+      "alpha": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "ink": 9883,
+      "width": 279,
+      "height": 370
+    },
+    {
+      "path": "art/armor-frames/steel/attack/01.svg",
+      "alpha": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "ink": 16410,
+      "width": 279,
+      "height": 370
+    },
+    {
+      "path": "art/armor-frames/bone_slime/attack/01.svg",
+      "alpha": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "ink": 10515,
+      "width": 279,
+      "height": 370
+    },
+    {
+      "path": "art/armor-frames/chitin/attack/01.svg",
+      "alpha": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "ink": 11383,
+      "width": 279,
+      "height": 370
+    },
+    {
+      "path": "art/armor-frames/leaf/attack/01.svg",
+      "alpha": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "ink": 11080,
+      "width": 279,
+      "height": 370
+    },
+    {
+      "path": "art/armor-frames/moss/attack/01.svg",
+      "alpha": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "ink": 11370,
+      "width": 279,
+      "height": 370
+    },
+    {
+      "path": "art/armor-frames/shadow/attack/01.svg",
+      "alpha": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "ink": 11094,
+      "width": 279,
+      "height": 370
+    },
+    {
+      "path": "art/armor-frames/moon_armor/attack/01.svg",
+      "alpha": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "ink": 11160,
+      "width": 279,
+      "height": 370
+    },
+    {
+      "path": "art/armor-frames/star/attack/01.svg",
+      "alpha": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "ink": 11291,
+      "width": 279,
+      "height": 370
+    },
+    {
+      "path": "art/armor-frames/king/attack/01.svg",
+      "alpha": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "ink": 13031,
+      "width": 279,
+      "height": 370
+    },
+    {
+      "path": "art/armor-frames/web/attack/02.svg",
+      "alpha": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "ink": 9869,
+      "width": 279,
+      "height": 370
+    },
+    {
+      "path": "art/armor-frames/steel/attack/02.svg",
+      "alpha": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "ink": 16722,
+      "width": 279,
+      "height": 370
+    },
+    {
+      "path": "art/armor-frames/bone_slime/attack/02.svg",
+      "alpha": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "ink": 10639,
+      "width": 279,
+      "height": 370
+    },
+    {
+      "path": "art/armor-frames/chitin/attack/02.svg",
+      "alpha": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "ink": 11585,
+      "width": 279,
+      "height": 370
+    },
+    {
+      "path": "art/armor-frames/leaf/attack/02.svg",
+      "alpha": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "ink": 11122,
+      "width": 279,
+      "height": 370
+    },
+    {
+      "path": "art/armor-frames/moss/attack/02.svg",
+      "alpha": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "ink": 11312,
+      "width": 279,
+      "height": 370
+    },
+    {
+      "path": "art/armor-frames/shadow/attack/02.svg",
+      "alpha": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "ink": 11148,
+      "width": 279,
+      "height": 370
+    },
+    {
+      "path": "art/armor-frames/moon_armor/attack/02.svg",
+      "alpha": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "ink": 11199,
+      "width": 279,
+      "height": 370
+    },
+    {
+      "path": "art/armor-frames/star/attack/02.svg",
+      "alpha": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "ink": 11332,
+      "width": 279,
+      "height": 370
+    },
+    {
+      "path": "art/armor-frames/king/attack/02.svg",
+      "alpha": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "ink": 12999,
+      "width": 279,
+      "height": 370
+    },
+    {
+      "path": "art/armor-frames/web/attack/03.svg",
+      "alpha": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "ink": 9453,
+      "width": 279,
+      "height": 370
+    },
+    {
+      "path": "art/armor-frames/steel/attack/03.svg",
+      "alpha": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "ink": 15559,
+      "width": 279,
+      "height": 370
+    },
+    {
+      "path": "art/armor-frames/bone_slime/attack/03.svg",
+      "alpha": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "ink": 10249,
+      "width": 279,
+      "height": 370
+    },
+    {
+      "path": "art/armor-frames/chitin/attack/03.svg",
+      "alpha": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "ink": 11141,
+      "width": 279,
+      "height": 370
+    },
+    {
+      "path": "art/armor-frames/leaf/attack/03.svg",
+      "alpha": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "ink": 10858,
+      "width": 279,
+      "height": 370
+    },
+    {
+      "path": "art/armor-frames/moss/attack/03.svg",
+      "alpha": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "ink": 10933,
+      "width": 279,
+      "height": 370
+    },
+    {
+      "path": "art/armor-frames/shadow/attack/03.svg",
+      "alpha": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "ink": 10691,
+      "width": 279,
+      "height": 370
+    },
+    {
+      "path": "art/armor-frames/moon_armor/attack/03.svg",
+      "alpha": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "ink": 10758,
+      "width": 279,
+      "height": 370
+    },
+    {
+      "path": "art/armor-frames/star/attack/03.svg",
+      "alpha": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "ink": 11037,
+      "width": 279,
+      "height": 370
+    },
+    {
+      "path": "art/armor-frames/king/attack/03.svg",
+      "alpha": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "ink": 12446,
+      "width": 279,
+      "height": 370
+    },
+    {
+      "path": "art/armor-frames/web/attack/04.svg",
+      "alpha": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "ink": 9321,
+      "width": 279,
+      "height": 370
+    },
+    {
+      "path": "art/armor-frames/steel/attack/04.svg",
+      "alpha": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "ink": 14562,
+      "width": 279,
+      "height": 370
+    },
+    {
+      "path": "art/armor-frames/bone_slime/attack/04.svg",
+      "alpha": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "ink": 9548,
+      "width": 279,
+      "height": 370
+    },
+    {
+      "path": "art/armor-frames/chitin/attack/04.svg",
+      "alpha": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "ink": 10447,
+      "width": 279,
+      "height": 370
+    },
+    {
+      "path": "art/armor-frames/leaf/attack/04.svg",
+      "alpha": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "ink": 10294,
+      "width": 279,
+      "height": 370
+    },
+    {
+      "path": "art/armor-frames/moss/attack/04.svg",
+      "alpha": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "ink": 10439,
+      "width": 279,
+      "height": 370
+    },
+    {
+      "path": "art/armor-frames/shadow/attack/04.svg",
+      "alpha": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "ink": 10623,
+      "width": 279,
+      "height": 370
+    },
+    {
+      "path": "art/armor-frames/moon_armor/attack/04.svg",
+      "alpha": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "ink": 10487,
+      "width": 279,
+      "height": 370
+    },
+    {
+      "path": "art/armor-frames/star/attack/04.svg",
+      "alpha": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "ink": 10573,
+      "width": 279,
+      "height": 370
+    },
+    {
+      "path": "art/armor-frames/king/attack/04.svg",
+      "alpha": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "ink": 12151,
+      "width": 279,
+      "height": 370
+    },
+    {
+      "path": "art/armor-frames/web/attack/05.svg",
+      "alpha": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "ink": 9148,
+      "width": 279,
+      "height": 370
+    },
+    {
+      "path": "art/armor-frames/steel/attack/05.svg",
+      "alpha": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "ink": 14160,
+      "width": 279,
+      "height": 370
+    },
+    {
+      "path": "art/armor-frames/bone_slime/attack/05.svg",
+      "alpha": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "ink": 9909,
+      "width": 279,
+      "height": 370
+    },
+    {
+      "path": "art/armor-frames/chitin/attack/05.svg",
+      "alpha": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "ink": 10793,
+      "width": 279,
+      "height": 370
+    },
+    {
+      "path": "art/armor-frames/leaf/attack/05.svg",
+      "alpha": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "ink": 10204,
+      "width": 279,
+      "height": 370
+    },
+    {
+      "path": "art/armor-frames/moss/attack/05.svg",
+      "alpha": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "ink": 10336,
+      "width": 279,
+      "height": 370
+    },
+    {
+      "path": "art/armor-frames/shadow/attack/05.svg",
+      "alpha": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "ink": 10266,
+      "width": 279,
+      "height": 370
+    },
+    {
+      "path": "art/armor-frames/moon_armor/attack/05.svg",
+      "alpha": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "ink": 10487,
+      "width": 279,
+      "height": 370
+    },
+    {
+      "path": "art/armor-frames/star/attack/05.svg",
+      "alpha": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "ink": 10689,
+      "width": 279,
+      "height": 370
+    },
+    {
+      "path": "art/armor-frames/king/attack/05.svg",
+      "alpha": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "ink": 12234,
+      "width": 279,
+      "height": 370
+    },
+    {
+      "path": "art/armor-frames/web/attack/06.svg",
+      "alpha": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "ink": 9883,
+      "width": 279,
+      "height": 370
+    },
+    {
+      "path": "art/armor-frames/steel/attack/06.svg",
+      "alpha": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "ink": 16415,
+      "width": 279,
+      "height": 370
+    },
+    {
+      "path": "art/armor-frames/bone_slime/attack/06.svg",
+      "alpha": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "ink": 10515,
+      "width": 279,
+      "height": 370
+    },
+    {
+      "path": "art/armor-frames/chitin/attack/06.svg",
+      "alpha": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "ink": 11383,
+      "width": 279,
+      "height": 370
+    },
+    {
+      "path": "art/armor-frames/leaf/attack/06.svg",
+      "alpha": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "ink": 11080,
+      "width": 279,
+      "height": 370
+    },
+    {
+      "path": "art/armor-frames/moss/attack/06.svg",
+      "alpha": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "ink": 11370,
+      "width": 279,
+      "height": 370
+    },
+    {
+      "path": "art/armor-frames/shadow/attack/06.svg",
+      "alpha": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "ink": 11094,
+      "width": 279,
+      "height": 370
+    },
+    {
+      "path": "art/armor-frames/moon_armor/attack/06.svg",
+      "alpha": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "ink": 11160,
+      "width": 279,
+      "height": 370
+    },
+    {
+      "path": "art/armor-frames/star/attack/06.svg",
+      "alpha": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "ink": 11291,
+      "width": 279,
+      "height": 370
+    },
+    {
+      "path": "art/armor-frames/king/attack/06.svg",
+      "alpha": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "ink": 13031,
+      "width": 279,
+      "height": 370
+    },
+    {
+      "path": "art/armor-frames/web/hurt/01.svg",
+      "alpha": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "ink": 9852,
+      "width": 279,
+      "height": 370
+    },
+    {
+      "path": "art/armor-frames/steel/hurt/01.svg",
+      "alpha": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "ink": 15491,
+      "width": 279,
+      "height": 370
+    },
+    {
+      "path": "art/armor-frames/bone_slime/hurt/01.svg",
+      "alpha": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "ink": 10605,
+      "width": 279,
+      "height": 370
+    },
+    {
+      "path": "art/armor-frames/chitin/hurt/01.svg",
+      "alpha": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "ink": 11359,
+      "width": 279,
+      "height": 370
+    },
+    {
+      "path": "art/armor-frames/leaf/hurt/01.svg",
+      "alpha": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "ink": 10788,
+      "width": 279,
+      "height": 370
+    },
+    {
+      "path": "art/armor-frames/moss/hurt/01.svg",
+      "alpha": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "ink": 11086,
+      "width": 279,
+      "height": 370
+    },
+    {
+      "path": "art/armor-frames/shadow/hurt/01.svg",
+      "alpha": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "ink": 11047,
+      "width": 279,
+      "height": 370
+    },
+    {
+      "path": "art/armor-frames/moon_armor/hurt/01.svg",
+      "alpha": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "ink": 11141,
+      "width": 279,
+      "height": 370
+    },
+    {
+      "path": "art/armor-frames/star/hurt/01.svg",
+      "alpha": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "ink": 11193,
+      "width": 279,
+      "height": 370
+    },
+    {
+      "path": "art/armor-frames/king/hurt/01.svg",
+      "alpha": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "ink": 12826,
+      "width": 279,
+      "height": 370
+    },
+    {
+      "path": "art/armor-frames/web/hurt/02.svg",
+      "alpha": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "ink": 10299,
+      "width": 279,
+      "height": 370
+    },
+    {
+      "path": "art/armor-frames/steel/hurt/02.svg",
+      "alpha": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "ink": 15847,
+      "width": 279,
+      "height": 370
+    },
+    {
+      "path": "art/armor-frames/bone_slime/hurt/02.svg",
+      "alpha": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "ink": 10802,
+      "width": 279,
+      "height": 370
+    },
+    {
+      "path": "art/armor-frames/chitin/hurt/02.svg",
+      "alpha": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "ink": 11821,
+      "width": 279,
+      "height": 370
+    },
+    {
+      "path": "art/armor-frames/leaf/hurt/02.svg",
+      "alpha": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "ink": 11361,
+      "width": 279,
+      "height": 370
+    },
+    {
+      "path": "art/armor-frames/moss/hurt/02.svg",
+      "alpha": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "ink": 11701,
+      "width": 279,
+      "height": 370
+    },
+    {
+      "path": "art/armor-frames/shadow/hurt/02.svg",
+      "alpha": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "ink": 11707,
+      "width": 279,
+      "height": 370
+    },
+    {
+      "path": "art/armor-frames/moon_armor/hurt/02.svg",
+      "alpha": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "ink": 11707,
+      "width": 279,
+      "height": 370
+    },
+    {
+      "path": "art/armor-frames/star/hurt/02.svg",
+      "alpha": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "ink": 11782,
+      "width": 279,
+      "height": 370
+    },
+    {
+      "path": "art/armor-frames/king/hurt/02.svg",
+      "alpha": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "ink": 13530,
+      "width": 279,
+      "height": 370
+    },
+    {
+      "path": "art/armor-frames/web/hurt/03.svg",
+      "alpha": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "ink": 9228,
+      "width": 279,
+      "height": 370
+    },
+    {
+      "path": "art/armor-frames/steel/hurt/03.svg",
+      "alpha": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "ink": 12442,
+      "width": 279,
+      "height": 370
+    },
+    {
+      "path": "art/armor-frames/bone_slime/hurt/03.svg",
+      "alpha": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "ink": 9823,
+      "width": 279,
+      "height": 370
+    },
+    {
+      "path": "art/armor-frames/chitin/hurt/03.svg",
+      "alpha": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "ink": 10346,
+      "width": 279,
+      "height": 370
+    },
+    {
+      "path": "art/armor-frames/leaf/hurt/03.svg",
+      "alpha": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "ink": 10094,
+      "width": 279,
+      "height": 370
+    },
+    {
+      "path": "art/armor-frames/moss/hurt/03.svg",
+      "alpha": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "ink": 10539,
+      "width": 279,
+      "height": 370
+    },
+    {
+      "path": "art/armor-frames/shadow/hurt/03.svg",
+      "alpha": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "ink": 10701,
+      "width": 279,
+      "height": 370
+    },
+    {
+      "path": "art/armor-frames/moon_armor/hurt/03.svg",
+      "alpha": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "ink": 10656,
+      "width": 279,
+      "height": 370
+    },
+    {
+      "path": "art/armor-frames/star/hurt/03.svg",
+      "alpha": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "ink": 10462,
+      "width": 279,
+      "height": 370
+    },
+    {
+      "path": "art/armor-frames/king/hurt/03.svg",
+      "alpha": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "ink": 12132,
+      "width": 279,
+      "height": 370
+    },
+    {
+      "path": "art/armor-frames/web/hurt/04.svg",
+      "alpha": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "ink": 9217,
+      "width": 279,
+      "height": 370
+    },
+    {
+      "path": "art/armor-frames/steel/hurt/04.svg",
+      "alpha": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "ink": 14717,
+      "width": 279,
+      "height": 370
+    },
+    {
+      "path": "art/armor-frames/bone_slime/hurt/04.svg",
+      "alpha": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "ink": 9449,
+      "width": 279,
+      "height": 370
+    },
+    {
+      "path": "art/armor-frames/chitin/hurt/04.svg",
+      "alpha": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "ink": 10291,
+      "width": 279,
+      "height": 370
+    },
+    {
+      "path": "art/armor-frames/leaf/hurt/04.svg",
+      "alpha": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "ink": 10287,
+      "width": 279,
+      "height": 370
+    },
+    {
+      "path": "art/armor-frames/moss/hurt/04.svg",
+      "alpha": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "ink": 10292,
+      "width": 279,
+      "height": 370
+    },
+    {
+      "path": "art/armor-frames/shadow/hurt/04.svg",
+      "alpha": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "ink": 10501,
+      "width": 279,
+      "height": 370
+    },
+    {
+      "path": "art/armor-frames/moon_armor/hurt/04.svg",
+      "alpha": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "ink": 10421,
+      "width": 279,
+      "height": 370
+    },
+    {
+      "path": "art/armor-frames/star/hurt/04.svg",
+      "alpha": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "ink": 10516,
+      "width": 279,
+      "height": 370
+    },
+    {
+      "path": "art/armor-frames/king/hurt/04.svg",
+      "alpha": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "ink": 12146,
+      "width": 279,
+      "height": 370
+    },
+    {
+      "path": "art/armor-frames/web/hurt/05.svg",
+      "alpha": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "ink": 7388,
+      "width": 279,
+      "height": 370
+    },
+    {
+      "path": "art/armor-frames/steel/hurt/05.svg",
+      "alpha": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "ink": 11257,
+      "width": 279,
+      "height": 370
+    },
+    {
+      "path": "art/armor-frames/bone_slime/hurt/05.svg",
+      "alpha": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "ink": 7780,
+      "width": 279,
+      "height": 370
+    },
+    {
+      "path": "art/armor-frames/chitin/hurt/05.svg",
+      "alpha": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "ink": 8377,
+      "width": 279,
+      "height": 370
+    },
+    {
+      "path": "art/armor-frames/leaf/hurt/05.svg",
+      "alpha": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "ink": 8111,
+      "width": 279,
+      "height": 370
+    },
+    {
+      "path": "art/armor-frames/moss/hurt/05.svg",
+      "alpha": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "ink": 8469,
+      "width": 279,
+      "height": 370
+    },
+    {
+      "path": "art/armor-frames/shadow/hurt/05.svg",
+      "alpha": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "ink": 8969,
+      "width": 279,
+      "height": 370
+    },
+    {
+      "path": "art/armor-frames/moon_armor/hurt/05.svg",
+      "alpha": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "ink": 8831,
+      "width": 279,
+      "height": 370
+    },
+    {
+      "path": "art/armor-frames/star/hurt/05.svg",
+      "alpha": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "ink": 8783,
+      "width": 279,
+      "height": 370
+    },
+    {
+      "path": "art/armor-frames/king/hurt/05.svg",
+      "alpha": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "ink": 10174,
+      "width": 279,
+      "height": 370
+    },
+    {
+      "path": "art/armor-frames/web/hurt/06.svg",
+      "alpha": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "ink": 9876,
+      "width": 279,
+      "height": 370
+    },
+    {
+      "path": "art/armor-frames/steel/hurt/06.svg",
+      "alpha": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "ink": 15725,
+      "width": 279,
+      "height": 370
+    },
+    {
+      "path": "art/armor-frames/bone_slime/hurt/06.svg",
+      "alpha": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "ink": 10621,
+      "width": 279,
+      "height": 370
+    },
+    {
+      "path": "art/armor-frames/chitin/hurt/06.svg",
+      "alpha": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "ink": 11385,
+      "width": 279,
+      "height": 370
+    },
+    {
+      "path": "art/armor-frames/leaf/hurt/06.svg",
+      "alpha": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "ink": 10864,
+      "width": 279,
+      "height": 370
+    },
+    {
+      "path": "art/armor-frames/moss/hurt/06.svg",
+      "alpha": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "ink": 11108,
+      "width": 279,
+      "height": 370
+    },
+    {
+      "path": "art/armor-frames/shadow/hurt/06.svg",
+      "alpha": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "ink": 11149,
+      "width": 279,
+      "height": 370
+    },
+    {
+      "path": "art/armor-frames/moon_armor/hurt/06.svg",
+      "alpha": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "ink": 11158,
+      "width": 279,
+      "height": 370
+    },
+    {
+      "path": "art/armor-frames/star/hurt/06.svg",
+      "alpha": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "ink": 11222,
+      "width": 279,
+      "height": 370
+    },
+    {
+      "path": "art/armor-frames/king/hurt/06.svg",
+      "alpha": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "ink": 12916,
+      "width": 279,
+      "height": 370
+    }
+  ]
+}

@@ -71,7 +71,12 @@ function cancelAttackPose(){cancelPose();activeAttack=0;heroFrame(0);}
 function syncHeroPose(){if(b.phase==='rest'&&!hurting)cancelAttackPose();}
 function syncEquipment(){
  const weapon=WEAPONS.find(w=>w.id===p.weapon)||WEAPONS[0];$('hero-weapon').setAttribute('href',weapon.svg);
- const armor=ARMORS.find(a=>a.id===p.equippedArmor)||ARMORS[0];const art=$('hero-armor');art.style.display=armor.svg?'':'none';if(armor.svg)art.setAttribute('href',armor.svg);
+ const armor=ARMORS.find(a=>a.id===p.equippedArmor)||ARMORS[0];const art=$('hero-armor');
+ art.setAttribute('data-armor-id',armor.id);
+ const match=$('hero-body').getAttribute('data-reference-frame')?.match(/^(attack|hurt)-([1-6])$/);
+ applyCanonicalFrame(match?.[1]||'attack',match?Number(match[2])-1:0,{
+  body:$('hero-body'),heroMotion,weaponSlot:slot,armorSlot,armorImage:art
+ });
 }
 const APPROVED_MONSTER_TYPES=new Set(['slime','spider','mouse','mushroom','beetle','larva','bat','ghost']);
 const ARTICULATED_MONSTER_TYPES=new Set(['skeleton','golem']);
