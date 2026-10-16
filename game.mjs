@@ -159,7 +159,8 @@ function frame(now){const dt=Math.min(.12,Math.max(0,(now-last)/1000));last=now;
   const events=stepFight(p,b,dt,p.autoBattle||manualReady);
   if(events.some(e=>['hero-hit','defeat','spawn'].includes(e.kind)))manualWindup=null;
   battleEvents(events);fishEvents(stepFishing(p,dt*1000));merchantEvents(stepMerchant(p,dt*1000,modalType==='trade'));updateMerchantAnimation(now);
-  if(now-lastSave>250){render();lastSave=now;}
+  // HP and phase changes must appear on the same frame as the combat event.
+  if(events.length||now-lastSave>250){render();lastSave=now;}
   if(now-lastAutosave>5000){save();lastAutosave=now;}
  }
  requestAnimationFrame(frame);
