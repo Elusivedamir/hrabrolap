@@ -1,7 +1,9 @@
 // Ten separately constructed garments; never writes the approved cat, swords or shop icons.
 import fs from 'node:fs/promises';
 import {ARMOR_SET_IDS,ARMOR_POSES} from '../armor-frames.mjs';
+import {steelGarment} from '../armor-garment-fit.mjs';
 const root=new URL('../',import.meta.url);
+const fitMasks=JSON.parse(await fs.readFile(new URL('art/armor-frames/steel/foreground-masks.json',root),'utf8'));
 const themes={
  web:['#81718e','#efe2f3','#413047','#b8a3c6'],steel:['#71899d','#e3f2f9','#293b4a','#aec4d0'],
  bone_slime:['#77b593','#dcf3c8','#364e41','#efdfb1'],chitin:['#744c38','#e5b570','#352b2b','#b47e46'],
@@ -120,8 +122,8 @@ for(const id of ARMOR_SET_IDS){
  const t=themes[id],[base,trim]=t,{chest,head,shoe}=construction(id,t);
  for(const kind of ['attack','hurt'])for(let i=0;i<6;i++){
   const p=ARMOR_POSES[kind][i],[cx,cy,angle,w,h]=p.torso;
-  const cutouts=`<ellipse data-protect="flower" cx="${p.flower[0]}" cy="${p.flower[1]}" rx="35" ry="33"/>${p.paws.map(([x,y,rx,ry])=>`<ellipse data-protect="paw" cx="${x}" cy="${y}" rx="${rx}" ry="${ry}"/>`).join('')}<polygon data-protect="scarf" points="${p.scarf}"/>`;
-  const svg=`<svg xmlns="http://www.w3.org/2000/svg" width="279" height="370" viewBox="0 0 279 370" data-armor="${id}" data-phase="${kind}" data-frame="${i+1}"><title>${id} ${kind} ${i+1}: fitted ${id} construction</title><defs><linearGradient id="metal" x1="0" y1="0" x2=".8" y2="1"><stop stop-color="${trim}"/><stop offset=".55" stop-color="${base}"/><stop offset="1" stop-color="${trim}"/></linearGradient><mask id="details" maskUnits="userSpaceOnUse" x="0" y="0" width="279" height="370"><rect width="279" height="370" fill="white"/><g fill="black">${cutouts}</g></mask></defs><g mask="url(#details)">${p.feet.map(b=>g(...b,`<g data-part="boot">${shoe}</g>`)).join('')}${g(cx,cy,angle,`<g data-part="chestplate" transform="scale(${w/100} ${h/90})">${chest}</g>`)}${g(...p.head,`<g data-part="helmet">${head}</g>`)}</g></svg>`;
+  const cutouts=`<ellipse data-protect="flower" cx="${p.flower[0]}" cy="${p.flower[1]}" rx="35" ry="33"/>${p.paws.map(([x,y,rx,ry])=>`<ellipse data-protect="paw" cx="${x}" cy="${y}" rx="${rx}" ry="${ry}"/>`).join('')}${id==='steel'&&kind==='hurt'&&i===3?'<ellipse data-protect="paw" cx="108" cy="286" rx="32" ry="32"/>':''}${id==='steel'?`<path data-protect="scarf" d="${fitMasks[kind][i]}"/>`:`<polygon data-protect="scarf" points="${p.scarf}"/>`}`;
+  const svg=`<svg xmlns="http://www.w3.org/2000/svg" width="279" height="370" viewBox="0 0 279 370" data-armor="${id}" data-phase="${kind}" data-frame="${i+1}"><title>${id} ${kind} ${i+1}: fitted ${id} construction</title><defs><linearGradient id="metal" x1="0" y1="0" x2=".8" y2="1"><stop stop-color="${trim}"/><stop offset=".55" stop-color="${base}"/><stop offset="1" stop-color="${trim}"/></linearGradient><mask id="details" maskUnits="userSpaceOnUse" x="0" y="0" width="279" height="370"><rect width="279" height="370" fill="white"/><g fill="black">${cutouts}</g></mask></defs><g mask="url(#details)">${p.feet.map(b=>g(...b,`<g data-part="boot">${shoe}</g>`)).join('')}${id==='steel'?steelGarment(kind,i):g(cx,cy,angle,`<g data-part="chestplate" transform="scale(${w/100} ${h/90})">${chest}</g>`)}${g(...p.head,`<g data-part="helmet">${head}</g>`)}</g></svg>`;
   const dir=new URL(`art/armor-frames/${id}/${kind}/`,root);await fs.mkdir(dir,{recursive:true});await fs.writeFile(new URL(`0${i+1}.svg`,dir),svg);
  }
 }

@@ -17,7 +17,7 @@ test('10 catalog armors have all 120 independent vector pose overlays, with prot
    for(const detail of ['flower','paw','scarf'])assert.ok(svg.includes(`data-protect="${detail}"`));
    shapes.add(createHash('sha256').update(svg.slice(svg.indexOf('<defs>'))).digest('hex'));
   }
-  assert.equal(shapes.size,kind==='hurt'?6:5,'hurt recovery has its own shifted garment anchors');
+  assert.equal(shapes.size,kind==='hurt'||id==='steel'?6:5,'steel protects the actual scarf pixels of each source frame; hurt recovery has shifted garment anchors');
  }
  assert.equal(paths.size,120);assert.equal(armorFramePath('none','attack',0),'');
 });

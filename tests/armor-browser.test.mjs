@@ -48,6 +48,16 @@ test('all 120 SVG overlays render transparently and retain flower, paws and eyes
   },ARMOR_SET_IDS.map(id=>armorFramePath(id,'attack',0)));
   for(const pair of silhouettes)assert.ok(pair.silhouetteDifference>.10,'torso outlines too similar: '+JSON.stringify(pair));
   await fs.writeFile('qa/armor-review/silhouette-results.json',JSON.stringify({colorIndependent:true,minimumDifference:Math.min(...silhouettes.map(p=>p.silhouetteDifference)),pairs:silhouettes},null,2));
+  // A fitted garment must cover the shoulder and flank that the old belly icon left bare.
+  const fitted=await page.evaluate(async()=>{const i=new Image();i.src='art/armor-frames/steel/attack/01.svg';await i.decode();const c=document.createElement('canvas');c.width=279;c.height=370;const x=c.getContext('2d');x.drawImage(i,0,0);return [[125,242],[108,285],[111,304],[243,241]].map(([u,v])=>({u,v,alpha:x.getImageData(u,v,1,1).data[3]}));});
+  for(const point of fitted)assert.equal(point.alpha,255,'garment leaves shoulder/flank bare: '+JSON.stringify(point));
+  await page.goto(new URL('armor-fit-review.html',base).href);await page.waitForFunction(()=>window.fitReady);
+  for(const kind of ['attack','hurt']){
+   await page.locator('#kind').selectOption(kind);await page.waitForFunction(k=>[...document.querySelectorAll('main svg')].every(e=>e.dataset.frame.startsWith(k)),kind);
+   await page.evaluate(async()=>{await Promise.all([...document.querySelectorAll('main image')].map(e=>{const i=new Image();i.src=e.getAttribute('href');return i.decode();}));});
+   await page.screenshot({path:`qa/armor-review/fitted-steel-${kind}.png`,fullPage:true});
+   if(kind==='attack'){const first=page.locator('main svg').first();await first.evaluate(e=>e.setAttribute('viewBox','25 65 240 285'));await first.screenshot({path:'qa/armor-review/fitted-steel-closeup.png'});await first.evaluate(e=>e.setAttribute('viewBox','0 0 279 370'));}
+  }
   assert.equal(results.length,120);assert.deepEqual(errors,[]);
   await fs.writeFile('qa/armor-review/vector-render-results.json',JSON.stringify({browser:browser.version(),rendered:results.length,errors,results},null,2));
  }finally{await browser.close();}
