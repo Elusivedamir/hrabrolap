@@ -260,3 +260,52 @@ test('original 10-frame fisher keeps fish away from house and ends at bucket',as
  assert.ok(bucket.x<scene.x+scene.width*.21,'physical bucket must be left of fisherman');
  await shot(page,'original-knight-fishing-ten-frames');
 });
+
+test('автобой покупается за монету и двадцатый уровень показывает 2 атаки в секунду',async()=>{
+ const p=c.freshProgress();p.gold=100000;p.autoUnlocked=true;p.autoEnabled=true;p.autoLevel=19;
+ const page=await pageFor(p);
+ assert.match(await page.locator('#status').textContent(),/АВТОБОЙ 1\/с/);
+ assert.match(await page.locator('#auto-upgrade').textContent(),/19\/100/);
+ const before=(await saved(page)).gold;
+ await page.locator('#auto-upgrade').click();
+ const after=await saved(page);
+ assert.equal(after.autoLevel,20);
+ assert.equal(after.gold,before-c.autoUpgradeCost(19));
+ assert.match(await page.locator('#status').textContent(),/АВТОБОЙ 2\/с/);
+ await page.reload();
+ assert.match(await page.locator('#status').textContent(),/АВТОБОЙ 2\/с/);
+ await shot(page,'auto-level-20-two-hits');
+});
+test('таймер поклёвки скрыт, состояние рыцаря видно, магазин стоит левее текста торговца',async()=>{
+ const p=c.freshProgress();p.nextCatchMs=157000;
+ const page=await pageFor(p);
+ assert.equal(await page.locator('#fish-status').textContent(),'Рыцарь рыбачит');
+ assert.ok(!(await page.locator('#surface').innerText()).includes('Поклёвка через'));
+ const shop=await page.locator('#mini-shop').boundingBox();
+ const merchant=await page.locator('#merchant-status').boundingBox();
+ const surf=await page.locator('#surface').boundingBox();
+ assert.ok(shop.x<merchant.x,'магазин должен стоять слева от надписи торговца');
+ assert.ok(shop.y+shop.height>surf.y+surf.height*.73,'магазинчик должен касаться земли');
+ await shot(page,'shop-grounded-and-no-bite-countdown');
+});
+test('при нулевых HP на монстре не должно быть пяти ярких сердец',async()=>{
+ const p=c.freshProgress();const b=c.startFight(p);b.enemyHp=0;b.phase='transition';
+ const page=await pageFor(p,b);
+ const hearts=await page.locator('#enemy-hearts .heart-shell').evaluateAll(items=>items.map(el=>({
+  fill:parseFloat(getComputedStyle(el.querySelector('.heart-filled')).width),
+  dark:getComputedStyle(el.querySelector('.heart-unfilled')).filter
+ })));
+ assert.equal(hearts.length,5);
+ assert.ok(hearts.every(x=>x.fill===0),'0 HP must yield no bright heart overlays');
+ assert.ok(hearts.every(x=>x.dark.includes('grayscale(1)')),'unfilled hearts must stay gray');
+ await shot(page,'enemy-empty-hearts');
+});
+test('рыба появляется на счётчике только после десятикадровой анимации укладки',async()=>{
+ const p=c.freshProgress();p.catchPlan=[{species:'Плотва',slots:1,weight:.2,length:21,price:12,waitMs:200}];p.nextCatchMs=200;
+ const page=await pageFor(p);
+ await page.clock.runFor(320);
+ assert.match(await page.locator('#bucket-indicator').textContent(),/0 рыб/);
+ await page.clock.runFor(1650);
+ assert.match(await page.locator('#bucket-indicator').textContent(),/1 рыб/);
+ await shot(page,'fish-delivered-to-bucket');
+});
