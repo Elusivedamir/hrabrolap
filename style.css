@@ -154,3 +154,41 @@
 .surface .bucket span{flex:0 0 auto;border-radius:7px;padding:1px 4px;color:#fff6d9;background:#49362edb!important;font-size:.70em;font-weight:800;line-height:1.2;white-space:nowrap}
 .surface .rest-sleep-sprite{position:absolute;z-index:5;left:64%;top:37%;width:24%;height:53%;object-fit:contain;object-position:center bottom;opacity:0;pointer-events:none;filter:drop-shadow(0 2px 1px #31222d55)}
 .surface.resting .rest-sleep-sprite{opacity:1}
+
+/* v0.9.7 interactive manual fight, creature hearts and permanent enchant feedback. */
+.battle-status{cursor:pointer;min-height:36px;min-width:100px;font-size:.75em;transition:background .14s}
+.battle-status:focus-visible,.enemy-holder:focus-visible{outline:3px solid #ffcd78;outline-offset:2px}
+.enemy-holder{cursor:pointer;touch-action:manipulation}
+.enemy-hearts{height:22px;margin:4px 0 2px;justify-content:center;gap:1px;overflow:visible}
+.enemy-hearts .heart-shell{height:22px;width:22px;flex:0 0 auto}
+.enemy-hearts[data-monster="slime"] img{filter:hue-rotate(99deg) saturate(1.1)}
+.enemy-hearts[data-monster="mouse"] img{filter:hue-rotate(280deg)}
+.enemy-hearts[data-monster="spider"] img{filter:hue-rotate(280deg) saturate(.75)}
+.enemy-hearts[data-monster="ghost"] img{filter:hue-rotate(170deg)}
+.enemy-hearts[data-monster="beetle"] img,.enemy-hearts[data-monster="golem"] img{filter:hue-rotate(42deg)}
+.legacy-monster-hp{display:none!important}
+.monster-fighter .health-title{flex:0 0 auto}
+.monster-fighter .enemy-holder{min-height:0}
+.enchant-controls{display:grid;gap:8px;margin:12px 0;padding:10px;background:#ebd5af;border:1px solid #af8867;border-radius:11px}
+.enchant-controls select{font:inherit;border:1px solid #876e5a;border-radius:8px;padding:7px;background:#fff5df;color:#503a2b}
+.enchant-controls small{color:#79583d}
+.enemy-holder.poisoned #enemy-art{filter:sepia(.55) hue-rotate(70deg) saturate(3) drop-shadow(0 0 6px #5cfc52)!important}
+.enemy-holder.poisoned:after{content:"☣";position:absolute;right:7%;top:7%;z-index:9;font-size:2em;color:#b1ff70;text-shadow:0 0 8px #5acb1a;animation:toxPulse 1s ease-in-out infinite;pointer-events:none}
+.enemy-holder.electrocuted:before{content:"⚡ ⚡";position:absolute;inset:8% 2% auto;z-index:9;text-align:center;font-size:2.7em;color:#fff2a3;text-shadow:0 0 7px #4ab7ff,0 0 17px #f7fb7f;pointer-events:none;animation:shockFlicker .54s steps(5,end)}
+.enemy-holder.electrocuted #enemy-art{filter:drop-shadow(0 0 8px #75caff) brightness(1.8)!important}
+.enemy-holder.life-drain:before{content:"🩸";position:absolute;left:-12%;top:30%;z-index:9;font-size:2.2em;text-shadow:0 0 6px #ec2038;animation:lifeDrain .58s ease-in forwards;pointer-events:none}
+.enemy-holder.poison-tick{filter:sepia(.7) hue-rotate(60deg) saturate(2)}
+@keyframes toxPulse{50%{opacity:.38;transform:translateY(-8px)}}
+@keyframes shockFlicker{30%,75%{opacity:.1}55%,90%{opacity:1}}
+@keyframes lifeDrain{0%{transform:translate(0,0);opacity:1}100%{transform:translate(-78px,-6px) scale(.55);opacity:0}}
+/* Fish travel ends at bucket (left of knight), never at the house. */
+.surface.reeling .fish-flight{left:39%;bottom:15%;animation:fishToLeftBucket 1.35s cubic-bezier(.25,.4,.4,1) forwards!important}
+@keyframes fishToLeftBucket{
+ 0%{opacity:0;transform:translate(0,0) rotate(0) scale(.7)}
+ 16%{opacity:1}
+ 49%{opacity:1;transform:translate(-170%,-165%) rotate(-16deg) scale(1.05)}
+ 89%{opacity:1;transform:translate(-340%,34%) rotate(35deg) scale(.63)}
+ 100%{opacity:0;transform:translate(-350%,38%) rotate(46deg) scale(.40)}
+}
+/* Keep new rest art in the attic, not on lower floor. */
+.surface .rest-sleep-sprite{left:72%;top:18%;width:18%;height:35%;z-index:6;object-position:center bottom}
