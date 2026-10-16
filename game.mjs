@@ -157,7 +157,7 @@ function render(){
  speedBtn.classList.toggle('can-buy',p.gold>=autoUpgradeCost(p.autoLevel)&&p.autoLevel<MAX_AUTO_LEVEL);
  speedBtn.classList.toggle('cant-buy',p.gold<autoUpgradeCost(p.autoLevel)||p.autoLevel>=MAX_AUTO_LEVEL);
  $('attack-speed-lvl').textContent='ур. '+p.autoLevel+'/100';
- $('attack-speed-stat').textContent='Автоатака: '+autoHitsPerSecond(p)+' удар/с · след.: '+(p.autoLevel>=MAX_AUTO_LEVEL?'макс.':(1+Math.floor(Math.min(100,p.autoLevel+1)/20))+'/с');
+ $('attack-speed-stat').textContent='Авто: '+autoHitsPerSecond(p)+' уд/с'+(p.autoLevel>=MAX_AUTO_LEVEL?' · максимум':(' · '+(autoHitsPerSecond(p)+1)+' уд/с на ур. '+(Math.floor(p.autoLevel/20)+1)*20));
  $('attack-speed-cost').textContent=p.autoLevel>=MAX_AUTO_LEVEL?'МАКСИМУМ · 6/с':'🪙 '+fmt(autoUpgradeCost(p.autoLevel));
  speedBtn.setAttribute('aria-label',p.autoLevel>=MAX_AUTO_LEVEL?'Скорость атаки максимально улучшена':'Улучшить скорость автоматической атаки до уровня '+(p.autoLevel+1)+' за '+autoUpgradeCost(p.autoLevel)+' монет');
  const info=[['sword',p.sword,swordCost(p.sword),'Меч','Урон '+heroDamage(p)+' → '+(heroDamage(p)+3)],['armor',p.armor,armorCost(p.armor),'Броня','HP '+maxHealth(p)+' → '+(maxHealth(p)+14)],['fish',p.fishLevel,fishCost(p.fishLevel),'Удочка','Более ценный улов'],['home',p.home,homeCost(p.home),'Домик','Быстрее отдых']];

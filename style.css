@@ -219,3 +219,15 @@
 /* Never show native Android/WebKit blue touch rectangle over monsters. */
 #enemy-holder{-webkit-tap-highlight-color:transparent;tap-highlight-color:transparent;user-select:none;-webkit-user-select:none;outline:0;touch-action:manipulation}
 #enemy-holder:focus-visible{outline:3px solid #ffcd78;outline-offset:2px}
+
+/* Independent speed purchase: fifth bottom upgrade, NOT another auto-battle toggle. */
+.upgrades{overflow-y:auto;scrollbar-width:thin;overscroll-behavior:contain}
+.upgrade-grid{grid-template-columns:minmax(0,1fr) minmax(0,1fr);grid-template-rows:repeat(3,minmax(0,1fr));min-height:162px;flex:1 0 auto}
+.upgrade-grid>.attack-speed-card{grid-column:1/-1;gap:9px;min-width:0;min-height:0}
+.attack-speed-card>img{width:16%;max-width:44px;max-height:54px}
+.attack-speed-card>span{flex:1;min-width:0}
+.attack-speed-card b{font-size:.90em}
+.attack-speed-card b small{font-size:.78em}
+.attack-speed-card span>small{font-size:.77em;white-space:normal}
+.attack-speed-card strong{font-size:.86em}
+.attack-speed-card:disabled{cursor:not-allowed;opacity:.70}

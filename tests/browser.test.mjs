@@ -276,6 +276,23 @@ test('автобой покупается за монету и двадцаты�
  assert.match(await page.locator('#status').textContent(),/АВТОБОЙ 2\/с/);
  await shot(page,'auto-level-20-two-hits');
 });
+test('карточка скорости атаки — пятая, на всю ширину снизу, автобой покупается отдельно сверху',async()=>{
+ const p=c.freshProgress();p.gold=100;
+ const page=await pageFor(p,undefined,{manual:true});
+ assert.equal(await page.locator('.dungeon-title #status').count(),1);
+ assert.equal(await page.locator('.dungeon-title #buy-attack-speed').count(),0);
+ assert.equal(await page.locator('.upgrade-grid > .upgrade-card').count(),5);
+ assert.equal(await page.locator('.upgrade-grid > #buy-attack-speed').count(),1);
+ const cards=await page.locator('.upgrade-grid > .upgrade-card').evaluateAll(items=>items.map(e=>e.id));
+ assert.deepEqual(cards,['buy-sword','buy-armor','buy-fish','buy-home','buy-attack-speed']);
+ const grid=await page.locator('.upgrade-grid').boundingBox();
+ const speed=await page.locator('#buy-attack-speed').boundingBox();
+ const last=await page.locator('#buy-home').boundingBox();
+ assert.ok(speed.y>=last.y+last.height-2,'speed upgrade must be below original four');
+ assert.ok(speed.width>grid.width*.85,'speed upgrade must span both columns');
+ assert.equal(await page.locator('#auto-upgrade').count(),0,'obsolete top auto speed button must not exist');
+ await shot(page,'fifth-bottom-attack-speed-card');
+});
 test('скорость атаки отдельна от покупки автобоя и доступна сразу',async()=>{
  const p=c.freshProgress();p.gold=100;
  const page=await pageFor(p,undefined,{manual:true});

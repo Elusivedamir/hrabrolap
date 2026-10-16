@@ -36,3 +36,9 @@ Approved main layout remains **100 waves**, single surface with fishing knight t
 
 ### Release gate
 Working commits always go to `fix/v0.9.7-approved-mobs-and-controls`. Keep `main` tagged v0.9.6 intact; do not merge/label v0.9.7 finished before green browser QA *and* explicit visual approval of the unresolved issues.
+
+## Clarification: separate speed upgrade below the four existing cards
+- Auto-battle is a separate one-off unlock beside the wave count, for **1 coin**, with free subsequent switching. Keep that original control in place.
+- A distinct **SPEED OF AUTO-ATTACK** paid upgrade is available IMMEDIATELY, including before unlocking auto-battle; it must NOT unlock the auto-battle mode. Save all levels independently.
+- Place speed as a visible, **fifth, full-width card in the lower "УЛУЧШЕНИЯ" area**, physically underneath Sword, Armor, Rod, House. Do NOT put it beside the top battle-mode switch.
+- Level 0/20/40/60/80/100 still equals 1/2/3/4/5/6 AUTO hits/sec; manual remains 3 hits/sec. The speed bonus only applies when the separate auto-battle mode is switched on.
