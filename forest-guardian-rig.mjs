@@ -23,7 +23,7 @@ const check = (kind, index) => {
 };
 export function forestArmorUrl(kind,index) {
  const i=check(kind,index);
- return 'assets/armor/forest_guardian/forest_'+kind+'_'+String(i+1).padStart(2,'0')+'.png?fit=2';
+ return 'assets/armor/forest_guardian/forest_'+kind+'_'+String(i+1).padStart(2,'0')+'.png?fit=3';
 }
 // The foreground is the SAME immutable original kitten frame, clipped to the face and exposed
 // hands. It cannot move or redraw a paw; only the clothing underneath it is different.
