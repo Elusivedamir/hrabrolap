@@ -186,7 +186,7 @@ export function tapMonster(p,b){
  if(b.phase!=='fight'||p.autoEnabled)return [];
  const interval=attackInterval(p,false);
  if(b.heroTimer+1e-8<interval)return [{kind:'cooldown',remaining:interval-b.heroTimer}];
- b.heroTimer=0;
+ b.heroTimer=Math.max(0,b.heroTimer-interval);
  const ev=[];hitEnemy(p,b,ev);return ev;
 }
 export function stepFight(p,b,seconds,auto=true){
