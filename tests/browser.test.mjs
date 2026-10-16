@@ -238,3 +238,25 @@ test('молния и вампиризм активируются без зам�
   assert.equal(await page.locator('#hero-weapon').getAttribute('href'),'art/weapons/iron.svg');
  }
 });
+
+test('original 10-frame fisher keeps fish away from house and ends at bucket',async()=>{
+ const p=c.freshProgress();
+ p.catchPlan=[{species:'Плотва',slots:1,weight:.2,length:21,price:12,waitMs:200}];
+ p.nextCatchMs=200;
+ const page=await pageFor(p);
+ await page.evaluate(()=>{
+  window.fisherFrames=[];
+  new MutationObserver(()=>{window.fisherFrames.push(document.querySelector('#fishing-animation')?.getAttribute('src'))})
+   .observe(document.querySelector('#fishing-animation'),{attributes:true,attributeFilter:['src']});
+ });
+ await page.clock.runFor(1550);
+ const frames=await page.evaluate(()=>window.fisherFrames);
+ for(let i=1;i<=10;i++)
+  assert.ok(frames.some(src=>src===`animations/fishing/${String(i).padStart(2,'0')}.svg`),'original fishing pose '+i+' missing');
+ assert.ok(await page.locator('#fishing-animation').evaluate(img=>img.complete&&img.naturalWidth>0));
+ assert.equal(await page.locator('.fishing-rig').evaluate(el=>getComputedStyle(el).display),'none');
+ const bucket=await page.locator('#bucket').boundingBox();
+ const scene=await page.locator('#surface').boundingBox();
+ assert.ok(bucket.x<scene.x+scene.width*.21,'physical bucket must be left of fisherman');
+ await shot(page,'original-knight-fishing-ten-frames');
+});
