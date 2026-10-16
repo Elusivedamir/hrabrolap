@@ -22,6 +22,7 @@ export const WEAPONS=[
 ];
 export const ARMORS=[
  {id:'none',name:'Без брони',price:0,health:0,svg:''},
+ {id:'forest_guardian',name:'Лесной страж',price:50,health:0,svg:'assets/armor/forest_guardian/forest_attack_01.png'},
  {id:'web',name:'Паутинная броня',price:300,health:35,materials:{web:6},svg:'art/armor/web.svg'},
  {id:'steel',name:'Рыцарский панцирь',price:230,health:28,svg:'art/armor/steel.svg'},
  {id:'bone_slime',name:'Броня из костей и слизи',price:550,health:60,materials:{bone:5,slime:5},svg:'art/armor/bone_slime.svg'},

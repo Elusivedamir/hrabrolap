@@ -3,6 +3,7 @@ import {QUESTS,questProgress,claimQuest} from './quests.mjs';
 import {monsterPose} from './monster-rig.mjs';
 import {bucketArt,sleepFrameIndex,SLEEP_FRAMES} from './bucket-rest.mjs';
 import {applyCanonicalFrame} from './canonical-sprites.mjs';
+import {FOREST_GUARDIAN_ID,forestArmorUrl,forestForegroundPath} from './forest-guardian-rig.mjs';
 import {armorAttackTransform,armorHurtTransform,hurtMotionTransform,hurtWeaponTransform,HURT_FRAMES,HURT_FRAME_MS} from './equipment-rig.mjs';
 import {WEAPONS,ARMORS,MATERIALS,freshProgress,validateProgress,restoreFight,swordCost,armorCost,fishCost,homeCost,bucketCost,bucketCapacity,heroDamage,maxHealth,startFight,stepFight,upgrade,buyEquipment,equipEquipment,offlineReward,bucketVolume,bucketGold,planFishing,stepFishing,stepMerchant,sellAll,purchaseAutoBattle,upgradeAttackSpeed,autoHitsPerSecond,autoUpgradeCost,MAX_AUTO_LEVEL,attackInterval,setEnchantment,tapMonster} from './game-core.mjs';
 const $=id=>document.getElementById(id), SAVE='hrabrolap-v0.2-save',OLD='hrabrolap-v0.1-save',fmt=n=>Math.floor(n).toLocaleString('ru-RU');
@@ -32,6 +33,18 @@ const ATTACKS=[
 ];
 let poseSerial=0,poseTimeouts=[],attackPrepared=false,currentPose=-1,attackSerial=0,activeAttack=0;
 const heroMotion=$('hero-motion'),slot=$('weapon-slot'),armorSlot=$('armor-slot');
+let forestKind='attack',forestIndex=0;
+function updateForestFrame(kind=forestKind,index=forestIndex){
+ forestKind=kind;forestIndex=index;
+ const chosen=p?.equippedArmor===FOREST_GUARDIAN_ID;
+ const overlay=$('forest-armor'),foreground=$('forest-front');
+ overlay.style.display=chosen?'':'none';foreground.style.display=chosen?'':'none';
+ if(!chosen)return;
+ overlay.setAttribute('href',forestArmorUrl(kind,index));
+ foreground.setAttribute('href',$('hero-body').getAttribute('href'));
+ $('forest-front-path').setAttribute('d',forestForegroundPath(kind,index));
+}
+
 let hurtSerial=0,hurtTimers=[],hurting=false;
 function cancelHurt(){
  hurtSerial++;for(const t of hurtTimers)clearTimeout(t);hurtTimers=[];hurting=false;
@@ -41,6 +54,7 @@ function hurtFrame(index){
  applyCanonicalFrame('hurt',index,{
   body:$('hero-body'),heroMotion,weaponSlot:slot,armorSlot,armorImage:$('hero-armor')
  });
+ updateForestFrame('hurt',index);
  $('hero-art').dataset.hurtFrame=String(index+1);
 }
 function playHurt(){
@@ -61,6 +75,7 @@ function heroFrame(index=0){
  applyCanonicalFrame('attack',index,{
   body:$('hero-body'),heroMotion,weaponSlot:slot,armorSlot,armorImage:$('hero-armor')
  });
+ updateForestFrame('attack',index);
  currentPose=index;
 }
 function cancelPose(){poseSerial++;for(const t of poseTimeouts)clearTimeout(t);poseTimeouts=[];attackPrepared=false;}
@@ -71,7 +86,7 @@ function cancelAttackPose(){cancelPose();activeAttack=0;heroFrame(0);}
 function syncHeroPose(){if(b.phase==='rest'&&!hurting)cancelAttackPose();}
 function syncEquipment(){
  const weapon=WEAPONS.find(w=>w.id===p.weapon)||WEAPONS[0];$('hero-weapon').setAttribute('href',weapon.svg);
- const armor=ARMORS.find(a=>a.id===p.equippedArmor)||ARMORS[0];const art=$('hero-armor');art.style.display=armor.svg?'':'none';if(armor.svg)art.setAttribute('href',armor.svg);
+ const armor=ARMORS.find(a=>a.id===p.equippedArmor)||ARMORS[0];const art=$('hero-armor');const forest=armor.id===FOREST_GUARDIAN_ID;art.style.display=!forest&&armor.svg?'':'none';if(!forest&&armor.svg)art.setAttribute('href',armor.svg);updateForestFrame();
 }
 const APPROVED_MONSTER_TYPES=new Set(['slime','spider','mouse','mushroom','beetle','larva','bat','ghost']);
 const ARTICULATED_MONSTER_TYPES=new Set(['skeleton','golem']);
@@ -199,7 +214,7 @@ function openModal(title,mode='info',text=''){modalType=mode;$('modal-title').te
       if(mode==='inventory'&&!own.includes(item.id))continue;
       const row=document.createElement('div');row.className='shop-item';const im=document.createElement('img');if(item.svg)im.src=item.svg;else {im.src='art/hero/bare-kitten.svg';im.alt='Без брони';}
       const main=document.createElement('main'),label=document.createElement('b');label.textContent=item.name;
-       const stats=document.createElement('small');stats.textContent=category==='weapon'?'Урон +'+item.damage:'Здоровье +'+item.health;
+       const stats=document.createElement('small');stats.textContent=category==='weapon'?'Урон +'+item.damage:item.id===FOREST_GUARDIAN_ID?'Костюм · без изменения здоровья':'Здоровье +'+item.health;
        const recipe=document.createElement('small');recipe.className='item-recipe';
        const names=Object.entries(item.materials||{}).map(([id,count])=>{const type=MATERIALS.find(m=>m.id===id);return `${type?.icon||'•'} ${type?.name||id} ${p.materials[id]||0}/${count}`;});
        recipe.textContent='🪙 '+fmt(item.price)+(names.length?' · '+names.join(' · '):'');

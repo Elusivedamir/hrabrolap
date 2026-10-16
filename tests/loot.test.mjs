@@ -2,11 +2,11 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import * as c from '../game-core.mjs';
 
-test('10 мечей, 10 покупаемых броней, независимые SVG-пути',()=>{
+test('10 мечей и 11 покупаемых броней, независимые пути',()=>{
  assert.equal(c.WEAPONS.length,10);
- assert.equal(c.ARMORS.filter(a=>a.id!=='none').length,10);
+ assert.equal(c.ARMORS.filter(a=>a.id!=='none').length,11);
  assert.equal(new Set(c.WEAPONS.map(w=>w.svg)).size,10);
- assert.equal(new Set(c.ARMORS.filter(a=>a.svg).map(a=>a.svg)).size,10);
+ assert.equal(new Set(c.ARMORS.filter(a=>a.svg).map(a=>a.svg)).size,11);
  for(const item of [...c.WEAPONS,...c.ARMORS])assert.ok(item.price>=0);
  const web=c.ARMORS.find(a=>a.id==='web');assert.equal(web.price,300);assert.equal(web.materials.web,6);
  const bone=c.ARMORS.find(a=>a.id==='bone_slime');assert.equal(bone.materials.bone,5);assert.equal(bone.materials.slime,5);

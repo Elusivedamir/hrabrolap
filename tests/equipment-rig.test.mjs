@@ -29,7 +29,7 @@ test('все позы экипировки образуют 3×6 ударов и
  }
 });
 test('preview references modular swords and armors; base cat is never redrawn',async()=>{
- assert.equal(WEAPONS.length,10);assert.equal(ARMORS.filter(a=>a.svg).length,10);
+ assert.equal(WEAPONS.length,10);assert.equal(ARMORS.filter(a=>a.svg).length,11);
  const game=await fs.readFile(new URL('../game.mjs',import.meta.url),'utf8');
  const page=await fs.readFile(new URL('../equipment-preview.html',import.meta.url),'utf8');
  assert.ok(page.includes('art/hero/bare-kitten.svg'));
