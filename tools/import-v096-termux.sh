@@ -40,7 +40,6 @@ node --check game.mjs
 node --check canonical-sprites.mjs
 node --check bucket-rest.mjs
 npm test
-git diff --check
 # Stage only the approved game sources, no caches, backups, Android secrets or saves.
 git add game.mjs index.html style.css package.json \
   canonical-sprites.mjs bucket-rest.mjs \
@@ -49,6 +48,7 @@ git add game.mjs index.html style.css package.json \
   assets/canonical/ assets/rest/ \
   art/scenery/bucket-empty.svg art/scenery/bucket-low.svg \
   art/scenery/bucket-mid.svg art/scenery/bucket-full.svg
+git diff --cached --check
 echo "Check staged files:"
 git diff --cached --stat
 if git diff --cached --quiet; then
@@ -57,7 +57,13 @@ if git diff --cached --quiet; then
 fi
 echo
 echo "Assets and source changes are staged; creating v0.9.6 commit..."
-git commit -m "feat: v0.9.6 canonical frames, fishing bucket stages and home sleep"
+if [[ -z "$(git config user.name || true)" || -z "$(git config user.email || true)" ]]; then
+  # Public GitHub noreply address corresponding to the repository owner.
+  git -c user.name="Elusivedamir" -c user.email="300641812+Elusivedamir@users.noreply.github.com" \
+    commit -m "feat: v0.9.6 canonical frames, fishing bucket stages and home sleep"
+else
+  git commit -m "feat: v0.9.6 canonical frames, fishing bucket stages and home sleep"
+fi
 echo
 echo "Pushing release branch to GitHub..."
 git push --set-upstream origin release/v0.9.6
