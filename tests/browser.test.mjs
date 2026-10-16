@@ -192,7 +192,7 @@ test('новый игрок вручную атакует, покупает ав
  await page.locator('#status').click();
  let savedGame=await saved(page);
  assert.equal(savedGame.gold,0);assert.equal(savedGame.autoUnlocked,true);assert.equal(savedGame.autoEnabled,true);
- assert.match(await page.locator('#status').textContent(),/АВТОБОЙ 1\\/с/);
+ assert.match(await page.locator('#status').textContent(),/АВТОБОЙ 1\/с/);
  await page.locator('#status').click();
  savedGame=await saved(page);
  assert.equal(savedGame.autoEnabled,false);assert.equal(savedGame.gold,0);
