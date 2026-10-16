@@ -1,8 +1,8 @@
 {
-  "generatedAt": "2026-10-16T17:01:12.033Z",
+  "generatedAt": "2026-10-16T17:09:01.716Z",
   "sourceCore": "v0.9.7",
   "method": "stepFight(0.1, autoEnabled) + manual tap at each eligible step; autobattle must be purchased for 1 coin if selected; max 3 manual/s or level-0 auto 1/s; покупки только за заработанное золото; максимум 3 игровых часа; продажа на каждом визите, если включена рыбалка. Реальное время воспроизводится моделью, не браузером.",
-  "wallSeconds": 0.178,
+  "wallSeconds": 0.261,
   "results": [
     {
       "id": "balanced-1s",
@@ -43,15 +43,15 @@
       },
       "monsterTypes": [
         "slime",
-        "spider",
+        "mouse",
         "mushroom",
         "bat",
         "skeleton",
+        "larva",
         "beetle",
         "ghost",
-        "golem",
-        "larva",
-        "mouse"
+        "spider",
+        "golem"
       ],
       "bossWaves": [
         10,
@@ -1006,16 +1006,16 @@
         "equippedArmor": 0
       },
       "monsterTypes": [
-        "slime",
+        "spider",
         "mouse",
         "mushroom",
-        "bat",
         "skeleton",
-        "spider",
+        "larva",
         "beetle",
         "ghost",
         "golem",
-        "larva"
+        "bat",
+        "slime"
       ],
       "bossWaves": [
         10,
@@ -1972,14 +1972,14 @@
       "monsterTypes": [
         "slime",
         "mouse",
+        "mushroom",
         "spider",
-        "bat",
+        "skeleton",
+        "larva",
         "beetle",
         "ghost",
-        "skeleton",
         "golem",
-        "larva",
-        "mushroom"
+        "bat"
       ],
       "bossWaves": [
         10,
@@ -2910,8 +2910,8 @@
       "cleared": true,
       "best": 100,
       "room": 100,
-      "seconds": 602.5,
-      "minutes": 10.04,
+      "seconds": 601.3,
+      "minutes": 10.02,
       "wins": 100,
       "defeats": 11,
       "farmWins": 0,
@@ -2938,12 +2938,12 @@
         "mouse",
         "mushroom",
         "bat",
-        "spider",
+        "skeleton",
         "larva",
         "beetle",
         "ghost",
         "golem",
-        "skeleton"
+        "spider"
       ],
       "bossWaves": [
         10,
@@ -3702,8 +3702,8 @@
           "sword": 22,
           "armor": 19,
           "damage": 89,
-          "health": 366,
-          "gold": 11859
+          "health": 391,
+          "gold": 11309
         },
         {
           "wave": 84,
@@ -3711,111 +3711,111 @@
           "sword": 22,
           "armor": 19,
           "damage": 89,
-          "health": 366,
-          "gold": 12264
+          "health": 391,
+          "gold": 11714
         },
         {
           "wave": 85,
           "seconds": 492.2,
           "sword": 22,
-          "armor": 19,
+          "armor": 20,
           "damage": 89,
-          "health": 366,
-          "gold": 12674
+          "health": 405,
+          "gold": 11537
         },
         {
           "wave": 86,
           "seconds": 497.4,
           "sword": 22,
-          "armor": 19,
+          "armor": 20,
           "damage": 89,
-          "health": 366,
-          "gold": 13088
+          "health": 405,
+          "gold": 11951
         },
         {
           "wave": 87,
           "seconds": 512.1,
-          "sword": 22,
-          "armor": 19,
-          "damage": 89,
-          "health": 366,
-          "gold": 13507
+          "sword": 23,
+          "armor": 20,
+          "damage": 92,
+          "health": 405,
+          "gold": 11737
         },
         {
           "wave": 88,
           "seconds": 517.3,
-          "sword": 22,
-          "armor": 19,
-          "damage": 89,
-          "health": 366,
-          "gold": 13931
+          "sword": 23,
+          "armor": 20,
+          "damage": 92,
+          "health": 405,
+          "gold": 12161
         },
         {
           "wave": 89,
           "seconds": 522.5,
-          "sword": 22,
-          "armor": 19,
-          "damage": 89,
-          "health": 366,
-          "gold": 14360
+          "sword": 23,
+          "armor": 20,
+          "damage": 92,
+          "health": 405,
+          "gold": 12590
         },
         {
           "wave": 90,
           "seconds": 532.5,
-          "sword": 22,
-          "armor": 19,
-          "damage": 89,
-          "health": 366,
-          "gold": 15662
+          "sword": 23,
+          "armor": 20,
+          "damage": 92,
+          "health": 405,
+          "gold": 13892
         },
         {
           "wave": 91,
           "seconds": 537.7,
-          "sword": 22,
-          "armor": 19,
-          "damage": 89,
-          "health": 366,
-          "gold": 16101
+          "sword": 23,
+          "armor": 20,
+          "damage": 92,
+          "health": 405,
+          "gold": 14331
         },
         {
           "wave": 92,
           "seconds": 542.9,
-          "sword": 22,
-          "armor": 19,
-          "damage": 89,
-          "health": 366,
-          "gold": 16545
+          "sword": 23,
+          "armor": 20,
+          "damage": 92,
+          "health": 405,
+          "gold": 14775
         },
         {
           "wave": 93,
-          "seconds": 548.5,
-          "sword": 22,
-          "armor": 19,
-          "damage": 89,
-          "health": 366,
-          "gold": 16994
+          "seconds": 548.1,
+          "sword": 23,
+          "armor": 20,
+          "damage": 92,
+          "health": 405,
+          "gold": 15224
         },
         {
           "wave": 94,
-          "seconds": 554.1,
-          "sword": 22,
-          "armor": 19,
-          "damage": 89,
-          "health": 391,
-          "gold": 16898
+          "seconds": 553.3,
+          "sword": 23,
+          "armor": 20,
+          "damage": 92,
+          "health": 405,
+          "gold": 15678
         },
         {
           "wave": 95,
-          "seconds": 569.2,
-          "sword": 22,
+          "seconds": 558.5,
+          "sword": 23,
           "armor": 20,
-          "damage": 89,
+          "damage": 92,
           "health": 405,
-          "gold": 16770
+          "gold": 16137
         },
         {
           "wave": 96,
-          "seconds": 574.8,
+          "seconds": 573.6,
           "sword": 23,
           "armor": 20,
           "damage": 92,
@@ -3824,7 +3824,7 @@
         },
         {
           "wave": 97,
-          "seconds": 580.4,
+          "seconds": 579.2,
           "sword": 23,
           "armor": 20,
           "damage": 92,
@@ -3833,7 +3833,7 @@
         },
         {
           "wave": 98,
-          "seconds": 586,
+          "seconds": 584.8,
           "sword": 23,
           "armor": 20,
           "damage": 92,
@@ -3842,7 +3842,7 @@
         },
         {
           "wave": 99,
-          "seconds": 591.6,
+          "seconds": 590.4,
           "sword": 23,
           "armor": 20,
           "damage": 92,
@@ -3851,7 +3851,7 @@
         },
         {
           "wave": 100,
-          "seconds": 602.4,
+          "seconds": 601.2,
           "sword": 23,
           "armor": 20,
           "damage": 92,
@@ -3898,15 +3898,15 @@
         "equippedArmor": 0
       },
       "monsterTypes": [
-        "slime",
         "spider",
         "mushroom",
         "bat",
-        "skeleton",
         "larva",
         "beetle",
-        "ghost",
         "golem",
+        "skeleton",
+        "ghost",
+        "slime",
         "mouse"
       ],
       "bossWaves": [
@@ -4862,6 +4862,7 @@
         "equippedArmor": 0
       },
       "monsterTypes": [
+        "slime",
         "spider",
         "mushroom",
         "bat",
@@ -4870,7 +4871,6 @@
         "beetle",
         "golem",
         "ghost",
-        "slime",
         "mouse"
       ],
       "bossWaves": [
@@ -5726,15 +5726,15 @@
       },
       "monsterTypes": [
         "spider",
+        "bat",
         "skeleton",
         "larva",
         "ghost",
         "golem",
-        "bat",
-        "mouse",
-        "mushroom",
         "beetle",
-        "slime"
+        "slime",
+        "mouse",
+        "mushroom"
       ],
       "bossWaves": [
         10,
@@ -6318,12 +6318,12 @@
         "spider",
         "mouse",
         "mushroom",
+        "bat",
         "skeleton",
-        "larva",
         "beetle",
         "ghost",
         "golem",
-        "bat",
+        "larva",
         "slime"
       ],
       "bossWaves": [
@@ -6517,27 +6517,27 @@
       "cleared": true,
       "best": 100,
       "room": 100,
-      "seconds": 599.3,
-      "minutes": 9.99,
+      "seconds": 601.3,
+      "minutes": 10.02,
       "wins": 100,
       "defeats": 11,
       "farmWins": 0,
-      "damage": 98,
-      "health": 433,
-      "sword": 24,
-      "armor": 22,
-      "gold": 16575,
-      "totalGold": 29770,
-      "weapon": "slimeblade",
+      "damage": 92,
+      "health": 405,
+      "sword": 23,
+      "armor": 20,
+      "gold": 19566,
+      "totalGold": 29880,
+      "weapon": "boneblade",
       "equippedArmor": "bone_slime",
       "caught": 12,
-      "sales": 1,
-      "fishGold": 87,
+      "sales": 2,
+      "fishGold": 197,
       "reloads": 0,
       "purchases": {
-        "sword": 24,
-        "armor": 22,
-        "weapon": 5,
+        "sword": 23,
+        "armor": 20,
+        "weapon": 4,
         "equippedArmor": 3
       },
       "monsterTypes": [
@@ -6549,8 +6549,8 @@
         "larva",
         "beetle",
         "golem",
-        "mouse",
-        "ghost"
+        "ghost",
+        "mouse"
       ],
       "bossWaves": [
         10,
@@ -7422,48 +7422,48 @@
         },
         {
           "wave": 96,
-          "seconds": 573.2,
+          "seconds": 573.6,
           "sword": 23,
-          "armor": 21,
-          "damage": 95,
-          "health": 419,
-          "gold": 15233
+          "armor": 20,
+          "damage": 92,
+          "health": 405,
+          "gold": 16584
         },
         {
           "wave": 97,
-          "seconds": 578.4,
+          "seconds": 579.2,
           "sword": 23,
-          "armor": 21,
-          "damage": 95,
-          "health": 419,
-          "gold": 15702
+          "armor": 20,
+          "damage": 92,
+          "health": 405,
+          "gold": 17053
         },
         {
           "wave": 98,
-          "seconds": 583.6,
-          "sword": 24,
-          "armor": 21,
-          "damage": 98,
-          "health": 419,
-          "gold": 15436
+          "seconds": 584.8,
+          "sword": 23,
+          "armor": 20,
+          "damage": 92,
+          "health": 405,
+          "gold": 17527
         },
         {
           "wave": 99,
-          "seconds": 588.8,
-          "sword": 24,
-          "armor": 21,
-          "damage": 98,
-          "health": 419,
-          "gold": 15915
+          "seconds": 590.4,
+          "sword": 23,
+          "armor": 20,
+          "damage": 92,
+          "health": 405,
+          "gold": 18006
         },
         {
           "wave": 100,
-          "seconds": 599.2,
-          "sword": 24,
-          "armor": 22,
-          "damage": 98,
-          "health": 433,
-          "gold": 16575
+          "seconds": 601.2,
+          "sword": 23,
+          "armor": 20,
+          "damage": 92,
+          "health": 405,
+          "gold": 19566
         }
       ]
     },
@@ -7481,10 +7481,10 @@
       "cleared": true,
       "best": 100,
       "room": 100,
-      "seconds": 646.3,
-      "minutes": 10.77,
+      "seconds": 601.3,
+      "minutes": 10.02,
       "wins": 100,
-      "defeats": 13,
+      "defeats": 11,
       "farmWins": 0,
       "damage": 92,
       "health": 405,
@@ -7494,7 +7494,7 @@
       "totalGold": 29863,
       "weapon": "boneblade",
       "equippedArmor": "bone_slime",
-      "caught": 15,
+      "caught": 14,
       "sales": 2,
       "fishGold": 180,
       "reloads": 0,
@@ -7505,16 +7505,16 @@
         "equippedArmor": 3
       },
       "monsterTypes": [
-        "slime",
-        "mouse",
         "spider",
+        "mushroom",
+        "skeleton",
+        "larva",
+        "golem",
         "bat",
         "beetle",
-        "golem",
         "ghost",
-        "skeleton",
-        "mushroom",
-        "larva"
+        "slime",
+        "mouse"
       ],
       "bossWaves": [
         10,
@@ -7783,547 +7783,547 @@
         },
         {
           "wave": 29,
-          "seconds": 132.5,
+          "seconds": 132.1,
           "sword": 8,
           "armor": 4,
-          "damage": 32,
+          "damage": 36,
           "health": 121,
-          "gold": 2009
+          "gold": 1949
         },
         {
           "wave": 30,
-          "seconds": 155.6,
+          "seconds": 140.1,
           "sword": 8,
-          "armor": 4,
-          "damage": 32,
-          "health": 121,
-          "gold": 2443
+          "armor": 5,
+          "damage": 36,
+          "health": 135,
+          "gold": 2320
         },
         {
           "wave": 31,
-          "seconds": 160.4,
-          "sword": 8,
-          "armor": 4,
-          "damage": 32,
-          "health": 121,
-          "gold": 2592
+          "seconds": 153.6,
+          "sword": 9,
+          "armor": 5,
+          "damage": 39,
+          "health": 135,
+          "gold": 2399
         },
         {
           "wave": 32,
-          "seconds": 165.2,
-          "sword": 8,
-          "armor": 4,
-          "damage": 32,
-          "health": 121,
-          "gold": 2746
+          "seconds": 158,
+          "sword": 9,
+          "armor": 5,
+          "damage": 39,
+          "health": 135,
+          "gold": 2553
         },
         {
           "wave": 33,
-          "seconds": 170,
-          "sword": 8,
-          "armor": 4,
-          "damage": 32,
-          "health": 121,
-          "gold": 2905
-        },
-        {
-          "wave": 34,
-          "seconds": 175.2,
-          "sword": 8,
-          "armor": 4,
-          "damage": 32,
-          "health": 121,
-          "gold": 3068
-        },
-        {
-          "wave": 35,
-          "seconds": 180.4,
-          "sword": 8,
-          "armor": 4,
-          "damage": 36,
-          "health": 121,
-          "gold": 3176
-        },
-        {
-          "wave": 36,
-          "seconds": 194.7,
-          "sword": 8,
-          "armor": 5,
-          "damage": 36,
-          "health": 135,
-          "gold": 3286
-        },
-        {
-          "wave": 37,
-          "seconds": 199.5,
-          "sword": 8,
-          "armor": 5,
-          "damage": 36,
-          "health": 135,
-          "gold": 3464
-        },
-        {
-          "wave": 38,
-          "seconds": 204.3,
-          "sword": 9,
-          "armor": 5,
-          "damage": 39,
-          "health": 135,
-          "gold": 3576
-        },
-        {
-          "wave": 39,
-          "seconds": 209.1,
-          "sword": 9,
-          "armor": 5,
-          "damage": 39,
-          "health": 135,
-          "gold": 3763
-        },
-        {
-          "wave": 40,
-          "seconds": 218.7,
+          "seconds": 162.4,
           "sword": 9,
           "armor": 6,
           "damage": 39,
           "health": 149,
-          "gold": 4264
+          "gold": 2638
+        },
+        {
+          "wave": 34,
+          "seconds": 166.8,
+          "sword": 9,
+          "armor": 6,
+          "damage": 39,
+          "health": 149,
+          "gold": 2801
+        },
+        {
+          "wave": 35,
+          "seconds": 171.2,
+          "sword": 10,
+          "armor": 6,
+          "damage": 42,
+          "health": 149,
+          "gold": 2887
+        },
+        {
+          "wave": 36,
+          "seconds": 175.6,
+          "sword": 10,
+          "armor": 6,
+          "damage": 42,
+          "health": 149,
+          "gold": 3060
+        },
+        {
+          "wave": 37,
+          "seconds": 180,
+          "sword": 10,
+          "armor": 6,
+          "damage": 42,
+          "health": 149,
+          "gold": 3238
+        },
+        {
+          "wave": 38,
+          "seconds": 184.4,
+          "sword": 10,
+          "armor": 7,
+          "damage": 42,
+          "health": 163,
+          "gold": 3335
+        },
+        {
+          "wave": 39,
+          "seconds": 189.2,
+          "sword": 10,
+          "armor": 7,
+          "damage": 42,
+          "health": 163,
+          "gold": 3522
+        },
+        {
+          "wave": 40,
+          "seconds": 207.1,
+          "sword": 11,
+          "armor": 8,
+          "damage": 45,
+          "health": 177,
+          "gold": 3902
         },
         {
           "wave": 41,
-          "seconds": 233,
-          "sword": 10,
-          "armor": 7,
-          "damage": 42,
-          "health": 163,
-          "gold": 4294
+          "seconds": 211.5,
+          "sword": 12,
+          "armor": 8,
+          "damage": 48,
+          "health": 177,
+          "gold": 3987
         },
         {
           "wave": 42,
-          "seconds": 237.8,
-          "sword": 10,
-          "armor": 7,
-          "damage": 42,
-          "health": 163,
-          "gold": 4495
+          "seconds": 215.9,
+          "sword": 12,
+          "armor": 8,
+          "damage": 48,
+          "health": 177,
+          "gold": 4188
         },
         {
           "wave": 43,
-          "seconds": 242.6,
-          "sword": 11,
-          "armor": 7,
-          "damage": 45,
-          "health": 163,
-          "gold": 4605
+          "seconds": 220.3,
+          "sword": 12,
+          "armor": 9,
+          "damage": 48,
+          "health": 191,
+          "gold": 4279
         },
         {
           "wave": 44,
-          "seconds": 247.4,
-          "sword": 11,
-          "armor": 7,
-          "damage": 45,
-          "health": 163,
-          "gold": 4816
+          "seconds": 225.1,
+          "sword": 12,
+          "armor": 9,
+          "damage": 48,
+          "health": 191,
+          "gold": 4490
         },
         {
           "wave": 45,
-          "seconds": 252.2,
-          "sword": 11,
-          "armor": 8,
-          "damage": 45,
-          "health": 177,
-          "gold": 4933
+          "seconds": 229.9,
+          "sword": 12,
+          "armor": 9,
+          "damage": 48,
+          "health": 191,
+          "gold": 4706
         },
         {
           "wave": 46,
-          "seconds": 257.4,
-          "sword": 11,
-          "armor": 8,
-          "damage": 45,
-          "health": 177,
-          "gold": 5153
-        },
-        {
-          "wave": 47,
-          "seconds": 262.2,
-          "sword": 12,
-          "armor": 8,
-          "damage": 48,
-          "health": 177,
-          "gold": 5266
-        },
-        {
-          "wave": 48,
-          "seconds": 267,
-          "sword": 12,
-          "armor": 8,
-          "damage": 48,
-          "health": 177,
-          "gold": 5496
-        },
-        {
-          "wave": 49,
-          "seconds": 281.3,
+          "seconds": 234.3,
           "sword": 13,
           "armor": 9,
           "damage": 51,
           "health": 191,
-          "gold": 5484
+          "gold": 4794
+        },
+        {
+          "wave": 47,
+          "seconds": 248.6,
+          "sword": 13,
+          "armor": 10,
+          "damage": 51,
+          "health": 205,
+          "gold": 4886
+        },
+        {
+          "wave": 48,
+          "seconds": 253,
+          "sword": 14,
+          "armor": 10,
+          "damage": 54,
+          "health": 205,
+          "gold": 4962
+        },
+        {
+          "wave": 49,
+          "seconds": 257.8,
+          "sword": 14,
+          "armor": 10,
+          "damage": 54,
+          "health": 205,
+          "gold": 5197
         },
         {
           "wave": 50,
-          "seconds": 290.5,
-          "sword": 13,
-          "armor": 10,
-          "damage": 51,
-          "health": 205,
-          "gold": 6070
+          "seconds": 266.6,
+          "sword": 14,
+          "armor": 11,
+          "damage": 54,
+          "health": 219,
+          "gold": 5762
         },
         {
           "wave": 51,
-          "seconds": 295.3,
-          "sword": 13,
-          "armor": 10,
-          "damage": 51,
-          "health": 205,
-          "gold": 6314
+          "seconds": 271.4,
+          "sword": 14,
+          "armor": 11,
+          "damage": 58,
+          "health": 219,
+          "gold": 5846
         },
         {
           "wave": 52,
-          "seconds": 300.5,
+          "seconds": 276.2,
           "sword": 14,
-          "armor": 10,
-          "damage": 54,
-          "health": 205,
-          "gold": 6496
+          "armor": 11,
+          "damage": 58,
+          "health": 219,
+          "gold": 6095
         },
         {
           "wave": 53,
-          "seconds": 305.3,
+          "seconds": 281,
           "sword": 14,
-          "armor": 10,
-          "damage": 54,
-          "health": 205,
-          "gold": 6750
+          "armor": 12,
+          "damage": 58,
+          "health": 233,
+          "gold": 6170
         },
         {
           "wave": 54,
-          "seconds": 310.1,
-          "sword": 14,
-          "armor": 11,
-          "damage": 54,
-          "health": 219,
-          "gold": 6855
+          "seconds": 294.9,
+          "sword": 15,
+          "armor": 12,
+          "damage": 61,
+          "health": 233,
+          "gold": 6249
         },
         {
           "wave": 55,
-          "seconds": 324.4,
-          "sword": 14,
-          "armor": 11,
-          "damage": 58,
-          "health": 219,
-          "gold": 6959
+          "seconds": 299.7,
+          "sword": 15,
+          "armor": 12,
+          "damage": 61,
+          "health": 233,
+          "gold": 6513
         },
         {
           "wave": 56,
-          "seconds": 329.2,
-          "sword": 14,
-          "armor": 11,
-          "damage": 58,
-          "health": 219,
-          "gold": 7227
+          "seconds": 304.5,
+          "sword": 15,
+          "armor": 13,
+          "damage": 61,
+          "health": 247,
+          "gold": 6660
         },
         {
           "wave": 57,
-          "seconds": 334,
-          "sword": 14,
-          "armor": 12,
-          "damage": 58,
-          "health": 233,
-          "gold": 7321
+          "seconds": 309.3,
+          "sword": 15,
+          "armor": 13,
+          "damage": 61,
+          "health": 247,
+          "gold": 6933
         },
         {
           "wave": 58,
-          "seconds": 339.2,
-          "sword": 14,
-          "armor": 12,
-          "damage": 58,
-          "health": 233,
-          "gold": 7599
+          "seconds": 314.1,
+          "sword": 16,
+          "armor": 13,
+          "damage": 64,
+          "health": 247,
+          "gold": 7000
         },
         {
           "wave": 59,
-          "seconds": 344,
-          "sword": 15,
-          "armor": 12,
-          "damage": 61,
-          "health": 233,
-          "gold": 7702
+          "seconds": 318.9,
+          "sword": 16,
+          "armor": 13,
+          "damage": 64,
+          "health": 247,
+          "gold": 7283
         },
         {
           "wave": 60,
-          "seconds": 353.6,
-          "sword": 15,
+          "seconds": 328.1,
+          "sword": 16,
           "armor": 13,
-          "damage": 61,
-          "health": 247,
-          "gold": 8357
+          "damage": 64,
+          "health": 275,
+          "gold": 7916
         },
         {
           "wave": 61,
-          "seconds": 367.9,
-          "sword": 16,
-          "armor": 13,
-          "damage": 64,
-          "health": 247,
-          "gold": 8439
+          "seconds": 342.4,
+          "sword": 17,
+          "armor": 14,
+          "damage": 67,
+          "health": 289,
+          "gold": 7721
         },
         {
           "wave": 62,
-          "seconds": 372.7,
-          "sword": 16,
-          "armor": 13,
-          "damage": 64,
-          "health": 275,
-          "gold": 8506
+          "seconds": 347.2,
+          "sword": 17,
+          "armor": 14,
+          "damage": 67,
+          "health": 289,
+          "gold": 8018
         },
         {
           "wave": 63,
-          "seconds": 377.9,
-          "sword": 16,
-          "armor": 13,
-          "damage": 64,
-          "health": 275,
-          "gold": 8808
+          "seconds": 352,
+          "sword": 17,
+          "armor": 15,
+          "damage": 67,
+          "health": 303,
+          "gold": 8040
         },
         {
           "wave": 64,
-          "seconds": 383.1,
-          "sword": 16,
-          "armor": 14,
-          "damage": 64,
-          "health": 289,
-          "gold": 8874
+          "seconds": 356.8,
+          "sword": 17,
+          "armor": 15,
+          "damage": 67,
+          "health": 303,
+          "gold": 8347
         },
         {
           "wave": 65,
-          "seconds": 388.3,
-          "sword": 16,
-          "armor": 14,
-          "damage": 64,
-          "health": 289,
-          "gold": 9186
+          "seconds": 361.6,
+          "sword": 17,
+          "armor": 15,
+          "damage": 69,
+          "health": 303,
+          "gold": 8379
         },
         {
           "wave": 66,
-          "seconds": 393.5,
+          "seconds": 366.4,
           "sword": 17,
-          "armor": 14,
-          "damage": 67,
-          "health": 289,
-          "gold": 9256
+          "armor": 15,
+          "damage": 69,
+          "health": 303,
+          "gold": 8696
         },
         {
           "wave": 67,
-          "seconds": 398.7,
-          "sword": 17,
-          "armor": 14,
-          "damage": 67,
-          "health": 289,
-          "gold": 9578
+          "seconds": 371.2,
+          "sword": 18,
+          "armor": 15,
+          "damage": 72,
+          "health": 303,
+          "gold": 8729
         },
         {
           "wave": 68,
-          "seconds": 403.9,
-          "sword": 17,
+          "seconds": 376,
+          "sword": 18,
           "armor": 15,
-          "damage": 67,
+          "damage": 72,
           "health": 303,
-          "gold": 9624
+          "gold": 9055
         },
         {
           "wave": 69,
-          "seconds": 409.1,
-          "sword": 17,
+          "seconds": 380.8,
+          "sword": 18,
           "armor": 15,
-          "damage": 67,
-          "health": 303,
-          "gold": 9955
+          "damage": 72,
+          "health": 310,
+          "gold": 9086
         },
         {
           "wave": 70,
-          "seconds": 428.2,
-          "sword": 18,
-          "armor": 15,
-          "damage": 72,
-          "health": 303,
-          "gold": 10395
+          "seconds": 404.3,
+          "sword": 19,
+          "armor": 16,
+          "damage": 75,
+          "health": 324,
+          "gold": 9433
         },
         {
           "wave": 71,
-          "seconds": 433.4,
-          "sword": 18,
-          "armor": 15,
-          "damage": 72,
-          "health": 310,
-          "gold": 10436
+          "seconds": 409.1,
+          "sword": 19,
+          "armor": 16,
+          "damage": 75,
+          "health": 324,
+          "gold": 9774
         },
         {
           "wave": 72,
-          "seconds": 438.6,
-          "sword": 18,
-          "armor": 15,
-          "damage": 72,
-          "health": 310,
-          "gold": 10782
+          "seconds": 413.9,
+          "sword": 19,
+          "armor": 17,
+          "damage": 75,
+          "health": 338,
+          "gold": 9744
         },
         {
           "wave": 73,
-          "seconds": 443.8,
-          "sword": 18,
-          "armor": 16,
-          "damage": 72,
-          "health": 324,
-          "gold": 10809
+          "seconds": 419.1,
+          "sword": 19,
+          "armor": 17,
+          "damage": 75,
+          "health": 338,
+          "gold": 10095
         },
         {
           "wave": 74,
-          "seconds": 449,
-          "sword": 18,
-          "armor": 16,
-          "damage": 72,
-          "health": 324,
-          "gold": 11165
+          "seconds": 423.9,
+          "sword": 20,
+          "armor": 17,
+          "damage": 78,
+          "health": 338,
+          "gold": 10056
         },
         {
           "wave": 75,
-          "seconds": 454.2,
-          "sword": 19,
-          "armor": 16,
-          "damage": 75,
-          "health": 324,
-          "gold": 11188
+          "seconds": 429.1,
+          "sword": 20,
+          "armor": 17,
+          "damage": 78,
+          "health": 338,
+          "gold": 10417
         },
         {
           "wave": 76,
-          "seconds": 459.4,
-          "sword": 19,
-          "armor": 16,
-          "damage": 75,
-          "health": 324,
-          "gold": 11553
+          "seconds": 434.3,
+          "sword": 20,
+          "armor": 18,
+          "damage": 78,
+          "health": 352,
+          "gold": 10346
         },
         {
           "wave": 77,
-          "seconds": 464.6,
-          "sword": 19,
-          "armor": 17,
-          "damage": 75,
-          "health": 338,
-          "gold": 11547
+          "seconds": 439.5,
+          "sword": 20,
+          "armor": 18,
+          "damage": 78,
+          "health": 352,
+          "gold": 10716
         },
         {
           "wave": 78,
-          "seconds": 479.3,
+          "seconds": 444.3,
           "sword": 20,
-          "armor": 17,
-          "damage": 78,
-          "health": 338,
-          "gold": 11527
+          "armor": 18,
+          "damage": 83,
+          "health": 352,
+          "gold": 10631
         },
         {
           "wave": 79,
-          "seconds": 484.5,
-          "sword": 20,
+          "seconds": 458.6,
+          "sword": 21,
           "armor": 18,
-          "damage": 78,
+          "damage": 86,
           "health": 352,
-          "gold": 11471
+          "gold": 10549
         },
         {
           "wave": 80,
-          "seconds": 494.5,
-          "sword": 20,
-          "armor": 18,
-          "damage": 83,
-          "health": 352,
-          "gold": 12166
+          "seconds": 467.8,
+          "sword": 21,
+          "armor": 19,
+          "damage": 86,
+          "health": 366,
+          "gold": 11198
         },
         {
           "wave": 81,
-          "seconds": 499.7,
-          "sword": 20,
-          "armor": 18,
-          "damage": 83,
-          "health": 352,
-          "gold": 12556
-        },
-        {
-          "wave": 82,
-          "seconds": 504.9,
-          "sword": 21,
-          "armor": 18,
-          "damage": 86,
-          "health": 352,
-          "gold": 12489
-        },
-        {
-          "wave": 83,
-          "seconds": 510.1,
-          "sword": 21,
-          "armor": 19,
-          "damage": 86,
-          "health": 366,
-          "gold": 12383
-        },
-        {
-          "wave": 84,
-          "seconds": 515.3,
-          "sword": 21,
-          "armor": 19,
-          "damage": 86,
-          "health": 366,
-          "gold": 12788
-        },
-        {
-          "wave": 85,
-          "seconds": 520.5,
+          "seconds": 472.6,
           "sword": 22,
           "armor": 19,
           "damage": 89,
           "health": 366,
-          "gold": 12657
+          "gold": 11047
         },
         {
-          "wave": 86,
-          "seconds": 535.2,
+          "wave": 82,
+          "seconds": 477.4,
+          "sword": 22,
+          "armor": 19,
+          "damage": 89,
+          "health": 366,
+          "gold": 11442
+        },
+        {
+          "wave": 83,
+          "seconds": 482.2,
           "sword": 22,
           "armor": 19,
           "damage": 89,
           "health": 391,
-          "gold": 12521
+          "gold": 11292
+        },
+        {
+          "wave": 84,
+          "seconds": 487,
+          "sword": 22,
+          "armor": 19,
+          "damage": 89,
+          "health": 391,
+          "gold": 11697
+        },
+        {
+          "wave": 85,
+          "seconds": 492.2,
+          "sword": 22,
+          "armor": 20,
+          "damage": 89,
+          "health": 405,
+          "gold": 11520
+        },
+        {
+          "wave": 86,
+          "seconds": 497.4,
+          "sword": 22,
+          "armor": 20,
+          "damage": 89,
+          "health": 405,
+          "gold": 11934
         },
         {
           "wave": 87,
-          "seconds": 540.4,
-          "sword": 22,
+          "seconds": 512.1,
+          "sword": 23,
           "armor": 20,
-          "damage": 89,
+          "damage": 92,
           "health": 405,
-          "gold": 12353
+          "gold": 11720
         },
         {
           "wave": 88,
-          "seconds": 545.6,
-          "sword": 22,
+          "seconds": 517.3,
+          "sword": 23,
           "armor": 20,
-          "damage": 89,
+          "damage": 92,
           "health": 405,
-          "gold": 12777
+          "gold": 12144
         },
         {
           "wave": 89,
-          "seconds": 550.8,
+          "seconds": 522.5,
           "sword": 23,
           "armor": 20,
           "damage": 92,
@@ -8332,7 +8332,7 @@
         },
         {
           "wave": 90,
-          "seconds": 560.8,
+          "seconds": 532.5,
           "sword": 23,
           "armor": 20,
           "damage": 92,
@@ -8341,7 +8341,7 @@
         },
         {
           "wave": 91,
-          "seconds": 566,
+          "seconds": 537.7,
           "sword": 23,
           "armor": 20,
           "damage": 92,
@@ -8350,7 +8350,7 @@
         },
         {
           "wave": 92,
-          "seconds": 571.2,
+          "seconds": 542.9,
           "sword": 23,
           "armor": 20,
           "damage": 92,
@@ -8359,7 +8359,7 @@
         },
         {
           "wave": 93,
-          "seconds": 576.4,
+          "seconds": 548.1,
           "sword": 23,
           "armor": 20,
           "damage": 92,
@@ -8368,7 +8368,7 @@
         },
         {
           "wave": 94,
-          "seconds": 591.1,
+          "seconds": 553.3,
           "sword": 23,
           "armor": 20,
           "damage": 92,
@@ -8377,7 +8377,7 @@
         },
         {
           "wave": 95,
-          "seconds": 596.3,
+          "seconds": 558.5,
           "sword": 23,
           "armor": 20,
           "damage": 92,
@@ -8386,43 +8386,43 @@
         },
         {
           "wave": 96,
-          "seconds": 601.9,
+          "seconds": 573.6,
           "sword": 23,
           "armor": 20,
           "damage": 92,
           "health": 405,
-          "gold": 16677
+          "gold": 16584
         },
         {
           "wave": 97,
-          "seconds": 607.5,
+          "seconds": 579.2,
           "sword": 23,
           "armor": 20,
           "damage": 92,
           "health": 405,
-          "gold": 17146
+          "gold": 17053
         },
         {
           "wave": 98,
-          "seconds": 613.1,
+          "seconds": 584.8,
           "sword": 23,
           "armor": 20,
           "damage": 92,
           "health": 405,
-          "gold": 17620
+          "gold": 17527
         },
         {
           "wave": 99,
-          "seconds": 618.7,
+          "seconds": 590.4,
           "sword": 23,
           "armor": 20,
           "damage": 92,
           "health": 405,
-          "gold": 18099
+          "gold": 18006
         },
         {
           "wave": 100,
-          "seconds": 646.2,
+          "seconds": 601.2,
           "sword": 23,
           "armor": 20,
           "damage": 92,
@@ -8472,13 +8472,13 @@
         "slime",
         "mouse",
         "mushroom",
-        "spider",
+        "bat",
         "skeleton",
         "larva",
-        "beetle",
+        "spider",
         "ghost",
         "golem",
-        "bat"
+        "beetle"
       ],
       "bossWaves": [
         10,
@@ -9434,15 +9434,15 @@
       },
       "monsterTypes": [
         "slime",
-        "spider",
+        "mouse",
         "mushroom",
+        "bat",
         "skeleton",
         "larva",
         "beetle",
-        "golem",
-        "bat",
         "ghost",
-        "mouse"
+        "golem",
+        "spider"
       ],
       "bossWaves": [
         10,
