@@ -1,0 +1,30 @@
+name: Restore original v0.9.3 fishing scene and knight frames
+on:
+  push:
+    branches:
+      - fix/v0.9.7-approved-mobs-and-controls
+    paths:
+      - assets/legacy-v093-fishing.manifest.b64
+      - tools/restore_v093_fishing.py
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  restore:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+      - run: python3 tools/restore_v093_fishing.py
+      - name: Commit exact original ten SVG frames and cutouts
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add animations/fishing/ art/animated/
+          if git diff --cached --quiet; then
+            echo "No new animated source files."
+          else
+            git commit -m "assets: recover original v0.9.3 animated fishing knight 10 poses"
+            git push origin HEAD:fix/v0.9.7-approved-mobs-and-controls
+          fi

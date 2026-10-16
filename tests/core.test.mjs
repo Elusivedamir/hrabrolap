@@ -1,8 +1,8 @@
 import assert from 'node:assert/strict';
 import {freshProgress,validateProgress,startFight,stepFight,upgrade,heroDamage,maxHealth,ENEMIES,MONSTERS,WEAPONS,ARMORS,buyEquipment,equipEquipment,bucketCapacity,bucketVolume,planFishing,stepFishing,stepMerchant,sellAll,offlineReward,monsterForWave,fishCost,swordCost,armorCost} from '../game-core.mjs';
 assert.equal(ENEMIES.length,100);
-assert.equal(MONSTERS.length,9);
-assert.equal(new Set(ENEMIES.map(e=>e.type)).size,8);
+assert.equal(MONSTERS.length,10);
+assert.equal(new Set(ENEMIES.map(e=>e.type)).size,10);
 for (let n=1;n<=100;n++) {
  const e=monsterForWave(n);
  assert.ok(e.hp>0 && e.attack>0 && e.reward>0);

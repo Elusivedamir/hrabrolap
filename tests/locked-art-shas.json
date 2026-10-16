@@ -1,0 +1,191 @@
+{
+  "base": "v0.9.6",
+  "description": "Immutable approved assets locked from the last accepted release; add new variants under new file names",
+  "files": [
+    {
+      "path": "art/approved/crown.svg",
+      "sha": "39c6cd8a414a423eb5c85a66d48e57ab7bcd2105",
+      "size": 446
+    },
+    {
+      "path": "art/approved/heart.svg",
+      "sha": "5d9b6f03c2a9c4dceee0a1a80c2bb34eed7656f2",
+      "size": 318
+    },
+    {
+      "path": "art/approved/port_active.webp",
+      "sha": "1bfd5fada7d47ae0844d76680fa54b31c44053e8",
+      "size": 115574
+    },
+    {
+      "path": "art/approved/port_rest.webp",
+      "sha": "e6d3e63588da196cf0870c86e745d703bcfb1ed9",
+      "size": 118540
+    },
+    {
+      "path": "art/hero/bare-kitten.svg",
+      "sha": "b7089dd9b249597c85fb252e964bb7ecc984592b",
+      "size": 143697
+    },
+    {
+      "path": "art/scenery/bucket-empty.svg",
+      "sha": "f4d2498108bd011ee9bae98f016819d7cfe0588b",
+      "size": 1670
+    },
+    {
+      "path": "art/scenery/bucket-full.svg",
+      "sha": "d123972ac7c7be9a4b47d2fc5cb4cc1136c2da30",
+      "size": 6266
+    },
+    {
+      "path": "art/scenery/bucket-low.svg",
+      "sha": "45523164bca6504cf6b27ca1710b1bb84ebf1d88",
+      "size": 2769
+    },
+    {
+      "path": "art/scenery/bucket-mid.svg",
+      "sha": "7ce3d8eca8ebacea4fbb4db0631a73527d68996e",
+      "size": 4418
+    },
+    {
+      "path": "art/weapons/boneblade.svg",
+      "sha": "a3c1274095d0306afa24c4e0927c7279cf8eaf19",
+      "size": 616
+    },
+    {
+      "path": "art/weapons/dusk.svg",
+      "sha": "b260036bb7816bcdf03bb250055a39790d2977f4",
+      "size": 676
+    },
+    {
+      "path": "art/weapons/fishbone.svg",
+      "sha": "4708901b3a79bbec091298d056ae4af2386c2cc4",
+      "size": 863
+    },
+    {
+      "path": "art/weapons/forest.svg",
+      "sha": "a91dd7811c671058abdfd5c869553418ddbf099d",
+      "size": 620
+    },
+    {
+      "path": "art/weapons/iron.svg",
+      "sha": "b0903783e14bf6d1bf80fc54b012958e43ca59f4",
+      "size": 695
+    },
+    {
+      "path": "art/weapons/moon.svg",
+      "sha": "aa35697bc641683192f6d602cb5ddf3f2b1b6353",
+      "size": 581
+    },
+    {
+      "path": "art/weapons/slimeblade.svg",
+      "sha": "15706e133270d54ebff7cb0b97c11276b3ed5292",
+      "size": 620
+    },
+    {
+      "path": "art/weapons/spiderleg.svg",
+      "sha": "7c29d01d711fe8cc7e0620d301ac3fec897e9ac2",
+      "size": 557
+    },
+    {
+      "path": "art/weapons/webfang.svg",
+      "sha": "15ead4b1a0bc294e68d4da4d21cf458345d00268",
+      "size": 595
+    },
+    {
+      "path": "art/weapons/wood.svg",
+      "sha": "a07b398810bdccb2701ff8cba5649f117051b744",
+      "size": 552
+    },
+    {
+      "path": "assets/canonical/attack_01.png",
+      "sha": "81afb20f7160e6161199942e564f0d34554ab949",
+      "size": 137497
+    },
+    {
+      "path": "assets/canonical/attack_02.png",
+      "sha": "2472df5fc52d965728a098869a214d0e810518ab",
+      "size": 141906
+    },
+    {
+      "path": "assets/canonical/attack_03.png",
+      "sha": "e2f7cf0be21fac32c4a4418b0f5df77a4b727a68",
+      "size": 147699
+    },
+    {
+      "path": "assets/canonical/attack_04.png",
+      "sha": "a32ce60e603f423c0e71fa20bba0f72a0fd31f2d",
+      "size": 147311
+    },
+    {
+      "path": "assets/canonical/attack_05.png",
+      "sha": "1126978bcbaf18860581240e027d113a97d03f9c",
+      "size": 142677
+    },
+    {
+      "path": "assets/canonical/attack_06.png",
+      "sha": "779a5cb8a4245a43ee510a41a999a916e3512a20",
+      "size": 143375
+    },
+    {
+      "path": "assets/canonical/hurt_01.png",
+      "sha": "3dcc4a6800122d30520a4f123bff203dc8e8cd09",
+      "size": 147216
+    },
+    {
+      "path": "assets/canonical/hurt_02.png",
+      "sha": "56491846c0b71e4e99b5d4e003c1941631ec979c",
+      "size": 147768
+    },
+    {
+      "path": "assets/canonical/hurt_03.png",
+      "sha": "f5b0477b7fb5148d117cd650c0a5cc5896aed397",
+      "size": 147923
+    },
+    {
+      "path": "assets/canonical/hurt_04.png",
+      "sha": "846c88c1917da74390bde5a17171d1410254dce0",
+      "size": 157605
+    },
+    {
+      "path": "assets/canonical/hurt_05.png",
+      "sha": "35246d6e4a503871e8e549643647e03952a15e8d",
+      "size": 142896
+    },
+    {
+      "path": "assets/canonical/hurt_06.png",
+      "sha": "9944fbb522ab0e6c3133a263e9ed40c426455de3",
+      "size": 146852
+    },
+    {
+      "path": "assets/rest/sleep_01.png",
+      "sha": "40af2fa2a00a32d563aab0db1af48f4f3de71250",
+      "size": 108692
+    },
+    {
+      "path": "assets/rest/sleep_02.png",
+      "sha": "541d0adac65b09cdf4c1f33145539f13dd52ba79",
+      "size": 111245
+    },
+    {
+      "path": "assets/rest/sleep_03.png",
+      "sha": "388b13a77ab2a879cd235bb6feff8210da9c8743",
+      "size": 112287
+    },
+    {
+      "path": "assets/rest/sleep_04.png",
+      "sha": "64cecd114f6ef8152cb1d5473e7c63a6bd69453a",
+      "size": 102508
+    },
+    {
+      "path": "assets/rest/sleep_05.png",
+      "sha": "393e4c907d747a6e3d68512f4f9cf2eed2dbb8de",
+      "size": 92302
+    },
+    {
+      "path": "assets/rest/sleep_06.png",
+      "sha": "c9b09ed845e4e64bcd461c48db9c0563c1cce264",
+      "size": 93626
+    }
+  ]
+}

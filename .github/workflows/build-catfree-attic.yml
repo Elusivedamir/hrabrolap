@@ -1,0 +1,34 @@
+name: Build cat-free original attic for visual QA
+on:
+  push:
+    branches:
+      - fix/v0.9.7-approved-mobs-and-controls
+    paths:
+      - tools/build_catfree_attic.py
+      - .github/workflows/build-catfree-attic.yml
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  inpaint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: python -m pip install opencv-python-headless==4.10.0.84 numpy==1.26.4
+      - run: python tools/build_catfree_attic.py
+      - name: Commit fixed original rest background to working branch
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add art/animated/port_rest_no_old_cat.webp
+          if git diff --cached --quiet; then
+            echo "No change to background."
+          else
+            git commit -m "art: remove old embedded sleeping kitten from original attic background"
+            git push origin HEAD:fix/v0.9.7-approved-mobs-and-controls
+          fi

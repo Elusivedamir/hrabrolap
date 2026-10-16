@@ -1,19 +1,23 @@
+import {FISHING_FRAMES} from './fishing-frames.mjs';
+import {QUESTS,questProgress,claimQuest} from './quests.mjs';
+import {monsterPose} from './monster-rig.mjs';
 import {bucketArt,sleepFrameIndex,SLEEP_FRAMES} from './bucket-rest.mjs';
 import {applyCanonicalFrame} from './canonical-sprites.mjs';
 import {armorAttackTransform,armorHurtTransform,hurtMotionTransform,hurtWeaponTransform,HURT_FRAMES,HURT_FRAME_MS} from './equipment-rig.mjs';
-import {WEAPONS,ARMORS,MATERIALS,freshProgress,validateProgress,restoreFight,swordCost,armorCost,fishCost,homeCost,bucketCost,bucketCapacity,heroDamage,maxHealth,startFight,stepFight,upgrade,buyEquipment,equipEquipment,offlineReward,bucketVolume,bucketGold,planFishing,stepFishing,stepMerchant,sellAll} from './game-core.mjs';
+import {WEAPONS,ARMORS,MATERIALS,freshProgress,validateProgress,restoreFight,swordCost,armorCost,fishCost,homeCost,bucketCost,bucketCapacity,heroDamage,maxHealth,startFight,stepFight,upgrade,buyEquipment,equipEquipment,offlineReward,bucketVolume,bucketGold,planFishing,stepFishing,stepMerchant,sellAll,purchaseAutoBattle,upgradeAttackSpeed,autoHitsPerSecond,autoUpgradeCost,MAX_AUTO_LEVEL,attackInterval,setEnchantment,tapMonster} from './game-core.mjs';
 const $=id=>document.getElementById(id), SAVE='hrabrolap-v0.2-save',OLD='hrabrolap-v0.1-save',fmt=n=>Math.floor(n).toLocaleString('ru-RU');
 let p,b,modalType='',last=performance.now(),lastSave=0,lastAutosave=0,msgTimeout=0,toastTimeout=0,lastFrameRest=false;
 const heartsRoot=$('hero-hearts');
+const monsterHearts=Array.from({length:5},()=>{const shell=document.createElement('span');shell.className='heart-shell';shell.innerHTML='<img class="heart-unfilled" src="art/approved/heart.svg" alt=""><span class="heart-filled"><img src="art/approved/heart.svg" alt=""></span>';$('enemy-hearts').append(shell);return shell;});
 const heroHearts=Array.from({length:5},()=>{const shell=document.createElement('span');shell.className='heart-shell';shell.innerHTML='<img class="heart-unfilled" src="art/approved/heart.svg" alt=""><span class="heart-filled"><img src="art/approved/heart.svg" alt=""></span>';heartsRoot.append(shell);return shell;});
 try {const raw=JSON.parse(localStorage.getItem(SAVE)||'null')||JSON.parse(localStorage.getItem(OLD)||'null');p=validateProgress(raw);b=restoreFight(p,raw?.version>=2?raw.battleState:null,raw?.version<3&&raw.cleared&&raw.best<100);
  if(p.lastSeen&&Date.now()>p.lastSeen+20000){p.pendingOffline=Math.min(p.pendingOffline+offlineReward(p,Date.now()-p.lastSeen),Math.floor(Math.min(swordCost(p.sword),armorCost(p.armor))*1.1));} p.lastSeen=Date.now();
 }catch(e){p=freshProgress();b=startFight(p);console.warn('save recovery',e);}
 if(!b)b=startFight(p);
 if(!p.catchPlan.length && bucketVolume(p)<bucketCapacity(p))planFishing(p);
-function save(){try{p.lastSeen=Date.now();localStorage.setItem(SAVE,JSON.stringify({...p,battleState:{level:b.level,hp:b.hp,enemyHp:b.enemyHp,phase:b.phase,heroTimer:b.heroTimer,enemyTimer:b.enemyTimer,rest:b.rest,monsterType:b.monster.type}}));}catch(e){console.warn(e)}}
+function save(){try{p.lastSeen=Date.now();localStorage.setItem(SAVE,JSON.stringify({...p,battleState:{level:b.level,hp:b.hp,enemyHp:b.enemyHp,phase:b.phase,heroTimer:b.heroTimer,enemyTimer:b.enemyTimer,rest:b.rest,monsterType:b.monster.type,poisonRemaining:b.poisonRemaining||0,poisonTick:b.poisonTick||0}}));}catch(e){console.warn(e)}}
 function notify(t){const el=$('toast');el.textContent=t;el.classList.add('show');clearTimeout(toastTimeout);toastTimeout=setTimeout(()=>el.classList.remove('show'),2300)}
-function say(t,time=2200){$('battle-message').textContent=t;clearTimeout(msgTimeout);msgTimeout=setTimeout(()=>{$('battle-message').textContent=b.phase==='rest'?'Котёнок отдыхает в домике':'Котёнок сражается сам · покупай улучшения'},time)}
+function say(t,time=2200){$('battle-message').textContent=t;lastBattleMessage=performance.now()+time;clearTimeout(msgTimeout);msgTimeout=setTimeout(()=>{$('battle-message').textContent=b.phase==='rest'?'Котёнок отдыхает в домике':p.autoEnabled?'Автобой · '+autoHitsPerSecond(p)+' ударов/с':'Нажми на монстра · ручной бой 3/с'},time)}
 function pulse(el,name,time=600){el.classList.remove(name);void el.offsetWidth;el.classList.add(name);setTimeout(()=>el.classList.remove(name),time)}
 
 // v0.8: one swordless hero body + one separate animated SVG weapon + independent armor.
@@ -69,14 +73,49 @@ function syncEquipment(){
  const weapon=WEAPONS.find(w=>w.id===p.weapon)||WEAPONS[0];$('hero-weapon').setAttribute('href',weapon.svg);
  const armor=ARMORS.find(a=>a.id===p.equippedArmor)||ARMORS[0];const art=$('hero-armor');art.style.display=armor.svg?'':'none';if(armor.svg)art.setAttribute('href',armor.svg);
 }
-function enemyAttack(move){const holder=$('enemy-holder');for(const cl of [...holder.classList])if(cl.startsWith('attack-')||cl==='spores')holder.classList.remove(cl);
+const APPROVED_MONSTER_TYPES=new Set(['slime','spider','mouse','mushroom','beetle','larva','bat','ghost']);
+const ARTICULATED_MONSTER_TYPES=new Set(['skeleton','golem']);
+const monsterSource=(type,boss=false)=>APPROVED_MONSTER_TYPES.has(type)?'art/monsters-v2/'+type+'.svg':ARTICULATED_MONSTER_TYPES.has(type)?(boss?'animations/'+type+'/boss/attack/01.svg':'art/monsters-v097/'+type+'.svg'):'art/monsters/'+type+'.svg';
+let monsterSequence=0,monsterTimers=[];
+function cancelMonsterFrames(){
+ monsterSequence++;for(const t of monsterTimers)clearTimeout(t);monsterTimers=[];
+ const art=$('enemy-art');art.style.animation='';art.style.transform='';
+ art.classList.toggle('approved-monster-frame',ARTICULATED_MONSTER_TYPES.has(b?.monster?.type));delete art.dataset.playingAnimation;
+ if(b?.monster){const source=monsterSource(b.monster.texture,b.monster.boss);if(art.getAttribute('src')!==source)art.setAttribute('src',source);}
+ $('boss-crown').style.visibility=b?.monster?.boss&&ARTICULATED_MONSTER_TYPES.has(b.monster.type)?'hidden':'';
+}
+function playMonsterFrames(phase){
+ cancelMonsterFrames();const sequence=monsterSequence,type=b.monster.type,boss=!!b.monster.boss;
+ const art=$('enemy-art'),holder=$('enemy-holder');
+ const archived=APPROVED_MONSTER_TYPES.has(type)||ARTICULATED_MONSTER_TYPES.has(type);
+ art.style.animation='none';
+ if(archived){
+  art.classList.add('approved-monster-frame');art.dataset.playingAnimation='1';
+  // Archived boss frames ALREADY INCLUDE the original approved crown.
+  if(boss)$('boss-crown').style.visibility='hidden';
+ }
+ for(let i=0;i<6;i++){
+  monsterTimers.push(setTimeout(()=>{
+   if(sequence!==monsterSequence||b.monster.type!==type||!!b.monster.boss!==boss)return;
+   holder.dataset.monsterPhase=phase;holder.dataset.monsterFrame=String(i+1);
+   if(archived){
+    art.setAttribute('src',`animations/${type}/${boss?'boss':'normal'}/${phase}/0${i+1}.svg`);
+   }else{
+    const pose=monsterPose(type,phase,i);
+    art.style.transform=pose.transform;
+   }
+  },i*64));
+ }
+ monsterTimers.push(setTimeout(()=>{if(sequence!==monsterSequence)return;cancelMonsterFrames();},6*64+15));
+}
+function enemyAttack(move){playMonsterFrames('attack');const holder=$('enemy-holder');for(const cl of [...holder.classList])if(cl.startsWith('attack-')||cl==='spores')holder.classList.remove(cl);
  void holder.getBoundingClientRect();holder.classList.add('attack-'+move);if(move==='spores')holder.classList.add('spores');setTimeout(()=>holder.classList.remove('attack-'+move,'spores'),710);}
 function coinFx(n){const c=document.createElement('span');c.className='float-coin';c.textContent='+'+fmt(n)+' 🪙';document.querySelector('.dungeon').append(c);setTimeout(()=>c.remove(),1100)}
 function fmtTimer(ms){const n=Math.ceil(ms/1000);return String(Math.floor(n/60)).padStart(2,'0')+':'+String(n%60).padStart(2,'0')}
-let sleepStartedAt=null;
+let sleepStartedAt=null,pendingFishVisual=0;
 function updateBucketDrawing(){
  const icon=$('bucket-graphic');
- const n=p.fishBucket.length;
+ const n=Math.max(0,p.fishBucket.length-pendingFishVisual);
  const next=bucketArt(n,p.bucketLevel>0);
  if(icon.getAttribute('src')!==next)icon.setAttribute('src',next);
  $('bucket-indicator').textContent=n+' рыб';
@@ -90,20 +129,43 @@ function updateSleepDrawing(rest){
  const next=SLEEP_FRAMES[sleepFrameIndex(now-sleepStartedAt)];
  if(sprite.getAttribute('src')!==next)sprite.setAttribute('src',next);
 }
+let lastBattleMessage=0;
 function render(){
  $('gold').textContent=fmt(p.gold);
  $('room').textContent=`ВОЛНА ${b.level}/100`; $('room-progress').textContent=`${p.best}/100`; $('room-fill').style.width=(p.best)+'%';
- $('enemy-name').textContent=b.monster.name;const enemySource=['slime','bat','mushroom'].includes(b.monster.texture)?'art/'+b.monster.texture+'.svg':'art/monsters/'+b.monster.texture+'.svg';if($('enemy-art').getAttribute('src')!==enemySource)$('enemy-art').src=enemySource;$('enemy-holder').dataset.monster=b.monster.type;$('enemy-holder').classList.toggle('boss',b.monster.boss);$('enemy-art').classList.toggle('boss',b.monster.boss);
+ $('enemy-name').textContent=b.monster.name;const enemySource=monsterSource(b.monster.texture,b.monster.boss),art=$('enemy-art'),variant=b.monster.boss?'boss':'normal';
+ if(art.dataset.monsterType!==b.monster.type||art.dataset.monsterVariant!==variant){
+  cancelMonsterFrames();art.dataset.monsterType=b.monster.type;art.dataset.monsterVariant=variant;
+  art.setAttribute('src',enemySource);
+ }else if(!art.dataset.playingAnimation&&art.getAttribute('src')!==enemySource){
+  art.setAttribute('src',enemySource);
+ }
+ $('enemy-holder').dataset.monster=b.monster.type;$('enemy-holder').classList.toggle('boss',b.monster.boss);$('enemy-art').classList.toggle('boss',b.monster.boss);
  $('hero-hp-num').textContent=Math.ceil(b.hp)+'/'+maxHealth(p);$('enemy-hp-num').textContent=Math.ceil(b.enemyHp)+'/'+b.monster.hp;
  $('hero-hp').style.width=(100*b.hp/maxHealth(p))+'%';$('enemy-hp').style.width=(100*b.enemyHp/b.monster.hp)+'%';
+ const monsterHeartCapacity=b.monster.hp/5;
+ monsterHearts.forEach((e,i)=>{const filling=Math.max(0,Math.min(1,(b.enemyHp-i*monsterHeartCapacity)/monsterHeartCapacity));e.querySelector('.heart-filled').style.width=(filling*100)+'%';});
+ $('enemy-hearts').setAttribute('aria-label',`Здоровье ${b.monster.name}: ${Math.ceil(b.enemyHp)} из ${b.monster.hp}`);
+ $('enemy-hearts').dataset.monster=b.monster.type;
+ $('enemy-holder').classList.toggle('poisoned',b.poisonRemaining>0&&b.phase==='fight');
  const heartCapacity=maxHealth(p)/5;heroHearts.forEach((e,i)=>{const filling=Math.max(0,Math.min(1,(b.hp-i*heartCapacity)/heartCapacity));e.querySelector('.heart-filled').style.width=(filling*100)+'%';});heartsRoot.setAttribute('aria-label',`Здоровье ${Math.ceil(b.hp)} из ${maxHealth(p)}`);
  $('boss-crown').style.display=b.monster.boss?'block':'none';
- const rest=b.phase==='rest';if(rest && !$('battle-message').textContent.includes('Котёнок'))$('battle-message').textContent='Котёнок отдыхает дома';$('surface').classList.toggle('resting',rest);$('hero-art').classList.toggle('resting-hero',rest);updateSleepDrawing(rest);
- const status=$('status');status.classList.toggle('rest',rest||p.farming);status.textContent=rest?'ОТДЫХ '+fmtTimer(b.rest*1000):p.cleared?'ГЛАВА ПРОЙДЕНА':p.farming?'ФАРМ МОНЕТ':'АВТОБОЙ';
+ const rest=b.phase==='rest';
+ if(rest)$('battle-message').textContent='Котёнок отдыхает дома';
+ else if(b.phase==='fight'&&performance.now()>lastBattleMessage)$('battle-message').textContent=p.autoEnabled?'Автобой · '+autoHitsPerSecond(p)+' ударов/с':'Нажми на монстра · ручной бой 3/с';$('surface').classList.toggle('resting',rest);$('hero-art').classList.toggle('resting-hero',rest);updateSleepDrawing(rest);
+ const status=$('status');status.classList.toggle('rest',rest||p.farming);status.textContent=rest?'ОТДЫХ '+fmtTimer(b.rest*1000):p.cleared?'ГЛАВА ПРОЙДЕНА':p.autoEnabled?'АВТОБОЙ '+autoHitsPerSecond(p)+'/с':p.autoUnlocked?'РУЧНОЙ БОЙ 3/с':'АВТОБОЙ · 1 🪙';
+ const speedBtn=$('buy-attack-speed');
+ speedBtn.disabled=p.autoLevel>=MAX_AUTO_LEVEL;
+ speedBtn.classList.toggle('can-buy',p.gold>=autoUpgradeCost(p.autoLevel)&&p.autoLevel<MAX_AUTO_LEVEL);
+ speedBtn.classList.toggle('cant-buy',p.gold<autoUpgradeCost(p.autoLevel)||p.autoLevel>=MAX_AUTO_LEVEL);
+ $('attack-speed-lvl').textContent='ур. '+p.autoLevel+'/100';
+ $('attack-speed-stat').textContent='Авто: '+autoHitsPerSecond(p)+' уд/с'+(p.autoLevel>=MAX_AUTO_LEVEL?' · максимум':(' · '+(autoHitsPerSecond(p)+1)+' уд/с на ур. '+(Math.floor(p.autoLevel/20)+1)*20));
+ $('attack-speed-cost').textContent=p.autoLevel>=MAX_AUTO_LEVEL?'МАКСИМУМ · 6/с':'🪙 '+fmt(autoUpgradeCost(p.autoLevel));
+ speedBtn.setAttribute('aria-label',p.autoLevel>=MAX_AUTO_LEVEL?'Скорость атаки максимально улучшена':'Улучшить скорость автоматической атаки до уровня '+(p.autoLevel+1)+' за '+autoUpgradeCost(p.autoLevel)+' монет');
  const info=[['sword',p.sword,swordCost(p.sword),'Меч','Урон '+heroDamage(p)+' → '+(heroDamage(p)+3)],['armor',p.armor,armorCost(p.armor),'Броня','HP '+maxHealth(p)+' → '+(maxHealth(p)+14)],['fish',p.fishLevel,fishCost(p.fishLevel),'Удочка','Более ценный улов'],['home',p.home,homeCost(p.home),'Домик','Быстрее отдых']];
  for(const [kind,lev,cost,label,description] of info){const id=kind==='home'?'home':kind;$(id+'-lvl').textContent='ур. '+lev;$(id+'-cost').textContent='🪙 '+fmt(cost);if(kind==='sword'||kind==='armor')$(kind+'-stat').textContent=description;const btn=$('buy-'+kind);btn.classList.toggle('can-buy',p.gold>=cost);btn.classList.toggle('cant-buy',p.gold<cost);btn.setAttribute('aria-label',`${label}: улучшить за ${cost} монет`);}
  syncEquipment();
- updateBucketDrawing();$('fish-status').textContent=bucketVolume(p)>=bucketCapacity(p)?'Ведро заполнено · рыбалка ждёт':`Поклёвка через ${fmtTimer(p.nextCatchMs)}`;
+ updateBucketDrawing();$('fish-status').textContent=bucketVolume(p)>=bucketCapacity(p)?'Ведро заполнено · рыбалка ждёт':'Рыцарь рыбачит';
  const visiting=p.merchantPhase==='waiting';$('merchant').classList.toggle('visible',visiting);$('merchant-visit').textContent=fmtTimer(p.merchantMs);$('merchant-status').textContent=visiting?'Торговец приехал!':'Торговец через '+fmtTimer(p.merchantMs);
 }
 function onUpgrade(kind){const result=upgrade(p,kind);if(!result.ok){notify(result.reason==='max'?'Ведро максимально улучшено':'Не хватает '+fmt((result.cost||0)-p.gold)+' монет');return;}
@@ -113,7 +175,6 @@ function onUpgrade(kind){const result=upgrade(p,kind);if(!result.ok){notify(resu
  // If farming and the upgrade can help, attack the blocked level after current fight. No free healing.
  if(kind==='bucket'){p.catchPlan=[];planFishing(p);}save();render();
 }
-const QUESTS=[{id:0,name:'Победи 5 слизней',field:'killedSlimes',target:5,reward:60},{id:1,name:'Продай 3 рыбы',field:'soldFish',target:3,reward:45},{id:2,name:'Улучши меч 2 раза',field:'spentSword',target:2,reward:40},{id:3,name:'Продай 5 щук',field:'soldPike',target:5,reward:150}];
 function openModal(title,mode='info',text=''){modalType=mode;$('modal-title').textContent=title;const content=$('modal-content'),buttons=$('modal-buttons');content.replaceChildren();buttons.replaceChildren();
  const para=t=>{const x=document.createElement('p');x.textContent=t;content.append(x)};
  const action=(label,callback,cls='')=>{const x=document.createElement('button');x.textContent=label;if(cls)x.className=cls;x.addEventListener('click',callback);buttons.append(x);return x};
@@ -149,12 +210,24 @@ function openModal(title,mode='info',text=''){modalType=mode;$('modal-title').te
     }
   };
   line('Мечи',WEAPONS,'weapon');line('Броня',ARMORS,'armor');
+  if(mode==='inventory'){
+   const enchantWrap=document.createElement('div');enchantWrap.className='enchant-controls';
+   const name=document.createElement('b');name.textContent='✨ Зачарование меча · тест механики';
+   const select=document.createElement('select');select.setAttribute('aria-label','Эффект меча');
+   for(const [id,label] of [['none','Без эффекта'],['poison','☠ Яд'],['lightning','⚡ Молния'],['vampirism','🩸 Вампиризм']]){
+    const option=document.createElement('option');option.value=id;option.textContent=label;select.append(option);
+   }
+   select.value=p.enchantment||'none';
+   select.addEventListener('change',()=>{setEnchantment(p,select.value);save();notify('Эффект оружия: '+select.options[select.selectedIndex].text);});
+   const hint=document.createElement('small');hint.textContent='Эффекты доступны для тестирования бесплатно. Цены зачарований определим позже.';
+   enchantWrap.append(name,select,hint);content.append(enchantWrap);
+  }
   if(mode==='shop'){para('Качество меча и брони улучшается кнопками внизу экрана независимо от внешнего вида предметов.');
    action('🎞 Ателье SVG — посмотреть 6 кадров',()=>{save();window.location.href='equipment-preview.html'});
    action('Открыть инвентарь',()=>openModal('Инвентарь','inventory'));}
   else action('Открыть магазин',()=>openModal('Магазин','shop'));
  }else if(mode==='quests'){
-  for(const q of QUESTS){const done=p.questClaimed.includes(q.id),count=p[q.field];const row=document.createElement('div');row.className='quest-row';const text=document.createElement('span');text.textContent=q.name;const mini=document.createElement('small');mini.textContent=Math.min(q.target,count)+'/'+q.target+' · награда '+q.reward+' 🪙';text.append(mini);const btn=document.createElement('button');btn.textContent=done?'✓':'+ 🪙';btn.disabled=done||count<q.target;btn.addEventListener('click',()=>{if(p.questClaimed.includes(q.id)||p[q.field]<q.target)return;p.questClaimed.push(q.id);p.gold+=q.reward;save();openModal('Задания','quests');notify('Награда за задание: +'+q.reward+' монет')});row.append(text,btn);content.append(row);}
+  for(const q of QUESTS){const done=p.questClaimed.includes(q.id),count=questProgress(p,q);const row=document.createElement('div');row.className='quest-row';const text=document.createElement('span');text.textContent=q.name;const mini=document.createElement('small');mini.textContent=Math.min(q.target,count)+'/'+q.target+' · награда '+q.reward+' 🪙';text.append(mini);const btn=document.createElement('button');btn.textContent=done?'✓':'+ 🪙';btn.disabled=done||count<q.target;btn.addEventListener('click',()=>{const result=claimQuest(p,q.id);if(!result.ok)return;save();openModal('Задания','quests');notify('Награда за задание: +'+result.reward+' монет')});row.append(text,btn);content.append(row);}
   para('В заданиях учитываются реальные победы, улучшения и продажи, но не офлайн-время.');
  }else if(mode==='offline'){
   para('Котёнок заработал, пока тебя не было: +'+fmt(p.pendingOffline)+' монет.');para('Офлайн-заработок ограничен стоимостью ближайшего улучшения и не открывает новые комнаты.');action('Забрать '+fmt(p.pendingOffline)+' 🪙',()=>{p.gold+=p.pendingOffline;p.pendingOffline=0;save();closeModal();notify('Офлайн-награда получена!')});
@@ -166,26 +239,77 @@ function openModal(title,mode='info',text=''){modalType=mode;$('modal-title').te
 }
 function closeModal(){const mode=modalType;modalType='';if($('modal').open)$('modal').close();last=performance.now();render()}
 function battleEvents(events){for(const ev of events){
- if(ev.kind==='hero-hit'){contactAttack();pulse($('enemy-holder'),'hurt',350);}
+ if(ev.kind==='hero-hit'){
+  contactAttack();playMonsterFrames('hurt');pulse($('enemy-holder'),'hurt',350);
+  const holder=$('enemy-holder');
+  if(ev.element==='lightning')pulse(holder,'electrocuted',540);
+  if(ev.element==='vampirism'&&ev.healed>0){pulse(holder,'life-drain',580);notify('Вампиризм: +'+ev.healed+' HP');}
+ }
+ if(ev.kind==='poison-tick'){pulse($('enemy-holder'),'poison-tick',350);}
  if(ev.kind==='enemy-hit'){playHurt();pulse($('hero-art'),'battle-hurt',HURT_FRAMES.length*HURT_FRAME_MS);enemyAttack(ev.move);}
- if(ev.kind==='win'){coinFx(ev.gold);
+ if(ev.kind==='win'){lastBattleMessage=performance.now()+1200;coinFx(ev.gold);
    const lootName=MATERIALS.find(x=>x.id===ev.loot?.id);
    say(`Победа! +${ev.gold} монет`+(lootName?` · +1 ${lootName.name}`:''));pulse($('enemy-holder'),'dead',660);save();if(ev.level===100&&ev.firstClear)setTimeout(()=>openModal('100 волн пройдено!','info','Храбролап прошёл все сто волн! Можно продолжать сражаться и собирать монеты.'),600);}
- if(ev.kind==='defeat'){syncHeroPose();say('Котёнок возвращается домой отдохнуть');save();}
+ if(ev.kind==='defeat'){lastBattleMessage=0;syncHeroPose();say('Котёнок возвращается домой отдохнуть');save();}
+ if(ev.kind==='spawn'){cancelMonsterFrames();}
  if(ev.kind==='spawn'&&ev.afterRest){cancelAttackPose();say('Мы справимся!');pulse($('surface'),'wake-up',1800);}
 }}
-function fishEvents(events){for(const e of events){if(e.kind==='catch'){pulse($('surface'),'biting',1400);setTimeout(()=>pulse($('surface'),'reeling',1400),430);notify('Рыцарь поймал: '+e.fish.species+' · '+e.fish.weight+' кг');save();}if(e.kind==='bucket-full'){notify('Ведро заполнено! Ждём торговца.');save();}}}
+let fishAnimationToken=0,fishFrameIds=[];
+function playFishCatch(){
+ fishAnimationToken++;for(const t of fishFrameIds)clearTimeout(t);
+ fishFrameIds=[];
+ const token=fishAnimationToken,img=$('fishing-animation');
+ $('surface').classList.add('animated-fishing');
+ img.dataset.frame='01';
+ for(let i=0;i<10;i++)fishFrameIds.push(setTimeout(()=>{
+   if(token!==fishAnimationToken||document.hidden)return;
+   const n=String(i+1).padStart(2,'0');
+   img.setAttribute('src',FISHING_FRAMES[i]);
+   img.dataset.frame=n;
+ },i*135));
+ fishFrameIds.push(setTimeout(()=>{
+  if(token!==fishAnimationToken)return;
+  img.setAttribute('src','animations/fishing/01.svg');
+  img.dataset.frame='01';
+  $('surface').classList.remove('animated-fishing');
+  pendingFishVisual=0;
+  updateBucketDrawing();
+ },1450));
+}
+function fishEvents(events){for(const e of events){
+ if(e.kind==='catch'){pendingFishVisual++;playFishCatch();updateBucketDrawing();notify('Рыцарь поймал: '+e.fish.species+' · '+e.fish.weight+' кг');save();}
+ if(e.kind==='bucket-full'){notify('Ведро заполнено! Ждём торговца.');save();}
+}}
 function merchantEvents(events){for(const e of events){if(e.kind==='merchant-arrive'){notify('Хей, ребята привет, есть что-то для меня?');save();}if(e.kind==='merchant-leave'){notify('Скоро вернусь!');save();}}}
 function frame(now){const dt=Math.min(.12,Math.max(0,(now-last)/1000));last=now;
  if(!document.hidden){
   // Prepares the swing in the last 350 ms before the real damage tick.
-  if(b.phase==='fight' && !attackPrepared && b.heroTimer < .95 && b.heroTimer+dt >= .95) prepareAttack();
-  battleEvents(stepFight(p,b,dt));fishEvents(stepFishing(p,dt*1000));merchantEvents(stepMerchant(p,dt*1000,modalType==='trade'));
+  if(b.phase==='fight' && p.autoEnabled && !attackPrepared && b.heroTimer < attackInterval(p,true)*.72 && b.heroTimer+dt >= attackInterval(p,true)*.72) prepareAttack();
+  battleEvents(stepFight(p,b,dt,p.autoEnabled));fishEvents(stepFishing(p,dt*1000));merchantEvents(stepMerchant(p,dt*1000,modalType==='trade'));
   if(now-lastSave>250){render();lastSave=now;}
   if(now-lastAutosave>5000){save();lastAutosave=now;}
  }
  requestAnimationFrame(frame);
 }
+$('status').addEventListener('click',()=>{
+ if(b.phase==='rest'){notify('Котёнок отдыхает');return;}
+ const result=purchaseAutoBattle(p);
+ if(!result.ok){notify('Для автобоя нужна 1 монета');return;}
+ notify(p.autoEnabled?'Автобой включён':'Ручной бой: нажимай на монстра');
+ save();render();
+});
+$('buy-attack-speed').addEventListener('click',()=>{
+ const result=upgradeAttackSpeed(p);
+ if(!result.ok){notify(result.reason==='max'?'Скорость атаки улучшена до максимума':'Для улучшения скорости нужно ещё '+fmt((result.cost||0)-p.gold)+' монет');return;}
+ notify('Скорость автоатаки: уровень '+result.level+'/100 · '+result.hitsPerSecond+' ударов/с');
+ save();render();
+});
+$('enemy-holder').addEventListener('click',()=>{
+ if(p.autoEnabled){notify('Отключи автобой, чтобы атаковать вручную');return;}
+ const events=tapMonster(p,b);
+ if(events.some(e=>e.kind==='cooldown'))return;
+ battleEvents(events);save();render();
+});
 for(const kind of ['sword','armor','fish','home'])$('buy-'+kind).addEventListener('click',()=>onUpgrade(kind));
 $('bucket').addEventListener('click',()=>openModal('Ведро рыцаря','bucket'));
 $('merchant').addEventListener('click',()=>openModal('Серый кот-торговец','trade'));
@@ -193,7 +317,7 @@ $('quests').addEventListener('click',()=>openModal('Задания','quests'));
 $('inventory').addEventListener('click',()=>openModal('Инвентарь','inventory'));
 $('shop').addEventListener('click',()=>openModal('Магазин','shop'));
 $('mini-shop').addEventListener('click',()=>openModal('Магазин','shop'));
-$('help').addEventListener('click',()=>openModal('Как играть','info','Храбролап автоматически бьётся с монстрами и приносит монеты. После победы здоровье НЕ восстанавливается. После поражения он отдыхает в домике и лечится. Рыбак сам ловит разную рыбу и складывает её в ведро. Каждые 5 минут приезжает торговец и ждёт 15 секунд. Нажми на торговца, чтобы продать улов. Рыбалка и визиты торговца полностью останавливаются, пока игра закрыта. Офлайн котёнок приносит только ограниченное количество монет.'));
+$('help').addEventListener('click',()=>openModal('Как играть','info','Нажимай на монстра, чтобы атаковать вручную — не более 3 ударов/с. Автобой покупается отдельно за 1 монету. Скорость автоатаки — самостоятельное улучшение в разделе «Улучшения», доступное сразу, даже до покупки автобоя: до 100 уровней и максимум 6 ударов/с. На ручной бой скорость не влияет. После победы здоровье НЕ восстанавливается. После поражения он отдыхает в домике и лечится. Рыбак сам ловит разную рыбу и складывает её в ведро. Каждые 5 минут приезжает торговец и ждёт 15 секунд. Нажми на торговца, чтобы продать улов. Рыбалка и визиты торговца полностью останавливаются, пока игра закрыта. Офлайн котёнок приносит только ограниченное количество монет.'));
 $('reset').addEventListener('click',()=>openModal('Начать заново?','reset'));
 $('modal-x').addEventListener('click',closeModal);
 $('modal').addEventListener('cancel',e=>{e.preventDefault();if(modalType!=='offline')closeModal()});

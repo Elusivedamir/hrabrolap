@@ -1,0 +1,30 @@
+name: Restore exact v0.9.3 monster sprite frames
+on:
+  push:
+    branches:
+      - fix/v0.9.7-approved-mobs-and-controls
+    paths:
+      - assets/legacy-v093-monster-frames.manifest.b64
+      - tools/restore_v093_monsters.py
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  restore:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+      - run: python3 tools/restore_v093_monsters.py
+      - name: Commit all verified SVG frames back into the working branch
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add animations/slime animations/spider animations/mouse animations/mushroom animations/beetle animations/larva animations/bat animations/ghost
+          if git diff --cached --quiet; then
+            echo "All approved monster frames are already committed."
+          else
+            git commit -m "assets: restore 192 exact v0.9.3 attack and hurt frames for normal and boss monsters"
+            git push origin HEAD:fix/v0.9.7-approved-mobs-and-controls
+          fi
