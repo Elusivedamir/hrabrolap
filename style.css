@@ -147,3 +147,10 @@
 @keyframes spiderFade{to{opacity:0;transform:rotate(40deg) scale(.65)}}
 
 .hud-action img{display:block;width:27px;height:27px;object-fit:contain}
+
+/* v0.9.6: only the physical bucket and existing house rest overlay. */
+.surface .bucket{left:1.5%!important;bottom:9%!important;width:17%!important;height:33%!important;max-height:83px;min-width:0!important;min-height:0!important;z-index:7!important;display:flex!important;flex-direction:column;align-items:center;justify-content:flex-end;gap:0;padding:0!important;border:0!important;border-radius:0!important;background:none!important;filter:drop-shadow(0 2px 2px #291c1c9a)}
+.surface .bucket img,.surface .bucket img#bucket-graphic{display:block!important;opacity:1!important;flex:1 1 auto;width:100%!important;height:calc(100% - 16px)!important;min-height:0;object-fit:contain;filter:none}
+.surface .bucket span{flex:0 0 auto;border-radius:7px;padding:1px 4px;color:#fff6d9;background:#49362edb!important;font-size:.70em;font-weight:800;line-height:1.2;white-space:nowrap}
+.surface .rest-sleep-sprite{position:absolute;z-index:5;left:64%;top:37%;width:24%;height:53%;object-fit:contain;object-position:center bottom;opacity:0;pointer-events:none;filter:drop-shadow(0 2px 1px #31222d55)}
+.surface.resting .rest-sleep-sprite{opacity:1}
