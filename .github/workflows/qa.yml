@@ -1,7 +1,7 @@
 name: Hrabrolap QA
 on: [push, pull_request, workflow_dispatch]
 permissions:
-  contents: read
+  contents: write
 jobs:
   gameplay:
     runs-on: ubuntu-latest
@@ -53,3 +53,17 @@ jobs:
         with:
           name: hrabrolap-v0.9.6
           path: hrabrolap-v0.9.6.zip
+
+      - name: Publish v0.9.6 tag after successful main QA
+        if: success() && github.ref == 'refs/heads/main' && github.event_name == 'push'
+        run: |
+          if [ "$(node -p "require('./package.json').version")" != "0.9.6" ]; then
+            echo "Skip tagging: release version is not 0.9.6"
+            exit 0
+          fi
+          if git ls-remote --exit-code --tags origin refs/tags/v0.9.6 >/dev/null 2>&1; then
+            echo "v0.9.6 tag already exists; leave it unchanged"
+            exit 0
+          fi
+          git tag v0.9.6
+          git push origin refs/tags/v0.9.6
