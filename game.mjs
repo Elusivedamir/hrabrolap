@@ -16,7 +16,7 @@ if(!b)b=startFight(p);
 if(!p.catchPlan.length && bucketVolume(p)<bucketCapacity(p))planFishing(p);
 function save(){try{p.lastSeen=Date.now();localStorage.setItem(SAVE,JSON.stringify({...p,battleState:{level:b.level,hp:b.hp,enemyHp:b.enemyHp,phase:b.phase,heroTimer:b.heroTimer,enemyTimer:b.enemyTimer,rest:b.rest,monsterType:b.monster.type,poisonRemaining:b.poisonRemaining||0,poisonTick:b.poisonTick||0}}));}catch(e){console.warn(e)}}
 function notify(t){const el=$('toast');el.textContent=t;el.classList.add('show');clearTimeout(toastTimeout);toastTimeout=setTimeout(()=>el.classList.remove('show'),2300)}
-function say(t,time=2200){$('battle-message').textContent=t;clearTimeout(msgTimeout);msgTimeout=setTimeout(()=>{$('battle-message').textContent=b.phase==='rest'?'Котёнок отдыхает в домике':'Котёнок сражается сам · покупай улучшения'},time)}
+function say(t,time=2200){$('battle-message').textContent=t;lastBattleMessage=performance.now()+time;clearTimeout(msgTimeout);msgTimeout=setTimeout(()=>{$('battle-message').textContent=b.phase==='rest'?'Котёнок отдыхает в домике':p.autoEnabled?'Автобой · '+autoHitsPerSecond(p)+' ударов/с':'Нажми на монстра · ручной бой 3/с'},time)}
 function pulse(el,name,time=600){el.classList.remove(name);void el.offsetWidth;el.classList.add(name);setTimeout(()=>el.classList.remove(name),time)}
 
 // v0.8: one swordless hero body + one separate animated SVG weapon + independent armor.
@@ -110,10 +110,10 @@ function enemyAttack(move){playMonsterFrames('attack');const holder=$('enemy-hol
  void holder.getBoundingClientRect();holder.classList.add('attack-'+move);if(move==='spores')holder.classList.add('spores');setTimeout(()=>holder.classList.remove('attack-'+move,'spores'),710);}
 function coinFx(n){const c=document.createElement('span');c.className='float-coin';c.textContent='+'+fmt(n)+' 🪙';document.querySelector('.dungeon').append(c);setTimeout(()=>c.remove(),1100)}
 function fmtTimer(ms){const n=Math.ceil(ms/1000);return String(Math.floor(n/60)).padStart(2,'0')+':'+String(n%60).padStart(2,'0')}
-let sleepStartedAt=null;
+let sleepStartedAt=null,pendingFishVisual=0;
 function updateBucketDrawing(){
  const icon=$('bucket-graphic');
- const n=p.fishBucket.length;
+ const n=Math.max(0,p.fishBucket.length-pendingFishVisual);
  const next=bucketArt(n,p.bucketLevel>0);
  if(icon.getAttribute('src')!==next)icon.setAttribute('src',next);
  $('bucket-indicator').textContent=n+' рыб';
@@ -267,10 +267,12 @@ function playFishCatch(){
   img.setAttribute('src','animations/fishing/01.svg');
   img.dataset.frame='01';
   $('surface').classList.remove('animated-fishing');
+  pendingFishVisual=0;
+  updateBucketDrawing();
  },1450));
 }
 function fishEvents(events){for(const e of events){
- if(e.kind==='catch'){playFishCatch();notify('Рыцарь поймал: '+e.fish.species+' · '+e.fish.weight+' кг');save();}
+ if(e.kind==='catch'){pendingFishVisual++;playFishCatch();updateBucketDrawing();notify('Рыцарь поймал: '+e.fish.species+' · '+e.fish.weight+' кг');save();}
  if(e.kind==='bucket-full'){notify('Ведро заполнено! Ждём торговца.');save();}
 }}
 function merchantEvents(events){for(const e of events){if(e.kind==='merchant-arrive'){notify('Хей, ребята привет, есть что-то для меня?');save();}if(e.kind==='merchant-leave'){notify('Скоро вернусь!');save();}}}
