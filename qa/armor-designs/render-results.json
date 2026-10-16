@@ -1,0 +1,218 @@
+{
+  "browser": "153.0.8010.0",
+  "errors": [],
+  "results": [
+    {
+      "src": "art/armor-designs/web.svg",
+      "width": 360,
+      "height": 440,
+      "cornerAlpha": 0,
+      "ink": 41289
+    },
+    {
+      "src": "art/armor-designs/steel.svg",
+      "width": 360,
+      "height": 440,
+      "cornerAlpha": 0,
+      "ink": 42451
+    },
+    {
+      "src": "art/armor-designs/bone_slime.svg",
+      "width": 360,
+      "height": 440,
+      "cornerAlpha": 0,
+      "ink": 41782
+    },
+    {
+      "src": "art/armor-designs/chitin.svg",
+      "width": 360,
+      "height": 440,
+      "cornerAlpha": 0,
+      "ink": 41144
+    },
+    {
+      "src": "art/armor-designs/leaf.svg",
+      "width": 360,
+      "height": 440,
+      "cornerAlpha": 0,
+      "ink": 41334
+    },
+    {
+      "src": "art/armor-designs/moss.svg",
+      "width": 360,
+      "height": 440,
+      "cornerAlpha": 0,
+      "ink": 43241
+    },
+    {
+      "src": "art/armor-designs/shadow.svg",
+      "width": 360,
+      "height": 440,
+      "cornerAlpha": 0,
+      "ink": 44094
+    },
+    {
+      "src": "art/armor-designs/moon_armor.svg",
+      "width": 360,
+      "height": 440,
+      "cornerAlpha": 0,
+      "ink": 45855
+    },
+    {
+      "src": "art/armor-designs/star.svg",
+      "width": 360,
+      "height": 440,
+      "cornerAlpha": 0,
+      "ink": 42698
+    },
+    {
+      "src": "art/armor-designs/king.svg",
+      "width": 360,
+      "height": 440,
+      "cornerAlpha": 0,
+      "ink": 48308
+    }
+  ],
+  "vectors": [
+    {
+      "src": "art/armor-designs/web.svg",
+      "slots": [
+        "helmet",
+        "leftSleeve",
+        "rightSleeve",
+        "torso",
+        "collar",
+        "leftBoot",
+        "rightBoot"
+      ],
+      "valid": true,
+      "external": 0
+    },
+    {
+      "src": "art/armor-designs/steel.svg",
+      "slots": [
+        "helmet",
+        "leftSleeve",
+        "rightSleeve",
+        "torso",
+        "collar",
+        "leftBoot",
+        "rightBoot"
+      ],
+      "valid": true,
+      "external": 0
+    },
+    {
+      "src": "art/armor-designs/bone_slime.svg",
+      "slots": [
+        "helmet",
+        "leftSleeve",
+        "rightSleeve",
+        "torso",
+        "collar",
+        "leftBoot",
+        "rightBoot"
+      ],
+      "valid": true,
+      "external": 0
+    },
+    {
+      "src": "art/armor-designs/chitin.svg",
+      "slots": [
+        "helmet",
+        "leftSleeve",
+        "rightSleeve",
+        "torso",
+        "collar",
+        "leftBoot",
+        "rightBoot"
+      ],
+      "valid": true,
+      "external": 0
+    },
+    {
+      "src": "art/armor-designs/leaf.svg",
+      "slots": [
+        "helmet",
+        "leftSleeve",
+        "rightSleeve",
+        "torso",
+        "collar",
+        "leftBoot",
+        "rightBoot"
+      ],
+      "valid": true,
+      "external": 0
+    },
+    {
+      "src": "art/armor-designs/moss.svg",
+      "slots": [
+        "helmet",
+        "leftSleeve",
+        "rightSleeve",
+        "torso",
+        "collar",
+        "leftBoot",
+        "rightBoot"
+      ],
+      "valid": true,
+      "external": 0
+    },
+    {
+      "src": "art/armor-designs/shadow.svg",
+      "slots": [
+        "helmet",
+        "leftSleeve",
+        "rightSleeve",
+        "torso",
+        "collar",
+        "leftBoot",
+        "rightBoot"
+      ],
+      "valid": true,
+      "external": 0
+    },
+    {
+      "src": "art/armor-designs/moon_armor.svg",
+      "slots": [
+        "helmet",
+        "leftSleeve",
+        "rightSleeve",
+        "torso",
+        "collar",
+        "leftBoot",
+        "rightBoot"
+      ],
+      "valid": true,
+      "external": 0
+    },
+    {
+      "src": "art/armor-designs/star.svg",
+      "slots": [
+        "helmet",
+        "leftSleeve",
+        "rightSleeve",
+        "torso",
+        "collar",
+        "leftBoot",
+        "rightBoot"
+      ],
+      "valid": true,
+      "external": 0
+    },
+    {
+      "src": "art/armor-designs/king.svg",
+      "slots": [
+        "helmet",
+        "leftSleeve",
+        "rightSleeve",
+        "torso",
+        "collar",
+        "leftBoot",
+        "rightBoot"
+      ],
+      "valid": true,
+      "external": 0
+    }
+  ]
+}
