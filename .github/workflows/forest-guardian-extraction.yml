@@ -1,0 +1,27 @@
+name: Forest Guardian extraction QA
+on:
+  push:
+    branches:
+      - feature/forest-guardian-armor
+  workflow_dispatch:
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Check immutable frames and PNG dimensions
+        run: node qa/forest-guardian/verify-extraction.mjs
+      - name: Install Pillow for source-only QA sheet
+        run: python3 -m pip install Pillow
+      - name: Generate real diagnostic sheet from 12 original game files
+        run: python3 qa/forest-guardian/make-original-contact-sheet.py
+      - uses: actions/upload-artifact@v4
+        with:
+          name: forest-guardian-original-12
+          path: |
+            qa/forest-guardian/original-contact-sheet.png
+            qa/forest-guardian/manifest.json
+          retention-days: 30

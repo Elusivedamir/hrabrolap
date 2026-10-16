@@ -1,0 +1,292 @@
+{
+  "schema": 1,
+  "source_commit": "52f637a00148e1580f3e8e281e95177ed12fcf99",
+  "integrity": "Copies reuse the same immutable Git blob SHA; the test independently checks PNG metadata, original SHA-256, and copied bytes",
+  "native_render": {
+    "x": 114,
+    "y": -22,
+    "width": 260,
+    "height": 346,
+    "anchor_basis_width": 279,
+    "anchor_basis_height": 370,
+    "description": "Coordinates and anchors copied from canonical-sprites.mjs at pinned source_commit; cat frame itself must not be changed"
+  },
+  "frames": [
+    {
+      "kind": "attack",
+      "index": 1,
+      "source": "assets/canonical/attack_01.png",
+      "copy": "qa/forest-guardian/original/attack_01.png",
+      "git_blob_sha": "81afb20f7160e6161199942e564f0d34554ab949",
+      "sha256": "3fd9fd0d57d60d342bc026ad1d4ca434846c9ccdd3e09e2c67e3aa28ed362959",
+      "native_width": 279,
+      "native_height": 370,
+      "mode": "RGBA",
+      "armor_anchor_source_xy_rotation_scale": [
+        156,
+        249,
+        0,
+        1
+      ],
+      "weapon_anchor_source_xy_rotation_scale": [
+        104,
+        233,
+        -15,
+        0.64
+      ]
+    },
+    {
+      "kind": "attack",
+      "index": 2,
+      "source": "assets/canonical/attack_02.png",
+      "copy": "qa/forest-guardian/original/attack_02.png",
+      "git_blob_sha": "2472df5fc52d965728a098869a214d0e810518ab",
+      "sha256": "cbaf083efb17f4b8bf261f5960c2cb697ce259f2437c52f9d06f9b1cd3729e91",
+      "native_width": 278,
+      "native_height": 370,
+      "mode": "RGBA",
+      "armor_anchor_source_xy_rotation_scale": [
+        166,
+        257,
+        -5,
+        1
+      ],
+      "weapon_anchor_source_xy_rotation_scale": [
+        89,
+        151,
+        -24,
+        0.64
+      ]
+    },
+    {
+      "kind": "attack",
+      "index": 3,
+      "source": "assets/canonical/attack_03.png",
+      "copy": "qa/forest-guardian/original/attack_03.png",
+      "git_blob_sha": "e2f7cf0be21fac32c4a4418b0f5df77a4b727a68",
+      "sha256": "c5ab1c4cb8b4eb8f78559a44c5f578efb43f20dccb4a728933acb2cda4152b29",
+      "native_width": 279,
+      "native_height": 370,
+      "mode": "RGBA",
+      "armor_anchor_source_xy_rotation_scale": [
+        153,
+        251,
+        -7,
+        1
+      ],
+      "weapon_anchor_source_xy_rotation_scale": [
+        90,
+        149,
+        -29,
+        0.64
+      ]
+    },
+    {
+      "kind": "attack",
+      "index": 4,
+      "source": "assets/canonical/attack_04.png",
+      "copy": "qa/forest-guardian/original/attack_04.png",
+      "git_blob_sha": "a32ce60e603f423c0e71fa20bba0f72a0fd31f2d",
+      "sha256": "d2d0c4e281aa1eec4b9f360fe4631d898641c67d0ca8eb8e3af09b407020c3d6",
+      "native_width": 279,
+      "native_height": 370,
+      "mode": "RGBA",
+      "armor_anchor_source_xy_rotation_scale": [
+        169,
+        247,
+        6,
+        1
+      ],
+      "weapon_anchor_source_xy_rotation_scale": [
+        99,
+        233,
+        86,
+        0.64
+      ]
+    },
+    {
+      "kind": "attack",
+      "index": 5,
+      "source": "assets/canonical/attack_05.png",
+      "copy": "qa/forest-guardian/original/attack_05.png",
+      "git_blob_sha": "1126978bcbaf18860581240e027d113a97d03f9c",
+      "sha256": "4af7bf3f7adf1820733dbdf2cf7a82a79f5162d4d579bffc36ae8c95cb54b9a9",
+      "native_width": 278,
+      "native_height": 370,
+      "mode": "RGBA",
+      "armor_anchor_source_xy_rotation_scale": [
+        140,
+        252,
+        4,
+        0.95
+      ],
+      "weapon_anchor_source_xy_rotation_scale": [
+        180,
+        230,
+        57,
+        0.64
+      ]
+    },
+    {
+      "kind": "attack",
+      "index": 6,
+      "source": "assets/canonical/attack_06.png",
+      "copy": "qa/forest-guardian/original/attack_06.png",
+      "git_blob_sha": "779a5cb8a4245a43ee510a41a999a916e3512a20",
+      "sha256": "c67774983db6a8cc209d6b7af671485f4e99da8f1cb152176f682c5e7b190557",
+      "native_width": 279,
+      "native_height": 370,
+      "mode": "RGBA",
+      "armor_anchor_source_xy_rotation_scale": [
+        156,
+        249,
+        0,
+        1
+      ],
+      "weapon_anchor_source_xy_rotation_scale": [
+        104,
+        233,
+        -15,
+        0.64
+      ]
+    },
+    {
+      "kind": "hurt",
+      "index": 1,
+      "source": "assets/canonical/hurt_01.png",
+      "copy": "qa/forest-guardian/original/hurt_01.png",
+      "git_blob_sha": "3dcc4a6800122d30520a4f123bff203dc8e8cd09",
+      "sha256": "24dec1060f21598c2dbafdccf2cb8159dc5b52bb02afcd2479dc236cd87fd998",
+      "native_width": 279,
+      "native_height": 370,
+      "mode": "RGBA",
+      "armor_anchor_source_xy_rotation_scale": [
+        163,
+        248,
+        0,
+        1
+      ],
+      "weapon_anchor_source_xy_rotation_scale": [
+        107,
+        233,
+        -15,
+        0.62
+      ]
+    },
+    {
+      "kind": "hurt",
+      "index": 2,
+      "source": "assets/canonical/hurt_02.png",
+      "copy": "qa/forest-guardian/original/hurt_02.png",
+      "git_blob_sha": "56491846c0b71e4e99b5d4e003c1941631ec979c",
+      "sha256": "e9ec64e8ed2a2faf659af2eeb4a2e6c26289cadd3d3398a3ddc276ac9875fc30",
+      "native_width": 278,
+      "native_height": 370,
+      "mode": "RGBA",
+      "armor_anchor_source_xy_rotation_scale": [
+        160,
+        246,
+        -5,
+        1
+      ],
+      "weapon_anchor_source_xy_rotation_scale": [
+        91,
+        241,
+        -20,
+        0.62
+      ]
+    },
+    {
+      "kind": "hurt",
+      "index": 3,
+      "source": "assets/canonical/hurt_03.png",
+      "copy": "qa/forest-guardian/original/hurt_03.png",
+      "git_blob_sha": "f5b0477b7fb5148d117cd650c0a5cc5896aed397",
+      "sha256": "4b8c4a1b4146373e67782c2dace0b0e408cf282d8bd7fc0e00e3d3b6f49235bd",
+      "native_width": 279,
+      "native_height": 370,
+      "mode": "RGBA",
+      "armor_anchor_source_xy_rotation_scale": [
+        165,
+        258,
+        -4,
+        1
+      ],
+      "weapon_anchor_source_xy_rotation_scale": [
+        105,
+        245,
+        -22,
+        0.62
+      ]
+    },
+    {
+      "kind": "hurt",
+      "index": 4,
+      "source": "assets/canonical/hurt_04.png",
+      "copy": "qa/forest-guardian/original/hurt_04.png",
+      "git_blob_sha": "846c88c1917da74390bde5a17171d1410254dce0",
+      "sha256": "ed6fa754a76a840feb34f324ef7a8f399ad325afa6498564ea3c9864d69c51b4",
+      "native_width": 279,
+      "native_height": 370,
+      "mode": "RGBA",
+      "armor_anchor_source_xy_rotation_scale": [
+        144,
+        248,
+        -12,
+        0.95
+      ],
+      "weapon_anchor_source_xy_rotation_scale": [
+        82,
+        201,
+        -35,
+        0.62
+      ]
+    },
+    {
+      "kind": "hurt",
+      "index": 5,
+      "source": "assets/canonical/hurt_05.png",
+      "copy": "qa/forest-guardian/original/hurt_05.png",
+      "git_blob_sha": "35246d6e4a503871e8e549643647e03952a15e8d",
+      "sha256": "7b4afc1a9c0e2f2029a08efcdbbff3d1ff87c88ff071d79049eb9f3f0cf0d710",
+      "native_width": 278,
+      "native_height": 370,
+      "mode": "RGBA",
+      "armor_anchor_source_xy_rotation_scale": [
+        152,
+        275,
+        7,
+        0.95
+      ],
+      "weapon_anchor_source_xy_rotation_scale": [
+        84,
+        273,
+        15,
+        0.62
+      ]
+    },
+    {
+      "kind": "hurt",
+      "index": 6,
+      "source": "assets/canonical/hurt_06.png",
+      "copy": "qa/forest-guardian/original/hurt_06.png",
+      "git_blob_sha": "9944fbb522ab0e6c3133a263e9ed40c426455de3",
+      "sha256": "59b81457f54bc84543db822860746ed0d28f85148dc9913c41ca63cb20011d58",
+      "native_width": 279,
+      "native_height": 370,
+      "mode": "RGBA",
+      "armor_anchor_source_xy_rotation_scale": [
+        163,
+        248,
+        0,
+        1
+      ],
+      "weapon_anchor_source_xy_rotation_scale": [
+        107,
+        233,
+        -15,
+        0.62
+      ]
+    }
+  ]
+}
