@@ -114,7 +114,7 @@ function updateSleepDrawing(rest){
 function render(){
  $('gold').textContent=fmt(p.gold);
  $('room').textContent=`ВОЛНА ${b.level}/100`; $('room-progress').textContent=`${p.best}/100`; $('room-fill').style.width=(p.best)+'%';
- $('enemy-name').textContent=b.monster.name;const enemySource=['slime','bat','mushroom','golem'].includes(b.monster.texture)?'art/'+b.monster.texture+'.svg':'art/monsters/'+b.monster.texture+'.svg';if($('enemy-art').getAttribute('src')!==enemySource){cancelMonsterFrames();$('enemy-art').src=enemySource;}$('enemy-holder').dataset.monster=b.monster.type;$('enemy-holder').classList.toggle('boss',b.monster.boss);$('enemy-art').classList.toggle('boss',b.monster.boss);
+ $('enemy-name').textContent=b.monster.name;const approvedV2=new Set(['slime','spider','mouse','mushroom','beetle','larva','bat','ghost']);const enemySource=approvedV2.has(b.monster.texture)?'art/monsters-v2/'+b.monster.texture+'.svg':b.monster.texture==='golem'?'art/golem.svg':'art/monsters/'+b.monster.texture+'.svg';if($('enemy-art').getAttribute('src')!==enemySource){cancelMonsterFrames();$('enemy-art').src=enemySource;}$('enemy-holder').dataset.monster=b.monster.type;$('enemy-holder').classList.toggle('boss',b.monster.boss);$('enemy-art').classList.toggle('boss',b.monster.boss);
  $('hero-hp-num').textContent=Math.ceil(b.hp)+'/'+maxHealth(p);$('enemy-hp-num').textContent=Math.ceil(b.enemyHp)+'/'+b.monster.hp;
  $('hero-hp').style.width=(100*b.hp/maxHealth(p))+'%';$('enemy-hp').style.width=(100*b.enemyHp/b.monster.hp)+'%';
  const monsterHeartCapacity=b.monster.hp/5;
