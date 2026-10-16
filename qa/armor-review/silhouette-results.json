@@ -1,0 +1,231 @@
+{
+  "colorIndependent": true,
+  "minimumDifference": 0.10155287157998522,
+  "pairs": [
+    {
+      "a": "art/armor-frames/web/attack/01.svg",
+      "b": "art/armor-frames/steel/attack/01.svg",
+      "silhouetteDifference": 0.16688770999115826
+    },
+    {
+      "a": "art/armor-frames/web/attack/01.svg",
+      "b": "art/armor-frames/bone_slime/attack/01.svg",
+      "silhouetteDifference": 0.19010713471620697
+    },
+    {
+      "a": "art/armor-frames/web/attack/01.svg",
+      "b": "art/armor-frames/chitin/attack/01.svg",
+      "silhouetteDifference": 0.17612267250821467
+    },
+    {
+      "a": "art/armor-frames/web/attack/01.svg",
+      "b": "art/armor-frames/leaf/attack/01.svg",
+      "silhouetteDifference": 0.16886792452830188
+    },
+    {
+      "a": "art/armor-frames/web/attack/01.svg",
+      "b": "art/armor-frames/moss/attack/01.svg",
+      "silhouetteDifference": 0.23137084510102107
+    },
+    {
+      "a": "art/armor-frames/web/attack/01.svg",
+      "b": "art/armor-frames/shadow/attack/01.svg",
+      "silhouetteDifference": 0.18655148260565024
+    },
+    {
+      "a": "art/armor-frames/web/attack/01.svg",
+      "b": "art/armor-frames/moon_armor/attack/01.svg",
+      "silhouetteDifference": 0.21120293847566574
+    },
+    {
+      "a": "art/armor-frames/web/attack/01.svg",
+      "b": "art/armor-frames/star/attack/01.svg",
+      "silhouetteDifference": 0.2144790257104195
+    },
+    {
+      "a": "art/armor-frames/web/attack/01.svg",
+      "b": "art/armor-frames/king/attack/01.svg",
+      "silhouetteDifference": 0.17067410905968228
+    },
+    {
+      "a": "art/armor-frames/steel/attack/01.svg",
+      "b": "art/armor-frames/bone_slime/attack/01.svg",
+      "silhouetteDifference": 0.21912858660998938
+    },
+    {
+      "a": "art/armor-frames/steel/attack/01.svg",
+      "b": "art/armor-frames/chitin/attack/01.svg",
+      "silhouetteDifference": 0.14340182164795595
+    },
+    {
+      "a": "art/armor-frames/steel/attack/01.svg",
+      "b": "art/armor-frames/leaf/attack/01.svg",
+      "silhouetteDifference": 0.1730512249443207
+    },
+    {
+      "a": "art/armor-frames/steel/attack/01.svg",
+      "b": "art/armor-frames/moss/attack/01.svg",
+      "silhouetteDifference": 0.2151029748283753
+    },
+    {
+      "a": "art/armor-frames/steel/attack/01.svg",
+      "b": "art/armor-frames/shadow/attack/01.svg",
+      "silhouetteDifference": 0.1711611321595721
+    },
+    {
+      "a": "art/armor-frames/steel/attack/01.svg",
+      "b": "art/armor-frames/moon_armor/attack/01.svg",
+      "silhouetteDifference": 0.18939727232732073
+    },
+    {
+      "a": "art/armor-frames/steel/attack/01.svg",
+      "b": "art/armor-frames/star/attack/01.svg",
+      "silhouetteDifference": 0.17435001092418614
+    },
+    {
+      "a": "art/armor-frames/steel/attack/01.svg",
+      "b": "art/armor-frames/king/attack/01.svg",
+      "silhouetteDifference": 0.13953488372093023
+    },
+    {
+      "a": "art/armor-frames/bone_slime/attack/01.svg",
+      "b": "art/armor-frames/chitin/attack/01.svg",
+      "silhouetteDifference": 0.1901893287435456
+    },
+    {
+      "a": "art/armor-frames/bone_slime/attack/01.svg",
+      "b": "art/armor-frames/leaf/attack/01.svg",
+      "silhouetteDifference": 0.20242729562628806
+    },
+    {
+      "a": "art/armor-frames/bone_slime/attack/01.svg",
+      "b": "art/armor-frames/moss/attack/01.svg",
+      "silhouetteDifference": 0.16974416017797553
+    },
+    {
+      "a": "art/armor-frames/bone_slime/attack/01.svg",
+      "b": "art/armor-frames/shadow/attack/01.svg",
+      "silhouetteDifference": 0.2233031674208145
+    },
+    {
+      "a": "art/armor-frames/bone_slime/attack/01.svg",
+      "b": "art/armor-frames/moon_armor/attack/01.svg",
+      "silhouetteDifference": 0.22807017543859648
+    },
+    {
+      "a": "art/armor-frames/bone_slime/attack/01.svg",
+      "b": "art/armor-frames/star/attack/01.svg",
+      "silhouetteDifference": 0.23605906986995812
+    },
+    {
+      "a": "art/armor-frames/bone_slime/attack/01.svg",
+      "b": "art/armor-frames/king/attack/01.svg",
+      "silhouetteDifference": 0.17377466581795034
+    },
+    {
+      "a": "art/armor-frames/chitin/attack/01.svg",
+      "b": "art/armor-frames/leaf/attack/01.svg",
+      "silhouetteDifference": 0.14211594856756146
+    },
+    {
+      "a": "art/armor-frames/chitin/attack/01.svg",
+      "b": "art/armor-frames/moss/attack/01.svg",
+      "silhouetteDifference": 0.2368474923234391
+    },
+    {
+      "a": "art/armor-frames/chitin/attack/01.svg",
+      "b": "art/armor-frames/shadow/attack/01.svg",
+      "silhouetteDifference": 0.1935978951984214
+    },
+    {
+      "a": "art/armor-frames/chitin/attack/01.svg",
+      "b": "art/armor-frames/moon_armor/attack/01.svg",
+      "silhouetteDifference": 0.14542190305206462
+    },
+    {
+      "a": "art/armor-frames/chitin/attack/01.svg",
+      "b": "art/armor-frames/star/attack/01.svg",
+      "silhouetteDifference": 0.17788879235447436
+    },
+    {
+      "a": "art/armor-frames/chitin/attack/01.svg",
+      "b": "art/armor-frames/king/attack/01.svg",
+      "silhouetteDifference": 0.1450082508250825
+    },
+    {
+      "a": "art/armor-frames/leaf/attack/01.svg",
+      "b": "art/armor-frames/moss/attack/01.svg",
+      "silhouetteDifference": 0.21445996895098693
+    },
+    {
+      "a": "art/armor-frames/leaf/attack/01.svg",
+      "b": "art/armor-frames/shadow/attack/01.svg",
+      "silhouetteDifference": 0.1816674561819043
+    },
+    {
+      "a": "art/armor-frames/leaf/attack/01.svg",
+      "b": "art/armor-frames/moon_armor/attack/01.svg",
+      "silhouetteDifference": 0.10155287157998522
+    },
+    {
+      "a": "art/armor-frames/leaf/attack/01.svg",
+      "b": "art/armor-frames/star/attack/01.svg",
+      "silhouetteDifference": 0.14701704545454544
+    },
+    {
+      "a": "art/armor-frames/leaf/attack/01.svg",
+      "b": "art/armor-frames/king/attack/01.svg",
+      "silhouetteDifference": 0.18062149331031507
+    },
+    {
+      "a": "art/armor-frames/moss/attack/01.svg",
+      "b": "art/armor-frames/shadow/attack/01.svg",
+      "silhouetteDifference": 0.2353198948290973
+    },
+    {
+      "a": "art/armor-frames/moss/attack/01.svg",
+      "b": "art/armor-frames/moon_armor/attack/01.svg",
+      "silhouetteDifference": 0.24598349978289188
+    },
+    {
+      "a": "art/armor-frames/moss/attack/01.svg",
+      "b": "art/armor-frames/star/attack/01.svg",
+      "silhouetteDifference": 0.22116218560277537
+    },
+    {
+      "a": "art/armor-frames/moss/attack/01.svg",
+      "b": "art/armor-frames/king/attack/01.svg",
+      "silhouetteDifference": 0.21266233766233766
+    },
+    {
+      "a": "art/armor-frames/shadow/attack/01.svg",
+      "b": "art/armor-frames/moon_armor/attack/01.svg",
+      "silhouetteDifference": 0.14739119980764606
+    },
+    {
+      "a": "art/armor-frames/shadow/attack/01.svg",
+      "b": "art/armor-frames/star/attack/01.svg",
+      "silhouetteDifference": 0.18497913769123783
+    },
+    {
+      "a": "art/armor-frames/shadow/attack/01.svg",
+      "b": "art/armor-frames/king/attack/01.svg",
+      "silhouetteDifference": 0.22367312552653748
+    },
+    {
+      "a": "art/armor-frames/moon_armor/attack/01.svg",
+      "b": "art/armor-frames/star/attack/01.svg",
+      "silhouetteDifference": 0.1660051365865048
+    },
+    {
+      "a": "art/armor-frames/moon_armor/attack/01.svg",
+      "b": "art/armor-frames/king/attack/01.svg",
+      "silhouetteDifference": 0.21389358108108109
+    },
+    {
+      "a": "art/armor-frames/star/attack/01.svg",
+      "b": "art/armor-frames/king/attack/01.svg",
+      "silhouetteDifference": 0.15477214101461736
+    }
+  ]
+}

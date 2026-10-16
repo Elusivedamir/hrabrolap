@@ -31,6 +31,23 @@ test('all 120 SVG overlays render transparently and retain flower, paws and eyes
    await page.evaluate(async()=>{await Promise.all([...document.querySelectorAll('.set image')].map(e=>{const im=new Image();im.src=e.getAttribute('href');return im.decode();}));});
    await page.screenshot({path:`qa/armor-review/${kind}-0${i+1}.png`,fullPage:true});
   }
+  // Compare alpha silhouettes of torso constructions, with all colors discarded.
+  // Recoloring one breastplate ten times must fail this regression.
+  const silhouettes=await page.evaluate(async(paths)=>{
+   const masks=await Promise.all(paths.map(async path=>{
+    const xml=new DOMParser().parseFromString(await (await fetch(path)).text(),'image/svg+xml');
+    xml.querySelectorAll('[data-part="helmet"],[data-part="boot"]').forEach(e=>e.remove());
+    const image=new Image();image.src='data:image/svg+xml;base64,'+btoa(new XMLSerializer().serializeToString(xml));await image.decode();
+    const c=document.createElement('canvas');c.width=279;c.height=370;const ctx=c.getContext('2d');ctx.drawImage(image,0,0);
+    const bytes=ctx.getImageData(0,0,279,370).data;return Array.from({length:279*370},(_,i)=>bytes[i*4+3]>127?1:0);
+   }));
+   const pairs=[];for(let i=0;i<masks.length;i++)for(let j=i+1;j<masks.length;j++){
+    let union=0,difference=0;for(let n=0;n<masks[i].length;n++){union+=masks[i][n]|masks[j][n];difference+=masks[i][n]^masks[j][n];}
+    pairs.push({a:paths[i],b:paths[j],silhouetteDifference:difference/union});
+   }return pairs;
+  },ARMOR_SET_IDS.map(id=>armorFramePath(id,'attack',0)));
+  for(const pair of silhouettes)assert.ok(pair.silhouetteDifference>.10,'torso outlines too similar: '+JSON.stringify(pair));
+  await fs.writeFile('qa/armor-review/silhouette-results.json',JSON.stringify({colorIndependent:true,minimumDifference:Math.min(...silhouettes.map(p=>p.silhouetteDifference)),pairs:silhouettes},null,2));
   assert.equal(results.length,120);assert.deepEqual(errors,[]);
   await fs.writeFile('qa/armor-review/vector-render-results.json',JSON.stringify({browser:browser.version(),rendered:results.length,errors,results},null,2));
  }finally{await browser.close();}
