@@ -19,7 +19,7 @@ jobs:
       - name: Generate real diagnostic sheet from 12 original game files
         run: python3 qa/forest-guardian/make-original-contact-sheet.py
       - name: Archive working project for exact rendering QA
-        run: tar --exclude=.git -czf hrabrolap-source.tar.gz .
+        run: tar --exclude=.git -czf /tmp/hrabrolap-source.tar.gz . && cp /tmp/hrabrolap-source.tar.gz .
       - uses: actions/upload-artifact@v4
         with:
           name: forest-guardian-original-12
