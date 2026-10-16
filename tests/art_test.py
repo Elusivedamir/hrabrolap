@@ -6,5 +6,9 @@ assert (r/'assets/hero/original-head.png').exists()
 assert (r/'art/hero/bare-kitten.svg').exists()
 for i in range(1,7): assert (r/f'assets/battle/attack_{i:02}.png').exists()
 s=(r/'game.mjs').read_text()
-for label in ('slash','overhead','thrust','heroFrame(','contactAttack(','hero-weapon','enemyAttack('): assert label in s,label
+for label in ('slash','overhead','thrust','heroFrame(','contactAttack(','hero-weapon','enemyAttack(','armorAttackTransform','hurtMotionTransform'): assert label in s,label
+h=(r/'index.html').read_text()
+assert 'id="armor-slot"' in h
+assert (r/'equipment-rig.mjs').is_file()
+assert (r/'equipment-preview.html').is_file()
 print('Rig tests: passed — 3 six-pose animation definitions, original face, separate weapon slot')
