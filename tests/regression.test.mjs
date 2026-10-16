@@ -92,11 +92,11 @@ test('перезагрузка сохраняет остаток переход�
  const b=c.restoreFight(p,{level:1,hp:27,enemyHp:0,heroTimer:.1,enemyTimer:1,phase:'transition',rest:.8});
  assert.equal(b.level,1);assert.equal(b.phase,'transition');assert.equal(b.rest,.8);assert.equal(b.hp,27);
 });
-test('у всех восьми видов реально происходят атака, урон и победа',()=>{
+test('все восемь базовых небоссовых типов, включая скелета, атакуют и получают урон',()=>{
  const seen=new Set();
  for(let room=1;room<=8;room++){
   const p=c.freshProgress();p.room=room;p.best=room-1;p.armor=100;
-  const b=c.startFight(p),events=[];
+  const b=c.startFight(p,c.maxHealth(p),()=>.99),events=[];
   for(let i=0;i<2000&&!events.some(e=>e.kind==='win');i++)events.push(...c.stepFight(p,b,.1));
   assert.ok(events.some(e=>e.kind==='enemy-hit'&&e.move===b.monster.move),b.monster.type);
   assert.ok(events.some(e=>e.kind==='hero-hit'),b.monster.type);
