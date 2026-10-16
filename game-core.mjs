@@ -36,13 +36,27 @@ export const armorCost=n=>Math.round(35*1.16**n);
 export const fishCost=n=>Math.round(45*1.24**n);
 export const homeCost=n=>Math.round(65*1.23**n);
 export const bucketCost=()=>320;
+// 0 => 1 hit/sec, 20 => 2, ... 100 => 6 hits/sec. Manual mode is always 3 hits/sec.
+export const MAX_AUTO_LEVEL=100;
+export const MANUAL_HITS_PER_SECOND=3;
+export const autoHitsPerSecond=p=>1+Math.floor(Math.min(MAX_AUTO_LEVEL,Math.max(0,p.autoLevel||0))/20);
+export const autoUpgradeCost=level=>Math.round(12*1.06**Math.max(0,Math.min(99,level)));
+export const attackInterval=(p,auto=p.autoEnabled)=>1/(auto?autoHitsPerSecond(p):MANUAL_HITS_PER_SECOND);
+export function upgradeAutoBattle(p){
+ if(!p.autoUnlocked)return {ok:false,reason:'locked'};
+ if(p.autoLevel>=MAX_AUTO_LEVEL)return {ok:false,reason:'max'};
+ const cost=autoUpgradeCost(p.autoLevel);
+ if(p.gold<cost)return {ok:false,reason:'gold',cost};
+ p.gold-=cost;p.autoLevel++;
+ return {ok:true,cost,level:p.autoLevel,hitsPerSecond:autoHitsPerSecond(p)};
+}
 export const bucketCapacity=p=>p.bucketLevel>0?24:12;
 const equipped=(arr,id)=>arr.find(x=>x.id===id)||arr[0];
 export const heroDamage=p=>8+3*p.sword+equipped(WEAPONS,p.weapon).damage;
 export const maxHealth=p=>65+14*p.armor+equipped(ARMORS,p.equippedArmor).health;
 export const restDuration=p=>Math.max(2.5,7-p.home*.35);
 export function battleRate(p){const m=monsterForWave(Math.max(1,Math.min(100,p.best||1)));return Math.floor(m.reward*60/Math.max(4,Math.ceil(m.hp/heroDamage(p))*1.3+1.1));}
-export function freshProgress(){return {version:VERSION,gold:0,sword:0,armor:0,fishLevel:0,home:0,bucketLevel:0,weapon:'iron',equippedArmor:'none',ownedWeapons:['iron'],ownedArmors:['none'],room:1,best:0,fails:0,farming:false,cleared:false,kills:0,totalGold:0,killedSlimes:0,caughtTotal:0,soldFish:0,soldPike:0,spentSword:0,autoUnlocked:false,autoEnabled:false,enchantment:'none',
+export function freshProgress(){return {version:VERSION,gold:0,sword:0,armor:0,fishLevel:0,home:0,bucketLevel:0,weapon:'iron',equippedArmor:'none',ownedWeapons:['iron'],ownedArmors:['none'],room:1,best:0,fails:0,farming:false,cleared:false,kills:0,totalGold:0,killedSlimes:0,caughtTotal:0,soldFish:0,soldPike:0,spentSword:0,autoUnlocked:false,autoEnabled:false,autoLevel:0,enchantment:'none',
   monsterKills:Object.fromEntries(MONSTERS.map(m=>[m.type,0])),bossKills:0,lightningHits:0,poisonKills:0,vampireHeals:0,
   materials:Object.fromEntries(MATERIALS.map(m=>[m.id,0])),fishBucket:[],catchPlan:[],nextCatchMs:0,merchantPhase:'away',merchantMs:300000,lastSeen:0,pendingOffline:0,questClaimed:[]};}
 const int=(v,lo,hi,d=lo)=>Number.isFinite(v)?Math.max(lo,Math.min(hi,Math.floor(v))):d;
@@ -53,6 +67,7 @@ export function validateProgress(raw){
  p.farming=!!raw.farming;p.cleared=!!raw.cleared;
  p.autoUnlocked=!!raw.autoUnlocked;
  p.autoEnabled=p.autoUnlocked&&!!raw.autoEnabled;
+ p.autoLevel=p.autoUnlocked?int(raw.autoLevel,0,MAX_AUTO_LEVEL,0):0;
  p.enchantment=['none','poison','lightning','vampirism'].includes(raw.enchantment)?raw.enchantment:'none';
  for(const monster of MONSTERS)p.monsterKills[monster.type]=int(raw.monsterKills?.[monster.type],0,1000000,0);
  for(const key of ['bossKills','lightningHits','poisonKills','vampireHeals'])p[key]=int(raw[key],0,1000000,0);
@@ -95,7 +110,7 @@ export function restoreFight(p,raw,completedLegacyChapter=false){
  const monster=!standard.boss&&custom?{...standard,...custom,name:custom.name,boss:false}:standard;
  const phase=['fight','rest','transition'].includes(raw.phase)?raw.phase:'fight';
  const b={level,monster,hp,enemyHp:finite(raw.enemyHp,0,monster.hp,monster.hp),phase,
-  heroTimer:finite(raw.heroTimer,0,1.3,0),enemyTimer:finite(raw.enemyTimer,0,2.4,0),rest:finite(raw.rest,0,phase==='rest'?restDuration(p):1.15,0),
+  heroTimer:finite(raw.heroTimer,0,1,0),enemyTimer:finite(raw.enemyTimer,0,2.4,0),rest:finite(raw.rest,0,phase==='rest'?restDuration(p):1.15,0),
   poisonRemaining:finite(raw.poisonRemaining,0,5,0),poisonTick:finite(raw.poisonTick,0,1,0)};
  if(b.phase==='fight'&&b.hp===0){b.phase='rest';b.rest=restDuration(p);}
  return b;
@@ -169,7 +184,8 @@ function hitEnemy(p,b,ev){
 }
 export function tapMonster(p,b){
  if(b.phase!=='fight'||p.autoEnabled)return [];
- if(b.heroTimer<1.3)return [{kind:'cooldown',remaining:1.3-b.heroTimer}];
+ const interval=attackInterval(p,false);
+ if(b.heroTimer+1e-8<interval)return [{kind:'cooldown',remaining:interval-b.heroTimer}];
  b.heroTimer=0;
  const ev=[];hitEnemy(p,b,ev);return ev;
 }
@@ -181,7 +197,7 @@ export function stepFight(p,b,seconds,auto=true){
   return ev;
  }
  if(b.phase!=='fight')return ev;
- b.heroTimer=Math.min(1.3,b.heroTimer+dt);b.enemyTimer+=dt;
+ b.heroTimer=Math.min(1,b.heroTimer+dt);b.enemyTimer+=dt;
  if(b.poisonRemaining>0){
   b.poisonRemaining=Math.max(0,b.poisonRemaining-dt);
   b.poisonTick=(b.poisonTick||0)+dt;
@@ -193,7 +209,7 @@ export function stepFight(p,b,seconds,auto=true){
    if(winFight(p,b,ev,'poison'))return ev;
   }
  }
- if(auto&&b.heroTimer>=1.3){b.heroTimer=0;hitEnemy(p,b,ev);if(b.phase!=='fight')return ev;}
+ if(auto&&p.autoUnlocked&&b.heroTimer+1e-8>=attackInterval(p,true)){b.heroTimer=Math.max(0,b.heroTimer-attackInterval(p,true));hitEnemy(p,b,ev);if(b.phase!=='fight')return ev;}
  if(b.enemyTimer>=2.4){b.enemyTimer-=2.4;b.hp=Math.max(0,b.hp-b.monster.attack);ev.push({kind:'enemy-hit',damage:b.monster.attack,move:b.monster.move});
   if(b.hp===0){if(!p.farming&&!p.cleared){p.fails++;if(p.fails>=2&&p.room>1)p.farming=true;}b.phase='rest';b.rest=restDuration(p);ev.push({kind:'defeat',farming:p.farming});}
  }
