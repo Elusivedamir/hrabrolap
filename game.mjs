@@ -3,7 +3,7 @@ import {QUESTS,questProgress,claimQuest} from './quests.mjs';
 import {monsterPose} from './monster-rig.mjs';
 import {bucketArt,sleepFrameIndex,SLEEP_FRAMES} from './bucket-rest.mjs';
 import {applyCanonicalFrame} from './canonical-sprites.mjs';
-import {FOREST_GUARDIAN_ID,forestArmorUrl,forestForegroundPath} from './forest-guardian-rig.mjs';
+import {FOREST_GUARDIAN_ID,forestArmorUrl} from './forest-guardian-rig.mjs';
 import {armorAttackTransform,armorHurtTransform,hurtMotionTransform,hurtWeaponTransform,HURT_FRAMES,HURT_FRAME_MS} from './equipment-rig.mjs';
 import {WEAPONS,ARMORS,MATERIALS,freshProgress,validateProgress,restoreFight,swordCost,armorCost,fishCost,homeCost,bucketCost,bucketCapacity,heroDamage,maxHealth,startFight,stepFight,upgrade,buyEquipment,equipEquipment,offlineReward,bucketVolume,bucketGold,planFishing,stepFishing,stepMerchant,sellAll,purchaseAutoBattle,upgradeAttackSpeed,autoHitsPerSecond,autoUpgradeCost,MAX_AUTO_LEVEL,attackInterval,setEnchantment,tapMonster} from './game-core.mjs';
 const $=id=>document.getElementById(id), SAVE='hrabrolap-v0.2-save',OLD='hrabrolap-v0.1-save',fmt=n=>Math.floor(n).toLocaleString('ru-RU');
@@ -38,11 +38,12 @@ function updateForestFrame(kind=forestKind,index=forestIndex){
  forestKind=kind;forestIndex=index;
  const chosen=p?.equippedArmor===FOREST_GUARDIAN_ID;
  const overlay=$('forest-armor'),foreground=$('forest-front');
- overlay.style.display=chosen?'':'none';foreground.style.display=chosen?'':'none';
+ // The re-registered alpha outfit already contains precise gaps for original paws
+ // and face; drawing the old elliptical original foreground over it erased sleeves.
+ foreground.style.display='none';
+ overlay.style.display=chosen?'':'none';
  if(!chosen)return;
  overlay.setAttribute('href',forestArmorUrl(kind,index));
- foreground.setAttribute('href',$('hero-body').getAttribute('href'));
- $('forest-front-path').setAttribute('d',forestForegroundPath(kind,index));
 }
 
 let hurtSerial=0,hurtTimers=[],hurting=false;
