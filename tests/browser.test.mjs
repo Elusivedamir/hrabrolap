@@ -9,12 +9,12 @@ const base=process.env.HRABROLAP_BASE_URL||'http://127.0.0.1:8080/';
 const key='hrabrolap-v0.2-save';let browser;
 const errors=[];const contexts=[];
 before(async()=>{await fs.mkdir('qa/screenshots',{recursive:true});browser=await chromium.launch({headless:true,...(process.env.HRABROLAP_CHROMIUM_EXECUTABLE?{executablePath:process.env.HRABROLAP_CHROMIUM_EXECUTABLE,args:['--no-zygote','--single-process','--use-gl=angle','--use-angle=swiftshader','--enable-unsafe-swiftshader']}:{})});});
-after(async()=>{for(const ctx of contexts)await ctx.close();await browser?.close();await fs.writeFile('qa/browser-errors.json',JSON.stringify(errors,null,2));});
+after(async()=>{await browser?.close();await fs.writeFile('qa/browser-errors.json',JSON.stringify(errors,null,2));});
 async function pageFor(progress=c.freshProgress(),battleState,options={}){
  // Existing 0.9.6 visual regression fixtures explicitly use unlocked auto mode.
  // v0.9.7 default gameplay stays MANUAL until auto is purchased for 1 coin.
  if(!options.manual)Object.assign(progress,{autoUnlocked:true,autoEnabled:true});
- const ctx=await browser.newContext({viewport:{width:390,height:844},deviceScaleFactor:1,isMobile:true,hasTouch:true});contexts.push(ctx);
+ const ctx=await browser.newContext({viewport:options.viewport||{width:390,height:844},deviceScaleFactor:1,isMobile:true,hasTouch:true});contexts.push(ctx);
  const page=await ctx.newPage();page.on('pageerror',e=>errors.push(e.message));
  page.on('console',msg=>{if(msg.type()==='error')errors.push(msg.text());});
  await page.clock.install({time:new Date('2026-10-15T17:00:00Z')});await page.clock.pauseAt(new Date('2026-10-15T17:01:00Z'));
@@ -65,19 +65,36 @@ test('каждый из десяти SVG-мечей остаётся единс�
   await shot(page,'fixture-weapon-'+weapon.id);
  }
 });
-test('восемь монстров атакуют/получают урон, короны всех десяти боссов',async()=>{
- for(let wave=1;wave<=8;wave++){
-  const p=c.freshProgress();Object.assign(p,{room:wave,best:wave-1,armor:100});const page=await pageFor(p);
-  await page.clock.runFor(2700);const seen=await page.evaluate(()=>window.qaObserved);
-  const expected=c.monsterForWave(wave).type==='spider'?c.MONSTERS.find(x=>x.type==='skeleton'):c.monsterForWave(wave);
-  assert.ok(seen.attacks.includes('attack-'+expected.move));assert.ok(seen.hurts>0);
-  assert.equal(await page.locator('#enemy-holder').getAttribute('data-monster'),expected.type);
-  await shot(page,'fixture-monster-'+expected.type);
+test('все десять монстров показывают 6 кадров атаки/урона, сердечки и короны десяти боссов',async()=>{
+ for(const monster of c.MONSTERS){
+  const p=c.freshProgress();p.armor=100;
+  const b=c.startFight(p);b.monsterType=monster.type;b.enemyTimer=2.39;
+  const page=await pageFor(p,b,{manual:true});
+  await page.evaluate(()=>{
+   window.monsterSamples=[];
+   new MutationObserver(()=>{const h=document.querySelector('#enemy-holder');
+    window.monsterSamples.push([h.dataset.monsterPhase,+h.dataset.monsterFrame]);
+   }).observe(document.querySelector('#enemy-holder'),{attributes:true,attributeFilter:['data-monster-frame']});
+  });
+  await page.clock.runFor(450);
+  await page.locator('#enemy-holder').click();
+  await page.clock.runFor(450);
+  const seen=await page.evaluate(()=>window.monsterSamples);
+  for(const phase of ['attack','hurt'])for(let i=1;i<=6;i++)assert.ok(seen.some(([p,f])=>p===phase&&f===i),monster.type+' '+phase+' frame '+i);
+  assert.equal(await page.locator('#enemy-holder').getAttribute('data-monster'),monster.type);
+  assert.equal(await page.locator('#enemy-hearts .heart-shell').count(),5);
+  assert.equal(await page.locator('.legacy-monster-hp').evaluate(e=>getComputedStyle(e).display),'none');
+  await shot(page,'fixture-monster-'+monster.type);
  }
  for(let wave=10;wave<=100;wave+=10){
   const p=c.freshProgress();Object.assign(p,{room:wave,best:wave-1});const page=await pageFor(p);
-  assert.equal(await page.locator('#boss-crown').isVisible(),true);
-  if(wave===100)await shot(page,'fixture-boss-100');
+  const type=c.monsterForWave(wave).type;
+  if(['skeleton','golem'].includes(type)){
+   assert.equal(await page.locator('#boss-crown').isVisible(),false,'crown is embedded in this model');
+   assert.match(await page.locator('#enemy-art').getAttribute('src'),new RegExp('animations/'+type+'/boss/'));
+   assert.ok(await page.locator('#enemy-art').evaluate(img=>img.complete&&img.naturalWidth===320));
+  }else assert.equal(await page.locator('#boss-crown').isVisible(),true);
+  if([10,40,100].includes(wave))await shot(page,'fixture-boss-'+wave);
  }
 });
 test('рыбалка, ведро 12→24 и ручная продажа торговцу',async()=>{
@@ -340,3 +357,4 @@ test('рыба появляется на счётчике только посл�
  assert.match(await page.locator('#bucket-indicator').textContent(),/1 рыб/);
  await shot(page,'fish-delivered-to-bucket');
 });
+

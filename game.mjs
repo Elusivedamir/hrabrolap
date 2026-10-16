@@ -73,19 +73,20 @@ function syncEquipment(){
  const armor=ARMORS.find(a=>a.id===p.equippedArmor)||ARMORS[0];const art=$('hero-armor');art.style.display=armor.svg?'':'none';if(armor.svg)art.setAttribute('href',armor.svg);
 }
 const APPROVED_MONSTER_TYPES=new Set(['slime','spider','mouse','mushroom','beetle','larva','bat','ghost']);
-const monsterSource=type=>APPROVED_MONSTER_TYPES.has(type)?'art/monsters-v2/'+type+'.svg':type==='golem'?'art/golem.svg':'art/monsters/'+type+'.svg';
+const ARTICULATED_MONSTER_TYPES=new Set(['skeleton','golem']);
+const monsterSource=(type,boss=false)=>APPROVED_MONSTER_TYPES.has(type)?'art/monsters-v2/'+type+'.svg':ARTICULATED_MONSTER_TYPES.has(type)?(boss?'animations/'+type+'/boss/attack/01.svg':'art/monsters-v097/'+type+'.svg'):'art/monsters/'+type+'.svg';
 let monsterSequence=0,monsterTimers=[];
 function cancelMonsterFrames(){
  monsterSequence++;for(const t of monsterTimers)clearTimeout(t);monsterTimers=[];
  const art=$('enemy-art');art.style.animation='';art.style.transform='';
- art.classList.remove('approved-monster-frame');delete art.dataset.playingAnimation;
- if(b?.monster){const source=monsterSource(b.monster.texture);if(art.getAttribute('src')!==source)art.setAttribute('src',source);}
- $('boss-crown').style.visibility='';
+ art.classList.toggle('approved-monster-frame',ARTICULATED_MONSTER_TYPES.has(b?.monster?.type));delete art.dataset.playingAnimation;
+ if(b?.monster){const source=monsterSource(b.monster.texture,b.monster.boss);if(art.getAttribute('src')!==source)art.setAttribute('src',source);}
+ $('boss-crown').style.visibility=b?.monster?.boss&&ARTICULATED_MONSTER_TYPES.has(b.monster.type)?'hidden':'';
 }
 function playMonsterFrames(phase){
  cancelMonsterFrames();const sequence=monsterSequence,type=b.monster.type,boss=!!b.monster.boss;
  const art=$('enemy-art'),holder=$('enemy-holder');
- const archived=APPROVED_MONSTER_TYPES.has(type);
+ const archived=APPROVED_MONSTER_TYPES.has(type)||ARTICULATED_MONSTER_TYPES.has(type);
  art.style.animation='none';
  if(archived){
   art.classList.add('approved-monster-frame');art.dataset.playingAnimation='1';
@@ -131,7 +132,7 @@ let lastBattleMessage=0;
 function render(){
  $('gold').textContent=fmt(p.gold);
  $('room').textContent=`ВОЛНА ${b.level}/100`; $('room-progress').textContent=`${p.best}/100`; $('room-fill').style.width=(p.best)+'%';
- $('enemy-name').textContent=b.monster.name;const enemySource=monsterSource(b.monster.texture),art=$('enemy-art'),variant=b.monster.boss?'boss':'normal';
+ $('enemy-name').textContent=b.monster.name;const enemySource=monsterSource(b.monster.texture,b.monster.boss),art=$('enemy-art'),variant=b.monster.boss?'boss':'normal';
  if(art.dataset.monsterType!==b.monster.type||art.dataset.monsterVariant!==variant){
   cancelMonsterFrames();art.dataset.monsterType=b.monster.type;art.dataset.monsterVariant=variant;
   art.setAttribute('src',enemySource);
