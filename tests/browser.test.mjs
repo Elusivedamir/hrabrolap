@@ -179,3 +179,61 @@ test('кот отдыхает в существующем доме без доб
  assert.match(await page.locator('#rest-sleep-sprite').getAttribute('src'),/^assets\/rest\/sleep_0[1-6]\.png$/);
  await shot(page,'fixture-rest-inside-existing-house');
 });
+
+test('новый игрок вручную атакует, покупает автобой за 1 монету и переключает его',async()=>{
+ const p=c.freshProgress();p.gold=1;
+ const page=await pageFor(p,undefined,{manual:true});
+ assert.match(await page.locator('#status').textContent(),/АВТОБОЙ.*1/);
+ await page.clock.runFor(1600);
+ const initial=Number((await page.locator('#enemy-hp-num').textContent()).split('/')[0]);
+ await page.locator('#enemy-holder').click();
+ const attacked=Number((await page.locator('#enemy-hp-num').textContent()).split('/')[0]);
+ assert.ok(attacked<initial,'manual tap deals damage when cooldown ready');
+ await page.locator('#status').click();
+ let savedGame=await saved(page);
+ assert.equal(savedGame.gold,0);assert.equal(savedGame.autoUnlocked,true);assert.equal(savedGame.autoEnabled,true);
+ assert.match(await page.locator('#status').textContent(),/АВТОБОЙ.*ВКЛ/);
+ await page.locator('#status').click();
+ savedGame=await saved(page);
+ assert.equal(savedGame.autoEnabled,false);assert.equal(savedGame.gold,0);
+ await page.locator('#status').click();
+ await page.clock.runFor(9000);
+ assert.ok((await saved(page)).kills>=1,'auto attacks after purchase');
+ await shot(page,'fixture-manual-and-unlocked-auto');
+});
+test('монстр демонстрирует 6 последовательных кадров нанесения урона и сердечки вместо HP-полосы',async()=>{
+ const p=c.freshProgress();const battle=c.startFight(p);
+ battle.enemyTimer=2.38;battle.hp=65;
+ const page=await pageFor(p,battle);
+ await page.evaluate(()=>{
+  window.monsterFrames=[];
+  new MutationObserver(()=>{const n=document.querySelector('#enemy-holder').dataset.monsterFrame;
+   if(n)window.monsterFrames.push(Number(n));}).observe(document.querySelector('#enemy-holder'),{attributes:true,attributeFilter:['data-monster-frame']});
+ });
+ await page.clock.runFor(650);
+ const frames=await page.evaluate(()=>window.monsterFrames);
+ for(let i=1;i<=6;i++)assert.ok(frames.includes(i),'monster frame '+i+' missing in '+frames);
+ assert.equal(await page.locator('#enemy-hearts .heart-shell').count(),5);
+ assert.equal(await page.locator('.legacy-monster-hp').evaluate(e=>getComputedStyle(e).display),'none');
+ await shot(page,'fixture-monster-six-attack-heart-hp');
+});
+test('яд действует на монстра визуально и отражается в сохранении',async()=>{
+ const p=c.freshProgress();p.enchantment='poison';p.armor=100;
+ const b=c.startFight(p);b.heroTimer=1.29;
+ const page=await pageFor(p,b);
+ await page.clock.runFor(500);
+ assert.equal(await page.locator('#enemy-holder').evaluate(el=>el.classList.contains('poisoned')),true);
+ assert.equal((await saved(page)).enchantment,'poison');
+ await shot(page,'fixture-poison-enchantment');
+});
+test('молния и вампиризм активируются без замены кат-сэмпла или оружия',async()=>{
+ for(const effect of ['lightning','vampirism']){
+  const p=c.freshProgress();p.enchantment=effect;
+  const b=c.startFight(p);b.heroTimer=1.29;b.hp=40;
+  const page=await pageFor(p,b);
+  await page.clock.runFor(250);
+  if(effect==='lightning')assert.equal((await saved(page)).lightningHits>0,true);
+  else assert.equal((await saved(page)).vampireHeals>0,true);
+  assert.equal(await page.locator('#hero-weapon').getAttribute('href'),'art/weapons/iron.svg');
+ }
+});
