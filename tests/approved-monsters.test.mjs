@@ -18,7 +18,7 @@ export const APPROVED_V2 = Object.freeze({
 test('eight approved v0.9.3 monsters must remain EXACT, not substituted by legacy SVG',async()=>{
  for(const [type,sha] of Object.entries(APPROVED_V2)){
   const bytes=await readFile(new URL('../art/monsters-v2/'+type+'.svg',import.meta.url));
-  const actual=createHash('sha1').update('blob '+bytes.length+'\\0'.replace('\\0','\0')).update(bytes).digest('hex');
+  const actual=createHash('sha1').update(Buffer.from('blob '+bytes.length)).update(Buffer.from([0])).update(bytes).digest('hex');
   assert.equal(actual,sha,'Approved monster changed: '+type);
  }
 });
