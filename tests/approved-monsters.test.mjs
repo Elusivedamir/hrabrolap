@@ -24,6 +24,6 @@ test('eight approved v0.9.3 monsters must remain EXACT, not substituted by legac
 });
 test('game explicitly references the eight approved v2 models',async()=>{
  const js=await readFile(new URL('../game.mjs',import.meta.url),'utf-8');
- assert.match(js,/art\\/monsters-v2\\//);
+ assert.ok(js.includes('art/monsters-v2/'));
  for(const type of Object.keys(APPROVED_V2)) assert.ok(js.includes("'"+type+"'"),'Model is not selected: '+type);
 });
