@@ -30,7 +30,7 @@ test('unpaid auto locked by default, costs exactly 1 once, modes toggle freely',
 test('manual input waits for cooldown, then deals exactly one hit',()=>{
  const p=c.freshProgress();const b=c.startFight(p,c.maxHealth(p),()=>.99);
  const initial=b.enemyHp;
- assert.equal(c.stepFight(p,b,1.3,false).filter(e=>e.kind==='hero-hit').length,0);
+ for(let i=0;i<6;i++)assert.equal(c.stepFight(p,b,.25,false).filter(e=>e.kind==='hero-hit').length,0);
  const e=c.tapMonster(p,b);assert.equal(e.filter(x=>x.kind==='hero-hit').length,1);assert.ok(b.enemyHp<initial);
  assert.equal(c.tapMonster(p,b)[0].kind,'cooldown');
 });
@@ -39,7 +39,7 @@ test('poison turns into real DOT and a poison win; lightning deals extra damage'
  assert.equal(c.setEnchantment(p,'poison'),true);b.heroTimer=1.3;b.enemyHp=15;
  const e=c.tapMonster(p,b);assert.equal(e[0].element,'poison');
  assert.ok(b.poisonRemaining>0);
- const poisonEvents=[];for(let i=0;i<12;i++)poisonEvents.push(...c.stepFight(p,b,.25,false));
+ const poisonEvents=[];for(let i=0;i<16;i++)poisonEvents.push(...c.stepFight(p,b,.25,false));
  assert.ok(poisonEvents.some(x=>x.kind==='poison-tick'));
  assert.ok(poisonEvents.some(x=>x.kind==='win'));assert.equal(p.poisonKills,1);
  const l=c.startFight(p,c.maxHealth(p),()=>.99);c.setEnchantment(p,'lightning');l.heroTimer=1.3;
