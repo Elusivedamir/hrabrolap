@@ -1,3 +1,4 @@
+import {armorFramePath} from './armor-frames.mjs';
 /**
  * CANONICAL SPRITES — extracted pixel-for-pixel in pose from the user-approved reference sheets.
  * No procedural transformations of the cat body are applied: only frame swaps.
@@ -51,9 +52,15 @@ export function applyCanonicalFrame(kind,index,rig){
  attr(weaponSlot,'transform',`translate(${wx.toFixed(2)} ${wy.toFixed(2)}) rotate(${angle}) scale(${scale})`);
  const [cx,cy,rot,sz]=ARMOR_HANDLES[kind][i];
  const ax=X+cx*kx,ay=Y+cy*ky;
- // Existing armor SVG is 100×80; overlay size is restricted to chest/shoulder region.
- for(const [key,value] of Object.entries({x:-40,y:-25,width:80,height:64}))attr(armorImage,key,value);
- attr(armorSlot,'transform',`translate(${ax.toFixed(2)} ${ay.toFixed(2)}) rotate(${rot}) scale(${sz})`);
+ // Armor is registered in the same native 279×370 canvas as the approved body.
+ // Only the independent equipment image changes; the kitten/weapon transforms stay exact.
+ const armorId=armorImage.getAttribute('data-armor-id')||armorImage.getAttribute('href')?.match(/art\/armor(?:-frames)?\/([^/.]+)/)?.[1]||'none';
+ const path=armorFramePath(armorId,kind,i);
+ for(const [key,value] of Object.entries({x:X,y:Y,width:W,height:H}))attr(armorImage,key,value);
+ attr(armorSlot,'transform','translate(0 0)');
+ armorImage.style.display=path?'':'none';
+ if(path)attr(armorImage,'href',path);else armorImage.removeAttribute('href');
+ attr(armorImage,'data-armor-id',armorId);attr(armorImage,'data-armor-pose',`${kind}-${i+1}`);
  attr(body,'data-reference-frame',`${kind}-${i+1}`);
  return {kind,frame:i+1,weaponX:wx,weaponY:wy,armorX:ax,armorY:ay};
 }

@@ -20,7 +20,7 @@ h2{font-family:Georgia,serif;margin:16px 0 8px}.grid{display:grid;grid-template-
 </style>
 </head><body><main>
 <h1>🎨 Ателье экипировки Храбролапа</h1>
-<p>Технический просмотр: одни и те же утверждённые SVG-кот, меч и броня комбинируются без перерисовки персонажа. Выберите снаряжение и проверьте все шесть положений.</p>
+<p>Технический просмотр: утверждённые кадры котёнка, отдельные SVG-меч и броня комбинируются без перерисовки персонажа. Выберите снаряжение и проверьте все шесть положений.</p>
 <div class="controls">
 <label>Тип анимации<select id="kind">
 <option value="slash">Рубящий удар</option><option value="overhead">Сверху вниз</option>
@@ -37,7 +37,9 @@ h2{font-family:Georgia,serif;margin:16px 0 8px}.grid{display:grid;grid-template-
 <p><a href="./index.html">← Вернуться в игру</a></p>
 </main><script type="module">
 import {WEAPONS,ARMORS} from './equipment-catalog.mjs';
-import {REFERENCE_ATTACKS,armorAttackTransform,armorHurtTransform,hurtMotionTransform,hurtWeaponTransform} from './equipment-rig.mjs';
+import {REFERENCE_ATTACKS} from './equipment-rig.mjs';
+import {applyCanonicalFrame} from './canonical-sprites.mjs';
+// Archived art/hero/bare-kitten.svg remains untouched; this viewer follows canonical PNGs.
 const $=id=>document.getElementById(id),NS='http://www.w3.org/2000/svg';
 let current=0,timer=null;
 function node(name,attrs={}){const x=document.createElementNS(NS,name);for(const [k,v] of Object.entries(attrs))x.setAttribute(k,v);return x;}
@@ -48,25 +50,17 @@ $('armor').value='web';
 function build(frame){
  const svg=node('svg',{viewBox:'0 0 488 305'});
  const motion=node('g');
- const base=node('image',{href:'art/hero/bare-kitten.svg',x:'0',y:'0',width:'488',height:'305'});
- const armorSlot=node('g'),armor=node('image',{x:'190',y:'212',width:'92',height:'63'});
+ // Same canonical kitten and frame renderer as the live game; no legacy model.
+ const base=node('image',{href:'assets/canonical/attack_01.png'});
+ const armorSlot=node('g'),armor=node('image');
  const weaponSlot=node('g'),weapon=node('image',{x:'-50',y:'-211',width:'100',height:'240'});
  const weaponItem=WEAPONS.find(w=>w.id===$('weapon').value)||WEAPONS[0];
  const armorItem=ARMORS.find(a=>a.id===$('armor').value)||ARMORS[0];
  weapon.setAttribute('href',weaponItem.svg);
- armor.setAttribute('href',armorItem.svg||'');
- armor.style.display=armorItem.svg?'':'none';
- const index=REFERENCE_ATTACKS.findIndex(a=>a.id===$('kind').value);
- if(index<0){
-  motion.setAttribute('transform',hurtMotionTransform(frame));
-  armorSlot.setAttribute('transform',armorHurtTransform(frame));
-  weaponSlot.setAttribute('transform',hurtWeaponTransform(frame));
- }else{
-  const [x,y,a,dx,dy,lean]=REFERENCE_ATTACKS[index].frames[frame];
-  motion.setAttribute('transform',`translate(${dx} ${dy}) rotate(${lean} 238 252)`);
-  armorSlot.setAttribute('transform',armorAttackTransform(index,frame));
-  weaponSlot.setAttribute('transform',`translate(${x} ${y}) rotate(${a})`);
- }
+ armor.setAttribute('data-armor-id',armorItem.id);
+ applyCanonicalFrame($('kind').value==='hurt'?'hurt':'attack',frame,{
+  body:base,heroMotion:motion,weaponSlot,armorSlot,armorImage:armor
+ });
  armorSlot.append(armor);weaponSlot.append(weapon);motion.append(base,armorSlot,weaponSlot);svg.append(motion);
  return svg;
 }

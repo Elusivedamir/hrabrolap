@@ -49,7 +49,7 @@ test('магазин, инвентарь, смена SVG и reload реальн�
  await page.locator('.shop-item').filter({hasText:'Лесная броня'}).getByRole('button').click();
  await shot(page,'fixture-inventory');await page.locator('#modal-x').click();
  assert.equal(await page.locator('#hero-weapon').getAttribute('href'),'art/weapons/moon.svg');
- assert.equal(await page.locator('#hero-armor').getAttribute('href'),'art/armor/leaf.svg');
+ assert.match(await page.locator('#hero-armor').getAttribute('href'),/^art\/armor-frames\/leaf\/(attack|hurt)\/0[1-6]\.svg$/);
  const before=await saved(page);await page.reload();await page.locator('#hero-rig').waitFor();
  const after=await saved(page);for(const k of ['gold','weapon','equippedArmor','room','best'])assert.equal(after[k],before[k],k);
  await page.locator('#inventory').click();await page.locator('.shop-item').filter({hasText:'Без брони'}).getByRole('button').click();
@@ -128,11 +128,11 @@ test('паутина в инвентаре, покупка брони за 300 �
  let save=await saved(page);assert.equal(save.materials.web,0);assert.equal(save.gold,0);assert.ok(save.ownedArmors.includes('web'));
  await page.getByRole('button',{name:'Открыть инвентарь'}).click();
  await page.locator('.shop-item').filter({hasText:'Паутинная броня'}).getByRole('button',{name:'Надеть'}).click();
- assert.equal(await page.locator('#hero-armor').getAttribute('href'),'art/armor/web.svg');
+ assert.match(await page.locator('#hero-armor').getAttribute('href'),/^art\/armor-frames\/web\/(attack|hurt)\/0[1-6]\.svg$/);
  await shot(page,'fixture-web-armor');
  await page.reload();save=await saved(page);
  assert.equal(save.equippedArmor,'web');assert.equal(save.materials.web,0);
- assert.equal(await page.locator('#hero-armor').getAttribute('href'),'art/armor/web.svg');
+ assert.match(await page.locator('#hero-armor').getAttribute('href'),/^art\/armor-frames\/web\/(attack|hurt)\/0[1-6]\.svg$/);
 });
 
 test('шестикадровое получение урона двигает SVG-броню и меч без замены кота',async()=>{
@@ -148,7 +148,7 @@ test('шестикадровое получение урона двигает SV
  const frames=await page.evaluate(()=>window.hurtFrames);
  for(let i=1;i<=6;i++)assert.ok(frames.includes(i),'missing hit frame '+i+': '+frames.join(','));
  assert.match(await page.locator('#hero-body').getAttribute('href'),/^assets\/canonical\/(attack|hurt)_0[1-6]\.png$/);
- assert.equal(await page.locator('#hero-armor').getAttribute('href'),'art/armor/web.svg');
+ assert.match(await page.locator('#hero-armor').getAttribute('href'),/^art\/armor-frames\/web\/(attack|hurt)\/0[1-6]\.svg$/);
  assert.equal(await page.locator('#hero-weapon').getAttribute('href'),'art/weapons/fishbone.svg');
  assert.match(await page.locator('#armor-slot').getAttribute('transform'),/^translate\(/);
  await shot(page,'rig-hurt-frame-6');
