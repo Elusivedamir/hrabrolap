@@ -213,7 +213,7 @@
 .enemy-hearts[data-monster="ghost"] .heart-filled img{filter:hue-rotate(170deg)}
 .enemy-hearts[data-monster="beetle"] .heart-filled img,.enemy-hearts[data-monster="golem"] .heart-filled img{filter:hue-rotate(42deg)}
 /* Small existing shop icon is physically grounded LEFT of the merchant label. */
-.surface .mini-shop{position:absolute;left:auto!important;right:35%!important;top:auto!important;bottom:9%!important;width:11%!important;height:18%!important;max-height:66px!important;object-fit:contain!important;object-position:center bottom!important;z-index:8!important;transform:none!important}
+.surface .mini-shop{position:absolute;left:auto!important;right:35%!important;top:auto!important;bottom:-2%!important;width:11%!important;height:18%!important;max-height:66px!important;object-fit:contain!important;object-position:center bottom!important;z-index:8!important;transform:none!important}
 .surface .rest-label{left:61%!important;top:3%!important;width:33%!important;font-size:.65em!important;padding:2px 4px!important;max-height:32px;z-index:7;pointer-events:none}
 
 /* Never show native Android/WebKit blue touch rectangle over monsters. */

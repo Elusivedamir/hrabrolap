@@ -334,7 +334,12 @@ test('таймер поклёвки скрыт, состояние рыцаря 
  const merchant=await page.locator('#merchant-status').boundingBox();
  const surf=await page.locator('#surface').boundingBox();
  assert.ok(shop.x<merchant.x,'магазин должен стоять слева от надписи торговца');
- assert.ok(shop.y+shop.height>surf.y+surf.height*.73,'магазинчик должен касаться земли');
+ // The shop SVG has empty space below its painted base (y=121 of 138).
+ // Check the actual painted base, not the bottom of the transparent img box.
+ const floor=await page.locator('#surface').evaluate(el=>{const r=el.getBoundingClientRect();return r.bottom-parseFloat(getComputedStyle(el).borderBottomWidth);});
+ const scale=Math.min(shop.width/140,shop.height/138);
+ const paintedBase=shop.y+shop.height-scale*(138-121);
+ assert.ok(Math.abs(paintedBase-floor)<2,`painted shop base ${paintedBase} must meet floor ${floor}`);
  await shot(page,'shop-grounded-and-no-bite-countdown');
 });
 test('при нулевых HP на монстре не должно быть пяти ярких сердец',async()=>{
