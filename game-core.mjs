@@ -51,7 +51,7 @@ export const bucketCost=()=>320;
 // 0 => 1 hit/sec, 20 => 2, ... 100 => 6 hits/sec. Manual mode is always 3 hits/sec.
 export const MAX_AUTO_LEVEL=100;
 export const MANUAL_HITS_PER_SECOND=3;
-export const autoHitsPerSecond=p=>1+Math.floor(Math.min(MAX_AUTO_LEVEL,Math.max(0,p.autoLevel||0))/20);
+export const autoHitsPerSecond=p=>1+Math.min(MAX_AUTO_LEVEL,Math.max(0,p.autoLevel||0))*.05;
 export const autoUpgradeCost=level=>Math.round(12*1.06**Math.max(0,Math.min(99,level)));
 export const attackInterval=(p,auto=p.autoEnabled)=>1/(auto?autoHitsPerSecond(p):MANUAL_HITS_PER_SECOND);
 // Attack speed is an independent upgrade, purchasable even before owning auto-combat.
@@ -193,7 +193,8 @@ function winFight(p,b,ev,source){
  ev.push({kind:'win',gold,loot,level:b.level,firstClear});
  return true;
 }
-function hitEnemy(p,b,ev){
+export const VAMPIRISM_CHANCE=.05;
+function hitEnemy(p,b,ev,rng=Math.random){
  const element=p.enchantment||'none',base=heroDamage(p);
  // Lightning resistance changes only the enchantment bonus, not sword damage.
  const multiplier=b.monster.lightningMultiplier??1;
@@ -203,19 +204,23 @@ function hitEnemy(p,b,ev){
  if(element==='poison'&&b.monster.immunity!=='poison'){b.poisonRemaining=Math.max(b.poisonRemaining||0,4);b.poisonTick=0;}
  if(element==='lightning'&&extra>0)p.lightningHits++;
  let healed=0;
- if(element==='vampirism'&&b.monster.immunity!=='vampirism'){healed=Math.min(maxHealth(p)-b.hp,Math.max(1,Math.floor(damage*.3)));b.hp+=healed;if(healed>0)p.vampireHeals++;}
+ if(element==='vampirism'&&b.monster.immunity!=='vampirism'&&rng()<VAMPIRISM_CHANCE){
+  // Five-percent proc chance PER successful hit, never guaranteed lifesteal.
+  healed=Math.max(0,Math.min(maxHealth(p)-b.hp,Math.max(1,Math.floor(damage*.12)),Math.ceil(maxHealth(p)*.08)));
+  b.hp+=healed;if(healed>0)p.vampireHeals++;
+ }
  ev.push({kind:'hero-hit',damage,element,healed});
  winFight(p,b,ev,'sword');
 }
-export function tapMonster(p,b){
+export function tapMonster(p,b,rng=Math.random){
  if(b.phase!=='fight'||p.autoEnabled)return [];
  const interval=attackInterval(p,false);
  if(b.heroTimer+1e-8<interval)return [{kind:'cooldown',remaining:interval-b.heroTimer}];
  // A manual click starts a fresh cooldown; idle/restore credit cannot shorten the next interval.
  b.heroTimer=0;
- const ev=[];hitEnemy(p,b,ev);return ev;
+ const ev=[];hitEnemy(p,b,ev,rng);return ev;
 }
-export function stepFight(p,b,seconds,auto=true){
+export function stepFight(p,b,seconds,auto=true,rng=Math.random){
  const ev=[],dt=Math.min(Math.max(0,seconds),.25);
  if(b.phase==='rest'||b.phase==='transition'){
   b.rest-=dt;
@@ -235,7 +240,7 @@ export function stepFight(p,b,seconds,auto=true){
    if(winFight(p,b,ev,'poison'))return ev;
   }
  }
- if(auto&&b.heroTimer+1e-8>=attackInterval(p,true)){b.heroTimer=Math.max(0,b.heroTimer-attackInterval(p,true));hitEnemy(p,b,ev);if(b.phase!=='fight')return ev;}
+ if(auto&&b.heroTimer+1e-8>=attackInterval(p,true)){b.heroTimer=Math.max(0,b.heroTimer-attackInterval(p,true));hitEnemy(p,b,ev,rng);if(b.phase!=='fight')return ev;}
  if(b.enemyTimer>=2.4){b.enemyTimer-=2.4;b.hp=Math.max(0,b.hp-b.monster.attack);ev.push({kind:'enemy-hit',damage:b.monster.attack,move:b.monster.move});
   if(b.hp===0){if(!p.farming&&!p.cleared){p.fails++;if(p.fails>=2&&p.room>1)p.farming=true;}b.phase='rest';b.rest=restDuration(p);ev.push({kind:'defeat',farming:p.farming});}
  }
