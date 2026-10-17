@@ -280,12 +280,12 @@ function openModal(title,mode='info',text=''){modalType=mode;$('modal').dataset.
    const enchantWrap=document.createElement('div');enchantWrap.className='enchant-controls';
    const name=document.createElement('b');name.textContent='✨ Зачарование меча · тест механики';
    const select=document.createElement('select');select.setAttribute('aria-label','Эффект меча');
-   for(const [id,label] of [['none','Без эффекта'],['poison','☠ Яд'],['lightning','⚡ Молния'],['vampirism','🩸 Вампиризм']]){
+   for(const [id,label] of [['none','Без эффекта'],['poison','☠ Яд'],['lightning','⚡ Молния'],['vampirism','🩸 Вампиризм · 5% шанс']]){
     const option=document.createElement('option');option.value=id;option.textContent=label;select.append(option);
    }
    select.value=p.enchantment||'none';
    select.addEventListener('change',()=>{setEnchantment(p,select.value);save();notify('Эффект оружия: '+select.options[select.selectedIndex].text);});
-   const hint=document.createElement('small');hint.textContent='Эффекты доступны для тестирования бесплатно. Цены зачарований определим позже.';
+   const hint=document.createElement('small');hint.textContent='Вампиризм: 5% шанс лечения при ударе, максимум 8% здоровья за срабатывание. По призракам, скелетам и големам не действует.';
    enchantWrap.append(name,select,hint);content.append(enchantWrap);
   }
   if(mode==='shop'){para('Качество меча и брони улучшается кнопками внизу экрана независимо от внешнего вида предметов.');
