@@ -1,0 +1,515 @@
+{
+  "source": "approved files unchanged",
+  "series": {
+    "canonical": [
+      {
+        "file": "attack_01.png",
+        "sha256": "3644b960a03d1763471ea07d34fb73b879734e73f11bbc1c4dc6dd09429fe58e",
+        "size": [
+          279,
+          370
+        ],
+        "bbox": [
+          36,
+          72,
+          265,
+          347
+        ]
+      },
+      {
+        "file": "attack_02.png",
+        "sha256": "1fc383726e6045e455e5bb0f98855c5c1a5a983b67c9b1335c922902c0ddae34",
+        "size": [
+          278,
+          370
+        ],
+        "bbox": [
+          13,
+          29,
+          278,
+          349
+        ]
+      },
+      {
+        "file": "attack_03.png",
+        "sha256": "7afa9d31f41fbf147f3391f24c077188baabdce9ca68f612c42ee93905d65b4b",
+        "size": [
+          279,
+          370
+        ],
+        "bbox": [
+          0,
+          30,
+          279,
+          350
+        ]
+      },
+      {
+        "file": "attack_04.png",
+        "sha256": "dea15d7f52444779b136ad451fea4d35a853f38586c54dda25a43566d1edd316",
+        "size": [
+          279,
+          370
+        ],
+        "bbox": [
+          0,
+          81,
+          269,
+          350
+        ]
+      },
+      {
+        "file": "attack_05.png",
+        "sha256": "65db4937f264e4304b0e043b28e406fc5c7bc2990620eb1016cf3f40c94258d7",
+        "size": [
+          278,
+          370
+        ],
+        "bbox": [
+          21,
+          81,
+          278,
+          354
+        ]
+      },
+      {
+        "file": "attack_06.png",
+        "sha256": "d075a30cd642e91f83da26a90fc34304a4063c0b29ec378ef3779089fc214908",
+        "size": [
+          279,
+          370
+        ],
+        "bbox": [
+          0,
+          72,
+          263,
+          347
+        ]
+      },
+      {
+        "file": "hurt_01.png",
+        "sha256": "c28fec2942a57d736555889bb48c6f2ed5872734b3d40840bfec4175260beaec",
+        "size": [
+          279,
+          370
+        ],
+        "bbox": [
+          32,
+          57,
+          269,
+          352
+        ]
+      },
+      {
+        "file": "hurt_02.png",
+        "sha256": "d44f7a7dc03e8eef8b534bc14f7d018e6facdb6bbc087b03771fce83d5c611ab",
+        "size": [
+          278,
+          370
+        ],
+        "bbox": [
+          20,
+          43,
+          278,
+          353
+        ]
+      },
+      {
+        "file": "hurt_03.png",
+        "sha256": "ff9d3efd260d7e70a01dfa5ef9e9c0ce55c6b75cb50ed0fea66d544bf238bcb3",
+        "size": [
+          279,
+          370
+        ],
+        "bbox": [
+          31,
+          41,
+          279,
+          354
+        ]
+      },
+      {
+        "file": "hurt_04.png",
+        "sha256": "342fc134c4050f8b60fc62c5008c799a9618a22133afd8e7c3ca933f5725c90c",
+        "size": [
+          279,
+          370
+        ],
+        "bbox": [
+          0,
+          25,
+          279,
+          355
+        ]
+      },
+      {
+        "file": "hurt_05.png",
+        "sha256": "c56a0b59964af5f152581acd97a96257c52360c04e79cc280fbde1053af0b153",
+        "size": [
+          278,
+          370
+        ],
+        "bbox": [
+          4,
+          116,
+          266,
+          359
+        ]
+      },
+      {
+        "file": "hurt_06.png",
+        "sha256": "cc6ebbd6d445e5ee371184052042e8919d88ce8c6b89f8efba3a4b97556af1a5",
+        "size": [
+          279,
+          370
+        ],
+        "bbox": [
+          14,
+          58,
+          252,
+          352
+        ]
+      }
+    ],
+    "forest_guardian": [
+      {
+        "file": "attack_01.png",
+        "sha256": "af769bcda9e230b75aa4c31600d8be35919469142b1850e0ea6a6093fb5c0257",
+        "size": [
+          279,
+          370
+        ],
+        "bbox": [
+          36,
+          87,
+          265,
+          365
+        ]
+      },
+      {
+        "file": "attack_02.png",
+        "sha256": "cedbfcc0c508fcc0dbf5ccf1ffed7a63172c9d8371cd68800c820db8cb60e7ec",
+        "size": [
+          279,
+          370
+        ],
+        "bbox": [
+          13,
+          29,
+          278,
+          351
+        ]
+      },
+      {
+        "file": "attack_03.png",
+        "sha256": "a5b8e48526501bb20be83c15a0f772e4c3637bc9f5264863ec8b20c68ce892e1",
+        "size": [
+          279,
+          370
+        ],
+        "bbox": [
+          0,
+          30,
+          279,
+          350
+        ]
+      },
+      {
+        "file": "attack_04.png",
+        "sha256": "bdf4436b7c9eed4f197b0cb781929d64f199716e5ec4b38ddf7fa871f8e0ba63",
+        "size": [
+          279,
+          370
+        ],
+        "bbox": [
+          0,
+          81,
+          269,
+          351
+        ]
+      },
+      {
+        "file": "attack_05.png",
+        "sha256": "37b0151f51761629c8c2b8b2ce69747ef684fb0ed859157ed9bd0c9ef904cfa8",
+        "size": [
+          279,
+          370
+        ],
+        "bbox": [
+          21,
+          81,
+          278,
+          354
+        ]
+      },
+      {
+        "file": "attack_06.png",
+        "sha256": "118b052686e8a58da3a5b589d0cc8bf3c51e90cb857a538f8f26733b64bda190",
+        "size": [
+          279,
+          370
+        ],
+        "bbox": [
+          0,
+          72,
+          263,
+          349
+        ]
+      },
+      {
+        "file": "hurt_01.png",
+        "sha256": "eff79af5b94c66a965b7f31c5194947c60856f8dfdbe3886e252358d870c5086",
+        "size": [
+          279,
+          370
+        ],
+        "bbox": [
+          32,
+          57,
+          269,
+          352
+        ]
+      },
+      {
+        "file": "hurt_02.png",
+        "sha256": "adac0c5cf5ebf534039631fadff565d207c6ac837d266727233858b6249053c1",
+        "size": [
+          279,
+          370
+        ],
+        "bbox": [
+          20,
+          43,
+          278,
+          353
+        ]
+      },
+      {
+        "file": "hurt_03.png",
+        "sha256": "4a9624886210c7b6160ace7681b30a1412cfaa5bf4917a1fb34c6bd012e5eeba",
+        "size": [
+          279,
+          370
+        ],
+        "bbox": [
+          31,
+          41,
+          279,
+          355
+        ]
+      },
+      {
+        "file": "hurt_04.png",
+        "sha256": "0477a5bb41080c4d38e1c748d29884fbcc65371dccc4f3a23db02456e1012145",
+        "size": [
+          558,
+          740
+        ],
+        "bbox": [
+          0,
+          51,
+          558,
+          712
+        ]
+      },
+      {
+        "file": "hurt_05.png",
+        "sha256": "a5c1ba34dc23d9e2ba6b9917139d15e76b24510544aba516c79130ae194e475b",
+        "size": [
+          279,
+          370
+        ],
+        "bbox": [
+          4,
+          116,
+          266,
+          359
+        ]
+      },
+      {
+        "file": "hurt_06.png",
+        "sha256": "cd882f62e0e98456b40d827132bcd897ca36cb0f2010eaa201ab84e88b3457d1",
+        "size": [
+          558,
+          740
+        ],
+        "bbox": [
+          29,
+          117,
+          503,
+          705
+        ]
+      }
+    ],
+    "steel_knight": [
+      {
+        "file": "attack_01.png",
+        "sha256": "141e346671fda36b85363c0201febf821e2ab26ab2fd1014928071a4b70ad3a7",
+        "size": [
+          279,
+          370
+        ],
+        "bbox": [
+          31,
+          36,
+          242,
+          324
+        ]
+      },
+      {
+        "file": "attack_02.png",
+        "sha256": "5996533303053ea6e6551161aeb822fd8f5f7a0e380b6dd19c2271f47384bd62",
+        "size": [
+          279,
+          370
+        ],
+        "bbox": [
+          22,
+          35,
+          257,
+          325
+        ]
+      },
+      {
+        "file": "attack_03.png",
+        "sha256": "d2cde36fb5b9e82d22e5b2670069455aaa9d93449690277b00f323af23d4f459",
+        "size": [
+          279,
+          370
+        ],
+        "bbox": [
+          24,
+          18,
+          259,
+          344
+        ]
+      },
+      {
+        "file": "attack_04.png",
+        "sha256": "9e23d8f1ba40b72378fca4f68b10e25e27824493ca26747a14daab176aa9eb9c",
+        "size": [
+          279,
+          370
+        ],
+        "bbox": [
+          22,
+          38,
+          258,
+          321
+        ]
+      },
+      {
+        "file": "attack_05.png",
+        "sha256": "a1c717b880dc002709ca3468edd3a2bb7cd88101bf58f6dc30599ad0fc97fcc4",
+        "size": [
+          279,
+          370
+        ],
+        "bbox": [
+          15,
+          55,
+          274,
+          306
+        ]
+      },
+      {
+        "file": "attack_06.png",
+        "sha256": "cb907c3728977702344f095d10960b12633988f4a252e9f6de8aadd93ad712e1",
+        "size": [
+          279,
+          370
+        ],
+        "bbox": [
+          25,
+          36,
+          243,
+          323
+        ]
+      },
+      {
+        "file": "hurt_01.png",
+        "sha256": "1168a0c8b1954e0ffce9b6cd509904699860a21c520a18eb651734ac20c5c349",
+        "size": [
+          279,
+          370
+        ],
+        "bbox": [
+          31,
+          36,
+          242,
+          323
+        ]
+      },
+      {
+        "file": "hurt_02.png",
+        "sha256": "b6bf3994b8ef3a7d201683a845e8d518d040550e7d43bfc33f60deba05042d0b",
+        "size": [
+          279,
+          370
+        ],
+        "bbox": [
+          23,
+          29,
+          263,
+          328
+        ]
+      },
+      {
+        "file": "hurt_03.png",
+        "sha256": "32c998a5acf22ff27d983232a2a3fbe0ccc0fa46a424449fcd0e18afb5346edb",
+        "size": [
+          279,
+          370
+        ],
+        "bbox": [
+          21,
+          33,
+          261,
+          328
+        ]
+      },
+      {
+        "file": "hurt_04.png",
+        "sha256": "e9e7cad1ba47d0623d0aa1cda69cdc42cbcbd3fcb604b4b41c0e624b9f53916a",
+        "size": [
+          279,
+          370
+        ],
+        "bbox": [
+          19,
+          24,
+          262,
+          333
+        ]
+      },
+      {
+        "file": "hurt_05.png",
+        "sha256": "7215d8dfddf3dc6ce57e650496d4ee2b1b0f5bcf04bd828cde18ebb426acd35c",
+        "size": [
+          279,
+          370
+        ],
+        "bbox": [
+          13,
+          68,
+          266,
+          294
+        ]
+      },
+      {
+        "file": "hurt_06.png",
+        "sha256": "8d73428950cdade14b77d48c1718e68fd310d4efe676e175e9641f4af6ff879b",
+        "size": [
+          279,
+          370
+        ],
+        "bbox": [
+          29,
+          37,
+          242,
+          323
+        ]
+      }
+    ]
+  }
+}
