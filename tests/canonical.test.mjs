@@ -1,7 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
-import {CANONICAL_FRAME_PATHS,CANONICAL_FRAME_COUNT,ARMOR_HANDLES,WEAPON_HANDLES,GLOBAL_SWORD_GRIP,applyCanonicalFrame} from '../canonical-sprites.mjs';
+import {CANONICAL_FRAME_PATHS,CANONICAL_FRAME_COUNT,ARMOR_HANDLES,WEAPON_HANDLES,PAW_HANDLES,applyCanonicalFrame} from '../canonical-sprites.mjs';
 test('approved 6 attack + 6 hurt assets are present without duplicate frames',()=>{
  assert.equal(CANONICAL_FRAME_COUNT,6);
  const all=[...CANONICAL_FRAME_PATHS.attack,...CANONICAL_FRAME_PATHS.hurt];
@@ -24,23 +24,34 @@ test('gear is independent of kitten and has an anchor for every pose',()=>{
 
 test('fourth hurt pose keeps weapon grip in paw and blade angled away from face',()=>{
  const [x,y,angle,scale]=WEAPON_HANDLES.hurt[3];
- assert.equal(x,82);assert.equal(y,201);
+ assert.equal(x,65);assert.equal(y,214);
  assert.equal(angle,-55);assert.equal(scale,.62);
 });
 
-test('all five character appearances share corrected grip for each of twelve frames',()=>{
- assert.deepEqual(GLOBAL_SWORD_GRIP,{x:6,y:-6});
+test('all five character appearances have pose-specific grips and a matching clipped paw',()=>{
  const el=()=>({props:{},setAttribute(k,v){this.props[k]=String(v)}});
- const rig=Object.fromEntries(['body','heroMotion','weaponSlot','armorSlot','armorImage'].map(id=>[id,el()]));
+ const rig=Object.fromEntries(['body','heroMotion','weaponSlot','armorSlot','armorImage','handFront','gripShape'].map(id=>[id,el()]));
  const armors=['none','forest_guardian','steel_knight','slime_guardian','bone_guardian'];
- for(const kind of ['attack','hurt'])for(let i=0;i<6;i++){
-  const [x,y,angle,scale]=WEAPON_HANDLES[kind][i];
-  const wx=(114+(x+6)*260/279).toFixed(2),wy=(-22+(y-6)*346/370).toFixed(2);
-  for(const armorId of armors){
-   applyCanonicalFrame(kind,i,{...rig,armorId});
-   const expectedY=armorId==='forest_guardian'&&kind==='attack'&&i===0?
-    (-22+(y-6+15)*346/370).toFixed(2):wy;
-   assert.equal(rig.weaponSlot.props.transform,`translate(${wx} ${expectedY}) rotate(${angle}) scale(${scale})`,`${armorId} ${kind} ${i+1}`);
+ for(const kind of ['attack','hurt']){
+  assert.equal(PAW_HANDLES[kind].length,6);
+  for(let i=0;i<6;i++){
+   const [x,y,angle,scale]=WEAPON_HANDLES[kind][i];
+   const [pawX,pawY]=PAW_HANDLES[kind][i];
+   const wx=(114+x*260/279).toFixed(2);
+   for(const armorId of armors){
+    applyCanonicalFrame(kind,i,{...rig,armorId,transparent:true});
+    const correction=armorId==='forest_guardian'&&kind==='attack'&&i===0?15:0;
+    const wy=(-22+(y+correction)*346/370).toFixed(2);
+    const gripY=(-22+(pawY+correction)*346/370).toFixed(2);
+    assert.equal(rig.weaponSlot.props.transform,`translate(${wx} ${wy}) rotate(${angle}) scale(${scale})`,`${armorId} ${kind} ${i+1}`);
+    assert.equal(rig.gripShape.props.cx,(114+pawX*260/279).toFixed(2));
+    assert.equal(rig.gripShape.props.cy,gripY);
+    assert.equal(rig.handFront.props.href,rig.body.props.href);
+   }
   }
  }
+ const markup=fs.readFileSync(new URL('../index.html',import.meta.url),'utf8');
+ assert.ok(markup.includes('id="hero-paw-front"'));
+ assert.ok(markup.includes('id="paw-grip-ellipse"'));
+ assert.ok(markup.includes('clip-path="url(#paw-grip-clip)"'));
 });
