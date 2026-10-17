@@ -1,4 +1,5 @@
 import {merchantFrameUrl,merchantVisual} from './merchant-sprites.mjs';
+import {caveStageForWave,caveStageName,caveBackgroundForWave} from './cave-themes.mjs';
 import {FISHING_FRAMES} from './fishing-frames.mjs';
 import {fishCount,pluralRu} from './russian.mjs';
 import {fishArt} from './fish-art.mjs';
@@ -8,7 +9,7 @@ import {bucketArt,sleepFrameIndex,SLEEP_FRAMES} from './bucket-rest.mjs';
 import {applyCanonicalFrame} from './canonical-sprites.mjs';
 import {FOREST_GUARDIAN_ID} from './forest-guardian-rig.mjs';
 import {armorAttackTransform,armorHurtTransform,hurtMotionTransform,hurtWeaponTransform,HURT_FRAMES,HURT_FRAME_MS} from './equipment-rig.mjs';
-import {WEAPONS,ARMORS,MATERIALS,freshProgress,validateProgress,restoreFight,swordCost,armorCost,fishCost,homeCost,bucketCost,bucketCapacity,heroDamage,maxHealth,startFight,stepFight,upgrade,buyEquipment,equipEquipment,offlineReward,bucketVolume,bucketGold,planFishing,stepFishing,stepMerchant,sellAll,purchaseAutoBattle,upgradeAttackSpeed,autoHitsPerSecond,autoUpgradeCost,MAX_AUTO_LEVEL,attackInterval,setEnchantment,tapMonster} from './game-core.mjs';
+import {WEAPONS,ARMORS,MATERIALS,WAVE_COUNT,freshProgress,validateProgress,restoreFight,swordCost,armorCost,fishCost,homeCost,bucketCost,bucketCapacity,heroDamage,maxHealth,startFight,stepFight,upgrade,buyEquipment,equipEquipment,offlineReward,bucketVolume,bucketGold,planFishing,stepFishing,stepMerchant,sellAll,purchaseAutoBattle,upgradeAttackSpeed,autoHitsPerSecond,autoUpgradeCost,MAX_AUTO_LEVEL,attackInterval,setEnchantment,tapMonster} from './game-core.mjs';
 const $=id=>document.getElementById(id), SAVE='hrabrolap-v0.2-save',OLD='hrabrolap-v0.1-save',fmt=n=>Math.floor(n).toLocaleString('ru-RU');
 let p,b,modalType='',last=performance.now(),lastSave=0,lastAutosave=0,msgTimeout=0,toastTimeout=0,lastFrameRest=false;
 const heartsRoot=$('hero-hearts');
@@ -146,7 +147,15 @@ function updateSleepDrawing(rest){
 let lastBattleMessage=0;
 function render(){
  $('gold').textContent=fmt(p.gold);
- $('room').textContent=`ВОЛНА ${b.level}/100`; $('room-progress').textContent=`${p.best}/100`; $('room-fill').style.width=(p.best)+'%';
+ $('room').textContent=`ВОЛНА ${b.level}/${WAVE_COUNT}`;
+ $('room-progress').textContent=`${p.best}/${WAVE_COUNT}`;
+ $('room-fill').style.width=(100*p.best/WAVE_COUNT)+'%';
+ const cave=$('dungeon'),stage=caveStageForWave(b.level);
+ if(cave.dataset.stage!==String(stage)){
+  cave.dataset.stage=String(stage);
+  $('cave-backdrop').src=caveBackgroundForWave(b.level);
+  $('cave-stage').textContent=`ЗАЛ ${stage}/70 · ${caveStageName(stage)}`;
+ }
  $('enemy-name').textContent=b.monster.name;const enemySource=monsterSource(b.monster.texture,b.monster.boss),art=$('enemy-art'),variant=b.monster.boss?'boss':'normal';
  if(art.dataset.monsterType!==b.monster.type||art.dataset.monsterVariant!==variant){
   cancelMonsterFrames();art.dataset.monsterType=b.monster.type;art.dataset.monsterVariant=variant;
@@ -199,12 +208,15 @@ function onUpgrade(kind){const result=upgrade(p,kind);if(!result.ok){notify(resu
  // If farming and the upgrade can help, attack the blocked level after current fight. No free healing.
  if(kind==='bucket'){p.catchPlan=[];planFishing(p);}save();render();
 }
-function openModal(title,mode='info',text=''){modalType=mode;$('modal-title').textContent=title;const content=$('modal-content'),buttons=$('modal-buttons');content.replaceChildren();buttons.replaceChildren();
+function openModal(title,mode='info',text=''){modalType=mode;$('modal').dataset.mode=mode;$('modal-title').textContent=title;const content=$('modal-content'),buttons=$('modal-buttons');content.replaceChildren();buttons.replaceChildren();
  const para=t=>{const x=document.createElement('p');x.textContent=t;content.append(x)};
  const action=(label,callback,cls='')=>{const x=document.createElement('button');x.textContent=label;if(cls)x.className=cls;x.addEventListener('click',callback);buttons.append(x);return x};
  if(mode==='bucket'||mode==='trade'){
   if(mode==='trade')para('Хей, ребята привет, есть что-то для меня?');
   const gold=bucketGold(p);
+  const summary=document.createElement('div');summary.className='bucket-summary';content.append(summary);
+  const summaryText=document.createElement('strong');summaryText.textContent='🐟 РЫБНЫЕ ЗАПАСЫ';summary.append(summaryText);
+  const summaryValue=document.createElement('span');summaryValue.textContent=`${bucketVolume(p)}/${bucketCapacity(p)} мест · 🪙 ${gold}`;summary.append(summaryValue);
   para(`Улов: ${fishCount(p.fishBucket.length)} · занято ${bucketVolume(p)} из ${bucketCapacity(p)} мест · ${gold} ${pluralRu(gold,'монета','монеты','монет')}`);
   if(!p.fishBucket.length){const d=document.createElement('div');d.className='empty';d.textContent='Ведро пока пустое';content.append(d)}
   for(const f of p.fishBucket){
@@ -262,7 +274,14 @@ function openModal(title,mode='info',text=''){modalType=mode;$('modal-title').te
    action('Открыть инвентарь',()=>openModal('Инвентарь','inventory'));}
   else action('Открыть магазин',()=>openModal('Магазин','shop'));
  }else if(mode==='quests'){
-  for(const q of QUESTS){const done=p.questClaimed.includes(q.id),count=questProgress(p,q);const row=document.createElement('div');row.className='quest-row';const text=document.createElement('span');text.textContent=q.name;const mini=document.createElement('small');mini.textContent=Math.min(q.target,count)+'/'+q.target+' · награда '+q.reward+' 🪙';text.append(mini);const btn=document.createElement('button');btn.textContent=done?'✓':'+ 🪙';btn.disabled=done||count<q.target;btn.addEventListener('click',()=>{const result=claimQuest(p,q.id);if(!result.ok)return;save();openModal('Задания','quests');notify('Награда за задание: +'+result.reward+' монет')});row.append(text,btn);content.append(row);}
+  for(const q of QUESTS){const done=p.questClaimed.includes(q.id),count=questProgress(p,q);const row=document.createElement('div');row.className='quest-row';
+ row.classList.toggle('completed',done);row.classList.toggle('ready',count>=q.target&&!done);
+ const icon=document.createElement('span');icon.className='quest-icon';
+ icon.textContent=q.kind==='monster'?'⚔️':q.key==='soldFish'||q.key==='soldPike'?'🐟':q.key==='best'||q.key==='bossKills'?'🏆':q.key==='spentSword'?'🗡️':'📜';
+ const text=document.createElement('span');text.className='quest-description';text.textContent=q.name;
+ const mini=document.createElement('small');mini.textContent=Math.min(q.target,count)+'/'+q.target+' · награда '+q.reward+' 🪙';text.append(mini);
+ const progress=document.createElement('span');progress.className='quest-meter';progress.setAttribute('aria-hidden','true');
+ const fill=document.createElement('i');fill.style.width=Math.min(100,100*count/q.target)+'%';progress.append(fill);text.append(progress);const btn=document.createElement('button');btn.textContent=done?'✓':'+ 🪙';btn.disabled=done||count<q.target;btn.addEventListener('click',()=>{const result=claimQuest(p,q.id);if(!result.ok)return;save();openModal('Задания','quests');notify('Награда за задание: +'+result.reward+' монет')});row.append(icon,text,btn);content.append(row);}
   para('В заданиях учитываются реальные победы, улучшения и продажи, но не офлайн-время.');
  }else if(mode==='offline'){
   para('Котёнок заработал, пока тебя не было: +'+fmt(p.pendingOffline)+' монет.');para('Офлайн-заработок ограничен стоимостью ближайшего улучшения и не открывает новые комнаты.');action('Забрать '+fmt(p.pendingOffline)+' 🪙',()=>{p.gold+=p.pendingOffline;p.pendingOffline=0;save();closeModal();notify('Офлайн-награда получена!')});
@@ -284,7 +303,8 @@ function battleEvents(events){for(const ev of events){
  if(ev.kind==='enemy-hit'){playHurt();pulse($('hero-art'),'battle-hurt',HURT_FRAMES.length*HURT_FRAME_MS);enemyAttack(ev.move);}
  if(ev.kind==='win'){lastBattleMessage=performance.now()+1200;coinFx(ev.gold);
    const lootName=MATERIALS.find(x=>x.id===ev.loot?.id);
-   say(`Победа! +${ev.gold} монет`+(lootName?` · +1 ${lootName.name}`:''));pulse($('enemy-holder'),'dead',660);save();if(ev.level===100&&ev.firstClear)setTimeout(()=>openModal('100 волн пройдено!','info','Храбролап прошёл все сто волн! Можно продолжать сражаться и собирать монеты.'),600);}
+   say(`Победа! +${ev.gold} монет`+(lootName?` · +1 ${lootName.name}`:''));pulse($('enemy-holder'),'dead',660);save();if(ev.firstClear&&ev.level===WAVE_COUNT)setTimeout(()=>openModal('700 волн пройдено!','info','Храбролап прошёл все 700 волн и исследовал 70 залов! Можно продолжать собирать добычу.'),600);
+   else if(ev.firstClear&&ev.level%10===0){notify('Открыт новый зал пещеры!');}}
  if(ev.kind==='defeat'){lastBattleMessage=0;syncHeroPose();say('Котёнок возвращается домой отдохнуть');save();}
  if(ev.kind==='spawn'){cancelMonsterFrames();}
  if(ev.kind==='spawn'&&ev.afterRest){cancelAttackPose();say('Мы справимся!');pulse($('surface'),'wake-up',1800);}
