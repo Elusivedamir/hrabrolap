@@ -26,6 +26,24 @@ export const WEAPON_HANDLES = Object.freeze({
   [82,201,-55,.62], [84,273,15,.62], [107,233,-15,.62]
  ]
 });
+// Costume-specific grips are calibrated independently of the original kitten.
+// No source sprite or SVG sword pixels are modified.
+export const FOREST_WEAPON_HANDLES = Object.freeze({
+ attack: [
+  [111,236,-14,.64], [96,155,-23,.64], [97,153,-28,.64],
+  [106,236,87,.64], [187,233,58,.64], [111,236,-14,.64]
+ ],
+ hurt: [
+  [114,236,-14,.62], [97,243,-19,.62], [111,247,-21,.62],
+  [89,205,-52,.62], [90,276,16,.62], [114,236,-14,.62]
+ ]
+});
+// The gold costume is the one visible in the user's reference video.
+// Its paw grip sits slightly right and above the original kitten's grip.
+export const GOLD_WEAPON_HANDLES = Object.freeze({
+ attack: WEAPON_HANDLES.attack.map(([x,y,a,s])=>[x+6,y-6,a,s]),
+ hurt: WEAPON_HANDLES.hurt.map(([x,y,a,s])=>[x+6,y-6,a,s])
+});
 // Position of each separate chestplate in reference frame coordinates.
 // [center_x, center_y, body_relative_rotation, scale_factor]. These are adjustable
 // equipment anchors, not transformations applied to the source kitten frames.
@@ -56,7 +74,8 @@ export function applyCanonicalFrame(kind,index,rig){
  for(const [key,value] of Object.entries({x:X,y:Y,width:W,height:H}))attr(body,key,value);
  // The cat itself is NEVER rotated, stretched or translated between frames.
  attr(heroMotion,'transform','translate(0 0)');
- let [handX,handY,angle,scale]=WEAPON_HANDLES[kind][i];
+ const grips=costume?FOREST_WEAPON_HANDLES:armorId==='steel_knight'?GOLD_WEAPON_HANDLES:WEAPON_HANDLES;
+ let [handX,handY,angle,scale]=grips[kind][i];
  // The user's first attack PSD contains the original pose exactly 15 pixels
  // lower on its canvas. Keep that artwork intact and put the sword in its paw.
  if(costume&&kind==='attack'&&i===0)handY+=15;
