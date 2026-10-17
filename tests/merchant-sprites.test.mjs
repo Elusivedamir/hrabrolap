@@ -47,3 +47,18 @@ test('merchant animation uses existing visit timer and does not change saves or 
  assert.ok(game.includes('merchantFrameUrl(pose.phase,pose.frame)'));
  assert.ok(game.includes('merchant.classList.toggle(\'visible\',pose.visible)'));
 });
+
+
+test('detailed merchant WebP atlas is shipped and used in the harbor',()=>{
+ const atlas=fs.readFileSync(new URL('../art/merchant-animated.webp',import.meta.url));
+ assert.ok(atlas.length>10000);
+ assert.equal(atlas.subarray(0,4).toString('ascii'),'RIFF');
+ assert.equal(atlas.subarray(8,12).toString('ascii'),'WEBP');
+ const html=fs.readFileSync(new URL('../index.html',import.meta.url),'utf8');
+ const game=fs.readFileSync(new URL('../game.mjs',import.meta.url),'utf8');
+ const css=fs.readFileSync(new URL('../style.css',import.meta.url),'utf8');
+ assert.ok(html.includes('id="merchant-sheet"'));
+ assert.ok(game.includes("merchantAtlasImage.src='art/merchant-animated.webp'"));
+ assert.ok(game.includes("backgroundPosition=(pose.frame*20)"));
+ assert.ok(css.includes('background-size:600% 300%'));
+});
