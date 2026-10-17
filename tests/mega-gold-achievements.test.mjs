@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import {MEGA_BOSSES,megaBossForWave,megaBossByType} from '../mega-bosses.mjs';
 import {MEGA_ANIMATION_COUNT,megaBossFrameSvg,megaBossFrameUrl} from '../mega-boss-art.mjs';
 import {ACHIEVEMENTS,achievementProgress,claimAchievement} from '../achievements.mjs';
-import {freshProgress,validateProgress,monsterForWave,startFight,stepFight,tapMonster,heroDamage,maxHealth,upgrade,fishCost,homeCost,MAX_FISH_LEVEL,MAX_HOME_LEVEL} from '../game-core.mjs';
+import {freshProgress,validateProgress,monsterForWave,startFight,stepFight,tapMonster,heroDamage,maxHealth,upgrade,planFishing,fishMarketMultiplier,fishingRodBonus,fishCost,homeCost,MAX_FISH_LEVEL,MAX_HOME_LEVEL} from '../game-core.mjs';
 
 test('14 unique milestone bosses are placed at 50..700 and preserve normal attacks',()=>{
  assert.equal(MEGA_BOSSES.length,14);
@@ -76,4 +76,20 @@ test('achievements claim exactly once and do not print infinite gold',()=>{
  assert.equal(claimAchievement(p,a.id).ok,false);
  assert.equal(p.gold,before);
  assert.equal(p.totalGold,before);
+});
+
+test('wave-scaled fishing remains supplementary and rod bonus has diminishing returns',()=>{
+ assert.equal(fishMarketMultiplier(0),1);
+ assert.equal(fishMarketMultiplier(100),4);
+ assert.equal(fishMarketMultiplier(700),64);
+ assert.equal(fishingRodBonus(0),1);
+ assert.ok(Math.abs(fishingRodBonus(30)-2.54)<.001);
+ const normal=freshProgress(),deep=freshProgress(),pro=freshProgress();
+ deep.best=700;pro.best=700;pro.fishLevel=30;
+ for(const p of [normal,deep,pro])planFishing(p,()=>.42);
+ const value=p=>p.catchPlan.reduce((total,fish)=>total+fish.price,0);
+ assert.ok(value(deep)>value(normal)*50);
+ assert.ok(value(deep)<value(normal)*70);
+ assert.ok(value(pro)>value(deep)*2.3);
+ assert.ok(value(pro)<value(deep)*2.7);
 });
