@@ -1,16 +1,35 @@
-<!doctype html><html lang="ru"><head><meta charset="utf-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/><title>Храбролап — новый кот-торговец</title><style>
-:root{color-scheme:dark}*{box-sizing:border-box}body{margin:0;padding:18px 12px;background:linear-gradient(#263f4a,#142a38);color:#ffeccc;font-family:system-ui,sans-serif}main{max-width:940px;margin:auto}h1{font-size:clamp(20px,5vw,30px);margin:0 0 6px}p{color:#decbb7;font-size:14px}.demo{border:2px solid #80624a;border-radius:18px;background:radial-gradient(circle at center,#536b5a,#283b3a);min-height:270px;display:flex;gap:8px;justify-content:center;align-items:center;flex-direction:column;padding:14px}.demo img{width:170px;height:207px;object-fit:contain;filter:drop-shadow(0 7px 5px #182d2c80)}.controls{display:flex;gap:7px;justify-content:center;flex-wrap:wrap}button{border:1px solid #aa8359;border-radius:10px;background:#876544;color:#fff1d8;font-size:13px;padding:9px 10px;cursor:pointer}.controls button.active{background:#578e68;border-color:#bfe1a6}h2{font-size:18px;color:#ffe4a3;margin:22px 0 10px}.grid{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:5px}.frame{border:1px solid #596878;border-radius:8px;background:#294251;text-align:center}.frame img{width:100%;height:auto;aspect-ratio:210/255;object-fit:contain;display:block}.frame span{font-size:12px;color:#efc9a1;padding:3px;display:block}@media(max-width:440px){.frame span{font-size:10px}.grid{gap:2px}}
-</style></head><body><main><h1>Серый кот-торговец · Храбролап</h1><p>18 кадров одной модели: 6 приход, 6 ожидание, 6 уход. Все кадры — прозрачные SVG с едиными пропорциями.</p><section class="demo"><img id="current" alt="Новый серый кот-торговец с корзиной рыбы"/><div class="controls"><button data-phase="arrive">Приход</button><button data-phase="idle" class="active">Ожидание</button><button data-phase="leave">Уход</button></div></section><div id="gallery"></div></main><script type="module">
-import{merchantFrameUrl}from './merchant-sprites.mjs';
-const names={arrive:'Приход',idle:'Ожидание',leave:'Уход'};
+<!doctype html>
+<html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Храбролап — новый кот-торговец</title>
+<style>
+:root{color-scheme:dark}*{box-sizing:border-box}body{margin:0;padding:16px 12px;background:linear-gradient(#294453,#172632);color:#ffedc8;font-family:system-ui,sans-serif}main{max-width:900px;margin:auto}
+h1{font-size:clamp(20px,5vw,28px);margin:0 0 6px}p{font-size:14px;color:#dbc9b1}
+.demo{background:radial-gradient(circle,#526956,#253d43);border:2px solid #b49369;border-radius:18px;min-height:320px;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:15px}
+.sprite{display:block;width:100%;aspect-ratio:210/264;background-image:url('art/merchant-animated.webp');background-size:600% 300%;background-repeat:no-repeat;background-position:0% 50%;filter:drop-shadow(0 3px 3px #1827358a)}
+#current{width:180px;max-width:80%;margin:0 auto 12px}
+.buttons{display:flex;gap:7px;flex-wrap:wrap;justify-content:center}
+button{padding:9px 11px;border-radius:9px;border:1px solid #c69d6f;background:#685445;color:#ffecd1;font-weight:700;cursor:pointer}button.active{background:#578663}
+h2{font-size:17px;margin:20px 0 9px}.grid{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:5px}.cell{padding:5px 3px;border:1px solid #425b63;background:#263c4b;border-radius:9px;text-align:center}.cell small{display:block;color:#dcc1a0}
+@media(max-width:440px){.grid{gap:2px}.cell{padding:2px}.cell small{font-size:10px}}
+</style></head><body><main><h1>Храбролап · новый кот-торговец</h1>
+<p>18 настоящих прозрачных кадров: шесть для прихода, шесть для ожидания и шесть для ухода. Это тот же атлас, который используется в игре.</p>
+<section class="demo"><div class="sprite" id="current" role="img" aria-label="Серый кот-торговец с корзиной рыбы"></div><div class="buttons">
+<button data-phase="arrive">Приход</button><button data-phase="idle" class="active">Ожидание</button><button data-phase="leave">Уход</button>
+</div></section><div id="gallery"></div>
+<script type="module">
+const names={arrive:'Приход',idle:'Ожидание',leave:'Уход'},rows={arrive:0,idle:50,leave:100};
+const setFrame=(el,phase,i)=>el.style.backgroundPosition=(i*20)+'% '+rows[phase]+'%';
 for(const phase of ['arrive','idle','leave']){
- const title=document.createElement('h2');title.textContent=names[phase]+' — 6 кадров';document.querySelector('#gallery').append(title);
+ const h=document.createElement('h2');h.textContent=names[phase]+' — 6 кадров';document.querySelector('#gallery').append(h);
  const grid=document.createElement('div');grid.className='grid';
- for(let i=0;i<6;i++){const card=document.createElement('div');card.className='frame';const img=document.createElement('img');img.src=merchantFrameUrl(phase,i);img.alt=`${names[phase]} кадр ${i+1}`;const cap=document.createElement('span');cap.textContent=String(i+1);card.append(img,cap);grid.append(card);}document.querySelector('#gallery').append(grid);
+ for(let i=0;i<6;i++){const cell=document.createElement('div');cell.className='cell';
+ const sprite=document.createElement('div');sprite.className='sprite';sprite.setAttribute('role','img');sprite.setAttribute('aria-label',names[phase]+': кадр '+(i+1));
+ setFrame(sprite,phase,i);const caption=document.createElement('small');caption.textContent='Кадр '+(i+1);
+ cell.append(sprite,caption);grid.append(cell);}
+ document.querySelector('#gallery').append(grid);
 }
 let phase='idle',frame=0;
-const current=document.querySelector('#current');
-function show(){current.src=merchantFrameUrl(phase,frame);frame=(frame+1)%6}
-function tick(){show();setTimeout(tick,phase==='idle'?400:120)}tick();
-for(const button of document.querySelectorAll('button[data-phase]'))button.addEventListener('click',()=>{phase=button.dataset.phase;frame=0;document.querySelectorAll('button[data-phase]').forEach(b=>b.classList.toggle('active',b===button));show()});
-</script></body></html>
+const display=()=>{setFrame(document.querySelector('#current'),phase,frame);frame=(frame+1)%6};
+function tick(){display();setTimeout(tick,phase==='idle'?400:120)}tick();
+document.querySelectorAll('[data-phase]').forEach(btn=>btn.addEventListener('click',()=>{phase=btn.dataset.phase;frame=0;document.querySelectorAll('[data-phase]').forEach(b=>b.classList.toggle('active',b===btn));display()}));
+</script></main></body></html>
