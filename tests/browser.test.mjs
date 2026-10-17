@@ -261,7 +261,7 @@ test('молния и вампиризм активируются без зам�
   await page.clock.runFor(250);
   await page.evaluate(()=>window.dispatchEvent(new Event('pagehide'))); // force persisted state for assertion
   if(effect==='lightning')assert.equal((await saved(page)).lightningHits>0,true);
-  else assert.equal((await saved(page)).vampireHeals>0,true);
+  else {assert.equal((await saved(page)).enchantment,'vampirism');assert.ok((await saved(page)).vampireHeals<=1,'5% vampirism is not guaranteed on each hit');}
   assert.equal(await page.locator('#hero-weapon').getAttribute('href'),'art/weapons/iron.svg');
  }
 });
@@ -447,11 +447,11 @@ test('серый торговец использует настоящий атл
 });
 
 
-test('cozy UI modals preserve fishing trade and 70-stage cave changes on mobile',async()=>{
+test('cozy UI modals preserve fishing trade and 200-stage cave changes on mobile',async()=>{
  const p=c.freshProgress();Object.assign(p,{room:11,best:10,gold:600,fishBucket:[{species:'Плотва',slots:1,weight:.25,length:20,price:8,waitMs:1200}]});
  const page=await pageFor(p);
  assert.equal(await page.locator('#room').textContent(),'ВОЛНА 11/2000');
- assert.match(await page.locator('#cave-stage').textContent(),/ЗАЛ 2\/70/);
+ assert.match(await page.locator('#cave-stage').textContent(),/ЗАЛ 2\/200/);
  const src=await page.locator('#cave-backdrop').getAttribute('src');
  assert.ok(src.startsWith('data:image/svg+xml'),'the second stage must change the cave art');
  const ready=await page.locator('#cave-backdrop').evaluate(async img=>{await img.decode();return img.naturalWidth>0});
