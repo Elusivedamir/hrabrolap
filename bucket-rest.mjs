@@ -2,9 +2,9 @@
 // механика рыбалки и сохранения здесь не изменяются.
 export const BUCKET_ART = Object.freeze({
   empty: 'art/scenery/bucket-empty.svg',
-  low: 'art/scenery/bucket-low.svg',
-  mid: 'art/scenery/bucket-mid.svg',
-  full: 'art/scenery/bucket-full.svg'
+  low: 'art/scenery/bucket-low-v2.svg',
+  mid: 'art/scenery/bucket-mid-v2.svg',
+  full: 'art/scenery/bucket-full-v2.svg'
 });
 export const SLEEP_FRAMES = Object.freeze(
   Array.from({length:6}, (_,i) => `assets/rest/sleep_${String(i+1).padStart(2,'0')}.png`)

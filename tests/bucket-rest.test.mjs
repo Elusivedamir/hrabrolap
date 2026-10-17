@@ -9,8 +9,8 @@ test('bucket count 0, 1..4, 5..7, upgrade overlap at 7, 8..24',()=>{
  for(let n=1;n<=4;n++)assert.equal(bucketStage(n,true),'low');
  for(let n=5;n<=6;n++)assert.equal(bucketStage(n,true),'mid');
  for(let n=7;n<=24;n++)assert.equal(bucketStage(n,true),'full');
- assert.match(bucketArt(7,true),/bucket-full\.svg$/);
- assert.match(bucketArt(7,false),/bucket-mid\.svg$/);
+ assert.match(bucketArt(7,true),/bucket-full-v2\.svg$/);
+ assert.match(bucketArt(7,false),/bucket-mid-v2\.svg$/);
 });
 test('all six source frames exist and every frame is shown at least once',()=>{
  assert.equal(SLEEP_FRAMES.length,6);
