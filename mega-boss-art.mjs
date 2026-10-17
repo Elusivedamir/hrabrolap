@@ -4,8 +4,8 @@ import {megaBossByType,MEGA_BOSSES} from './mega-bosses.mjs';
  * Artwork is deliberately hand-described as shapes, not recolors of a common body.
  */
 export const MEGA_FRAME_COUNT=6;
-const A=[[0,0,0,1,1],[-4,-3,-6,1.03,.99],[-10,-8,-12,1.07,.97],[-24,-5,9,1.16,.9],[-12,1,5,1.06,.95],[0,0,0,1,1]];
-const H=[[0,0,0,1,1],[5,0,8,.96,1.01],[11,5,-13,.9,.92],[15,7,14,.86,.88],[6,3,-8,.95,.95],[0,0,0,1,1]];
+const A=[[0,0,0,1,1],[-4,-3,-6,1.03,.99],[-10,-8,-12,1.07,.97],[-24,-5,9,1.16,.9],[-12,1,5,1.06,.95],[1,-2,2,1.02,.98]];
+const H=[[0,1,-2,1.01,.99],[5,0,8,.96,1.01],[11,5,-13,.9,.92],[15,7,14,.86,.88],[6,3,-8,.95,.95],[-1,0,1,.99,1.02]];
 const path=(d,fill='url(#shell)',width=5)=>'<path d="'+d+'" fill="'+fill+'" stroke="#282638" stroke-width="'+width+'" stroke-linejoin="round" stroke-linecap="round"/>';
 const ellipse=(x,y,rx,ry,fill='url(#shell)',width=5)=>'<ellipse cx="'+x+'" cy="'+y+'" rx="'+rx+'" ry="'+ry+'" fill="'+fill+'" stroke="#282638" stroke-width="'+width+'"/>';
 const circle=(x,y,r,fill,width=3)=>'<circle cx="'+x+'" cy="'+y+'" r="'+r+'" fill="'+fill+'" stroke="#332d3b" stroke-width="'+width+'"/>';
