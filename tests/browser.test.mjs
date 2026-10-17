@@ -186,7 +186,7 @@ test('новое ведро отрисовывается слева и меня�
  const p=c.freshProgress();p.fishBucket=[{species:'Плотва',weight:0.25,length:21,slots:1,price:5,waitMs:1500}];
  const page=await pageFor(p);
  const bucket=page.locator('#bucket');
- assert.equal(await page.locator('#bucket-graphic').getAttribute('src'),'art/scenery/bucket-low.svg');
+ assert.equal(await page.locator('#bucket-graphic').getAttribute('src'),'art/scenery/bucket-low-v2.svg');
  const coords=await page.evaluate(()=>({bucket:document.querySelector('#bucket').getBoundingClientRect().left,scene:document.querySelector('#surface').getBoundingClientRect().left,width:document.querySelector('#surface').getBoundingClientRect().width}));
  assert.ok(coords.bucket<coords.scene+coords.width*.21,'bucket should be to the left of fisherman');
  await shot(page,'fixture-bucket-left');
