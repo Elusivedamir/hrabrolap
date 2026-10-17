@@ -6,7 +6,7 @@ const coreURL=process.env.HRABROLAP_CORE?pathToFileURL(process.env.HRABROLAP_COR
 const c=await import(coreURL);
 function rng(seed){let state=seed>>>0;return()=>{state=(Math.imul(state,1664525)+1013904223)>>>0;return state/4294967296;};}
 
-export function simulate({id,policy='balanced',decisionSeconds=1,seed=1,equipment=false,fish=false,reload=false,combat='manual',limitSeconds=10800}){
+export function simulate({id,policy='balanced',decisionSeconds=1,seed=1,equipment=false,fish=false,reload=false,combat='manual',limitSeconds=43200}){
  let p=c.freshProgress(),b=c.startFight(p);const random=rng(seed),waves=[],seen=new Set(),bosses=[];
  let wins=0,defeats=0,farmWins=0,reloads=0,sales=0,fishGold=0,nextDecision=0,nextReload=300;
  const purchases={sword:0,armor:0,weapon:0,equippedArmor:0};
@@ -66,7 +66,7 @@ export async function runBalance(outDir){
  ];
  const results=configs.map(simulate);
  const summary={generatedAt:new Date().toISOString(),sourceCore:process.env.HRABROLAP_CORE?'external-core':'v0.9.7',
-  method:'stepFight(0.1, autoEnabled) + manual tap at each eligible step; autobattle must be purchased for 1 coin if selected; max 3 manual/s or level-0 auto 1/s; покупки только за заработанное золото; максимум 3 игровых часа; продажа на каждом визите, если включена рыбалка. Реальное время воспроизводится моделью, не браузером.',
+  method:'stepFight(0.1, autoEnabled) + manual tap at each eligible step; autobattle must be purchased for 1 coin if selected; max 3 manual/s or level-0 auto 1/s; покупки только за заработанное золото; максимум 12 игровых часов; продажа на каждом визите, если включена рыбалка. Реальное время воспроизводится моделью, не браузером.',
   wallSeconds:+((performance.now()-began)/1000).toFixed(3),results};
  if(outDir){
   await fs.mkdir(outDir,{recursive:true});
