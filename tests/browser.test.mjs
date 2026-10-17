@@ -489,6 +489,11 @@ test('merchant debug mode enables 15-second timer and never persists it as the n
  const p=c.freshProgress();p.merchantPhase='away';p.merchantMs=300000;
  const page=await pageFor(p,undefined,{merchantTest:true});
  assert.equal(await page.locator('#merchant').isVisible(),false);
+ const countdown=page.locator('#merchant-test-countdown');
+ assert.equal(await countdown.isVisible(),true,'test-only countdown must be visible on mobile');
+ assert.equal(await page.locator('#merchant-test-time').textContent(),'00:15');
+ assert.equal(await page.locator('#merchant-test-label').textContent(),'До прихода');
+ await shot(page,'merchant-15s-visible-timer-mobile');
  assert.match(await page.locator('#merchant-status').textContent(),/00:15|0:15/);
  // Playwright's virtual RAF advances more slowly than wall time when dt is capped;
  // the exact 15s arrival and repeat cycle are asserted in game-core tests.
@@ -499,6 +504,7 @@ test('merchant debug mode enables 15-second timer and never persists it as the n
  assert.equal(raw.merchantMs,300000);
  assert.equal(raw.merchantPhase,'away');
  await page.goto(base);
+ assert.equal(await countdown.isVisible(),false,'normal mode must hide test countdown');
  assert.match(await page.locator('#merchant-status').textContent(),/05:00|5:00/);
  assert.equal(await page.locator('#merchant').isVisible(),false);
  assert.deepEqual(errors,[]);
