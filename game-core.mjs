@@ -21,9 +21,9 @@ export function monsterForWave(level){
  const model=MONSTERS[(Math.floor((n-1)/10)*3+(n-1)%10)%10];
  const after=Math.max(0,n-100);
  // Keep waves 1-100 exactly as players know them; 101-700 scale steadily.
- const baseHp=n<=100?17+4.8*n+n**1.34:(17+480+100**1.34)*(1+.011*after+.000018*after*after);
+ const baseHp=n<=100?17+4.8*n+n**1.34:(17+480+100**1.34)*(1+.006*after+.000008*after*after);
  const hp=Math.round(baseHp*(boss?2.25:1));
- return {...model,name:(boss?'Король · ':'')+model.name,boss,hp,attack:Math.ceil((n<=100?1+n*.34:35*(1+.0045*after+.000004*after*after))*(boss?1.42:1)),reward:Math.round((n<=100?8+n*3.8+n**1.2*.38:(8+380+100**1.2*.38)*(1+.019*after+.000018*after*after))*(boss?3:1))};
+ return {...model,name:(boss?'Король · ':'')+model.name,boss,hp,attack:Math.ceil((n<=100?1+n*.34:35*(1+.003*after+.000002*after*after))*(boss?1.42:1)),reward:Math.round((n<=100?8+n*3.8+n**1.2*.38:(8+380+100**1.2*.38)*(1+.019*after+.000018*after*after))*(boss?3:1))};
 }
 // В обычных боях шанс паука 30%. Прежний регулярный слот паука
 // отдан скелету; боссы на каждой 10-й волне остаются без изменений.
