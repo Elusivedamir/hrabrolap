@@ -13,6 +13,8 @@ import {applyCanonicalFrame} from './canonical-sprites.mjs';
 import {FOREST_GUARDIAN_ID} from './forest-guardian-rig.mjs';
 import {armorAttackTransform,armorHurtTransform,hurtMotionTransform,hurtWeaponTransform,HURT_FRAMES,HURT_FRAME_MS} from './equipment-rig.mjs';
 import {WEAPONS,ARMORS,MATERIALS,WAVE_COUNT,freshProgress,validateProgress,restoreFight,swordCost,armorCost,fishCost,homeCost,bucketCost,bucketCapacity,heroDamage,maxHealth,startFight,stepFight,upgrade,buyEquipment,equipEquipment,offlineReward,bucketVolume,bucketGold,planFishing,stepFishing,stepMerchant,sellAll,purchaseAutoBattle,upgradeAttackSpeed,autoHitsPerSecond,autoUpgradeCost,MAX_AUTO_LEVEL,MAX_FISH_LEVEL,MAX_HOME_LEVEL,attackInterval,setEnchantment,tapMonster} from './game-core.mjs';
+// Test switch only: /?merchantTest=1; does not change normal saved visit cadence.
+const MERCHANT_TEST_MODE=new URLSearchParams(location.search).get('merchantTest')==='1';
 const $=id=>document.getElementById(id), SAVE='hrabrolap-v0.2-save',OLD='hrabrolap-v0.1-save',fmt=n=>Math.floor(n).toLocaleString('ru-RU');
 let p,b,modalType='',last=performance.now(),lastSave=0,lastAutosave=0,msgTimeout=0,toastTimeout=0,lastFrameRest=false;
 const heartsRoot=$('hero-hearts');
@@ -22,8 +24,9 @@ try {const raw=JSON.parse(localStorage.getItem(SAVE)||'null')||JSON.parse(localS
  if(p.lastSeen&&Date.now()>p.lastSeen+20000){p.pendingOffline=Math.min(p.pendingOffline+offlineReward(p,Date.now()-p.lastSeen),Math.floor(Math.min(swordCost(p.sword),armorCost(p.armor))*1.1));} p.lastSeen=Date.now();
 }catch(e){p=freshProgress();b=startFight(p);console.warn('save recovery',e);}
 if(!b)b=startFight(p);
+if(MERCHANT_TEST_MODE){p.merchantPhase='away';p.merchantMs=15000;}
 if(!p.catchPlan.length && bucketVolume(p)<bucketCapacity(p))planFishing(p);
-function save(){try{p.lastSeen=Date.now();localStorage.setItem(SAVE,JSON.stringify({...p,battleState:{level:b.level,hp:b.hp,enemyHp:b.enemyHp,phase:b.phase,heroTimer:b.heroTimer,enemyTimer:b.enemyTimer,rest:b.rest,monsterType:b.monster.type,poisonRemaining:b.poisonRemaining||0,poisonTick:b.poisonTick||0}}));}catch(e){console.warn(e)}}
+function save(){try{p.lastSeen=Date.now();localStorage.setItem(SAVE,JSON.stringify({...p,merchantPhase:MERCHANT_TEST_MODE?'away':p.merchantPhase,merchantMs:MERCHANT_TEST_MODE?300000:p.merchantMs,battleState:{level:b.level,hp:b.hp,enemyHp:b.enemyHp,phase:b.phase,heroTimer:b.heroTimer,enemyTimer:b.enemyTimer,rest:b.rest,monsterType:b.monster.type,poisonRemaining:b.poisonRemaining||0,poisonTick:b.poisonTick||0}}));}catch(e){console.warn(e)}}
 function notify(t){const el=$('toast');el.textContent=t;el.classList.add('show');clearTimeout(toastTimeout);toastTimeout=setTimeout(()=>el.classList.remove('show'),2300)}
 function say(t,time=2200){$('battle-message').textContent=t;lastBattleMessage=performance.now()+time;clearTimeout(msgTimeout);msgTimeout=setTimeout(()=>{$('battle-message').textContent=b.phase==='rest'?'Котёнок отдыхает в домике':p.autoEnabled?'Автобой · '+autoHitsPerSecond(p)+' ударов/с':'Нажми на монстра · ручной бой 3/с'},time)}
 function pulse(el,name,time=600){el.classList.remove(name);void el.offsetWidth;el.classList.add(name);setTimeout(()=>el.classList.remove(name),time)}
@@ -380,7 +383,7 @@ function frame(now){const dt=Math.min(.12,Math.max(0,(now-last)/1000));last=now;
  if(!document.hidden){
   // Prepares the swing in the last 350 ms before the real damage tick.
   if(b.phase==='fight' && p.autoEnabled && !attackPrepared && b.heroTimer < attackInterval(p,true)*.72 && b.heroTimer+dt >= attackInterval(p,true)*.72) prepareAttack();
-  battleEvents(stepFight(p,b,dt,p.autoEnabled));fishEvents(stepFishing(p,dt*1000));merchantEvents(stepMerchant(p,dt*1000,modalType==='trade'));
+  battleEvents(stepFight(p,b,dt,p.autoEnabled));fishEvents(stepFishing(p,dt*1000));merchantEvents(stepMerchant(p,dt*1000,modalType==='trade',MERCHANT_TEST_MODE));
   if(now-lastSave>250){render();lastSave=now;}
   if(now-lastAutosave>5000){save();lastAutosave=now;}
  }
