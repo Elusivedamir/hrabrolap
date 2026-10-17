@@ -91,3 +91,14 @@ test('completed v5 700-wave save resumes 701 with all gold, unlocked gear and tr
  assert.equal(p.gold,12345);assert.equal(p.autoLevel,37);
  assert.deepEqual(p.megaBossWins,[50,700]);
 });
+
+test('restoring saved fleshless enemies cannot accidentally enable poison',()=>{
+ for(const type of ['ghost','golem','skeleton']){
+  const p=game.freshProgress();p.room=3;p.best=2;p.enchantment='poison';
+  const b=game.restoreFight(p,{level:3,monsterType:type,hp:60,enemyHp:9999,phase:'fight',heroTimer:1,enemyTimer:0});
+  assert.equal(b.monster.type,type);
+  assert.equal(b.monster.immunity,'poison');
+  game.tapMonster(p,b);
+  assert.equal(b.poisonRemaining,0);
+ }
+});
