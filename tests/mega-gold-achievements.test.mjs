@@ -68,7 +68,7 @@ test('gold sinks cap useless house and fishing upgrades without breaking saves',
  assert.deepEqual(restored.achievementClaimed,[0,3]);
 });
 test('achievements claim exactly once and do not print infinite gold',()=>{
- assert.equal(ACHIEVEMENTS.length,24);
+ assert.equal(ACHIEVEMENTS.length,28);
  const p=freshProgress();p.best=10;
  const a=ACHIEVEMENTS[0];assert.equal(achievementProgress(p,a),10);
  assert.equal(claimAchievement(p,a.id).ok,true);
