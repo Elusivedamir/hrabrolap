@@ -78,8 +78,9 @@ export function applyCanonicalFrame(kind,index,rig){
   const offsetY=costume&&kind==='attack'&&i===0?15:0;
   attr(gripShape,'cx',(X+pawX*kx).toFixed(2));
   attr(gripShape,'cy',(Y+(pawY+offsetY)*ky).toFixed(2));
-  attr(gripShape,'rx',13);
-  attr(gripShape,'ry',13);
+  // A small forepaw foreground only covers the grip, never the crossguard.
+  attr(gripShape,'rx',11);
+  attr(gripShape,'ry',10);
  }
  const [cx,cy,rot,sz]=ARMOR_HANDLES[kind][i];
  const ax=X+cx*kx,ay=Y+cy*ky;
