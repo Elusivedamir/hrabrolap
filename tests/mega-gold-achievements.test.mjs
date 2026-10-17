@@ -6,9 +6,9 @@ import {ACHIEVEMENTS,achievementProgress,claimAchievement} from '../achievements
 import {freshProgress,validateProgress,monsterForWave,startFight,stepFight,tapMonster,heroDamage,maxHealth,upgrade,planFishing,fishMarketMultiplier,fishingRodBonus,fishCost,homeCost,MAX_FISH_LEVEL,MAX_HOME_LEVEL} from '../game-core.mjs';
 
 test('14 unique milestone bosses are placed at 50..700 and preserve normal attacks',()=>{
- assert.equal(MEGA_BOSSES.length,14);
- assert.equal(new Set(MEGA_BOSSES.map(x=>x.id)).size,14);
- for(let n=1;n<=700;n++){
+ assert.equal(MEGA_BOSSES.length,40);
+ assert.equal(new Set(MEGA_BOSSES.map(x=>x.id)).size,40);
+ for(let n=1;n<=2000;n++{
   const m=monsterForWave(n);
   assert.equal(!!m.megaboss,n%50===0);
   if(n%50!==0)continue;
@@ -19,7 +19,7 @@ test('14 unique milestone bosses are placed at 50..700 and preserve normal attac
  }
 });
 test('14 separate models contain 6 SVG attack poses and 6 hurt poses each',()=>{
- assert.equal(MEGA_ANIMATION_COUNT,168);
+ assert.equal(MEGA_ANIMATION_COUNT,480);
  const examples=new Set();
  for(const boss of MEGA_BOSSES){
   const first=megaBossFrameSvg(boss.id,'attack',0);
@@ -31,7 +31,7 @@ test('14 separate models contain 6 SVG attack poses and 6 hurt poses each',()=>{
    assert.ok(megaBossFrameUrl(boss.id,phase,i).startsWith('data:image/svg+xml'));
   }
  }
- assert.equal(examples.size,14);
+ assert.equal(examples.size,40);
 });
 test('immunity cancels only enchantment effect, sword always works',()=>{
  const p=freshProgress();
