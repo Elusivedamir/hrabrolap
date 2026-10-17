@@ -39,7 +39,12 @@ def art(theme,p):
  return f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 279 370" width="279" height="370">{sleeve}<g transform="translate({cx} {cy}) rotate({angle})" stroke-linecap="round" stroke-linejoin="round">{vest}{motifs[theme]}</g>{boots}</svg>'
 def main():
  for id,(name,*_) in THEMES.items():
-  dest=ROOT/'assets'/'costumes'/id;dest.mkdir(parents=True,exist_ok=True);frames=[]
+  dest=ROOT/'assets'/'costumes'/id
+  existing=dest/'manifest.json'
+  if existing.exists() and json.loads(existing.read_text()).get('approved_source'):
+   print('Preserving approved full-costume artwork:',id)
+   continue
+  dest.mkdir(parents=True,exist_ok=True);frames=[]
   for kind in ('attack','hurt'):
    for n,pose in enumerate(POSE[kind],1):
     file=ROOT/'assets'/'canonical'/f'{kind}_{n:02}.png'
