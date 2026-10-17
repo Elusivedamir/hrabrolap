@@ -49,7 +49,7 @@ test('poison turns into real DOT and a poison win; lightning deals extra damage'
 test('vampirism heals no more than lost HP and persists effect selection',()=>{
  const p=c.freshProgress();c.setEnchantment(p,'vampirism');
  const b=c.startFight(p,c.maxHealth(p),()=>.99);b.heroTimer=1.3;b.hp=60;
- const e=c.tapMonster(p,b);assert.equal(e[0].element,'vampirism');
+ const e=c.tapMonster(p,b,()=>.04);assert.equal(e[0].element,'vampirism');
  assert.ok(b.hp>60&&b.hp<=c.maxHealth(p));assert.equal(p.vampireHeals,1);
  assert.equal(c.validateProgress(JSON.parse(JSON.stringify(p))).enchantment,'vampirism');
 });
