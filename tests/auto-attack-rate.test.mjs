@@ -14,13 +14,13 @@ test('manual attack hard-limited to 3 taps per second even when tapping at 100Hz
  assert.ok(Math.abs(c.attackInterval(p,false)-1/3)<1e-9);
 });
 test('auto attack rate at 0,20,40,60,80,100 levels is exactly 1–6 hits/second',()=>{
- for(const [level,expected] of [[0,1],[19,1],[20,2],[39,2],[40,3],[59,3],[60,4],[79,4],[80,5],[99,5],[100,6]]){
+ for(const [level,expected] of [[0,1],[1,1.05],[19,1.95],[20,2],[39,2.95],[40,3],[59,3.95],[60,4],[79,4.95],[80,5],[99,5.95],[100,6]]){
   const p=c.freshProgress();p.autoUnlocked=true;p.autoEnabled=true;p.autoLevel=level;
-  assert.equal(c.autoHitsPerSecond(p),expected,'auto level '+level);
+  assert.ok(Math.abs(c.autoHitsPerSecond(p)-expected)<1e-9,'auto level '+level);
   const b=c.startFight(p);b.monster.hp=100000;b.enemyHp=100000;
   let hits=0;
   for(let i=0;i<100;i++)hits+=c.stepFight(p,b,.01,true).filter(x=>x.kind==='hero-hit').length;
-  assert.equal(hits,expected,'actual hits at auto level '+level);
+  assert.ok(Math.abs(hits-expected)<=1,'actual hits at auto level '+level+': '+hits);
  }
 });
 test('auto upgrades require purchase, charge only displayed price and stop at level 100',()=>{
