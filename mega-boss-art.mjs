@@ -1,4 +1,5 @@
 import {megaBossByType,MEGA_BOSSES} from './mega-bosses.mjs';
+import {lateBossFrameSvg} from './late-boss-art.mjs';
 /** Fourteen original vector silhouettes: no changes to existing approved sprites.
  * Every monster has 6 explicit attack poses + 6 explicit hurt poses (168 frames).
  * Artwork is deliberately hand-described as shapes, not recolors of a common body.
@@ -132,6 +133,7 @@ const cache=new Map();
 export function megaBossFrameSvg(type,phase='attack',index=0){
  const b=megaBossByType(type);
  if(!b)throw Error('Unknown mega boss '+type);
+ if(b.family)return lateBossFrameSvg(b,phase,index);
  if(!['attack','hurt'].includes(phase))throw Error('Invalid mega animation '+phase);
  const i=Math.min(5,Math.max(0,Math.trunc(Number(index)||0)));
  const [dx,dy,r,sx,sy]=(phase==='attack'?A:H)[i];
