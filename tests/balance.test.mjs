@@ -5,7 +5,7 @@ test('фактический путь 1→700, все десять моделе�
  const r=simulate({id:'test',decisionSeconds:1});
  assert.equal(r.cleared,true,JSON.stringify({best:r.best,room:r.room,sword:r.sword,armor:r.armor,seconds:r.seconds,defeats:r.defeats,gold:r.gold}));assert.equal(r.waves.length,700);
  assert.deepEqual(r.waves.map(w=>w.wave),Array.from({length:700},(_,i)=>i+1));
- assert.deepEqual(r.bossWaves,Array.from({length:70},(_,i)=>(i+1)*10));assert.equal(r.monsterTypes.length,10);
+ assert.deepEqual(r.bossWaves,Array.from({length:70},(_,i)=>(i+1)*10));assert.equal(r.monsterTypes.length,24);
 });
 test('сохранение каждые пять минут не меняет результат кампании',()=>{
  const a=simulate({id:'normal',decisionSeconds:10,combat:'auto'});
