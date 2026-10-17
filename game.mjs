@@ -162,6 +162,7 @@ function render(){
  $('enemy-holder').classList.toggle('poisoned',b.poisonRemaining>0&&b.phase==='fight');
  const heartCapacity=maxHealth(p)/5;heroHearts.forEach((e,i)=>{const filling=Math.max(0,Math.min(1,(b.hp-i*heartCapacity)/heartCapacity));e.querySelector('.heart-filled').style.width=(filling*100)+'%';});heartsRoot.setAttribute('aria-label',`Здоровье ${Math.ceil(b.hp)} из ${maxHealth(p)}`);
  $('boss-crown').style.display=b.monster.boss?'block':'none';
+ if(b.monster.boss&&!art.dataset.playingAnimation)$('boss-crown').style.visibility=ARTICULATED_MONSTER_TYPES.has(b.monster.type)?'hidden':'';
  const rest=b.phase==='rest';
  if(rest)$('battle-message').textContent='Котёнок отдыхает дома';
  else if(b.phase==='fight'&&performance.now()>lastBattleMessage)$('battle-message').textContent=p.autoEnabled?'Автобой · '+autoHitsPerSecond(p)+' ударов/с':'Нажми на монстра · ручной бой 3/с';$('surface').classList.toggle('resting',rest);$('hero-art').classList.toggle('resting-hero',rest);updateSleepDrawing(rest);
