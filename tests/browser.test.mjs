@@ -122,25 +122,25 @@ test('поражение, дом и возрождение без покупки
  assert.deepEqual(errors,[]);
 });
 
-test('паутина в инвентаре, покупка брони за 300 и 6 паутин, экипировка и reload',async()=>{
- const p=c.freshProgress();p.gold=300;p.materials.web=6;
+test('новый костюм в инвентаре: покупка за 50, экипировка и reload',async()=>{
+ const p=c.freshProgress();p.gold=50;
  const page=await pageFor(p);
  await page.locator('#shop').click();
- const web=page.locator('.shop-item').filter({hasText:'Паутинная броня'});
- assert.ok((await web.textContent()).includes('6/6'));
- await web.getByRole('button',{name:'Купить'}).click();
- let save=await saved(page);assert.equal(save.materials.web,0);assert.equal(save.gold,0);assert.ok(save.ownedArmors.includes('web'));
+ const row=page.locator('.shop-item').filter({hasText:'Стальной рыцарь'});
+ await row.getByRole('button',{name:'Купить'}).click();
+ let save=await saved(page);assert.equal(save.gold,0);assert.ok(save.ownedArmors.includes('steel_knight'));
  await page.getByRole('button',{name:'Открыть инвентарь'}).click();
- await page.locator('.shop-item').filter({hasText:'Паутинная броня'}).getByRole('button',{name:'Надеть'}).click();
- assert.equal(await page.locator('#hero-armor').getAttribute('href'),'art/armor/web.svg');
- await shot(page,'fixture-web-armor');
+ await page.locator('.shop-item').filter({hasText:'Стальной рыцарь'}).getByRole('button',{name:'Надеть'}).click();
+ assert.equal(await page.locator('#hero-body').getAttribute('data-costume'),'steel_knight');
+ await shot(page,'fixture-steel-knight');
  await page.reload();save=await saved(page);
- assert.equal(save.equippedArmor,'web');assert.equal(save.materials.web,0);
- assert.equal(await page.locator('#hero-armor').getAttribute('href'),'art/armor/web.svg');
+ assert.equal(save.equippedArmor,'steel_knight');
+ assert.match(await page.locator('#hero-body').getAttribute('href'),/assets\\/costumes\\/steel_knight\\/attack_0[1-6]\\.png/);
 });
 
+
 test('шестикадровое получение урона двигает SVG-броню и меч без замены кота',async()=>{
- const p=c.freshProgress();p.armor=150;p.ownedArmors.push('web');p.equippedArmor='web';
+ const p=c.freshProgress();p.armor=150;p.ownedArmors.push('steel_knight');p.equippedArmor='steel_knight';
  p.ownedWeapons.push('fishbone');p.weapon='fishbone';
  const b=c.startFight(p);b.enemyTimer=2.39;
  const page=await pageFor(p,b);
@@ -152,7 +152,7 @@ test('шестикадровое получение урона двигает SV
  const frames=await page.evaluate(()=>window.hurtFrames);
  for(let i=1;i<=6;i++)assert.ok(frames.includes(i),'missing hit frame '+i+': '+frames.join(','));
  assert.match(await page.locator('#hero-body').getAttribute('href'),/^assets\/canonical\/(attack|hurt)_0[1-6]\.png$/);
- assert.equal(await page.locator('#hero-armor').getAttribute('href'),'art/armor/web.svg');
+ assert.equal(await page.locator('#hero-armor').isVisible(),false);
  assert.equal(await page.locator('#hero-weapon').getAttribute('href'),'art/weapons/fishbone.svg');
  assert.match(await page.locator('#armor-slot').getAttribute('transform'),/^translate\(/);
  await shot(page,'rig-hurt-frame-6');
@@ -165,15 +165,15 @@ test('мобильное SVG-ателье показывает 6 кадров и
  await page.locator('.sprite').first().waitFor();
  assert.equal(await page.locator('.sprite').count(),6);
  assert.equal(await page.locator('#weapon option').count(),10);
- assert.equal(await page.locator('#armor option').count(),12);
- await page.locator('#armor').selectOption('web');
+ assert.equal(await page.locator('#armor option').count(),7);
+ await page.locator('#armor').selectOption('steel_knight');
  await page.locator('#weapon').selectOption('spiderleg');
  await page.locator('#kind').selectOption('hurt');
  assert.equal(await page.locator('.sprite').count(),6);
  assert.equal(await page.locator('#big image').count(),3);
  await shot(page,'equipment-preview-hurt-web-spiderleg');
  await page.locator('#kind').selectOption('overhead');
- await page.locator('#armor').selectOption('moon_armor');
+ await page.locator('#armor').selectOption('moon_mage');
  await page.locator('#weapon').selectOption('dusk');
  await page.locator('.sprite').nth(3).click();
  assert.equal(await page.locator('#current-frame').textContent(),'4/6');

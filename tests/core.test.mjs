@@ -16,7 +16,7 @@ p.gold=110;assert.equal(upgrade(p,'sword').ok,true);assert.equal(upgrade(p,'armo
 assert.equal(equipEquipment(p,'weapon','fishbone'),false,'cannot equip unowned');
 p.gold=3000;assert.equal(buyEquipment(p,'weapon','fishbone').ok,true);assert.equal(buyEquipment(p,'weapon','fishbone').ok,false);
 assert.equal(equipEquipment(p,'weapon','fishbone'),true);assert.equal(heroDamage(p),19);
-assert.equal(buyEquipment(p,'armor','steel').ok,true);assert.equal(equipEquipment(p,'armor','steel'),true);assert.equal(maxHealth(p),107);
+assert.equal(buyEquipment(p,'armor','steel_knight').ok,true);assert.equal(equipEquipment(p,'armor','steel_knight'),true);assert.equal(maxHealth(p),79);
 assert.equal(equipEquipment(p,'weapon','iron'),true);assert.equal(heroDamage(p),11);
 assert.equal(equipEquipment(p,'armor','none'),true);assert.equal(maxHealth(p),79);
 const migrated=validateProgress({version:2,room:10,best:9,gold:333,fishBucket:[],merchantPhase:'away',merchantMs:280000});assert.equal(migrated.room,10);assert.equal(migrated.gold,333);assert.equal(migrated.weapon,'iron');

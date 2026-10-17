@@ -80,8 +80,8 @@ function contactAttack(){if(hurting)cancelHurt();cancelPose();const serial=poseS
 function cancelAttackPose(){cancelPose();activeAttack=0;heroFrame(0);}
 function syncHeroPose(){if(b.phase==='rest'&&!hurting)cancelAttackPose();}
 function syncEquipment(){
- const weapon=WEAPONS.find(w=>w.id===p.weapon)||WEAPONS[0];$('hero-weapon').setAttribute('href',weapon.svg);
- const armor=ARMORS.find(a=>a.id===p.equippedArmor)||ARMORS[0];const art=$('hero-armor');const forest=armor.id===FOREST_GUARDIAN_ID;art.style.display=!forest&&armor.svg?'':'none';if(!forest&&armor.svg)art.setAttribute('href',armor.svg);applyHeroFrame();
+ const weapon=WEAPONS.find(w=>w.id===p.weapon)||WEAPONS[0];$('hero-weapon').setAttribute('href',weapon.svg);$('hero-weapon-blade').setAttribute('href',weapon.svg);
+ const armor=ARMORS.find(a=>a.id===p.equippedArmor)||ARMORS[0];const art=$('hero-armor');const full=!!armor.fullCharacter;art.style.display=!full&&armor.svg?'':'none';if(!full&&armor.svg)art.setAttribute('href',armor.svg);applyHeroFrame();
 }
 const APPROVED_MONSTER_TYPES=new Set(['slime','spider','mouse','mushroom','beetle','larva','bat','ghost']);
 const ARTICULATED_MONSTER_TYPES=new Set(['skeleton','golem']);
@@ -196,7 +196,7 @@ function openModal(title,mode='info',text=''){modalType=mode;$('modal-title').te
   if(mode==='trade'){const btn=action(`Продать всё · ${bucketGold(p)} 🪙`,()=>{const sale=sellAll(p);if(sale.ok){notify('Продано '+sale.count+' рыб · +'+sale.gold+' монет!');save();closeModal();}else notify('Ведро пустое');});btn.disabled=p.fishBucket.length===0;}
   else {para('Продать улов можно только серому коту-торговцу. Он приезжает каждые 5 минут активной игры и ждёт 15 секунд.');if(!p.bucketLevel)action('Улучшить ведро до 24 мест · '+bucketCost()+' 🪙',()=>{const r=upgrade(p,'bucket');if(!r.ok){notify('Не хватает монет');return;}p.catchPlan=[];planFishing(p);save();openModal('Ведро рыцаря','bucket');notify('Теперь вмещается 24!')});}
  }else if(mode==='shop'||mode==='inventory'){
-  para(mode==='shop'?'Покупай экипировку за монеты и добычу с монстров. Рецепты проверяются перед покупкой.':'Выбирай приобретённые вещи. Меч и броня переключаются без изменения анимаций котёнка.');
+  para(mode==='shop'?'Покупай экипировку за монеты и добычу с монстров. Рецепты проверяются перед покупкой.':'Выбирай приобретённые вещи. Новый костюм переключает все 12 кадров котёнка; меч остаётся отдельным SVG.');
    const materials=document.createElement('div');materials.className='materials-summary';
    const label=document.createElement('b');label.textContent='🎒 Материалы в инвентаре';materials.append(label);
    const chips=document.createElement('div');chips.className='material-chips';
@@ -209,7 +209,7 @@ function openModal(title,mode='info',text=''){modalType=mode;$('modal-title').te
       if(mode==='inventory'&&!own.includes(item.id))continue;
       const row=document.createElement('div');row.className='shop-item';const im=document.createElement('img');if(item.svg)im.src=item.svg;else {im.src='art/hero/bare-kitten.svg';im.alt='Без брони';}
       const main=document.createElement('main'),label=document.createElement('b');label.textContent=item.name;
-       const stats=document.createElement('small');stats.textContent=category==='weapon'?'Урон +'+item.damage:item.id===FOREST_GUARDIAN_ID?'Костюм · без изменения здоровья':'Здоровье +'+item.health;
+       const stats=document.createElement('small');stats.textContent=category==='weapon'?'Урон +'+item.damage:item.fullCharacter?'Костюм · без изменения здоровья':'Здоровье +'+item.health;
        const recipe=document.createElement('small');recipe.className='item-recipe';
        const names=Object.entries(item.materials||{}).map(([id,count])=>{const type=MATERIALS.find(m=>m.id===id);return `${type?.icon||'•'} ${type?.name||id} ${p.materials[id]||0}/${count}`;});
        recipe.textContent='🪙 '+fmt(item.price)+(names.length?' · '+names.join(' · '):'');

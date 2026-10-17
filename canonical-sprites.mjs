@@ -45,8 +45,11 @@ export function applyCanonicalFrame(kind,index,rig){
  const {body,heroMotion,weaponSlot,armorSlot,armorImage,armorId='none'}=rig;
  if(!body||!heroMotion||!weaponSlot||!armorSlot||!armorImage)throw new Error('Incomplete SVG equipment rig');
  const costume=armorId===FOREST_GUARDIAN_ID;
- attr(body,'href',costume?forestFrameUrl(kind,i):CANONICAL_FRAME_PATHS[kind][i]);
- attr(body,'data-costume',costume?FOREST_GUARDIAN_ID:'none');
+ const complete=new Set(['steel_knight','thorn_ranger','moon_mage','ember_guard','frost_watcher']);
+ const baked=complete.has(armorId);
+ const file=kind+'_'+String(i+1).padStart(2,'0')+'.png';
+ attr(body,'href',costume?forestFrameUrl(kind,i):baked?'assets/costumes/'+armorId+'/'+file:CANONICAL_FRAME_PATHS[kind][i]);
+ attr(body,'data-costume',costume||baked?armorId:'none');
  for(const [key,value] of Object.entries({x:X,y:Y,width:W,height:H}))attr(body,key,value);
  // The cat itself is NEVER rotated, stretched or translated between frames.
  attr(heroMotion,'transform','translate(0 0)');

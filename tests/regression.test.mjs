@@ -2,12 +2,12 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import * as c from '../game-core.mjs';
 
-test('снятие брони ограничивает текущее HP, надевание не лечит',()=>{
- const p=c.freshProgress();p.ownedArmors.push('leaf');p.equippedArmor='leaf';
- const b=c.startFight(p);assert.equal(b.hp,150);
+test('смена косметической брони не меняет здоровье и не лечит',()=>{
+ const p=c.freshProgress();p.ownedArmors.push('thorn_ranger');p.equippedArmor='thorn_ranger';p.armor=6;
+ const b=c.startFight(p);assert.equal(b.hp,149);
  assert.equal(c.equipEquipment(p,'armor','none',b),true);
- assert.equal(b.hp,65);assert.equal(c.maxHealth(p),65);
- b.hp=20;c.equipEquipment(p,'armor','leaf',b);assert.equal(b.hp,20);
+ assert.equal(b.hp,149);assert.equal(c.maxHealth(p),149);
+ b.hp=20;c.equipEquipment(p,'armor','thorn_ranger',b);assert.equal(b.hp,20);
 });
 test('сильное оружие выводит из фарма, текущее сражение не пересоздаётся',()=>{
  const p=c.freshProgress();Object.assign(p,{room:10,best:9,farming:true,fails:2,gold:1000});
@@ -50,14 +50,14 @@ test('повреждённый список вещей сохраняет мон
   const p=c.validateProgress({...c.freshProgress(),gold:432,room:4,best:3,ownedWeapons});
   assert.equal(p.gold,432);assert.equal(p.room,4);assert.deepEqual(p.ownedWeapons,['iron']);
  }
- for(const ownedArmors of [{},'steel',null,12]){
+ for(const ownedArmors of [{},'steel_knight',null,12]){
   const p=c.validateProgress({...c.freshProgress(),gold:432,ownedArmors});
   assert.equal(p.gold,432);assert.deepEqual(p.ownedArmors,['none']);
  }
 });
 test('встроенные предметы и повторные ID в сохранении не дублируются',()=>{
- const p=c.validateProgress({...c.freshProgress(),ownedWeapons:['iron','iron','moon','moon','invalid'],ownedArmors:['none','steel','steel']});
- assert.deepEqual(p.ownedWeapons,['iron','moon']);assert.deepEqual(p.ownedArmors,['none','steel']);
+ const p=c.validateProgress({...c.freshProgress(),ownedWeapons:['iron','iron','moon','moon','invalid'],ownedArmors:['none','steel_knight','steel_knight']});
+ assert.deepEqual(p.ownedWeapons,['iron','moon']);assert.deepEqual(p.ownedArmors,['none','steel_knight']);
 });
 test('невалидная рыба и переполнение из сохранения отбрасываются',()=>{
  const f={species:'Щука',slots:3,price:80,weight:2,length:60,waitMs:9000};
