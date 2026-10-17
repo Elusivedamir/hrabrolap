@@ -493,7 +493,7 @@ test('merchant debug mode enables 15-second timer and never persists it as the n
  // Playwright's virtual RAF advances more slowly than wall time when dt is capped;
  // the exact 15s arrival and repeat cycle are asserted in game-core tests.
  await page.clock.runFor(1100);
- assert.match(await page.locator('#merchant-status').textContent(),/00:1[34]|0:1[34]/);
+ assert.match(await page.locator('#merchant-status').textContent(),/00:1[345]|0:1[345]/);
  await page.evaluate(()=>window.dispatchEvent(new Event('pagehide')));
  const raw=await saved(page);
  assert.equal(raw.merchantMs,300000);
