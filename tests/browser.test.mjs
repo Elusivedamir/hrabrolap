@@ -479,7 +479,7 @@ test('first fifty-wave mega-boss and achievement window render on mobile',async(
  await shot(page,'megaboss-50-mobile');
  await page.locator('#achievements').click();
  assert.equal(await page.locator('#modal').getAttribute('data-mode'),'achievements');
- assert.equal(await page.locator('.achievement-row').count(),24);
+ assert.equal(await page.locator('.achievement-row').count(),28);
  await shot(page,'achievements-24-mobile');
  await page.locator('#modal-x').click();
  assert.deepEqual(errors,[]);
