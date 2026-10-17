@@ -1,4 +1,4 @@
-/** One hundred ninety-nine illustrated cave rooms + the original room.
+/** Three user-approved P1 illustrated rooms and procedural fallback for remaining stages.
  * Pure deterministic scene generation: no image assets, character art,
  * battle geometry, or accepted backgrounds are overwritten.
  */
@@ -17,12 +17,17 @@ const PALETTES=Object.freeze([
 ]);
 function clampStage(n){return Math.max(1,Math.min(CAVE_ROOM_COUNT,Math.floor(Number(n)||1)));}
 export function caveStageForWave(wave){return clampStage(Math.floor((Math.max(1,Number(wave)||1)-1)/10)+1);}
-export function caveStageName(stage){return PALETTES[(clampStage(stage)-1)%PALETTES.length].name;}
+const APPROVED_P1_ROOMS=Object.freeze({
+  1:Object.freeze({name:'Каменный порог',url:'assets/prototypes/p1/R001-stone-threshold.svg'}),
+  5:Object.freeze({name:'Моховая сторожка',url:'assets/prototypes/p1/R005-moss-outpost.svg'}),
+  12:Object.freeze({name:'Рунный тупик',url:'assets/prototypes/p1/R012-rune-dead-end.svg'})
+});
+export function caveStageName(stage){const n=clampStage(stage);return APPROVED_P1_ROOMS[n]?.name||PALETTES[(n-1)%PALETTES.length].name;}
 function rand(seed){const s=Math.sin(seed*37.181+.33)*43758.5453;return s-Math.floor(s);}
 const cache=new Map();
 export function caveBackgroundForWave(wave){
  const stage=caveStageForWave(wave);
- if(stage===1)return 'art/approved/dungeon_comic.webp';
+ if(APPROVED_P1_ROOMS[stage])return APPROVED_P1_ROOMS[stage].url;
  if(cache.has(stage))return cache.get(stage);
  const p=PALETTES[(stage-1)%PALETTES.length];
  const epoch=Math.floor((stage-1)/PALETTES.length);
