@@ -1,0 +1,89 @@
+{
+  "armor_id": "bone_guardian",
+  "name": "Костяная броня",
+  "price": 0,
+  "materials": {
+    "bone": 15
+  },
+  "content": "complete-character",
+  "source": "ImageGen edit of the Golden Knight 6×2 reference atlas",
+  "source_size": [
+    1886,
+    834
+  ],
+  "sword": "separate-svg",
+  "frames": [
+    {
+      "file": "attack_01.png",
+      "width": 279,
+      "height": 370,
+      "sha256": "c97e7718ebfcb94f34f24df569937572ab1e7cfef0a732f42bc03da0c2f800d8"
+    },
+    {
+      "file": "attack_02.png",
+      "width": 279,
+      "height": 370,
+      "sha256": "2d0364ab5e2d2e0ef6b42dfb1c81ac5f56f5db4e0c044f08d6273c51ec037118"
+    },
+    {
+      "file": "attack_03.png",
+      "width": 279,
+      "height": 370,
+      "sha256": "a528056f1afc925758a46a2422ac745e7871db7d96503ca1ba92064a66949619"
+    },
+    {
+      "file": "attack_04.png",
+      "width": 279,
+      "height": 370,
+      "sha256": "007035da8bfe3d76b802dfd3596b9ec862f3a1827b9b1a5cb43ed2f4827edf2d"
+    },
+    {
+      "file": "attack_05.png",
+      "width": 279,
+      "height": 370,
+      "sha256": "b8f34af664c63fd3f3f3651ea916a4213453f8a1b7c4a2f05782bceed15f2143"
+    },
+    {
+      "file": "attack_06.png",
+      "width": 279,
+      "height": 370,
+      "sha256": "e62cc50b80e3d4aadb40c2237dc61deff9785be4a3a95df9dedd357e2777885e"
+    },
+    {
+      "file": "hurt_01.png",
+      "width": 279,
+      "height": 370,
+      "sha256": "7f080af8b0a0b57de79898fee6ea4fa19d7f6f2cb5ca14405b88f4e45ccd00eb"
+    },
+    {
+      "file": "hurt_02.png",
+      "width": 279,
+      "height": 370,
+      "sha256": "b9b290b289198360db45fe36302233dffd261c4b46ac7848091e5a5b1147b5ae"
+    },
+    {
+      "file": "hurt_03.png",
+      "width": 279,
+      "height": 370,
+      "sha256": "39d3bbf54704e4420450e504fe0791c5e9935f533a5c0b7202bf3241ae18f57f"
+    },
+    {
+      "file": "hurt_04.png",
+      "width": 279,
+      "height": 370,
+      "sha256": "7a6a7fc0d87584aa254e40a599ed2fa626aee2a366179dfbd22488b2fd4d7813"
+    },
+    {
+      "file": "hurt_05.png",
+      "width": 279,
+      "height": 370,
+      "sha256": "1283a8579940ee5dba840f91d0ccfd0565e5fd1e01fd38e4bf9cbbead0d00f6c"
+    },
+    {
+      "file": "hurt_06.png",
+      "width": 279,
+      "height": 370,
+      "sha256": "f543d3c2b40f481c3e607e0b69e0968c66c744bedf56cdec0f3252056f449354"
+    }
+  ]
+}

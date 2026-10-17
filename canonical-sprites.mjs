@@ -45,7 +45,7 @@ export function applyCanonicalFrame(kind,index,rig){
  const {body,heroMotion,weaponSlot,armorSlot,armorImage,armorId='none',transparent=false}=rig;
  if(!body||!heroMotion||!weaponSlot||!armorSlot||!armorImage)throw new Error('Incomplete SVG equipment rig');
  const costume=armorId===FOREST_GUARDIAN_ID;
- const complete=new Set(['steel_knight']);
+ const complete=new Set(['steel_knight','slime_guardian','bone_guardian']);
  const baked=complete.has(armorId);
  const file=kind+'_'+String(i+1).padStart(2,'0')+'.png';
  const original=costume?forestFrameUrl(kind,i):baked?'assets/costumes/'+armorId+'/'+file:CANONICAL_FRAME_PATHS[kind][i];

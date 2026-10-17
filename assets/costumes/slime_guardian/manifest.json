@@ -1,0 +1,89 @@
+{
+  "armor_id": "slime_guardian",
+  "name": "Слизневая броня",
+  "price": 0,
+  "materials": {
+    "slime": 15
+  },
+  "content": "complete-character",
+  "source": "ImageGen edit of the Golden Knight 6×2 reference atlas",
+  "source_size": [
+    1885,
+    834
+  ],
+  "sword": "separate-svg",
+  "frames": [
+    {
+      "file": "attack_01.png",
+      "width": 279,
+      "height": 370,
+      "sha256": "22667bc80abad5f11a0708d9e0cd951931af586dddca86f43b407a0f15981b6a"
+    },
+    {
+      "file": "attack_02.png",
+      "width": 279,
+      "height": 370,
+      "sha256": "de17740dd1f82b5e7ab0562df37550031984bb1415e3c6501718b18a68d07db6"
+    },
+    {
+      "file": "attack_03.png",
+      "width": 279,
+      "height": 370,
+      "sha256": "024ee0969138e417ed392c641fcba117752302bc0b91adcccb3ef1ded943a393"
+    },
+    {
+      "file": "attack_04.png",
+      "width": 279,
+      "height": 370,
+      "sha256": "a0d6106adefda74797e142b43b6ea945ce6b9abea9257361ed8d493944490aad"
+    },
+    {
+      "file": "attack_05.png",
+      "width": 279,
+      "height": 370,
+      "sha256": "542b729e1d2ceefc101e417f3aa8ed5342bcf806af0fe17d8e165300b9ebc0f2"
+    },
+    {
+      "file": "attack_06.png",
+      "width": 279,
+      "height": 370,
+      "sha256": "c7b2feac2b3a07e2ff712c82ae46e292f965afcc3551e035bb80e9d60f677e9e"
+    },
+    {
+      "file": "hurt_01.png",
+      "width": 279,
+      "height": 370,
+      "sha256": "d73cb56b30d3ca28f7121589c1ebf6337fa1394abe20f19f871587c4b8841f8a"
+    },
+    {
+      "file": "hurt_02.png",
+      "width": 279,
+      "height": 370,
+      "sha256": "c4a80043d435d8903902e250aff2f43d70a362ee4637bfe6d6c50b1e2a01373b"
+    },
+    {
+      "file": "hurt_03.png",
+      "width": 279,
+      "height": 370,
+      "sha256": "e8435724fcc428ff916c956df2bdc8fd0de828383cd6e5114223c199d373bd99"
+    },
+    {
+      "file": "hurt_04.png",
+      "width": 279,
+      "height": 370,
+      "sha256": "500c46f74c359a970e2035a56570c523ed4d49b059460defe0d67923ca10c9bc"
+    },
+    {
+      "file": "hurt_05.png",
+      "width": 279,
+      "height": 370,
+      "sha256": "97a5677257134549cf2b05dd64b0d88bc92ef41e7a2c13a8b2cb1230f080154b"
+    },
+    {
+      "file": "hurt_06.png",
+      "width": 279,
+      "height": 370,
+      "sha256": "2ca88fa3c6dea147b730e761d601c2c70a4b4701fad32cc5c23cedec858a9c62"
+    }
+  ]
+}

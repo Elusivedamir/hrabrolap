@@ -234,3 +234,13 @@
 
 /* v0.9.8: do not show combat instruction/rate overlay under the kitten. */
 #battle-message{display:none!important;}
+
+/* Species portraits stay legible in the bucket on narrow mobile screens. */
+.fish-row{align-items:center;gap:8px;padding:8px 0;white-space:normal}
+.fish-row .fish-portrait{flex:0 0 76px;width:76px;height:56px;object-fit:contain;background:#e8dbbb;border:1px solid #ccb58f;border-radius:10px}
+.fish-details{flex:1;min-width:0;line-height:1.3}
+.fish-details strong,.fish-details small{display:block}
+.fish-details strong{font-size:.95em;color:#64452f}
+.fish-details small{margin-top:4px;font-size:.82em;color:#827058}
+.fish-row .fish-price{flex:0 0 auto;white-space:nowrap;font-size:.9em}
+@media(max-width:360px){.fish-row{gap:6px}.fish-row .fish-portrait{flex-basis:60px;width:60px;height:48px}.fish-details small{font-size:.75em}}

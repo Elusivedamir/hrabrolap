@@ -4,7 +4,7 @@ from pathlib import Path
 import sys,zipfile
 root=Path(__file__).resolve().parents[1]
 out=Path(sys.argv[1]) if len(sys.argv)>1 else root/'hrabrolap-v0.9.7-visual-review.zip'
-files=sorted(set([*root.glob('*.html'),*root.glob('*.mjs'),root/'style.css',root/'README.md',root/'docs/QA-WORK-v097.md',root/'docs/QA-FOREST-MANUAL-20261017.md']+[p for name in ('art','assets','animations') for p in (root/name).rglob('*') if p.is_file()]))
+files=sorted(set([*root.glob('*.html'),*root.glob('*.mjs'),root/'style.css',root/'README.md',root/'docs/QA-WORK-v097.md',root/'docs/QA-FOREST-MANUAL-20261017.md',root/'docs/QA-FISH-CRAFTING-20261017.md']+[p for name in ('art','assets','animations') for p in (root/name).rglob('*') if p.is_file()]))
 out.parent.mkdir(parents=True,exist_ok=True)
 with zipfile.ZipFile(out,'w',zipfile.ZIP_DEFLATED,compresslevel=9) as z:
  for p in files:z.write(p,p.relative_to(root))

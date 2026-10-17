@@ -1,4 +1,6 @@
 import {FISHING_FRAMES} from './fishing-frames.mjs';
+import {fishCount,pluralRu} from './russian.mjs';
+import {fishArt} from './fish-art.mjs';
 import {QUESTS,questProgress,claimQuest} from './quests.mjs';
 import {monsterPose} from './monster-rig.mjs';
 import {bucketArt,sleepFrameIndex,SLEEP_FRAMES} from './bucket-rest.mjs';
@@ -128,8 +130,8 @@ function updateBucketDrawing(){
  const n=Math.max(0,p.fishBucket.length-pendingFishVisual);
  const next=bucketArt(n,p.bucketLevel>0);
  if(icon.getAttribute('src')!==next)icon.setAttribute('src',next);
- $('bucket-indicator').textContent=n+' рыб';
- $('bucket').setAttribute('aria-label','Рыцарское ведро: '+n+' рыб. Открыть улов');
+ $('bucket-indicator').textContent=fishCount(n);
+ $('bucket').setAttribute('aria-label','Рыцарское ведро: '+fishCount(n)+'. Открыть улов');
 }
 function updateSleepDrawing(rest){
  const sprite=$('rest-sleep-sprite');
@@ -190,10 +192,20 @@ function openModal(title,mode='info',text=''){modalType=mode;$('modal-title').te
  const action=(label,callback,cls='')=>{const x=document.createElement('button');x.textContent=label;if(cls)x.className=cls;x.addEventListener('click',callback);buttons.append(x);return x};
  if(mode==='bucket'||mode==='trade'){
   if(mode==='trade')para('Хей, ребята привет, есть что-то для меня?');
-  para(`Улов: ${p.fishBucket.length} рыб · ${bucketVolume(p)}/${bucketCapacity(p)} места · ${bucketGold(p)} монет`);
+  const gold=bucketGold(p);
+  para(`Улов: ${fishCount(p.fishBucket.length)} · занято ${bucketVolume(p)} из ${bucketCapacity(p)} мест · ${gold} ${pluralRu(gold,'монета','монеты','монет')}`);
   if(!p.fishBucket.length){const d=document.createElement('div');d.className='empty';d.textContent='Ведро пока пустое';content.append(d)}
-  for(const f of p.fishBucket){const row=document.createElement('div');row.className='fish-row';const details=document.createElement('span');details.textContent=`${f.species} · ${f.length} см · ${f.weight.toFixed(2)} кг`;const price=document.createElement('b');price.textContent=f.price+' 🪙';row.append(details,price);content.append(row);}
-  if(mode==='trade'){const btn=action(`Продать всё · ${bucketGold(p)} 🪙`,()=>{const sale=sellAll(p);if(sale.ok){notify('Продано '+sale.count+' рыб · +'+sale.gold+' монет!');save();closeModal();}else notify('Ведро пустое');});btn.disabled=p.fishBucket.length===0;}
+  for(const f of p.fishBucket){
+   const row=document.createElement('div');row.className='fish-row';
+   const picture=document.createElement('img');picture.className='fish-portrait';picture.src=fishArt(f.species);picture.alt=f.species;picture.width=88;picture.height=62;
+   const details=document.createElement('span');details.className='fish-details';
+   const name=document.createElement('strong');name.textContent=f.species;
+   const size=document.createElement('small');size.textContent=`${f.length} см · ${f.weight.toLocaleString('ru-RU',{minimumFractionDigits:2,maximumFractionDigits:2})} кг`;
+   details.append(name,size);
+   const price=document.createElement('b');price.className='fish-price';price.textContent=f.price+' 🪙';
+   row.append(picture,details,price);content.append(row);
+  }
+  if(mode==='trade'){const btn=action(`Продать всё · ${bucketGold(p)} 🪙`,()=>{const sale=sellAll(p);if(sale.ok){notify('Улов продан: '+fishCount(sale.count)+' · +'+sale.gold+' '+pluralRu(sale.gold,'монета','монеты','монет')+'!');save();closeModal();}else notify('Ведро пустое');});btn.disabled=p.fishBucket.length===0;}
   else {para('Продать улов можно только серому коту-торговцу. Он приезжает каждые 5 минут активной игры и ждёт 15 секунд.');if(!p.bucketLevel)action('Улучшить ведро до 24 мест · '+bucketCost()+' 🪙',()=>{const r=upgrade(p,'bucket');if(!r.ok){notify('Не хватает монет');return;}p.catchPlan=[];planFishing(p);save();openModal('Ведро рыцаря','bucket');notify('Теперь вмещается 24!')});}
  }else if(mode==='shop'||mode==='inventory'){
   para(mode==='shop'?'Покупай экипировку за монеты и добычу с монстров. Рецепты проверяются перед покупкой.':'Выбирай приобретённые вещи. Новый костюм переключает все 12 кадров котёнка; меч остаётся отдельным SVG.');
@@ -205,17 +217,18 @@ function openModal(title,mode='info',text=''){modalType=mode;$('modal-title').te
   const line=(caption,items,category)=>{
     const title=document.createElement('div');title.className='section-title';title.textContent=caption;content.append(title);
     for(const item of items){const own=category==='weapon'?p.ownedWeapons:p.ownedArmors;
-       if(mode==='shop'&&!item.price)continue;
+       if(mode==='shop'&&!item.price&&!Object.keys(item.materials||{}).length)continue;
       if(mode==='inventory'&&!own.includes(item.id))continue;
       const row=document.createElement('div');row.className='shop-item';const im=document.createElement('img');if(item.svg)im.src=item.svg;else {im.src='art/hero/bare-kitten.svg';im.alt='Без брони';}
       const main=document.createElement('main'),label=document.createElement('b');label.textContent=item.name;
        const stats=document.createElement('small');stats.textContent=category==='weapon'?'Урон +'+item.damage:item.fullCharacter?'Костюм · без изменения здоровья':'Здоровье +'+item.health;
        const recipe=document.createElement('small');recipe.className='item-recipe';
        const names=Object.entries(item.materials||{}).map(([id,count])=>{const type=MATERIALS.find(m=>m.id===id);return `${type?.icon||'•'} ${type?.name||id} ${p.materials[id]||0}/${count}`;});
-       recipe.textContent='🪙 '+fmt(item.price)+(names.length?' · '+names.join(' · '):'');
+       recipe.textContent=[...(item.price?['🪙 '+fmt(item.price)]:[]),...names].join(' · ')||'Бесплатно';
        main.append(label,stats,recipe);
-      const button=document.createElement('button');const equipped=(category==='weapon'?p.weapon:p.equippedArmor)===item.id;const has=own.includes(item.id);button.textContent=equipped?'Надето':has?'Надеть':'Купить';button.disabled=equipped;
-      button.addEventListener('click',()=>{if(!has){const r=buyEquipment(p,category,item.id);if(!r.ok){if(r.reason==='material'){const mat=MATERIALS.find(x=>x.id===r.material);notify('Не хватает: '+(mat?.name||r.material)+' '+r.available+'/'+r.need);}else notify('Не хватает монет');return;}notify('Куплено: '+item.name);}else{equipEquipment(p,category,item.id,b);notify('Надето: '+item.name);}save();openModal(mode==='shop'?'Магазин':'Инвентарь',mode);});
+      const crafted=!item.price&&Object.keys(item.materials||{}).length>0;
+      const button=document.createElement('button');const equipped=(category==='weapon'?p.weapon:p.equippedArmor)===item.id;const has=own.includes(item.id);button.textContent=equipped?'Надето':has?'Надеть':crafted?'Создать':'Купить';button.disabled=equipped;
+      button.addEventListener('click',()=>{if(!has){const r=buyEquipment(p,category,item.id);if(!r.ok){if(r.reason==='material'){const mat=MATERIALS.find(x=>x.id===r.material);notify('Не хватает: '+(mat?.name||r.material)+' '+r.available+'/'+r.need);}else notify('Не хватает монет');return;}notify((crafted?'Создано: ':'Куплено: ')+item.name);}else{equipEquipment(p,category,item.id,b);notify('Надето: '+item.name);}save();openModal(mode==='shop'?'Магазин':'Инвентарь',mode);});
       row.append(im,main,button);content.append(row);
     }
   };

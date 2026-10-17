@@ -2,8 +2,8 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import {readFileSync,existsSync} from 'node:fs';
 import {CANONICAL_FRAME_PATHS,applyCanonicalFrame} from '../canonical-sprites.mjs';
-for(const series of ['canonical','forest_guardian','steel_knight']) {
- test('36 transparent approved-body copies: '+series,()=>{
+for(const series of ['canonical','forest_guardian','steel_knight','slime_guardian','bone_guardian']) {
+ test('transparent character frames: '+series,()=>{
   for(const kind of ['attack','hurt'])for(let n=1;n<=6;n++) {
    const name=kind+'_'+String(n).padStart(2,'0')+'.png';
    const path=new URL('../assets/clean/'+series+'/'+name,import.meta.url);

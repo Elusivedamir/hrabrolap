@@ -1,0 +1,21 @@
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+
+> hrabrolap@0.9.7 qa:balance
+> node tests/simulate-balance.mjs
+
+┌─────────┬─────────────────────────┬─────────┬──────┬─────────┬──────┬─────────┬──────────┬────────┬────────┬─────────┐
+│ (index) │ id                      │ cleared │ best │ minutes │ wins │ defeats │ farmWins │ damage │ health │ reloads │
+├─────────┼─────────────────────────┼─────────┼──────┼─────────┼──────┼─────────┼──────────┼────────┼────────┼─────────┤
+│ 0       │ 'balanced-1s'           │ true    │ 100  │ 7.98    │ 100  │ 6       │ 0        │ 98     │ 457    │ 0       │
+│ 1       │ 'balanced-10s'          │ true    │ 100  │ 20.04   │ 100  │ 23      │ 0        │ 98     │ 457    │ 0       │
+│ 2       │ 'balanced-30s'          │ true    │ 100  │ 17.85   │ 100  │ 33      │ 0        │ 65     │ 289    │ 0       │
+│ 3       │ 'equipment-fishing-10s' │ false   │ 19   │ 180     │ 669  │ 329     │ 650      │ 8      │ 65     │ 0       │
+│ 4       │ 'reload-every-5min'     │ true    │ 100  │ 20.04   │ 100  │ 23      │ 0        │ 98     │ 457    │ 4       │
+│ 5       │ 'sword-only'            │ false   │ 89   │ 180     │ 1432 │ 597     │ 1343     │ 167    │ 65     │ 0       │
+│ 6       │ 'armor-only'            │ false   │ 59   │ 180     │ 307  │ 151     │ 248      │ 8      │ 611    │ 0       │
+│ 7       │ 'no-upgrades'           │ false   │ 19   │ 180     │ 669  │ 329     │ 650      │ 8      │ 65     │ 0       │
+│ 8       │ 'fishing-seed-2'        │ false   │ 19   │ 180     │ 669  │ 329     │ 650      │ 8      │ 65     │ 0       │
+│ 9       │ 'fishing-seed-3'        │ false   │ 19   │ 180     │ 669  │ 329     │ 650      │ 8      │ 65     │ 0       │
+│ 10      │ 'fishing-seed-4'        │ false   │ 19   │ 180     │ 669  │ 329     │ 650      │ 8      │ 65     │ 0       │
+│ 11      │ 'fishing-seed-5'        │ false   │ 19   │ 180     │ 669  │ 329     │ 650      │ 8      │ 65     │ 0       │
+└─────────┴─────────────────────────┴─────────┴──────┴─────────┴──────┴─────────┴──────────┴────────┴────────┴─────────┘

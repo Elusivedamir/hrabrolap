@@ -23,7 +23,9 @@ export const WEAPONS=[
 export const ARMORS=[
  {id:'none',name:'Без брони',price:0,health:0,svg:''},
  {id:'forest_guardian',name:'Лесной страж',price:50,health:0,fullCharacter:true,svg:'assets/clean/forest_guardian/attack_01.png'},
- {id:'steel_knight',name:'Золотой рыцарь',price:50,health:0,fullCharacter:true,svg:'assets/clean/steel_knight/attack_01.png'}
+ {id:'steel_knight',name:'Золотой рыцарь',price:50,health:0,fullCharacter:true,svg:'assets/clean/steel_knight/attack_01.png'},
+ {id:'slime_guardian',name:'Слизневая броня',price:0,materials:{slime:15},health:0,fullCharacter:true,svg:'assets/clean/slime_guardian/attack_01.png'},
+ {id:'bone_guardian',name:'Костяная броня',price:0,materials:{bone:15},health:0,fullCharacter:true,svg:'assets/clean/bone_guardian/attack_01.png'}
 ];
 export function materialName(id){return MATERIALS.find(x=>x.id===id)?.name||id;}
 export function requirementsText(item){return Object.entries(item.materials||{}).map(([id,count])=>`${materialName(id)} ×${count}`).join(' · ');}

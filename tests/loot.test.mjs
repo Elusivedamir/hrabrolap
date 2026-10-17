@@ -2,13 +2,13 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import * as c from '../game-core.mjs';
 
-test('10 мечей и 2 полных комплекта за 50 монет',()=>{
+test('10 мечей и 4 полных комплекта, включая два рецепта',()=>{
  assert.equal(c.WEAPONS.length,10);
- assert.equal(c.ARMORS.filter(a=>a.id!=='none').length,2);
+ assert.equal(c.ARMORS.filter(a=>a.id!=='none').length,4);
  assert.equal(new Set(c.WEAPONS.map(w=>w.svg)).size,10);
- assert.equal(new Set(c.ARMORS.filter(a=>a.svg).map(a=>a.svg)).size,2);
+ assert.equal(new Set(c.ARMORS.filter(a=>a.svg).map(a=>a.svg)).size,4);
  for(const item of c.ARMORS.filter(a=>a.id!=='none')){
-  assert.equal(item.price,50);
+  assert.equal(item.price,['slime_guardian','bone_guardian'].includes(item.id)?0:50);
   assert.equal(item.health,0);
   assert.equal(item.fullCharacter,true);
  }

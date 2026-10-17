@@ -364,7 +364,7 @@ test('рыба появляется на счётчике только посл�
  await page.clock.runFor(320);
  assert.match(await page.locator('#bucket-indicator').textContent(),/0 рыб/);
  await page.clock.runFor(1650);
- assert.match(await page.locator('#bucket-indicator').textContent(),/1 рыб/);
+ assert.match(await page.locator('#bucket-indicator').textContent(),/^1 рыба$/);
  await shot(page,'fish-delivered-to-bucket');
 });
 
