@@ -44,7 +44,8 @@ function applyHeroFrame(kind=heroKind,index=heroIndex){
  $('forest-armor').style.display='none';
  applyCanonicalFrame(kind,index,{
   body:$('hero-body'),heroMotion,weaponSlot:slot,armorSlot,
-  armorImage:$('hero-armor'),armorId:p.equippedArmor,transparent:true
+  armorImage:$('hero-armor'),handFront:$('hero-paw-front'),
+  gripShape:$('paw-grip-ellipse'),armorId:p.equippedArmor,transparent:true
  });
 }
 
