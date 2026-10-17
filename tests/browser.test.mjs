@@ -98,7 +98,7 @@ test('все десять монстров показывают 6 кадров �
    assert.equal(await page.locator('#boss-crown').isVisible(),false,'epic bosses have bespoke heads, no extra crown');
    assert.ok((await page.locator('#enemy-art').getAttribute('src')).startsWith('data:image/svg+xml'));
    assert.equal(await page.locator('#boss-resistance').isVisible(),true);
-   assert.ok(await page.locator('#enemy-art').evaluate(img=>img.complete&&img.naturalWidth>0));
+   assert.ok(await page.locator('#enemy-art').evaluate(async img=>{await img.decode();return img.naturalWidth>0}),`boss wave ${wave} ${type} failed to decode`);
   }else if(['skeleton','golem'].includes(type)){
    assert.equal(await page.locator('#boss-crown').isVisible(),false,'crown is embedded in this model');
    assert.match(await page.locator('#enemy-art').getAttribute('src'),new RegExp('animations/'+type+'/boss/'));
