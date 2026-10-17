@@ -3,8 +3,8 @@ import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
 import {ARMORS,freshProgress,buyEquipment,equipEquipment} from '../game-core.mjs';
 import {applyCanonicalFrame} from '../canonical-sprites.mjs';
-const names=['steel_knight','thorn_ranger','moon_mage','ember_guard','frost_watcher'];
-test('five distinct costumes are 50 coins and contain exactly sixty transparent complete-character sprites',()=>{
+const names=['steel_knight'];
+test('only approved Golden Knight and Forest Guardian are purchasable',()=>{
  assert.deepEqual(ARMORS.map(x=>x.id),['none','forest_guardian',...names]);
  for(const name of names){
   const armor=ARMORS.find(x=>x.id===name);assert.equal(armor.price,50);assert.equal(armor.fullCharacter,true);
@@ -16,7 +16,7 @@ test('five distinct costumes are 50 coins and contain exactly sixty transparent 
   }
  }
 });
-test('equipping five entire characters retains separate sword anchors and swaps to originals on removal',()=>{
+test('equipping approved complete character retains separate sword anchors and swaps to originals on removal',()=>{
  const element=()=>({attrs:{},setAttribute(k,v){this.attrs[k]=v;}});
  const r=Object.fromEntries(['body','heroMotion','weaponSlot','armorSlot','armorImage'].map(k=>[k,element()]));
  for(const name of names){

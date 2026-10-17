@@ -16,8 +16,9 @@ function el(tag,props={}){const n=document.createElementNS(ns,tag);for(const [k,
 for(const kind of ['attack','hurt'])for(let i=0;i<6;i++){
  const cell=document.createElement('div');cell.className='cell';
  const svg=el('svg',{viewBox:'0 0 279 370',role:'img','aria-label':kind+' '+(i+1)});
- const base='assets/canonical/'+kind+'_'+String(i+1).padStart(2,'0')+'.png';
- svg.append(el('image',{href:forestFrameUrl(kind,i),x:0,y:0,width:279,height:370,'data-forest':forestFrameUrl(kind,i),'data-base':base}));
+ const base='assets/clean/canonical/'+kind+'_'+String(i+1).padStart(2,'0')+'.png';
+ const forest=forestFrameUrl(kind,i).replace('assets/costumes/','assets/clean/');
+ svg.append(el('image',{href:forest,x:0,y:0,width:279,height:370,'data-forest':forest,'data-base':base}));
  cell.append(svg);const caption=document.createElement('div');caption.className='caption';caption.textContent=(kind==='attack'?'Атака ':'Урон ')+(i+1);cell.append(caption);g.append(cell);
 }
 document.getElementById('toggle').onclick=()=>{

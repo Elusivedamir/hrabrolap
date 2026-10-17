@@ -42,7 +42,7 @@ function applyHeroFrame(kind=heroKind,index=heroIndex){
  $('forest-armor').style.display='none';
  applyCanonicalFrame(kind,index,{
   body:$('hero-body'),heroMotion,weaponSlot:slot,armorSlot,
-  armorImage:$('hero-armor'),armorId:p.equippedArmor
+  armorImage:$('hero-armor'),armorId:p.equippedArmor,transparent:true
  });
 }
 
@@ -163,7 +163,7 @@ function render(){
  const rest=b.phase==='rest';
  if(rest)$('battle-message').textContent='Котёнок отдыхает дома';
  else if(b.phase==='fight'&&performance.now()>lastBattleMessage)$('battle-message').textContent=p.autoEnabled?'Автобой · '+autoHitsPerSecond(p)+' ударов/с':'Нажми на монстра · ручной бой 3/с';$('surface').classList.toggle('resting',rest);$('hero-art').classList.toggle('resting-hero',rest);updateSleepDrawing(rest);
- const status=$('status');status.classList.toggle('rest',rest||p.farming);status.textContent=rest?'ОТДЫХ '+fmtTimer(b.rest*1000):p.cleared?'ГЛАВА ПРОЙДЕНА':p.autoEnabled?'АВТОБОЙ '+autoHitsPerSecond(p)+'/с':p.autoUnlocked?'РУЧНОЙ БОЙ 3/с':'АВТОБОЙ · 1 🪙';
+ const status=$('status');status.classList.toggle('rest',rest||p.farming);status.textContent=rest?'ОТДЫХ '+fmtTimer(b.rest*1000):p.cleared?'ГЛАВА ПРОЙДЕНА':p.autoEnabled?'АВТОБОЙ':p.autoUnlocked?'РУЧНОЙ БОЙ':'АВТОБОЙ · 1 🪙';
  const speedBtn=$('buy-attack-speed');
  speedBtn.disabled=p.autoLevel>=MAX_AUTO_LEVEL;
  speedBtn.classList.toggle('can-buy',p.gold>=autoUpgradeCost(p.autoLevel)&&p.autoLevel<MAX_AUTO_LEVEL);

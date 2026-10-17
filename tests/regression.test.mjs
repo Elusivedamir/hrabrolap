@@ -3,11 +3,11 @@ import assert from 'node:assert/strict';
 import * as c from '../game-core.mjs';
 
 test('смена косметической брони не меняет здоровье и не лечит',()=>{
- const p=c.freshProgress();p.ownedArmors.push('thorn_ranger');p.equippedArmor='thorn_ranger';p.armor=6;
+ const p=c.freshProgress();p.ownedArmors.push('steel_knight');p.equippedArmor='steel_knight';p.armor=6;
  const b=c.startFight(p);assert.equal(b.hp,149);
  assert.equal(c.equipEquipment(p,'armor','none',b),true);
  assert.equal(b.hp,149);assert.equal(c.maxHealth(p),149);
- b.hp=20;c.equipEquipment(p,'armor','thorn_ranger',b);assert.equal(b.hp,20);
+ b.hp=20;c.equipEquipment(p,'armor','steel_knight',b);assert.equal(b.hp,20);
 });
 test('сильное оружие выводит из фарма, текущее сражение не пересоздаётся',()=>{
  const p=c.freshProgress();Object.assign(p,{room:10,best:9,farming:true,fails:2,gold:1000});

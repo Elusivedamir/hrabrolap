@@ -61,7 +61,7 @@ function build(frame){
  const index=REFERENCE_ATTACKS.findIndex(a=>a.id===$('kind').value);
  if(armorItem.fullCharacter){
   armor.style.display='none';
-  applyCanonicalFrame(index<0?'hurt':'attack',frame,{body:base,heroMotion:motion,weaponSlot,armorSlot,armorImage:armor,armorId:armorItem.id});
+  applyCanonicalFrame(index<0?'hurt':'attack',frame,{body:base,heroMotion:motion,weaponSlot,armorSlot,armorImage:armor,armorId:armorItem.id,transparent:true});
  }else if(index<0){
   motion.setAttribute('transform',hurtMotionTransform(frame));
   armorSlot.setAttribute('transform',armorHurtTransform(frame));
@@ -80,7 +80,7 @@ function build(frame){
  const hiltClip=node('clipPath',{id:hiltClipId,clipPathUnits:'userSpaceOnUse'});
  hiltClip.append(node('rect',{x:-50,y:-46,width:100,height:75}));
  defs.append(bladeClip,hiltClip);
- const bladeGroup=node('g',{transform:'translate(0 29.6) scale(1 1.6)'});
+ const bladeGroup=node('g',{transform:'translate(0 46) scale(1 2)'});
  bladeGroup.append(node('image',{href:weaponItem.svg,x:-50,y:-211,width:100,height:240,'clip-path':'url(#'+bladeClipId+')'}));
  weapon.setAttribute('clip-path','url(#'+hiltClipId+')');
  weaponSlot.append(defs,bladeGroup,weapon);motion.append(base,armorSlot,weaponSlot);svg.append(motion);

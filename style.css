@@ -231,3 +231,6 @@
 .attack-speed-card span>small{font-size:.77em;white-space:normal}
 .attack-speed-card strong{font-size:.86em}
 .attack-speed-card:disabled{cursor:not-allowed;opacity:.70}
+
+/* v0.9.8: do not show combat instruction/rate overlay under the kitten. */
+#battle-message{display:none!important;}

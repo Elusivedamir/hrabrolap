@@ -42,13 +42,15 @@ function attr(element,name,value){element.setAttribute(name,String(value));}
 export function applyCanonicalFrame(kind,index,rig){
  if(kind!=='attack'&&kind!=='hurt')throw new Error('Unknown canonical animation: '+kind);
  const i=Math.max(0,Math.min(5,Math.trunc(index)||0));
- const {body,heroMotion,weaponSlot,armorSlot,armorImage,armorId='none'}=rig;
+ const {body,heroMotion,weaponSlot,armorSlot,armorImage,armorId='none',transparent=false}=rig;
  if(!body||!heroMotion||!weaponSlot||!armorSlot||!armorImage)throw new Error('Incomplete SVG equipment rig');
  const costume=armorId===FOREST_GUARDIAN_ID;
- const complete=new Set(['steel_knight','thorn_ranger','moon_mage','ember_guard','frost_watcher']);
+ const complete=new Set(['steel_knight']);
  const baked=complete.has(armorId);
  const file=kind+'_'+String(i+1).padStart(2,'0')+'.png';
- attr(body,'href',costume?forestFrameUrl(kind,i):baked?'assets/costumes/'+armorId+'/'+file:CANONICAL_FRAME_PATHS[kind][i]);
+ const original=costume?forestFrameUrl(kind,i):baked?'assets/costumes/'+armorId+'/'+file:CANONICAL_FRAME_PATHS[kind][i];
+ const displayed=transparent?original.replace('assets/canonical/','assets/clean/canonical/').replace('assets/costumes/','assets/clean/'):original;
+ attr(body,'href',displayed);
  attr(body,'data-costume',costume||baked?armorId:'none');
  for(const [key,value] of Object.entries({x:X,y:Y,width:W,height:H}))attr(body,key,value);
  // The cat itself is NEVER rotated, stretched or translated between frames.

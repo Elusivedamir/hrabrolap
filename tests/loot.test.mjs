@@ -2,11 +2,11 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import * as c from '../game-core.mjs';
 
-test('10 мечей и 6 полных комплектов за 50 монет',()=>{
+test('10 мечей и 2 полных комплекта за 50 монет',()=>{
  assert.equal(c.WEAPONS.length,10);
- assert.equal(c.ARMORS.filter(a=>a.id!=='none').length,6);
+ assert.equal(c.ARMORS.filter(a=>a.id!=='none').length,2);
  assert.equal(new Set(c.WEAPONS.map(w=>w.svg)).size,10);
- assert.equal(new Set(c.ARMORS.filter(a=>a.svg).map(a=>a.svg)).size,6);
+ assert.equal(new Set(c.ARMORS.filter(a=>a.svg).map(a=>a.svg)).size,2);
  for(const item of c.ARMORS.filter(a=>a.id!=='none')){
   assert.equal(item.price,50);
   assert.equal(item.health,0);
@@ -38,12 +38,12 @@ test('кости и слизь добываются с соответствую�
   assert.equal(p.materials[resource],1);
  }
 });
-test('покупка шести визуальных комплектов по 50 монет не расходует добычу',()=>{
+test('покупка двух визуальных комплектов по 50 монет не расходует добычу',()=>{
  const p=c.freshProgress();p.gold=49;p.materials.web=7;p.materials.bone=3;
  assert.equal(c.buyEquipment(p,'armor','steel_knight').ok,false);
  assert.equal(p.gold,49);
- p.gold=300;
- for(const id of ['forest_guardian','steel_knight','thorn_ranger','moon_mage','ember_guard','frost_watcher']){
+ p.gold=100;
+ for(const id of ['forest_guardian','steel_knight']){
   const before= {...p.materials};
   const result=c.buyEquipment(p,'armor',id);
   assert.equal(result.ok,true,id);

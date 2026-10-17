@@ -7,7 +7,7 @@ import {forestFrameUrl} from '../forest-guardian-rig.mjs';
 
 const base=process.env.HRABROLAP_BASE_URL||'http://127.0.0.1:8080/';
 const key='hrabrolap-v0.2-save',out='qa/forest-manual';
-const paths=['attack','hurt'].flatMap(kind=>Array.from({length:6},(_,i)=>forestFrameUrl(kind,i)));
+const paths=['attack','hurt'].flatMap(kind=>Array.from({length:6},(_,i)=>forestFrameUrl(kind,i).replace('assets/costumes/','assets/clean/')));
 const errors=[];let browser;
 before(async()=>{
  await fs.mkdir(out,{recursive:true});
@@ -61,7 +61,7 @@ test('50-coin shop purchase, inventory equipment, real reload and removal',async
  assert.equal(await page.locator('#hero-body').getAttribute('href'),paths[0]);
  await page.locator('#inventory').click();await page.locator('.shop-item').filter({hasText:'Без брони'}).getByRole('button').click();
  await page.locator('#modal-x').click();
- assert.equal(await page.locator('#hero-body').getAttribute('href'),'assets/canonical/attack_01.png');
+ assert.equal(await page.locator('#hero-body').getAttribute('href'),'assets/clean/canonical/attack_01.png');
  assert.equal((await saved(page)).gold,0);assert.deepEqual(errors,[]);
  await page.context().close();
 });
@@ -110,14 +110,14 @@ test('preview and SVG atelier use the same complete frames without layering anot
  const hrefs=await page.locator('.cell svg image').evaluateAll(images=>images.map(im=>im.getAttribute('href')));
  assert.deepEqual(hrefs,paths);await preload(page);
  await page.locator('#toggle').click();
- assert.ok((await page.locator('.cell svg image').first().getAttribute('href')).startsWith('assets/canonical/'));
+ assert.ok((await page.locator('.cell svg image').first().getAttribute('href')).startsWith('assets/clean/canonical/'));
  await page.goto(new URL('equipment-preview.html',base).href);
  await page.locator('#armor').selectOption('forest_guardian');
  for(const kind of ['slash','overhead','thrust','hurt']){
   await page.locator('#kind').selectOption(kind);
   for(let i=0;i<6;i++){
    const sprite=page.locator('.sprite').nth(i);const body=sprite.locator('image[data-costume="forest_guardian"]');
-   assert.equal(await body.count(),1);assert.equal(await body.getAttribute('href'),forestFrameUrl(kind==='hurt'?'hurt':'attack',i));
+   assert.equal(await body.count(),1);assert.equal(await body.getAttribute('href'),forestFrameUrl(kind==='hurt'?'hurt':'attack',i).replace('assets/costumes/','assets/clean/'));
   }
  }
  await page.close();
