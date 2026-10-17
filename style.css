@@ -262,3 +262,8 @@
 .merchant{width:25%;right:1.5%;height:60%;bottom:5%;animation:none;overflow:visible}
 .merchant img#merchant-art{display:block;width:100%;height:88%;object-fit:contain;animation:none!important;filter:drop-shadow(0 2px 2px #15171b70)}
 .merchant[data-phase="arrive"],.merchant[data-phase="leave"]{transform-origin:bottom center}
+
+/* Detail merchant: stable 6×3 transparent atlas, one cell per animated frame. */
+.merchant .merchant-sheet{display:none;position:absolute;left:0;bottom:16%;width:100%;height:auto;aspect-ratio:210/264;background-image:url('art/merchant-animated.webp');background-size:600% 300%;background-repeat:no-repeat;background-position:0% 50%;pointer-events:none;filter:drop-shadow(0 3px 2px #16242a88)}
+.merchant.atlas-ready .merchant-sheet{display:block}
+.merchant.atlas-ready img#merchant-art{visibility:hidden}
