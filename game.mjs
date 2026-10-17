@@ -1,3 +1,4 @@
+import {merchantFrameUrl,merchantVisual} from './merchant-sprites.mjs';
 import {FISHING_FRAMES} from './fishing-frames.mjs';
 import {fishCount,pluralRu} from './russian.mjs';
 import {fishArt} from './fish-art.mjs';
@@ -180,7 +181,14 @@ function render(){
  for(const [kind,lev,cost,label,description] of info){const id=kind==='home'?'home':kind;$(id+'-lvl').textContent='ур. '+lev;$(id+'-cost').textContent='🪙 '+fmt(cost);if(kind==='sword'||kind==='armor')$(kind+'-stat').textContent=description;const btn=$('buy-'+kind);btn.classList.toggle('can-buy',p.gold>=cost);btn.classList.toggle('cant-buy',p.gold<cost);btn.setAttribute('aria-label',`${label}: улучшить за ${cost} монет`);}
  syncEquipment();
  updateBucketDrawing();$('fish-status').textContent=bucketVolume(p)>=bucketCapacity(p)?'Ведро заполнено · рыбалка ждёт':'Рыцарь рыбачит';
- const visiting=p.merchantPhase==='waiting';$('merchant').classList.toggle('visible',visiting);$('merchant-visit').textContent=fmtTimer(p.merchantMs);$('merchant-status').textContent=visiting?'Торговец приехал!':'Торговец через '+fmtTimer(p.merchantMs);
+ const visiting=p.merchantPhase==='waiting';
+ const pose=merchantVisual(p.merchantPhase,p.merchantMs,performance.now(),merchantExitUntil);
+ const merchant=$('merchant'),merchantImage=$('merchant-art');
+ merchant.classList.toggle('visible',pose.visible);
+ merchant.dataset.phase=pose.phase;merchant.dataset.frame=String(pose.frame+1);
+ if(pose.visible){const sprite=merchantFrameUrl(pose.phase,pose.frame);if(merchantImage.getAttribute('src')!==sprite)merchantImage.setAttribute('src',sprite);}
+ $('merchant-visit').textContent=fmtTimer(p.merchantMs);
+ $('merchant-status').textContent=visiting?'Торговец приехал!':'Торговец через '+fmtTimer(p.merchantMs);
 }
 function onUpgrade(kind){const result=upgrade(p,kind);if(!result.ok){notify(result.reason==='max'?'Ведро максимально улучшено':'Не хватает '+fmt((result.cost||0)-p.gold)+' монет');return;}
  // Deliberately DO NOT recreate the battle: hero HP is persistent across room changes and upgrades.
@@ -207,7 +215,7 @@ function openModal(title,mode='info',text=''){modalType=mode;$('modal-title').te
    const price=document.createElement('b');price.className='fish-price';price.textContent=f.price+' 🪙';
    row.append(picture,details,price);content.append(row);
   }
-  if(mode==='trade'){const btn=action(`Продать всё · ${bucketGold(p)} 🪙`,()=>{const sale=sellAll(p);if(sale.ok){notify('Улов продан: '+fishCount(sale.count)+' · +'+sale.gold+' '+pluralRu(sale.gold,'монета','монеты','монет')+'!');save();closeModal();}else notify('Ведро пустое');});btn.disabled=p.fishBucket.length===0;}
+  if(mode==='trade'){const btn=action(`Продать всё · ${bucketGold(p)} 🪙`,()=>{const sale=sellAll(p);if(sale.ok){merchantExitUntil=performance.now()+720;notify('Улов продан: '+fishCount(sale.count)+' · +'+sale.gold+' '+pluralRu(sale.gold,'монета','монеты','монет')+'!');save();closeModal();}else notify('Ведро пустое');});btn.disabled=p.fishBucket.length===0;}
   else {para('Продать улов можно только серому коту-торговцу. Он приезжает каждые 5 минут активной игры и ждёт 15 секунд.');if(!p.bucketLevel)action('Улучшить ведро до 24 мест · '+bucketCost()+' 🪙',()=>{const r=upgrade(p,'bucket');if(!r.ok){notify('Не хватает монет');return;}p.catchPlan=[];planFishing(p);save();openModal('Ведро рыцаря','bucket');notify('Теперь вмещается 24!')});}
  }else if(mode==='shop'||mode==='inventory'){
   para(mode==='shop'?'Покупай экипировку за монеты и добычу с монстров. Рецепты проверяются перед покупкой.':'Выбирай приобретённые вещи. Новый костюм переключает все 12 кадров котёнка; меч остаётся отдельным SVG.');
@@ -305,7 +313,8 @@ function fishEvents(events){for(const e of events){
  if(e.kind==='catch'){pendingFishVisual++;playFishCatch();updateBucketDrawing();notify('Рыцарь поймал: '+e.fish.species+' · '+e.fish.weight+' кг');save();}
  if(e.kind==='bucket-full'){notify('Ведро заполнено! Ждём торговца.');save();}
 }}
-function merchantEvents(events){for(const e of events){if(e.kind==='merchant-arrive'){notify('Хей, ребята привет, есть что-то для меня?');save();}if(e.kind==='merchant-leave'){notify('Скоро вернусь!');save();}}}
+let merchantExitUntil=0;
+function merchantEvents(events){for(const e of events){if(e.kind==='merchant-arrive'){notify('Хей, ребята привет, есть что-то для меня?');save();}if(e.kind==='merchant-leave'){merchantExitUntil=performance.now()+720;notify('Скоро вернусь!');save();}}}
 function frame(now){const dt=Math.min(.12,Math.max(0,(now-last)/1000));last=now;
  if(!document.hidden){
   // Prepares the swing in the last 350 ms before the real damage tick.
