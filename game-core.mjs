@@ -292,7 +292,16 @@ export function stepFishing(p,ms,r=Math.random){
  }
  return events;
 }
-export function stepMerchant(p,ms,tradeOpen=false){if(tradeOpen)return [];
- const ev=[];p.merchantMs=Math.max(0,p.merchantMs-Math.max(0,ms));if(p.merchantMs<=0){if(p.merchantPhase==='away'){p.merchantPhase='waiting';p.merchantMs=15000;ev.push({kind:'merchant-arrive'});}else {p.merchantPhase='away';p.merchantMs=300000;ev.push({kind:'merchant-leave'});}}return ev;
+// Test-only fast merchant cadence: first visit after 15s, then 5s visible / 10s away.
+// Production cadence remains 15s visible / 5 minutes away.
+export function stepMerchant(p,ms,tradeOpen=false,testMode=false){
+ if(tradeOpen)return [];
+ const ev=[];
+ p.merchantMs=Math.max(0,p.merchantMs-Math.max(0,ms));
+ if(p.merchantMs<=0){
+  if(p.merchantPhase==='away'){p.merchantPhase='waiting';p.merchantMs=testMode?5000:15000;ev.push({kind:'merchant-arrive'});}
+  else{p.merchantPhase='away';p.merchantMs=testMode?10000:300000;ev.push({kind:'merchant-leave'});}
+ }
+ return ev;
 }
 export function sellAll(p){if(p.merchantPhase!=='waiting'||p.fishBucket.length===0)return {ok:false};const sum=bucketGold(p),count=p.fishBucket.length,pikes=p.fishBucket.filter(f=>f.species==='Щука').length;p.gold+=sum;p.totalGold+=sum;p.soldFish+=count;p.soldPike+=pikes;p.fishBucket=[];p.catchPlan=[];p.nextCatchMs=0;p.merchantPhase='away';p.merchantMs=300000;return {ok:true,gold:sum,count,pikes};}
