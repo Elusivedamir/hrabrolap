@@ -1,0 +1,48 @@
+<!doctype html><html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Храбролап · 14 главных боссов</title><style>
+*{box-sizing:border-box}body{margin:0;background:#1d293b;color:#fce4b7;font:15px system-ui,sans-serif}main{max-width:1050px;margin:auto;padding:18px}
+h1{font-size:24px;margin:0 0 4px;color:#ffdf9e}p{color:#d7c4af}button{font:inherit;color:#fdf0d4;cursor:pointer}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(145px,1fr));gap:10px}
+.card{background:linear-gradient(#344456,#252c43);border:2px solid #856f5c;border-radius:14px;padding:9px;text-align:center;cursor:pointer}
+.card:focus-visible,.card.active{outline:2px solid #ffd18d;outline-offset:2px}
+.card img{width:100%;aspect-ratio:1.05;object-fit:contain}
+.card strong,.card small{display:block}.card strong{font-size:.93em;min-height:35px}.card small{font-size:.76em;color:#e2c09b}
+.preview{border:3px solid #997451;border-radius:17px;padding:12px;background:linear-gradient(135deg,#33445a,#232d3c);margin:14px 0}
+.preview-head{display:flex;align-items:center;justify-content:space-between;gap:10px}
+.preview h2{font-size:20px;margin:0}.preview p{margin:3px 0 8px}
+.center{display:flex;justify-content:center;align-items:center;min-height:245px;background:radial-gradient(ellipse,#4e6169,#293243);border-radius:12px}
+#hero{width:min(250px,70vw);height:250px;object-fit:contain}
+.controls{display:flex;justify-content:center;gap:8px;margin:10px 0}.controls button{padding:8px 13px;border:2px solid #b29169;background:linear-gradient(#7a614a,#554638);border-radius:9px}.controls button.active{background:linear-gradient(#799d78,#557452)}
+.frames{display:grid;grid-template-columns:repeat(6,1fr);gap:4px}.frames>div{border:1px solid #586575;border-radius:7px;background:#283846;padding:3px;text-align:center;font-size:11px}
+.frames img{width:100%;aspect-ratio:1;object-fit:contain;display:block}
+@media(max-width:480px){.frames{grid-template-columns:repeat(3,1fr)}.grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+</style></head><body><main><h1>Храбролап · 14 главных боссов</h1><p>Каждые 50 волн — отдельный 2D-монстр с 6 кадрами атаки и 6 кадрами получения урона. Обычные монстры, котёнок и остальные изображения не изменены.</p>
+<section class="preview"><div class="preview-head"><h2 id="name"></h2><small id="wave"></small></div><p id="immunity"></p><div class="center"><img id="hero" alt="Анимация главного босса"></div>
+<div class="controls"><button class="active" id="attack">⚔ Атака</button><button id="hurt">💥 Получение урона</button></div><div class="frames" id="frames"></div></section>
+<section class="grid" id="roster" aria-label="Все главные боссы"></section>
+<script type="module">
+import {MEGA_BOSSES} from './mega-bosses.mjs';
+import {megaBossFrameUrl} from './mega-boss-art.mjs';
+const $=id=>document.getElementById(id);let boss=MEGA_BOSSES[0],phase='attack',index=0;
+for(const b of MEGA_BOSSES){
+ const card=document.createElement('button');card.className='card';card.type='button';card.dataset.wave=b.wave;
+ const img=new Image();img.src=megaBossFrameUrl(b.id,'attack',0);img.alt=b.name;
+ const label=document.createElement('strong');label.textContent=b.name;
+ const wave=document.createElement('small');wave.textContent='Волна '+b.wave;
+ const resistance=document.createElement('small');resistance.textContent=b.resistanceText;
+ card.append(img,label,wave,resistance);card.onclick=()=>{boss=b;index=0;render();window.scrollTo({top:0,behavior:'smooth'})};$('roster').append(card);
+}
+function render(){
+ $('name').textContent=boss.name;$('wave').textContent='Волна '+boss.wave;
+ $('immunity').textContent=boss.resistanceText;
+ $('hero').src=megaBossFrameUrl(boss.id,phase,index);
+ $('roster').querySelectorAll('button').forEach(el=>el.classList.toggle('active',Number(el.dataset.wave)===boss.wave));
+ for(const t of ['attack','hurt'])$(t).classList.toggle('active',t===phase);
+ $('frames').replaceChildren();
+ for(let n=0;n<6;n++){const cell=document.createElement('div'),img=new Image();img.src=megaBossFrameUrl(boss.id,phase,n);img.alt='Кадр '+(n+1);cell.append(img,document.createTextNode(''+(n+1)));$('frames').append(cell);}
+}
+$('attack').onclick=()=>{phase='attack';index=0;render()};
+$('hurt').onclick=()=>{phase='hurt';index=0;render()};
+setInterval(()=>{index=(index+1)%6;$('hero').src=megaBossFrameUrl(boss.id,phase,index)},150);
+render();
+</script></main></body></html>
