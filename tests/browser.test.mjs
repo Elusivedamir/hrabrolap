@@ -26,7 +26,7 @@ async function pageFor(progress=c.freshProgress(),battleState,options={}){
  // Фикстура пишется один раз; последующие reload читают реальное сохранение игры.
  await page.addInitScript(()=>{Math.random=()=>.99;});
  await page.addInitScript(({key,raw})=>{if(!sessionStorage.getItem('qa-seeded')){localStorage.setItem(key,JSON.stringify(raw));sessionStorage.setItem('qa-seeded','1');}},{key,raw:{...progress,lastSeen:0,...(battleState?{battleState}:{})}});
- await page.goto(base);await page.locator('#hero-rig').waitFor();
+ await page.goto(options.merchantTest?base+'?merchantTest=1':base);await page.locator('#hero-rig').waitFor();
  await page.evaluate(()=>{window.qaObserved={attacks:[],transforms:[],spriteFrames:[],hurts:0};new MutationObserver(records=>{
   for(const r of records){const t=r.target;if(t.id==='weapon-slot')window.qaObserved.transforms.push(t.getAttribute('transform'));if(t.id==='hero-body')window.qaObserved.spriteFrames.push(t.getAttribute('href'));
    if(t.id==='enemy-holder'){window.qaObserved.attacks.push(...[...t.classList].filter(x=>x.startsWith('attack-')));if(t.classList.contains('hurt'))window.qaObserved.hurts++;}}
@@ -450,7 +450,7 @@ test('серый торговец использует настоящий атл
 test('cozy UI modals preserve fishing trade and 70-stage cave changes on mobile',async()=>{
  const p=c.freshProgress();Object.assign(p,{room:11,best:10,gold:600,fishBucket:[{species:'Плотва',slots:1,weight:.25,length:20,price:8,waitMs:1200}]});
  const page=await pageFor(p);
- assert.equal(await page.locator('#room').textContent(),'ВОЛНА 11/700');
+ assert.equal(await page.locator('#room').textContent(),'ВОЛНА 11/2000');
  assert.match(await page.locator('#cave-stage').textContent(),/ЗАЛ 2\/70/);
  const src=await page.locator('#cave-backdrop').getAttribute('src');
  assert.ok(src.startsWith('data:image/svg+xml'),'the second stage must change the cave art');
@@ -482,5 +482,37 @@ test('first fifty-wave mega-boss and achievement window render on mobile',async(
  assert.equal(await page.locator('.achievement-row').count(),24);
  await shot(page,'achievements-24-mobile');
  await page.locator('#modal-x').click();
+ assert.deepEqual(errors,[]);
+});
+
+test('merchant test mode shows cat every 15 seconds without changing regular saves',async()=>{
+ const p=c.freshProgress();p.merchantPhase='away';p.merchantMs=300000;
+ const page=await pageFor(p,undefined,{merchantTest:true});
+ assert.equal(await page.locator('#merchant').isVisible(),false);
+ await page.clock.runFor(15030);
+ assert.equal(await page.locator('#merchant').isVisible(),true);
+ await shot(page,'merchant-debug-after-15s');
+ await page.clock.runFor(5030);
+ assert.equal(await page.locator('#merchant').isVisible(),false);
+ await page.clock.runFor(10030);
+ assert.equal(await page.locator('#merchant').isVisible(),true);
+ const raw=await saved(page);
+ assert.equal(raw.merchantMs,300000);
+ assert.equal(raw.merchantPhase,'away');
+ await page.goto(base);await page.clock.runFor(2000);
+ assert.equal(await page.locator('#merchant').isVisible(),false);
+ assert.deepEqual(errors,[]);
+});
+test('new stage boss 750 and final boss 2000 use their unique vector art',async()=>{
+ for(const wave of [750,2000]){
+  const p=c.freshProgress();p.room=wave;p.best=wave-1;p.armor=200;
+  const page=await pageFor(p);
+  const type=c.monsterForWave(wave).type;
+  assert.equal(await page.locator('#enemy-holder').getAttribute('data-monster'),type);
+  await page.locator('#enemy-art').evaluate(async img=>img.decode());
+  assert.equal(await page.locator('#boss-resistance').isVisible(),true);
+  assert.ok((await page.locator('#enemy-art').getAttribute('src')).startsWith('data:image/svg+xml'));
+  await shot(page,'boss-'+wave+'-mobile');
+ }
  assert.deepEqual(errors,[]);
 });
