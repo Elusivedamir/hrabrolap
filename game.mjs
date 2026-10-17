@@ -219,6 +219,16 @@ function render(){
  if(pose.visible){const sprite=merchantFrameUrl(pose.phase,pose.frame);if(merchantImage.getAttribute('src')!==sprite)merchantImage.setAttribute('src',sprite);}
  $('merchant-visit').textContent=fmtTimer(p.merchantMs);
  $('merchant-status').textContent=visiting?'Торговец приехал!':'Торговец через '+fmtTimer(p.merchantMs);
+ // Visible countdown only in ?merchantTest=1. The normal five-minute cycle is unchanged.
+ const testTimer=$('merchant-test-countdown');
+ if(MERCHANT_TEST_MODE){
+  testTimer.hidden=false;
+  testTimer.classList.toggle('is-visiting',visiting);
+  $('merchant-test-time').textContent=fmtTimer(p.merchantMs);
+  $('merchant-test-label').textContent=visiting?'В продаже':'До прихода';
+  const span=visiting?5000:(p.merchantMs>10000?15000:10000);
+  $('merchant-test-fill').style.width=Math.max(0,Math.min(100,p.merchantMs/span*100))+'%';
+ }else if(!testTimer.hidden)testTimer.hidden=true;
 }
 function onUpgrade(kind){const result=upgrade(p,kind);if(!result.ok){notify(result.reason==='max'?({fish:'Удочка улучшена максимально',home:'Дом улучшен максимально',bucket:'Ведро улучшено максимально'}[kind]||'Достигнут максимум'):'Не хватает '+fmt((result.cost||0)-p.gold)+' монет');return;}
  // Deliberately DO NOT recreate the battle: hero HP is persistent across room changes and upgrades.
