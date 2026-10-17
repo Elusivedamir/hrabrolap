@@ -47,13 +47,13 @@ test('магазин, инвентарь, смена SVG и reload реальн�
  const p=c.freshProgress();p.gold=5000;const page=await pageFor(p);
  await page.locator('#shop').click();
  await page.locator('.shop-item').filter({hasText:'Лунный клинок'}).getByRole('button').click();
- await page.locator('.shop-item').filter({hasText:'Лесная броня'}).getByRole('button').click();
+ await page.locator('.shop-item').filter({hasText:'Терновый следопыт'}).getByRole('button').click();
  await page.getByRole('button',{name:'Открыть инвентарь',exact:true}).click();
  await page.locator('.shop-item').filter({hasText:'Лунный клинок'}).getByRole('button').click();
- await page.locator('.shop-item').filter({hasText:'Лесная броня'}).getByRole('button').click();
+ await page.locator('.shop-item').filter({hasText:'Терновый следопыт'}).getByRole('button').click();
  await shot(page,'fixture-inventory');await page.locator('#modal-x').click();
  assert.equal(await page.locator('#hero-weapon').getAttribute('href'),'art/weapons/moon.svg');
- assert.equal(await page.locator('#hero-armor').getAttribute('href'),'art/armor/leaf.svg');
+ assert.equal(await page.locator('#hero-body').getAttribute('data-costume'),'thorn_ranger');
  const before=await saved(page);await page.reload();await page.locator('#hero-rig').waitFor();
  const after=await saved(page);for(const k of ['gold','weapon','equippedArmor','room','best'])assert.equal(after[k],before[k],k);
  await page.locator('#inventory').click();await page.locator('.shop-item').filter({hasText:'Без брони'}).getByRole('button').click();
