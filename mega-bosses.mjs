@@ -2,6 +2,13 @@
  * Affinities block only spell effects, never ordinary sword damage.
  * Resistances are telegraphed before players choose an enchantment.
  */
+const MOVES=Object.freeze({
+ thorn_warden:'wriggle',bone_regent:'rattle',silk_empress:'leap',
+ glacier_serpent:'swoop',ember_salamander:'ram',spore_monarch:'spores',
+ abyss_jelly:'pulse',granite_colossus:'ram',mirror_moth:'swoop',
+ treasure_mimic:'bite',root_titan:'spores',storm_basilisk:'pulse',
+ shadow_knight:'rattle',elder_dragon:'swoop'
+});
 const raw=[
  [50,'thorn_warden','Моховой страж','🌿','#5f8c54','#bedc83','poison',1,1,'Плети корней'],
  [100,'bone_regent','Костяной регент','💀','#d8c6a7','#7e667d','vampirism',1,1,'Костяной вихрь'],
@@ -20,7 +27,7 @@ const raw=[
 ];
 export const MEGA_BOSSES=Object.freeze(raw.map(([wave,id,name,icon,base,accent,immunity,lightningMultiplier,vampirismMultiplier,attackName],index)=>Object.freeze({
  wave,id,type:id,name,icon,base,accent,immunity,lightningMultiplier,vampirismMultiplier:immunity==='vampirism'?0:vampirismMultiplier,
- attackName,order:index+1,megaboss:true,
+ attackName,move:MOVES[id],order:index+1,megaboss:true,
  resistanceText:immunity==='poison'?'☠ Невосприимчив к яду':immunity==='vampirism'?'🩸 Нельзя лечиться вампиризмом':lightningMultiplier===0?'⚡ Иммунитет к молнии':lightningMultiplier<1?'⚡ Сопротивление молнии':'⚔ Без иммунитета'
 })));
 export const MEGA_BOSS_BY_TYPE=Object.freeze(Object.fromEntries(MEGA_BOSSES.map(b=>[b.id,b])));
