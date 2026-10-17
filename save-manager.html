@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Храбролап — резервная копия сохранения</title><style>
+:root{font-family:system-ui,'Trebuchet MS',sans-serif;color-scheme:light}
+body{background:#39373d;color:#f6e7cd;margin:0;padding:22px 12px}
+main{max-width:520px;margin:0 auto}
+h1{font-size:1.45rem;margin-bottom:12px}
+section{background:#ffedcb;color:#5a3b2c;border:4px solid #8d6746;border-radius:18px;padding:16px;margin:16px 0;box-shadow:0 5px #27212c}
+h2{margin:0 0 12px;font-size:1.22rem}
+button,.link{box-sizing:border-box;display:block;width:100%;min-height:47px;border:2px solid #5b784f;border-radius:12px;background:#66905c;color:#fffbea;font-size:1rem;font-weight:800;text-align:center;padding:10px;text-decoration:none;cursor:pointer}
+button:disabled{opacity:.5;cursor:default}
+p{line-height:1.5}small{display:block;line-height:1.5}
+input{display:block;max-width:100%;padding:9px;margin:8px 0 12px}
+#status{white-space:pre-wrap;line-height:1.5}
+.back{color:#ffe3a3;display:inline-block;margin-top:8px}
+</style></head><body><main><a class="back" href="./">← Вернуться в игру</a>
+<h1>🐱 Храбролап · сохранения</h1>
+<p>Сохрани прогресс в файл JSON, прежде чем менять порт или устройство. Резервная копия хранится только у тебя.</p>
+<section><h2>1. Создать копию</h2><p id="source">Ищу сохранение…</p><button id="export" disabled>Скачать резервную копию</button></section>
+<section><h2>2. Восстановить копию</h2><p>Открой эту страницу на новом адресе игры (например, порт 8090), выбери ранее скачанный JSON-файл.</p>
+<input type="file" id="file" accept=".json,application/json" aria-label="Выбрать файл сохранения">
+<p id="preview">Файл ещё не выбран.</p><button id="import" disabled>Восстановить на этом адресе</button>
+<small>Текущий прогресс не перезапишется без отдельного подтверждения. После восстановления открой игру по ссылке выше.</small>
+</section>
+<section><h2>Важно</h2><p id="status" role="status" aria-live="polite">Порт 8080 и порт 8090 хранят сохранения отдельно. Этой страницей можно перенести свой прогресс без сброса.</p></section>
+</main><script type="module" src="save-manager.mjs"></script></body></html>
