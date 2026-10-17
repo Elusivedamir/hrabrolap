@@ -43,7 +43,7 @@ export function simulate({id,policy='balanced',decisionSeconds=1,seed=1,equipmen
    const raw=JSON.parse(JSON.stringify({...p,battleState:b}));
    p=c.validateProgress(raw);b=c.restoreFight(p,raw.battleState);reloads++;nextReload+=300;
   }
-  if(!Number.isFinite(p.gold)||p.gold<0||!Number.isFinite(b.hp)||b.hp<0||b.hp>c.maxHealth(p)||p.room>100)throw Error('Invalid state at '+id+' '+seconds);
+  if(!Number.isFinite(p.gold)||p.gold<0||!Number.isFinite(b.hp)||b.hp<0||b.hp>c.maxHealth(p)||p.room>c.WAVE_COUNT)throw Error('Invalid state at '+id+' '+seconds);
  }
  return {id,policy,combat,autoUnlocked:p.autoUnlocked,autoLevel:p.autoLevel,decisionSeconds,seed,equipment,fish,reload,cleared:p.cleared,best:p.best,room:p.room,
   seconds:+(tick/10).toFixed(1),minutes:+(tick/600).toFixed(2),wins,defeats,farmWins,damage:c.heroDamage(p),health:c.maxHealth(p),
