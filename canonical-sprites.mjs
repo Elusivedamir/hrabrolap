@@ -20,9 +20,10 @@ export const WEAPON_HANDLES = Object.freeze({
   [104,233,-15,.64], [89,151,-24,.64], [90,149,-29,.64],
   [99,233,86,.64], [180,230,57,.64], [104,233,-15,.64]
  ],
+ // Keep the long blade away from the kitten's flower and face in hurt frame 4.
  hurt: [
   [107,233,-15,.62], [91,241,-20,.62], [105,245,-22,.62],
-  [82,201,-35,.62], [84,273,15,.62], [107,233,-15,.62]
+  [82,201,-55,.62], [84,273,15,.62], [107,233,-15,.62]
  ]
 });
 // Position of each separate chestplate in reference frame coordinates.
