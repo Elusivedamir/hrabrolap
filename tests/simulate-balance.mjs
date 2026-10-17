@@ -9,7 +9,7 @@ function rng(seed){let state=seed>>>0;return()=>{state=(Math.imul(state,1664525)
 export function simulate({id,policy='balanced',decisionSeconds=1,seed=1,equipment=false,fish=false,reload=false,combat='manual',limitSeconds=43200}){
  let p=c.freshProgress(),b=c.startFight(p);const random=rng(seed),waves=[],seen=new Set(),bosses=[];
  let wins=0,defeats=0,farmWins=0,reloads=0,sales=0,fishGold=0,nextDecision=0,nextReload=300;
- const purchases={sword:0,armor:0,weapon:0,equippedArmor:0};
+ const purchases={sword:0,armor:0,weapon:0,equippedArmor:0,attackSpeed:0};
  let tick=0;
  for(;tick<limitSeconds*10&&!p.cleared;tick++){
   const seconds=tick/10;
@@ -31,9 +31,12 @@ export function simulate({id,policy='balanced',decisionSeconds=1,seed=1,equipmen
     const options=[];
     if(policy!=='armor-only')options.push({kind:'sword',cost:c.swordCost(p.sword),run:()=>c.upgrade(p,'sword')});
     if(policy!=='sword-only')options.push({kind:'armor',cost:c.armorCost(p.armor),run:()=>c.upgrade(p,'armor')});
+    if(combat==='auto'&&p.autoUnlocked&&p.autoLevel<c.MAX_AUTO_LEVEL)
+     options.push({kind:'attackSpeed',cost:c.autoUpgradeCost(p.autoLevel),run:()=>c.upgradeAttackSpeed(p)});
     if(equipment){
-     for(const w of c.WEAPONS.filter(w=>!p.ownedWeapons.includes(w.id)))options.push({kind:'weapon',cost:w.price,run:()=>{const buy=c.buyEquipment(p,'weapon',w.id);if(buy.ok)c.equipEquipment(p,'weapon',w.id,b);return buy;}});
-     for(const a of c.ARMORS.filter(a=>!p.ownedArmors.includes(a.id)))options.push({kind:'equippedArmor',cost:a.price,run:()=>{const buy=c.buyEquipment(p,'armor',a.id);if(buy.ok)c.equipEquipment(p,'armor',a.id,b);return buy;}});
+     const affordableMaterials=item=>Object.entries(item.materials||{}).every(([id,need])=>(p.materials[id]||0)>=need);
+     for(const w of c.WEAPONS.filter(w=>!p.ownedWeapons.includes(w.id)&&affordableMaterials(w)))options.push({kind:'weapon',cost:w.price,run:()=>{const buy=c.buyEquipment(p,'weapon',w.id);if(buy.ok)c.equipEquipment(p,'weapon',w.id,b);return buy;}});
+     for(const a of c.ARMORS.filter(a=>!p.ownedArmors.includes(a.id)&&affordableMaterials(a)))options.push({kind:'equippedArmor',cost:a.price,run:()=>{const buy=c.buyEquipment(p,'armor',a.id);if(buy.ok)c.equipEquipment(p,'armor',a.id,b);return buy;}});
     }
     options.sort((a,b)=>a.cost-b.cost);const selected=options[0];
     if(selected&&selected.cost<=p.gold&&selected.run().ok)purchases[selected.kind]++;
