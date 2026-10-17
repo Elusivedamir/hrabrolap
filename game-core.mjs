@@ -133,7 +133,7 @@ export function restoreFight(p,raw,completedLegacyChapter=false){
  if(completedLegacyChapter&&level<=p.best)return startFight(p,hp);
  const standard=monsterForWave(level);
  const custom=MONSTERS.find(m=>m.type===raw.monsterType);
- const monster=!standard.boss&&custom?{...standard,...custom,name:custom.name,boss:false}:standard;
+ const monster=!standard.boss&&custom?{...standard,...custom,name:custom.name,boss:false,bloodless:['ghost','golem','skeleton'].includes(custom.type),immunity:['ghost','golem','skeleton'].includes(custom.type)?'poison':''}:standard;
  const phase=['fight','rest','transition'].includes(raw.phase)?raw.phase:'fight';
  const b={level,monster,hp,enemyHp:finite(raw.enemyHp,0,monster.hp,monster.hp),phase,
   heroTimer:finite(raw.heroTimer,0,1,0),enemyTimer:finite(raw.enemyTimer,0,2.4,0),rest:finite(raw.rest,0,phase==='rest'?restDuration(p):1.15,0),
