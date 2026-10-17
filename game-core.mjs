@@ -1,8 +1,8 @@
 import {WEAPONS,ARMORS,MATERIALS} from './equipment-catalog.mjs';
 export {WEAPONS,ARMORS,MATERIALS} from './equipment-catalog.mjs';
 // Храбролап v0.8.1 — исправления HP, миграции и восстановления сохранений.
-export const VERSION=4;
-export const WAVE_COUNT=100;
+export const VERSION=5;
+export const WAVE_COUNT=700;
 export const MONSTERS=[
  {type:'slime',name:'Слизень',texture:'slime',move:'jump',attackName:'Прыжок телом'},
  {type:'mouse',name:'Мышь',texture:'mouse',move:'bite',attackName:'Быстрый укус'},
@@ -16,11 +16,14 @@ export const MONSTERS=[
  {type:'golem',name:'Каменный голем',texture:'golem',move:'ram',attackName:'Каменный толчок'}
 ];
 export function monsterForWave(level){
- const n=Math.max(1,Math.min(100,Math.floor(level))),boss=n%10===0;
+ const n=Math.max(1,Math.min(WAVE_COUNT,Math.floor(level))),boss=n%10===0;
  // На каждой десятой волне усиленная версия обычного монстра: та же модель + корона.
  const model=MONSTERS[(Math.floor((n-1)/10)*3+(n-1)%10)%10];
- const hp=Math.round((17+4.8*n+1.0*n**1.34)*(boss?2.25:1));
- return {...model,name:(boss?'Король · ':'')+model.name,boss,hp,attack:Math.ceil((1+n*.34)*(boss?1.42:1)),reward:Math.round((8+n*3.8+n**1.2*.38)*(boss?3:1))};
+ const after=Math.max(0,n-100);
+ // Keep waves 1-100 exactly as players know them; 101-700 scale steadily.
+ const baseHp=n<=100?17+4.8*n+n**1.34:(17+480+100**1.34)*(1+.011*after+.000018*after*after);
+ const hp=Math.round(baseHp*(boss?2.25:1));
+ return {...model,name:(boss?'Король · ':'')+model.name,boss,hp,attack:Math.ceil((n<=100?1+n*.34:35*(1+.0045*after+.000004*after*after))*(boss?1.42:1)),reward:Math.round((n<=100?8+n*3.8+n**1.2*.38:(8+380+100**1.2*.38)*(1+.019*after+.000018*after*after))*(boss?3:1))};
 }
 // В обычных боях шанс паука 30%. Прежний регулярный слот паука
 // отдан скелету; боссы на каждой 10-й волне остаются без изменений.
@@ -30,9 +33,9 @@ export function spawnMonsterForWave(level,r=Math.random){
  const base=(r()<.30?MONSTERS.find(m=>m.type==='spider'):original.type==='spider'?MONSTERS.find(m=>m.type==='skeleton'):original);
  return {...original,...base,name:base.name,boss:false};
 }
-export const ENEMIES=Array.from({length:100},(_,i)=>monsterForWave(i+1));
-export const swordCost=n=>Math.round(20*1.17**n);
-export const armorCost=n=>Math.round(35*1.16**n);
+export const ENEMIES=Array.from({length:WAVE_COUNT},(_,i)=>monsterForWave(i+1));
+export const swordCost=n=>Math.round(n<=35?20*1.17**n:20*1.17**35*(1+.039*(n-35))**2);
+export const armorCost=n=>Math.round(n<=35?35*1.16**n:35*1.16**35*(1+.039*(n-35))**2);
 export const fishCost=n=>Math.round(45*1.24**n);
 export const homeCost=n=>Math.round(65*1.23**n);
 export const bucketCost=()=>320;
@@ -58,16 +61,18 @@ const equipped=(arr,id)=>arr.find(x=>x.id===id)||arr[0];
 export const heroDamage=p=>8+3*p.sword+equipped(WEAPONS,p.weapon).damage;
 export const maxHealth=p=>65+14*p.armor+equipped(ARMORS,p.equippedArmor).health;
 export const restDuration=p=>Math.max(2.5,7-p.home*.35);
-export function battleRate(p){const m=monsterForWave(Math.max(1,Math.min(100,p.best||1)));return Math.floor(m.reward*60/Math.max(4,Math.ceil(m.hp/heroDamage(p))*1.3+1.1));}
+export function battleRate(p){const m=monsterForWave(Math.max(1,Math.min(WAVE_COUNT,p.best||1)));return Math.floor(m.reward*60/Math.max(4,Math.ceil(m.hp/heroDamage(p))*1.3+1.1));}
 export function freshProgress(){return {version:VERSION,gold:0,sword:0,armor:0,fishLevel:0,home:0,bucketLevel:0,weapon:'iron',equippedArmor:'none',ownedWeapons:['iron'],ownedArmors:['none'],room:1,best:0,fails:0,farming:false,cleared:false,kills:0,totalGold:0,killedSlimes:0,caughtTotal:0,soldFish:0,soldPike:0,spentSword:0,autoUnlocked:false,autoEnabled:false,autoLevel:0,enchantment:'none',
   monsterKills:Object.fromEntries(MONSTERS.map(m=>[m.type,0])),bossKills:0,lightningHits:0,poisonKills:0,vampireHeals:0,
   materials:Object.fromEntries(MATERIALS.map(m=>[m.id,0])),fishBucket:[],catchPlan:[],nextCatchMs:0,merchantPhase:'away',merchantMs:300000,lastSeen:0,pendingOffline:0,questClaimed:[]};}
 const int=(v,lo,hi,d=lo)=>Number.isFinite(v)?Math.max(lo,Math.min(hi,Math.floor(v))):d;
 export function validateProgress(raw){
- const p=freshProgress(); if(!raw||![1,2,3,4].includes(raw.version))return p;
+ const p=freshProgress(); if(!raw||![1,2,3,4,5].includes(raw.version))return p;
  for(const k of ['gold','sword','armor','fishLevel','home','room','best','fails','kills','totalGold','killedSlimes','caughtTotal','soldFish','soldPike','spentSword','pendingOffline','bucketLevel'])p[k]=int(raw[k],0,k==='gold'||k==='totalGold'?1e13:1e6,p[k]);
- p.room=int(p.room,1,100);p.best=int(p.best,0,100);p.fails=int(p.fails,0,2);p.bucketLevel=int(p.bucketLevel,0,1);
+ p.room=int(p.room,1,WAVE_COUNT);p.best=int(p.best,0,WAVE_COUNT);p.fails=int(p.fails,0,2);p.bucketLevel=int(p.bucketLevel,0,1);
  p.farming=!!raw.farming;p.cleared=!!raw.cleared;
+ // A completed 100-wave v4 save resumes at 101, retaining all inventory and gold.
+ if(raw.version<=4&&p.cleared&&p.best>=100&&p.best<WAVE_COUNT){p.cleared=false;p.farming=false;p.room=Math.max(p.room,p.best+1);}
  p.autoUnlocked=!!raw.autoUnlocked;
  p.autoEnabled=p.autoUnlocked&&!!raw.autoEnabled;
  p.autoLevel=int(raw.autoLevel,0,MAX_AUTO_LEVEL,0);
@@ -94,17 +99,17 @@ export function validateProgress(raw){
    for(const item of MATERIALS)p.materials[item.id]=int(raw.materials[item.id],0,1000000,0);
   }
 // В v1/v2 cleared означало прохождение десяти комнат, а не ста волн.
- if(raw.version<3&&p.cleared&&p.best<100){p.cleared=false;p.room=Math.min(100,Math.max(p.room,p.best+1));}
+ if(raw.version<3&&p.cleared&&p.best<100){p.cleared=false;p.room=Math.min(WAVE_COUNT,Math.max(p.room,p.best+1));}
  return p;
 }
 function isFish(f){return f&&SPECIES.some(s=>s.species===f.species&&s.slots===f.slots)&&Number.isSafeInteger(f.price)&&f.price>0&&Number.isFinite(f.weight)&&f.weight>0&&Number.isFinite(f.length)&&f.length>0&&Number.isFinite(f.waitMs)&&f.waitMs>0}
 function fitFish(raw,capacity){const fish=[];if(!Array.isArray(raw))return fish;for(const f of raw){if(!isFish(f)||f.slots>capacity)continue;fish.push({...f});capacity-=f.slots;if(capacity===0)break;}return fish;}
-export function getRoom(p){return p.cleared?100:(p.farming?Math.max(1,p.room-1):p.room);}
+export function getRoom(p){return p.cleared?WAVE_COUNT:(p.farming?Math.max(1,p.room-1):p.room);}
 export function startFight(p,hp=maxHealth(p),r=Math.random){const level=getRoom(p),monster=spawnMonsterForWave(level,r);return {level,monster,hp:Math.min(maxHealth(p),hp),enemyHp:monster.hp,phase:'fight',heroTimer:0,enemyTimer:0,rest:0,poisonRemaining:0,poisonTick:0};}
 export function restoreFight(p,raw,completedLegacyChapter=false){
  if(!raw||typeof raw!=='object')return startFight(p);
  const finite=(value,min,max,fallback)=>Number.isFinite(value)?Math.max(min,Math.min(max,value)):fallback;
- const level=int(raw.level,1,100,getRoom(p));
+ const level=int(raw.level,1,WAVE_COUNT,getRoom(p));
  const hp=finite(raw.hp,0,maxHealth(p),maxHealth(p));
  // Завершённый бой из старой главы не переносим на заново открытые волны.
  if(completedLegacyChapter&&level<=p.best)return startFight(p,hp);
@@ -168,7 +173,7 @@ function winFight(p,b,ev,source){
  const loot=material?{id:material,amount:1}:null;
  if(loot)p.materials[loot.id]=(p.materials[loot.id]||0)+loot.amount;
  const firstClear=!p.farming&&!p.cleared&&b.level===p.room&&b.level>p.best;
- if(firstClear){p.best=Math.max(p.best,b.level);p.fails=0;if(b.level===100){p.cleared=true;p.room=100;}else p.room=b.level+1;}
+ if(firstClear){p.best=Math.max(p.best,b.level);p.fails=0;if(b.level===WAVE_COUNT){p.cleared=true;p.room=WAVE_COUNT;}else p.room=b.level+1;}
  b.phase='transition';b.rest=1.15;b.poisonRemaining=0;
  ev.push({kind:'win',gold,loot,level:b.level,firstClear});
  return true;
