@@ -440,3 +440,24 @@ test('серый торговец использует настоящий атл
  await merchant.click();assert.match(await page.locator('#modal-title').textContent(),/торговец/i);
  assert.deepEqual(errors,[]);
 });
+
+
+test('cozy UI modals preserve fishing trade and 70-stage cave changes on mobile',async()=>{
+ const p=c.freshProgress();Object.assign(p,{room:11,best:10,gold:600,fishBucket:[{species:'Плотва',slots:1,weight:.25,length:20,price:8,waitMs:1200}]});
+ const page=await pageFor(p);
+ assert.equal(await page.locator('#room').textContent(),'ВОЛНА 11/700');
+ assert.match(await page.locator('#cave-stage').textContent(),/ЗАЛ 2\/70/);
+ const src=await page.locator('#cave-backdrop').getAttribute('src');
+ assert.ok(src.startsWith('data:image/svg+xml'),'the second stage must change the cave art');
+ const ready=await page.locator('#cave-backdrop').evaluate(async img=>{await img.decode();return img.naturalWidth>0});
+ assert.ok(ready,'cave background must decode successfully');
+ await shot(page,'cave-stage-2-mobile');
+ for(const [id,mode,name] of [['#bucket','bucket','bucket-v2-mobile'],['#shop','shop','shop-v2-mobile'],['#quests','quests','quests-v2-mobile']]){
+  await page.locator(id).click();
+  assert.equal(await page.locator('#modal').getAttribute('data-mode'),mode);
+  assert.equal(await page.locator('#modal').getAttribute('open'),'');
+  await shot(page,name);
+  await page.locator('#modal-x').click();
+ }
+ assert.deepEqual(errors,[]);
+});
