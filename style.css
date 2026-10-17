@@ -257,3 +257,8 @@
 .enemy-holder[data-monster="ghost"]{--crown-x:51%;--crown-y:22%;--crown-w:34%}
 .enemy-holder[data-monster="skeleton"]{--crown-x:50%;--crown-y:20%;--crown-w:31%}
 .enemy-holder[data-monster="golem"]{--crown-x:50%;--crown-y:23%;--crown-w:33%}
+
+/* Merchant v2: sprite pose frames follow the real visit timer without resizing his body. */
+.merchant{width:25%;right:1.5%;height:60%;bottom:5%;animation:none;overflow:visible}
+.merchant img#merchant-art{display:block;width:100%;height:88%;object-fit:contain;animation:none!important;filter:drop-shadow(0 2px 2px #15171b70)}
+.merchant[data-phase="arrive"],.merchant[data-phase="leave"]{transform-origin:bottom center}
