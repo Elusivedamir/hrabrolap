@@ -15,20 +15,25 @@ const X=114,Y=-22,W=260,H=346;
 const kx = W/NATIVE_WIDTH, ky=H/NATIVE_HEIGHT;
 // Reference coordinates sampled at the grasp paw, in the exact original cropped frame canvas.
 // [paw_x, paw_y, clockwise_degrees, weapon_scale]
+// Each point is the sword pivot in the ORIGINAL 279x370 character canvas.
+// Calibrated on the real twelve kitten frames (not a blanket translation).
+// The hand outline remains the approved PNG; only the separate sword is repositioned.
 export const WEAPON_HANDLES = Object.freeze({
  attack: [
-  [104,233,-15,.64], [89,151,-24,.64], [90,149,-29,.64],
-  [99,233,86,.64], [180,230,57,.64], [104,233,-15,.64]
+  [94,244,-15,.64], [82,161,-24,.64], [84,153,-29,.64],
+  [95,255,86,.64], [171,257,57,.64], [94,244,-15,.64]
  ],
- // Keep the long blade away from the kitten's flower and face in hurt frame 4.
  hurt: [
-  [107,233,-15,.62], [91,241,-20,.62], [105,245,-22,.62],
-  [82,201,-55,.62], [84,273,15,.62], [107,233,-15,.62]
+  [122,268,-15,.62], [65,251,-20,.62], [110,271,-22,.62],
+  [65,214,-55,.62], [84,294,-22,.62], [122,268,-15,.62]
  ]
 });
-// Shared grip adjustment for every costume and the unarmored kitten.
-// The original six attack/hurt poses remain unchanged; only sword SVG shifts.
-export const GLOBAL_SWORD_GRIP = Object.freeze({x:6,y:-6});
+// Only the center of the gripping paw is overdrawn on top of the SVG handle.
+// Same original character artwork, used as a *clipped* foreground layer.
+export const PAW_HANDLES = Object.freeze({
+ attack: [[90,236],[81,151],[83,147],[96,250],[174,252],[90,236]],
+ hurt: [[124,257],[62,240],[108,261],[64,202],[85,284],[124,257]]
+});
 // Position of each separate chestplate in reference frame coordinates.
 // [center_x, center_y, body_relative_rotation, scale_factor]. These are adjustable
 // equipment anchors, not transformations applied to the source kitten frames.
@@ -46,7 +51,7 @@ function attr(element,name,value){element.setAttribute(name,String(value));}
 export function applyCanonicalFrame(kind,index,rig){
  if(kind!=='attack'&&kind!=='hurt')throw new Error('Unknown canonical animation: '+kind);
  const i=Math.max(0,Math.min(5,Math.trunc(index)||0));
- const {body,heroMotion,weaponSlot,armorSlot,armorImage,armorId='none',transparent=false}=rig;
+ const {body,heroMotion,weaponSlot,armorSlot,armorImage,handFront,gripShape,armorId='none',transparent=false}=rig;
  if(!body||!heroMotion||!weaponSlot||!armorSlot||!armorImage)throw new Error('Incomplete SVG equipment rig');
  const costume=armorId===FOREST_GUARDIAN_ID;
  const complete=new Set(['steel_knight','slime_guardian','bone_guardian']);
@@ -60,13 +65,22 @@ export function applyCanonicalFrame(kind,index,rig){
  // The cat itself is NEVER rotated, stretched or translated between frames.
  attr(heroMotion,'transform','translate(0 0)');
  let [handX,handY,angle,scale]=WEAPON_HANDLES[kind][i];
- handX+=GLOBAL_SWORD_GRIP.x;
- handY+=GLOBAL_SWORD_GRIP.y;
  // The user's first attack PSD contains the original pose exactly 15 pixels
  // lower on its canvas. Keep that artwork intact and put the sword in its paw.
  if(costume&&kind==='attack'&&i===0)handY+=15;
  const wx=X+handX*kx,wy=Y+handY*ky;
  attr(weaponSlot,'transform',`translate(${wx.toFixed(2)} ${wy.toFixed(2)}) rotate(${angle}) scale(${scale})`);
+ // Repaint the approved paw above the sword's grip; never generate new cat art.
+ if(handFront&&gripShape){
+  attr(handFront,'href',displayed);
+  for(const [key,value] of Object.entries({x:X,y:Y,width:W,height:H}))attr(handFront,key,value);
+  const [pawX,pawY]=PAW_HANDLES[kind][i];
+  const offsetY=costume&&kind==='attack'&&i===0?15:0;
+  attr(gripShape,'cx',(X+pawX*kx).toFixed(2));
+  attr(gripShape,'cy',(Y+(pawY+offsetY)*ky).toFixed(2));
+  attr(gripShape,'rx',13);
+  attr(gripShape,'ry',13);
+ }
  const [cx,cy,rot,sz]=ARMOR_HANDLES[kind][i];
  const ax=X+cx*kx,ay=Y+cy*ky;
  // Existing armor SVG is 100×80; overlay size is restricted to chest/shoulder region.
