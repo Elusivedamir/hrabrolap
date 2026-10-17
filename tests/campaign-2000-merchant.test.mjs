@@ -16,6 +16,13 @@ test('debug merchant arrives every 15 seconds and normal game retains five minut
  assert.equal(p.merchantMs,10000);
  const second=game.stepMerchant(p,10000,false,true);
  assert.equal(second[0].kind,'merchant-arrive');
+ const saleProgress=game.freshProgress();
+ saleProgress.merchantPhase='waiting';saleProgress.merchantMs=5000;
+ saleProgress.fishBucket=[{species:'Плотва',slots:1,weight:.2,length:20,price:8,waitMs:1000}];
+ assert.equal(game.sellAll(saleProgress,true).ok,true);
+ assert.equal(saleProgress.merchantMs,15000,'selling must not reset test merchant to five minutes');
+ game.stepMerchant(saleProgress,15000,false,true);
+ assert.equal(saleProgress.merchantPhase,'waiting');
  const normal=game.freshProgress();
  game.stepMerchant(normal,15000);
  assert.equal(normal.merchantPhase,'away');
