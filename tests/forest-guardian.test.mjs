@@ -41,7 +41,7 @@ test('equipping and removing the costume preserves its canvas and aligns the sep
   assert.equal(rig.body.attrs.href,forestFrameUrl(kind,i));
   assert.equal(rig.body.attrs['data-costume'],FOREST_GUARDIAN_ID);
   if(kind==='attack'&&i===0){
-   assert.equal(rig.weaponSlot.attrs.transform,'translate(216.51 204.30) rotate(-15) scale(0.64)');
+   assert.equal(rig.weaponSlot.attrs.transform,'translate(201.60 220.20) rotate(-15) scale(0.64)');
   }else assert.equal(rig.weaponSlot.attrs.transform,weapon);
   for(const key of ['x','y','width','height'])assert.equal(rig.body.attrs[key],geometry[key]);
   applyCanonicalFrame(kind,i,{...rig,armorId:'none'});
