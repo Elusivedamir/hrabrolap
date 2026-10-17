@@ -13,8 +13,6 @@ jobs:
           node-version: '22'
       - run: npm ci --ignore-scripts
       - run: python3 -m pip install Pillow==11.3.0
-      - name: Rebuild refined Forest Guardian display frames
-        run: python3 tools/refine_forest_guardian.py
       - name: Verify protected approved assets were not changed by build steps
         run: git diff --exit-code -- assets/canonical/ art/approved/ tests/locked-art-shas.json
       - run: npm test
@@ -43,6 +41,10 @@ jobs:
         with:
           name: hrabrolap-qa
           path: qa/
+
+      - name: Assert tested source assets remain unchanged
+        if: success()
+        run: git diff --exit-code -- assets/ art/ animations/ index.html game.mjs game-core.mjs style.css
 
       - name: Package tested HTML5 build
         if: success()
