@@ -126,11 +126,11 @@ test('новый костюм в инвентаре: покупка за 50, э�
  const p=c.freshProgress();p.gold=50;
  const page=await pageFor(p);
  await page.locator('#shop').click();
- const row=page.locator('.shop-item').filter({hasText:'Стальной рыцарь'});
+ const row=page.locator('.shop-item').filter({hasText:/^(?=.*(?:Стальной рыцарь|Золотой рыцарь)).*$/});
  await row.getByRole('button',{name:'Купить'}).click();
  let save=await saved(page);assert.equal(save.gold,0);assert.ok(save.ownedArmors.includes('steel_knight'));
  await page.getByRole('button',{name:'Открыть инвентарь'}).click();
- await page.locator('.shop-item').filter({hasText:'Стальной рыцарь'}).getByRole('button',{name:'Надеть'}).click();
+ await page.locator('.shop-item').filter({hasText:/^(?=.*(?:Стальной рыцарь|Золотой рыцарь)).*$/}).getByRole('button',{name:'Надеть'}).click();
  assert.equal(await page.locator('#hero-body').getAttribute('data-costume'),'steel_knight');
  await shot(page,'fixture-steel-knight');
  await page.reload();save=await saved(page);
