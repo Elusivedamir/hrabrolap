@@ -186,6 +186,8 @@ function render(){
  const merchant=$('merchant'),merchantImage=$('merchant-art');
  merchant.classList.toggle('visible',pose.visible);
  merchant.dataset.phase=pose.phase;merchant.dataset.frame=String(pose.frame+1);
+ const row={arrive:0,idle:50,leave:100}[pose.phase];
+ $('merchant-sheet').style.backgroundPosition=(pose.frame*20)+'% '+row+'%';
  if(pose.visible){const sprite=merchantFrameUrl(pose.phase,pose.frame);if(merchantImage.getAttribute('src')!==sprite)merchantImage.setAttribute('src',sprite);}
  $('merchant-visit').textContent=fmtTimer(p.merchantMs);
  $('merchant-status').textContent=visiting?'Торговец приехал!':'Торговец через '+fmtTimer(p.merchantMs);
@@ -313,6 +315,10 @@ function fishEvents(events){for(const e of events){
  if(e.kind==='catch'){pendingFishVisual++;playFishCatch();updateBucketDrawing();notify('Рыцарь поймал: '+e.fish.species+' · '+e.fish.weight+' кг');save();}
  if(e.kind==='bucket-full'){notify('Ведро заполнено! Ждём торговца.');save();}
 }}
+const merchantAtlasImage=new Image();
+merchantAtlasImage.addEventListener('load',()=>{$('merchant').classList.add('atlas-ready');});
+merchantAtlasImage.addEventListener('error',()=>{$('merchant').classList.remove('atlas-ready');});
+merchantAtlasImage.src='art/merchant-animated.webp';
 let merchantExitUntil=0;
 function merchantEvents(events){for(const e of events){if(e.kind==='merchant-arrive'){notify('Хей, ребята привет, есть что-то для меня?');save();}if(e.kind==='merchant-leave'){merchantExitUntil=performance.now()+720;notify('Скоро вернусь!');save();}}}
 function frame(now){const dt=Math.min(.12,Math.max(0,(now-last)/1000));last=now;
