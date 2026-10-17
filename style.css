@@ -388,3 +388,29 @@ body,.game,.game button,.game input,.game select,.game textarea,.game small,.gam
  .surface .merchant-test-countdown{padding:5px 6px 6px;width:45%}
  .surface .merchant-test-line{gap:4px}
 }
+
+/* P2: fingertip-safe actions and readable purchase feedback.
+ * Overrides only window controls — no character, scene or approved art changes.
+ */
+.game .modal .modal-x{
+ width:44px;min-width:44px;height:44px;min-height:44px;
+ display:grid;place-items:center;line-height:1;margin:-4px -4px 0 0
+}
+.game .modal h2{margin-right:52px}
+.game .modal .modal-card{overscroll-behavior:contain;-webkit-overflow-scrolling:touch}
+.game .modal .modal-buttons button,
+.game .modal .shop-item button,
+.game .modal .quest-row button,
+.game .modal .achievement-row button{min-height:44px}
+.game .modal .shop-item .purchase-hint{
+ display:block;white-space:normal;overflow-wrap:anywhere;
+ color:#8a4636;font-weight:800;font-size:.85em;line-height:1.4;margin-top:3px
+}
+.game .modal .shop-item.needs-resources{border-color:#c7a27b}
+.game .modal button:focus-visible,.game #enemy-holder:focus-visible{
+ outline:3px solid #f5c673;outline-offset:2px
+}
+@media(max-width:360px){
+ .game .modal .shop-item button{min-width:66px;min-height:44px}
+ .game .modal .purchase-hint{font-size:.82em}
+}
