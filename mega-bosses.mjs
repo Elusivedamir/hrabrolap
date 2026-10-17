@@ -1,3 +1,4 @@
+import {LATE_BOSS_MODELS} from './late-bosses.mjs';
 /** Fourteen original milestone bosses, one every 50 waves.
  * Affinities block only spell effects, never ordinary sword damage.
  * Resistances are telegraphed before players choose an enchantment.
@@ -25,12 +26,12 @@ const raw=[
  [650,'shadow_knight','Теневой рыцарь','🛡️','#555074','#b29edb','vampirism',1,1,'Чёрный клинок'],
  [700,'elder_dragon','Древний дракон','🐲','#693c75','#e997c5','poison',0.7,1,'Пламя древних']
 ];
-export const MEGA_BOSSES=Object.freeze(raw.map(([wave,id,name,icon,base,accent,immunity,lightningMultiplier,vampirismMultiplier,attackName],index)=>Object.freeze({
+export const MEGA_BOSSES=Object.freeze([...raw.map(([wave,id,name,icon,base,accent,immunity,lightningMultiplier,vampirismMultiplier,attackName],index)=>Object.freeze({
  wave,id,type:id,name,icon,base,accent,immunity,lightningMultiplier,vampirismMultiplier:immunity==='vampirism'?0:vampirismMultiplier,
  attackName,move:MOVES[id],order:index+1,megaboss:true,
  resistanceText:immunity==='poison'?'☠ Невосприимчив к яду':immunity==='vampirism'?'🩸 Нельзя лечиться вампиризмом':lightningMultiplier===0?'⚡ Иммунитет к молнии':lightningMultiplier<1?'⚡ Сопротивление молнии':'⚔ Без иммунитета'
-})));
+})),...LATE_BOSS_MODELS.map((b,i)=>Object.freeze({...b,order:i+15,megaboss:true,vampirismMultiplier:b.immunity==='vampirism'?0:1,resistanceText:b.immunity==='poison'?'☠ Невосприимчив к яду':b.immunity==='vampirism'?'🩸 Нельзя лечиться вампиризмом':b.lightningMultiplier===0?'⚡ Иммунитет к молнии':b.lightningMultiplier<1?'⚡ Сопротивление молнии':'⚔ Без иммунитета'}))]);
 export const MEGA_BOSS_BY_TYPE=Object.freeze(Object.fromEntries(MEGA_BOSSES.map(b=>[b.id,b])));
 export const MEGA_BOSS_TYPES=Object.freeze(MEGA_BOSSES.map(b=>b.id));
-export const megaBossForWave=wave=>Number.isInteger(wave)&&wave%50===0&&wave>=50&&wave<=700?MEGA_BOSSES[wave/50-1]:null;
+export const megaBossForWave=wave=>Number.isInteger(wave)&&wave%50===0&&wave>=50&&wave<=2000?MEGA_BOSSES[wave/50-1]:null;
 export const megaBossByType=type=>MEGA_BOSS_BY_TYPE[type]||null;
