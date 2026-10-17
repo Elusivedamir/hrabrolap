@@ -5,7 +5,8 @@ import {fishCount,pluralRu} from './russian.mjs';
 import {fishArt} from './fish-art.mjs';
 import {QUESTS,questProgress,claimQuest} from './quests.mjs';
 import {monsterPose} from './monster-rig.mjs';
-import {majorBossByType,majorBossFrameUrl} from './major-bosses.mjs';
+import {megaBossByType} from './mega-bosses.mjs';
+import {megaBossFrameUrl} from './mega-boss-art.mjs';
 import {bucketArt,sleepFrameIndex,SLEEP_FRAMES} from './bucket-rest.mjs';
 import {applyCanonicalFrame} from './canonical-sprites.mjs';
 import {FOREST_GUARDIAN_ID} from './forest-guardian-rig.mjs';
@@ -91,19 +92,19 @@ function syncEquipment(){
 }
 const APPROVED_MONSTER_TYPES=new Set(['slime','spider','mouse','mushroom','beetle','larva','bat','ghost']);
 const ARTICULATED_MONSTER_TYPES=new Set(['skeleton','golem']);
-const monsterSource=(type,boss=false)=>majorBossByType(type)?majorBossFrameUrl(type,'attack',0):APPROVED_MONSTER_TYPES.has(type)?'art/monsters-v2/'+type+'.svg':ARTICULATED_MONSTER_TYPES.has(type)?(boss?'animations/'+type+'/boss/attack/01.svg':'art/monsters-v097/'+type+'.svg'):'art/monsters/'+type+'.svg';
+const monsterSource=(type,boss=false)=>megaBossByType(type)?megaBossFrameUrl(type,'attack',0):APPROVED_MONSTER_TYPES.has(type)?'art/monsters-v2/'+type+'.svg':ARTICULATED_MONSTER_TYPES.has(type)?(boss?'animations/'+type+'/boss/attack/01.svg':'art/monsters-v097/'+type+'.svg'):'art/monsters/'+type+'.svg';
 let monsterSequence=0,monsterTimers=[];
 function cancelMonsterFrames(){
  monsterSequence++;for(const t of monsterTimers)clearTimeout(t);monsterTimers=[];
  const art=$('enemy-art');art.style.animation='';art.style.transform='';
- art.classList.toggle('approved-monster-frame',ARTICULATED_MONSTER_TYPES.has(b?.monster?.type)||!!majorBossByType(b?.monster?.type));delete art.dataset.playingAnimation;
+ art.classList.toggle('approved-monster-frame',ARTICULATED_MONSTER_TYPES.has(b?.monster?.type)||!!megaBossByType(b?.monster?.type));delete art.dataset.playingAnimation;
  if(b?.monster){const source=monsterSource(b.monster.texture,b.monster.boss);if(art.getAttribute('src')!==source)art.setAttribute('src',source);}
- $('boss-crown').style.visibility=b?.monster?.boss&&(ARTICULATED_MONSTER_TYPES.has(b.monster.type)||majorBossByType(b.monster.type))?'hidden':'';
+ $('boss-crown').style.visibility=b?.monster?.boss&&(ARTICULATED_MONSTER_TYPES.has(b.monster.type)||megaBossByType(b.monster.type))?'hidden':'';
 }
 function playMonsterFrames(phase){
  cancelMonsterFrames();const sequence=monsterSequence,type=b.monster.type,boss=!!b.monster.boss;
  const art=$('enemy-art'),holder=$('enemy-holder');
- const epic=!!majorBossByType(type),archived=epic||APPROVED_MONSTER_TYPES.has(type)||ARTICULATED_MONSTER_TYPES.has(type);
+ const epic=!!megaBossByType(type),archived=epic||APPROVED_MONSTER_TYPES.has(type)||ARTICULATED_MONSTER_TYPES.has(type);
  art.style.animation='none';
  if(archived){
   art.classList.add('approved-monster-frame');art.dataset.playingAnimation='1';
@@ -114,7 +115,7 @@ function playMonsterFrames(phase){
   monsterTimers.push(setTimeout(()=>{
    if(sequence!==monsterSequence||b.monster.type!==type||!!b.monster.boss!==boss)return;
    holder.dataset.monsterPhase=phase;holder.dataset.monsterFrame=String(i+1);
-   if(epic){art.setAttribute('src',majorBossFrameUrl(type,phase,i));}
+   if(epic){art.setAttribute('src',megaBossFrameUrl(type,phase,i));}
    else if(archived){
     art.setAttribute('src',`animations/${type}/${boss?'boss':'normal'}/${phase}/0${i+1}.svg`);
    }else{
@@ -178,7 +179,7 @@ function render(){
  $('enemy-holder').classList.toggle('poisoned',b.poisonRemaining>0&&b.phase==='fight');
  const heartCapacity=maxHealth(p)/5;heroHearts.forEach((e,i)=>{const filling=Math.max(0,Math.min(1,(b.hp-i*heartCapacity)/heartCapacity));e.querySelector('.heart-filled').style.width=(filling*100)+'%';});heartsRoot.setAttribute('aria-label',`Здоровье ${Math.ceil(b.hp)} из ${maxHealth(p)}`);
  $('boss-crown').style.display=b.monster.boss?'block':'none';
- if(b.monster.boss&&!art.dataset.playingAnimation)$('boss-crown').style.visibility=(ARTICULATED_MONSTER_TYPES.has(b.monster.type)||!!majorBossByType(b.monster.type))?'hidden':'';
+ if(b.monster.boss&&!art.dataset.playingAnimation)$('boss-crown').style.visibility=(ARTICULATED_MONSTER_TYPES.has(b.monster.type)||!!megaBossByType(b.monster.type))?'hidden':'';
  const rest=b.phase==='rest';
  if(rest)$('battle-message').textContent='Котёнок отдыхает дома';
  else if(b.phase==='fight'&&performance.now()>lastBattleMessage)$('battle-message').textContent=p.autoEnabled?'Автобой · '+autoHitsPerSecond(p)+' ударов/с':'Нажми на монстра · ручной бой 3/с';$('surface').classList.toggle('resting',rest);$('hero-art').classList.toggle('resting-hero',rest);updateSleepDrawing(rest);
