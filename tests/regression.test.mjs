@@ -106,7 +106,7 @@ test('все восемь базовых небоссовых типов, вкл
 });
 test('2000-я волна завершается единожды и прогресс не выходит за 2000',()=>{
  const p=c.freshProgress();p.room=2000;p.best=1999;p.sword=1000;p.armor=1000;
- const b=c.startFight(p);const events=[];
+ const b=c.startFight(p);b.enemyHp=1;const events=[];
  for(let i=0;i<150;i++)events.push(...c.stepFight(p,b,.1));
  assert.equal(events.filter(e=>e.kind==='win'&&e.firstClear).length,1);
  assert.equal(p.room,2000);assert.equal(p.best,2000);assert.equal(p.cleared,true);
