@@ -23,7 +23,7 @@ export const WEAPONS=[
 export const ARMORS=[
  {id:'none',name:'Без брони',price:0,health:0,svg:''},
  {id:'forest_guardian',name:'Лесной страж',price:50,health:0,fullCharacter:true,svg:'assets/costumes/forest_guardian/attack_01.png'},
- {id:'steel_knight',name:'Стальной рыцарь',price:50,health:0,fullCharacter:true,svg:'assets/costumes/steel_knight/attack_01.png'},
+ {id:'steel_knight',name:'Золотой рыцарь',price:50,health:0,fullCharacter:true,svg:'assets/costumes/steel_knight/attack_01.png'},
  {id:'thorn_ranger',name:'Терновый следопыт',price:50,health:0,fullCharacter:true,svg:'assets/costumes/thorn_ranger/attack_01.png'},
  {id:'moon_mage',name:'Лунный чародей',price:50,health:0,fullCharacter:true,svg:'assets/costumes/moon_mage/attack_01.png'},
  {id:'ember_guard',name:'Огненный страж',price:50,health:0,fullCharacter:true,svg:'assets/costumes/ember_guard/attack_01.png'},

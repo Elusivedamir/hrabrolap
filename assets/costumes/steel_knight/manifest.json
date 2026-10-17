@@ -1,57 +1,84 @@
 {
-  "id": "steel_knight",
-  "name": "Стальной рыцарь",
+  "armor_id": "steel_knight",
+  "name": "Золотой рыцарь",
   "price": 50,
-  "type": "complete-character",
+  "content": "complete-character",
+  "approved_source": true,
+  "source_archive": "incoming/approved_knight.zip",
+  "source_sha256": "8c06911f15e0f7773983aa463d09126c08c482c5b30e110b57604a8c8b378a04",
   "sword": "separate-svg",
   "frames": [
     {
       "file": "attack_01.png",
-      "sha256": "589803e5df78e5284d30c82d521f9d0b7850919bd9ae43bf384f66d6d5546dfe"
+      "sha256": "492bc7d958f9bff0f06eb1cef2a234d5200d5474cc2b60313a4465e032dfeab0",
+      "width": 279,
+      "height": 370
     },
     {
       "file": "attack_02.png",
-      "sha256": "4c17a8fe2a1faa187566e9d63c15cb9673442621c9f59cabfd3ef8d5db712f60"
+      "sha256": "eec61afaab09e42d6abc943467c0367e09bc86c251f138b418dbc5181c269f01",
+      "width": 279,
+      "height": 370
     },
     {
       "file": "attack_03.png",
-      "sha256": "64d40f6bc2af52c85c9be2eb6b75ebc86dbc3e0dacb20c56de1697a27e01fbb1"
+      "sha256": "b044a3a8b09acf21cdec804a86297ab30191ab7dc573993e543a085fc9396a2d",
+      "width": 279,
+      "height": 370
     },
     {
       "file": "attack_04.png",
-      "sha256": "641762dfce3c9ccca0f62ebdc998c6513913faae26a16752d13da36335b0440e"
+      "sha256": "e71aefd7ae7fec2b72dc80709401fa49d1f00cf68031180420e6f6fe88a7dcdc",
+      "width": 279,
+      "height": 370
     },
     {
       "file": "attack_05.png",
-      "sha256": "251fb920cbfb5e8cc4f46afcb0d174f33923030c8b577109b764e31fb092d599"
+      "sha256": "169827e6157bd87e3561e45a63b5a1e2fbe410ec3128692d7a60c8bac2df617d",
+      "width": 279,
+      "height": 370
     },
     {
       "file": "attack_06.png",
-      "sha256": "c6fa5cd1f215e178cc454ffecce5b7b2e4eb72d3a056d8a763e9bcd07f4e9bce"
+      "sha256": "9293653d0e4cf2c18e33117af26de19f0ecf42b27406c401261bd6a562251a06",
+      "width": 279,
+      "height": 370
     },
     {
       "file": "hurt_01.png",
-      "sha256": "74df4a9ae77a512f2b11c3e3e8b6603d3b2ab4b7ea4001d6c320e64c10bd0704"
+      "sha256": "e5ae936dc78a7fe2879cf3d2aaa41e59e721f6c333e15a9a8f35208514f40e56",
+      "width": 279,
+      "height": 370
     },
     {
       "file": "hurt_02.png",
-      "sha256": "ca0c5532400ea4df5e11f6936dad19e89c0fe03cb0e087b7b9d017a4b800a8be"
+      "sha256": "b0f4442b80d6be31cbc4280d8545417c2187ae410df205c3fbeee04ead890d4b",
+      "width": 279,
+      "height": 370
     },
     {
       "file": "hurt_03.png",
-      "sha256": "1770b753c2b4cdc444ef155aedea49ab15f5615040dab07d8ad6b994bedbaacd"
+      "sha256": "57ddad2fa49594122409b0f4c223c296620a97bc2a97c9d480aea33b436811a1",
+      "width": 279,
+      "height": 370
     },
     {
       "file": "hurt_04.png",
-      "sha256": "5922132f9accc766ccbdcddd0562516221c13e2e43219f53d4db21a0d5a33517"
+      "sha256": "02dd80ede8988e8b2182c42b8447694e8d8606dabfced0482819311b35682fed",
+      "width": 279,
+      "height": 370
     },
     {
       "file": "hurt_05.png",
-      "sha256": "5e6764f12737d389eb81f30ec7ad8d8149f85c2796e1f90d0cef128271409054"
+      "sha256": "c9cfc77f1fc8c2d680779e41f04c821b31ecf512a02491fb33287720f40ab0fa",
+      "width": 279,
+      "height": 370
     },
     {
       "file": "hurt_06.png",
-      "sha256": "cdc66693863ffca8e9874cd46e9c43a9540dbfa13a0387731144aadcdb792d2c"
+      "sha256": "34050674a5b891e146e5feaac289974bd8dbac5a6beb3f7a3f2ec93e0d1f2179",
+      "width": 279,
+      "height": 370
     }
   ]
 }
