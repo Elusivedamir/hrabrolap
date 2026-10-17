@@ -489,12 +489,12 @@ test('merchant test mode shows cat every 15 seconds without changing regular sav
  const p=c.freshProgress();p.merchantPhase='away';p.merchantMs=300000;
  const page=await pageFor(p,undefined,{merchantTest:true});
  assert.equal(await page.locator('#merchant').isVisible(),false);
- await page.clock.runFor(15030);
+ await page.clock.runFor(18000); // sample inside the 15–20s visit, not on a RAF boundary
  assert.equal(await page.locator('#merchant').isVisible(),true);
  await shot(page,'merchant-debug-after-15s');
- await page.clock.runFor(5030);
+ await page.clock.runFor(5000);
  assert.equal(await page.locator('#merchant').isVisible(),false);
- await page.clock.runFor(10030);
+ await page.clock.runFor(10000);
  assert.equal(await page.locator('#merchant').isVisible(),true);
  const raw=await saved(page);
  assert.equal(raw.merchantMs,300000);
