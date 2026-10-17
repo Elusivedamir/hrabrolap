@@ -21,3 +21,9 @@ test('gear is independent of kitten and has an anchor for every pose',()=>{
  assert.ok(markup.includes('id="hero-armor"'));
  assert.ok(markup.includes('assets/canonical/attack_01.png'));
 });
+
+test('fourth hurt pose keeps weapon grip in paw and blade angled away from face',()=>{
+ const [x,y,angle,scale]=WEAPON_HANDLES.hurt[3];
+ assert.equal(x,82);assert.equal(y,201);
+ assert.equal(angle,-55);assert.equal(scale,.62);
+});
