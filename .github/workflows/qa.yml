@@ -1,7 +1,7 @@
 name: Hrabrolap QA
 on: [push, pull_request, workflow_dispatch]
 permissions:
-  contents: write
+  contents: read
 jobs:
   gameplay:
     runs-on: ubuntu-latest
@@ -15,6 +15,8 @@ jobs:
       - run: python3 -m pip install Pillow==11.3.0
       - name: Rebuild refined Forest Guardian display frames
         run: python3 tools/refine_forest_guardian.py
+      - name: Verify protected approved assets were not changed by build steps
+        run: git diff --exit-code -- assets/canonical/ art/approved/ tests/locked-art-shas.json
       - run: npm test
       - run: npm run qa:balance
       - run: npx playwright install --with-deps chromium
@@ -52,30 +54,3 @@ jobs:
         with:
           name: hrabrolap-v0.9.7
           path: hrabrolap-v0.9.7-visual-review.zip
-
-      - name: Publish v0.9.7 tag after successful main QA
-        if: success() && github.ref == 'refs/heads/main' && github.event_name == 'push'
-        run: |
-          if [ "$(node -p "require('./package.json').version")" != "0.9.7" ]; then
-            echo "Skip tagging: release version is not 0.9.7"
-            exit 0
-          fi
-          if git ls-remote --exit-code --tags origin refs/tags/v0.9.7 >/dev/null 2>&1; then
-            echo "v0.9.7 tag already exists; leave it unchanged"
-            exit 0
-          fi
-          git tag v0.9.7
-          git push origin refs/tags/v0.9.7
-
-      - name: Publish reviewed Forest Guardian graphics on main
-        if: success() && github.ref == 'refs/heads/main' && github.event_name == 'push'
-        run: |
-          git add assets/clean/forest_guardian/
-          if git diff --cached --quiet; then
-            echo "Forest Guardian graphic files already current."
-            exit 0
-          fi
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git commit -m "art: ship Forest Guardian v2 cleaned 12-frame costume [skip ci]"
-          git push origin HEAD:main
