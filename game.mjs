@@ -12,7 +12,7 @@ import {bucketArt,sleepFrameIndex,SLEEP_FRAMES} from './bucket-rest.mjs';
 import {applyCanonicalFrame} from './canonical-sprites.mjs';
 import {FOREST_GUARDIAN_ID} from './forest-guardian-rig.mjs';
 import {armorAttackTransform,armorHurtTransform,hurtMotionTransform,hurtWeaponTransform,HURT_FRAMES,HURT_FRAME_MS} from './equipment-rig.mjs';
-import {WEAPONS,ARMORS,MATERIALS,WAVE_COUNT,freshProgress,validateProgress,restoreFight,swordCost,armorCost,fishCost,homeCost,bucketCost,bucketCapacity,heroDamage,maxHealth,startFight,stepFight,upgrade,buyEquipment,equipEquipment,offlineReward,bucketVolume,bucketGold,planFishing,stepFishing,stepMerchant,sellAll,purchaseAutoBattle,upgradeAttackSpeed,autoHitsPerSecond,autoUpgradeCost,MAX_AUTO_LEVEL,attackInterval,setEnchantment,tapMonster} from './game-core.mjs';
+import {WEAPONS,ARMORS,MATERIALS,WAVE_COUNT,freshProgress,validateProgress,restoreFight,swordCost,armorCost,fishCost,homeCost,bucketCost,bucketCapacity,heroDamage,maxHealth,startFight,stepFight,upgrade,buyEquipment,equipEquipment,offlineReward,bucketVolume,bucketGold,planFishing,stepFishing,stepMerchant,sellAll,purchaseAutoBattle,upgradeAttackSpeed,autoHitsPerSecond,autoUpgradeCost,MAX_AUTO_LEVEL,MAX_FISH_LEVEL,MAX_HOME_LEVEL,attackInterval,setEnchantment,tapMonster} from './game-core.mjs';
 const $=id=>document.getElementById(id), SAVE='hrabrolap-v0.2-save',OLD='hrabrolap-v0.1-save',fmt=n=>Math.floor(n).toLocaleString('ru-RU');
 let p,b,modalType='',last=performance.now(),lastSave=0,lastAutosave=0,msgTimeout=0,toastTimeout=0,lastFrameRest=false;
 const heartsRoot=$('hero-hearts');
@@ -194,7 +194,16 @@ function render(){
  $('attack-speed-cost').textContent=p.autoLevel>=MAX_AUTO_LEVEL?'МАКСИМУМ · 6/с':'🪙 '+fmt(autoUpgradeCost(p.autoLevel));
  speedBtn.setAttribute('aria-label',p.autoLevel>=MAX_AUTO_LEVEL?'Скорость атаки максимально улучшена':'Улучшить скорость автоматической атаки до уровня '+(p.autoLevel+1)+' за '+autoUpgradeCost(p.autoLevel)+' монет');
  const info=[['sword',p.sword,swordCost(p.sword),'Меч','Урон '+heroDamage(p)+' → '+(heroDamage(p)+3)],['armor',p.armor,armorCost(p.armor),'Броня','HP '+maxHealth(p)+' → '+(maxHealth(p)+14)],['fish',p.fishLevel,fishCost(p.fishLevel),'Удочка','Более ценный улов'],['home',p.home,homeCost(p.home),'Домик','Быстрее отдых']];
- for(const [kind,lev,cost,label,description] of info){const id=kind==='home'?'home':kind;$(id+'-lvl').textContent='ур. '+lev;$(id+'-cost').textContent='🪙 '+fmt(cost);if(kind==='sword'||kind==='armor')$(kind+'-stat').textContent=description;const btn=$('buy-'+kind);btn.classList.toggle('can-buy',p.gold>=cost);btn.classList.toggle('cant-buy',p.gold<cost);btn.setAttribute('aria-label',`${label}: улучшить за ${cost} монет`);}
+ for(const [kind,lev,cost,label,description] of info){
+  const maximum=(kind==='fish'&&lev>=MAX_FISH_LEVEL)||(kind==='home'&&lev>=MAX_HOME_LEVEL);
+  $(kind+'-lvl').textContent=maximum?'МАКС · ур. '+lev:'ур. '+lev;
+  $(kind+'-cost').textContent=maximum?'МАКСИМУМ':'🪙 '+fmt(cost);
+  if(kind==='sword'||kind==='armor')$(kind+'-stat').textContent=description;
+  const btn=$('buy-'+kind);btn.disabled=maximum;
+  btn.classList.toggle('can-buy',!maximum&&p.gold>=cost);
+  btn.classList.toggle('cant-buy',maximum||p.gold<cost);
+  btn.setAttribute('aria-label',maximum?label+': достигнут максимум':label+': улучшить за '+cost+' монет');
+ }
  syncEquipment();
  updateBucketDrawing();$('fish-status').textContent=bucketVolume(p)>=bucketCapacity(p)?'Ведро заполнено · рыбалка ждёт':'Рыцарь рыбачит';
  const visiting=p.merchantPhase==='waiting';
@@ -208,7 +217,7 @@ function render(){
  $('merchant-visit').textContent=fmtTimer(p.merchantMs);
  $('merchant-status').textContent=visiting?'Торговец приехал!':'Торговец через '+fmtTimer(p.merchantMs);
 }
-function onUpgrade(kind){const result=upgrade(p,kind);if(!result.ok){notify(result.reason==='max'?'Ведро максимально улучшено':'Не хватает '+fmt((result.cost||0)-p.gold)+' монет');return;}
+function onUpgrade(kind){const result=upgrade(p,kind);if(!result.ok){notify(result.reason==='max'?({fish:'Удочка улучшена максимально',home:'Дом улучшен максимально',bucket:'Ведро улучшено максимально'}[kind]||'Достигнут максимум'):'Не хватает '+fmt((result.cost||0)-p.gold)+' монет');return;}
  // Deliberately DO NOT recreate the battle: hero HP is persistent across room changes and upgrades.
  notify(({sword:'Меч стал сильнее!',armor:'Максимальное HP выросло, но здоровье не восстановилось',fish:'Теперь можно поймать рыбу подороже!',home:'Дом стал уютнее · отдых быстрее'})[kind]);
  if(kind==='sword'||kind==='armor')pulse($('hero-art'),'upgrade-glow',750);
