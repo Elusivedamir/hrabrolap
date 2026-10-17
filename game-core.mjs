@@ -1,4 +1,5 @@
 import {WEAPONS,ARMORS,MATERIALS} from './equipment-catalog.mjs';
+import {megaBossForWave} from './mega-bosses.mjs';
 export {WEAPONS,ARMORS,MATERIALS} from './equipment-catalog.mjs';
 // Храбролап v0.8.1 — исправления HP, миграции и восстановления сохранений.
 export const VERSION=5;
@@ -23,7 +24,11 @@ export function monsterForWave(level){
  // Keep waves 1-100 exactly as players know them; 101-700 scale steadily.
  const baseHp=n<=100?17+4.8*n+n**1.34:(17+480+100**1.34)*(1+.006*after+.000008*after*after);
  const hp=Math.round(baseHp*(boss?2.25:1));
- return {...model,name:(boss?'Король · ':'')+model.name,boss,hp,attack:Math.ceil((n<=100?1+n*.34:35*(1+.003*after+.000002*after*after))*(boss?1.42:1)),reward:Math.round((n<=100?8+n*3.8+n**1.2*.38:(8+380+100**1.2*.38)*(1+.019*after+.000018*after*after))*(boss?3:1))};
+ const baseAttack=Math.ceil((n<=100?1+n*.34:35*(1+.003*after+.000002*after*after))*(boss?1.42:1));
+ const baseReward=Math.round((n<=100?8+n*3.8+n**1.2*.38:(8+380+100**1.2*.38)*(1+.019*after+.000018*after*after))*(boss?3:1));
+ const major=megaBossForWave(n);
+ if(major)return {...model,...major,type:major.id,texture:major.id,boss:true,megaboss:true,hp:Math.round(hp*1.42),attack:Math.ceil(baseAttack*1.07),reward:Math.round(baseReward*1.65)};
+ return {...model,name:(boss?'Король · ':'')+model.name,boss,megaboss:false,hp,attack:baseAttack,reward:baseReward};
 }
 // В обычных боях шанс паука 30%. Прежний регулярный слот паука
 // отдан скелету; боссы на каждой 10-й волне остаются без изменений.
@@ -36,8 +41,12 @@ export function spawnMonsterForWave(level,r=Math.random){
 export const ENEMIES=Array.from({length:WAVE_COUNT},(_,i)=>monsterForWave(i+1));
 export const swordCost=n=>Math.round(n<=35?20*1.17**n:20*1.17**35*(1+.039*(n-35))**2);
 export const armorCost=n=>Math.round(n<=35?35*1.16**n:35*1.16**35*(1+.039*(n-35))**2);
-export const fishCost=n=>Math.round(45*1.24**n);
-export const homeCost=n=>Math.round(65*1.23**n);
+// Fishing stays worthwhile without exponential dead-ends at high levels.
+export const MAX_FISH_LEVEL=30;
+export const fishCost=n=>Math.round(45*1.12**Math.min(MAX_FISH_LEVEL,Math.max(0,n)));
+// Rest bottoms out at 2.5s around level 13: buying beyond is wasteful.
+export const MAX_HOME_LEVEL=13;
+export const homeCost=n=>Math.round(65*1.23**Math.min(MAX_HOME_LEVEL,Math.max(0,n)));
 export const bucketCost=()=>320;
 // 0 => 1 hit/sec, 20 => 2, ... 100 => 6 hits/sec. Manual mode is always 3 hits/sec.
 export const MAX_AUTO_LEVEL=100;
@@ -61,9 +70,9 @@ const equipped=(arr,id)=>arr.find(x=>x.id===id)||arr[0];
 export const heroDamage=p=>8+3*p.sword+equipped(WEAPONS,p.weapon).damage;
 export const maxHealth=p=>65+14*p.armor+equipped(ARMORS,p.equippedArmor).health;
 export const restDuration=p=>Math.max(2.5,7-p.home*.35);
-export function battleRate(p){const m=monsterForWave(Math.max(1,Math.min(WAVE_COUNT,p.best||1)));return Math.floor(m.reward*60/Math.max(4,Math.ceil(m.hp/heroDamage(p))*1.3+1.1));}
+export function battleRate(p){const m=monsterForWave(Math.max(1,Math.min(WAVE_COUNT,p.best&&p.best%10===0?p.best-1:p.best||1)));return Math.floor(m.reward*60/Math.max(4,Math.ceil(m.hp/heroDamage(p))*1.3+1.1));}
 export function freshProgress(){return {version:VERSION,gold:0,sword:0,armor:0,fishLevel:0,home:0,bucketLevel:0,weapon:'iron',equippedArmor:'none',ownedWeapons:['iron'],ownedArmors:['none'],room:1,best:0,fails:0,farming:false,cleared:false,kills:0,totalGold:0,killedSlimes:0,caughtTotal:0,soldFish:0,soldPike:0,spentSword:0,autoUnlocked:false,autoEnabled:false,autoLevel:0,enchantment:'none',
-  monsterKills:Object.fromEntries(MONSTERS.map(m=>[m.type,0])),bossKills:0,lightningHits:0,poisonKills:0,vampireHeals:0,
+  monsterKills:Object.fromEntries(MONSTERS.map(m=>[m.type,0])),megaBossWins:[],achievementClaimed:[],bossKills:0,lightningHits:0,poisonKills:0,vampireHeals:0,
   materials:Object.fromEntries(MATERIALS.map(m=>[m.id,0])),fishBucket:[],catchPlan:[],nextCatchMs:0,merchantPhase:'away',merchantMs:300000,lastSeen:0,pendingOffline:0,questClaimed:[]};}
 const int=(v,lo,hi,d=lo)=>Number.isFinite(v)?Math.max(lo,Math.min(hi,Math.floor(v))):d;
 export function validateProgress(raw){
@@ -87,6 +96,8 @@ export function validateProgress(raw){
   p.merchantMs=int(raw.merchantMs,0,300000,300000);
   p.lastSeen=Number.isFinite(raw.lastSeen)?Math.min(Date.now(),Math.max(0,raw.lastSeen)):0;
   p.questClaimed=Array.isArray(raw.questClaimed)?raw.questClaimed.filter(x=>Number.isInteger(x)&&x>=0&&x<40).slice(0,40):[];
+  p.achievementClaimed=Array.isArray(raw.achievementClaimed)?[...new Set(raw.achievementClaimed.filter(x=>Number.isInteger(x)&&x>=0&&x<100))].slice(0,100):[];
+  p.megaBossWins=Array.isArray(raw.megaBossWins)?[...new Set(raw.megaBossWins.filter(x=>Number.isInteger(x)&&x>=50&&x<=700&&x%50===0))]:[];
  }
  if(raw.version>=3){
   p.ownedWeapons=[...new Set(['iron',...(Array.isArray(raw.ownedWeapons)?raw.ownedWeapons:[]).filter(id=>WEAPONS.some(w=>w.id===id))])];
@@ -123,7 +134,7 @@ export function restoreFight(p,raw,completedLegacyChapter=false){
  if(b.phase==='fight'&&b.hp===0){b.phase='rest';b.rest=restDuration(p);}
  return b;
 }
-export function upgrade(p,kind){const info={sword:['sword',swordCost],armor:['armor',armorCost],fish:['fishLevel',fishCost],home:['home',homeCost],bucket:['bucketLevel',bucketCost]}[kind];if(!info)return {ok:false};const [field,priceFunc]=info;if(kind==='bucket'&&p.bucketLevel>0)return {ok:false,reason:'max'};
+export function upgrade(p,kind){const info={sword:['sword',swordCost],armor:['armor',armorCost],fish:['fishLevel',fishCost],home:['home',homeCost],bucket:['bucketLevel',bucketCost]}[kind];if(!info)return {ok:false};const [field,priceFunc]=info;if((kind==='bucket'&&p.bucketLevel>0)||(kind==='fish'&&p.fishLevel>=MAX_FISH_LEVEL)||(kind==='home'&&p.home>=MAX_HOME_LEVEL))return {ok:false,reason:'max'};
  const cost=priceFunc(p[field]);if(p.gold<cost)return {ok:false,cost};p.gold-=cost;p[field]++;if(kind==='sword')p.spentSword++;
  if(kind==='sword'||kind==='armor'){p.fails=0;p.farming=false;}
  return {ok:true,cost};}
@@ -163,16 +174,20 @@ export function setEnchantment(p,kind){
 }
 function winFight(p,b,ev,source){
  if(b.phase!=='fight'||b.enemyHp>0)return false;
- const gold=b.monster.reward;p.gold+=gold;p.totalGold+=gold;p.kills++;
+ // Repeat clears yield less gold. Prevents infinite premium-boss farm loops.
+ const firstClear=!p.farming&&!p.cleared&&b.level===p.room&&b.level>p.best;
+ const multiplier=firstClear?1:b.monster.megaboss?.35:b.monster.boss?.50:.75;
+ const gold=Math.max(1,Math.round(b.monster.reward*multiplier));
+ p.gold+=gold;p.totalGold+=gold;p.kills++;
  if(b.monster.type==='slime')p.killedSlimes++;
  if(p.monsterKills && b.monster.type in p.monsterKills)p.monsterKills[b.monster.type]++;
  if(b.monster.boss)p.bossKills++;
+ if(b.monster.megaboss&&firstClear&&!p.megaBossWins.includes(b.level))p.megaBossWins.push(b.level);
  if(source==='poison')p.poisonKills++;
  const materialByMonster={spider:'web',slime:'slime',skeleton:'bone',larva:'leaf',mushroom:'leaf',beetle:'chitin',ghost:'essence'};
  const material=materialByMonster[b.monster.type]||null;
  const loot=material?{id:material,amount:1}:null;
  if(loot)p.materials[loot.id]=(p.materials[loot.id]||0)+loot.amount;
- const firstClear=!p.farming&&!p.cleared&&b.level===p.room&&b.level>p.best;
  if(firstClear){p.best=Math.max(p.best,b.level);p.fails=0;if(b.level===WAVE_COUNT){p.cleared=true;p.room=WAVE_COUNT;}else p.room=b.level+1;}
  b.phase='transition';b.rest=1.15;b.poisonRemaining=0;
  ev.push({kind:'win',gold,loot,level:b.level,firstClear});
@@ -180,13 +195,15 @@ function winFight(p,b,ev,source){
 }
 function hitEnemy(p,b,ev){
  const element=p.enchantment||'none',base=heroDamage(p);
- const extra=element==='lightning'?Math.max(1,Math.ceil(base*.35)):0;
+ // Lightning resistance changes only the enchantment bonus, not sword damage.
+ const multiplier=b.monster.lightningMultiplier??1;
+ const extra=element==='lightning'?Math.ceil(base*.35*multiplier):0;
  const damage=Math.min(b.enemyHp,base+extra);
  b.enemyHp=Math.max(0,b.enemyHp-damage);
- if(element==='poison'){b.poisonRemaining=Math.max(b.poisonRemaining||0,4);b.poisonTick=0;}
- if(element==='lightning')p.lightningHits++;
+ if(element==='poison'&&b.monster.immunity!=='poison'){b.poisonRemaining=Math.max(b.poisonRemaining||0,4);b.poisonTick=0;}
+ if(element==='lightning'&&extra>0)p.lightningHits++;
  let healed=0;
- if(element==='vampirism'){healed=Math.min(maxHealth(p)-b.hp,Math.max(1,Math.floor(damage*.3)));b.hp+=healed;if(healed>0)p.vampireHeals++;}
+ if(element==='vampirism'&&b.monster.immunity!=='vampirism'){healed=Math.min(maxHealth(p)-b.hp,Math.max(1,Math.floor(damage*.3)));b.hp+=healed;if(healed>0)p.vampireHeals++;}
  ev.push({kind:'hero-hit',damage,element,healed});
  winFight(p,b,ev,'sword');
 }
