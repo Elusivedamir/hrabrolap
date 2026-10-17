@@ -312,4 +312,4 @@ export function stepMerchant(p,ms,tradeOpen=false,testMode=false){
  }
  return ev;
 }
-export function sellAll(p){if(p.merchantPhase!=='waiting'||p.fishBucket.length===0)return {ok:false};const sum=bucketGold(p),count=p.fishBucket.length,pikes=p.fishBucket.filter(f=>f.species==='Щука').length;p.gold+=sum;p.totalGold+=sum;p.soldFish+=count;p.soldPike+=pikes;p.fishBucket=[];p.catchPlan=[];p.nextCatchMs=0;p.merchantPhase='away';p.merchantMs=300000;return {ok:true,gold:sum,count,pikes};}
+export function sellAll(p,testMode=false){if(p.merchantPhase!=='waiting'||p.fishBucket.length===0)return {ok:false};const sum=bucketGold(p),count=p.fishBucket.length,pikes=p.fishBucket.filter(f=>f.species==='Щука').length;p.gold+=sum;p.totalGold+=sum;p.soldFish+=count;p.soldPike+=pikes;p.fishBucket=[];p.catchPlan=[];p.nextCatchMs=0;p.merchantPhase='away';p.merchantMs=testMode?15000:300000;return {ok:true,gold:sum,count,pikes};}
