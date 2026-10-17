@@ -2,14 +2,14 @@ import assert from 'node:assert/strict';
 import {freshProgress,validateProgress,startFight,stepFight,upgrade,heroDamage,maxHealth,ENEMIES,MONSTERS,WEAPONS,ARMORS,buyEquipment,equipEquipment,bucketCapacity,bucketVolume,planFishing,stepFishing,stepMerchant,sellAll,offlineReward,monsterForWave,fishCost,swordCost,armorCost} from '../game-core.mjs';
 assert.equal(ENEMIES.length,700);
 assert.equal(MONSTERS.length,10);
-assert.equal(new Set(ENEMIES.map(e=>e.type)).size,10);
+assert.equal(new Set(ENEMIES.map(e=>e.type)).size,24);
 for (let n=1;n<=700;n++) {
  const e=monsterForWave(n);
  assert.ok(e.hp>0 && e.attack>0 && e.reward>0);
  assert.equal(e.boss,n%10===0);
  if(n>1)assert.ok(e.hp>monsterForWave(n-1).hp || n%10===1,`wave ${n} HP`);
 }
-for (let n=10;n<=700;n+=10){const e=monsterForWave(n),base=MONSTERS.find(x=>x.type===e.type);assert.ok(base);assert.equal(e.texture,base.texture);}
+for (let n=10;n<=700;n+=10){const e=monsterForWave(n),base=MONSTERS.find(x=>x.type===e.type);if(n%50===0){assert.equal(e.megaboss,true);}else{assert.ok(base);assert.equal(e.texture,base.texture);}}
 const p=freshProgress();assert.equal(p.weapon,'iron');assert.equal(p.equippedArmor,'none');assert.equal(heroDamage(p),8);assert.equal(maxHealth(p),65);
 const b=startFight(p),initial=b.hp;
 p.gold=110;assert.equal(upgrade(p,'sword').ok,true);assert.equal(upgrade(p,'armor').ok,true);assert.equal(heroDamage(p),11);assert.equal(maxHealth(p),79);assert.equal(b.hp,initial,'upgrades do not heal');
