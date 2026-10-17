@@ -244,3 +244,16 @@
 .fish-details small{margin-top:4px;font-size:.82em;color:#827058}
 .fish-row .fish-price{flex:0 0 auto;white-space:nowrap;font-size:.9em}
 @media(max-width:360px){.fish-row{gap:6px}.fish-row .fish-portrait{flex-basis:60px;width:60px;height:48px}.fish-details small{font-size:.75em}}
+
+/* Crown is anchored to each monster's head, not to the enemy HP row. */
+.enemy-holder .boss-crown{position:absolute;left:var(--crown-x,50%);top:var(--crown-y,16%);width:var(--crown-w,34%);height:auto;aspect-ratio:130/80;max-height:none;z-index:8;transform:translate(-50%,-50%);transform-origin:50% 85%;pointer-events:none;filter:drop-shadow(0 2px 1px #242b3c)}
+.enemy-holder[data-monster="slime"]{--crown-x:50%;--crown-y:22%;--crown-w:35%}
+.enemy-holder[data-monster="mouse"]{--crown-x:42%;--crown-y:17%;--crown-w:31%}
+.enemy-holder[data-monster="mushroom"]{--crown-x:50%;--crown-y:16%;--crown-w:34%}
+.enemy-holder[data-monster="bat"]{--crown-x:49%;--crown-y:16%;--crown-w:28%}
+.enemy-holder[data-monster="spider"]{--crown-x:49%;--crown-y:26%;--crown-w:27%}
+.enemy-holder[data-monster="larva"]{--crown-x:28%;--crown-y:38%;--crown-w:28%}
+.enemy-holder[data-monster="beetle"]{--crown-x:50%;--crown-y:21%;--crown-w:28%}
+.enemy-holder[data-monster="ghost"]{--crown-x:51%;--crown-y:22%;--crown-w:34%}
+.enemy-holder[data-monster="skeleton"]{--crown-x:50%;--crown-y:20%;--crown-w:31%}
+.enemy-holder[data-monster="golem"]{--crown-x:50%;--crown-y:23%;--crown-w:33%}
