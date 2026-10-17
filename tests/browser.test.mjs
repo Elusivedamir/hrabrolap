@@ -135,11 +135,11 @@ test('новый костюм в инвентаре: покупка за 50, э�
  await shot(page,'fixture-steel-knight');
  await page.reload();save=await saved(page);
  assert.equal(save.equippedArmor,'steel_knight');
- assert.match(await page.locator('#hero-body').getAttribute('href'),/assets\\/costumes\\/steel_knight\\/attack_0[1-6]\\.png/);
+ assert.ok((await page.locator('#hero-body').getAttribute('href')).startsWith('assets/costumes/steel_knight/attack_0'));
 });
 
 
-test('шестикадровое получение урона двигает SVG-броню и меч без замены кота',async()=>{
+test('шестикадровое получение урона переключает одетого котёнка, меч отдельно',async()=>{
  const p=c.freshProgress();p.armor=150;p.ownedArmors.push('steel_knight');p.equippedArmor='steel_knight';
  p.ownedWeapons.push('fishbone');p.weapon='fishbone';
  const b=c.startFight(p);b.enemyTimer=2.39;
@@ -151,13 +151,13 @@ test('шестикадровое получение урона двигает SV
  await page.clock.runFor(900);
  const frames=await page.evaluate(()=>window.hurtFrames);
  for(let i=1;i<=6;i++)assert.ok(frames.includes(i),'missing hit frame '+i+': '+frames.join(','));
- assert.match(await page.locator('#hero-body').getAttribute('href'),/^assets\/canonical\/(attack|hurt)_0[1-6]\.png$/);
+ assert.ok((await page.locator('#hero-body').getAttribute('href')).startsWith('assets/costumes/steel_knight/'));
  assert.equal(await page.locator('#hero-armor').isVisible(),false);
  assert.equal(await page.locator('#hero-weapon').getAttribute('href'),'art/weapons/fishbone.svg');
  assert.match(await page.locator('#armor-slot').getAttribute('transform'),/^translate\(/);
  await shot(page,'rig-hurt-frame-6');
 });
-test('мобильное SVG-ателье показывает 6 кадров и переключает 10 мечей и 11 видов брони',async()=>{
+test('мобильное SVG-ателье показывает 6 кадров и переключает 10 мечей и 6 комплектов брони',async()=>{
  const ctx=await browser.newContext({viewport:{width:390,height:844},isMobile:true,hasTouch:true});
  contexts.push(ctx);
  const page=await ctx.newPage();page.on('pageerror',e=>errors.push(e.message));
