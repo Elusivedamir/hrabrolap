@@ -1,8 +1,8 @@
-/** Sixty-nine additional illustrated cave rooms + the original room.
+/** One hundred ninety-nine illustrated cave rooms + the original room.
  * Pure deterministic scene generation: no image assets, character art,
  * battle geometry, or accepted backgrounds are overwritten.
  */
-export const CAVE_ROOM_COUNT=70;
+export const CAVE_ROOM_COUNT=200;
 const PALETTES=Object.freeze([
  {name:'Старая пещера',rock:'#364559',shade:'#192635',floor:'#6b665e',light:'#f5b469',crystal:'#87bee1',glow:'#c5e9fd'},
  {name:'Синие кристаллы',rock:'#273b66',shade:'#111c39',floor:'#455078',light:'#85caf2',crystal:'#66bcff',glow:'#c6ebff'},
