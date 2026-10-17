@@ -461,3 +461,21 @@ test('cozy UI modals preserve fishing trade and 70-stage cave changes on mobile'
  }
  assert.deepEqual(errors,[]);
 });
+
+test('first fifty-wave mega-boss and achievement window render on mobile',async()=>{
+ const p=c.freshProgress();p.room=50;p.best=49;p.gold=250;
+ const page=await pageFor(p);
+ assert.match(await page.locator('#enemy-name').textContent(),/Моховой страж/);
+ assert.equal(await page.locator('#boss-resistance').isVisible(),true);
+ assert.match(await page.locator('#boss-resistance').textContent(),/яду/);
+ const img=await page.locator('#enemy-art').evaluate(async el=>{await el.decode();return {url:el.getAttribute('src'),w:el.naturalWidth,h:el.naturalHeight};});
+ assert.ok(img.url.startsWith('data:image/svg+xml'));
+ assert.ok(img.w>=180&&img.h>=180);
+ await shot(page,'megaboss-50-mobile');
+ await page.locator('#achievements').click();
+ assert.equal(await page.locator('#modal').getAttribute('data-mode'),'achievements');
+ assert.equal(await page.locator('.achievement-row').count(),24);
+ await shot(page,'achievements-24-mobile');
+ await page.locator('#modal-x').click();
+ assert.deepEqual(errors,[]);
+});
