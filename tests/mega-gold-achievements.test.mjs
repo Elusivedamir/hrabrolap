@@ -8,7 +8,7 @@ import {freshProgress,validateProgress,monsterForWave,startFight,stepFight,tapMo
 test('14 unique milestone bosses are placed at 50..700 and preserve normal attacks',()=>{
  assert.equal(MEGA_BOSSES.length,40);
  assert.equal(new Set(MEGA_BOSSES.map(x=>x.id)).size,40);
- for(let n=1;n<=2000;n++{
+ for(let n=1;n<=2000;n++){
   const m=monsterForWave(n);
   assert.equal(!!m.megaboss,n%50===0);
   if(n%50!==0)continue;
