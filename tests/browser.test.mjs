@@ -419,3 +419,24 @@ test('уровень 100 даёт ровно 6 автоударов/с, ручн
   await shot(page,auto?'auto-level-100-six-hits':'manual-cap-three-hits');
  }
 });
+
+
+test('серый торговец использует настоящий атлас 18 кадров и остаётся кликабельным',async()=>{
+ const p=c.freshProgress();p.merchantPhase='waiting';p.merchantMs=10000;
+ const page=await pageFor(p);
+ const merchant=page.locator('#merchant');
+ await page.locator('#merchant.atlas-ready').waitFor({timeout:5000});
+ assert.equal(await merchant.isVisible(),true);
+ assert.equal(await merchant.getAttribute('data-phase'),'idle');
+ const atlas=await page.evaluate(async()=>{
+  const image=new Image();image.src='art/merchant-animated.webp';await image.decode();
+  const sheet=document.querySelector('#merchant-sheet');
+  return {width:image.naturalWidth,height:image.naturalHeight,position:getComputedStyle(sheet).backgroundPosition,display:getComputedStyle(sheet).display};
+ });
+ assert.equal(atlas.width,1260);assert.equal(atlas.height,792);
+ assert.equal(atlas.display,'block');
+ assert.match(atlas.position,/%/);
+ await shot(page,'merchant-v2-mobile');
+ await merchant.click();assert.match(await page.locator('#modal-title').textContent(),/торговец/i);
+ assert.deepEqual(errors,[]);
+});
