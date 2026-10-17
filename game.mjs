@@ -28,7 +28,7 @@ if(MERCHANT_TEST_MODE){p.merchantPhase='away';p.merchantMs=15000;}
 if(!p.catchPlan.length && bucketVolume(p)<bucketCapacity(p))planFishing(p);
 function save(){try{p.lastSeen=Date.now();localStorage.setItem(SAVE,JSON.stringify({...p,merchantPhase:MERCHANT_TEST_MODE?'away':p.merchantPhase,merchantMs:MERCHANT_TEST_MODE?300000:p.merchantMs,battleState:{level:b.level,hp:b.hp,enemyHp:b.enemyHp,phase:b.phase,heroTimer:b.heroTimer,enemyTimer:b.enemyTimer,rest:b.rest,monsterType:b.monster.type,poisonRemaining:b.poisonRemaining||0,poisonTick:b.poisonTick||0}}));}catch(e){console.warn(e)}}
 function notify(t){const el=$('toast');el.textContent=t;el.classList.add('show');clearTimeout(toastTimeout);toastTimeout=setTimeout(()=>el.classList.remove('show'),2300)}
-function say(t,time=2200){$('battle-message').textContent=t;lastBattleMessage=performance.now()+time;clearTimeout(msgTimeout);msgTimeout=setTimeout(()=>{$('battle-message').textContent=b.phase==='rest'?'Котёнок отдыхает в домике':p.autoEnabled?'Автобой · '+autoHitsPerSecond(p)+' ударов/с':'Нажми на монстра · ручной бой 3/с'},time)}
+function say(t,time=2200){$('battle-message').textContent=t;lastBattleMessage=performance.now()+time;clearTimeout(msgTimeout);msgTimeout=setTimeout(()=>{$('battle-message').textContent=b.phase==='rest'?'Котёнок отдыхает в домике':p.autoEnabled?'Автобой · '+autoHitsPerSecond(p).toFixed(2)+' ударов/с':'Нажми на монстра · ручной бой 3/с'},time)}
 function pulse(el,name,time=600){el.classList.remove(name);void el.offsetWidth;el.classList.add(name);setTimeout(()=>el.classList.remove(name),time)}
 
 // v0.8: one swordless hero body + one separate animated SVG weapon + independent armor.
@@ -161,7 +161,7 @@ function render(){
  if(cave.dataset.stage!==String(stage)){
   cave.dataset.stage=String(stage);
   $('cave-backdrop').src=caveBackgroundForWave(b.level);
-  $('cave-stage').textContent=`ЗАЛ ${stage}/70 · ${caveStageName(stage)}`;
+  $('cave-stage').textContent=`ЗАЛ ${stage}/200 · ${caveStageName(stage)}`;
  }
  $('enemy-name').textContent=b.monster.name;
  $('enemy-name').title=b.monster.resistanceText||'';
@@ -186,14 +186,14 @@ function render(){
  if(b.monster.boss&&!art.dataset.playingAnimation)$('boss-crown').style.visibility=(ARTICULATED_MONSTER_TYPES.has(b.monster.type)||!!megaBossByType(b.monster.type))?'hidden':'';
  const rest=b.phase==='rest';
  if(rest)$('battle-message').textContent='Котёнок отдыхает дома';
- else if(b.phase==='fight'&&performance.now()>lastBattleMessage)$('battle-message').textContent=p.autoEnabled?'Автобой · '+autoHitsPerSecond(p)+' ударов/с':'Нажми на монстра · ручной бой 3/с';$('surface').classList.toggle('resting',rest);$('hero-art').classList.toggle('resting-hero',rest);updateSleepDrawing(rest);
+ else if(b.phase==='fight'&&performance.now()>lastBattleMessage)$('battle-message').textContent=p.autoEnabled?'Автобой · '+autoHitsPerSecond(p).toFixed(2)+' ударов/с':'Нажми на монстра · ручной бой 3/с';$('surface').classList.toggle('resting',rest);$('hero-art').classList.toggle('resting-hero',rest);updateSleepDrawing(rest);
  const status=$('status');status.classList.toggle('rest',rest||p.farming);status.textContent=rest?'ОТДЫХ '+fmtTimer(b.rest*1000):p.cleared?'ГЛАВА ПРОЙДЕНА':p.autoEnabled?'АВТОБОЙ':p.autoUnlocked?'РУЧНОЙ БОЙ':'АВТОБОЙ · 1 🪙';
  const speedBtn=$('buy-attack-speed');
  speedBtn.disabled=p.autoLevel>=MAX_AUTO_LEVEL;
  speedBtn.classList.toggle('can-buy',p.gold>=autoUpgradeCost(p.autoLevel)&&p.autoLevel<MAX_AUTO_LEVEL);
  speedBtn.classList.toggle('cant-buy',p.gold<autoUpgradeCost(p.autoLevel)||p.autoLevel>=MAX_AUTO_LEVEL);
  $('attack-speed-lvl').textContent='ур. '+p.autoLevel+'/100';
- $('attack-speed-stat').textContent='Авто: '+autoHitsPerSecond(p)+' уд/с'+(p.autoLevel>=MAX_AUTO_LEVEL?' · максимум':(' · '+(autoHitsPerSecond(p)+1)+' уд/с на ур. '+(Math.floor(p.autoLevel/20)+1)*20));
+ $('attack-speed-stat').textContent='Авто: '+autoHitsPerSecond(p).toFixed(2)+' уд/с'+(p.autoLevel>=MAX_AUTO_LEVEL?' · максимум':(' → '+(autoHitsPerSecond(p)+.05).toFixed(2)+' уд/с на следующем уровне'));
  $('attack-speed-cost').textContent=p.autoLevel>=MAX_AUTO_LEVEL?'МАКСИМУМ · 6/с':'🪙 '+fmt(autoUpgradeCost(p.autoLevel));
  speedBtn.setAttribute('aria-label',p.autoLevel>=MAX_AUTO_LEVEL?'Скорость атаки максимально улучшена':'Улучшить скорость автоматической атаки до уровня '+(p.autoLevel+1)+' за '+autoUpgradeCost(p.autoLevel)+' монет');
  const info=[['sword',p.sword,swordCost(p.sword),'Меч','Урон '+heroDamage(p)+' → '+(heroDamage(p)+3)],['armor',p.armor,armorCost(p.armor),'Броня','HP '+maxHealth(p)+' → '+(maxHealth(p)+14)],['fish',p.fishLevel,fishCost(p.fishLevel),'Удочка','Более ценный улов'],['home',p.home,homeCost(p.home),'Домик','Быстрее отдых']];
@@ -341,7 +341,7 @@ function battleEvents(events){for(const ev of events){
  if(ev.kind==='enemy-hit'){playHurt();pulse($('hero-art'),'battle-hurt',HURT_FRAMES.length*HURT_FRAME_MS);enemyAttack(ev.move);}
  if(ev.kind==='win'){lastBattleMessage=performance.now()+1200;coinFx(ev.gold);
    const lootName=MATERIALS.find(x=>x.id===ev.loot?.id);
-   say(`Победа! +${ev.gold} монет`+(lootName?` · +1 ${lootName.name}`:''));pulse($('enemy-holder'),'dead',660);save();if(ev.firstClear&&ev.level===WAVE_COUNT)setTimeout(()=>openModal('700 волн пройдено!','info','Храбролап прошёл все 700 волн и исследовал 70 залов! Можно продолжать собирать добычу.'),600);
+   say(`Победа! +${ev.gold} монет`+(lootName?` · +1 ${lootName.name}`:''));pulse($('enemy-holder'),'dead',660);save();if(ev.firstClear&&ev.level===WAVE_COUNT)setTimeout(()=>openModal('2000 волн пройдено!','info','Храбролап победил 40 великих боссов и исследовал все 200 залов подземелья!'),600);
    else if(ev.firstClear&&ev.level%10===0){notify('Открыт новый зал пещеры!');}}
  if(ev.kind==='defeat'){lastBattleMessage=0;syncHeroPose();say('Котёнок возвращается домой отдохнуть');save();}
  if(ev.kind==='spawn'){cancelMonsterFrames();}
@@ -399,7 +399,7 @@ $('status').addEventListener('click',()=>{
 $('buy-attack-speed').addEventListener('click',()=>{
  const result=upgradeAttackSpeed(p);
  if(!result.ok){notify(result.reason==='max'?'Скорость атаки улучшена до максимума':'Для улучшения скорости нужно ещё '+fmt((result.cost||0)-p.gold)+' монет');return;}
- notify('Скорость автоатаки: уровень '+result.level+'/100 · '+result.hitsPerSecond+' ударов/с');
+ notify('Скорость автоатаки: уровень '+result.level+'/100 · '+result.hitsPerSecond.toFixed(2)+' ударов/с');
  save();render();
 });
 $('enemy-holder').addEventListener('click',()=>{
@@ -416,7 +416,7 @@ $('achievements').addEventListener('click',()=>openModal('Достижения',
 $('inventory').addEventListener('click',()=>openModal('Инвентарь','inventory'));
 $('shop').addEventListener('click',()=>openModal('Магазин','shop'));
 $('mini-shop').addEventListener('click',()=>openModal('Магазин','shop'));
-$('help').addEventListener('click',()=>openModal('Как играть','info','Нажимай на монстра, чтобы атаковать вручную — не более 3 ударов/с. Автобой покупается отдельно за 1 монету. Скорость автоатаки — самостоятельное улучшение в разделе «Улучшения», доступное сразу, даже до покупки автобоя: до 100 уровней и максимум 6 ударов/с. На ручной бой скорость не влияет. После победы здоровье НЕ восстанавливается. После поражения он отдыхает в домике и лечится. Рыбак сам ловит разную рыбу и складывает её в ведро. Каждые 5 минут приезжает торговец и ждёт 15 секунд. Нажми на торговца, чтобы продать улов. Рыбалка и визиты торговца полностью останавливаются, пока игра закрыта. Офлайн котёнок приносит только ограниченное количество монет.'));
+$('help').addEventListener('click',()=>openModal('Как играть','info','Нажимай на монстра, чтобы атаковать вручную — не более 3 ударов/с. Автобой покупается отдельно за 1 монету. Скорость автоатаки — самостоятельное улучшение в разделе «Улучшения», доступное сразу, даже до покупки автобоя: каждый уровень даёт +0,05 удара/с, максимум 6 ударов/с. На ручной бой скорость не влияет. После победы здоровье НЕ восстанавливается. После поражения он отдыхает в домике и лечится. Рыбак сам ловит разную рыбу и складывает её в ведро. Каждые 5 минут приезжает торговец и ждёт 15 секунд. Нажми на торговца, чтобы продать улов. Рыбалка и визиты торговца полностью останавливаются, пока игра закрыта. Офлайн котёнок приносит только ограниченное количество монет.'));
 $('reset').addEventListener('click',()=>openModal('Начать заново?','reset'));
 $('modal-x').addEventListener('click',closeModal);
 $('modal').addEventListener('cancel',e=>{e.preventDefault();if(modalType!=='offline')closeModal()});
