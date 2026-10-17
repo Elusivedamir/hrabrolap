@@ -43,3 +43,57 @@ test('P1 review page renders original hero, three separate rooms and 12 moss bos
  assert.deepEqual(errors,[]);
  } finally{await browser.close();}
 });
+
+test('approved P1 art renders in actual gameplay at waves 1, 41, 50 and 111',async()=>{
+ const {freshProgress}=await import('../game-core.mjs');
+ const {caveBackgroundForWave,caveStageName}=await import('../cave-themes.mjs');
+ const {megaBossFrameUrl}=await import('../mega-boss-art.mjs');
+ const checks=[
+  {wave:1,stage:1,name:'Каменный порог',room:'R001-stone-threshold.svg'},
+  {wave:41,stage:5,name:'Моховая сторожка',room:'R005-moss-outpost.svg'},
+  {wave:50,stage:5,name:'Моховая сторожка',room:'R005-moss-outpost.svg',boss:true},
+  {wave:111,stage:12,name:'Рунный тупик',room:'R012-rune-dead-end.svg'}
+ ];
+ const browser=await chromium.launch({headless:true});
+ try{
+  for(const c of checks){
+   assert.ok(caveBackgroundForWave(c.wave).endsWith(c.room));
+   assert.equal(caveStageName(c.stage),c.name);
+   const progress={...freshProgress(),room:c.wave,best:c.wave-1,autoUnlocked:false,autoEnabled:false,lastSeen:0};
+   const context=await browser.newContext({viewport:{width:390,height:844},isMobile:true,hasTouch:true});
+   try{
+    const page=await context.newPage(),errors=[];
+    page.on('pageerror',e=>errors.push(e.message));
+    page.on('console',msg=>{if(msg.type()==='error')errors.push(msg.text());});
+    await page.addInitScript(data=>{localStorage.setItem('hrabrolap-v0.2-save',JSON.stringify(data));},progress);
+    await page.goto(base,{waitUntil:'load'});
+    const back=page.locator('#cave-backdrop');
+    await page.waitForFunction(expected=>document.getElementById('cave-backdrop')?.getAttribute('src')?.endsWith(expected),c.room);
+    const size=await back.evaluate(async img=>{await img.decode();return [img.naturalWidth,img.naturalHeight]});
+    assert.deepEqual(size,[840,470],c.room);
+    await page.locator('#cave-stage').waitFor();
+    assert.match(await page.locator('#cave-stage').innerText(),new RegExp(c.name));
+    if(c.boss){
+      const sprite=page.locator('#enemy-art');
+      await page.waitForFunction(()=>document.getElementById('enemy-art')?.getAttribute('src')?.includes('boss-thorn-warden/attack_'),null,{timeout:10000});
+      const art=await sprite.evaluate(async img=>{await img.decode();return {src:img.getAttribute('src'),w:img.naturalWidth,h:img.naturalHeight}});
+      assert.equal(art.w,240);
+      assert.equal(art.h,245);
+      assert.ok(art.src.includes('boss-thorn-warden/attack_'));
+      assert.match(await page.locator('#enemy-name').innerText(),/Моховой страж/);
+      for(const phase of ['attack','hurt'])for(let n=0;n<6;n++){
+        const path=megaBossFrameUrl('thorn_warden',phase,n);
+        assert.match(path,new RegExp(phase+'_'+String(n+1).padStart(2,'0')+'\\.svg$'));
+        const img=await page.evaluate(async src=>{
+         const image=new Image();image.src=src;await image.decode();return [image.naturalWidth,image.naturalHeight];
+        },path);
+        assert.deepEqual(img,[240,245],path);
+      }
+    }
+    await fs.mkdir('qa/screenshots',{recursive:true});
+    await page.locator('#dungeon').screenshot({path:'qa/screenshots/p1-IN-GAME-'+c.wave+'-mobile.png'});
+    assert.deepEqual(errors,[],JSON.stringify(errors));
+   }finally{await context.close();}
+  }
+ }finally{await browser.close();}
+});
