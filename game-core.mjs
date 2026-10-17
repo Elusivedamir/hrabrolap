@@ -22,11 +22,15 @@ export function monsterForWave(level){
  const model=MONSTERS[(Math.floor((n-1)/10)*3+(n-1)%10)%10];
  const after=Math.max(0,n-100);
  // Keep waves 1-100 exactly as players know them; 101-700 scale steadily.
- const baseHp=n<=100?17+4.8*n+n**1.34:(17+480+100**1.34)*(1+.006*after+.000008*after*after);
+ const base100=17+480+100**1.34;
+ const hp700=base100*(1+.006*600+.000008*600**2);
+ const beyond=Math.max(0,n-700);
+ const baseHp=n<=100?17+4.8*n+n**1.34:n<=700?base100*(1+.006*after+.000008*after*after):hp700*(1+.0012*beyond+.0000005*beyond*beyond);
  const hp=Math.round(baseHp*(boss?2.25:1));
- const baseAttack=Math.ceil((n<=100?1+n*.34:35*(1+.003*after+.000002*after*after))*(boss?1.42:1)*(n>=50?1.18:1));
+ const atk700=35*(1+.003*600+.000002*600**2);
+ const baseAttack=Math.ceil((n<=100?1+n*.34:n<=700?35*(1+.003*after+.000002*after*after):atk700*(1+.00058*beyond))*(boss?1.42:1)*(n>=50?1.18:1));
  // Gold is a scarce upgrade resource, not a score counter. Bonuses are paid only once.
- const baseReward=Math.max(2,Math.round((n<=100?8+n*3.8+n**1.2*.38:(8+380+100**1.2*.38)*(1+.011*after+.000006*after*after))*(boss?2.3:1)*.48));
+ const baseReward=Math.max(2,Math.round((n<=100?8+n*3.8+n**1.2*.38:(8+380+100**1.2*.38)*(1+.003*after+.0000012*after*after))*(boss?2.3:1)*.55));
  const major=megaBossForWave(n);
  if(major)return {...model,...major,type:major.id,texture:major.id,boss:true,megaboss:true,hp:Math.round(hp*1.38),attack:Math.ceil(baseAttack*1.13),reward:Math.round(baseReward*1.28),bloodless:['golem','wraith','clockwork','guardian'].includes(major.family)||['bone_regent','granite_colossus','shadow_knight'].includes(major.id)};
  const bloodless=['ghost','golem','skeleton'].includes(model.type);
@@ -42,8 +46,8 @@ export function spawnMonsterForWave(level,r=Math.random){
  return {...original,...base,name:base.name,boss:false,immunity:bloodless?'poison':'',bloodless};
 }
 export const ENEMIES=Array.from({length:WAVE_COUNT},(_,i)=>monsterForWave(i+1));
-export const swordCost=n=>Math.round(n<=35?20*1.17**n:20*1.17**35*(1+.039*(n-35))**2);
-export const armorCost=n=>Math.round(n<=35?35*1.16**n:35*1.16**35*(1+.039*(n-35))**2);
+export const swordCost=n=>Math.max(1,Math.round(20*1.105**Math.min(35,Math.max(0,n))*(1+.005*Math.max(0,n-35))**1.5));
+export const armorCost=n=>Math.max(1,Math.round(35*1.09**Math.min(35,Math.max(0,n))*(1+.004*Math.max(0,n-35))**1.5));
 // Fishing stays worthwhile without exponential dead-ends at high levels.
 export const MAX_FISH_LEVEL=30;
 export const fishCost=n=>Math.round(45*1.12**Math.min(MAX_FISH_LEVEL,Math.max(0,n)));
