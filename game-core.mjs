@@ -242,7 +242,17 @@ export function stepFight(p,b,seconds,auto=true){
  return ev;
 }
 export function offlineReward(p,ms){const minutes=Math.min(480,Math.max(0,ms/60000)),raw=Math.floor(minutes*battleRate(p)*.5),next=Math.min(swordCost(p.sword),armorCost(p.armor));return Math.min(raw,Math.floor(next*1.1));}
-export const SPECIES=[
+// Fish sale prices follow the unlocked cave depth, but stay supplementary:
+ // baseline ~4-6% of combat earnings; upgraded rods may add ~10-12%.
+ export function fishMarketMultiplier(best){
+  const cleared=Math.max(0,Math.min(WAVE_COUNT,Math.floor(Number(best)||0)));
+  return Math.min(80,(1+cleared/100)**2);
+ }
+ export function fishingRodBonus(level){
+  const n=Math.max(0,Math.min(MAX_FISH_LEVEL,Math.floor(Number(level)||0)));
+  return 1+.11*Math.min(10,n)+.022*Math.max(0,n-10);
+ }
+ export const SPECIES=[
  {species:'Плотва',slots:1,base:8,min:12,max:25,weight:[.12,.45],length:[14,27]},
  {species:'Карась',slots:2,base:18,min:24,max:44,weight:[.45,1.2],length:[22,38]},
  {species:'Окунь',slots:2,base:27,min:30,max:51,weight:[.40,1.4],length:[23,42]},
@@ -257,7 +267,7 @@ export function planFishing(p,r=Math.random){
  const a=[];let remain=capacity;
  while(remain>0){const available=SPECIES.filter(x=>x.slots<=remain && (x.species!=='Золотой карп' || p.fishLevel>=3));const weighted=available.map(f=>({f,w:f.slots===1?6:f.slots===2?4:f.slots===3?1.5:.3}));let hit=r()*weighted.reduce((s,x)=>s+x.w,0);let s=weighted.at(-1).f;for(const w of weighted){hit-=w.w;if(hit<=0){s=w.f;break;}}
   const length=Math.round(rand(r,...s.length)),weight=+(rand(r,...s.weight)).toFixed(2);
-  const price=Math.max(1,Math.round(s.base*(.75+weight/s.weight[1]*.55)*(1+p.fishLevel*.11)));
+  const price=Math.max(1,Math.round(s.base*(.75+weight/s.weight[1]*.55)*fishingRodBonus(p.fishLevel)*fishMarketMultiplier(p.best)));
   a.push({species:s.species,slots:s.slots,weight,length,price,waitMs:rand(r,s.min,s.max)*1000});remain-=s.slots;
  }
  // Six active minutes for a fully empty baseline bucket, but randomized time between bites, weighted by fish size.
