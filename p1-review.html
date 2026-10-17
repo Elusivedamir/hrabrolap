@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Храбролап — P1 / художественная приёмка</title>
+<style>
+:root{color-scheme:light;--wood:#6b4430;--parchment:#ffeed0;--green:#466c51}
+*{box-sizing:border-box}body{font-family:system-ui,-apple-system,'Trebuchet MS',sans-serif;margin:0;background:#253542;color:#fff4da;line-height:1.4}
+header{padding:13px 17px;background:#65432f;border-bottom:4px solid #392e2a}
+h1{margin:0;font-size:19px}header small{color:#f1dcb4}.app{max-width:840px;margin:auto;padding:15px}
+.info{margin:0 0 13px;color:#f6e2bc;font-size:13px}
+.controls{display:flex;flex-wrap:wrap;gap:7px;margin:12px 0}
+button{border:2px solid #b68956;border-radius:9px;background:#efdfb8;color:#41382f;padding:10px;font:700 13px system-ui;cursor:pointer;min-height:44px}
+button.selected{background:#9dc37c;border-color:#d2f1b6;color:#293d30}
+.scene-frame{position:relative;border:7px solid #785b47;border-radius:13px;overflow:hidden;background:#293849;box-shadow:0 5px 0 #1a242e;aspect-ratio:840/470}
+.scene-frame img{position:absolute;user-select:none}
+#cave{inset:0;width:100%;height:100%;object-fit:fill}
+#hero{left:11%;bottom:7%;width:32%;height:72%;object-fit:contain;object-position:bottom;filter:drop-shadow(0 4px 2px #15262d99)}
+#boss{right:9%;bottom:6%;height:73%;width:34%;object-fit:contain;object-position:bottom;filter:drop-shadow(0 4px 2px #15262d99)}
+.scene-frame.no-fighters #hero,.scene-frame.no-fighters #boss{display:none}
+.scene-title{position:absolute;z-index:3;left:2%;top:3%;max-width:49%;background:#473e36de;padding:3px 8px;border:2px solid #d1ad75;border-radius:9px;font-size:clamp(10px,1.9vw,15px)}
+.boss-chip{position:absolute;z-index:3;right:2%;top:3%;background:#253527df;padding:4px 9px;border-radius:9px;border:2px solid #aad181;font-size:clamp(9px,1.8vw,14px)}
+#caption{margin:12px 0 16px;color:#d6e0c6;font-size:14px}
+.panel{background:#f7e4bd;color:#4a392d;border:4px solid #8f694d;border-radius:14px;padding:12px;margin:16px 0}
+.panel h2{font-size:17px;margin:0 0 5px}.panel p{font-size:13px;margin:8px 0}.frames{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:5px}
+.frame{position:relative;background:#9ba98655;border-radius:8px;border:2px solid #9c876b;padding:0;min-width:0;min-height:60px;aspect-ratio:1}
+.frame.active{border:3px solid #4b8c59;background:#daf2ad}
+.frame img{width:100%;height:100%;object-fit:contain}
+.frame span{position:absolute;right:2px;bottom:0;background:#f5e7c8;border-radius:4px;padding:0 3px;font-size:10px}
+footer{font-size:12px;color:#dfc9a6;padding:12px 0 24px}
+.badge{display:inline-block;padding:2px 6px;background:#e1cba7;color:#603e30;border-radius:6px}
+a{color:#b7e3e4}
+@media(max-width:400px){.app{padding:9px}.controls{gap:5px}.controls button{font-size:12px;padding:9px 7px}.frame{min-height:44px}.panel{padding:9px}.scene-title,.boss-chip{padding:2px 4px}}
+</style>
+</head><body>
+<header><h1>Храбролап • P1 / графический просмотрщик</h1><small>Кандидаты — без внедрения в игру. Принятого котёнка не меняем.</small></header>
+<main class="app">
+<p class="info"><span class="badge">PROTOTYPE / NOT APPROVED</span> Три пробных комнаты из первой главы и 12 отдельных SVG-кадров Мохового стража.</p>
+<div class="controls" id="room-buttons">
+<button data-room="R001" class="selected">R001 · Каменный порог</button>
+<button data-room="R005">R005 · Моховая сторожка</button>
+<button data-room="R012">R012 · Рунный тупик</button>
+</div>
+<div class="scene-frame" id="stage">
+<img id="cave" src="assets/prototypes/p1/R001-stone-threshold.svg" alt="Кандидат фона пещеры" />
+<img id="hero" src="assets/canonical/attack_01.png" alt="Оригинальный Храбролап, без изменений" />
+<img id="boss" src="assets/prototypes/p1/boss-thorn-warden/attack_01.svg" alt="Пробная модель Мохового стража" />
+<div class="scene-title" id="scene-title">R001 · Каменный порог</div>
+<div class="boss-chip">🌿 Моховой страж · яд не действует</div>
+</div>
+<div class="controls">
+<button id="toggle-actors">Скрыть героев / посмотреть фон</button>
+<button id="play" class="selected">⏸ Пауза</button>
+<button data-phase="attack" class="selected">Атака · 6 кадров</button>
+<button data-phase="hurt">Урон · 6 кадров</button>
+</div>
+<p id="caption">Зал R001 • этап P1. Модель босса — художественный кандидат. Бой в самой игре пока не изменён.</p>
+<section class="panel">
+<h2>12 покадровых поз Мохового стража</h2>
+<p>Выбирай отдельный кадр, чтобы проверить лапы, корни, глаза, растительность и непрерывность движения. Ни один из SVG не заменяет сейчас игровые кадры.</p>
+<div class="frames" id="frames"></div>
+</section>
+<section class="panel"><h2>Как оцениваем</h2>
+<p><b>Комнаты:</b> действительно ли различаются архитектура, крупные детали, настроение? Удобен ли фон для персонажей и сердечек HP?</p>
+<p><b>Босс:</b> похож ли на отдельную лесную тварь, а не на обычного слизня? Читается ли удар в сторону Храбролапа, не плавают ли лапы и глаза между кадрами?</p>
+<p><b>Обязательное условие:</b> это предварительный арт. Даже если технические тесты проходят, окончательное художественное утверждение — за пользователем.</p></section>
+</main><script type="module">
+const rooms={
+ R001:['Каменный порог','assets/prototypes/p1/R001-stone-threshold.svg'],
+ R005:['Моховая сторожка','assets/prototypes/p1/R005-moss-outpost.svg'],
+ R012:['Рунный тупик','assets/prototypes/p1/R012-rune-dead-end.svg']
+};
+const $=id=>document.getElementById(id);
+let room='R001',phase='attack',index=0,playing=true;
+const frameUrl=(p,i)=>'assets/prototypes/p1/boss-thorn-warden/'+p+'_'+String(i+1).padStart(2,'0')+'.svg';
+function render(){
+ $('cave').src=rooms[room][1];
+ $('scene-title').textContent=room+' · '+rooms[room][0];
+ $('boss').src=frameUrl(phase,index);
+ $('caption').textContent=room+' • '+rooms[room][0]+' · '+(phase==='attack'?'Атака':'Получение урона')+' · кадр '+(index+1)+'/6. Прототип, не заменяет main.';
+ document.querySelectorAll('[data-room]').forEach(b=>b.classList.toggle('selected',b.dataset.room===room));
+ document.querySelectorAll('[data-phase]').forEach(b=>b.classList.toggle('selected',b.dataset.phase===phase));
+ document.querySelectorAll('.frame').forEach(b=>b.classList.toggle('active',b.dataset.index===String(index)));
+}
+function setupFrames(){
+ const holder=$('frames');holder.replaceChildren();
+ for(let p of ['attack','hurt'])for(let i=0;i<6;i++){
+  const b=document.createElement('button');b.className='frame';b.dataset.index=String(i);b.ariaLabel=p+' кадр '+(i+1);
+  const img=document.createElement('img');img.src=frameUrl(p,i);img.alt='';img.loading='lazy';
+  const n=document.createElement('span');n.textContent=(p==='attack'?'A':'H')+(i+1);
+  b.append(img,n);b.onclick=()=>{phase=p;index=i;playing=false;$('play').textContent='▶ Играть';render();};
+  holder.append(b);
+ }
+}
+document.querySelectorAll('[data-room]').forEach(b=>b.onclick=()=>{room=b.dataset.room;render();});
+document.querySelectorAll('[data-phase]').forEach(b=>b.onclick=()=>{phase=b.dataset.phase;index=0;render();});
+$('toggle-actors').onclick=()=>$('stage').classList.toggle('no-fighters');
+$('play').onclick=()=>{playing=!playing;$('play').textContent=playing?'⏸ Пауза':'▶ Играть';render();};
+setInterval(()=>{if(playing){index=(index+1)%6;render();}},250);
+setupFrames();render();
+</script></body></html>

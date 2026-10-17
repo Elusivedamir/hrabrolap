@@ -32,7 +32,7 @@ test('200 unique cave stage images, exactly one new stage per ten waves',()=>{
   const start=(stage-1)*10+1;
   assert.equal(caveStageForWave(start+9),stage);
   const url=caveBackgroundForWave(start);
-  assert.ok(url.startsWith(stage===1?'art/approved/':'data:image/svg+xml'));
+  assert.ok(url.startsWith([1,5,12].includes(stage)?'assets/prototypes/p1/':'data:image/svg+xml'));
   assert.ok(caveStageName(stage).length>3);
   scenes.add(url);
  }
