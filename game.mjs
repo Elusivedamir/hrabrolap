@@ -248,7 +248,7 @@ function openModal(title,mode='info',text=''){modalType=mode;$('modal').dataset.
    const price=document.createElement('b');price.className='fish-price';price.textContent=f.price+' 🪙';
    row.append(picture,details,price);content.append(row);
   }
-  if(mode==='trade'){const btn=action(`Продать всё · ${bucketGold(p)} 🪙`,()=>{const sale=sellAll(p);if(sale.ok){merchantExitUntil=performance.now()+720;notify('Улов продан: '+fishCount(sale.count)+' · +'+sale.gold+' '+pluralRu(sale.gold,'монета','монеты','монет')+'!');save();closeModal();}else notify('Ведро пустое');});btn.disabled=p.fishBucket.length===0;}
+  if(mode==='trade'){const btn=action(`Продать всё · ${bucketGold(p)} 🪙`,()=>{const sale=sellAll(p,MERCHANT_TEST_MODE);if(sale.ok){merchantExitUntil=performance.now()+720;notify('Улов продан: '+fishCount(sale.count)+' · +'+sale.gold+' '+pluralRu(sale.gold,'монета','монеты','монет')+'!');save();closeModal();}else notify('Ведро пустое');});btn.disabled=p.fishBucket.length===0;}
   else {para('Продать улов можно только серому коту-торговцу. Он приезжает каждые 5 минут активной игры и ждёт 15 секунд.');if(!p.bucketLevel)action('Улучшить ведро до 24 мест · '+bucketCost()+' 🪙',()=>{const r=upgrade(p,'bucket');if(!r.ok){notify('Не хватает монет');return;}p.catchPlan=[];planFishing(p);save();openModal('Ведро рыцаря','bucket');notify('Теперь вмещается 24!')});}
  }else if(mode==='shop'||mode==='inventory'){
   para(mode==='shop'?'Покупай экипировку за монеты и добычу с монстров. Рецепты проверяются перед покупкой.':'Выбирай приобретённые вещи. Новый костюм переключает все 12 кадров котёнка; меч остаётся отдельным SVG.');
