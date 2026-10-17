@@ -238,7 +238,7 @@ function onUpgrade(kind){const result=upgrade(p,kind);if(!result.ok){notify(resu
  if(kind==='bucket'){p.catchPlan=[];planFishing(p);}save();render();
 }
 let modalReturnFocus=null;
-function openModal(title,mode='info',text=''){if(!$('modal').open)modalReturnFocus=document.activeElement;modalType=mode;$('modal').dataset.mode=mode;$('modal-title').textContent=title;const content=$('modal-content'),buttons=$('modal-buttons');content.replaceChildren();buttons.replaceChildren();
+function openModal(title,mode='info',text=''){const scrollTop=modalType===mode?$('modal-content').scrollTop:0;if(!$('modal').open)modalReturnFocus=document.activeElement;modalType=mode;$('modal').dataset.mode=mode;$('modal-title').textContent=title;const content=$('modal-content'),buttons=$('modal-buttons');content.replaceChildren();buttons.replaceChildren();
  const para=t=>{const x=document.createElement('p');x.textContent=t;content.append(x)};
  const action=(label,callback,cls='')=>{const x=document.createElement('button');x.textContent=label;if(cls)x.className=cls;x.addEventListener('click',callback);buttons.append(x);return x};
  if(mode==='bucket'||mode==='trade'){
@@ -347,7 +347,7 @@ function openModal(title,mode='info',text=''){if(!$('modal').open)modalReturnFoc
   para('Это удалит монеты, улов, улучшения и весь прогресс.');action('Сбросить игру',()=>{p=freshProgress();b=startFight(p);planFishing(p);save();closeModal();render();notify('Прогресс сброшен')});
  }else para(text);
  if(mode!=='offline')action('Закрыть',closeModal,'secondary');
- if(!$('modal').open)$('modal').showModal();$('modal-x').focus({preventScroll:true});render();
+ if(!$('modal').open)$('modal').showModal();if(scrollTop)$('modal-content').scrollTop=scrollTop;$('modal-x').focus({preventScroll:true});render();
 }
 function closeModal(){modalType='';if($('modal').open)$('modal').close();const opener=modalReturnFocus;modalReturnFocus=null;if(opener?.isConnected&&!opener.disabled&&opener.getClientRects().length)opener.focus({preventScroll:true});last=performance.now();render()}
 function battleEvents(events){for(const ev of events){

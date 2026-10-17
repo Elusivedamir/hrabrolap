@@ -414,3 +414,56 @@ body,.game,.game button,.game input,.game select,.game textarea,.game small,.gam
  .game .modal .shop-item button{min-width:66px;min-height:44px}
  .game .modal .purchase-hint{font-size:.82em}
 }
+
+/* P2: dialog header and footer stay visible while only long lists scroll.
+   This is strictly UI layout; no approved illustration is touched. */
+.game .modal[open]{
+ display:flex;
+ align-items:center;
+ justify-content:center;
+ padding:clamp(9px,3%,17px);
+}
+.game .modal .modal-card{
+ margin:0;
+ width:100%;
+ max-width:100%;
+ max-height:100%;
+ min-height:0;
+ display:flex;
+ flex-direction:column;
+ overflow:hidden;
+}
+.game .modal .modal-x{
+ position:absolute;
+ top:10px;
+ right:10px;
+ margin:0;
+ float:none;
+ flex-shrink:0;
+}
+.game .modal h2{
+ flex:0 0 auto;
+ padding-right:48px;
+ margin:0 0 12px;
+ overflow-wrap:anywhere;
+}
+.game .modal .modal-content{
+ flex:1 1 auto;
+ min-height:0;
+ overflow-y:auto;
+ overflow-x:hidden;
+ overscroll-behavior:contain;
+ -webkit-overflow-scrolling:touch;
+}
+.game .modal .modal-buttons{
+ flex:0 0 auto;
+ min-height:0;
+ max-height:32%;
+ overflow-y:auto;
+ overscroll-behavior:contain;
+ padding-bottom:3px;
+}
+@media(max-width:360px){
+ .game .modal .modal-card{padding:13px 9px 11px}
+ .game .modal h2{font-size:1.18em;padding-right:48px}
+}
