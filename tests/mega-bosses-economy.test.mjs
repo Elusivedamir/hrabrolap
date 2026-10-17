@@ -6,9 +6,9 @@ import {megaBossFrameSvg,megaBossFrameUrl,MEGA_ANIMATION_COUNT} from '../mega-bo
 import {ACHIEVEMENTS,achievementProgress,claimAchievement} from '../achievements.mjs';
 
 test('14 genuinely distinct bosses replace every fifth crowned boss',()=>{
- assert.equal(MEGA_BOSSES.length,14);
- assert.equal(new Set(MEGA_BOSSES.map(x=>x.id)).size,14);
- for(let i=1;i<=14;i++){
+ assert.equal(MEGA_BOSSES.length,40);
+ assert.equal(new Set(MEGA_BOSSES.map(x=>x.id)).size,40);
+ for(let i=1;i<=40;i++){
   const wave=50*i,b=megaBossForWave(wave),monster=c.monsterForWave(wave);
   assert.ok(b);assert.equal(monster.type,b.id);
   assert.equal(monster.megaboss,true);assert.equal(monster.boss,true);
@@ -21,7 +21,7 @@ test('14 genuinely distinct bosses replace every fifth crowned boss',()=>{
 });
 
 test('168 attack-and-hurt images include fourteen distinct silhouettes',()=>{
- assert.equal(MEGA_ANIMATION_COUNT,168);
+ assert.equal(MEGA_ANIMATION_COUNT,480);
  const shapes=new Set();
  for(const b of MEGA_BOSSES){
   const frames=new Set();
@@ -36,7 +36,7 @@ test('168 attack-and-hurt images include fourteen distinct silhouettes',()=>{
   }
   assert.equal(frames.size,12,b.id);
  }
- assert.equal(shapes.size,14);
+ assert.equal(shapes.size,40);
 });
 
 test('one-time rewards prevent major-boss infinite gold farming',()=>{
@@ -97,7 +97,7 @@ test('sword/armor costs and gold rewards remain finite and buying is never negat
  for(let n=0;n<=200;n++){
   for(const fn of [c.swordCost,c.armorCost]){const price=fn(n);assert.ok(Number.isSafeInteger(price)&&price>=0);}
  }
- for(let wave=1;wave<=700;wave++){
+ for(let wave=1;wave<=2000;wave++){
   const enemy=c.monsterForWave(wave);
   assert.ok(Number.isSafeInteger(enemy.reward)&&enemy.reward>=1,wave);
  }
