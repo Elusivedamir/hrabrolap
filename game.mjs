@@ -4,6 +4,7 @@ import {FISHING_FRAMES} from './fishing-frames.mjs';
 import {fishCount,pluralRu} from './russian.mjs';
 import {fishArt} from './fish-art.mjs';
 import {QUESTS,questProgress,claimQuest} from './quests.mjs';
+import {ACHIEVEMENTS,achievementProgress,claimAchievement} from './achievements.mjs';
 import {monsterPose} from './monster-rig.mjs';
 import {megaBossByType} from './mega-bosses.mjs';
 import {megaBossFrameUrl} from './mega-boss-art.mjs';
@@ -289,6 +290,25 @@ function openModal(title,mode='info',text=''){modalType=mode;$('modal').dataset.
  const progress=document.createElement('span');progress.className='quest-meter';progress.setAttribute('aria-hidden','true');
  const fill=document.createElement('i');fill.style.width=Math.min(100,100*count/q.target)+'%';progress.append(fill);text.append(progress);const btn=document.createElement('button');btn.textContent=done?'✓':'+ 🪙';btn.disabled=done||count<q.target;btn.addEventListener('click',()=>{const result=claimQuest(p,q.id);if(!result.ok)return;save();openModal('Задания','quests');notify('Награда за задание: +'+result.reward+' монет')});row.append(icon,text,btn);content.append(row);}
   para('В заданиях учитываются реальные победы, улучшения и продажи, но не офлайн-время.');
+ }else if(mode==='achievements'){
+  const tally=p.achievementClaimed||[];
+  const earned=ACHIEVEMENTS.filter(a=>achievementProgress(p,a)>=a.target).length;
+  para('🏆 Открыто '+earned+' из '+ACHIEVEMENTS.length+' достижений. Награду можно забрать один раз.');
+  for(const a of ACHIEVEMENTS){
+   const count=achievementProgress(p,a),claimed=tally.includes(a.id),ready=count>=a.target;
+   const row=document.createElement('div');row.className='achievement-row';
+   row.classList.toggle('achieved',claimed);row.classList.toggle('ready',ready&&!claimed);
+   const icon=document.createElement('span');icon.className='achievement-medal';icon.textContent=a.icon;
+   const details=document.createElement('div');details.className='achievement-details';
+   const title=document.createElement('strong');title.textContent=a.name;details.append(title);
+   const description=document.createElement('small');description.textContent=a.description;details.append(description);
+   const bar=document.createElement('span');bar.className='quest-meter';
+   const fill=document.createElement('i');fill.style.width=Math.min(100,100*count/a.target)+'%';bar.append(fill);details.append(bar);
+   const status=document.createElement('small');status.textContent=Math.min(count,a.target)+'/'+a.target+' · 🪙 '+a.gold;details.append(status);
+   const btn=document.createElement('button');btn.type='button';btn.textContent=claimed?'✓':ready?'Забрать':'🔒';btn.disabled=claimed||!ready;
+   btn.addEventListener('click',()=>{const result=claimAchievement(p,a.id);if(!result.ok)return;save();openModal('Достижения','achievements');notify('Достижение: '+a.name+' · +'+result.reward+' 🪙');});
+   row.append(icon,details,btn);content.append(row);
+  }
  }else if(mode==='offline'){
   para('Котёнок заработал, пока тебя не было: +'+fmt(p.pendingOffline)+' монет.');para('Офлайн-заработок ограничен стоимостью ближайшего улучшения и не открывает новые комнаты.');action('Забрать '+fmt(p.pendingOffline)+' 🪙',()=>{p.gold+=p.pendingOffline;p.pendingOffline=0;save();closeModal();notify('Офлайн-награда получена!')});
  }else if(mode==='reset'){
@@ -380,6 +400,7 @@ for(const kind of ['sword','armor','fish','home'])$('buy-'+kind).addEventListene
 $('bucket').addEventListener('click',()=>openModal('Ведро рыцаря','bucket'));
 $('merchant').addEventListener('click',()=>openModal('Серый кот-торговец','trade'));
 $('quests').addEventListener('click',()=>openModal('Задания','quests'));
+$('achievements').addEventListener('click',()=>openModal('Достижения','achievements'));
 $('inventory').addEventListener('click',()=>openModal('Инвентарь','inventory'));
 $('shop').addEventListener('click',()=>openModal('Магазин','shop'));
 $('mini-shop').addEventListener('click',()=>openModal('Магазин','shop'));
