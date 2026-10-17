@@ -13,6 +13,8 @@ jobs:
           node-version: '22'
       - run: npm ci --ignore-scripts
       - run: python3 -m pip install Pillow==11.3.0
+      - name: Rebuild refined Forest Guardian display frames
+        run: python3 tools/refine_forest_guardian.py
       - run: npm test
       - run: npm run qa:balance
       - run: npx playwright install --with-deps chromium
@@ -64,3 +66,16 @@ jobs:
           fi
           git tag v0.9.7
           git push origin refs/tags/v0.9.7
+
+      - name: Publish reviewed Forest Guardian graphics on main
+        if: success() && github.ref == 'refs/heads/main' && github.event_name == 'push'
+        run: |
+          git add assets/clean/forest_guardian/
+          if git diff --cached --quiet; then
+            echo "Forest Guardian graphic files already current."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git commit -m "art: ship Forest Guardian v2 cleaned 12-frame costume [skip ci]"
+          git push origin HEAD:main
