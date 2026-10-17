@@ -170,7 +170,7 @@ test('мобильное SVG-ателье показывает 6 кадров и
  await page.locator('#weapon').selectOption('spiderleg');
  await page.locator('#kind').selectOption('hurt');
  assert.equal(await page.locator('.sprite').count(),6);
- assert.equal(await page.locator('#big image').count(),3);
+ assert.equal(await page.locator('#big image').count(),4);
  await shot(page,'equipment-preview-hurt-web-spiderleg');
  await page.locator('#kind').selectOption('overhead');
  await page.locator('#armor').selectOption('moon_mage');
