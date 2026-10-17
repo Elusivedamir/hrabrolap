@@ -20,7 +20,7 @@ let p,b,modalType='',last=performance.now(),lastSave=0,lastAutosave=0,msgTimeout
 const heartsRoot=$('hero-hearts');
 const monsterHearts=Array.from({length:5},()=>{const shell=document.createElement('span');shell.className='heart-shell';shell.innerHTML='<img class="heart-unfilled" src="art/approved/heart.svg" alt=""><span class="heart-filled"><img src="art/approved/heart.svg" alt=""></span>';$('enemy-hearts').append(shell);return shell;});
 const heroHearts=Array.from({length:5},()=>{const shell=document.createElement('span');shell.className='heart-shell';shell.innerHTML='<img class="heart-unfilled" src="art/approved/heart.svg" alt=""><span class="heart-filled"><img src="art/approved/heart.svg" alt=""></span>';heartsRoot.append(shell);return shell;});
-try {const raw=JSON.parse(localStorage.getItem(SAVE)||'null')||JSON.parse(localStorage.getItem(OLD)||'null');p=validateProgress(raw);b=restoreFight(p,raw?.version>=2?raw.battleState:null,raw?.version<3&&raw.cleared&&raw.best<100);
+try {const raw=JSON.parse(localStorage.getItem(SAVE)||'null')||JSON.parse(localStorage.getItem(OLD)||'null');p=validateProgress(raw);b=restoreFight(p,raw?.version>=2?raw.battleState:null,Boolean(raw?.cleared&&p.room>(raw?.battleState?.level??raw?.room??0)));
  if(p.lastSeen&&Date.now()>p.lastSeen+20000){p.pendingOffline=Math.min(p.pendingOffline+offlineReward(p,Date.now()-p.lastSeen),Math.floor(Math.min(swordCost(p.sword),armorCost(p.armor))*1.1));} p.lastSeen=Date.now();
 }catch(e){p=freshProgress();b=startFight(p);console.warn('save recovery',e);}
 if(!b)b=startFight(p);
