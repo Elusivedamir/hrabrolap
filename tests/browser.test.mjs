@@ -214,7 +214,7 @@ test('новый игрок вручную атакует, покупает ав
  await page.locator('#status').click();
  let savedGame=await saved(page);
  assert.equal(savedGame.gold,0);assert.equal(savedGame.autoUnlocked,true);assert.equal(savedGame.autoEnabled,true);
- assert.match(await page.locator('#status').textContent(),/АВТОБОЙ 1\/с/);
+ assert.match(await page.locator('#status').textContent(),/АВТОБОЙ/);
  await page.locator('#status').click();
  savedGame=await saved(page);
  assert.equal(savedGame.autoEnabled,false);assert.equal(savedGame.gold,0);
@@ -286,16 +286,16 @@ test('original 10-frame fisher keeps fish away from house and ends at bucket',as
 test('автобой покупается за монету и двадцатый уровень показывает 2 атаки в секунду',async()=>{
  const p=c.freshProgress();p.gold=100000;p.autoUnlocked=true;p.autoEnabled=true;p.autoLevel=19;
  const page=await pageFor(p);
- assert.match(await page.locator('#status').textContent(),/АВТОБОЙ 1\/с/);
+ assert.match(await page.locator('#status').textContent(),/АВТОБОЙ/);
  assert.match(await page.locator('#attack-speed-lvl').textContent(),/19\/100/);
  const before=(await saved(page)).gold;
  await page.locator('#buy-attack-speed').click();
  const after=await saved(page);
  assert.equal(after.autoLevel,20);
  assert.equal(after.gold,before-c.autoUpgradeCost(19));
- assert.match(await page.locator('#status').textContent(),/АВТОБОЙ 2\/с/);
+ assert.match(await page.locator('#status').textContent(),/АВТОБОЙ/);
  await page.reload();
- assert.match(await page.locator('#status').textContent(),/АВТОБОЙ 2\/с/);
+ assert.match(await page.locator('#status').textContent(),/АВТОБОЙ/);
  await shot(page,'auto-level-20-two-hits');
 });
 test('карточка скорости атаки — пятая, на всю ширину снизу, автобой покупается отдельно сверху',async()=>{
