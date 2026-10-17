@@ -1,0 +1,57 @@
+{
+  "id": "ember_guard",
+  "name": "Огненный страж",
+  "price": 50,
+  "type": "complete-character",
+  "sword": "separate-svg",
+  "frames": [
+    {
+      "file": "attack_01.png",
+      "sha256": "5b3e1c6c4b6c1fd8429b266748200a7f4a6c4816d5752b6eb609fc2aa3777a6a"
+    },
+    {
+      "file": "attack_02.png",
+      "sha256": "43e36a14ffc78a9a671ca464e595497a23f8ab3282b28a8750fb6410602755b3"
+    },
+    {
+      "file": "attack_03.png",
+      "sha256": "050bfc2f23b2a05d06bbfb14fe18bf06cea7c58291a5e25da1b21691c5cf17dc"
+    },
+    {
+      "file": "attack_04.png",
+      "sha256": "0cfb934599a4b738ec443c74a0ee6edbf7efe60466058623801cfa04033c9c3d"
+    },
+    {
+      "file": "attack_05.png",
+      "sha256": "8240099955a38ba4e75116400f0487b25c9e760ffaa99aea97a76804da97e6f9"
+    },
+    {
+      "file": "attack_06.png",
+      "sha256": "fcbace7a9eb6e7b39b811c21fa0479a5fc4c8e91e9a1ebcf874a49ffe0988bf8"
+    },
+    {
+      "file": "hurt_01.png",
+      "sha256": "b8a6401086249db5afabec8ec4ffc72c828cb0727959053be24d59b614e0762a"
+    },
+    {
+      "file": "hurt_02.png",
+      "sha256": "ecd932140169a8d501a6c935cc1973dcd45104f4ea6b40fa5cfa82fe0c982a5d"
+    },
+    {
+      "file": "hurt_03.png",
+      "sha256": "a1486ea4ba316f276ff00982e90c9c5a384df3bc3ab7dffd4c4a3d6a79e31c7c"
+    },
+    {
+      "file": "hurt_04.png",
+      "sha256": "ca5df5e9f8dd696e293316c1193825296b1b7c7748dc8413dad92c65b6749937"
+    },
+    {
+      "file": "hurt_05.png",
+      "sha256": "582f6b0f4ff10a23979b74a0eebdc5741e6362cf3a91085346537db52aece083"
+    },
+    {
+      "file": "hurt_06.png",
+      "sha256": "be9c3618d31d69865300731799f7946be1377110403565a18bbb8da4b9e7bb45"
+    }
+  ]
+}

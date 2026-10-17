@@ -1,0 +1,57 @@
+{
+  "id": "steel_knight",
+  "name": "Стальной рыцарь",
+  "price": 50,
+  "type": "complete-character",
+  "sword": "separate-svg",
+  "frames": [
+    {
+      "file": "attack_01.png",
+      "sha256": "589803e5df78e5284d30c82d521f9d0b7850919bd9ae43bf384f66d6d5546dfe"
+    },
+    {
+      "file": "attack_02.png",
+      "sha256": "4c17a8fe2a1faa187566e9d63c15cb9673442621c9f59cabfd3ef8d5db712f60"
+    },
+    {
+      "file": "attack_03.png",
+      "sha256": "64d40f6bc2af52c85c9be2eb6b75ebc86dbc3e0dacb20c56de1697a27e01fbb1"
+    },
+    {
+      "file": "attack_04.png",
+      "sha256": "641762dfce3c9ccca0f62ebdc998c6513913faae26a16752d13da36335b0440e"
+    },
+    {
+      "file": "attack_05.png",
+      "sha256": "251fb920cbfb5e8cc4f46afcb0d174f33923030c8b577109b764e31fb092d599"
+    },
+    {
+      "file": "attack_06.png",
+      "sha256": "c6fa5cd1f215e178cc454ffecce5b7b2e4eb72d3a056d8a763e9bcd07f4e9bce"
+    },
+    {
+      "file": "hurt_01.png",
+      "sha256": "74df4a9ae77a512f2b11c3e3e8b6603d3b2ab4b7ea4001d6c320e64c10bd0704"
+    },
+    {
+      "file": "hurt_02.png",
+      "sha256": "ca0c5532400ea4df5e11f6936dad19e89c0fe03cb0e087b7b9d017a4b800a8be"
+    },
+    {
+      "file": "hurt_03.png",
+      "sha256": "1770b753c2b4cdc444ef155aedea49ab15f5615040dab07d8ad6b994bedbaacd"
+    },
+    {
+      "file": "hurt_04.png",
+      "sha256": "5922132f9accc766ccbdcddd0562516221c13e2e43219f53d4db21a0d5a33517"
+    },
+    {
+      "file": "hurt_05.png",
+      "sha256": "5e6764f12737d389eb81f30ec7ad8d8149f85c2796e1f90d0cef128271409054"
+    },
+    {
+      "file": "hurt_06.png",
+      "sha256": "cdc66693863ffca8e9874cd46e9c43a9540dbfa13a0387731144aadcdb792d2c"
+    }
+  ]
+}
