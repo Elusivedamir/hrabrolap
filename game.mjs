@@ -237,7 +237,8 @@ function onUpgrade(kind){const result=upgrade(p,kind);if(!result.ok){notify(resu
  // If farming and the upgrade can help, attack the blocked level after current fight. No free healing.
  if(kind==='bucket'){p.catchPlan=[];planFishing(p);}save();render();
 }
-function openModal(title,mode='info',text=''){modalType=mode;$('modal').dataset.mode=mode;$('modal-title').textContent=title;const content=$('modal-content'),buttons=$('modal-buttons');content.replaceChildren();buttons.replaceChildren();
+let modalReturnFocus=null;
+function openModal(title,mode='info',text=''){if(!$('modal').open)modalReturnFocus=document.activeElement;modalType=mode;$('modal').dataset.mode=mode;$('modal-title').textContent=title;const content=$('modal-content'),buttons=$('modal-buttons');content.replaceChildren();buttons.replaceChildren();
  const para=t=>{const x=document.createElement('p');x.textContent=t;content.append(x)};
  const action=(label,callback,cls='')=>{const x=document.createElement('button');x.textContent=label;if(cls)x.className=cls;x.addEventListener('click',callback);buttons.append(x);return x};
  if(mode==='bucket'||mode==='trade'){
@@ -279,6 +280,15 @@ function openModal(title,mode='info',text=''){modalType=mode;$('modal').dataset.
        const names=Object.entries(item.materials||{}).map(([id,count])=>{const type=MATERIALS.find(m=>m.id===id);return `${type?.icon||'•'} ${type?.name||id} ${p.materials[id]||0}/${count}`;});
        recipe.textContent=[...(item.price?['🪙 '+fmt(item.price)]:[]),...names].join(' · ')||'Бесплатно';
        main.append(label,stats,recipe);
+      const missingGold=Math.max(0,(item.price||0)-p.gold);
+      const missingMaterial=Object.entries(item.materials||{}).find(([id,amount])=>(p.materials[id]||0)<amount);
+      if(!own.includes(item.id)&&(missingGold||missingMaterial)){
+       const hint=document.createElement('small');hint.className='purchase-hint';
+       const reasons=[];
+       if(missingGold)reasons.push('Нужно ещё '+fmt(missingGold)+' 🪙');
+       if(missingMaterial){const [id,amount]=missingMaterial;const material=MATERIALS.find(m=>m.id===id);reasons.push('Не хватает: '+(material?.name||id)+' '+(p.materials[id]||0)+'/'+amount);}
+       hint.textContent=reasons.join(' · ');main.append(hint);row.classList.add('needs-resources');
+      }
       const crafted=!item.price&&Object.keys(item.materials||{}).length>0;
       const button=document.createElement('button');const equipped=(category==='weapon'?p.weapon:p.equippedArmor)===item.id;const has=own.includes(item.id);button.textContent=equipped?'Надето':has?'Надеть':crafted?'Создать':'Купить';button.disabled=equipped;
       button.addEventListener('click',()=>{if(!has){const r=buyEquipment(p,category,item.id);if(!r.ok){if(r.reason==='material'){const mat=MATERIALS.find(x=>x.id===r.material);notify('Не хватает: '+(mat?.name||r.material)+' '+r.available+'/'+r.need);}else notify('Не хватает монет');return;}notify((crafted?'Создано: ':'Куплено: ')+item.name);}else{equipEquipment(p,category,item.id,b);notify('Надето: '+item.name);}save();openModal(mode==='shop'?'Магазин':'Инвентарь',mode);});
@@ -337,9 +347,9 @@ function openModal(title,mode='info',text=''){modalType=mode;$('modal').dataset.
   para('Это удалит монеты, улов, улучшения и весь прогресс.');action('Сбросить игру',()=>{p=freshProgress();b=startFight(p);planFishing(p);save();closeModal();render();notify('Прогресс сброшен')});
  }else para(text);
  if(mode!=='offline')action('Закрыть',closeModal,'secondary');
- if(!$('modal').open)$('modal').showModal();render();
+ if(!$('modal').open)$('modal').showModal();$('modal-x').focus({preventScroll:true});render();
 }
-function closeModal(){const mode=modalType;modalType='';if($('modal').open)$('modal').close();last=performance.now();render()}
+function closeModal(){modalType='';if($('modal').open)$('modal').close();const opener=modalReturnFocus;modalReturnFocus=null;if(opener?.isConnected&&!opener.disabled&&opener.getClientRects().length)opener.focus({preventScroll:true});last=performance.now();render()}
 function battleEvents(events){for(const ev of events){
  if(ev.kind==='hero-hit'){
   contactAttack();playMonsterFrames('hurt');pulse($('enemy-holder'),'hurt',350);
@@ -412,11 +422,15 @@ $('buy-attack-speed').addEventListener('click',()=>{
  notify('Скорость автоатаки: уровень '+result.level+'/100 · '+result.hitsPerSecond.toFixed(2)+' ударов/с');
  save();render();
 });
-$('enemy-holder').addEventListener('click',()=>{
+function manualAttack(){
  if(p.autoEnabled){notify('Отключи автобой, чтобы атаковать вручную');return;}
  const events=tapMonster(p,b);
  if(events.some(e=>e.kind==='cooldown'))return;
  battleEvents(events);save();render();
+}
+$('enemy-holder').addEventListener('click',manualAttack);
+$('enemy-holder').addEventListener('keydown',event=>{
+ if(event.key==='Enter'||event.key===' '){event.preventDefault();if(event.repeat)return;manualAttack();}
 });
 for(const kind of ['sword','armor','fish','home'])$('buy-'+kind).addEventListener('click',()=>onUpgrade(kind));
 $('bucket').addEventListener('click',()=>openModal('Ведро рыцаря','bucket'));
