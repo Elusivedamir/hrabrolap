@@ -2,8 +2,8 @@ import {WEAPONS,ARMORS,MATERIALS} from './equipment-catalog.mjs';
 import {megaBossForWave} from './mega-bosses.mjs';
 export {WEAPONS,ARMORS,MATERIALS} from './equipment-catalog.mjs';
 // Храбролап v0.8.1 — исправления HP, миграции и восстановления сохранений.
-export const VERSION=5;
-export const WAVE_COUNT=700;
+export const VERSION=6;
+export const WAVE_COUNT=2000;
 export const MONSTERS=[
  {type:'slime',name:'Слизень',texture:'slime',move:'jump',attackName:'Прыжок телом'},
  {type:'mouse',name:'Мышь',texture:'mouse',move:'bite',attackName:'Быстрый укус'},
@@ -24,11 +24,13 @@ export function monsterForWave(level){
  // Keep waves 1-100 exactly as players know them; 101-700 scale steadily.
  const baseHp=n<=100?17+4.8*n+n**1.34:(17+480+100**1.34)*(1+.006*after+.000008*after*after);
  const hp=Math.round(baseHp*(boss?2.25:1));
- const baseAttack=Math.ceil((n<=100?1+n*.34:35*(1+.003*after+.000002*after*after))*(boss?1.42:1));
- const baseReward=Math.round((n<=100?8+n*3.8+n**1.2*.38:(8+380+100**1.2*.38)*(1+.019*after+.000018*after*after))*(boss?3:1));
+ const baseAttack=Math.ceil((n<=100?1+n*.34:35*(1+.003*after+.000002*after*after))*(boss?1.42:1)*(n>=50?1.18:1));
+ // Gold is a scarce upgrade resource, not a score counter. Bonuses are paid only once.
+ const baseReward=Math.max(2,Math.round((n<=100?8+n*3.8+n**1.2*.38:(8+380+100**1.2*.38)*(1+.011*after+.000006*after*after))*(boss?2.3:1)*.48));
  const major=megaBossForWave(n);
- if(major)return {...model,...major,type:major.id,texture:major.id,boss:true,megaboss:true,hp:Math.round(hp*1.42),attack:Math.ceil(baseAttack*1.07),reward:Math.round(baseReward*1.65)};
- return {...model,name:(boss?'Король · ':'')+model.name,boss,megaboss:false,hp,attack:baseAttack,reward:baseReward};
+ if(major)return {...model,...major,type:major.id,texture:major.id,boss:true,megaboss:true,hp:Math.round(hp*1.38),attack:Math.ceil(baseAttack*1.13),reward:Math.round(baseReward*1.28),bloodless:['golem','wraith','clockwork','guardian'].includes(major.family)||['bone_regent','granite_colossus','shadow_knight'].includes(major.id)};
+ const bloodless=['ghost','golem','skeleton'].includes(model.type);
+ return {...model,name:(boss?'Король · ':'')+model.name,boss,megaboss:false,hp,attack:baseAttack,reward:baseReward,immunity:bloodless?'poison':'',bloodless};
 }
 // В обычных боях шанс паука 30%. Прежний регулярный слот паука
 // отдан скелету; боссы на каждой 10-й волне остаются без изменений.
@@ -36,7 +38,8 @@ export function spawnMonsterForWave(level,r=Math.random){
  const original=monsterForWave(level);
  if(original.boss)return original;
  const base=(r()<.30?MONSTERS.find(m=>m.type==='spider'):original.type==='spider'?MONSTERS.find(m=>m.type==='skeleton'):original);
- return {...original,...base,name:base.name,boss:false};
+ const bloodless=['ghost','golem','skeleton'].includes(base.type);
+ return {...original,...base,name:base.name,boss:false,immunity:bloodless?'poison':'',bloodless};
 }
 export const ENEMIES=Array.from({length:WAVE_COUNT},(_,i)=>monsterForWave(i+1));
 export const swordCost=n=>Math.round(n<=35?20*1.17**n:20*1.17**35*(1+.039*(n-35))**2);
@@ -76,12 +79,12 @@ export function freshProgress(){return {version:VERSION,gold:0,sword:0,armor:0,f
   materials:Object.fromEntries(MATERIALS.map(m=>[m.id,0])),fishBucket:[],catchPlan:[],nextCatchMs:0,merchantPhase:'away',merchantMs:300000,lastSeen:0,pendingOffline:0,questClaimed:[]};}
 const int=(v,lo,hi,d=lo)=>Number.isFinite(v)?Math.max(lo,Math.min(hi,Math.floor(v))):d;
 export function validateProgress(raw){
- const p=freshProgress(); if(!raw||![1,2,3,4,5].includes(raw.version))return p;
+ const p=freshProgress(); if(!raw||![1,2,3,4,5,6].includes(raw.version))return p;
  for(const k of ['gold','sword','armor','fishLevel','home','room','best','fails','kills','totalGold','killedSlimes','caughtTotal','soldFish','soldPike','spentSword','pendingOffline','bucketLevel'])p[k]=int(raw[k],0,k==='gold'||k==='totalGold'?1e13:1e6,p[k]);
  p.room=int(p.room,1,WAVE_COUNT);p.best=int(p.best,0,WAVE_COUNT);p.fails=int(p.fails,0,2);p.bucketLevel=int(p.bucketLevel,0,1);
  p.farming=!!raw.farming;p.cleared=!!raw.cleared;
  // A completed 100-wave v4 save resumes at 101, retaining all inventory and gold.
- if(raw.version<=4&&p.cleared&&p.best>=100&&p.best<WAVE_COUNT){p.cleared=false;p.farming=false;p.room=Math.max(p.room,p.best+1);}
+ if(p.cleared&&p.best<WAVE_COUNT&&((raw.version<=4&&p.best>=100)||(raw.version<=5&&p.best>=700))){p.cleared=false;p.farming=false;p.room=Math.max(p.room,p.best+1);}
  p.autoUnlocked=!!raw.autoUnlocked;
  p.autoEnabled=p.autoUnlocked&&!!raw.autoEnabled;
  p.autoLevel=int(raw.autoLevel,0,MAX_AUTO_LEVEL,0);
@@ -97,7 +100,7 @@ export function validateProgress(raw){
   p.lastSeen=Number.isFinite(raw.lastSeen)?Math.min(Date.now(),Math.max(0,raw.lastSeen)):0;
   p.questClaimed=Array.isArray(raw.questClaimed)?raw.questClaimed.filter(x=>Number.isInteger(x)&&x>=0&&x<40).slice(0,40):[];
   p.achievementClaimed=Array.isArray(raw.achievementClaimed)?[...new Set(raw.achievementClaimed.filter(x=>Number.isInteger(x)&&x>=0&&x<100))].slice(0,100):[];
-  p.megaBossWins=Array.isArray(raw.megaBossWins)?[...new Set(raw.megaBossWins.filter(x=>Number.isInteger(x)&&x>=50&&x<=700&&x%50===0))]:[];
+  p.megaBossWins=Array.isArray(raw.megaBossWins)?[...new Set(raw.megaBossWins.filter(x=>Number.isInteger(x)&&x>=50&&x<=WAVE_COUNT&&x%50===0))]:[];
  }
  if(raw.version>=3){
   p.ownedWeapons=[...new Set(['iron',...(Array.isArray(raw.ownedWeapons)?raw.ownedWeapons:[]).filter(id=>WEAPONS.some(w=>w.id===id))])];
@@ -176,7 +179,7 @@ function winFight(p,b,ev,source){
  if(b.phase!=='fight'||b.enemyHp>0)return false;
  // Repeat clears yield less gold. Prevents infinite premium-boss farm loops.
  const firstClear=!p.farming&&!p.cleared&&b.level===p.room&&b.level>p.best;
- const multiplier=firstClear?1:b.monster.megaboss?.35:b.monster.boss?.50:.75;
+ const multiplier=firstClear?1:b.monster.megaboss?.2:b.monster.boss?.3:.42;
  const gold=Math.max(1,Math.round(b.monster.reward*multiplier));
  p.gold+=gold;p.totalGold+=gold;p.kills++;
  if(b.monster.type==='slime')p.killedSlimes++;
@@ -204,7 +207,7 @@ function hitEnemy(p,b,ev,rng=Math.random){
  if(element==='poison'&&b.monster.immunity!=='poison'){b.poisonRemaining=Math.max(b.poisonRemaining||0,4);b.poisonTick=0;}
  if(element==='lightning'&&extra>0)p.lightningHits++;
  let healed=0;
- if(element==='vampirism'&&b.monster.immunity!=='vampirism'&&rng()<VAMPIRISM_CHANCE){
+ if(element==='vampirism'&&!b.monster.bloodless&&b.monster.immunity!=='vampirism'&&rng()<VAMPIRISM_CHANCE){
   // Five-percent proc chance PER successful hit, never guaranteed lifesteal.
   healed=Math.max(0,Math.min(maxHealth(p)-b.hp,Math.max(1,Math.floor(damage*.12)),Math.ceil(maxHealth(p)*.08)));
   b.hp+=healed;if(healed>0)p.vampireHeals++;
@@ -241,7 +244,8 @@ export function stepFight(p,b,seconds,auto=true,rng=Math.random){
   }
  }
  if(auto&&b.heroTimer+1e-8>=attackInterval(p,true)){b.heroTimer=Math.max(0,b.heroTimer-attackInterval(p,true));hitEnemy(p,b,ev,rng);if(b.phase!=='fight')return ev;}
- if(b.enemyTimer>=2.4){b.enemyTimer-=2.4;b.hp=Math.max(0,b.hp-b.monster.attack);ev.push({kind:'enemy-hit',damage:b.monster.attack,move:b.monster.move});
+ const enemyInterval=Math.max(1.6,2.4-b.level/3000);
+ if(b.enemyTimer>=enemyInterval){b.enemyTimer-=enemyInterval;b.hp=Math.max(0,b.hp-b.monster.attack);ev.push({kind:'enemy-hit',damage:b.monster.attack,move:b.monster.move});
   if(b.hp===0){if(!p.farming&&!p.cleared){p.fails++;if(p.fails>=2&&p.room>1)p.farming=true;}b.phase='rest';b.rest=restDuration(p);ev.push({kind:'defeat',farming:p.farming});}
  }
  return ev;
