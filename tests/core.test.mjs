@@ -1,15 +1,15 @@
 import assert from 'node:assert/strict';
 import {freshProgress,validateProgress,startFight,stepFight,upgrade,heroDamage,maxHealth,ENEMIES,MONSTERS,WEAPONS,ARMORS,buyEquipment,equipEquipment,bucketCapacity,bucketVolume,planFishing,stepFishing,stepMerchant,sellAll,offlineReward,monsterForWave,fishCost,swordCost,armorCost} from '../game-core.mjs';
-assert.equal(ENEMIES.length,700);
+assert.equal(ENEMIES.length,2000);
 assert.equal(MONSTERS.length,10);
-assert.equal(new Set(ENEMIES.map(e=>e.type)).size,24);
-for (let n=1;n<=700;n++) {
+assert.equal(new Set(ENEMIES.map(e=>e.type)).size,50);
+for (let n=1;n<=2000;n++) {
  const e=monsterForWave(n);
  assert.ok(e.hp>0 && e.attack>0 && e.reward>0);
  assert.equal(e.boss,n%10===0);
  if(n>1)assert.ok(e.hp>monsterForWave(n-1).hp || n%10===1,`wave ${n} HP`);
 }
-for (let n=10;n<=700;n+=10){const e=monsterForWave(n),base=MONSTERS.find(x=>x.type===e.type);if(n%50===0){assert.equal(e.megaboss,true);}else{assert.ok(base);assert.equal(e.texture,base.texture);}}
+for (let n=10;n<=2000;n+=10){const e=monsterForWave(n),base=MONSTERS.find(x=>x.type===e.type);if(n%50===0){assert.equal(e.megaboss,true);}else{assert.ok(base);assert.equal(e.texture,base.texture);}}
 const p=freshProgress();assert.equal(p.weapon,'iron');assert.equal(p.equippedArmor,'none');assert.equal(heroDamage(p),8);assert.equal(maxHealth(p),65);
 const b=startFight(p),initial=b.hp;
 p.gold=110;assert.equal(upgrade(p,'sword').ok,true);assert.equal(upgrade(p,'armor').ok,true);assert.equal(heroDamage(p),11);assert.equal(maxHealth(p),79);assert.equal(b.hp,initial,'upgrades do not heal');
@@ -28,4 +28,4 @@ f.gold=1000;assert.equal(upgrade(f,'bucket').ok,true);assert.equal(bucketCapacit
 stepMerchant(f,300000);assert.equal(f.merchantPhase,'waiting');const sale=sellAll(f);assert.equal(sale.ok,true);assert.equal(bucketVolume(f),0);
 const m=freshProgress();stepMerchant(m,300000);stepMerchant(m,12000,true);assert.equal(m.merchantMs,15000);stepMerchant(m,15000);assert.equal(m.merchantPhase,'away');
 const o=freshProgress();o.best=2;assert.ok(offlineReward(o,8*60*60*1000)<=Math.floor(Math.min(swordCost(0),armorCost(0))*1.1));
-console.log('game-core tests: passed — 700 waves, 10 monster definitions, 10 weapons, 10 purchasable armors, saves and combat');
+console.log('game-core tests: passed — 2000 waves, 10 monster definitions, 10 weapons, 10 purchasable armors, saves and combat');
