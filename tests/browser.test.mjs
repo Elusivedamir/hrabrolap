@@ -157,7 +157,7 @@ test('шестикадровое получение урона переключ�
  assert.match(await page.locator('#armor-slot').getAttribute('transform'),/^translate\(/);
  await shot(page,'rig-hurt-frame-6');
 });
-test('мобильное SVG-ателье показывает 6 кадров и переключает 10 мечей и 6 комплектов брони',async()=>{
+test('мобильное SVG-ателье показывает 6 кадров и все доступные мечи и комплекты брони',async()=>{
  const ctx=await browser.newContext({viewport:{width:390,height:844},isMobile:true,hasTouch:true});
  contexts.push(ctx);
  const page=await ctx.newPage();page.on('pageerror',e=>errors.push(e.message));
@@ -165,7 +165,7 @@ test('мобильное SVG-ателье показывает 6 кадров и
  await page.locator('.sprite').first().waitFor();
  assert.equal(await page.locator('.sprite').count(),6);
  assert.equal(await page.locator('#weapon option').count(),10);
- assert.equal(await page.locator('#armor option').count(),3);
+ assert.deepEqual(await page.locator('#armor option').evaluateAll(options=>options.map(option=>option.value)),c.ARMORS.map(armor=>armor.id));
  await page.locator('#armor').selectOption('steel_knight');
  await page.locator('#weapon').selectOption('spiderleg');
  await page.locator('#kind').selectOption('hurt');
