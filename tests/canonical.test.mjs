@@ -46,6 +46,8 @@ test('all five character appearances have pose-specific grips and a matching cli
     assert.equal(rig.weaponSlot.props.transform,`translate(${wx} ${wy}) rotate(${angle}) scale(${scale})`,`${armorId} ${kind} ${i+1}`);
     assert.equal(rig.gripShape.props.cx,(114+pawX*260/279).toFixed(2));
     assert.equal(rig.gripShape.props.cy,gripY);
+    assert.equal(rig.gripShape.props.rx,'11');
+    assert.equal(rig.gripShape.props.ry,'10');
     assert.equal(rig.handFront.props.href,rig.body.props.href);
    }
   }
@@ -54,4 +56,17 @@ test('all five character appearances have pose-specific grips and a matching cli
  assert.ok(markup.includes('id="hero-paw-front"'));
  assert.ok(markup.includes('id="paw-grip-ellipse"'));
  assert.ok(markup.includes('clip-path="url(#paw-grip-clip)"'));
+});
+
+test('sword hilt ends beneath the paw instead of leaving a floating pommel',()=>{
+ const html=fs.readFileSync(new URL('../index.html',import.meta.url),'utf8');
+ // Local sword pivot is close to the gripping paw; the blade remains oversized.
+ // The hilt begins at -46 and ends at -4, under the 10px paw mask.
+ const clip=html.match(/id="sword-hilt-clip"[^>]*><rect ([^>]+)\/>/);
+ assert.ok(clip,'sword hilt clip must exist');
+ assert.match(clip[1],/y="-46"/);
+ assert.match(clip[1],/height="42"/);
+ assert.match(html,/id="paw-grip-ellipse"[^>]*rx="11" ry="10"/);
+ assert.match(html,/id="hero-paw-front"/);
+ assert.match(html,/id="sword-enlarged-blade"/);
 });
