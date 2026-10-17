@@ -37,6 +37,8 @@ h2{font-family:Georgia,serif;margin:16px 0 8px}.grid{display:grid;grid-template-
 <p><a href="./index.html">← Вернуться в игру</a></p>
 </main><script type="module">
 import {WEAPONS,ARMORS} from './equipment-catalog.mjs';
+import {applyCanonicalFrame} from './canonical-sprites.mjs';
+import {FOREST_GUARDIAN_ID} from './forest-guardian-rig.mjs';
 import {REFERENCE_ATTACKS,armorAttackTransform,armorHurtTransform,hurtMotionTransform,hurtWeaponTransform} from './equipment-rig.mjs';
 const $=id=>document.getElementById(id),NS='http://www.w3.org/2000/svg';
 let current=0,timer=null;
@@ -57,7 +59,10 @@ function build(frame){
  armor.setAttribute('href',armorItem.svg||'');
  armor.style.display=armorItem.svg?'':'none';
  const index=REFERENCE_ATTACKS.findIndex(a=>a.id===$('kind').value);
- if(index<0){
+ if(armorItem.id===FOREST_GUARDIAN_ID){
+  armor.style.display='none';
+  applyCanonicalFrame(index<0?'hurt':'attack',frame,{body:base,heroMotion:motion,weaponSlot,armorSlot,armorImage:armor,armorId:armorItem.id});
+ }else if(index<0){
   motion.setAttribute('transform',hurtMotionTransform(frame));
   armorSlot.setAttribute('transform',armorHurtTransform(frame));
   weaponSlot.setAttribute('transform',hurtWeaponTransform(frame));

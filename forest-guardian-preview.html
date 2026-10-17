@@ -7,9 +7,9 @@ button{padding:10px 16px;border:1px solid #a48f70;background:#fff8ea;border-radi
 .cell svg{display:block;width:100%;height:auto;aspect-ratio:279/370}
 .caption{padding:8px;font-size:13px}
 @media(max-width:850px){.grid{grid-template-columns:repeat(3,minmax(0,1fr))}}@media(max-width:500px){.grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
-</style></head><body><h1>Лесной страж · 50 монет</h1><p>12 кадров исходного котёнка и отдельного слоя брони. Нажмите, чтобы сравнить. Лапы и мордочка остаются на оригинальном слое; броня прозрачна в нужных местах.</p><div class="tools"><button id="toggle">Снять броню</button><button id="zoom">Увеличить</button><a href="index.html">В игру</a></div><section id="grid" class="grid"></section>
+</style></head><body><h1>Лесной страж · 50 монет</h1><p>6 кадров атаки и 6 кадров получения урона из вручную отредактированных файлов Дамира. Нажмите, чтобы сравнить с котёнком без брони.</p><div class="tools"><button id="toggle">Снять броню</button><button id="zoom">Увеличить</button><a href="index.html">В игру</a></div><section id="grid" class="grid"></section>
 <script type="module">
-import {forestArmorUrl} from './forest-guardian-rig.mjs';
+import {forestFrameUrl} from './forest-guardian-rig.mjs';
 const ns='http://www.w3.org/2000/svg',g=document.getElementById('grid');
 let shown=true,zoom=false;
 function el(tag,props={}){const n=document.createElementNS(ns,tag);for(const [k,v] of Object.entries(props))n.setAttribute(k,String(v));return n}
@@ -17,12 +17,11 @@ for(const kind of ['attack','hurt'])for(let i=0;i<6;i++){
  const cell=document.createElement('div');cell.className='cell';
  const svg=el('svg',{viewBox:'0 0 279 370',role:'img','aria-label':kind+' '+(i+1)});
  const base='assets/canonical/'+kind+'_'+String(i+1).padStart(2,'0')+'.png';
- svg.append(el('image',{href:base,x:0,y:0,width:279,height:370}));
- const armor=el('image',{href:forestArmorUrl(kind,i),x:0,y:0,width:279,height:370,'data-forest':'1'});svg.append(armor);
+ svg.append(el('image',{href:forestFrameUrl(kind,i),x:0,y:0,width:279,height:370,'data-forest':forestFrameUrl(kind,i),'data-base':base}));
  cell.append(svg);const caption=document.createElement('div');caption.className='caption';caption.textContent=(kind==='attack'?'Атака ':'Урон ')+(i+1);cell.append(caption);g.append(cell);
 }
 document.getElementById('toggle').onclick=()=>{
- shown=!shown;for(const n of document.querySelectorAll('[data-forest]'))n.style.display=shown?'':'none';
+ shown=!shown;for(const n of document.querySelectorAll('[data-forest]'))n.setAttribute('href',shown?n.dataset.forest:n.dataset.base);
  document.getElementById('toggle').textContent=shown?'Снять броню':'Надеть броню';
 };
 document.getElementById('zoom').onclick=()=>{zoom=!zoom;g.style.gridTemplateColumns=zoom?'repeat(2,minmax(0,1fr))':'';};

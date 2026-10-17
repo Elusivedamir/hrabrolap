@@ -1,0 +1,90 @@
+{
+  "browser": "153.0.8010.0",
+  "viewport": {
+    "width": 390,
+    "height": 844
+  },
+  "price": 50,
+  "shop": true,
+  "inventory": true,
+  "reload": true,
+  "removal": true,
+  "insufficientGold": true,
+  "liveFrames": [
+    "assets/costumes/forest_guardian/attack_01.png",
+    "assets/costumes/forest_guardian/attack_02.png",
+    "assets/costumes/forest_guardian/attack_03.png",
+    "assets/costumes/forest_guardian/attack_04.png",
+    "assets/costumes/forest_guardian/attack_05.png",
+    "assets/costumes/forest_guardian/attack_06.png",
+    "assets/costumes/forest_guardian/hurt_01.png",
+    "assets/costumes/forest_guardian/hurt_02.png",
+    "assets/costumes/forest_guardian/hurt_03.png",
+    "assets/costumes/forest_guardian/hurt_04.png",
+    "assets/costumes/forest_guardian/hurt_05.png",
+    "assets/costumes/forest_guardian/hurt_06.png"
+  ],
+  "sizes": [
+    {
+      "url": "assets/costumes/forest_guardian/attack_01.png",
+      "width": 279,
+      "height": 370
+    },
+    {
+      "url": "assets/costumes/forest_guardian/attack_02.png",
+      "width": 279,
+      "height": 370
+    },
+    {
+      "url": "assets/costumes/forest_guardian/attack_03.png",
+      "width": 279,
+      "height": 370
+    },
+    {
+      "url": "assets/costumes/forest_guardian/attack_04.png",
+      "width": 279,
+      "height": 370
+    },
+    {
+      "url": "assets/costumes/forest_guardian/attack_05.png",
+      "width": 279,
+      "height": 370
+    },
+    {
+      "url": "assets/costumes/forest_guardian/attack_06.png",
+      "width": 279,
+      "height": 370
+    },
+    {
+      "url": "assets/costumes/forest_guardian/hurt_01.png",
+      "width": 279,
+      "height": 370
+    },
+    {
+      "url": "assets/costumes/forest_guardian/hurt_02.png",
+      "width": 279,
+      "height": 370
+    },
+    {
+      "url": "assets/costumes/forest_guardian/hurt_03.png",
+      "width": 279,
+      "height": 370
+    },
+    {
+      "url": "assets/costumes/forest_guardian/hurt_04.png",
+      "width": 558,
+      "height": 740
+    },
+    {
+      "url": "assets/costumes/forest_guardian/hurt_05.png",
+      "width": 279,
+      "height": 370
+    },
+    {
+      "url": "assets/costumes/forest_guardian/hurt_06.png",
+      "width": 558,
+      "height": 740
+    }
+  ],
+  "errors": []
+}

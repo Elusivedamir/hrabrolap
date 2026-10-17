@@ -1,0 +1,113 @@
+{
+  "frames": [
+    {
+      "frame": "attack_01.png",
+      "source": "attack_12_20261017103409.psd",
+      "pixel_difference": 0,
+      "size": [
+        279,
+        370
+      ]
+    },
+    {
+      "frame": "attack_02.png",
+      "source": "attack_11_20261017103222.psd",
+      "pixel_difference": 0,
+      "size": [
+        279,
+        370
+      ]
+    },
+    {
+      "frame": "attack_03.png",
+      "source": "attack_09_20261017103040.psd",
+      "pixel_difference": 0,
+      "size": [
+        279,
+        370
+      ]
+    },
+    {
+      "frame": "attack_04.png",
+      "source": "attack_10_20261017103131.psd",
+      "pixel_difference": 0,
+      "size": [
+        279,
+        370
+      ]
+    },
+    {
+      "frame": "attack_05.png",
+      "source": "attack_08_20261017102849.psd",
+      "pixel_difference": 0,
+      "size": [
+        279,
+        370
+      ]
+    },
+    {
+      "frame": "attack_06.png",
+      "source": "attack_07_20261017102632.psd",
+      "pixel_difference": 0,
+      "size": [
+        279,
+        370
+      ]
+    },
+    {
+      "frame": "hurt_01.png",
+      "source": "hurt_12_20261017102254.psd",
+      "pixel_difference": 0,
+      "size": [
+        279,
+        370
+      ]
+    },
+    {
+      "frame": "hurt_02.png",
+      "source": "hurt_11_20261017102051.psd",
+      "pixel_difference": 0,
+      "size": [
+        279,
+        370
+      ]
+    },
+    {
+      "frame": "hurt_03.png",
+      "source": "hurt_10_20261017101851.psd",
+      "pixel_difference": 0,
+      "size": [
+        279,
+        370
+      ]
+    },
+    {
+      "frame": "hurt_04.png",
+      "source": "hurt_08_20261017100813.psd",
+      "pixel_difference": 0,
+      "size": [
+        558,
+        740
+      ]
+    },
+    {
+      "frame": "hurt_05.png",
+      "source": "hurt_09_20261017101636.psd",
+      "pixel_difference": 0,
+      "size": [
+        279,
+        370
+      ]
+    },
+    {
+      "frame": "hurt_06.png",
+      "source": "hurt_07_20261017100503.psd",
+      "pixel_difference": 0,
+      "size": [
+        558,
+        740
+      ]
+    }
+  ],
+  "passed": 12
+}

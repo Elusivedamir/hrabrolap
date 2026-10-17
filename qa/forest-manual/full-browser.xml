@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<testsuites>
+	<testcase name="мобильный запуск, цикл трёх атак, ресурсы и отсутствие JS-ошибок" time="3.510881" classname="test" file="/workspace/scratch/b1eb81981561/hrabrolap/tests/browser.test.mjs"/>
+	<testcase name="магазин, инвентарь, смена SVG и reload реального localStorage" time="0.703277" classname="test" file="/workspace/scratch/b1eb81981561/hrabrolap/tests/browser.test.mjs"/>
+	<testcase name="каждый из десяти SVG-мечей остаётся единственным оружием во всех трёх атаках" time="32.839249" classname="test" file="/workspace/scratch/b1eb81981561/hrabrolap/tests/browser.test.mjs"/>
+	<testcase name="все десять монстров показывают 6 кадров атаки/урона, сердечки и короны десяти боссов" time="13.471072" classname="test" file="/workspace/scratch/b1eb81981561/hrabrolap/tests/browser.test.mjs"/>
+	<testcase name="рыбалка, ведро 12→24 и ручная продажа торговцу" time="7.621552" classname="test" file="/workspace/scratch/b1eb81981561/hrabrolap/tests/browser.test.mjs"/>
+	<testcase name="поражение, дом и возрождение без покупки лечения" time="2.738928" classname="test" file="/workspace/scratch/b1eb81981561/hrabrolap/tests/browser.test.mjs"/>
+	<testcase name="паутина в инвентаре, покупка брони за 300 и 6 паутин, экипировка и reload" time="0.535182" classname="test" file="/workspace/scratch/b1eb81981561/hrabrolap/tests/browser.test.mjs"/>
+	<testcase name="шестикадровое получение урона двигает SVG-броню и меч без замены кота" time="0.527726" classname="test" file="/workspace/scratch/b1eb81981561/hrabrolap/tests/browser.test.mjs"/>
+	<testcase name="мобильное SVG-ателье показывает 6 кадров и переключает 10 мечей и 11 видов брони" time="1.099143" classname="test" file="/workspace/scratch/b1eb81981561/hrabrolap/tests/browser.test.mjs"/>
+	<testcase name="новое ведро отрисовывается слева и меняет состояние по числу рыб и улучшению" time="0.297513" classname="test" file="/workspace/scratch/b1eb81981561/hrabrolap/tests/browser.test.mjs"/>
+	<testcase name="кот отдыхает в существующем доме без добавления котёнка в подземелье" time="0.795206" classname="test" file="/workspace/scratch/b1eb81981561/hrabrolap/tests/browser.test.mjs"/>
+	<testcase name="новый игрок вручную атакует, покупает автобой за 1 монету и переключает его" time="3.687261" classname="test" file="/workspace/scratch/b1eb81981561/hrabrolap/tests/browser.test.mjs"/>
+	<testcase name="монстр демонстрирует 6 последовательных кадров нанесения урона и сердечки вместо HP-полосы" time="0.543144" classname="test" file="/workspace/scratch/b1eb81981561/hrabrolap/tests/browser.test.mjs"/>
+	<testcase name="яд действует на монстра визуально и отражается в сохранении" time="0.445960" classname="test" file="/workspace/scratch/b1eb81981561/hrabrolap/tests/browser.test.mjs"/>
+	<testcase name="молния и вампиризм активируются без замены кат-сэмпла или оружия" time="0.514030" classname="test" file="/workspace/scratch/b1eb81981561/hrabrolap/tests/browser.test.mjs"/>
+	<testcase name="original 10-frame fisher keeps fish away from house and ends at bucket" time="0.805164" classname="test" file="/workspace/scratch/b1eb81981561/hrabrolap/tests/browser.test.mjs"/>
+	<testcase name="автобой покупается за монету и двадцатый уровень показывает 2 атаки в секунду" time="0.345486" classname="test" file="/workspace/scratch/b1eb81981561/hrabrolap/tests/browser.test.mjs"/>
+	<testcase name="карточка скорости атаки — пятая, на всю ширину снизу, автобой покупается отдельно сверху" time="0.285024" classname="test" file="/workspace/scratch/b1eb81981561/hrabrolap/tests/browser.test.mjs"/>
+	<testcase name="скорость атаки отдельна от покупки автобоя и доступна сразу" time="0.304947" classname="test" file="/workspace/scratch/b1eb81981561/hrabrolap/tests/browser.test.mjs"/>
+	<testcase name="таймер поклёвки скрыт, состояние рыцаря видно, магазин стоит левее текста торговца" time="0.261454" classname="test" file="/workspace/scratch/b1eb81981561/hrabrolap/tests/browser.test.mjs"/>
+	<testcase name="при нулевых HP на монстре не должно быть пяти ярких сердец" time="0.251670" classname="test" file="/workspace/scratch/b1eb81981561/hrabrolap/tests/browser.test.mjs"/>
+	<testcase name="рыба появляется на счётчике только после десятикадровой анимации укладки" time="0.843996" classname="test" file="/workspace/scratch/b1eb81981561/hrabrolap/tests/browser.test.mjs"/>
+	<testcase name="рыба в девятой позе попадает в край физического ведра на трёх мобильных экранах" time="0.554779" classname="test" file="/workspace/scratch/b1eb81981561/hrabrolap/tests/browser.test.mjs"/>
+	<testcase name="награда задания сохраняется после reload и повторно не выдаётся" time="0.378356" classname="test" file="/workspace/scratch/b1eb81981561/hrabrolap/tests/browser.test.mjs"/>
+	<testcase name="уровень 100 даёт ровно 6 автоударов/с, ручной бой остаётся 3/с" time="0.818003" classname="test" file="/workspace/scratch/b1eb81981561/hrabrolap/tests/browser.test.mjs"/>
+	<testcase name="50-coin shop purchase, inventory equipment, real reload and removal" time="0.890665" classname="test" file="/workspace/scratch/b1eb81981561/hrabrolap/tests/forest-guardian-browser.test.mjs"/>
+	<testcase name="49 coins cannot purchase the costume" time="0.324250" classname="test" file="/workspace/scratch/b1eb81981561/hrabrolap/tests/forest-guardian-browser.test.mjs"/>
+	<testcase name="live battle plays all 6 attack and 6 hurt frames with one body and one separate sword" time="1.409366" classname="test" file="/workspace/scratch/b1eb81981561/hrabrolap/tests/forest-guardian-browser.test.mjs"/>
+	<testcase name="preview and SVG atelier use the same complete frames without layering another cat" time="0.281719" classname="test" file="/workspace/scratch/b1eb81981561/hrabrolap/tests/forest-guardian-browser.test.mjs"/>
+	<!-- tests 29 -->
+	<!-- suites 0 -->
+	<!-- pass 29 -->
+	<!-- fail 0 -->
+	<!-- cancelled 0 -->
+	<!-- skipped 0 -->
+	<!-- todo 0 -->
+	<!-- duration_ms 77793.771933 -->
+</testsuites>

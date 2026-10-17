@@ -1,8 +1,10 @@
 /**
  * CANONICAL SPRITES — extracted pixel-for-pixel in pose from the user-approved reference sheets.
  * No procedural transformations of the cat body are applied: only frame swaps.
- * Original image content and motions remain in the twelve PNG files. Gear is a separate SVG layer.
+ * Original image content and motions remain in the twelve PNG files.
+ * Forest Guardian uses the user's complete fitted character frames when equipped.
  */
+import {FOREST_GUARDIAN_ID,forestFrameUrl} from './forest-guardian-rig.mjs';
 export const CANONICAL_FRAME_COUNT = 6;
 export const CANONICAL_FRAME_PATHS = Object.freeze({
   attack: Object.freeze(Array.from({length: 6}, (_, i) => `assets/canonical/attack_${String(i+1).padStart(2, '0')}.png`)),
@@ -40,13 +42,18 @@ function attr(element,name,value){element.setAttribute(name,String(value));}
 export function applyCanonicalFrame(kind,index,rig){
  if(kind!=='attack'&&kind!=='hurt')throw new Error('Unknown canonical animation: '+kind);
  const i=Math.max(0,Math.min(5,Math.trunc(index)||0));
- const {body,heroMotion,weaponSlot,armorSlot,armorImage}=rig;
+ const {body,heroMotion,weaponSlot,armorSlot,armorImage,armorId='none'}=rig;
  if(!body||!heroMotion||!weaponSlot||!armorSlot||!armorImage)throw new Error('Incomplete SVG equipment rig');
- attr(body,'href',CANONICAL_FRAME_PATHS[kind][i]);
+ const costume=armorId===FOREST_GUARDIAN_ID;
+ attr(body,'href',costume?forestFrameUrl(kind,i):CANONICAL_FRAME_PATHS[kind][i]);
+ attr(body,'data-costume',costume?FOREST_GUARDIAN_ID:'none');
  for(const [key,value] of Object.entries({x:X,y:Y,width:W,height:H}))attr(body,key,value);
  // The cat itself is NEVER rotated, stretched or translated between frames.
  attr(heroMotion,'transform','translate(0 0)');
- const [handX,handY,angle,scale]=WEAPON_HANDLES[kind][i];
+ let [handX,handY,angle,scale]=WEAPON_HANDLES[kind][i];
+ // The user's first attack PSD contains the original pose exactly 15 pixels
+ // lower on its canvas. Keep that artwork intact and put the sword in its paw.
+ if(costume&&kind==='attack'&&i===0)handY+=15;
  const wx=X+handX*kx,wy=Y+handY*ky;
  attr(weaponSlot,'transform',`translate(${wx.toFixed(2)} ${wy.toFixed(2)}) rotate(${angle}) scale(${scale})`);
  const [cx,cy,rot,sz]=ARMOR_HANDLES[kind][i];

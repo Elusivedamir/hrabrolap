@@ -1,0 +1,140 @@
+{
+  "armor_id": "forest_guardian",
+  "price": 50,
+  "content": "complete-character",
+  "pixel_changes": false,
+  "frames": [
+    {
+      "kind": "attack",
+      "index": 1,
+      "file": "attack_01.png",
+      "source": "attack_12_20261017103409.psd",
+      "width": 279,
+      "height": 370,
+      "source_sha256": "9261434bdecb767c2cfe2e281a26ca649e4d2f3b43776db47e03a544c8900def",
+      "png_sha256": "6b217ad89b8994356c74e56a0cc4b129c652d662f0a1c4eb9256a27050b4dc5f",
+      "rgba_sha256": "f6bf26f1cab977ab16f62012330cdfd40f6e77c4181e931ebcb38552ebfb9503"
+    },
+    {
+      "kind": "attack",
+      "index": 2,
+      "file": "attack_02.png",
+      "source": "attack_11_20261017103222.psd",
+      "width": 279,
+      "height": 370,
+      "source_sha256": "6d7ca81e746050fe7f50461ee896db8ba0ab0b5c40f19ab55663469f1693da40",
+      "png_sha256": "e3367119037d68a62e03e9364e0693b66ad9c44fe6c563a36d5db03ea9bb74a0",
+      "rgba_sha256": "0ee72a6309276ec6918348b95049c35ab9ea5926eafc0e7f6dd6ac29e9a8f814"
+    },
+    {
+      "kind": "attack",
+      "index": 3,
+      "file": "attack_03.png",
+      "source": "attack_09_20261017103040.psd",
+      "width": 279,
+      "height": 370,
+      "source_sha256": "485f256212375a15af9c1ed0b636f1f47c517d930c7d4530722b4b5f4f8a94a4",
+      "png_sha256": "45a5d8e84e126ad8a9643624b553051799fae210de50120c57be3b9294346277",
+      "rgba_sha256": "c8d6987b3b83d783978f4354812cd011daee2d6034dfb48d6b370a083a83ff59"
+    },
+    {
+      "kind": "attack",
+      "index": 4,
+      "file": "attack_04.png",
+      "source": "attack_10_20261017103131.psd",
+      "width": 279,
+      "height": 370,
+      "source_sha256": "7b153faae523f31a4ab4b2591cbdbea4d9d024ff94fdacdec18ddf6c6ae9686a",
+      "png_sha256": "d0ea2192d49ff63ea17cd436b315a9064b60b3c81496469e4189974b5c44b763",
+      "rgba_sha256": "b2d3e288a1d58a7969d90aa543cc1387a01136742cf79cca3da15a17eaa6cead"
+    },
+    {
+      "kind": "attack",
+      "index": 5,
+      "file": "attack_05.png",
+      "source": "attack_08_20261017102849.psd",
+      "width": 279,
+      "height": 370,
+      "source_sha256": "1d7060350a8722225f11b6a0d9571102c4c6e9868c0b95758bdbe631f02302ae",
+      "png_sha256": "0b052810ddca133ebb5a70546c93a30a4b9cba0d107d97160a720217acd9a414",
+      "rgba_sha256": "6cbf8ca49412ad45388f80fa2f294c03b81f18758d739ca1405acefb3eda28f3"
+    },
+    {
+      "kind": "attack",
+      "index": 6,
+      "file": "attack_06.png",
+      "source": "attack_07_20261017102632.psd",
+      "width": 279,
+      "height": 370,
+      "source_sha256": "40710ded28fa6aad88df4cf8b026246e2b2d4df54f7cff8e14b83e00ae0215e1",
+      "png_sha256": "711e4273fc47bf1da83695cba4580a44c81228f5d89dff9b80b5b53012295784",
+      "rgba_sha256": "ba51da343250b5e1d3267d2d617458de4e0574dc55ce75dd1a19559a9bf1790d"
+    },
+    {
+      "kind": "hurt",
+      "index": 1,
+      "file": "hurt_01.png",
+      "source": "hurt_12_20261017102254.psd",
+      "width": 279,
+      "height": 370,
+      "source_sha256": "cdaeeb570a5c124614c169634698e9be3501183f1866973db5d4beafee775f6d",
+      "png_sha256": "9ce716daa6281be3cc608782c6d2494b032b48b55a4e978c62b26476b6a826c7",
+      "rgba_sha256": "64e86625bc1d0ae7ba20d976a33b5f1b00abc7e743717846afc0f7eaec49713b"
+    },
+    {
+      "kind": "hurt",
+      "index": 2,
+      "file": "hurt_02.png",
+      "source": "hurt_11_20261017102051.psd",
+      "width": 279,
+      "height": 370,
+      "source_sha256": "f70d8c907d2ad5d75b9358685100fc385c2c12ce2e5175da238da802425f44da",
+      "png_sha256": "85734a3c39ac1a2529778e996ba2f5a7df5aead43d306fbd0070aba6c9413853",
+      "rgba_sha256": "d8a447dc1fcc82db07841a29ff8cdb1b22743ba0a80b6b72606660423c51a319"
+    },
+    {
+      "kind": "hurt",
+      "index": 3,
+      "file": "hurt_03.png",
+      "source": "hurt_10_20261017101851.psd",
+      "width": 279,
+      "height": 370,
+      "source_sha256": "8e53b22efe81612f4c2cea535fe28d32b27801923d4a122129ed6ba99ac16ce3",
+      "png_sha256": "a1378d21a2deed38dd361067900967746b3a446586b269208c02608216606243",
+      "rgba_sha256": "8b96da1fe1322427be99b5d01d107187dbb2d32baa9d5821beac0187d8422b26"
+    },
+    {
+      "kind": "hurt",
+      "index": 4,
+      "file": "hurt_04.png",
+      "source": "hurt_08_20261017100813.psd",
+      "width": 558,
+      "height": 740,
+      "source_sha256": "b3df4334501745d53d24a087c3e3ab899f6df34f19d66eeeb3ecff85113a0701",
+      "png_sha256": "709f3da8dcf3eb2a0a8d11316b5f5669ce2c14166550abbc0433717db1dc981c",
+      "rgba_sha256": "78b332778fe4ad1af49183bd58cbcac015b3ed0c12bf6b2da0bfc79ab24e8052"
+    },
+    {
+      "kind": "hurt",
+      "index": 5,
+      "file": "hurt_05.png",
+      "source": "hurt_09_20261017101636.psd",
+      "width": 279,
+      "height": 370,
+      "source_sha256": "9e6d177728a81d091266f30f206914ed59fec5317f33e5df2979a00f183473f8",
+      "png_sha256": "d1cd709f89ffc77b92e59648a8d4935e4afaa7dbb54247a66021504a4c9d01c7",
+      "rgba_sha256": "55c9afc1300f23ba9db4a535e8c7ef79a6a7b35922a53d81ef5aed6027440fd3"
+    },
+    {
+      "kind": "hurt",
+      "index": 6,
+      "file": "hurt_06.png",
+      "source": "hurt_07_20261017100503.psd",
+      "width": 558,
+      "height": 740,
+      "source_sha256": "6b97a7341501ac8a388b17f2bc2c0f207e229456e2a8a4fe16f8349bc4eccaaa",
+      "png_sha256": "0b153996de929495709cfbcc1b93ff5756f1b30d1539811912bf2861dc497b25",
+      "rgba_sha256": "2b3137194acf3f53fe07e9416cf3c8bb817b230a4e33f120180061328c08b5d8"
+    }
+  ]
+}

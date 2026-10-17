@@ -3,7 +3,7 @@ import {QUESTS,questProgress,claimQuest} from './quests.mjs';
 import {monsterPose} from './monster-rig.mjs';
 import {bucketArt,sleepFrameIndex,SLEEP_FRAMES} from './bucket-rest.mjs';
 import {applyCanonicalFrame} from './canonical-sprites.mjs';
-import {FOREST_GUARDIAN_ID,forestArmorUrl} from './forest-guardian-rig.mjs';
+import {FOREST_GUARDIAN_ID} from './forest-guardian-rig.mjs';
 import {armorAttackTransform,armorHurtTransform,hurtMotionTransform,hurtWeaponTransform,HURT_FRAMES,HURT_FRAME_MS} from './equipment-rig.mjs';
 import {WEAPONS,ARMORS,MATERIALS,freshProgress,validateProgress,restoreFight,swordCost,armorCost,fishCost,homeCost,bucketCost,bucketCapacity,heroDamage,maxHealth,startFight,stepFight,upgrade,buyEquipment,equipEquipment,offlineReward,bucketVolume,bucketGold,planFishing,stepFishing,stepMerchant,sellAll,purchaseAutoBattle,upgradeAttackSpeed,autoHitsPerSecond,autoUpgradeCost,MAX_AUTO_LEVEL,attackInterval,setEnchantment,tapMonster} from './game-core.mjs';
 const $=id=>document.getElementById(id), SAVE='hrabrolap-v0.2-save',OLD='hrabrolap-v0.1-save',fmt=n=>Math.floor(n).toLocaleString('ru-RU');
@@ -33,17 +33,17 @@ const ATTACKS=[
 ];
 let poseSerial=0,poseTimeouts=[],attackPrepared=false,currentPose=-1,attackSerial=0,activeAttack=0;
 const heroMotion=$('hero-motion'),slot=$('weapon-slot'),armorSlot=$('armor-slot');
-let forestKind='attack',forestIndex=0;
-function updateForestFrame(kind=forestKind,index=forestIndex){
- forestKind=kind;forestIndex=index;
- const chosen=p?.equippedArmor===FOREST_GUARDIAN_ID;
- const overlay=$('forest-armor'),foreground=$('forest-front');
- // The re-registered alpha outfit already contains precise gaps for original paws
- // and face; drawing the old elliptical original foreground over it erased sleeves.
- foreground.style.display='none';
- overlay.style.display=chosen?'':'none';
- if(!chosen)return;
- overlay.setAttribute('href',forestArmorUrl(kind,index));
+let heroKind='attack',heroIndex=0;
+function applyHeroFrame(kind=heroKind,index=heroIndex){
+ heroKind=kind;heroIndex=index;
+ // The submitted PSDs already contain the fitted cat and armor. Draw ONE body.
+ // Legacy overlay nodes stay disabled so no second cat or old sleeve is visible.
+ $('forest-front').style.display='none';
+ $('forest-armor').style.display='none';
+ applyCanonicalFrame(kind,index,{
+  body:$('hero-body'),heroMotion,weaponSlot:slot,armorSlot,
+  armorImage:$('hero-armor'),armorId:p.equippedArmor
+ });
 }
 
 let hurtSerial=0,hurtTimers=[],hurting=false;
@@ -52,10 +52,7 @@ function cancelHurt(){
  delete $('hero-art').dataset.hurtFrame;
 }
 function hurtFrame(index){
- applyCanonicalFrame('hurt',index,{
-  body:$('hero-body'),heroMotion,weaponSlot:slot,armorSlot,armorImage:$('hero-armor')
- });
- updateForestFrame('hurt',index);
+ applyHeroFrame('hurt',index);
  $('hero-art').dataset.hurtFrame=String(index+1);
 }
 function playHurt(){
@@ -73,10 +70,7 @@ function playHurt(){
 }
 
 function heroFrame(index=0){
- applyCanonicalFrame('attack',index,{
-  body:$('hero-body'),heroMotion,weaponSlot:slot,armorSlot,armorImage:$('hero-armor')
- });
- updateForestFrame('attack',index);
+ applyHeroFrame('attack',index);
  currentPose=index;
 }
 function cancelPose(){poseSerial++;for(const t of poseTimeouts)clearTimeout(t);poseTimeouts=[];attackPrepared=false;}
@@ -87,7 +81,7 @@ function cancelAttackPose(){cancelPose();activeAttack=0;heroFrame(0);}
 function syncHeroPose(){if(b.phase==='rest'&&!hurting)cancelAttackPose();}
 function syncEquipment(){
  const weapon=WEAPONS.find(w=>w.id===p.weapon)||WEAPONS[0];$('hero-weapon').setAttribute('href',weapon.svg);
- const armor=ARMORS.find(a=>a.id===p.equippedArmor)||ARMORS[0];const art=$('hero-armor');const forest=armor.id===FOREST_GUARDIAN_ID;art.style.display=!forest&&armor.svg?'':'none';if(!forest&&armor.svg)art.setAttribute('href',armor.svg);updateForestFrame();
+ const armor=ARMORS.find(a=>a.id===p.equippedArmor)||ARMORS[0];const art=$('hero-armor');const forest=armor.id===FOREST_GUARDIAN_ID;art.style.display=!forest&&armor.svg?'':'none';if(!forest&&armor.svg)art.setAttribute('href',armor.svg);applyHeroFrame();
 }
 const APPROVED_MONSTER_TYPES=new Set(['slime','spider','mouse','mushroom','beetle','larva','bat','ghost']);
 const ARTICULATED_MONSTER_TYPES=new Set(['skeleton','golem']);
@@ -202,7 +196,7 @@ function openModal(title,mode='info',text=''){modalType=mode;$('modal-title').te
   if(mode==='trade'){const btn=action(`Продать всё · ${bucketGold(p)} 🪙`,()=>{const sale=sellAll(p);if(sale.ok){notify('Продано '+sale.count+' рыб · +'+sale.gold+' монет!');save();closeModal();}else notify('Ведро пустое');});btn.disabled=p.fishBucket.length===0;}
   else {para('Продать улов можно только серому коту-торговцу. Он приезжает каждые 5 минут активной игры и ждёт 15 секунд.');if(!p.bucketLevel)action('Улучшить ведро до 24 мест · '+bucketCost()+' 🪙',()=>{const r=upgrade(p,'bucket');if(!r.ok){notify('Не хватает монет');return;}p.catchPlan=[];planFishing(p);save();openModal('Ведро рыцаря','bucket');notify('Теперь вмещается 24!')});}
  }else if(mode==='shop'||mode==='inventory'){
-  para(mode==='shop'?'Покупай SVG-экипировку за монеты и добычу с монстров. Рецепты проверяются перед покупкой.':'Выбирай приобретённые вещи. Меч и броня переключаются без изменения анимаций котёнка.');
+  para(mode==='shop'?'Покупай экипировку за монеты и добычу с монстров. Рецепты проверяются перед покупкой.':'Выбирай приобретённые вещи. Меч и броня переключаются без изменения анимаций котёнка.');
    const materials=document.createElement('div');materials.className='materials-summary';
    const label=document.createElement('b');label.textContent='🎒 Материалы в инвентаре';materials.append(label);
    const chips=document.createElement('div');chips.className='material-chips';

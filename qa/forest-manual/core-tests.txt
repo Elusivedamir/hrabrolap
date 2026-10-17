@@ -1,0 +1,77 @@
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+
+> hrabrolap@0.9.7 test
+> node --check game.mjs && node --check game-core.mjs && node --test tests/core.test.mjs tests/regression.test.mjs tests/loot.test.mjs tests/equipment-rig.test.mjs tests/canonical.test.mjs tests/forest-guardian.test.mjs tests/bucket-rest.test.mjs tests/v097-combat.test.mjs tests/auto-attack-rate.test.mjs tests/locked-assets.test.mjs tests/approved-monsters.test.mjs tests/archived-monster-frames.test.mjs tests/archived-fishing.test.mjs tests/articulated-monsters.test.mjs tests/fishing-deposit.test.mjs tests/balance.test.mjs && python3 tests/asset-check.py && python3 tests/art_test.py && python3 tests/preserve-assets.py && python3 tests/attic-background.test.py
+
+✔ eight approved v0.9.3 monsters must remain EXACT, not substituted by legacy SVG (13.614439ms)
+✔ game explicitly references the eight approved v2 models (2.820206ms)
+✔ 10 original v0.9.3 knight SVG poses and 4 clean background/cutout files must stay exact (22.214976ms)
+✔ game uses animated source scene and correct knight pose directory (4.72511ms)
+✔ all 192 original v0.9.3 normal and boss animation SVGs remain byte-exact (112.220429ms)
+✔ combat renderer selects frame files and suppresses duplicate boss crown during a boss animation (1.253709ms)
+✔ skeleton and golem have distinct articulated attack/hurt frames with fitted boss crowns (35.517108ms)
+✔ manual attack hard-limited to 3 taps per second even when tapping at 100Hz (1.326097ms)
+✔ auto attack rate at 0,20,40,60,80,100 levels is exactly 1–6 hits/second (1.060359ms)
+✔ auto upgrades require purchase, charge only displayed price and stop at level 100 (1.340018ms)
+✔ older unlocked saves begin auto-upgrades from zero, invalid progress is clamped (0.281883ms)
+✔ manual hit after idle or restored timer cannot spend surplus credit on a second fast hit (0.188142ms)
+✔ фактический путь 1→100, все десять моделей и десять боссов (12.648553ms)
+✔ сохранение каждые пять минут не меняет результат кампании (20.531134ms)
+✔ bucket count 0, 1..4, 5..7, upgrade overlap at 7, 8..24 (3.895757ms)
+✔ all six source frames exist and every frame is shown at least once (0.411476ms)
+✔ approved 6 attack + 6 hurt assets are present without duplicate frames (4.389577ms)
+✔ gear is independent of kitten and has an anchor for every pose (0.441602ms)
+game-core tests: passed — 100 waves, 9 monster definitions, 10 weapons, 10 purchasable armors, saves and combat
+✔ tests/core.test.mjs (73.131544ms)
+✔ точно сохранены оригинальные координаты трёх шестикадровых атак (6.162645ms)
+✔ все позы экипировки образуют 3×6 ударов и 6 реакций на урон (0.850544ms)
+✔ preview references modular swords and armors; base cat is never redrawn (5.030107ms)
+✔ 10 fishing poses retain original knight; only free fish deposit position differs (9.48332ms)
+✔ 12 complete user frames retain their native canvases, order and verified export hashes (4.408315ms)
+✔ equipping and removing the costume preserves its canvas and aligns the separate sword (0.708541ms)
+✔ new set costs 50 coins, preserves HP, saves and unequips (0.823264ms)
+✔ original immutable PNGs remain locked; graphics not yet loaded by this test (2.634497ms)
+✔ approved reference cat, sword, sleep and original scene bytes remain unchanged (23.561374ms)
+✔ 10 мечей и 11 покупаемых броней, независимые пути (0.818266ms)
+✔ пауки возникают в 30% обычных боёв, с сохранением боссов (0.82745ms)
+✔ за убийство паука выдаётся паутина, только один раз (0.601711ms)
+✔ кости и слизь добываются с соответствующих монстров (0.35364ms)
+✔ 300 монет и ровно 6 паутин: списание только при успешной покупке (0.29404ms)
+✔ броня из слизи и костей: по пять каждого и золото (0.124507ms)
+✔ сохранения v3 мигрируют, v4 сохраняют ресурсы и тип врага (0.85439ms)
+✔ снятие брони ограничивает текущее HP, надевание не лечит (1.400909ms)
+✔ сильное оружие выводит из фарма, текущее сражение не пересоздаётся (0.270805ms)
+✔ слабая экипировка не снимает режим фарма (0.184236ms)
+✔ победа над фарм-врагом после апгрейда не считается первым прохождением (0.485407ms)
+✔ перенос завершённой старой главы v1/v2 открывает 11-ю волну (0.489304ms)
+✔ перенос незавершённой 10-й волны не пропускает босса (0.16656ms)
+✔ старое battleState не возвращает в уже завершённую главу (0.316374ms)
+✔ повреждённый список вещей сохраняет монеты и исправные поля (0.986498ms)
+✔ встроенные предметы и повторные ID в сохранении не дублируются (2.981372ms)
+✔ невалидная рыба и переполнение из сохранения отбрасываются (0.616634ms)
+✔ план из сохранения не переполняет оставшееся место в ведре (0.379429ms)
+✔ восстановление боя очищает дробный уровень и нечисловые таймеры (1.405135ms)
+✔ сохранение/восстановление боя и отдыха через JSON без лечения (0.523855ms)
+✔ перезагрузка сохраняет остаток перехода между волнами (0.150085ms)
+✔ все восемь базовых небоссовых типов, включая скелета, атакуют и получают урон (0.963494ms)
+✔ 100-я волна завершается единожды и прогресс не выходит за 100 (0.343385ms)
+✔ торговец: без него продажа невозможна, ожидание заморожено в открытой торговле (0.87431ms)
+✔ 10 enemies, each has 6 explicit attack and 6 explicit hurt poses (2.024083ms)
+✔ unpaid auto locked by default, costs exactly 1 once, modes toggle freely (0.766859ms)
+✔ manual input waits for cooldown, then deals exactly one hit (0.482013ms)
+✔ poison turns into real DOT and a poison win; lightning deals extra damage (0.382894ms)
+✔ vampirism heals no more than lost HP and persists effect selection (0.224196ms)
+✔ 25 quests, old IDs kept, claimed once and completion tied to actual stats (0.31377ms)
+✔ approved cat PNGs and 10 SVG swords still exist as immutable inputs (0.391777ms)
+ℹ tests 59
+ℹ suites 0
+ℹ pass 59
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 295.062514
+Art/package tests: passed — 76 SVG, pure-vector weapons & armor, original six attack frames archived, no coin/min
+Rig tests: passed — 3 six-pose animation definitions, original face, separate weapon slot
+PASS: 59 original art/assets files match v0.8 byte for byte
+PASS: attic edit leaves every pixel outside the kitten/Z masks unchanged
