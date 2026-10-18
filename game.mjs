@@ -340,7 +340,7 @@ function openModal(title,mode='info',text=''){const scrollTop=modalType===mode?$
    const bar=document.createElement('span');bar.className='quest-meter';
    const fill=document.createElement('i');fill.style.width=Math.min(100,100*count/a.target)+'%';bar.append(fill);details.append(bar);
    const status=document.createElement('small');status.textContent=Math.min(count,a.target)+'/'+a.target+' · 🪙 '+a.gold;details.append(status);
-   const btn=document.createElement('button');btn.type='button';btn.textContent=claimed?'✓':ready?'Забрать':'🔒';btn.disabled=claimed||!ready;
+   const btn=document.createElement('button');btn.type='button';btn.textContent=claimed?'Получено ✓':ready?'Забрать +'+fmt(a.gold)+' 🪙':'🔒 Не готово';btn.disabled=claimed||!ready;btn.setAttribute('aria-label',claimed?'Награда получена: '+a.name:ready?'Забрать '+a.gold+' монет за достижение: '+a.name:'Достижение не выполнено: '+a.name+' · '+Math.min(count,a.target)+' из '+a.target);
    btn.addEventListener('click',()=>{const result=claimAchievement(p,a.id);if(!result.ok)return;save();openModal('Достижения','achievements');notify('Достижение: '+a.name+' · +'+result.reward+' 🪙');});
    row.append(icon,details,btn);content.append(row);
   }
