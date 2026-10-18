@@ -468,3 +468,18 @@ body,.game,.game button,.game input,.game select,.game textarea,.game small,.gam
  .game .modal .modal-card{padding:13px 9px 11px}
  .game .modal h2{font-size:1.18em;padding-right:48px}
 }
+
+/* P2: reward buttons must display their state and exact payout at 320px,
+   instead of a tiny ambiguous "+" control. No scene/art geometry changes. */
+.game .modal .quest-row button{
+ flex:0 0 98px;
+ width:98px;
+ min-width:98px;
+ min-height:44px;
+ height:auto;
+ padding:6px 4px;
+ font-size:.74em;
+ line-height:1.17;
+ white-space:normal;
+ overflow-wrap:break-word;
+}
