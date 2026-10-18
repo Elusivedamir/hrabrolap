@@ -18,7 +18,8 @@ case "$MODE" in
   art|game-art) PAGE="index.html"; TITLE="игра · художественные кандидаты P3"; EXTRA="&p3Art=1" ;;
   atelier|armor) PAGE="equipment-preview.html"; TITLE="ателье анимаций" ;;
   save|backup) PAGE="save-manager.html"; TITLE="резервные копии" ;;
-  *) fail "Неизвестный режим '$MODE'. Используй: hrabrolap [p3|game|art|atelier|save]" ;;
+  ice|salamander|ice-boss) PAGE="ice-salamander-test.html"; TITLE="тест анимаций ледяной саламандры" ;;
+  *) fail "Неизвестный режим '$MODE'. Используй: hrabrolap [p3|game|art|atelier|save|ice]" ;;
 esac
 
 [[ "$PORT" =~ ^[0-9]+$ ]] && (( PORT>=1024 && PORT<=65535 )) || fail "Некорректный порт: $PORT"
