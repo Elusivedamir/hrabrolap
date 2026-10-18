@@ -17,6 +17,8 @@ import {armorAttackTransform,armorHurtTransform,hurtMotionTransform,hurtWeaponTr
 import {WEAPONS,ARMORS,MATERIALS,WAVE_COUNT,freshProgress,validateProgress,restoreFight,swordCost,armorCost,fishCost,homeCost,bucketCost,bucketCapacity,heroDamage,maxHealth,startFight,stepFight,upgrade,buyEquipment,equipEquipment,offlineReward,bucketVolume,bucketGold,planFishing,stepFishing,stepMerchant,sellAll,purchaseAutoBattle,upgradeAttackSpeed,autoHitsPerSecond,autoUpgradeCost,MAX_AUTO_LEVEL,MAX_FISH_LEVEL,MAX_HOME_LEVEL,attackInterval,setEnchantment,tapMonster} from './game-core.mjs';
 // Test switch only: /?merchantTest=1; does not change normal saved visit cadence.
 const MERCHANT_TEST_MODE=new URLSearchParams(location.search).get('merchantTest')==='1';
+// Visual QA only. Player must explicitly opt in; never override approved graphics in regular play.
+const P3_ART_PREVIEW=new URLSearchParams(location.search).get('p3Art')==='1';
 const $=id=>document.getElementById(id), SAVE='hrabrolap-v0.2-save',OLD='hrabrolap-v0.1-save',fmt=n=>Math.floor(n).toLocaleString('ru-RU');
 let p,b,modalType='',last=performance.now(),lastSave=0,lastAutosave=0,msgTimeout=0,toastTimeout=0,lastFrameRest=false;
 const heartsRoot=$('hero-hearts');
@@ -101,7 +103,7 @@ function syncEquipment(){
 }
 const APPROVED_MONSTER_TYPES=new Set(['slime','spider','mouse','mushroom','beetle','larva','bat','ghost']);
 const ARTICULATED_MONSTER_TYPES=new Set(['skeleton','golem']);
-const monsterSource=(type,boss=false)=>megaBossByType(type)?megaBossFrameUrl(type,'attack',0):APPROVED_MONSTER_TYPES.has(type)?'art/monsters-v2/'+type+'.svg':ARTICULATED_MONSTER_TYPES.has(type)?(boss?'animations/'+type+'/boss/attack/01.svg':'art/monsters-v097/'+type+'.svg'):'art/monsters/'+type+'.svg';
+const monsterSource=(type,boss=false)=>megaBossByType(type)?megaBossFrameUrl(type,'attack',0,P3_ART_PREVIEW):APPROVED_MONSTER_TYPES.has(type)?'art/monsters-v2/'+type+'.svg':ARTICULATED_MONSTER_TYPES.has(type)?(boss?'animations/'+type+'/boss/attack/01.svg':'art/monsters-v097/'+type+'.svg'):'art/monsters/'+type+'.svg';
 let monsterSequence=0,monsterTimers=[];
 function cancelMonsterFrames(){
  monsterSequence++;for(const t of monsterTimers)clearTimeout(t);monsterTimers=[];
@@ -124,7 +126,7 @@ function playMonsterFrames(phase){
   monsterTimers.push(setTimeout(()=>{
    if(sequence!==monsterSequence||b.monster.type!==type||!!b.monster.boss!==boss)return;
    holder.dataset.monsterPhase=phase;holder.dataset.monsterFrame=String(i+1);
-   if(epic){art.setAttribute('src',megaBossFrameUrl(type,phase,i));}
+   if(epic){art.setAttribute('src',megaBossFrameUrl(type,phase,i,P3_ART_PREVIEW));}
    else if(archived){
     art.setAttribute('src',`animations/${type}/${boss?'boss':'normal'}/${phase}/0${i+1}.svg`);
    }else{
@@ -165,8 +167,8 @@ function render(){
  const cave=$('dungeon'),stage=caveStageForWave(b.level);
  if(cave.dataset.stage!==String(stage)){
   cave.dataset.stage=String(stage);
-  $('cave-backdrop').src=caveBackgroundForWave(b.level);
-  $('cave-stage').textContent=`ЗАЛ ${stage}/200 · ${caveStageName(stage)}`;
+  $('cave-backdrop').src=caveBackgroundForWave(b.level,P3_ART_PREVIEW);
+  $('cave-stage').textContent=`ЗАЛ ${stage}/200 · ${caveStageName(stage)}`+(P3_ART_PREVIEW?' · ЭСКИЗ P3':'');
  }
  const wall=$('dawn-wall'),seal=dawnSealForStage(stage);
  wall.hidden=!seal;
