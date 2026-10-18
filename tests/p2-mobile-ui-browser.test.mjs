@@ -74,3 +74,34 @@ test('P2: keyboard Enter and Space attack the live monster in manual mode',async
   assert.deepEqual(errors,[]);
  }finally{await browser.close();}
 });
+
+test('P2: the dockside shop image is keyboard-accessible and returns focus after closing',async()=>{
+ const browser=await chromium.launch({headless:true});
+ try{
+  const context=await browser.newContext({viewport:{width:320,height:740},deviceScaleFactor:1,isMobile:true,hasTouch:true});
+  try{
+   const page=await context.newPage(),errors=[];
+   page.on('pageerror',e=>errors.push(e.message));
+   const progress=freshProgress();
+   await page.addInitScript(raw=>localStorage.setItem('hrabrolap-v0.2-save',JSON.stringify(raw)),progress);
+   await page.goto(base);
+   await page.locator('#hero-rig').waitFor();
+   const dockShop=page.getByRole('button',{name:'Открыть магазин у дома'});
+   assert.equal(await dockShop.count(),1);
+   await dockShop.focus();
+   assert.equal(await page.evaluate(()=>document.activeElement?.id),'mini-shop');
+   await page.keyboard.press('Enter');
+   assert.equal(await page.locator('#modal-title').textContent(),'Магазин');
+   await page.locator('#modal-x').click();
+   assert.equal(await page.evaluate(()=>document.activeElement?.id),'mini-shop');
+   await page.keyboard.press('Space');
+   assert.equal(await page.locator('#modal-title').textContent(),'Магазин');
+   await page.keyboard.press('Escape');
+   assert.equal(await page.locator('#modal').isVisible(),false);
+   assert.equal(await page.evaluate(()=>document.activeElement?.id),'mini-shop');
+   const saved=JSON.parse(await page.evaluate(()=>localStorage.getItem('hrabrolap-v0.2-save')));
+   assert.equal(saved.gold,0,'opening a shop must not spend gold');
+   assert.deepEqual(errors,[]);
+  }finally{await context.close();}
+ }finally{await browser.close();}
+});

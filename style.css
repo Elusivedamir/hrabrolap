@@ -407,7 +407,8 @@ body,.game,.game button,.game input,.game select,.game textarea,.game small,.gam
  color:#8a4636;font-weight:800;font-size:.85em;line-height:1.4;margin-top:3px
 }
 .game .modal .shop-item.needs-resources{border-color:#c7a27b}
-.game .modal button:focus-visible,.game #enemy-holder:focus-visible{
+.game .modal button:focus-visible,.game #enemy-holder:focus-visible,
+.game #mini-shop:focus-visible{
  outline:3px solid #f5c673;outline-offset:2px
 }
 @media(max-width:360px){
