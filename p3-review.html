@@ -21,6 +21,8 @@ button.active{background:#bce3a2;border-color:#477d51}
 .rooms button{text-align:left;white-space:normal;overflow-wrap:anywhere}
 .boss-buttons,.toolbar{display:flex;gap:6px;flex-wrap:wrap}
 .boss-buttons button{flex:1 1 180px}
+#art-compare{background:#d8b8a1;color:#523a31;border-color:#bf926d}
+#art-compare.active{background:#bbdfa6;color:#2a5133;border-color:#4c8648}
 .note{font-size:13px;margin:8px 0;color:#f4dfbf}
 .scene{aspect-ratio:840/470;position:relative;border:5px solid #946f50;border-radius:12px;overflow:hidden;background:#2d3645}
 .scene img{position:absolute;display:block;object-fit:contain}
@@ -49,7 +51,7 @@ footer{font-size:12px;color:#e3d5ba;padding:12px 0 24px}
 <header><h1>Храбролап · P3 — Пробуждение глубин</h1>
 <p>Рабочая художественная приёмка: 20 залов · 4 супербосса · 12 кадров на каждого. Эта страница ничего не меняет в игре и сохранениях.</p></header>
 <main>
-<p class="note"><strong>Важно:</strong> R001, R005 и R012 уже используют принятый арт P1. У остальных залов пока процедурные технические фоны. Модели боссов 100, 150 и 200 — игровые кандидаты, не окончательно утверждённый арт.</p>
+<p class="note"><strong>Важно:</strong> R001, R005 и R012 уже используют принятый арт P1. Три заново нарисованных зала R010, R015, R020 и три супербосса (100, 150, 200) представлены новыми художественными кандидатами P3. Они ещё не приняты и не заменяют старые изображения в обычной игре.</p>
 <section aria-label="Список залов"><h2>Залы R001–R020</h2><div class="rooms" id="rooms"></div></section>
 <section aria-label="Сцена">
 <h2 id="room-title">R001 — Каменный порог</h2>
@@ -60,7 +62,7 @@ footer{font-size:12px;color:#e3d5ba;padding:12px 0 24px}
 <div class="caption"><span id="art-status">Принятый фон P1</span><span id="boss-status">Обычный зал</span></div>
 </div>
 <p class="note" id="actual-room-name"></p>
-<div class="toolbar"><button id="toggle-actors" type="button">Скрыть персонажей / оценить фон</button></div>
+<div class="toolbar"><button id="toggle-actors" type="button">Скрыть персонажей / оценить фон</button><button id="art-compare" type="button" class="active" aria-pressed="true">Новые кандидаты P3 (сравнить со старыми)</button></div>
 </section>
 <section class="panel" aria-label="Просмотр боссов">
 <h2>Четыре супербосса · 6 атак + 6 реакций на урон</h2>
@@ -70,12 +72,13 @@ footer{font-size:12px;color:#e3d5ba;padding:12px 0 24px}
 <div class="frames" id="frames"></div>
 <p>Нажми на кадр, чтобы проверить силуэт, движение конечностей, положение головы и направление удара. Проверяется игровая модель, а не нейросетевой вариант.</p>
 </section>
-<footer>Источник: текущие игровые <code>cave-themes.mjs</code> и <code>mega-boss-art.mjs</code>. Художественная приёмка остальных сцен и боссов требует отдельного решения; эта страница не объявляет их готовыми.</footer>
+<footer>Новые рисунки из <code>assets/prototypes/p3/</code> можно сравнить со старыми. Художественное утверждение выполняется отдельно; игра по умолчанию использует предыдущий арт. Для проверки кандидатов в настоящем бою: <code>index.html?p3Art=1</code>, без изменения сохранений.</footer>
 </main>
 <script type="module">
 import {caveBackgroundForWave,caveStageName} from './cave-themes.mjs';
 import {megaBossForWave} from './mega-bosses.mjs';
 import {megaBossFrameUrl} from './mega-boss-art.mjs';
+import {p3RoomCandidate,p3BossCandidate} from './p3-art-candidates.mjs';
 import {dawnSealForWave} from './dawn-seals.mjs';
 import {dawnSealUrl} from './dawn-seal-art.mjs';
 
@@ -88,16 +91,16 @@ const ROOM_NAMES=[
 const APPROVED=new Set([1,5,12]);
 const BOSS_WAVES=[50,100,150,200];
 const $=id=>document.getElementById(id);
-let room=1,bossWave=50,phase='attack',frame=0,playing=false;
+let room=1,bossWave=50,phase='attack',frame=0,playing=false,candidateArt=true;
 const roomId=n=>'R'+String(n).padStart(3,'0');
 const currentBoss=()=>megaBossForWave(bossWave);
 function selectRoom(n){
  room=n;
  const wave=(n-1)*10+1;
- $('cave').src=caveBackgroundForWave(wave);
+ $('cave').src=caveBackgroundForWave(wave,candidateArt);
  $('room-title').textContent=roomId(n)+' — '+ROOM_NAMES[n-1];
- $('actual-room-name').textContent='В игре: '+caveStageName(n)+' · волны '+wave+'–'+(wave+9)+'.';
- $('art-status').textContent=APPROVED.has(n)?'Принятый фон P1':'Технический фон · требует нового арта';
+ $('actual-room-name').textContent='Зал '+caveStageName(n)+' · волны '+wave+'–'+(wave+9)+' · '+(candidateArt&&p3RoomCandidate(n)?'новая версия доступна для просмотра; в обычной игре прежний фон до утверждения':'текущий утверждённый или технический вариант')+'.';
+ $('art-status').textContent=APPROVED.has(n)?'Принятый фон P1':candidateArt&&p3RoomCandidate(n)?'НОВЫЙ КАНДИДАТ P3 · на утверждение':'Технический фон · требует нового арта';
  const hasBoss=n%5===0;
  $('preview-seal').hidden=!hasBoss;
  if(hasBoss){const rune=dawnSealForWave(n*10);$('preview-seal').src=dawnSealUrl(rune.wave);$('preview-seal').alt=rune.name+' на задней стене';$('seal-description').textContent=rune.name+' · '+rune.artStatus+' · эскиз на стене за боссом, не утверждённый арт';}
@@ -110,9 +113,9 @@ function selectRoom(n){
 function selectBoss(wave){selectRoom(wave/10);}
 function renderBoss(){
  const model=currentBoss();
- $('boss').src=megaBossFrameUrl(model.id,phase,frame);
+ $('boss').src=megaBossFrameUrl(model.id,phase,frame,candidateArt);
  $('boss').alt=model.name+', '+(phase==='attack'?'атака':'получение урона')+', кадр '+(frame+1)+'/6';
- $('status').textContent=model.name+' · волна '+bossWave+' · '+(bossWave===50?'утверждённый P1':'игровой арт-кандидат')+' · '+(phase==='attack'?'атака':'урон')+' '+(frame+1)+'/6';
+ $('status').textContent=model.name+' · волна '+bossWave+' · '+(bossWave===50?'утверждённый P1':candidateArt&&p3BossCandidate(model.id)?'НОВЫЙ кандидат P3 — отдельная покадровая анимация':'Старый технический вариант')+' · '+(phase==='attack'?'атака':'урон')+' '+(frame+1)+'/6';
  for(const b of $('frames').querySelectorAll('button'))b.classList.toggle('active',b.dataset.phase===phase&&Number(b.dataset.frame)===frame);
  for(const b of $('boss-buttons').querySelectorAll('button')){b.classList.toggle('active',Number(b.dataset.wave)===bossWave);b.setAttribute('aria-pressed',String(Number(b.dataset.wave)===bossWave));}
  for(const b of document.querySelectorAll('[data-phase]')){b.classList.toggle('active',b.dataset.phase===phase);b.setAttribute('aria-pressed',String(b.dataset.phase===phase));}
@@ -123,14 +126,14 @@ function renderFrames(){
  const model=currentBoss();
  for(const kind of ['attack','hurt'])for(let n=0;n<6;n++){
   const b=document.createElement('button');b.type='button';b.dataset.phase=kind;b.dataset.frame=n;b.setAttribute('aria-label',model.name+': '+(kind==='attack'?'атака':'урон')+' '+(n+1)+'/6');
-  const img=document.createElement('img');img.src=megaBossFrameUrl(model.id,kind,n);img.alt='';img.loading='lazy';
+  const img=document.createElement('img');img.src=megaBossFrameUrl(model.id,kind,n,candidateArt);img.alt='';img.loading='lazy';
   const caption=document.createElement('span');caption.textContent=(kind==='attack'?'A':'H')+(n+1);
   b.append(img,caption);b.addEventListener('click',()=>selectFrame(kind,n));grid.append(b);
  }
 }
 for(let n=1;n<=20;n++){
  const b=document.createElement('button');b.type='button';b.dataset.room=n;
- b.textContent=roomId(n)+' · '+ROOM_NAMES[n-1]+(APPROVED.has(n)?' ✓':' · эскиз');
+ b.textContent=roomId(n)+' · '+ROOM_NAMES[n-1]+(APPROVED.has(n)?' ✓':p3RoomCandidate(n)?' ✦ Новый арт':' · тех. фон');
  b.addEventListener('click',()=>selectRoom(n));$('rooms').append(b);
 }
 for(const wave of BOSS_WAVES){
@@ -139,6 +142,7 @@ for(const wave of BOSS_WAVES){
  b.addEventListener('click',()=>selectBoss(wave));$('boss-buttons').append(b);
 }
 for(const b of document.querySelectorAll('[data-phase]'))b.addEventListener('click',()=>selectFrame(b.dataset.phase,0));
+$('art-compare').addEventListener('click',()=>{candidateArt=!candidateArt;$('art-compare').classList.toggle('active',candidateArt);$('art-compare').setAttribute('aria-pressed',String(candidateArt));$('art-compare').textContent=candidateArt?'Новые кандидаты P3 (сравнить со старыми)':'Старые варианты (вернуть новые)';selectRoom(room);});
 $('play').addEventListener('click',()=>{playing=!playing;$('play').textContent=playing?'⏸ Пауза':'▶ Воспроизвести';});
 $('toggle-actors').addEventListener('click',()=>{const hidden=$('stage').classList.toggle('hide-actors');$('toggle-actors').setAttribute('aria-pressed',String(hidden));});
 setInterval(()=>{if(playing){frame=(frame+1)%6;renderBoss();}},220);
