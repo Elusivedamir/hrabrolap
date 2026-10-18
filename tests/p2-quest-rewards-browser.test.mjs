@@ -18,7 +18,7 @@ test('P2: mobile quest rewards show exact amount, keep 44px targets and never pa
     const seed=freshProgress();
     seed.killedSlimes=5;
     seed.autoEnabled=false;
-    await page.addInitScript(data=>localStorage.setItem('hrabrolap-v0.2-save',JSON.stringify(data)),seed);
+    await page.addInitScript(data=>{if(!localStorage.getItem('hrabrolap-v0.2-save'))localStorage.setItem('hrabrolap-v0.2-save',JSON.stringify(data));},seed);
     await page.goto(base,{waitUntil:'domcontentloaded'});
     await page.locator('#quests').click();
     const first=page.locator('.quest-row').first();
