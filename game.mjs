@@ -8,6 +8,8 @@ import {ACHIEVEMENTS,achievementProgress,claimAchievement} from './achievements.
 import {monsterPose} from './monster-rig.mjs';
 import {megaBossByType} from './mega-bosses.mjs';
 import {megaBossFrameUrl} from './mega-boss-art.mjs';
+import {CHAPTER_NAMES,DAWN_SEALS,dawnSealForWave,dawnSealForStage,ownsDawnSeal,collectedDawnSeals} from './dawn-seals.mjs';
+import {dawnSealUrl} from './dawn-seal-art.mjs';
 import {bucketArt,sleepFrameIndex,SLEEP_FRAMES} from './bucket-rest.mjs';
 import {applyCanonicalFrame} from './canonical-sprites.mjs';
 import {FOREST_GUARDIAN_ID} from './forest-guardian-rig.mjs';
@@ -166,6 +168,21 @@ function render(){
   $('cave-backdrop').src=caveBackgroundForWave(b.level);
   $('cave-stage').textContent=`ЗАЛ ${stage}/200 · ${caveStageName(stage)}`;
  }
+ const wall=$('dawn-wall'),seal=dawnSealForStage(stage);
+ wall.hidden=!seal;
+ if(seal){
+  const acquired=ownsDawnSeal(p,seal.wave);
+  wall.classList.toggle('is-collected',acquired);
+  wall.setAttribute('aria-label',acquired?'Печать Рассвета уже освобождена: '+seal.name:'На стене: '+seal.name);
+  if($('dawn-wall-art').dataset.wave!==String(seal.wave)){
+   $('dawn-wall-art').src=dawnSealUrl(seal.wave);
+   $('dawn-wall-art').dataset.wave=String(seal.wave);
+  }
+  $('dawn-wall-art').alt=seal.name;
+ }
+ const sealCount=collectedDawnSeals(p).length;
+ $('seals').textContent='✧ '+sealCount+'/40';
+ $('seals').setAttribute('aria-label','Печати Рассвета: собрано '+sealCount+' из 40');
  $('enemy-name').textContent=b.monster.name;
  $('enemy-name').title=b.monster.resistanceText||'';
  const resistance=$('boss-resistance');resistance.hidden=!b.monster.megaboss;resistance.textContent=b.monster.resistanceText||'';
@@ -344,6 +361,28 @@ function openModal(title,mode='info',text=''){const scrollTop=modalType===mode?$
    btn.addEventListener('click',()=>{const result=claimAchievement(p,a.id);if(!result.ok)return;save();openModal('Достижения','achievements');notify('Достижение: '+a.name+' · +'+result.reward+' 🪙');});
    row.append(icon,details,btn);content.append(row);
   }
+ }else if(mode==='seals'){
+  const claimed=collectedDawnSeals(p).length;
+  para('Искра Рассвета скрыта за сорока древними печатями. Каждую печать можно освободить только первой победой над её супербоссом.');
+  const summary=document.createElement('div');summary.className='seal-summary';
+  summary.textContent='✧ Печати Рассвета · '+claimed+'/40'+(claimed===40?' · все замки сняты':' · путь к Искре ещё продолжается');
+  content.append(summary);
+  for(let chapter=1;chapter<=10;chapter++){
+    const title=document.createElement('h3');title.className='seal-chapter-title';
+    const count=DAWN_SEALS.filter(item=>item.chapter===chapter&&ownsDawnSeal(p,item.wave)).length;
+    title.textContent='Глава '+chapter+' · '+CHAPTER_NAMES[chapter-1]+' · '+count+'/4';content.append(title);
+    const grid=document.createElement('div');grid.className='seal-grid';content.append(grid);
+    for(const seal of DAWN_SEALS.filter(item=>item.chapter===chapter)){
+      const owned=ownsDawnSeal(p,seal.wave);
+      const card=document.createElement('div');card.className='seal-card';card.classList.toggle('collected',owned);
+      card.setAttribute('aria-label',seal.name+' · '+(owned?'собрана':'не собрана')+' · волна '+seal.wave);
+      const img=document.createElement('img');img.src=dawnSealUrl(seal.wave);img.alt='';img.loading='lazy';
+      const name=document.createElement('strong');name.textContent=seal.name;
+      const status=document.createElement('small');status.textContent='Волна '+seal.wave+' · '+(owned?'✧ Освобождена':'🔒 Заперта');
+      const art=document.createElement('small');art.className='seal-art-status';art.textContent=seal.artStatus;
+      card.append(img,name,status,art);grid.append(card);
+    }
+  }
  }else if(mode==='offline'){
   para('Котёнок заработал, пока тебя не было: +'+fmt(p.pendingOffline)+' монет.');para('Офлайн-заработок ограничен стоимостью ближайшего улучшения и не открывает новые комнаты.');action('Забрать '+fmt(p.pendingOffline)+' 🪙',()=>{p.gold+=p.pendingOffline;p.pendingOffline=0;save();closeModal();notify('Офлайн-награда получена!')});
  }else if(mode==='reset'){
@@ -353,6 +392,17 @@ function openModal(title,mode='info',text=''){const scrollTop=modalType===mode?$
  if(!$('modal').open)$('modal').showModal();if(scrollTop)$('modal-content').scrollTop=scrollTop;$('modal-x').focus({preventScroll:true});render();
 }
 function closeModal(){modalType='';if($('modal').open)$('modal').close();const opener=modalReturnFocus;modalReturnFocus=null;if(opener?.isConnected&&!opener.disabled&&opener.getClientRects().length)opener.focus({preventScroll:true});last=performance.now();render()}
+function flySealToJournal(seal){
+ const origin=$('dawn-wall-art').getBoundingClientRect(),target=$('seals').getBoundingClientRect(),root=$('game').getBoundingClientRect();
+ if(!origin.width||!target.width)return;
+ const art=document.createElement('img');art.className='dawn-seal-flight';
+ art.src=dawnSealUrl(seal.wave);art.alt='';
+ art.style.left=(origin.left-root.left)+'px';art.style.top=(origin.top-root.top)+'px';
+ art.style.width=origin.width+'px';art.style.height=origin.height+'px';
+ art.style.setProperty('--seal-flight-x',(target.left+target.width/2-origin.left-origin.width/2)+'px');
+ art.style.setProperty('--seal-flight-y',(target.top+target.height/2-origin.top-origin.height/2)+'px');
+ $('game').append(art);setTimeout(()=>art.remove(),940);
+}
 function battleEvents(events){for(const ev of events){
  if(ev.kind==='hero-hit'){
   contactAttack();playMonsterFrames('hurt');pulse($('enemy-holder'),'hurt',350);
@@ -365,7 +415,12 @@ function battleEvents(events){for(const ev of events){
  if(ev.kind==='win'){lastBattleMessage=performance.now()+1200;coinFx(ev.gold);
    const lootName=MATERIALS.find(x=>x.id===ev.loot?.id);
    say(`Победа! +${ev.gold} монет`+(lootName?` · +1 ${lootName.name}`:''));pulse($('enemy-holder'),'dead',660);save();if(ev.firstClear&&ev.level===WAVE_COUNT)setTimeout(()=>openModal('2000 волн пройдено!','info','Храбролап победил 40 великих боссов и исследовал все 200 залов подземелья!'),600);
-   else if(ev.firstClear&&ev.level%10===0){notify('Открыт новый зал пещеры!');}}
+   else if(ev.firstClear&&ev.level%10===0&&ev.level%50!==0){notify('Открыт новый зал пещеры!');}
+   if(ev.firstClear&&ev.level%50===0){
+     const seal=dawnSealForWave(ev.level);
+     if(seal){flySealToJournal(seal);notify('✧ Освобождена '+seal.name+' · Печати Рассвета '+collectedDawnSeals(p).length+'/40');}
+   }
+ }
  if(ev.kind==='defeat'){lastBattleMessage=0;syncHeroPose();say('Котёнок возвращается домой отдохнуть');save();}
  if(ev.kind==='spawn'){cancelMonsterFrames();}
  if(ev.kind==='spawn'&&ev.afterRest){cancelAttackPose();say('Мы справимся!');pulse($('surface'),'wake-up',1800);}
@@ -440,6 +495,7 @@ $('bucket').addEventListener('click',()=>openModal('Ведро рыцаря','bu
 $('merchant').addEventListener('click',()=>{if(p.merchantPhase!=='waiting'){notify('Торговец ещё не приехал');return;}openModal('Серый кот-торговец','trade');});
 $('quests').addEventListener('click',()=>openModal('Задания','quests'));
 $('achievements').addEventListener('click',()=>openModal('Достижения','achievements'));
+$('seals').addEventListener('click',()=>openModal('Печати Рассвета','seals'));
 $('inventory').addEventListener('click',()=>openModal('Инвентарь','inventory'));
 $('shop').addEventListener('click',()=>openModal('Магазин','shop'));
 const openMiniShop=()=>openModal('Магазин','shop');

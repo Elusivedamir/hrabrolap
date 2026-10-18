@@ -498,3 +498,34 @@ body,.game,.game button,.game input,.game select,.game textarea,.game small,.gam
  white-space:normal;
  overflow-wrap:anywhere;
 }
+
+
+/* P3 Dawn Seals: a separate niche BEHIND the boss, never a replacement sprite. */
+.game .dungeon .dawn-wall{
+ position:absolute;z-index:1;left:64%;top:26%;width:18%;aspect-ratio:1;
+ transform:translateX(-50%);pointer-events:none;display:grid;place-items:center;
+ border-radius:50%;background:radial-gradient(circle,#1e2339c9 0%,#333b49a8 52%,transparent 74%);
+}
+.game .dungeon .dawn-wall[hidden]{display:none}
+.game .dungeon .arena{z-index:2}
+.game .dawn-wall img{width:100%;height:100%;display:block;object-fit:contain;filter:drop-shadow(0 0 9px #eedbaaa0);animation:dawnPulse 3s ease-in-out infinite}
+.game .dawn-wall #dawn-wall-imprint{display:none;color:#bba997;font-size:clamp(19px,5vw,30px);opacity:.42}
+.game .dawn-wall.is-collected img{display:none}
+.game .dawn-wall.is-collected #dawn-wall-imprint{display:block}
+.game .dawn-seal-flight{position:absolute;z-index:30;pointer-events:none;animation:dawnSealFly .88s ease-in-out forwards;filter:drop-shadow(0 0 9px #ffeaa8)}
+@keyframes dawnPulse{0%,100%{transform:scale(.96);opacity:.81}50%{transform:scale(1.05);opacity:1}}
+@keyframes dawnSealFly{0%{transform:translate(0,0) scale(1);opacity:1}25%{transform:translate(0,-24px) scale(1.28);opacity:1}100%{transform:translate(var(--seal-flight-x),var(--seal-flight-y)) scale(.35);opacity:0}}
+.game #seals{min-height:38px;min-width:45px;white-space:nowrap;color:#fde1ab;font-weight:900;font-size:.74em;padding:4px}
+.game .upgrade-head>div{gap:3px}
+.game .modal .seal-summary{margin:10px 0 12px;background:#e8d1a8;border:2px solid #b08b62;border-radius:10px;padding:9px;font-weight:900;color:#59402c}
+.game .modal .seal-chapter-title{font-size:.96em;line-height:1.3;color:#744b32;margin:14px 0 8px}
+.game .modal .seal-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:7px}
+.game .modal .seal-card{display:flex;flex-direction:column;align-items:center;gap:3px;border-radius:12px;border:2px solid #baa48d;background:#decfbd;padding:8px 3px;text-align:center;min-width:0;opacity:.75}
+.game .modal .seal-card.collected{opacity:1;border-color:#8aae77;background:#f2e8cd}
+.game .modal .seal-card img{width:62px;max-width:80%;height:65px;object-fit:contain;filter:grayscale(1) brightness(.6)}
+.game .modal .seal-card.collected img{filter:drop-shadow(0 0 3px #d9b87788)}
+.game .modal .seal-card strong{font-size:.77em;overflow-wrap:anywhere;line-height:1.2}
+.game .modal .seal-card small{font-size:.68em;line-height:1.2}
+.game .modal .seal-card .seal-art-status{font-style:italic;color:#8e6b52}
+@media(max-width:360px){.game .upgrade-head{font-size:.8em}.game #seals{padding:2px;min-width:43px}}
+@media(prefers-reduced-motion:reduce){.game .dawn-wall img,.game .dawn-seal-flight{animation:none!important}}
