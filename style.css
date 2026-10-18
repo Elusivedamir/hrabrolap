@@ -502,7 +502,7 @@ body,.game,.game button,.game input,.game select,.game textarea,.game small,.gam
 
 /* P3 Dawn Seals: a separate niche BEHIND the boss, never a replacement sprite. */
 .game .dungeon .dawn-wall{
- position:absolute;z-index:1;left:64%;top:26%;width:18%;aspect-ratio:1;
+ position:absolute;z-index:1;left:50%;top:45%;width:18%;aspect-ratio:1;
  transform:translateX(-50%);pointer-events:none;display:grid;place-items:center;
  border-radius:50%;background:radial-gradient(circle,#1e2339c9 0%,#333b49a8 52%,transparent 74%);
 }
@@ -512,6 +512,11 @@ body,.game,.game button,.game input,.game select,.game textarea,.game small,.gam
 .game .dawn-wall #dawn-wall-imprint{display:none;color:#bba997;font-size:clamp(19px,5vw,30px);opacity:.42}
 .game .dawn-wall.is-collected img{display:none}
 .game .dawn-wall.is-collected #dawn-wall-imprint{display:block}
+/* R005 has the approved seal painted at the exact floor center. The live seal
+   stays present for first-clear and journal logic, without a second glyph. */
+.game .dungeon[data-stage="5"] .dawn-wall{background:none}
+.game .dungeon[data-stage="5"] .dawn-wall img,
+.game .dungeon[data-stage="5"] .dawn-wall #dawn-wall-imprint{visibility:hidden}
 .game .dawn-seal-flight{position:absolute;z-index:30;pointer-events:none;animation:dawnSealFly .88s ease-in-out forwards;filter:drop-shadow(0 0 9px #ffeaa8)}
 @keyframes dawnPulse{0%,100%{transform:scale(.96);opacity:.81}50%{transform:scale(1.05);opacity:1}}
 @keyframes dawnSealFly{0%{transform:translate(0,0) scale(1);opacity:1}25%{transform:translate(0,-24px) scale(1.28);opacity:1}100%{transform:translate(var(--seal-flight-x),var(--seal-flight-y)) scale(.35);opacity:0}}

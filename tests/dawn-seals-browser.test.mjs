@@ -38,7 +38,7 @@ test('Dawn Seals: boss wall collection flies into 40-slot journal, persists and 
     const state=await save(page);
     assert.equal(state.best,50);assert.deepEqual(state.megaBossWins,[50]);
     assert.equal(await page.locator('#dawn-wall').getAttribute('aria-label'),'Печать Рассвета уже освобождена: Печать Мха');
-    assert.equal(await page.locator('#dawn-wall-imprint').isVisible(),true);
+    assert.equal(await page.locator('#dawn-wall-imprint').isVisible(),false,'R005 has the approved floor engraving instead of a second glyph');
     await page.locator('#dungeon').screenshot({path:'qa/screenshots/dawn-seal-after-'+width+'.png'});
     await page.locator('#seals').click();
     assert.equal(await page.locator('.seal-card').count(),40);
@@ -89,10 +89,10 @@ test('P3 art review shows the four corresponding wall-seal glyphs without touchi
   assert.equal(await rune.isVisible(),false,'regular room contains no wall seal');
   for(const [wave,name] of [[50,'Мха'],[100,'Кости'],[150,'Хитина'],[200,'Льда']]){
    await page.locator('#boss-buttons [data-wave="'+wave+'"]').click();
-   assert.equal(await rune.isVisible(),true);
+   assert.equal(await rune.isVisible(),wave!==50,'wave 50 seal is painted into the approved room');
    assert.match(await rune.getAttribute('alt'),new RegExp('Печать '+name));
    assert.equal(await rune.evaluate(async image=>{await image.decode();return image.naturalWidth>0}),true);
-   assert.match(await page.locator('#seal-description').textContent(),/концепт/);
+   assert.match(await page.locator('#seal-description').textContent(),wave===50?/утверждённая печать/:/эскиз/);
   }
   await page.locator('#toggle-actors').click();
   assert.equal(await rune.isVisible(),true,'wall seal stays visible when character overlays are hidden');

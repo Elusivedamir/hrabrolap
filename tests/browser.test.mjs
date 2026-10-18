@@ -97,7 +97,7 @@ test('все десять монстров показывают 6 кадров �
   if(wave%50===0){
    assert.equal(await page.locator('#boss-crown').isVisible(),false,'epic bosses have bespoke heads, no extra crown');
    const bossUrl=await page.locator('#enemy-art').getAttribute('src');
-   if(wave===50)assert.match(bossUrl,/assets\/prototypes\/p1\/boss-thorn-warden\/attack_0[1-6]\.svg$/);
+   if(wave===50)assert.match(bossUrl,/assets\/approved\/moss-guardian\/attack_0[1-6]\.png$/);
    else assert.ok(bossUrl.startsWith('data:image/svg+xml'));
    assert.equal(await page.locator('#boss-resistance').isVisible(),true);
    assert.ok(await page.locator('#enemy-art').evaluate(async img=>{await img.decode();return img.naturalWidth>0}),`boss wave ${wave} ${type} failed to decode`);
@@ -476,7 +476,7 @@ test('first fifty-wave mega-boss and achievement window render on mobile',async(
  assert.equal(await page.locator('#boss-resistance').isVisible(),true);
  assert.match(await page.locator('#boss-resistance').textContent(),/яду/);
  const img=await page.locator('#enemy-art').evaluate(async el=>{await el.decode();return {url:el.getAttribute('src'),w:el.naturalWidth,h:el.naturalHeight};});
- assert.match(img.url,/assets\/prototypes\/p1\/boss-thorn-warden\/attack_0[1-6]\.svg$/);
+ assert.match(img.url,/assets\/approved\/moss-guardian\/attack_0[1-6]\.png$/);
  assert.ok(img.w>=180&&img.h>=180);
  await shot(page,'megaboss-50-mobile');
  await page.locator('#achievements').click();

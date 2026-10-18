@@ -155,12 +155,12 @@ export function megaBossFrameSvg(type,phase='attack',index=0){
 }
 export function megaBossFrameUrl(type,phase='attack',index=0,p3ArtPreview=false){
  if(p3ArtPreview){const candidate=p3BossFrameUrl(type,phase,index);if(candidate)return candidate;}
- // User-approved P1 Moss Guardian: twelve individual, pre-rendered SVG poses.
- // Original procedural artwork remains available for all other bosses.
+ // Approved Moss Guardian: twelve transparent painted poses from the approved sheet.
+ // Keep the archived P1 SVGs and all other boss art intact.
  if(type==='thorn_warden'){
   if(!['attack','hurt'].includes(phase))throw Error('Invalid mega animation '+phase);
   const i=Math.min(5,Math.max(0,Math.trunc(Number(index)||0)));
-  return 'assets/prototypes/p1/boss-thorn-warden/'+phase+'_'+String(i+1).padStart(2,'0')+'.svg';
+  return 'assets/approved/moss-guardian/'+phase+'_'+String(i+1).padStart(2,'0')+'.png';
  }
  const key=type+'/'+phase+'/'+index;if(cache.has(key))return cache.get(key);
  const url='data:image/svg+xml;charset=UTF-8,'+encodeURIComponent(megaBossFrameSvg(type,phase,index));

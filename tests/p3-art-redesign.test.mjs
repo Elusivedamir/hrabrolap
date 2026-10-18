@@ -54,5 +54,5 @@ test('P3 each anatomically distinct boss has 6 independently drawn attack/hurt f
   }
   assert.equal(frames.size,12,'twelve distinct authored frames for '+boss);
  }
- assert.match(megaBossFrameUrl('thorn_warden','attack',0,true),/assets\/prototypes\/p1/);
+ assert.match(megaBossFrameUrl('thorn_warden','attack',0,true),/assets\/approved\/moss-guardian/);
 });

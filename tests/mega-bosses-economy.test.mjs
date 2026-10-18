@@ -29,7 +29,7 @@ test('168 attack-and-hurt images include fourteen distinct silhouettes',()=>{
    const s=megaBossFrameSvg(b.id,phase,i),u=megaBossFrameUrl(b.id,phase,i);
    assert.match(s,/<svg /);assert.match(s,/<\/svg>/);
    assert.match(s,/<path|<ellipse|<circle/);
-   if(b.id==='thorn_warden')assert.match(u,/^assets\/prototypes\/p1\/boss-thorn-warden\/(attack|hurt)_0[1-6]\.svg$/);
+   if(b.id==='thorn_warden')assert.match(u,/^assets\/approved\/moss-guardian\/(attack|hurt)_0[1-6]\.png$/);
    else {assert.ok(u.startsWith('data:image/svg+xml'));assert.ok(u.length>700);}
    frames.add(s);
    if(phase==='attack'&&i===0)shapes.add(s);

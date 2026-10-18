@@ -22,8 +22,8 @@ test('P1 review page renders original hero, three separate rooms and 12 moss bos
  for(const [room,file] of [['R001','stone-threshold'],['R005','moss-outpost'],['R012','rune-dead-end']]){
   await page.locator('[data-room="'+room+'"]').click();
   const result=await page.locator('#cave').evaluate(async img=>{await img.decode();return {w:img.naturalWidth,h:img.naturalHeight,src:img.getAttribute('src')}});
-  assert.equal(result.w,840,room+' image width');
-  assert.equal(result.h,470,room+' image height');
+  assert.equal(result.w,room==='R005'?1672:840,room+' image width');
+  assert.equal(result.h,room==='R005'?941:470,room+' image height');
   assert.ok(result.src.includes(file),room+' image changed');
   await page.screenshot({path:'qa/screenshots/p1-'+room+'-review-mobile.png',fullPage:true});
  }
@@ -32,9 +32,9 @@ test('P1 review page renders original hero, three separate rooms and 12 moss bos
   const b=page.locator('.frame[aria-label="'+phase+' кадр '+i+'"]');
   await b.click();
   const frame=await page.locator('#boss').evaluate(async img=>{await img.decode();return {w:img.naturalWidth,h:img.naturalHeight,src:img.getAttribute('src')}});
-  assert.equal(frame.w,240,'boss '+phase+' frame '+i);
-  assert.equal(frame.h,245,'boss '+phase+' frame '+i);
-  assert.ok(frame.src.includes(phase+'_'+String(i).padStart(2,'0')+'.svg'));
+  assert.equal(frame.w,362,'boss '+phase+' frame '+i);
+  assert.equal(frame.h,362,'boss '+phase+' frame '+i);
+  assert.ok(frame.src.includes(phase+'_'+String(i).padStart(2,'0')+'.png'));
  }
  await page.locator('.frame[aria-label="attack кадр 1"]').click();
  await page.screenshot({path:'qa/screenshots/p1-Moss-Guardian-attack-12frames.png',fullPage:true});
@@ -50,8 +50,8 @@ test('approved P1 art renders in actual gameplay at waves 1, 41, 50 and 111',asy
  const {megaBossFrameUrl}=await import('../mega-boss-art.mjs');
  const checks=[
   {wave:1,stage:1,name:'Каменный порог',room:'R001-stone-threshold.svg'},
-  {wave:41,stage:5,name:'Моховая сторожка',room:'R005-moss-outpost.svg'},
-  {wave:50,stage:5,name:'Моховая сторожка',room:'R005-moss-outpost.svg',boss:true},
+  {wave:41,stage:5,name:'Моховая сторожка',room:'R005-moss-outpost.webp'},
+  {wave:50,stage:5,name:'Моховая сторожка',room:'R005-moss-outpost.webp',boss:true},
   {wave:111,stage:12,name:'Рунный тупик',room:'R012-rune-dead-end.svg'}
  ];
  const browser=await chromium.launch({headless:true});
@@ -70,24 +70,24 @@ test('approved P1 art renders in actual gameplay at waves 1, 41, 50 and 111',asy
     const back=page.locator('#cave-backdrop');
     await page.waitForFunction(expected=>document.getElementById('cave-backdrop')?.getAttribute('src')?.endsWith(expected),c.room);
     const size=await back.evaluate(async img=>{await img.decode();return [img.naturalWidth,img.naturalHeight]});
-    assert.deepEqual(size,[840,470],c.room);
+    assert.deepEqual(size,c.stage===5?[1672,941]:[840,470],c.room);
     await page.locator('#cave-stage').waitFor();
     assert.match(await page.locator('#cave-stage').innerText(),new RegExp(c.name));
     if(c.boss){
       const sprite=page.locator('#enemy-art');
-      await page.waitForFunction(()=>document.getElementById('enemy-art')?.getAttribute('src')?.includes('boss-thorn-warden/attack_'),null,{timeout:10000});
+      await page.waitForFunction(()=>document.getElementById('enemy-art')?.getAttribute('src')?.includes('moss-guardian/attack_'),null,{timeout:10000});
       const art=await sprite.evaluate(async img=>{await img.decode();return {src:img.getAttribute('src'),w:img.naturalWidth,h:img.naturalHeight}});
-      assert.equal(art.w,240);
-      assert.equal(art.h,245);
-      assert.ok(art.src.includes('boss-thorn-warden/attack_'));
+      assert.equal(art.w,362);
+      assert.equal(art.h,362);
+      assert.ok(art.src.includes('moss-guardian/attack_'));
       assert.match(await page.locator('#enemy-name').innerText(),/Моховой страж/);
       for(const phase of ['attack','hurt'])for(let n=0;n<6;n++){
         const path=megaBossFrameUrl('thorn_warden',phase,n);
-        assert.match(path,new RegExp(phase+'_'+String(n+1).padStart(2,'0')+'\\.svg$'));
+        assert.match(path,new RegExp(phase+'_'+String(n+1).padStart(2,'0')+'\\.png$'));
         const img=await page.evaluate(async src=>{
          const image=new Image();image.src=src;await image.decode();return [image.naturalWidth,image.naturalHeight];
         },path);
-        assert.deepEqual(img,[240,245],path);
+        assert.deepEqual(img,[362,362],path);
       }
     }
     await fs.mkdir('qa/screenshots',{recursive:true});

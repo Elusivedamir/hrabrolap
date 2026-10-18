@@ -31,19 +31,19 @@ a{color:#b7e3e4}
 @media(max-width:400px){.app{padding:9px}.controls{gap:5px}.controls button{font-size:12px;padding:9px 7px}.frame{min-height:44px}.panel{padding:9px}.scene-title,.boss-chip{padding:2px 4px}}
 </style>
 </head><body>
-<header><h1>Храбролап • P1 / графический просмотрщик</h1><small>Кандидаты — без внедрения в игру. Принятого котёнка не меняем.</small></header>
+<header><h1>Храбролап • P1 / графический просмотрщик</h1><small>Моховой страж и его арена утверждены. Принятого котёнка не меняем.</small></header>
 <main class="app">
-<p class="info"><span class="badge">PROTOTYPE / NOT APPROVED</span> Три пробных комнаты из первой главы и 12 отдельных SVG-кадров Мохового стража.</p>
+<p class="info"><span class="badge">R005 / APPROVED</span> Моховая сторожка и 12 отдельных кадров Мохового стража.</p>
 <div class="controls" id="room-buttons">
-<button data-room="R001" class="selected">R001 · Каменный порог</button>
-<button data-room="R005">R005 · Моховая сторожка</button>
+<button data-room="R001">R001 · Каменный порог</button>
+<button data-room="R005" class="selected">R005 · Моховая сторожка</button>
 <button data-room="R012">R012 · Рунный тупик</button>
 </div>
 <div class="scene-frame" id="stage">
-<img id="cave" src="assets/prototypes/p1/R001-stone-threshold.svg" alt="Кандидат фона пещеры" />
+<img id="cave" src="assets/approved/moss-guardian/R005-moss-outpost.webp" alt="Моховая сторожка с печатью в центре" />
 <img id="hero" src="assets/canonical/attack_01.png" alt="Оригинальный Храбролап, без изменений" />
-<img id="boss" src="assets/prototypes/p1/boss-thorn-warden/attack_01.svg" alt="Пробная модель Мохового стража" />
-<div class="scene-title" id="scene-title">R001 · Каменный порог</div>
+<img id="boss" src="assets/approved/moss-guardian/attack_01.png" alt="Моховой страж" />
+<div class="scene-title" id="scene-title">R005 · Моховая сторожка</div>
 <div class="boss-chip">🌿 Моховой страж · яд не действует</div>
 </div>
 <div class="controls">
@@ -52,10 +52,10 @@ a{color:#b7e3e4}
 <button data-phase="attack" class="selected">Атака · 6 кадров</button>
 <button data-phase="hurt">Урон · 6 кадров</button>
 </div>
-<p id="caption">Зал R001 • этап P1. Модель босса — художественный кандидат. Бой в самой игре пока не изменён.</p>
+<p id="caption">Зал R005 • Моховая сторожка · Атака · кадр 1/6.</p>
 <section class="panel">
 <h2>12 покадровых поз Мохового стража</h2>
-<p>Выбирай отдельный кадр, чтобы проверить лапы, корни, глаза, растительность и непрерывность движения. Ни один из SVG не заменяет сейчас игровые кадры.</p>
+<p>Выбирай отдельный кадр, чтобы проверить корни, глаза, растительность и непрерывность движения. Эти кадры подключены к игре.</p>
 <div class="frames" id="frames"></div>
 </section>
 <section class="panel"><h2>Как оцениваем</h2>
@@ -65,17 +65,17 @@ a{color:#b7e3e4}
 </main><script type="module">
 const rooms={
  R001:['Каменный порог','assets/prototypes/p1/R001-stone-threshold.svg'],
- R005:['Моховая сторожка','assets/prototypes/p1/R005-moss-outpost.svg'],
+ R005:['Моховая сторожка','assets/approved/moss-guardian/R005-moss-outpost.webp'],
  R012:['Рунный тупик','assets/prototypes/p1/R012-rune-dead-end.svg']
 };
 const $=id=>document.getElementById(id);
-let room='R001',phase='attack',index=0,playing=true;
-const frameUrl=(p,i)=>'assets/prototypes/p1/boss-thorn-warden/'+p+'_'+String(i+1).padStart(2,'0')+'.svg';
+let room='R005',phase='attack',index=0,playing=true;
+const frameUrl=(p,i)=>'assets/approved/moss-guardian/'+p+'_'+String(i+1).padStart(2,'0')+'.png';
 function render(){
  $('cave').src=rooms[room][1];
  $('scene-title').textContent=room+' · '+rooms[room][0];
  $('boss').src=frameUrl(phase,index);
- $('caption').textContent=room+' • '+rooms[room][0]+' · '+(phase==='attack'?'Атака':'Получение урона')+' · кадр '+(index+1)+'/6. Прототип, не заменяет main.';
+ $('caption').textContent=room+' • '+rooms[room][0]+' · '+(phase==='attack'?'Атака':'Получение урона')+' · кадр '+(index+1)+'/6.';
  document.querySelectorAll('[data-room]').forEach(b=>b.classList.toggle('selected',b.dataset.room===room));
  document.querySelectorAll('[data-phase]').forEach(b=>b.classList.toggle('selected',b.dataset.phase===phase));
  document.querySelectorAll('.frame').forEach(b=>b.classList.toggle('active',b.dataset.index===String(index)));

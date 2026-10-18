@@ -22,7 +22,7 @@ function clampStage(n){return Math.max(1,Math.min(CAVE_ROOM_COUNT,Math.floor(Num
 export function caveStageForWave(wave){return clampStage(Math.floor((Math.max(1,Number(wave)||1)-1)/10)+1);}
 const APPROVED_P1_ROOMS=Object.freeze({
   1:Object.freeze({name:'Каменный порог',url:'assets/prototypes/p1/R001-stone-threshold.svg'}),
-  5:Object.freeze({name:'Моховая сторожка',url:'assets/prototypes/p1/R005-moss-outpost.svg'}),
+  5:Object.freeze({name:'Моховая сторожка',url:'assets/approved/moss-guardian/R005-moss-outpost.webp'}),
   12:Object.freeze({name:'Рунный тупик',url:'assets/prototypes/p1/R012-rune-dead-end.svg'})
 });
 export function caveStageName(stage){const n=clampStage(stage);return CHAPTER_ONE_ROOM_NAMES[n-1]||APPROVED_P1_ROOMS[n]?.name||PALETTES[(n-1)%PALETTES.length].name;}

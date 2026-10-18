@@ -29,7 +29,7 @@ button.active{background:#bce3a2;border-color:#477d51}
 #cave{inset:0;width:100%;height:100%;object-fit:fill}
 #hero{bottom:5%;left:10%;width:31%;height:68%;object-position:center bottom}
 #boss{bottom:5%;right:8%;width:34%;height:71%;object-position:center bottom}
-#preview-seal{top:27%;left:62%;width:17%;height:27%;object-fit:contain;filter:drop-shadow(0 0 9px #ffd78f);pointer-events:none}
+#preview-seal{top:41.5%;left:41.5%;width:17%;height:27%;object-fit:contain;filter:drop-shadow(0 0 9px #ffd78f);pointer-events:none}
 #preview-seal[hidden]{display:none}
 #boss[hidden]{display:none}
 .scene.hide-actors #hero,.scene.hide-actors #boss{display:none}
@@ -102,8 +102,8 @@ function selectRoom(n){
  $('actual-room-name').textContent='Зал '+caveStageName(n)+' · волны '+wave+'–'+(wave+9)+' · '+(candidateArt&&p3RoomCandidate(n)?'новая версия доступна для просмотра; в обычной игре прежний фон до утверждения':'текущий утверждённый или технический вариант')+'.';
  $('art-status').textContent=APPROVED.has(n)?'Принятый фон P1':candidateArt&&p3RoomCandidate(n)?'НОВЫЙ КАНДИДАТ P3 · на утверждение':'Технический фон · требует нового арта';
  const hasBoss=n%5===0;
- $('preview-seal').hidden=!hasBoss;
- if(hasBoss){const rune=dawnSealForWave(n*10);$('preview-seal').src=dawnSealUrl(rune.wave);$('preview-seal').alt=rune.name+' на задней стене';$('seal-description').textContent=rune.name+' · '+rune.artStatus+' · эскиз на стене за боссом, не утверждённый арт';}
+ $('preview-seal').hidden=!hasBoss||n===5;
+ if(hasBoss){const rune=dawnSealForWave(n*10);$('preview-seal').src=dawnSealUrl(rune.wave);$('preview-seal').alt=rune.name+' в центре пола';$('seal-description').textContent=n===5?rune.name+' · утверждённая печать выгравирована в центре пола':rune.name+' · '+rune.artStatus+' · эскиз в центре пола, требует утверждения';}
  $('boss').hidden=!hasBoss;
  $('boss-status').textContent=hasBoss?'Арена: '+megaBossForWave(n*10).name:'Обычный зал';
  for(const button of $('rooms').querySelectorAll('button')){button.classList.toggle('active',Number(button.dataset.room)===n);button.setAttribute('aria-pressed',String(Number(button.dataset.room)===n));}

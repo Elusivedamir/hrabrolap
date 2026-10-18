@@ -50,7 +50,7 @@ test('P3 review: each of 4 original boss models can inspect 6 attacks and 6 hurt
     await page.getByRole('button',{name:model.name+': '+(phase==='attack'?'атака':'урон')+' '+frame+'/6'}).click();
     const image=await page.locator('#boss').evaluate(async img=>{await img.decode();return {w:img.naturalWidth,h:img.naturalHeight,src:img.getAttribute('src')}});
     assert.ok(image.w>0&&image.h>0,model.id+' '+phase+' '+frame);
-    if(wave===50)assert.match(image.src,/assets\/prototypes\/p1\/boss-thorn-warden\//);
+    if(wave===50)assert.match(image.src,/assets\/approved\/moss-guardian\//);
     else assert.match(image.src,/assets\/prototypes\/p3\/boss-(bone-regent|silk-empress|glacier-serpent)\/(attack|hurt)_0[1-6]\.svg/,'new unique pose pack for boss '+wave);
     assert.match(await page.locator('#status').textContent(),new RegExp(phase==='attack'?'атака':'урон'));
    }
