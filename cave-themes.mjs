@@ -1,4 +1,4 @@
-/** Three user-approved P1 illustrated rooms and procedural fallback for remaining stages.
+/** Approved illustrated rooms and procedural fallback for remaining stages.
  * Pure deterministic scene generation: no image assets, character art,
  * battle geometry, or accepted backgrounds are overwritten.
  */
@@ -23,6 +23,7 @@ export function caveStageForWave(wave){return clampStage(Math.floor((Math.max(1,
 const APPROVED_P1_ROOMS=Object.freeze({
   1:Object.freeze({name:'Каменный порог',url:'assets/prototypes/p1/R001-stone-threshold.svg'}),
   5:Object.freeze({name:'Моховая сторожка',url:'assets/approved/moss-guardian/R005-moss-outpost.webp'}),
+  10:Object.freeze({name:'Костяной зал',url:'assets/approved/bone-regent/R010-bone-hall.webp'}),
   12:Object.freeze({name:'Рунный тупик',url:'assets/prototypes/p1/R012-rune-dead-end.svg'})
 });
 export function caveStageName(stage){const n=clampStage(stage);return CHAPTER_ONE_ROOM_NAMES[n-1]||APPROVED_P1_ROOMS[n]?.name||PALETTES[(n-1)%PALETTES.length].name;}
@@ -30,8 +31,8 @@ function rand(seed){const s=Math.sin(seed*37.181+.33)*43758.5453;return s-Math.f
 const cache=new Map();
 export function caveBackgroundForWave(wave,p3ArtPreview=false){
  const stage=caveStageForWave(wave);
- if(p3ArtPreview&&p3RoomCandidate(stage))return p3RoomCandidate(stage).url;
  if(APPROVED_P1_ROOMS[stage])return APPROVED_P1_ROOMS[stage].url;
+ if(p3ArtPreview&&p3RoomCandidate(stage))return p3RoomCandidate(stage).url;
  if(cache.has(stage))return cache.get(stage);
  const p=PALETTES[(stage-1)%PALETTES.length];
  const epoch=Math.floor((stage-1)/PALETTES.length);

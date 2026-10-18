@@ -154,14 +154,15 @@ export function megaBossFrameSvg(type,phase='attack',index=0){
  '</svg>';
 }
 export function megaBossFrameUrl(type,phase='attack',index=0,p3ArtPreview=false){
- if(p3ArtPreview){const candidate=p3BossFrameUrl(type,phase,index);if(candidate)return candidate;}
- // Approved Moss Guardian: twelve transparent painted poses from the approved sheet.
+ // Approved bosses: twelve transparent painted poses from their approved sheets.
  // Keep the archived P1 SVGs and all other boss art intact.
- if(type==='thorn_warden'){
+ if(type==='thorn_warden'||type==='bone_regent'){
   if(!['attack','hurt'].includes(phase))throw Error('Invalid mega animation '+phase);
   const i=Math.min(5,Math.max(0,Math.trunc(Number(index)||0)));
-  return 'assets/approved/moss-guardian/'+phase+'_'+String(i+1).padStart(2,'0')+'.png';
+  const directory=type==='thorn_warden'?'moss-guardian':'bone-regent';
+  return 'assets/approved/'+directory+'/'+phase+'_'+String(i+1).padStart(2,'0')+'.png';
  }
+ if(p3ArtPreview){const candidate=p3BossFrameUrl(type,phase,index);if(candidate)return candidate;}
  const key=type+'/'+phase+'/'+index;if(cache.has(key))return cache.get(key);
  const url='data:image/svg+xml;charset=UTF-8,'+encodeURIComponent(megaBossFrameSvg(type,phase,index));
  cache.set(key,url);return url;

@@ -30,6 +30,7 @@ test('14 separate models contain 6 SVG attack poses and 6 hurt poses each',()=>{
    assert.ok(svg.includes('viewBox="0 0 240 230"'));
    const url=megaBossFrameUrl(boss.id,phase,i);
    if(boss.id==='thorn_warden')assert.match(url,/^assets\/approved\/moss-guardian\/(attack|hurt)_0[1-6]\.png$/);
+   else if(boss.id==='bone_regent')assert.match(url,/^assets\/approved\/bone-regent\/(attack|hurt)_0[1-6]\.png$/);
    else assert.ok(url.startsWith('data:image/svg+xml'));
   }
  }

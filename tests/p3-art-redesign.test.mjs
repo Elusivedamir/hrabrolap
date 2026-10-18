@@ -12,7 +12,7 @@ test('P3 all 20 chapter-one stage titles match the approved written catalog',()=
  for(const [stage,name] of Object.entries(specials))assert.equal(caveStageName(Number(stage)),name);
 });
 
-test('P3 illustrated arenas have unique authored scenery but are opt-in only',async()=>{
+test('P3 illustrated arenas retain prototypes; approved bone hall overrides the candidate',async()=>{
  const expected=new Map([[10,'R010-bone-hall.svg'],[15,'R015-spider-nest.svg'],[20,'R020-ice-serpent-lair.svg']]);
  const texts=[];
  for(const [stage,file] of expected){
@@ -22,8 +22,13 @@ test('P3 illustrated arenas have unique authored scenery but are opt-in only',as
   assert.match(svg,/<svg/);assert.match(svg,/viewBox="0 0 840 470"/);
   assert.ok(svg.length>5000,'scene has its own drawn environmental elements');
   assert.ok((svg.match(/<path/g)||[]).length>=20,'scene must contain illustrated objects');
-  assert.equal(caveBackgroundForWave(stage*10,true),candidate.url);
-  assert.ok(caveBackgroundForWave(stage*10).startsWith('data:image/svg+xml'),'default game art untouched');
+  if(stage===10){
+   assert.equal(caveBackgroundForWave(stage*10,true),'assets/approved/bone-regent/R010-bone-hall.webp');
+   assert.equal(caveBackgroundForWave(stage*10),'assets/approved/bone-regent/R010-bone-hall.webp');
+  }else{
+   assert.equal(caveBackgroundForWave(stage*10,true),candidate.url);
+   assert.ok(caveBackgroundForWave(stage*10).startsWith('data:image/svg+xml'));
+  }
   texts.push(svg);
  }
  assert.equal(new Set(texts).size,3);
@@ -32,7 +37,7 @@ test('P3 illustrated arenas have unique authored scenery but are opt-in only',as
  }
 });
 
-test('P3 each anatomically distinct boss has 6 independently drawn attack/hurt frames; normal mode unchanged',async()=>{
+test('P3 candidate boss SVGs are retained; approved bone regent has 12 transparent PNGs',async()=>{
  const pack=new Map([
   ['bone_regent','boss-bone-regent'],
   ['silk_empress','boss-silk-empress'],
@@ -43,16 +48,26 @@ test('P3 each anatomically distinct boss has 6 independently drawn attack/hurt f
   const frames=new Set();
   for(const phase of ['attack','hurt'])for(let i=0;i<6;i++){
     const src=p3BossFrameUrl(boss,phase,i);
-    assert.equal(src,megaBossFrameUrl(boss,phase,i,true));
+    if(boss!=='bone_regent')assert.equal(src,megaBossFrameUrl(boss,phase,i,true));
     assert.match(src,new RegExp('assets/prototypes/p3/'+dir+'/'+phase+'_0[1-6]\\.svg'));
     const svg=await readFile(new URL('../'+src,import.meta.url),'utf8');
     assert.match(svg,/<svg/);
     assert.match(svg,/viewBox="0 0 240 245"/);
     assert.ok(svg.length>3500,'rich silhouette frame of '+boss);
     frames.add(svg);
-    assert.ok(megaBossFrameUrl(boss,phase,i).startsWith('data:image/svg+xml'),'regular boss art unchanged');
+    if(boss!=='bone_regent')assert.ok(megaBossFrameUrl(boss,phase,i).startsWith('data:image/svg+xml'));
   }
   assert.equal(frames.size,12,'twelve distinct authored frames for '+boss);
  }
+ const approved=new Set();
+ for(const phase of ['attack','hurt'])for(let i=0;i<6;i++){
+  const src=megaBossFrameUrl('bone_regent',phase,i,true);
+  assert.equal(src,megaBossFrameUrl('bone_regent',phase,i));
+  assert.match(src,/assets\/approved\/bone-regent\/(attack|hurt)_0[1-6]\.png/);
+  const data=await readFile(new URL('../'+src,import.meta.url));
+  assert.equal(data.subarray(1,4).toString(),'PNG');
+  approved.add(data.toString('base64'));
+ }
+ assert.equal(approved.size,12);
  assert.match(megaBossFrameUrl('thorn_warden','attack',0,true),/assets\/approved\/moss-guardian/);
 });
