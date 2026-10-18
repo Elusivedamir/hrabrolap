@@ -483,3 +483,18 @@ body,.game,.game button,.game input,.game select,.game textarea,.game small,.gam
  white-space:normal;
  overflow-wrap:break-word;
 }
+
+/* P2 release gate: readable achievement payout/state without tiny buttons. */
+.game .modal .achievement-row button{
+ flex:0 0 96px;
+ width:96px;
+ min-width:96px;
+ max-width:96px;
+ min-height:44px;
+ height:auto;
+ padding:6px 3px;
+ font-size:.73em;
+ line-height:1.2;
+ white-space:normal;
+ overflow-wrap:anywhere;
+}
