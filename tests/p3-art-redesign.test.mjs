@@ -22,8 +22,8 @@ test('P3 illustrated arenas retain prototypes; approved bone hall overrides the 
   assert.match(svg,/<svg/);assert.match(svg,/viewBox="0 0 840 470"/);
   assert.ok(svg.length>5000,'scene has its own drawn environmental elements');
   assert.ok((svg.match(/<path/g)||[]).length>=20,'scene must contain illustrated objects');
-  if([10,15].includes(stage)){
-   const approved=stage===10?'assets/approved/bone-regent/R010-bone-hall.webp':'assets/approved/silk-empress/R015-spider-nest.webp';
+  if([10,15,20].includes(stage)){
+   const approved=stage===10?'assets/approved/bone-regent/R010-bone-hall.webp':stage===15?'assets/approved/silk-empress/R015-spider-nest.webp':'assets/approved/glacier-serpent/R020-ice-serpent-lair.webp';
    assert.equal(caveBackgroundForWave(stage*10,true),approved);
    assert.equal(caveBackgroundForWave(stage*10),approved);
   }else{
@@ -38,7 +38,7 @@ test('P3 illustrated arenas retain prototypes; approved bone hall overrides the 
  }
 });
 
-test('P3 candidate boss SVGs are retained; approved bone regent has 12 transparent PNGs',async()=>{
+test('P3 candidate boss SVGs are retained; approved bosses have 12 transparent PNGs',async()=>{
  const pack=new Map([
   ['bone_regent','boss-bone-regent'],
   ['silk_empress','boss-silk-empress'],
@@ -49,19 +49,19 @@ test('P3 candidate boss SVGs are retained; approved bone regent has 12 transpare
   const frames=new Set();
   for(const phase of ['attack','hurt'])for(let i=0;i<6;i++){
     const src=p3BossFrameUrl(boss,phase,i);
-    if(!['bone_regent','silk_empress'].includes(boss))assert.equal(src,megaBossFrameUrl(boss,phase,i,true));
+    if(!['bone_regent','silk_empress','glacier_serpent'].includes(boss))assert.equal(src,megaBossFrameUrl(boss,phase,i,true));
     assert.match(src,new RegExp('assets/prototypes/p3/'+dir+'/'+phase+'_0[1-6]\\.svg'));
     const svg=await readFile(new URL('../'+src,import.meta.url),'utf8');
     assert.match(svg,/<svg/);
     assert.match(svg,/viewBox="0 0 240 245"/);
     assert.ok(svg.length>3500,'rich silhouette frame of '+boss);
     frames.add(svg);
-    if(!['bone_regent','silk_empress'].includes(boss))assert.ok(megaBossFrameUrl(boss,phase,i).startsWith('data:image/svg+xml'));
+    if(!['bone_regent','silk_empress','glacier_serpent'].includes(boss))assert.ok(megaBossFrameUrl(boss,phase,i).startsWith('data:image/svg+xml'));
   }
   assert.equal(frames.size,12,'twelve distinct authored frames for '+boss);
  }
  const approved=new Set();
- for(const [boss,directory] of [['bone_regent','bone-regent'],['silk_empress','silk-empress']]){
+ for(const [boss,directory] of [['bone_regent','bone-regent'],['silk_empress','silk-empress'],['glacier_serpent','glacier-serpent']]){
   approved.clear();
   for(const phase of ['attack','hurt'])for(let i=0;i<6;i++){
    const src=megaBossFrameUrl(boss,phase,i,true);

@@ -32,6 +32,7 @@ button.active{background:#bce3a2;border-color:#477d51}
 .scene[data-room="5"] #boss{right:7%;width:43%;height:82%}
 .scene[data-room="10"] #boss{right:7%;width:43%;height:82%}
 .scene[data-room="15"] #boss{right:7%;width:43%;height:82%}
+.scene[data-room="20"] #boss{right:7%;width:43%;height:82%}
 #preview-seal{top:41.5%;left:41.5%;width:17%;height:27%;object-fit:contain;filter:drop-shadow(0 0 9px #ffd78f);pointer-events:none}
 #preview-seal[hidden]{display:none}
 #boss[hidden]{display:none}
@@ -54,7 +55,7 @@ footer{font-size:12px;color:#e3d5ba;padding:12px 0 24px}
 <header><h1>Храбролап · P3 — Пробуждение глубин</h1>
 <p>Рабочая художественная приёмка: 20 залов · 4 супербосса · 12 кадров на каждого. Эта страница ничего не меняет в игре и сохранениях.</p></header>
 <main>
-<p class="note"><strong>Важно:</strong> R005, R010 и R015 с их боссами приняты и используются в игре. R020 и босс волны 200 остаются художественными кандидатами.</p>
+<p class="note"><strong>Важно:</strong> R005, R010, R015 и R020 с их боссами утверждены и используются в игре. Руна каждого зала находится в центре пола.</p>
 <section aria-label="Список залов"><h2>Залы R001–R020</h2><div class="rooms" id="rooms"></div></section>
 <section aria-label="Сцена">
 <h2 id="room-title">R001 — Каменный порог</h2>
@@ -70,12 +71,12 @@ footer{font-size:12px;color:#e3d5ba;padding:12px 0 24px}
 <section class="panel" aria-label="Просмотр боссов">
 <h2>Четыре супербосса · 6 атак + 6 реакций на урон</h2>
 <div class="boss-buttons" id="boss-buttons"></div>
-<p id="status" aria-live="polite">Выбран Моховой страж.</p><p id="seal-description" aria-live="polite">Печать Рассвета на стене — художественный концепт, не утверждена.</p>
+<p id="status" aria-live="polite">Выбран Моховой страж.</p><p id="seal-description" aria-live="polite">Печать Рассвета выгравирована в центре пола утверждённого зала.</p>
 <div class="toolbar"><button id="play" type="button">▶ Воспроизвести</button><button data-phase="attack" type="button" class="active">Атака</button><button data-phase="hurt" type="button">Получение урона</button></div>
 <div class="frames" id="frames"></div>
 <p>Нажми на кадр, чтобы проверить силуэт, движение конечностей, положение головы и направление удара. Проверяется игровая модель, а не нейросетевой вариант.</p>
 </section>
-<footer>R005, R010 и R015 используют утверждённые изображения. Остальные новые рисунки из <code>assets/prototypes/p3/</code> можно сравнить со старыми; они ожидают отдельного утверждения. Для проверки кандидатов в бою: <code>index.html?p3Art=1</code>, без изменения сохранений.</footer>
+<footer>R005, R010, R015 и R020 используют утверждённые изображения. Остальные новые рисунки из <code>assets/prototypes/p3/</code> можно сравнить со старыми; они ожидают отдельного утверждения. Для проверки кандидатов в бою: <code>index.html?p3Art=1</code>, без изменения сохранений.</footer>
 </main>
 <script type="module">
 import {caveBackgroundForWave,caveStageName} from './cave-themes.mjs';
@@ -91,7 +92,7 @@ const ROOM_NAMES=[
 'Зал капель','Рунный тупик','Стена рисунков','Кристальный карман','Паучье гнездо',
 'Каменная лестница','Тёмный карниз','Обледеневший спуск','Гулкий проход','Логово ледяного змея'
 ];
-const APPROVED=new Set([1,5,10,12,15]);
+const APPROVED=new Set([1,5,10,12,15,20]);
 const BOSS_WAVES=[50,100,150,200];
 const $=id=>document.getElementById(id);
 let room=1,bossWave=50,phase='attack',frame=0,playing=false,candidateArt=true;
@@ -106,8 +107,8 @@ function selectRoom(n){
  $('actual-room-name').textContent='Зал '+caveStageName(n)+' · волны '+wave+'–'+(wave+9)+' · '+(APPROVED.has(n)?'утверждённый фон':candidateArt&&p3RoomCandidate(n)?'новая версия на утверждение':'технический вариант')+'.';
  $('art-status').textContent=APPROVED.has(n)?'Принятый фон':candidateArt&&p3RoomCandidate(n)?'НОВЫЙ КАНДИДАТ P3 · на утверждение':'Технический фон · требует нового арта';
  const hasBoss=n%5===0;
- $('preview-seal').hidden=!hasBoss||[5,10,15].includes(n);
- if(hasBoss){const rune=dawnSealForWave(n*10);$('preview-seal').src=dawnSealUrl(rune.wave);$('preview-seal').alt=rune.name+' в центре пола';$('seal-description').textContent=[5,10,15].includes(n)?rune.name+' · утверждённая печать выгравирована в центре пола':rune.name+' · '+rune.artStatus+' · эскиз в центре пола, требует утверждения';}
+ $('preview-seal').hidden=!hasBoss||[5,10,15,20].includes(n);
+ if(hasBoss){const rune=dawnSealForWave(n*10);$('preview-seal').src=dawnSealUrl(rune.wave);$('preview-seal').alt=rune.name+' в центре пола';$('seal-description').textContent=[5,10,15,20].includes(n)?rune.name+' · утверждённая печать выгравирована в центре пола':rune.name+' · '+rune.artStatus+' · эскиз в центре пола, требует утверждения';}
  $('boss').hidden=!hasBoss;
  $('boss-status').textContent=hasBoss?'Арена: '+megaBossForWave(n*10).name:'Обычный зал';
  for(const button of $('rooms').querySelectorAll('button')){button.classList.toggle('active',Number(button.dataset.room)===n);button.setAttribute('aria-pressed',String(Number(button.dataset.room)===n));}
@@ -119,7 +120,7 @@ function renderBoss(){
  const model=currentBoss();
  $('boss').src=megaBossFrameUrl(model.id,phase,frame,candidateArt);
  $('boss').alt=model.name+', '+(phase==='attack'?'атака':'получение урона')+', кадр '+(frame+1)+'/6';
- $('status').textContent=model.name+' · волна '+bossWave+' · '+([50,100,150].includes(bossWave)?'утверждённый арт':candidateArt&&p3BossCandidate(model.id)?'НОВЫЙ кандидат P3 — отдельная покадровая анимация':'Старый технический вариант')+' · '+(phase==='attack'?'атака':'урон')+' '+(frame+1)+'/6';
+ $('status').textContent=model.name+' · волна '+bossWave+' · '+([50,100,150,200].includes(bossWave)?'утверждённый арт':candidateArt&&p3BossCandidate(model.id)?'НОВЫЙ кандидат P3 — отдельная покадровая анимация':'Старый технический вариант')+' · '+(phase==='attack'?'атака':'урон')+' '+(frame+1)+'/6';
  for(const b of $('frames').querySelectorAll('button'))b.classList.toggle('active',b.dataset.phase===phase&&Number(b.dataset.frame)===frame);
  for(const b of $('boss-buttons').querySelectorAll('button')){b.classList.toggle('active',Number(b.dataset.wave)===bossWave);b.setAttribute('aria-pressed',String(Number(b.dataset.wave)===bossWave));}
  for(const b of document.querySelectorAll('[data-phase]')){b.classList.toggle('active',b.dataset.phase===phase);b.setAttribute('aria-pressed',String(b.dataset.phase===phase));}
@@ -142,7 +143,7 @@ for(let n=1;n<=20;n++){
 }
 for(const wave of BOSS_WAVES){
  const model=megaBossForWave(wave);const b=document.createElement('button');b.type='button';b.dataset.wave=wave;
- b.textContent=wave+' · '+model.name+([50,100,150].includes(wave)?' ✓':'');
+ b.textContent=wave+' · '+model.name+([50,100,150,200].includes(wave)?' ✓':'');
  b.addEventListener('click',()=>selectBoss(wave));$('boss-buttons').append(b);
 }
 for(const b of document.querySelectorAll('[data-phase]'))b.addEventListener('click',()=>selectFrame(b.dataset.phase,0));

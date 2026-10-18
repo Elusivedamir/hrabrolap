@@ -156,10 +156,10 @@ export function megaBossFrameSvg(type,phase='attack',index=0){
 export function megaBossFrameUrl(type,phase='attack',index=0,p3ArtPreview=false){
  // Approved bosses: twelve transparent painted poses from their approved sheets.
  // Keep the archived P1 SVGs and all other boss art intact.
- if(type==='thorn_warden'||type==='bone_regent'||type==='silk_empress'){
+ if(type==='thorn_warden'||type==='bone_regent'||type==='silk_empress'||type==='glacier_serpent'){
   if(!['attack','hurt'].includes(phase))throw Error('Invalid mega animation '+phase);
   const i=Math.min(5,Math.max(0,Math.trunc(Number(index)||0)));
-  const directory=type==='thorn_warden'?'moss-guardian':type==='bone_regent'?'bone-regent':'silk-empress';
+  const directory=type==='thorn_warden'?'moss-guardian':type==='bone_regent'?'bone-regent':type==='silk_empress'?'silk-empress':'glacier-serpent';
   return 'assets/approved/'+directory+'/'+phase+'_'+String(i+1).padStart(2,'0')+'.png';
  }
  if(p3ArtPreview){const candidate=p3BossFrameUrl(type,phase,index);if(candidate)return candidate;}
