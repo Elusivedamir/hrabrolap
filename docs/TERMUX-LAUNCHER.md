@@ -16,6 +16,7 @@ cd ~/hrabrolap-new && git pull --ff-only origin main && bash tools/termux-hrabro
 | `hrabrolap` | Просмотрщик P3 с 20 залами и 4 боссами |
 | `hrabrolap p3` | То же: `p3-review.html` |
 | `hrabrolap game` | Игра: `index.html` |
+| `hrabrolap art` | Настоящая игра с новыми P3-кандидатами через `index.html?p3Art=1`; сохранения и порт прежние |
 | `hrabrolap atelier` | SVG-ателье: `equipment-preview.html` |
 | `hrabrolap save` | Просмотр и резервное копирование сохранений: `save-manager.html` |
 
