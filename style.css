@@ -522,6 +522,10 @@ body,.game,.game button,.game input,.game select,.game textarea,.game small,.gam
 .game .dungeon[data-stage="10"] .dawn-wall img,
 .game .dungeon[data-stage="10"] .dawn-wall #dawn-wall-imprint{visibility:hidden}
 .game .dungeon[data-stage="10"] .enemy-holder.boss{transform:scale(1.30);transform-origin:50% 95%}
+.game .dungeon[data-stage="15"] .dawn-wall{background:none}
+.game .dungeon[data-stage="15"] .dawn-wall img,
+.game .dungeon[data-stage="15"] .dawn-wall #dawn-wall-imprint{visibility:hidden}
+.game .dungeon[data-stage="15"] .enemy-holder.boss{transform:scale(1.30);transform-origin:50% 95%}
 .game .dawn-seal-flight{position:absolute;z-index:30;pointer-events:none;animation:dawnSealFly .88s ease-in-out forwards;filter:drop-shadow(0 0 9px #ffeaa8)}
 @keyframes dawnPulse{0%,100%{transform:scale(.96);opacity:.81}50%{transform:scale(1.05);opacity:1}}
 @keyframes dawnSealFly{0%{transform:translate(0,0) scale(1);opacity:1}25%{transform:translate(0,-24px) scale(1.28);opacity:1}100%{transform:translate(var(--seal-flight-x),var(--seal-flight-y)) scale(.35);opacity:0}}

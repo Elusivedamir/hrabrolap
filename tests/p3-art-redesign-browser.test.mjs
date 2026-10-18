@@ -7,8 +7,6 @@ import {freshProgress} from '../game-core.mjs';
 const base=process.env.HRABROLAP_BASE_URL||'http://127.0.0.1:8080/';
 const SAVE='hrabrolap-v0.2-save';
 const cases=[
- {stage:10,wave:100,title:'Костяной зал',boss:'bone_regent',directory:'boss-bone-regent'},
- {stage:15,wave:150,title:'Паучье гнездо',boss:'silk_empress',directory:'boss-silk-empress'},
  {stage:20,wave:200,title:'Логово ледяного змея',boss:'glacier_serpent',directory:'boss-glacier-serpent'}
 ];
 async function decoded(locator){

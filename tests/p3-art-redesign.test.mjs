@@ -22,9 +22,10 @@ test('P3 illustrated arenas retain prototypes; approved bone hall overrides the 
   assert.match(svg,/<svg/);assert.match(svg,/viewBox="0 0 840 470"/);
   assert.ok(svg.length>5000,'scene has its own drawn environmental elements');
   assert.ok((svg.match(/<path/g)||[]).length>=20,'scene must contain illustrated objects');
-  if(stage===10){
-   assert.equal(caveBackgroundForWave(stage*10,true),'assets/approved/bone-regent/R010-bone-hall.webp');
-   assert.equal(caveBackgroundForWave(stage*10),'assets/approved/bone-regent/R010-bone-hall.webp');
+  if([10,15].includes(stage)){
+   const approved=stage===10?'assets/approved/bone-regent/R010-bone-hall.webp':'assets/approved/silk-empress/R015-spider-nest.webp';
+   assert.equal(caveBackgroundForWave(stage*10,true),approved);
+   assert.equal(caveBackgroundForWave(stage*10),approved);
   }else{
    assert.equal(caveBackgroundForWave(stage*10,true),candidate.url);
    assert.ok(caveBackgroundForWave(stage*10).startsWith('data:image/svg+xml'));
@@ -48,26 +49,29 @@ test('P3 candidate boss SVGs are retained; approved bone regent has 12 transpare
   const frames=new Set();
   for(const phase of ['attack','hurt'])for(let i=0;i<6;i++){
     const src=p3BossFrameUrl(boss,phase,i);
-    if(boss!=='bone_regent')assert.equal(src,megaBossFrameUrl(boss,phase,i,true));
+    if(!['bone_regent','silk_empress'].includes(boss))assert.equal(src,megaBossFrameUrl(boss,phase,i,true));
     assert.match(src,new RegExp('assets/prototypes/p3/'+dir+'/'+phase+'_0[1-6]\\.svg'));
     const svg=await readFile(new URL('../'+src,import.meta.url),'utf8');
     assert.match(svg,/<svg/);
     assert.match(svg,/viewBox="0 0 240 245"/);
     assert.ok(svg.length>3500,'rich silhouette frame of '+boss);
     frames.add(svg);
-    if(boss!=='bone_regent')assert.ok(megaBossFrameUrl(boss,phase,i).startsWith('data:image/svg+xml'));
+    if(!['bone_regent','silk_empress'].includes(boss))assert.ok(megaBossFrameUrl(boss,phase,i).startsWith('data:image/svg+xml'));
   }
   assert.equal(frames.size,12,'twelve distinct authored frames for '+boss);
  }
  const approved=new Set();
- for(const phase of ['attack','hurt'])for(let i=0;i<6;i++){
-  const src=megaBossFrameUrl('bone_regent',phase,i,true);
-  assert.equal(src,megaBossFrameUrl('bone_regent',phase,i));
-  assert.match(src,/assets\/approved\/bone-regent\/(attack|hurt)_0[1-6]\.png/);
-  const data=await readFile(new URL('../'+src,import.meta.url));
-  assert.equal(data.subarray(1,4).toString(),'PNG');
-  approved.add(data.toString('base64'));
+ for(const [boss,directory] of [['bone_regent','bone-regent'],['silk_empress','silk-empress']]){
+  approved.clear();
+  for(const phase of ['attack','hurt'])for(let i=0;i<6;i++){
+   const src=megaBossFrameUrl(boss,phase,i,true);
+   assert.equal(src,megaBossFrameUrl(boss,phase,i));
+   assert.match(src,new RegExp('assets/approved/'+directory+'/(attack|hurt)_0[1-6]\\.png'));
+   const data=await readFile(new URL('../'+src,import.meta.url));
+   assert.equal(data.subarray(1,4).toString(),'PNG');
+   approved.add(data.toString('base64'));
+  }
+  assert.equal(approved.size,12,boss);
  }
- assert.equal(approved.size,12);
  assert.match(megaBossFrameUrl('thorn_warden','attack',0,true),/assets\/approved\/moss-guardian/);
 });

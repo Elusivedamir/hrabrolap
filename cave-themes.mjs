@@ -24,7 +24,8 @@ const APPROVED_P1_ROOMS=Object.freeze({
   1:Object.freeze({name:'Каменный порог',url:'assets/prototypes/p1/R001-stone-threshold.svg'}),
   5:Object.freeze({name:'Моховая сторожка',url:'assets/approved/moss-guardian/R005-moss-outpost.webp'}),
   10:Object.freeze({name:'Костяной зал',url:'assets/approved/bone-regent/R010-bone-hall.webp'}),
-  12:Object.freeze({name:'Рунный тупик',url:'assets/prototypes/p1/R012-rune-dead-end.svg'})
+  12:Object.freeze({name:'Рунный тупик',url:'assets/prototypes/p1/R012-rune-dead-end.svg'}),
+  15:Object.freeze({name:'Паучье гнездо',url:'assets/approved/silk-empress/R015-spider-nest.webp'})
 });
 export function caveStageName(stage){const n=clampStage(stage);return CHAPTER_ONE_ROOM_NAMES[n-1]||APPROVED_P1_ROOMS[n]?.name||PALETTES[(n-1)%PALETTES.length].name;}
 function rand(seed){const s=Math.sin(seed*37.181+.33)*43758.5453;return s-Math.floor(s);}

@@ -31,6 +31,7 @@ test('168 attack-and-hurt images include fourteen distinct silhouettes',()=>{
    assert.match(s,/<path|<ellipse|<circle/);
    if(b.id==='thorn_warden')assert.match(u,/^assets\/approved\/moss-guardian\/(attack|hurt)_0[1-6]\.png$/);
    else if(b.id==='bone_regent')assert.match(u,/^assets\/approved\/bone-regent\/(attack|hurt)_0[1-6]\.png$/);
+   else if(b.id==='silk_empress')assert.match(u,/^assets\/approved\/silk-empress\/(attack|hurt)_0[1-6]\.png$/);
    else {assert.ok(u.startsWith('data:image/svg+xml'));assert.ok(u.length>700);}
    frames.add(s);
    if(phase==='attack'&&i===0)shapes.add(s);
