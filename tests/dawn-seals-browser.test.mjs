@@ -78,3 +78,27 @@ test('Dawn Seals: old progress unlocks previously beaten bosses without mutating
   }finally{await context.close();}
  }finally{await browser.close();}
 });
+
+test('P3 art review shows the four corresponding wall-seal glyphs without touching saves',async()=>{
+ const browser=await chromium.launch({headless:true});
+ try{
+  const page=await browser.newPage({viewport:{width:390,height:844},isMobile:true,hasTouch:true});
+  const errors=[];page.on('pageerror',e=>errors.push(e.message));
+  await page.goto(new URL('p3-review.html',base).href,{waitUntil:'domcontentloaded'});
+  const rune=page.locator('#preview-seal');
+  assert.equal(await rune.isVisible(),false,'regular room contains no wall seal');
+  for(const [wave,name] of [[50,'Мха'],[100,'Кости'],[150,'Хитина'],[200,'Льда']]){
+   await page.locator('#boss-buttons [data-wave="'+wave+'"]').click();
+   assert.equal(await rune.isVisible(),true);
+   assert.match(await rune.getAttribute('alt'),new RegExp('Печать '+name));
+   assert.equal(await rune.evaluate(async image=>{await image.decode();return image.naturalWidth>0}),true);
+   assert.match(await page.locator('#seal-description').textContent(),/концепт/);
+  }
+  await page.locator('#toggle-actors').click();
+  assert.equal(await rune.isVisible(),true,'wall seal stays visible when character overlays are hidden');
+  await fs.mkdir('qa/screenshots',{recursive:true});
+  await page.screenshot({path:'qa/screenshots/p3-four-dawn-seal-concepts-390.png'});
+  assert.equal(await page.evaluate(()=>localStorage.getItem('hrabrolap-v0.2-save')),null);
+  assert.deepEqual(errors,[]);
+ }finally{await browser.close();}
+});
