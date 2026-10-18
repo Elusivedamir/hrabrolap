@@ -36,9 +36,9 @@ test('ice salamander standalone preview: images, all 12 frames and controls on m
   await page.locator('#transparent').check();
   assert.match(await page.locator('#stage').getAttribute('class'),/checker/);
   assert.equal(await page.locator('#room-art').evaluate(e=>getComputedStyle(e).visibility),'hidden');
-  await page.locator('#fps').fill('12');
+  await page.locator('#fps').evaluate(e=>{e.value='12';e.dispatchEvent(new Event('input',{bubbles:true}))});
   assert.equal(await page.locator('#fps-value').textContent(),'12 к/с');
-  await page.locator('#zoom').fill('125');
+  await page.locator('#zoom').evaluate(e=>{e.value='125';e.dispatchEvent(new Event('input',{bubbles:true}))});
   assert.equal(await page.locator('#zoom-value').textContent(),'125%');
   await page.locator('#play').click();
   assert.equal(await page.locator('#play').getAttribute('aria-pressed'),'true');
