@@ -74,7 +74,7 @@ footer{font-size:12px;color:#e3d5ba;padding:12px 0 24px}
 <div class="frames" id="frames"></div>
 <p>Нажми на кадр, чтобы проверить силуэт, движение конечностей, положение головы и направление удара. Проверяется игровая модель, а не нейросетевой вариант.</p>
 </section>
-<footer>Новые рисунки из <code>assets/prototypes/p3/</code> можно сравнить со старыми. Художественное утверждение выполняется отдельно; игра по умолчанию использует предыдущий арт. Для проверки кандидатов в настоящем бою: <code>index.html?p3Art=1</code>, без изменения сохранений.</footer>
+<footer>R005 и R010 используют утверждённые изображения. Остальные новые рисунки из <code>assets/prototypes/p3/</code> можно сравнить со старыми; они ожидают отдельного утверждения. Для проверки кандидатов в бою: <code>index.html?p3Art=1</code>, без изменения сохранений.</footer>
 </main>
 <script type="module">
 import {caveBackgroundForWave,caveStageName} from './cave-themes.mjs';
@@ -141,7 +141,7 @@ for(let n=1;n<=20;n++){
 }
 for(const wave of BOSS_WAVES){
  const model=megaBossForWave(wave);const b=document.createElement('button');b.type='button';b.dataset.wave=wave;
- b.textContent=wave+' · '+model.name+(wave===50?' ✓':'');
+ b.textContent=wave+' · '+model.name+([50,100].includes(wave)?' ✓':'');
  b.addEventListener('click',()=>selectBoss(wave));$('boss-buttons').append(b);
 }
 for(const b of document.querySelectorAll('[data-phase]'))b.addEventListener('click',()=>selectFrame(b.dataset.phase,0));
