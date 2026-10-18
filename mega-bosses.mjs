@@ -5,7 +5,7 @@ import {LATE_BOSS_MODELS} from './late-bosses.mjs';
  */
 const MOVES=Object.freeze({
  thorn_warden:'wriggle',bone_regent:'rattle',silk_empress:'leap',
- glacier_serpent:'swoop',ember_salamander:'ram',spore_monarch:'spores',
+ glacier_serpent:'swoop',ember_salamander:'pulse',spore_monarch:'spores',
  abyss_jelly:'pulse',granite_colossus:'ram',mirror_moth:'swoop',
  treasure_mimic:'bite',root_titan:'spores',storm_basilisk:'pulse',
  shadow_knight:'rattle',elder_dragon:'swoop'
@@ -15,7 +15,7 @@ const raw=[
  [100,'bone_regent','Костяной регент','💀','#d8c6a7','#7e667d','vampirism',1,1,'Костяной вихрь'],
  [150,'silk_empress','Хитиновая императрица','🕷️','#684677','#d18aab','',0.35,1,'Паучий шквал'],
  [200,'glacier_serpent','Ледяной змей','❄️','#60bfce','#d3fcff','vampirism',1,1,'Морозный бросок'],
- [250,'ember_salamander','Огненная саламандра','🔥','#c35b3e','#ffc56c','',1,1,'Огненный хвост'],
+ [250,'ember_salamander','Ледяная саламандра','❄️','#397ba3','#b5f4ff','',1,1,'Ледяное дыхание'],
  [300,'spore_monarch','Король спор','🍄','#ad69aa','#edc6db','poison',1,1,'Облако спор'],
  [350,'abyss_jelly','Медуза бездны','🌊','#6489c8','#b1b6fd','vampirism',1,1,'Глубинный разряд'],
  [400,'granite_colossus','Гранитный колосс','🪨','#817983','#c6a97d','poison',0.65,1,'Каменный кулак'],

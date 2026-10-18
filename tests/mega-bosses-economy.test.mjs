@@ -33,6 +33,7 @@ test('168 attack-and-hurt images include fourteen distinct silhouettes',()=>{
    else if(b.id==='bone_regent')assert.match(u,/^assets\/approved\/bone-regent\/(attack|hurt)_0[1-6]\.png$/);
    else if(b.id==='silk_empress')assert.match(u,/^assets\/approved\/silk-empress\/(attack|hurt)_0[1-6]\.png$/);
    else if(b.id==='glacier_serpent')assert.match(u,/^assets\/approved\/glacier-serpent\/(attack|hurt)_0[1-6]\.png$/);
+   else if(b.id==='ember_salamander')assert.match(u,/^assets\/approved\/ice-salamander\/(attack|hurt)_0[1-6]\.webp$/);
    else {assert.ok(u.startsWith('data:image/svg+xml'));assert.ok(u.length>700);}
    frames.add(s);
    if(phase==='attack'&&i===0)shapes.add(s);

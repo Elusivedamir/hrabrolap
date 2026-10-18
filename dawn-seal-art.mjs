@@ -44,4 +44,4 @@ export function dawnSealSvg(wave){
  hex+'</svg>';
  cache.set(wave,svg);return svg;
 }
-export const dawnSealUrl=wave=>'data:image/svg+xml;charset=UTF-8,'+encodeURIComponent(dawnSealSvg(wave));
+export const dawnSealUrl=wave=>wave===250?'assets/approved/ice-salamander/frost_seal.webp':'data:image/svg+xml;charset=UTF-8,'+encodeURIComponent(dawnSealSvg(wave));

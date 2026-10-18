@@ -17,7 +17,8 @@ test('forty seals exactly match the forty canonical bosses and arenas',()=>{
   assert.equal(dawnSealForWave(item.wave+1),null);
   assert.equal(dawnSealForStage(item.wave/10-1),null);
   assert.match(dawnSealSvg(item.wave),/^<svg[^>]+>/);
-  assert.ok(dawnSealUrl(item.wave).startsWith('data:image/svg+xml'));
+  if(item.wave===250)assert.equal(dawnSealUrl(250),'assets/approved/ice-salamander/frost_seal.webp');
+  else assert.ok(dawnSealUrl(item.wave).startsWith('data:image/svg+xml'));
  }
  assert.deepEqual(DAWN_SEALS.slice(0,4).map(s=>s.name),['Печать Мха','Печать Кости','Печать Хитина','Печать Льда']);
  assert.equal(new Set([50,100,150,200].map(dawnSealSvg)).size,4,'four independent first-chapter glyph compositions');

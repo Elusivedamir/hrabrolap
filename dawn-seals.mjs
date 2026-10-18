@@ -16,11 +16,11 @@ export const DAWN_SEALS=Object.freeze(MEGA_BOSSES.map((boss,index)=>Object.freez
  wave:boss.wave,
  chapter:Math.floor(index/4)+1,
  number:index+1,
- name:index<4?'Печать '+FIRST_SEALS[index]:'Печать стража: '+boss.name,
+ name:index<4?'Печать '+FIRST_SEALS[index]:index===4?'Печать Мороза':'Печать стража: '+boss.name,
  boss:boss.name,
  bossId:boss.id,
  // A unique artistic concept for every seal is required before this can be approved.
- artStatus:index<4?'P3-концепт':'Графический эскиз'
+ artStatus:index===4?'Утверждена':index<4?'P3-концепт':'Графический эскиз'
 })));
 export const dawnSealForWave=wave=>Number.isInteger(wave)&&wave>=50&&wave<=2000&&wave%50===0?DAWN_SEALS[wave/50-1]:null;
 export const dawnSealForStage=stage=>Number.isInteger(stage)&&stage>=1&&stage<=200&&stage%5===0?dawnSealForWave(stage*10):null;

@@ -547,3 +547,8 @@ body,.game,.game button,.game input,.game select,.game textarea,.game small,.gam
 .game .modal .seal-card .seal-art-status{font-style:italic;color:#8e6b52}
 @media(max-width:360px){.game .upgrade-head{font-size:.8em}.game #seals{padding:2px;min-width:43px}}
 @media(prefers-reduced-motion:reduce){.game .dawn-wall img,.game .dawn-seal-flight{animation:none!important}}
+
+/* R025: approved icy room already includes the frost seal at the floor center. */
+.game .dungeon[data-stage="25"] .dawn-wall{background:none}
+.game .dungeon[data-stage="25"] .dawn-wall img,
+.game .dungeon[data-stage="25"] .dawn-wall #dawn-wall-imprint{visibility:hidden}
