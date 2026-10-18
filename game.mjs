@@ -24,9 +24,12 @@ try {const raw=JSON.parse(localStorage.getItem(SAVE)||'null')||JSON.parse(localS
  if(p.lastSeen&&Date.now()>p.lastSeen+20000){p.pendingOffline=Math.min(p.pendingOffline+offlineReward(p,Date.now()-p.lastSeen),Math.floor(Math.min(swordCost(p.sword),armorCost(p.armor))*1.1));} p.lastSeen=Date.now();
 }catch(e){p=freshProgress();b=startFight(p);console.warn('save recovery',e);}
 if(!b)b=startFight(p);
-if(MERCHANT_TEST_MODE){p.merchantPhase='away';p.merchantMs=15000;}
+// Keep the production merchant's exact phase and remaining time in persistent saves.
+// The accelerated merchant exists only for the current debug page session.
+let productionMerchantSnapshot=null;
+if(MERCHANT_TEST_MODE){productionMerchantSnapshot={phase:p.merchantPhase,ms:p.merchantMs};p.merchantPhase='away';p.merchantMs=15000;}
 if(!p.catchPlan.length && bucketVolume(p)<bucketCapacity(p))planFishing(p);
-function save(){try{p.lastSeen=Date.now();localStorage.setItem(SAVE,JSON.stringify({...p,merchantPhase:MERCHANT_TEST_MODE?'away':p.merchantPhase,merchantMs:MERCHANT_TEST_MODE?300000:p.merchantMs,battleState:{level:b.level,hp:b.hp,enemyHp:b.enemyHp,phase:b.phase,heroTimer:b.heroTimer,enemyTimer:b.enemyTimer,rest:b.rest,monsterType:b.monster.type,poisonRemaining:b.poisonRemaining||0,poisonTick:b.poisonTick||0}}));}catch(e){console.warn(e)}}
+function save(){try{p.lastSeen=Date.now();localStorage.setItem(SAVE,JSON.stringify({...p,merchantPhase:productionMerchantSnapshot?.phase??p.merchantPhase,merchantMs:productionMerchantSnapshot?.ms??p.merchantMs,battleState:{level:b.level,hp:b.hp,enemyHp:b.enemyHp,phase:b.phase,heroTimer:b.heroTimer,enemyTimer:b.enemyTimer,rest:b.rest,monsterType:b.monster.type,poisonRemaining:b.poisonRemaining||0,poisonTick:b.poisonTick||0}}));}catch(e){console.warn(e)}}
 function notify(t){const el=$('toast');el.textContent=t;el.classList.add('show');clearTimeout(toastTimeout);toastTimeout=setTimeout(()=>el.classList.remove('show'),2300)}
 function say(t,time=2200){$('battle-message').textContent=t;lastBattleMessage=performance.now()+time;clearTimeout(msgTimeout);msgTimeout=setTimeout(()=>{$('battle-message').textContent=b.phase==='rest'?'Котёнок отдыхает в домике':p.autoEnabled?'Автобой · '+autoHitsPerSecond(p).toFixed(2)+' ударов/с':'Нажми на монстра · ручной бой 3/с'},time)}
 function pulse(el,name,time=600){el.classList.remove(name);void el.offsetWidth;el.classList.add(name);setTimeout(()=>el.classList.remove(name),time)}
@@ -259,7 +262,7 @@ function openModal(title,mode='info',text=''){const scrollTop=modalType===mode?$
    const price=document.createElement('b');price.className='fish-price';price.textContent=f.price+' 🪙';
    row.append(picture,details,price);content.append(row);
   }
-  if(mode==='trade'){const btn=action(`Продать всё · ${bucketGold(p)} 🪙`,()=>{const sale=sellAll(p,MERCHANT_TEST_MODE);if(sale.ok){merchantExitUntil=performance.now()+720;notify('Улов продан: '+fishCount(sale.count)+' · +'+sale.gold+' '+pluralRu(sale.gold,'монета','монеты','монет')+'!');save();closeModal();}else notify('Ведро пустое');});btn.disabled=p.fishBucket.length===0;}
+  if(mode==='trade'){const btn=action(`Продать всё · ${bucketGold(p)} 🪙`,()=>{const sale=sellAll(p,MERCHANT_TEST_MODE);if(sale.ok){merchantExitUntil=performance.now()+720;notify('Улов продан: '+fishCount(sale.count)+' · +'+sale.gold+' '+pluralRu(sale.gold,'монета','монеты','монет')+'!');save();closeModal();}else notify(p.fishBucket.length?'Торговец уже уехал':'Ведро пустое');});btn.disabled=p.fishBucket.length===0||p.merchantPhase!=='waiting';}
   else {para('Продать улов можно только серому коту-торговцу. Он приезжает каждые 5 минут активной игры и ждёт 15 секунд.');if(!p.bucketLevel)action('Улучшить ведро до 24 мест · '+bucketCost()+' 🪙',()=>{const r=upgrade(p,'bucket');if(!r.ok){notify('Не хватает монет');return;}p.catchPlan=[];planFishing(p);save();openModal('Ведро рыцаря','bucket');notify('Теперь вмещается 24!')});}
  }else if(mode==='shop'||mode==='inventory'){
   para(mode==='shop'?'Покупай экипировку за монеты и добычу с монстров. Рецепты проверяются перед покупкой.':'Выбирай приобретённые вещи. Новый костюм переключает все 12 кадров котёнка; меч остаётся отдельным SVG.');
@@ -344,7 +347,7 @@ function openModal(title,mode='info',text=''){const scrollTop=modalType===mode?$
  }else if(mode==='offline'){
   para('Котёнок заработал, пока тебя не было: +'+fmt(p.pendingOffline)+' монет.');para('Офлайн-заработок ограничен стоимостью ближайшего улучшения и не открывает новые комнаты.');action('Забрать '+fmt(p.pendingOffline)+' 🪙',()=>{p.gold+=p.pendingOffline;p.pendingOffline=0;save();closeModal();notify('Офлайн-награда получена!')});
  }else if(mode==='reset'){
-  para('Это удалит монеты, улов, улучшения и весь прогресс.');action('Сбросить игру',()=>{p=freshProgress();b=startFight(p);planFishing(p);save();closeModal();render();notify('Прогресс сброшен')});
+  para('Это удалит монеты, улов, улучшения и весь прогресс.');action('Сбросить игру',()=>{p=freshProgress();if(MERCHANT_TEST_MODE){productionMerchantSnapshot={phase:'away',ms:p.merchantMs};p.merchantMs=15000;}b=startFight(p);planFishing(p);save();closeModal();render();notify('Прогресс сброшен')});
  }else para(text);
  if(mode!=='offline')action('Закрыть',closeModal,'secondary');
  if(!$('modal').open)$('modal').showModal();if(scrollTop)$('modal-content').scrollTop=scrollTop;$('modal-x').focus({preventScroll:true});render();
@@ -434,7 +437,7 @@ $('enemy-holder').addEventListener('keydown',event=>{
 });
 for(const kind of ['sword','armor','fish','home'])$('buy-'+kind).addEventListener('click',()=>onUpgrade(kind));
 $('bucket').addEventListener('click',()=>openModal('Ведро рыцаря','bucket'));
-$('merchant').addEventListener('click',()=>openModal('Серый кот-торговец','trade'));
+$('merchant').addEventListener('click',()=>{if(p.merchantPhase!=='waiting'){notify('Торговец ещё не приехал');return;}openModal('Серый кот-торговец','trade');});
 $('quests').addEventListener('click',()=>openModal('Задания','quests'));
 $('achievements').addEventListener('click',()=>openModal('Достижения','achievements'));
 $('inventory').addEventListener('click',()=>openModal('Инвентарь','inventory'));
