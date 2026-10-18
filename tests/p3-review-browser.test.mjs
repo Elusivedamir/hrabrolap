@@ -22,7 +22,7 @@ test('P3 review: all 20 first-chapter rooms show live runtime backgrounds and ho
    assert.ok(actual.w>0&&actual.h>0,'room R'+stage+' must decode');
    assert.match(await page.locator('#room-title').textContent(),new RegExp('R'+String(stage).padStart(3,'0')));
    const approved=[1,5,10,12,15,20].includes(stage);
-   if(approved){assert.match(actual.src,stage===20?/assets\/approved\/glacier-serpent\/:stage===15?/assets\/approved\/silk-empress\//:stage===10?/assets\/approved\/bone-regent\//:stage===5?/assets\/approved\/moss-guardian\//:/assets\/prototypes\/p1\//);assert.match(await page.locator('#art-status').textContent(),/Принятый/);}
+   if(approved){const dir=stage===20?'assets/approved/glacier-serpent/':stage===15?'assets/approved/silk-empress/':stage===10?'assets/approved/bone-regent/':stage===5?'assets/approved/moss-guardian/':'assets/prototypes/p1/';assert.ok(actual.src.includes(dir));assert.match(await page.locator('#art-status').textContent(),/Принятый/);}
    else{assert.ok(actual.src.startsWith('data:image/svg+xml'),'room '+stage+' remains procedural');assert.match(await page.locator('#art-status').textContent(),/Технический/);}
    assert.equal(await page.locator('#boss').isVisible(),stage%5===0,'boss is visible only at milestone arena');
   }

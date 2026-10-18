@@ -98,6 +98,7 @@ test('все десять монстров показывают 6 кадров �
    assert.equal(await page.locator('#boss-crown').isVisible(),false,'epic bosses have bespoke heads, no extra crown');
    const bossUrl=await page.locator('#enemy-art').getAttribute('src');
    if(wave===50)assert.match(bossUrl,/assets\/approved\/moss-guardian\/attack_0[1-6]\.png$/);
+   else if(wave===100)assert.match(bossUrl,/assets\/approved\/bone-regent\/attack_0[1-6]\.png$/);
    else assert.ok(bossUrl.startsWith('data:image/svg+xml'));
    assert.equal(await page.locator('#boss-resistance').isVisible(),true);
    assert.ok(await page.locator('#enemy-art').evaluate(async img=>{await img.decode();return img.naturalWidth>0}),`boss wave ${wave} ${type} failed to decode`);

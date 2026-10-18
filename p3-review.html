@@ -107,8 +107,8 @@ function selectRoom(n){
  $('actual-room-name').textContent='Зал '+caveStageName(n)+' · волны '+wave+'–'+(wave+9)+' · '+(APPROVED.has(n)?'утверждённый фон':candidateArt&&p3RoomCandidate(n)?'новая версия на утверждение':'технический вариант')+'.';
  $('art-status').textContent=APPROVED.has(n)?'Принятый фон':candidateArt&&p3RoomCandidate(n)?'НОВЫЙ КАНДИДАТ P3 · на утверждение':'Технический фон · требует нового арта';
  const hasBoss=n%5===0;
- $('preview-seal').hidden=!hasBoss||[5,10,15,20].includes(n);
- if(hasBoss){const rune=dawnSealForWave(n*10);$('preview-seal').src=dawnSealUrl(rune.wave);$('preview-seal').alt=rune.name+' в центре пола';$('seal-description').textContent=[5,10,15,20].includes(n)?rune.name+' · утверждённая печать выгравирована в центре пола':rune.name+' · '+rune.artStatus+' · эскиз в центре пола, требует утверждения';}
+ $('preview-seal').hidden=!hasBoss||n===5;
+ if(hasBoss){const rune=dawnSealForWave(n*10);$('preview-seal').src=dawnSealUrl(rune.wave);$('preview-seal').alt=rune.name+' в центре пола';$('seal-description').textContent=n===5?rune.name+' · утверждённая печать выгравирована в центре пола':rune.name+' · '+rune.artStatus+' · эскиз в центре пола, требует утверждения';}
  $('boss').hidden=!hasBoss;
  $('boss-status').textContent=hasBoss?'Арена: '+megaBossForWave(n*10).name:'Обычный зал';
  for(const button of $('rooms').querySelectorAll('button')){button.classList.toggle('active',Number(button.dataset.room)===n);button.setAttribute('aria-pressed',String(Number(button.dataset.room)===n));}
