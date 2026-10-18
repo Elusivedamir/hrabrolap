@@ -27,8 +27,9 @@ button.active{background:#bce3a2;border-color:#477d51}
 .scene{aspect-ratio:840/470;position:relative;border:5px solid #946f50;border-radius:12px;overflow:hidden;background:#2d3645}
 .scene img{position:absolute;display:block;object-fit:contain}
 #cave{inset:0;width:100%;height:100%;object-fit:fill}
-#hero{bottom:5%;left:10%;width:31%;height:68%;object-position:center bottom}
+#hero{bottom:5%;left:10%;width:29%;height:68%;object-position:center bottom}
 #boss{bottom:5%;right:8%;width:34%;height:71%;object-position:center bottom}
+.scene[data-room="5"] #boss{right:7%;width:43%;height:82%}
 #preview-seal{top:41.5%;left:41.5%;width:17%;height:27%;object-fit:contain;filter:drop-shadow(0 0 9px #ffd78f);pointer-events:none}
 #preview-seal[hidden]{display:none}
 #boss[hidden]{display:none}
@@ -57,7 +58,7 @@ footer{font-size:12px;color:#e3d5ba;padding:12px 0 24px}
 <h2 id="room-title">R001 — Каменный порог</h2>
 <div class="scene" id="stage">
 <img id="cave" alt="Фон выбранной комнаты">
-<img id="preview-seal" src="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%201%201%22%3E%3C%2Fsvg%3E" alt="Эскиз Печати Рассвета на стене" hidden><img id="hero" src="assets/canonical/attack_01.png" alt="Утверждённый Храбролап">
+<img id="preview-seal" src="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%201%201%22%3E%3C%2Fsvg%3E" alt="Эскиз Печати Рассвета на стене" hidden><img id="hero" src="assets/clean/canonical/attack_01.png" alt="Утверждённый Храбролап на прозрачном фоне">
 <img id="boss" alt="Модель супербосса" hidden>
 <div class="caption"><span id="art-status">Принятый фон P1</span><span id="boss-status">Обычный зал</span></div>
 </div>
@@ -96,6 +97,7 @@ const roomId=n=>'R'+String(n).padStart(3,'0');
 const currentBoss=()=>megaBossForWave(bossWave);
 function selectRoom(n){
  room=n;
+ $('stage').dataset.room=String(n);
  const wave=(n-1)*10+1;
  $('cave').src=caveBackgroundForWave(wave,candidateArt);
  $('room-title').textContent=roomId(n)+' — '+ROOM_NAMES[n-1];
