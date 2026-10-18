@@ -27,6 +27,8 @@ button.active{background:#bce3a2;border-color:#477d51}
 #cave{inset:0;width:100%;height:100%;object-fit:fill}
 #hero{bottom:5%;left:10%;width:31%;height:68%;object-position:center bottom}
 #boss{bottom:5%;right:8%;width:34%;height:71%;object-position:center bottom}
+#preview-seal{top:27%;left:62%;width:17%;height:27%;object-fit:contain;filter:drop-shadow(0 0 9px #ffd78f);pointer-events:none}
+#preview-seal[hidden]{display:none}
 #boss[hidden]{display:none}
 .scene.hide-actors #hero,.scene.hide-actors #boss{display:none}
 .caption{position:absolute;top:7px;left:7px;right:7px;display:flex;gap:5px;align-items:flex-start;justify-content:space-between;flex-wrap:wrap;pointer-events:none}
@@ -53,7 +55,7 @@ footer{font-size:12px;color:#e3d5ba;padding:12px 0 24px}
 <h2 id="room-title">R001 — Каменный порог</h2>
 <div class="scene" id="stage">
 <img id="cave" alt="Фон выбранной комнаты">
-<img id="hero" src="assets/canonical/attack_01.png" alt="Утверждённый Храбролап">
+<img id="preview-seal" src="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%201%201%22%3E%3C%2Fsvg%3E" alt="Эскиз Печати Рассвета на стене" hidden><img id="hero" src="assets/canonical/attack_01.png" alt="Утверждённый Храбролап">
 <img id="boss" alt="Модель супербосса" hidden>
 <div class="caption"><span id="art-status">Принятый фон P1</span><span id="boss-status">Обычный зал</span></div>
 </div>
@@ -63,7 +65,7 @@ footer{font-size:12px;color:#e3d5ba;padding:12px 0 24px}
 <section class="panel" aria-label="Просмотр боссов">
 <h2>Четыре супербосса · 6 атак + 6 реакций на урон</h2>
 <div class="boss-buttons" id="boss-buttons"></div>
-<p id="status" aria-live="polite">Выбран Моховой страж.</p>
+<p id="status" aria-live="polite">Выбран Моховой страж.</p><p id="seal-description" aria-live="polite">Печать Рассвета на стене — художественный концепт, не утверждена.</p>
 <div class="toolbar"><button id="play" type="button">▶ Воспроизвести</button><button data-phase="attack" type="button" class="active">Атака</button><button data-phase="hurt" type="button">Получение урона</button></div>
 <div class="frames" id="frames"></div>
 <p>Нажми на кадр, чтобы проверить силуэт, движение конечностей, положение головы и направление удара. Проверяется игровая модель, а не нейросетевой вариант.</p>
@@ -74,6 +76,8 @@ footer{font-size:12px;color:#e3d5ba;padding:12px 0 24px}
 import {caveBackgroundForWave,caveStageName} from './cave-themes.mjs';
 import {megaBossForWave} from './mega-bosses.mjs';
 import {megaBossFrameUrl} from './mega-boss-art.mjs';
+import {dawnSealForWave} from './dawn-seals.mjs';
+import {dawnSealUrl} from './dawn-seal-art.mjs';
 
 const ROOM_NAMES=[
 'Каменный порог','Тихий уступ','Старая лампа','Ручей под сводом','Моховая сторожка',
@@ -95,6 +99,8 @@ function selectRoom(n){
  $('actual-room-name').textContent='В игре: '+caveStageName(n)+' · волны '+wave+'–'+(wave+9)+'.';
  $('art-status').textContent=APPROVED.has(n)?'Принятый фон P1':'Технический фон · требует нового арта';
  const hasBoss=n%5===0;
+ $('preview-seal').hidden=!hasBoss;
+ if(hasBoss){const rune=dawnSealForWave(n*10);$('preview-seal').src=dawnSealUrl(rune.wave);$('preview-seal').alt=rune.name+' на задней стене';$('seal-description').textContent=rune.name+' · '+rune.artStatus+' · эскиз на стене за боссом, не утверждённый арт';}
  $('boss').hidden=!hasBoss;
  $('boss-status').textContent=hasBoss?'Арена: '+megaBossForWave(n*10).name:'Обычный зал';
  for(const button of $('rooms').querySelectorAll('button')){button.classList.toggle('active',Number(button.dataset.room)===n);button.setAttribute('aria-pressed',String(Number(button.dataset.room)===n));}
