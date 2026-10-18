@@ -10,13 +10,15 @@ ROOT="$(cd "$(dirname "$SCRIPT_PATH")/.." && pwd -P)"
 PORT="${HRABROLAP_PORT:-8090}"
 HOST="127.0.0.1"
 MODE="${1:-p3}"
+EXTRA=""
 
 case "$MODE" in
   p3|review) PAGE="p3-review.html"; TITLE="просмотрщик первой главы" ;;
   game|play) PAGE="index.html"; TITLE="игра" ;;
+  art|game-art) PAGE="index.html"; TITLE="игра · художественные кандидаты P3"; EXTRA="&p3Art=1" ;;
   atelier|armor) PAGE="equipment-preview.html"; TITLE="ателье анимаций" ;;
   save|backup) PAGE="save-manager.html"; TITLE="резервные копии" ;;
-  *) fail "Неизвестный режим '$MODE'. Используй: hrabrolap [p3|game|atelier|save]" ;;
+  *) fail "Неизвестный режим '$MODE'. Используй: hrabrolap [p3|game|art|atelier|save]" ;;
 esac
 
 [[ "$PORT" =~ ^[0-9]+$ ]] && (( PORT>=1024 && PORT<=65535 )) || fail "Некорректный порт: $PORT"
@@ -95,7 +97,7 @@ else
 fi
 
 REV="$(git -C "$ROOT" rev-parse --short HEAD)"
-URL="http://$HOST:$PORT/$PAGE?v=$REV"
+URL="http://$HOST:$PORT/$PAGE?v=$REV$EXTRA"
 info "Открываю $TITLE:"
 info "$URL"
 if command -v termux-open-url >/dev/null 2>&1; then

@@ -23,6 +23,7 @@ test('P3 review: all 20 first-chapter rooms show live runtime backgrounds and ho
    assert.match(await page.locator('#room-title').textContent(),new RegExp('R'+String(stage).padStart(3,'0')));
    const approved=[1,5,12].includes(stage);
    if(approved){assert.match(actual.src,/assets\/prototypes\/p1\//);assert.match(await page.locator('#art-status').textContent(),/Принятый/);}
+   else if([10,15,20].includes(stage)){assert.match(actual.src,/assets\/prototypes\/p3\/R0(10|15|20)-/);assert.match(await page.locator('#art-status').textContent(),/КАНДИДАТ/);}
    else{assert.ok(actual.src.startsWith('data:image/svg+xml'),'room '+stage+' remains procedural');assert.match(await page.locator('#art-status').textContent(),/Технический/);}
    assert.equal(await page.locator('#boss').isVisible(),stage%5===0,'boss is visible only at milestone arena');
   }
@@ -50,7 +51,7 @@ test('P3 review: each of 4 original boss models can inspect 6 attacks and 6 hurt
     const image=await page.locator('#boss').evaluate(async img=>{await img.decode();return {w:img.naturalWidth,h:img.naturalHeight,src:img.getAttribute('src')}});
     assert.ok(image.w>0&&image.h>0,model.id+' '+phase+' '+frame);
     if(wave===50)assert.match(image.src,/assets\/prototypes\/p1\/boss-thorn-warden\//);
-    else assert.ok(image.src.startsWith('data:image/svg+xml'),'non-P1 boss must show current runtime candidate');
+    else assert.match(image.src,/assets\/prototypes\/p3\/boss-(bone-regent|silk-empress|glacier-serpent)\/(attack|hurt)_0[1-6]\.svg/,'new unique pose pack for boss '+wave);
     assert.match(await page.locator('#status').textContent(),new RegExp(phase==='attack'?'атака':'урон'));
    }
    await page.screenshot({path:'qa/screenshots/p3-boss-'+wave+'-320-mobile.png',fullPage:true});

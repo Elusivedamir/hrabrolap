@@ -2,7 +2,10 @@
  * Pure deterministic scene generation: no image assets, character art,
  * battle geometry, or accepted backgrounds are overwritten.
  */
+import {p3RoomCandidate} from './p3-art-candidates.mjs';
 export const CAVE_ROOM_COUNT=200;
+/** Human-authored chapter 1 catalog names (not random palette labels). */
+export const CHAPTER_ONE_ROOM_NAMES=Object.freeze(['Каменный порог','Тихий уступ','Старая лампа','Ручей под сводом','Моховая сторожка','Забытый поворот','Круг светлячков','Треснувшая колонна','Пещерный балкон','Костяной зал','Зал капель','Рунный тупик','Стена рисунков','Кристальный карман','Паучье гнездо','Каменная лестница','Тёмный карниз','Обледеневший спуск','Гулкий проход','Логово ледяного змея']);
 const PALETTES=Object.freeze([
  {name:'Старая пещера',rock:'#364559',shade:'#192635',floor:'#6b665e',light:'#f5b469',crystal:'#87bee1',glow:'#c5e9fd'},
  {name:'Синие кристаллы',rock:'#273b66',shade:'#111c39',floor:'#455078',light:'#85caf2',crystal:'#66bcff',glow:'#c6ebff'},
@@ -22,11 +25,12 @@ const APPROVED_P1_ROOMS=Object.freeze({
   5:Object.freeze({name:'Моховая сторожка',url:'assets/prototypes/p1/R005-moss-outpost.svg'}),
   12:Object.freeze({name:'Рунный тупик',url:'assets/prototypes/p1/R012-rune-dead-end.svg'})
 });
-export function caveStageName(stage){const n=clampStage(stage);return APPROVED_P1_ROOMS[n]?.name||PALETTES[(n-1)%PALETTES.length].name;}
+export function caveStageName(stage){const n=clampStage(stage);return CHAPTER_ONE_ROOM_NAMES[n-1]||APPROVED_P1_ROOMS[n]?.name||PALETTES[(n-1)%PALETTES.length].name;}
 function rand(seed){const s=Math.sin(seed*37.181+.33)*43758.5453;return s-Math.floor(s);}
 const cache=new Map();
-export function caveBackgroundForWave(wave){
+export function caveBackgroundForWave(wave,p3ArtPreview=false){
  const stage=caveStageForWave(wave);
+ if(p3ArtPreview&&p3RoomCandidate(stage))return p3RoomCandidate(stage).url;
  if(APPROVED_P1_ROOMS[stage])return APPROVED_P1_ROOMS[stage].url;
  if(cache.has(stage))return cache.get(stage);
  const p=PALETTES[(stage-1)%PALETTES.length];
