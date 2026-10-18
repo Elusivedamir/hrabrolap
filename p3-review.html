@@ -1,0 +1,141 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Храбролап — P3: первая глава, просмотр 20 залов и 4 боссов</title>
+<style>
+:root{font-family:system-ui,-apple-system,"Segoe UI",sans-serif;color-scheme:light;background:#20303b;color:#f7e9ce}
+*{box-sizing:border-box}
+body{margin:0;line-height:1.4}
+header{padding:12px 16px;background:#65432f;border-bottom:4px solid #3b2d28}
+h1{font-size:20px;line-height:1.2;margin:0 0 4px}
+header p{font-size:13px;margin:0;color:#ead4b4}
+main{width:min(960px,100%);padding:12px;margin:auto}
+section{margin:13px 0}
+h2{font-size:17px;margin:4px 0 10px}
+button{font:700 13px system-ui,-apple-system,sans-serif;cursor:pointer;border:2px solid #95744f;border-radius:10px;background:#f7e0b0;color:#513d2b;min-height:44px;padding:8px;text-align:center}
+button:focus-visible{outline:3px solid #6ad6dd;outline-offset:3px}
+button.active{background:#bce3a2;border-color:#477d51}
+.rooms{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px}
+.rooms button{text-align:left;white-space:normal;overflow-wrap:anywhere}
+.boss-buttons,.toolbar{display:flex;gap:6px;flex-wrap:wrap}
+.boss-buttons button{flex:1 1 180px}
+.note{font-size:13px;margin:8px 0;color:#f4dfbf}
+.scene{aspect-ratio:840/470;position:relative;border:5px solid #946f50;border-radius:12px;overflow:hidden;background:#2d3645}
+.scene img{position:absolute;display:block;object-fit:contain}
+#cave{inset:0;width:100%;height:100%;object-fit:fill}
+#hero{bottom:5%;left:10%;width:31%;height:68%;object-position:center bottom}
+#boss{bottom:5%;right:8%;width:34%;height:71%;object-position:center bottom}
+#boss[hidden]{display:none}
+.scene.hide-actors #hero,.scene.hide-actors #boss{display:none}
+.caption{position:absolute;top:7px;left:7px;right:7px;display:flex;gap:5px;align-items:flex-start;justify-content:space-between;flex-wrap:wrap;pointer-events:none}
+.caption span{background:#2b2927e3;border-radius:6px;border:1px solid #e1b780;color:#fff4de;padding:3px 6px;font-size:clamp(9px,2vw,13px)}
+.panel{background:#f5e4c7;color:#533e2f;border:3px solid #946f50;border-radius:12px;padding:12px}
+.panel p{font-size:13px;margin:6px 0}
+.frames{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:5px}
+.frames button{padding:2px;min-width:0;aspect-ratio:1;background:#e3dbbd;display:flex;flex-direction:column;justify-content:center;align-items:center}
+.frames img{width:100%;height:calc(100% - 15px);object-fit:contain;min-height:22px}
+.frames span{font-size:10px;line-height:13px}
+#status{font-weight:700}
+footer{font-size:12px;color:#e3d5ba;padding:12px 0 24px}
+@media(min-width:640px){.rooms{grid-template-columns:repeat(4,minmax(0,1fr))}.rooms button{font-size:14px}}
+@media(max-width:360px){main{padding:8px}.rooms button{font-size:12px;padding:6px}.frames{gap:3px}.frames button{padding:0;font-size:10px}.caption span{font-size:10px}}
+</style>
+</head>
+<body>
+<header><h1>Храбролап · P3 — Пробуждение глубин</h1>
+<p>Рабочая художественная приёмка: 20 залов · 4 супербосса · 12 кадров на каждого. Эта страница ничего не меняет в игре и сохранениях.</p></header>
+<main>
+<p class="note"><strong>Важно:</strong> R001, R005 и R012 уже используют принятый арт P1. У остальных залов пока процедурные технические фоны. Модели боссов 100, 150 и 200 — игровые кандидаты, не окончательно утверждённый арт.</p>
+<section aria-label="Список залов"><h2>Залы R001–R020</h2><div class="rooms" id="rooms"></div></section>
+<section aria-label="Сцена">
+<h2 id="room-title">R001 — Каменный порог</h2>
+<div class="scene" id="stage">
+<img id="cave" alt="Фон выбранной комнаты">
+<img id="hero" src="assets/canonical/attack_01.png" alt="Утверждённый Храбролап">
+<img id="boss" alt="Модель супербосса" hidden>
+<div class="caption"><span id="art-status">Принятый фон P1</span><span id="boss-status">Обычный зал</span></div>
+</div>
+<p class="note" id="actual-room-name"></p>
+<div class="toolbar"><button id="toggle-actors" type="button">Скрыть персонажей / оценить фон</button></div>
+</section>
+<section class="panel" aria-label="Просмотр боссов">
+<h2>Четыре супербосса · 6 атак + 6 реакций на урон</h2>
+<div class="boss-buttons" id="boss-buttons"></div>
+<p id="status" aria-live="polite">Выбран Моховой страж.</p>
+<div class="toolbar"><button id="play" type="button">▶ Воспроизвести</button><button data-phase="attack" type="button" class="active">Атака</button><button data-phase="hurt" type="button">Получение урона</button></div>
+<div class="frames" id="frames"></div>
+<p>Нажми на кадр, чтобы проверить силуэт, движение конечностей, положение головы и направление удара. Проверяется игровая модель, а не нейросетевой вариант.</p>
+</section>
+<footer>Источник: текущие игровые <code>cave-themes.mjs</code> и <code>mega-boss-art.mjs</code>. Художественная приёмка остальных сцен и боссов требует отдельного решения; эта страница не объявляет их готовыми.</footer>
+</main>
+<script type="module">
+import {caveBackgroundForWave,caveStageName} from './cave-themes.mjs';
+import {megaBossForWave} from './mega-bosses.mjs';
+import {megaBossFrameUrl} from './mega-boss-art.mjs';
+
+const ROOM_NAMES=[
+'Каменный порог','Тихий уступ','Старая лампа','Ручей под сводом','Моховая сторожка',
+'Забытый поворот','Круг светлячков','Треснувшая колонна','Пещерный балкон','Костяной зал',
+'Зал капель','Рунный тупик','Стена рисунков','Кристальный карман','Паучье гнездо',
+'Каменная лестница','Тёмный карниз','Обледеневший спуск','Гулкий проход','Логово ледяного змея'
+];
+const APPROVED=new Set([1,5,12]);
+const BOSS_WAVES=[50,100,150,200];
+const $=id=>document.getElementById(id);
+let room=1,bossWave=50,phase='attack',frame=0,playing=false;
+const roomId=n=>'R'+String(n).padStart(3,'0');
+const currentBoss=()=>megaBossForWave(bossWave);
+function selectRoom(n){
+ room=n;
+ const wave=(n-1)*10+1;
+ $('cave').src=caveBackgroundForWave(wave);
+ $('room-title').textContent=roomId(n)+' — '+ROOM_NAMES[n-1];
+ $('actual-room-name').textContent='В игре: '+caveStageName(n)+' · волны '+wave+'–'+(wave+9)+'.';
+ $('art-status').textContent=APPROVED.has(n)?'Принятый фон P1':'Технический фон · требует нового арта';
+ const hasBoss=n%5===0;
+ $('boss').hidden=!hasBoss;
+ $('boss-status').textContent=hasBoss?'Арена: '+megaBossForWave(n*10).name:'Обычный зал';
+ for(const button of $('rooms').querySelectorAll('button')){button.classList.toggle('active',Number(button.dataset.room)===n);button.setAttribute('aria-pressed',String(Number(button.dataset.room)===n));}
+ if(hasBoss){bossWave=n*10;phase='attack';frame=0;renderFrames();}
+ renderBoss();
+}
+function selectBoss(wave){selectRoom(wave/10);}
+function renderBoss(){
+ const model=currentBoss();
+ $('boss').src=megaBossFrameUrl(model.id,phase,frame);
+ $('boss').alt=model.name+', '+(phase==='attack'?'атака':'получение урона')+', кадр '+(frame+1)+'/6';
+ $('status').textContent=model.name+' · волна '+bossWave+' · '+(bossWave===50?'утверждённый P1':'игровой арт-кандидат')+' · '+(phase==='attack'?'атака':'урон')+' '+(frame+1)+'/6';
+ for(const b of $('frames').querySelectorAll('button'))b.classList.toggle('active',b.dataset.phase===phase&&Number(b.dataset.frame)===frame);
+ for(const b of $('boss-buttons').querySelectorAll('button')){b.classList.toggle('active',Number(b.dataset.wave)===bossWave);b.setAttribute('aria-pressed',String(Number(b.dataset.wave)===bossWave));}
+ for(const b of document.querySelectorAll('[data-phase]')){b.classList.toggle('active',b.dataset.phase===phase);b.setAttribute('aria-pressed',String(b.dataset.phase===phase));}
+}
+function selectFrame(nextPhase,nextFrame){playing=false;$('play').textContent='▶ Воспроизвести';phase=nextPhase;frame=nextFrame;renderBoss();}
+function renderFrames(){
+ const grid=$('frames');grid.replaceChildren();
+ const model=currentBoss();
+ for(const kind of ['attack','hurt'])for(let n=0;n<6;n++){
+  const b=document.createElement('button');b.type='button';b.dataset.phase=kind;b.dataset.frame=n;b.setAttribute('aria-label',model.name+': '+(kind==='attack'?'атака':'урон')+' '+(n+1)+'/6');
+  const img=document.createElement('img');img.src=megaBossFrameUrl(model.id,kind,n);img.alt='';img.loading='lazy';
+  const caption=document.createElement('span');caption.textContent=(kind==='attack'?'A':'H')+(n+1);
+  b.append(img,caption);b.addEventListener('click',()=>selectFrame(kind,n));grid.append(b);
+ }
+}
+for(let n=1;n<=20;n++){
+ const b=document.createElement('button');b.type='button';b.dataset.room=n;
+ b.textContent=roomId(n)+' · '+ROOM_NAMES[n-1]+(APPROVED.has(n)?' ✓':' · эскиз');
+ b.addEventListener('click',()=>selectRoom(n));$('rooms').append(b);
+}
+for(const wave of BOSS_WAVES){
+ const model=megaBossForWave(wave);const b=document.createElement('button');b.type='button';b.dataset.wave=wave;
+ b.textContent=wave+' · '+model.name+(wave===50?' ✓':'');
+ b.addEventListener('click',()=>selectBoss(wave));$('boss-buttons').append(b);
+}
+for(const b of document.querySelectorAll('[data-phase]'))b.addEventListener('click',()=>selectFrame(b.dataset.phase,0));
+$('play').addEventListener('click',()=>{playing=!playing;$('play').textContent=playing?'⏸ Пауза':'▶ Воспроизвести';});
+$('toggle-actors').addEventListener('click',()=>{const hidden=$('stage').classList.toggle('hide-actors');$('toggle-actors').setAttribute('aria-pressed',String(hidden));});
+setInterval(()=>{if(playing){frame=(frame+1)%6;renderBoss();}},220);
+renderFrames();selectRoom(1);
+</script>
+</body></html>
