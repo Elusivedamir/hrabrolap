@@ -17,7 +17,7 @@ test('P3 review: all 20 first-chapter rooms show live runtime backgrounds and ho
   assert.equal(await page.locator('#frames button').count(),12);
   assert.equal(await page.locator('#hero').evaluate(async img=>{await img.decode();return img.naturalWidth>0}),true);
   for(let stage=1;stage<=20;stage++){
-   await page.locator('[data-room="'+stage+'"]').click();
+   await page.locator('#rooms button[data-room="'+stage+'"]').click();
    const actual=await page.locator('#cave').evaluate(async img=>{await img.decode();return {src:img.getAttribute('src'),w:img.naturalWidth,h:img.naturalHeight}});
    assert.ok(actual.w>0&&actual.h>0,'room R'+stage+' must decode');
    assert.match(await page.locator('#room-title').textContent(),new RegExp('R'+String(stage).padStart(3,'0')));
