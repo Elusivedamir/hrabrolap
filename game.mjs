@@ -439,7 +439,11 @@ $('quests').addEventListener('click',()=>openModal('Задания','quests'));
 $('achievements').addEventListener('click',()=>openModal('Достижения','achievements'));
 $('inventory').addEventListener('click',()=>openModal('Инвентарь','inventory'));
 $('shop').addEventListener('click',()=>openModal('Магазин','shop'));
-$('mini-shop').addEventListener('click',()=>openModal('Магазин','shop'));
+const openMiniShop=()=>openModal('Магазин','shop');
+$('mini-shop').addEventListener('click',openMiniShop);
+$('mini-shop').addEventListener('keydown',event=>{
+ if(event.key==='Enter'||event.key===' '){event.preventDefault();if(!event.repeat)openMiniShop();}
+});
 $('help').addEventListener('click',()=>openModal('Как играть','info','Нажимай на монстра, чтобы атаковать вручную — не более 3 ударов/с. Автобой покупается отдельно за 1 монету. Скорость автоатаки — самостоятельное улучшение в разделе «Улучшения», доступное сразу, даже до покупки автобоя: каждый уровень даёт +0,05 удара/с, максимум 6 ударов/с. На ручной бой скорость не влияет. После победы здоровье НЕ восстанавливается. После поражения он отдыхает в домике и лечится. Рыбак сам ловит разную рыбу и складывает её в ведро. Каждые 5 минут приезжает торговец и ждёт 15 секунд. Нажми на торговца, чтобы продать улов. Рыбалка и визиты торговца полностью останавливаются, пока игра закрыта. Офлайн котёнок приносит только ограниченное количество монет.'));
 $('reset').addEventListener('click',()=>openModal('Начать заново?','reset'));
 $('modal-x').addEventListener('click',closeModal);
