@@ -32,7 +32,7 @@ test('200 unique cave stage images, exactly one new stage per ten waves',()=>{
   const start=(stage-1)*10+1;
   assert.equal(caveStageForWave(start+9),stage);
   const url=caveBackgroundForWave(start);
-  assert.ok(url.startsWith(stage===5?'assets/approved/moss-guardian/':stage===10?'assets/approved/bone-regent/':stage===15?'assets/approved/silk-empress/':stage===20?'assets/approved/glacier-serpent/':[1,12].includes(stage)?'assets/prototypes/p1/':'data:image/svg+xml'));
+  assert.ok(url.startsWith(stage===5?'assets/approved/moss-guardian/':stage===10?'assets/approved/bone-regent/':stage===15?'assets/approved/silk-empress/':stage===20?'assets/approved/glacier-serpent/':stage===25?'assets/approved/ice-salamander/':[1,12].includes(stage)?'assets/prototypes/p1/':'data:image/svg+xml'));
   assert.ok(caveStageName(stage).length>3);
   scenes.add(url);
  }

@@ -33,6 +33,7 @@ test('14 separate models contain 6 SVG attack poses and 6 hurt poses each',()=>{
    else if(boss.id==='bone_regent')assert.match(url,/^assets\/approved\/bone-regent\/(attack|hurt)_0[1-6]\.png$/);
    else if(boss.id==='silk_empress')assert.match(url,/^assets\/approved\/silk-empress\/(attack|hurt)_0[1-6]\.png$/);
    else if(boss.id==='glacier_serpent')assert.match(url,/^assets\/approved\/glacier-serpent\/(attack|hurt)_0[1-6]\.png$/);
+   else if(boss.id==='ember_salamander')assert.match(url,/^assets\/approved\/ice-salamander\/(attack|hurt)_0[1-6]\.webp$/);
    else assert.ok(url.startsWith('data:image/svg+xml'));
   }
  }
