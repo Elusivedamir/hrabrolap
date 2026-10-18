@@ -1,5 +1,6 @@
 import {megaBossByType,MEGA_BOSSES} from './mega-bosses.mjs';
 import {lateBossFrameSvg} from './late-boss-art.mjs';
+import {p3BossFrameUrl} from './p3-art-candidates.mjs';
 /** Fourteen original vector silhouettes: no changes to existing approved sprites.
  * Every monster has 6 explicit attack poses + 6 explicit hurt poses (168 frames).
  * Artwork is deliberately hand-described as shapes, not recolors of a common body.
@@ -152,7 +153,8 @@ export function megaBossFrameSvg(type,phase='attack',index=0){
  (wounded&&i===3?'<g fill="#fff6d2" opacity=".75"><circle cx="42" cy="82" r="5"/><circle cx="194" cy="156" r="4"/></g>':'')+
  '</svg>';
 }
-export function megaBossFrameUrl(type,phase='attack',index=0){
+export function megaBossFrameUrl(type,phase='attack',index=0,p3ArtPreview=false){
+ if(p3ArtPreview){const candidate=p3BossFrameUrl(type,phase,index);if(candidate)return candidate;}
  // User-approved P1 Moss Guardian: twelve individual, pre-rendered SVG poses.
  // Original procedural artwork remains available for all other bosses.
  if(type==='thorn_warden'){
