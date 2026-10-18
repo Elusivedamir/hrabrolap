@@ -19,6 +19,7 @@ cd ~/hrabrolap-new && git pull --ff-only origin main && bash tools/termux-hrabro
 | `hrabrolap art` | Настоящая игра с новыми P3-кандидатами через `index.html?p3Art=1`; сохранения и порт прежние |
 | `hrabrolap atelier` | SVG-ателье: `equipment-preview.html` |
 | `hrabrolap save` | Просмотр и резервное копирование сохранений: `save-manager.html` |
+| `hrabrolap ice` | Отдельное тестовое меню ледяной саламандры: 6 кадров атаки, 6 кадров урона, воспроизведение, скорость, масштаб, проверка альфа-канала и печати |
 
 Каждый запуск обновляет `main` командой `git pull --ff-only origin main`, проверяет сервер на `127.0.0.1:8090`, запускает его при необходимости и открывает выбранную страницу через системный Android-браузер.
 
