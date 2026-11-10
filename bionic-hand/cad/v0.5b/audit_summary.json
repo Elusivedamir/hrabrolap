@@ -1,0 +1,57 @@
+{
+  "revision": "v0.5b",
+  "date": "2026-11-10",
+  "method": "CadQuery/OCCT exact BRep positive-volume intersection of modeled thumb solids vs four finger solids and frame; AABB broadphase",
+  "sampled_poses": 27,
+  "exact_intersections_checked": 52,
+  "volumetric_collisions_found": 0,
+  "modes": [
+    {
+      "mode": "swing",
+      "poses": 9,
+      "candidates": 14,
+      "collisions": 0
+    },
+    {
+      "mode": "pinch",
+      "poses": 9,
+      "candidates": 20,
+      "collisions": 0
+    },
+    {
+      "mode": "power",
+      "poses": 9,
+      "candidates": 18,
+      "collisions": 0
+    }
+  ],
+  "thumb_base_mm": [
+    -35,
+    12,
+    42
+  ],
+  "thumb_link_lengths_mm": [
+    33,
+    25
+  ],
+  "cmc_swivel_axis_unit": [
+    -0.01760047,
+    0.88511706,
+    0.46503549
+  ],
+  "cmc_swivel_angle_deg": 89.05598,
+  "ip_max_deg": 25,
+  "mode_conditions": {
+    "pinch": {
+      "finger_close_phase": 0.63,
+      "opposition": 1,
+      "ip_phase": 1
+    },
+    "power": {
+      "finger_close_phase": 1,
+      "opposition": 0.5,
+      "ip_phase": 0.4
+    }
+  },
+  "limit": "Discrete sampled positions only; no actual CMC pin/bearing, actuator, heads, cable, FEA, safety or gripping-load verification"
+}
