@@ -1,0 +1,13 @@
+{
+  "version": "v0.5d",
+  "status": "SPACE_RESERVATION_ONLY_NO_SEAL_OR_IP",
+  "coordinate_frame": "MCP frame Rc, origin P = B + 14*A; +z is pin axis",
+  "mcp_boot_keepout_box_mm": {"x": [-16,7], "y": [-7,7], "z": [-10,10]},
+  "purpose": "reserve room around fork and pin; service access at both pin ends",
+  "boot_material": "not selected",
+  "boot_fit_and_swept_clearance": "not verified; keepout box is not a designed boot",
+  "release_access": "boot must be removable and must not prevent emergency release",
+  "moisture_paths": ["CMC shaft", "MCP pin ends", "moving proximal boot edge", "service split"],
+  "electronic_compartment": "still needs a separate protected enclosure and cable entries",
+  "acceptance": "measure torque, time, temperature and wear after fitting actual boot; ingress testing outside body"
+}

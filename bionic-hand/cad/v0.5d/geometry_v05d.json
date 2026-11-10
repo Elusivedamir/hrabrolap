@@ -1,0 +1,174 @@
+{
+  "version": "v0.5d",
+  "parent_commit": "db8b39ef963a7c8ae299f3eb70b27c85b143fa6d",
+  "basis": "available 23-solid archive review; not the missing 24-solid variant",
+  "palm_mm": [
+    122,
+    85
+  ],
+  "digit_lengths_mm": [
+    75,
+    84,
+    78,
+    61
+  ],
+  "thumb_lengths_mm": [
+    33,
+    25
+  ],
+  "wrist_reserved_limit_mm": 50,
+  "solid_count": 25,
+  "mcp_offset_mm": 14.0,
+  "mcp_range_study_deg": [
+    0,
+    20
+  ],
+  "mcp_pin_diameter_mm": 3,
+  "mcp_bore_diameter_mm": 3.2,
+  "clevis_inside_width_mm": 4.4,
+  "proximal_eye_width_mm": 3.3,
+  "eye_side_gap_each_mm": 0.55,
+  "pin_axial_gap_before_head_mm": 0.3,
+  "retainer_status": "geometry envelope only; standard part and spring retention not selected",
+  "manufacturing_status": "single-piece rotor+clevis CAD mock-up; production construction/material unapproved",
+  "actuation": "CMC candidate only; MCP/IP prescribed, flexion actuator absent",
+  "environment": "reserve dust boot access; no installed seal or verified IP",
+  "unverified": [
+    "8 grasps",
+    "loaded 1.5s",
+    "10kg",
+    "FEA",
+    "EMG",
+    "thermal",
+    "physical tests",
+    "IP",
+    "full assembly fastening"
+  ],
+  "rest_parts": {
+    "frame_v04_reference": {
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 57573.7201001666
+    },
+    "servo_MG90S_nominal": {
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 7996.282339297275
+    },
+    "servo_cradle_PETG": {
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 3301.1740469603565
+    },
+    "bearing_bridge_concept": {
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 1814.3434280123863
+    },
+    "pinky_prox": {
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 2386.6516621095557
+    },
+    "pinky_middle": {
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 555.448558284962
+    },
+    "pinky_dist": {
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 822.2011033654369
+    },
+    "ring_prox": {
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 4012.8870949790644
+    },
+    "ring_middle": {
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 1660.8443624119097
+    },
+    "ring_dist": {
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 1116.3264200495778
+    },
+    "middle_prox": {
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 4716.758882089628
+    },
+    "middle_middle": {
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 1997.3141828793664
+    },
+    "middle_dist": {
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 1307.4413172466166
+    },
+    "index_prox": {
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 3823.0628797989175
+    },
+    "index_middle": {
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 1581.6830963001473
+    },
+    "index_dist": {
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 1053.4470764667867
+    },
+    "thumb_prox": {
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 2878.1708844796826
+    },
+    "thumb_dist": {
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 1874.2511497192645
+    },
+    "thumb_rotor": {
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 2339.067905807275
+    },
+    "servo_horn": {
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 241.56757324417597
+    },
+    "link_rod": {
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 575.0706221127632
+    },
+    "link_pin_servo": {
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 56.548667764616276
+    },
+    "link_pin_thumb": {
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 56.54866776461629
+    },
+    "thumb_mcp_pin": {
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 126.93762196462227
+    },
+    "thumb_mcp_retainer_envelope": {
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 7.499355641389281
+    }
+  }
+}
