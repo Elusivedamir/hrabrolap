@@ -1,0 +1,33 @@
+{
+  "version": "v0.6a",
+  "scope": "analytical 10kg target on FOUR fingers; no full-hand FEA or tests",
+  "target_mass_kg": 10,
+  "gravitational_force_N": 98.0665,
+  "thumb_counted": false,
+  "scenarios": [
+    {
+      "factor": 1,
+      "per_finger_equal_N": 24.517,
+      "example_joint_torque_at40mm_Nm": 0.981
+    },
+    {
+      "factor": 2,
+      "per_finger_equal_N": 49.033,
+      "example_joint_torque_at40mm_Nm": 1.961
+    },
+    {
+      "factor": 3,
+      "per_finger_equal_N": 73.55,
+      "example_joint_torque_at40mm_Nm": 2.942
+    }
+  ],
+  "unverified": [
+    "actual uneven load share",
+    "real moment arms",
+    "steel load path",
+    "socket interface",
+    "dynamic FEA",
+    "proof and fatigue tests"
+  ],
+  "status": "REQUIREMENTS_SCREEN_ONLY_10KG_NOT_VERIFIED"
+}
