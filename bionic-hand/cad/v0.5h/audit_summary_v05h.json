@@ -1,0 +1,49 @@
+{
+  "version": "v0.5h",
+  "execution_date": "2026-11-10",
+  "tool": "CadQuery/OCC",
+  "scope": "isolated reinforced MCP, NOT full hand",
+  "model_bodies": 11,
+  "angles_deg": {
+    "start": 0,
+    "end": 60,
+    "step": 1,
+    "count": 61
+  },
+  "body_validity_checks": 671,
+  "checked_nonintentional_pairs": 2196,
+  "exact_BRep_candidates": 362,
+  "overlaps_above_0p02mm3": 0,
+  "intended_contact_pairs_excluded": 19,
+  "plate": {
+    "size_mm": [
+      34,
+      12,
+      2
+    ],
+    "holes_x_mm": [
+      0,
+      7.5,
+      14,
+      23
+    ],
+    "hole_y_mm": 0,
+    "drill_d_mm": 3.3
+  },
+  "critical_gates": {
+    "bolt_heads_outside_old_z12_boot_by_mm": 0.3,
+    "pin_axial_overlap_with_steel_plate_mm": 1.8,
+    "printed_spool_direct_pin_engagement_mm": 0,
+    "axial_retention": "not built",
+    "release": "not built",
+    "spring": "not built",
+    "full_3d_hand": "not tested"
+  },
+  "fem_1d_mpa_at_10_20_50_N": [
+    12.5,
+    25,
+    62.5
+  ],
+  "fem_limit": "uniform 1D beam, no holes/contact/material certification",
+  "status": "SAMPLED_LOCAL_GEOMETRY_PASS_BUT_INTERFACE_REWORK_REQUIRED"
+}
