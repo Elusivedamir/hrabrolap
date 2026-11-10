@@ -3,7 +3,7 @@
 // v0.3 linked 75mm finger remains as supplied. v0.4 upgrades the fixed MCP module with a metal mounting shoe.
 // Use -D 'v04_view="cartridge"' to export v04 cartridge STL.
 // Use v04_view="assembly" and angle=0..80 for four-finger pose.
-include <finger_75mm_carry_v03.scad>
+include <../v0.3/finger_75mm_carry_v03.scad>
 export_part="_suppressed_by_v04_";
 v04_view="assembly";
 angle=80; // edit 0..80 or override using -D
