@@ -1,0 +1,78 @@
+{
+  "version": "v0.5g",
+  "scope": "isolated MCP / not complete hand",
+  "tested_local_date": "2026-11-10",
+  "tested_with": "CadQuery",
+  "moving_range_deg": [
+    0,
+    60
+  ],
+  "angle_step_deg": 1,
+  "body_count": 4,
+  "validity_checks": 244,
+  "selected_pair_checks": 244,
+  "exact_BRep_candidates": 244,
+  "forbidden_overlap_threshold_mm3": 0.02,
+  "forbidden_overlaps_detected": 0,
+  "unit_tests_passed": 7,
+  "unit_tests_total": 7,
+  "body_pairs_tested": [
+    "fork_guide/prox_drum",
+    "fork_guide/retainer_envelope",
+    "prox_drum/retainer_envelope",
+    "prox_drum/pin_mock"
+  ],
+  "excluded_pairs": [
+    "fork_guide/pin_mock",
+    "pin_mock/retainer_envelope"
+  ],
+  "motor_study_assumptions": {
+    "tip_arm_mm": 58,
+    "spool_radius_mm": 3,
+    "efficiency": 0.6
+  },
+  "capstan_mm": {
+    "rim_radius": 5.2,
+    "cable_center_radius": 5.8,
+    "cable_diameter_assumed": 1.2
+  },
+  "stroke_60deg_mm": 6.07375,
+  "servo_rotation_at_3mm_spool_deg": 116,
+  "servo_rpm_for_hypothetical_1p5s": 12.88889,
+  "scenarios": [
+    {
+      "tip_N": 1,
+      "tendon_N": 10,
+      "motor_Nm": 0.05
+    },
+    {
+      "tip_N": 2,
+      "tendon_N": 20,
+      "motor_Nm": 0.1
+    },
+    {
+      "tip_N": 5,
+      "tendon_N": 50,
+      "motor_Nm": 0.25
+    }
+  ],
+  "thin_rib_2N_simple_beam_screen_MPa": 93.75,
+  "thin_rib_5N_simple_beam_screen_MPa": 234.38,
+  "status": "sampled_local_geometry_pass_but_strength_risk_and_no_real_actuation",
+  "not_checked": [
+    "full hand",
+    "continuous motion",
+    "physical tendon in groove and anchoring",
+    "return spring",
+    "emergency release",
+    "IP",
+    "FEA",
+    "actuator fit",
+    "heat",
+    "8 grasps",
+    "1.5 seconds under load",
+    "10kg",
+    "EMG",
+    "wearable safety"
+  ]
+}
