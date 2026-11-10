@@ -1,0 +1,17 @@
+{
+  "revision": "v0.5c protection study 1",
+  "units": "mm",
+  "status": "CONCEPT_ONLY_NOT_MANUFACTURING_DIMENSIONS",
+  "palm_length": 122.0,
+  "palm_outer_width_preliminary": 85.0,
+  "wrist_total_limit": 50.0,
+  "cover_wall_hypothesis": 1.6,
+  "lid_gasket_free_thickness_hypothesis": 1.0,
+  "lid_gasket_closed_gap_hypothesis": 0.75,
+  "lid_sealing_band_hypothesis": 3.5,
+  "sample_outer_size": [40.0, 28.0],
+  "seal_material": "not selected",
+  "IP54": "possible target only; unverified",
+  "shaft_seal": "not selected; needs reserved space and torque test",
+  "cable_entries": "not dimensioned; component selection required"
+}

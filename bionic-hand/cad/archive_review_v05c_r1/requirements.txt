@@ -1,0 +1,10 @@
+# Actual execution environment for revision 1, 2026-11-10.
+cadquery==2.7.0
+numpy==2.3.5
+scipy==1.17.0
+trimesh==4.11.1
+# Rendering only:
+vtk==9.3.1
+Pillow==13.0.0
+matplotlib==3.10.8
+# ffmpeg executable and DejaVuSans fonts are also needed for MP4.

@@ -1,0 +1,211 @@
+#!/usr/bin/env python3
+"""v0.5c powered thumb CMC engineering demonstrator.
+Servo MG90S (180 deg) acts on 1:1 PARALLEL-AXIS FOUR BAR.
+Outputs approximate CAD envelopes and kinematics; dimensions of servo spline, screw tabs,
+bearing fits, and structural attachments must be verified on a purchased servo.
+THIS IS NOT a wearable, tested, medical or load-capable design.
+"""
+from pathlib import Path
+import sys, math, json, tempfile
+import numpy as np
+import cadquery as cq
+import trimesh
+from scipy.spatial.transform import Rotation as Rot
+V05B=Path(__file__).resolve().parent.parent/'v0.5b'
+sys.path.insert(0,str(V05B))
+from thumb_corrected_v05b import R_OPEN, ROT_VEC, SWIVEL_AXIS, THUMB, DIGITS, finger_solid_parts, seg_solid, rigid, frame_v05b
+OUT=Path(__file__).resolve().parent
+PARTS=OUT/'parts';PARTS.mkdir(exist_ok=True)
+A=np.asarray(SWIVEL_AXIS,dtype=float)
+U=np.array([1.,0,0]);U-=np.dot(U,A)*A;U/=np.linalg.norm(U)
+V=np.cross(A,U)
+R=np.column_stack((U,V,A))
+B=np.asarray(THUMB['base'],float)
+# CMC bearing pivot B and remote servo output centre C in SAME plane normal to A.
+# Servo body extends in -A towards the palm; crank/bar linkage is on +A side.
+C=B-31*U+39*V
+RCRANK=14.5
+PIN_D=3.0
+LINK_L=float(np.linalg.norm(C-B))
+Q_MAX=np.linalg.norm(ROT_VEC)*180/math.pi
+
+def rigid(s, rotation, translation):
+    # Preserve analytic surfaces under a rigid move. The legacy transformGeometry
+    # can produce invalid BRep after oblique rotations in OCC/CadQuery 2.7.
+    rv=Rot.from_matrix(np.asarray(rotation,dtype=float)).as_rotvec()
+    angle=float(np.linalg.norm(rv))
+    result=s
+    if angle>1e-12:
+        axis=rv/angle
+        result=result.rotate((0,0,0),tuple(float(x) for x in axis),math.degrees(angle))
+    return result.translate(tuple(float(x) for x in translation))
+
+def axis_cyl(radius,height,p,d=A):
+    return cq.Solid.makeCylinder(float(radius),float(height),cq.Vector(*np.asarray(p,float)),cq.Vector(*np.asarray(d,float)))
+
+def local_box(x1,x2,y1,y2,z1,z2,org):
+    s=cq.Workplane('XY').box(x2-x1,y2-y1,z2-z1).translate(((x1+x2)/2,(y1+y2)/2,(z1+z2)/2)).val()
+    return rigid(s,R,np.asarray(org,float))
+
+def cylinder_between(p,q,r):
+    p=np.asarray(p,float);q=np.asarray(q,float);d=q-p
+    return cq.Solid.makeCylinder(float(r),float(np.linalg.norm(d)),cq.Vector(*p),cq.Vector(*(d/np.linalg.norm(d))))
+
+def capsule_between(p,q,r,thick=2.5,axial=A):
+    # cylinder ends and connecting hull, board-oriented 3D link from endpoints
+    p=np.asarray(p);q=np.asarray(q);axial=np.asarray(axial)
+    mid=(p+q)/2
+    # local bar along world line from p to q; z along axis a
+    e=(q-p)/np.linalg.norm(q-p);w=np.cross(axial,e);w/=np.linalg.norm(w)
+    T=np.column_stack((e,w,axial))
+    b=cq.Workplane('XY').box(np.linalg.norm(q-p),2*r,thick).val()
+    b=rigid(b,T,mid)
+    o=axis_cyl(r,thick,p-axial*thick/2,axial)
+    e2=axis_cyl(r,thick,q-axial*thick/2,axial)
+    return b.fuse(o,e2).clean()
+
+# Nominal servo external envelope from commonly published MG90S 22.8x12.2x28.5mm;
+# NOT a manufacturer CAD model. The actual offset of splined output requires measurement.
+# Local x servo shell offset -4.0mm from CMC motor output axis; fit needs calibration.
+servo_shell=local_box(-15.4,7.4,-6.1,6.1,-30.5,-2.0,C)
+servo_spline=axis_cyl(2.5,3.5,C-2*A)
+servo_body=servo_shell.fuse(servo_spline).clean()
+# Servo body sleeve (printed, not load-bearing) with 0.5mm pocket clearance and open lip.
+servo_sleeve=local_box(-17.8,9.8,-8.0,8.0,-27.3,-20.5,C).cut(local_box(-16.0,8.0,-6.7,6.7,-28.0,-19.0,C)).clean()
+# Additional two side rails, coupling requires actual shell tab measurements.
+for x in [-17.8,7.9]:
+    servo_sleeve=servo_sleeve.fuse(local_box(x,x+1.9,-8.0,8.0,-25.5,-5.0,C)).clean()
+# Removable MG90S cradle: 2 M3 vertical fixing holes at existing central spine.
+# This requires a new structural evaluation of modified chassis before use.
+mount_holes=[(-85.0,0.0),(-52.0,0.0)] # x,z in world coords
+plate=cq.Workplane('XY').box(42.0,2.3,12.0).translate((-69.0,-2.2,0.0)).val()
+# Two side braces are placed OUTSIDE the servo shell.
+for xlocal,xtarget in [(-19.0,-85.0),(12.3,-52.0)]:
+    p0=C-22.0*A+xlocal*U
+    p1=np.array([xtarget,-1.1,0.0])
+    brace=cylinder_between(p0,p1,2.6)
+    servo_sleeve=servo_sleeve.fuse(brace).clean()
+servo_sleeve=servo_sleeve.fuse(plate).clean()
+for x,z in mount_holes:
+    yaxis=np.array([0.,1.,0.])
+    servo_sleeve=servo_sleeve.cut(axis_cyl(1.65,6.0,np.array([x,-4.0,z]),yaxis)).clean()
+# This frame modification is a *separate CAD variant*: two through-holes in the v0.4 central spine.
+frame_with_holes=cq.importers.importStep(str(V05B.parent/"v0.5"/"baseline_v04_chassis.step")).val()
+for x,z in mount_holes:
+    frame_with_holes=frame_with_holes.cut(axis_cyl(1.65,12.0,np.array([x,-11.,z]),np.array([0.,1.,0.]))).clean()
+assert frame_with_holes.isValid()
+# Ring bearing support separate from moving shaft; clearance 0.30mm radial.
+# Mechanical metal bearing + shaft still require shaft retention and stress calculations.
+base_ring1=axis_cyl(8.6,2.7,B-7.0*A).cut(axis_cyl(4.3,2.9,B-7.1*A)).clean()
+base_ring2=axis_cyl(8.6,2.7,B-1.8*A).cut(axis_cyl(4.3,2.9,B-1.9*A)).clean()
+# Fixed bridge between bearing collars and frame: provisional shape, not structural strength verified.
+base_anchor=np.array([-46.0,4.0,35.0])
+anchor_to=np.asarray(B-5.0*A-10.8*V)
+bearing_arm=cylinder_between(base_anchor,np.array([-46.0,4.0,50.0]),2.7).fuse(cylinder_between(np.array([-46.0,4.0,50.0]),anchor_to,2.7)).clean()
+bearing_link=cylinder_between(B-6.1*A-7.6*V,B-0.3*A-7.6*V,1.7)
+# Bolted metal support: 2 holes M3 in a 3mm plate and matching holes in frame.
+# Requires static stress test of frame hole positions; prototype only.
+bearing_face=cq.Workplane('XY').box(12,3.0,11).translate((-46,2.1,35.5)).val()
+bearing_bridge=base_ring1.fuse(base_ring2,bearing_arm,bearing_link,bearing_face).clean()
+for bx in [-49.,-43.]:
+    bh=axis_cyl(1.65,7,np.array([bx,-1,36.0]),np.array([0.,1.,0.]))
+    bearing_bridge=bearing_bridge.cut(bh).clean()
+    fh=axis_cyl(1.65,12,np.array([bx,-9.5,36.0]),np.array([0.,1.,0.]))
+    frame_with_holes=frame_with_holes.cut(fh).clean()
+assert bearing_bridge.isValid() and len(bearing_bridge.Solids())==1
+frame_screw_pad=None
+# Motion-dependent pieces
+
+def thumb_pose(q,ip=.0):
+    q=float(q);ip=float(ip)
+    assert 0<=q<=1 and 0<=ip<=1
+    Q=Rot.from_rotvec(q*ROT_VEC).as_matrix()
+    Rc=Q@R_OPEN
+    thumb_base=B+6.0*A
+    thumbprox=rigid(seg_solid(33,12.5,'prox'),Rc,thumb_base)
+    joint=thumb_base+Rc@np.array([33.,0.,0.])
+    thumbdist=rigid(seg_solid(25,11.5,'dist'),Rc@np.array([[math.cos(math.radians(25*ip)),-math.sin(math.radians(25*ip)),0],[math.sin(math.radians(25*ip)),math.cos(math.radians(25*ip)),0],[0,0,1]]),joint)
+    # Rotor steel sleeve and rocker, on shared axis A
+    shaft=axis_cyl(4.0,12.0,B-10*A)
+    # coupling stub and 9-mm crank toward distal edge: cranks both rotate by q exactly
+    arm=Q@U
+    shoulder=axis_cyl(4.3,4.7,B+1.2*A)
+    thumb_horn=capsule_between(B+5*A,B+5*A+arm*RCRANK,2.6,2.4)
+    rotor=shaft.fuse(shoulder,thumb_horn).clean()
+    # Revision 1: both crank plates need actual pin bores. Original audit omitted pins.
+    thumb_pin_axis=B+arm*RCRANK
+    rotor=rotor.cut(axis_cyl(1.6,9.0,thumb_pin_axis+1.0*A)).clean()
+    # Separate proximal and rotor: physically bolted after design; their overlapping envelopes omitted from 'no collision' assertions.
+    sh=B+6.5*A + arm*RCRANK
+    s0=C+6.5*A+arm*RCRANK
+    # servo output horn, rod and connection ends: true equal-crank parallelogram.
+    sr=axis_cyl(3.5,1.5,C+3*A)
+    servo_horn=capsule_between(C+5*A,C+5*A+arm*RCRANK,2.5,2.4).fuse(sr).clean()
+    servo_horn=servo_horn.cut(axis_cyl(1.6,9.0,C+arm*RCRANK+1.0*A)).clean()
+    # Rod from joint to joint, plate lies 2mm outwards of crank plate; rods connect via 3mm pins.
+    rod=capsule_between(s0+2.2*A,sh+2.2*A,2.8,2.0)
+    rod=rod.cut(axis_cyl(1.6,3,s0+0.8*A)).cut(axis_cyl(1.6,3,sh+0.8*A)).clean()
+    # 8mm temporary pin spans BOTH 2.4mm crank and 2mm rod; retention is unresolved.
+    pins=[axis_cyl(1.5,8,s0-3.5*A),axis_cyl(1.5,8,sh-3.5*A)]
+    return {
+      'thumb_prox':thumbprox,'thumb_dist':thumbdist,'thumb_rotor':rotor,'servo_horn':servo_horn,
+      'link_rod':rod,'link_pin_servo':pins[0],'link_pin_thumb':pins[1]
+    },{
+      'opposition_deg':q*Q_MAX,'servo_output_deg':q*Q_MAX,'ip_deg':ip*25,'link_rod_length_mm':np.linalg.norm(sh-s0),
+      'servo_pivot':C,'thumb_pivot':B,'proximal_joint':joint,
+      'tip':joint + Rc@np.array([[math.cos(math.radians(25*ip)),-math.sin(math.radians(25*ip)),0],[math.sin(math.radians(25*ip)),math.cos(math.radians(25*ip)),0],[0,0,1]])@np.array([25.,0,0])
+    }
+
+# a simple static assembly, collision considered per body; keep mounting plate separate for inspection
+STATIC={'frame_v04_reference':frame_with_holes,'servo_MG90S_nominal':servo_body,'servo_cradle_PETG':servo_sleeve,
+        'bearing_bridge_concept':bearing_bridge}
+
+def all_parts(four,q,ip):
+    out=dict(STATIC)
+    for d in DIGITS:
+        out.update(dict(finger_solid_parts(d,four)[0]))
+    dyn,info=thumb_pose(q,ip);out.update(dyn)
+    return out,info
+
+if __name__=='__main__':
+    out,info=all_parts(0,.0,0)
+    for k,s in out.items():
+        assert s.isValid(),k
+        cq.exporters.export(s,str(PARTS/f'{k}.step'))
+    cq.exporters.export(cq.Compound.makeCompound(list(out.values())),str(OUT/'thumb_motor_v05c_reference.step'))
+    for f,q,ip,name in [(0,0,0,'rest'),(.63,1,1,'pinch'),(1,.5,.4,'power')]:
+        pieces,_=all_parts(f,q,ip)
+        scene=trimesh.Scene()
+        for k,s in pieces.items():
+            with tempfile.NamedTemporaryFile(suffix='.stl') as t:
+                cq.exporters.export(s,t.name,tolerance=.18,angularTolerance=.12)
+                m=trimesh.load(t.name,force='mesh')
+            if k=='frame_v04_reference':color=[55,76,100,255]
+            elif k.startswith('thumb'):color=[242,160,77,255]
+            elif k=='servo_MG90S_nominal':color=[35,39,43,255]
+            elif k=='servo_cradle_PETG':color=[140,155,171,255]
+            elif k.startswith('bearing') or k=='bridge_screw_pad':color=[165,175,187,255]
+            elif k=='servo_horn':color=[221,200,91,255]
+            elif k=='link_rod':color=[59,176,151,255]
+            elif k.startswith('link_pin'):color=[230,225,214,255]
+            elif k.endswith('_prox'):color=[194,210,228,255]
+            else:color=[67,121,185,255]
+            m.visual.face_colors=color
+            scene.add_geometry(m,node_name=k,geom_name=k)
+        scene.export(str(OUT/f'thumb_motor_v05c_{name}.glb'))
+    res={'version':'v0.5c-archive-review-r1','actuator':'MG90S nominal CAD candidate only; actual range, spline and continuous rating unverified',
+         'actuator_envelope_mm':[22.8,12.2,28.5],'comparison_voltage_V':4.8,
+         'actuator_supply_range_status':'unconfirmed; do not infer a 6V rating from the old model',
+         'drive':'one motor for opposition; rigid 1:1 planar parallelogram linkage to oblique CMC shaft',
+         'CMC_axis':A.tolist(),'CMC_deg':Q_MAX,'servo_output_center':C.tolist(),'thumb_pivot':B.tolist(),
+         'crank_radius_mm':RCRANK,'rod_center_distance_mm':LINK_L,'end_through_holes_mm':3.2,
+         'thumb_IP':'prescribed 0..25deg; separate flexion actuator not yet packaged',
+         'limits':['spline and servo flange measurements need real sample; horn hub has an unresolved axial gap',
+                   'frame/servo mounts have no complete fastener path','bridge/rotor not stress analyzed',
+                   'pin bores corrected; axial retention and washers unresolved',
+                   'rotor/proximal overlap is not a designed attachment',
+                   'separate flexion actuator not packaged','no housing, shaft seals or thermal verification',
+                   '10kg unsupported','EMG not measured','no continuous collision check'],
+         'solids':{k:dict(is_valid=s.isValid(),vol_mm3=round(s.Volume(),2),bbox=[[round(a,1) for a in v] for v in [[s.BoundingBox().xmin,s.BoundingBox().ymin,s.BoundingBox().zmin],[s.BoundingBox().xmax,s.BoundingBox().ymax,s.BoundingBox().zmax]]]) for k,s in out.items()}}
+    (OUT/'geometry_and_drive_v05c.json').write_text(json.dumps(res,ensure_ascii=False,indent=2))
+    print('PARTS',len(out),'actuator C',C,'frame B',B,'link',LINK_L,'CMC',Q_MAX,flush=True)

@@ -1,0 +1,13 @@
+{
+  "archive_name": "bionic_hand_v05c_DRIVE_AND_VIDEO.zip",
+  "archive_sha256": "75845a40291e1312a50a613152e68c05d758cc74561972543c56f9870334660e",
+  "github_baseline": "e404e6dcbbfadbde433387952d1fb3defca27fe2",
+  "historical_sources_preserved": true,
+  "revision": "v0.5c-archive-review-r1",
+  "date": "2026-11-10",
+  "binary_artifacts_on_github": "compressed archive-review STEP, one PNG preview, compressed gasket sample; no corrected MP4",
+  "generated_step_sha256": "a3893a3b9b88b177366d04e9affd613a10dbac748481d38005a71292500088c4",
+  "compressed_step_sha256": "c6040859568fde15c8f4b08c0071d81d6c2ebecc400b2799bfca7d99adc422fa",
+  "latest_documented_github_head": "0bb6961e3f079b3620ded64e8644974fef75ff29",
+  "variant": "23-solid archive review, NOT the documented 24-solid fork/MCP revision"
+}

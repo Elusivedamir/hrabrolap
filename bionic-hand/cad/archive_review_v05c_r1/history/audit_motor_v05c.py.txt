@@ -1,0 +1,30 @@
+#!/usr/bin/env python3
+"""Finite snapshots of exact OpenCascade solid intersection; user must not infer continuous collision proof."""
+from build_thumb_motor_v05c import *
+from itertools import product
+from datetime import datetime
+import time
+samples=[('rest',0,0,0),('swing25',.1,.25,0),('swing50',.1,.5,0),('swing75',.1,.75,0),('opposed',.1,1.,0),('pinch',.63,1.,1.),('power',1.,.5,.4)]
+# Exclude intended joints and overlapping legacy frame support. Check all novel components vs nearby fixed/other moving assemblies.
+static_keys=['frame_v04_reference','servo_MG90S_nominal','servo_cradle_PETG','bearing_bridge_concept']
+thumb_moving=['thumb_prox','thumb_dist','thumb_rotor','servo_horn','link_rod']
+checks=[('servo_MG90S_nominal','frame_v04_reference'),('servo_MG90S_nominal','servo_cradle_PETG'),('servo_cradle_PETG','frame_v04_reference'),('bearing_bridge_concept','servo_MG90S_nominal'),('bearing_bridge_concept','thumb_rotor'),('bearing_bridge_concept','thumb_prox'),('bearing_bridge_concept','thumb_dist'),('servo_MG90S_nominal','thumb_prox'),('servo_MG90S_nominal','thumb_dist'),('servo_cradle_PETG','thumb_prox'),('servo_cradle_PETG','thumb_dist'),('link_rod','frame_v04_reference'),('link_rod','bearing_bridge_concept'),('link_rod','thumb_prox'),('link_rod','thumb_dist'),('link_rod','servo_MG90S_nominal'),('link_rod','servo_cradle_PETG'),('servo_horn','frame_v04_reference'),('servo_horn','servo_cradle_PETG'),('thumb_rotor','frame_v04_reference'),('thumb_rotor','servo_MG90S_nominal'),('thumb_prox','servo_horn')]
+for d in DIGITS:
+ for part in ['prox','middle','dist']:
+  n=d['name']+'_'+part
+  for comp in ['servo_MG90S_nominal','servo_cradle_PETG','link_rod','thumb_rotor','bearing_bridge_concept']:
+   checks.append((comp,n))
+violations=[];tested=0; broad=0;tm=time.time()
+for label,f,q,ip in samples:
+ shapes,kin=all_parts(f,q,ip)
+ for x,y in checks:
+  a,b=shapes[x].BoundingBox(),shapes[y].BoundingBox()
+  sep=[min(getattr(a,ax+'max'),getattr(b,ax+'max'))-max(getattr(a,ax+'min'),getattr(b,ax+'min')) for ax in 'xyz']
+  if min(sep)<.01: continue
+  broad+=1
+  vol=shapes[x].intersect(shapes[y]).Volume();tested+=1
+  if vol>.02:violations.append(dict(pose=label,a=x,b=y,volume_mm3=round(vol,3)))
+ print(label,'samples',broad,'violations',len(violations),flush=True)
+report={'script_version':'v0.5c','timestamp':'2026-11-10','poses':samples,'tested_occ_pairs':tested,'candidate_aabb_pairs':broad,'violations':violations,'duration_s':round(time.time()-tm,2),'exclusions':['intentional bolted part overlaps','unmodeled screw heads, wires','no sweeping collision continuous proof','frame attachments geometry only'],'status':'no positive-volume intersections in tested pairs' if not violations else 'FAIL: interference detected'}
+(OUT/'motor_audit_v05c.json').write_text(json.dumps(report,indent=2,ensure_ascii=False))
+print('FINAL',report['status'],len(violations),report['duration_s'])

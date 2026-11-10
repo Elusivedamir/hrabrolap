@@ -1,0 +1,130 @@
+{
+  "version": "v0.5c-archive-review-r1",
+  "status": "COMPONENT_SELECTION_AND_PACKAGING_BLOCKED",
+  "dimensions_mm": {
+    "revision": "v0.5c protection study 1",
+    "units": "mm",
+    "status": "CONCEPT_ONLY_NOT_MANUFACTURING_DIMENSIONS",
+    "palm_length": 122.0,
+    "palm_outer_width_preliminary": 85.0,
+    "wrist_total_limit": 50.0,
+    "cover_wall_hypothesis": 1.6,
+    "lid_gasket_free_thickness_hypothesis": 1.0,
+    "lid_gasket_closed_gap_hypothesis": 0.75,
+    "lid_sealing_band_hypothesis": 3.5,
+    "sample_outer_size": [
+      40.0,
+      28.0
+    ],
+    "seal_material": "not selected",
+    "IP54": "possible target only; unverified",
+    "shaft_seal": "not selected; needs reserved space and torque test",
+    "cable_entries": "not dimensioned; component selection required"
+  },
+  "lid_compression_hypothesis_fraction": 0.25,
+  "inside_width_if_only_sidewalls_mm": 81.8,
+  "inside_width_after_sealing_bands_mm": 78.0,
+  "CMC_shaft_radius_mm": 4.0,
+  "CMC_bore_radius_mm": 4.3,
+  "CMC_radial_gap_mm": 0.3,
+  "CMC_ring2_end_to_shoulder_gap_mm": 0.2999999999999998,
+  "CMC_between_rings_axial_space_mm": 2.5,
+  "fixed_components_bbox_mm": {
+    "frame_v04_reference": [
+      [
+        -122.0,
+        -15.0,
+        -40.0
+      ],
+      [
+        -7.0,
+        11.0,
+        40.0
+      ]
+    ],
+    "servo_MG90S_nominal": [
+      [
+        -81.35761178494955,
+        -0.4169859997383855,
+        -12.488382080108702
+      ],
+      [
+        -58.059529890533746,
+        32.147282923128344,
+        11.75187402667972
+      ]
+    ],
+    "servo_cradle_PETG": [
+      [
+        -90.0,
+        -3.35,
+        -12.701898144372953
+      ],
+      [
+        -48.0,
+        29.10415401546141,
+        12.058397188769064
+      ]
+    ],
+    "bearing_bridge_concept": [
+      [
+        -52.0,
+        -0.12609716567265322,
+        30.0
+      ],
+      [
+        -26.278128746086697,
+        16.798773921184196,
+        52.69371322882943
+      ]
+    ]
+  },
+  "kinematic_calculation": {
+    "samples": 361,
+    "opposition_range_deg": [
+      0,
+      89.05598360769228
+    ],
+    "ratio": 1.0,
+    "link_length_mm": 49.81967482832461,
+    "max_link_closure_error_mm": 7.105427357601002e-15,
+    "min_transmission_sine": 0.6350570331933844,
+    "min_acute_transmission_angle_deg": 39.424214640650725,
+    "nominal_stall_torque_4V8_Nm": 0.1765197,
+    "stall_only_link_force_upper_N": 19.169573404418948,
+    "stall_only_force_at_58mm_lever_N": 3.0434431034482756,
+    "datasheet_no_load_travel_time_s": 0.14842663934615383,
+    "requested_duration_s": 1.5,
+    "limits": [
+      "ideal rigid 1:1 parallelogram, one assembly branch only",
+      "no stall rating used as continuous rating",
+      "pin fit, backlash, bearing/seal friction, impact and load case not verified",
+      "58mm is an illustrative lever, not calculated actual contact force",
+      "motor voltage, actual angular range and hardware torque-speed curve unverified"
+    ]
+  },
+  "blockers": [
+    "no complete sealed hand housing or integrated gland",
+    "CMC bridge outside provisional palm width; radial thumb-root envelope unresolved",
+    "separate thumb flexion actuator not packaged",
+    "rotor/proximal and servo spline/horn attachments unresolved",
+    "pins have no designed axial retention or washers",
+    "emergency release, PCB, battery, connectors and cable routes not packaged",
+    "no thermal, ingress, strength, EMG or body-use validation"
+  ],
+  "sample_validity": {
+    "land_sample": {
+      "valid": true,
+      "solid_count": 1
+    },
+    "compressed_gasket_sample": {
+      "valid": true,
+      "solid_count": 1
+    },
+    "lid_sample": {
+      "valid": true,
+      "solid_count": 1
+    }
+  },
+  "IP_status": "UNVERIFIED; possible IP54 target only"
+}

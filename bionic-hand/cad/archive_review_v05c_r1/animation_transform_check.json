@@ -1,0 +1,9 @@
+{
+  "version": "v0.5c-archive-review-r1",
+  "poses": 7,
+  "landmark_comparisons": 56,
+  "maximum_error_mm": 1.5888218580782548e-14,
+  "tolerance_mm": 1e-07,
+  "status": "PASS",
+  "scope": "rendered rigid transforms vs CAD kinematic landmarks, not hardware"
+}

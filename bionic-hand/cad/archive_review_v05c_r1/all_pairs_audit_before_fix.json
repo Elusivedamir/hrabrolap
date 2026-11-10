@@ -1,0 +1,836 @@
+{
+  "version": "v0.5c audit revision 1",
+  "cadquery": "2.7.0",
+  "python": "3.12.14",
+  "samples": [
+    [
+      "rest",
+      0,
+      0,
+      0
+    ],
+    [
+      "swing25",
+      0.1,
+      0.25,
+      0
+    ],
+    [
+      "swing50",
+      0.1,
+      0.5,
+      0
+    ],
+    [
+      "swing75",
+      0.1,
+      0.75,
+      0
+    ],
+    [
+      "opposed",
+      0.1,
+      1,
+      0
+    ],
+    [
+      "pinch",
+      0.63,
+      1,
+      1
+    ],
+    [
+      "power",
+      1,
+      0.5,
+      0.4
+    ]
+  ],
+  "volume_threshold_mm3": 0.02,
+  "pair_checks": 1771,
+  "brep_intersections": 210,
+  "overlaps": [
+    {
+      "pose": "rest",
+      "a": "servo_horn",
+      "b": "link_pin_servo",
+      "volume_mm3": 6.36173
+    },
+    {
+      "pose": "swing25",
+      "a": "thumb_rotor",
+      "b": "link_pin_thumb",
+      "volume_mm3": 6.36173
+    },
+    {
+      "pose": "swing25",
+      "a": "servo_horn",
+      "b": "link_pin_servo",
+      "volume_mm3": 6.36173
+    },
+    {
+      "pose": "swing50",
+      "a": "thumb_rotor",
+      "b": "link_pin_thumb",
+      "volume_mm3": 6.36173
+    },
+    {
+      "pose": "swing50",
+      "a": "servo_horn",
+      "b": "link_pin_servo",
+      "volume_mm3": 6.36173
+    },
+    {
+      "pose": "swing75",
+      "a": "thumb_rotor",
+      "b": "link_pin_thumb",
+      "volume_mm3": 6.36173
+    },
+    {
+      "pose": "swing75",
+      "a": "servo_horn",
+      "b": "link_pin_servo",
+      "volume_mm3": 6.36173
+    },
+    {
+      "pose": "opposed",
+      "a": "thumb_rotor",
+      "b": "link_pin_thumb",
+      "volume_mm3": 6.36173
+    },
+    {
+      "pose": "opposed",
+      "a": "servo_horn",
+      "b": "link_pin_servo",
+      "volume_mm3": 6.36173
+    },
+    {
+      "pose": "pinch",
+      "a": "thumb_rotor",
+      "b": "link_pin_thumb",
+      "volume_mm3": 6.36173
+    },
+    {
+      "pose": "pinch",
+      "a": "servo_horn",
+      "b": "link_pin_servo",
+      "volume_mm3": 6.36173
+    },
+    {
+      "pose": "power",
+      "a": "thumb_rotor",
+      "b": "link_pin_thumb",
+      "volume_mm3": 6.36173
+    },
+    {
+      "pose": "power",
+      "a": "servo_horn",
+      "b": "link_pin_servo",
+      "volume_mm3": 6.36173
+    }
+  ],
+  "interface_overlaps": [
+    {
+      "pose": "rest",
+      "a": "thumb_prox",
+      "b": "thumb_rotor",
+      "volume_mm3": 65.28688,
+      "reason": "unresolved rotor-to-proximal attachment"
+    },
+    {
+      "pose": "swing25",
+      "a": "thumb_prox",
+      "b": "thumb_rotor",
+      "volume_mm3": 71.70457,
+      "reason": "unresolved rotor-to-proximal attachment"
+    },
+    {
+      "pose": "swing50",
+      "a": "thumb_prox",
+      "b": "thumb_rotor",
+      "volume_mm3": 71.70457,
+      "reason": "unresolved rotor-to-proximal attachment"
+    },
+    {
+      "pose": "swing75",
+      "a": "thumb_prox",
+      "b": "thumb_rotor",
+      "volume_mm3": 71.70457,
+      "reason": "unresolved rotor-to-proximal attachment"
+    },
+    {
+      "pose": "opposed",
+      "a": "thumb_prox",
+      "b": "thumb_rotor",
+      "volume_mm3": 71.70457,
+      "reason": "unresolved rotor-to-proximal attachment"
+    },
+    {
+      "pose": "pinch",
+      "a": "thumb_prox",
+      "b": "thumb_rotor",
+      "volume_mm3": 71.70457,
+      "reason": "unresolved rotor-to-proximal attachment"
+    },
+    {
+      "pose": "power",
+      "a": "thumb_prox",
+      "b": "thumb_rotor",
+      "volume_mm3": 71.70457,
+      "reason": "unresolved rotor-to-proximal attachment"
+    }
+  ],
+  "validity": {
+    "rest:frame_v04_reference": {
+      "valid": true,
+      "solids": 1
+    },
+    "rest:servo_MG90S_nominal": {
+      "valid": true,
+      "solids": 1
+    },
+    "rest:servo_cradle_PETG": {
+      "valid": true,
+      "solids": 1
+    },
+    "rest:bearing_bridge_concept": {
+      "valid": true,
+      "solids": 1
+    },
+    "rest:pinky_prox": {
+      "valid": true,
+      "solids": 1
+    },
+    "rest:pinky_middle": {
+      "valid": true,
+      "solids": 1
+    },
+    "rest:pinky_dist": {
+      "valid": true,
+      "solids": 1
+    },
+    "rest:ring_prox": {
+      "valid": true,
+      "solids": 1
+    },
+    "rest:ring_middle": {
+      "valid": true,
+      "solids": 1
+    },
+    "rest:ring_dist": {
+      "valid": true,
+      "solids": 1
+    },
+    "rest:middle_prox": {
+      "valid": true,
+      "solids": 1
+    },
+    "rest:middle_middle": {
+      "valid": true,
+      "solids": 1
+    },
+    "rest:middle_dist": {
+      "valid": true,
+      "solids": 1
+    },
+    "rest:index_prox": {
+      "valid": true,
+      "solids": 1
+    },
+    "rest:index_middle": {
+      "valid": true,
+      "solids": 1
+    },
+    "rest:index_dist": {
+      "valid": true,
+      "solids": 1
+    },
+    "rest:thumb_prox": {
+      "valid": true,
+      "solids": 1
+    },
+    "rest:thumb_dist": {
+      "valid": true,
+      "solids": 1
+    },
+    "rest:thumb_rotor": {
+      "valid": true,
+      "solids": 1
+    },
+    "rest:servo_horn": {
+      "valid": true,
+      "solids": 1
+    },
+    "rest:link_rod": {
+      "valid": true,
+      "solids": 1
+    },
+    "rest:link_pin_servo": {
+      "valid": true,
+      "solids": 1
+    },
+    "rest:link_pin_thumb": {
+      "valid": true,
+      "solids": 1
+    },
+    "swing25:frame_v04_reference": {
+      "valid": true,
+      "solids": 1
+    },
+    "swing25:servo_MG90S_nominal": {
+      "valid": true,
+      "solids": 1
+    },
+    "swing25:servo_cradle_PETG": {
+      "valid": true,
+      "solids": 1
+    },
+    "swing25:bearing_bridge_concept": {
+      "valid": true,
+      "solids": 1
+    },
+    "swing25:pinky_prox": {
+      "valid": true,
+      "solids": 1
+    },
+    "swing25:pinky_middle": {
+      "valid": true,
+      "solids": 1
+    },
+    "swing25:pinky_dist": {
+      "valid": true,
+      "solids": 1
+    },
+    "swing25:ring_prox": {
+      "valid": true,
+      "solids": 1
+    },
+    "swing25:ring_middle": {
+      "valid": true,
+      "solids": 1
+    },
+    "swing25:ring_dist": {
+      "valid": true,
+      "solids": 1
+    },
+    "swing25:middle_prox": {
+      "valid": true,
+      "solids": 1
+    },
+    "swing25:middle_middle": {
+      "valid": true,
+      "solids": 1
+    },
+    "swing25:middle_dist": {
+      "valid": true,
+      "solids": 1
+    },
+    "swing25:index_prox": {
+      "valid": true,
+      "solids": 1
+    },
+    "swing25:index_middle": {
+      "valid": true,
+      "solids": 1
+    },
+    "swing25:index_dist": {
+      "valid": true,
+      "solids": 1
+    },
+    "swing25:thumb_prox": {
+      "valid": false,
+      "solids": 1
+    },
+    "swing25:thumb_dist": {
+      "valid": true,
+      "solids": 1
+    },
+    "swing25:thumb_rotor": {
+      "valid": true,
+      "solids": 1
+    },
+    "swing25:servo_horn": {
+      "valid": true,
+      "solids": 1
+    },
+    "swing25:link_rod": {
+      "valid": true,
+      "solids": 1
+    },
+    "swing25:link_pin_servo": {
+      "valid": true,
+      "solids": 1
+    },
+    "swing25:link_pin_thumb": {
+      "valid": true,
+      "solids": 1
+    },
+    "swing50:frame_v04_reference": {
+      "valid": true,
+      "solids": 1
+    },
+    "swing50:servo_MG90S_nominal": {
+      "valid": true,
+      "solids": 1
+    },
+    "swing50:servo_cradle_PETG": {
+      "valid": true,
+      "solids": 1
+    },
+    "swing50:bearing_bridge_concept": {
+      "valid": true,
+      "solids": 1
+    },
+    "swing50:pinky_prox": {
+      "valid": true,
+      "solids": 1
+    },
+    "swing50:pinky_middle": {
+      "valid": true,
+      "solids": 1
+    },
+    "swing50:pinky_dist": {
+      "valid": true,
+      "solids": 1
+    },
+    "swing50:ring_prox": {
+      "valid": true,
+      "solids": 1
+    },
+    "swing50:ring_middle": {
+      "valid": true,
+      "solids": 1
+    },
+    "swing50:ring_dist": {
+      "valid": true,
+      "solids": 1
+    },
+    "swing50:middle_prox": {
+      "valid": true,
+      "solids": 1
+    },
+    "swing50:middle_middle": {
+      "valid": true,
+      "solids": 1
+    },
+    "swing50:middle_dist": {
+      "valid": true,
+      "solids": 1
+    },
+    "swing50:index_prox": {
+      "valid": true,
+      "solids": 1
+    },
+    "swing50:index_middle": {
+      "valid": true,
+      "solids": 1
+    },
+    "swing50:index_dist": {
+      "valid": true,
+      "solids": 1
+    },
+    "swing50:thumb_prox": {
+      "valid": false,
+      "solids": 1
+    },
+    "swing50:thumb_dist": {
+      "valid": true,
+      "solids": 1
+    },
+    "swing50:thumb_rotor": {
+      "valid": true,
+      "solids": 1
+    },
+    "swing50:servo_horn": {
+      "valid": true,
+      "solids": 1
+    },
+    "swing50:link_rod": {
+      "valid": true,
+      "solids": 1
+    },
+    "swing50:link_pin_servo": {
+      "valid": true,
+      "solids": 1
+    },
+    "swing50:link_pin_thumb": {
+      "valid": true,
+      "solids": 1
+    },
+    "swing75:frame_v04_reference": {
+      "valid": true,
+      "solids": 1
+    },
+    "swing75:servo_MG90S_nominal": {
+      "valid": true,
+      "solids": 1
+    },
+    "swing75:servo_cradle_PETG": {
+      "valid": true,
+      "solids": 1
+    },
+    "swing75:bearing_bridge_concept": {
+      "valid": true,
+      "solids": 1
+    },
+    "swing75:pinky_prox": {
+      "valid": true,
+      "solids": 1
+    },
+    "swing75:pinky_middle": {
+      "valid": true,
+      "solids": 1
+    },
+    "swing75:pinky_dist": {
+      "valid": true,
+      "solids": 1
+    },
+    "swing75:ring_prox": {
+      "valid": true,
+      "solids": 1
+    },
+    "swing75:ring_middle": {
+      "valid": true,
+      "solids": 1
+    },
+    "swing75:ring_dist": {
+      "valid": true,
+      "solids": 1
+    },
+    "swing75:middle_prox": {
+      "valid": true,
+      "solids": 1
+    },
+    "swing75:middle_middle": {
+      "valid": true,
+      "solids": 1
+    },
+    "swing75:middle_dist": {
+      "valid": true,
+      "solids": 1
+    },
+    "swing75:index_prox": {
+      "valid": true,
+      "solids": 1
+    },
+    "swing75:index_middle": {
+      "valid": true,
+      "solids": 1
+    },
+    "swing75:index_dist": {
+      "valid": true,
+      "solids": 1
+    },
+    "swing75:thumb_prox": {
+      "valid": false,
+      "solids": 1
+    },
+    "swing75:thumb_dist": {
+      "valid": true,
+      "solids": 1
+    },
+    "swing75:thumb_rotor": {
+      "valid": true,
+      "solids": 1
+    },
+    "swing75:servo_horn": {
+      "valid": true,
+      "solids": 1
+    },
+    "swing75:link_rod": {
+      "valid": true,
+      "solids": 1
+    },
+    "swing75:link_pin_servo": {
+      "valid": true,
+      "solids": 1
+    },
+    "swing75:link_pin_thumb": {
+      "valid": true,
+      "solids": 1
+    },
+    "opposed:frame_v04_reference": {
+      "valid": true,
+      "solids": 1
+    },
+    "opposed:servo_MG90S_nominal": {
+      "valid": true,
+      "solids": 1
+    },
+    "opposed:servo_cradle_PETG": {
+      "valid": true,
+      "solids": 1
+    },
+    "opposed:bearing_bridge_concept": {
+      "valid": true,
+      "solids": 1
+    },
+    "opposed:pinky_prox": {
+      "valid": true,
+      "solids": 1
+    },
+    "opposed:pinky_middle": {
+      "valid": true,
+      "solids": 1
+    },
+    "opposed:pinky_dist": {
+      "valid": true,
+      "solids": 1
+    },
+    "opposed:ring_prox": {
+      "valid": true,
+      "solids": 1
+    },
+    "opposed:ring_middle": {
+      "valid": true,
+      "solids": 1
+    },
+    "opposed:ring_dist": {
+      "valid": true,
+      "solids": 1
+    },
+    "opposed:middle_prox": {
+      "valid": true,
+      "solids": 1
+    },
+    "opposed:middle_middle": {
+      "valid": true,
+      "solids": 1
+    },
+    "opposed:middle_dist": {
+      "valid": true,
+      "solids": 1
+    },
+    "opposed:index_prox": {
+      "valid": true,
+      "solids": 1
+    },
+    "opposed:index_middle": {
+      "valid": true,
+      "solids": 1
+    },
+    "opposed:index_dist": {
+      "valid": true,
+      "solids": 1
+    },
+    "opposed:thumb_prox": {
+      "valid": false,
+      "solids": 1
+    },
+    "opposed:thumb_dist": {
+      "valid": true,
+      "solids": 1
+    },
+    "opposed:thumb_rotor": {
+      "valid": true,
+      "solids": 1
+    },
+    "opposed:servo_horn": {
+      "valid": true,
+      "solids": 1
+    },
+    "opposed:link_rod": {
+      "valid": true,
+      "solids": 1
+    },
+    "opposed:link_pin_servo": {
+      "valid": true,
+      "solids": 1
+    },
+    "opposed:link_pin_thumb": {
+      "valid": true,
+      "solids": 1
+    },
+    "pinch:frame_v04_reference": {
+      "valid": true,
+      "solids": 1
+    },
+    "pinch:servo_MG90S_nominal": {
+      "valid": true,
+      "solids": 1
+    },
+    "pinch:servo_cradle_PETG": {
+      "valid": true,
+      "solids": 1
+    },
+    "pinch:bearing_bridge_concept": {
+      "valid": true,
+      "solids": 1
+    },
+    "pinch:pinky_prox": {
+      "valid": true,
+      "solids": 1
+    },
+    "pinch:pinky_middle": {
+      "valid": true,
+      "solids": 1
+    },
+    "pinch:pinky_dist": {
+      "valid": true,
+      "solids": 1
+    },
+    "pinch:ring_prox": {
+      "valid": true,
+      "solids": 1
+    },
+    "pinch:ring_middle": {
+      "valid": true,
+      "solids": 1
+    },
+    "pinch:ring_dist": {
+      "valid": true,
+      "solids": 1
+    },
+    "pinch:middle_prox": {
+      "valid": true,
+      "solids": 1
+    },
+    "pinch:middle_middle": {
+      "valid": true,
+      "solids": 1
+    },
+    "pinch:middle_dist": {
+      "valid": true,
+      "solids": 1
+    },
+    "pinch:index_prox": {
+      "valid": true,
+      "solids": 1
+    },
+    "pinch:index_middle": {
+      "valid": true,
+      "solids": 1
+    },
+    "pinch:index_dist": {
+      "valid": true,
+      "solids": 1
+    },
+    "pinch:thumb_prox": {
+      "valid": false,
+      "solids": 1
+    },
+    "pinch:thumb_dist": {
+      "valid": true,
+      "solids": 1
+    },
+    "pinch:thumb_rotor": {
+      "valid": true,
+      "solids": 1
+    },
+    "pinch:servo_horn": {
+      "valid": true,
+      "solids": 1
+    },
+    "pinch:link_rod": {
+      "valid": true,
+      "solids": 1
+    },
+    "pinch:link_pin_servo": {
+      "valid": true,
+      "solids": 1
+    },
+    "pinch:link_pin_thumb": {
+      "valid": true,
+      "solids": 1
+    },
+    "power:frame_v04_reference": {
+      "valid": true,
+      "solids": 1
+    },
+    "power:servo_MG90S_nominal": {
+      "valid": true,
+      "solids": 1
+    },
+    "power:servo_cradle_PETG": {
+      "valid": true,
+      "solids": 1
+    },
+    "power:bearing_bridge_concept": {
+      "valid": true,
+      "solids": 1
+    },
+    "power:pinky_prox": {
+      "valid": true,
+      "solids": 1
+    },
+    "power:pinky_middle": {
+      "valid": true,
+      "solids": 1
+    },
+    "power:pinky_dist": {
+      "valid": true,
+      "solids": 1
+    },
+    "power:ring_prox": {
+      "valid": true,
+      "solids": 1
+    },
+    "power:ring_middle": {
+      "valid": true,
+      "solids": 1
+    },
+    "power:ring_dist": {
+      "valid": true,
+      "solids": 1
+    },
+    "power:middle_prox": {
+      "valid": true,
+      "solids": 1
+    },
+    "power:middle_middle": {
+      "valid": true,
+      "solids": 1
+    },
+    "power:middle_dist": {
+      "valid": true,
+      "solids": 1
+    },
+    "power:index_prox": {
+      "valid": true,
+      "solids": 1
+    },
+    "power:index_middle": {
+      "valid": true,
+      "solids": 1
+    },
+    "power:index_dist": {
+      "valid": true,
+      "solids": 1
+    },
+    "power:thumb_prox": {
+      "valid": false,
+      "solids": 1
+    },
+    "power:thumb_dist": {
+      "valid": true,
+      "solids": 1
+    },
+    "power:thumb_rotor": {
+      "valid": true,
+      "solids": 1
+    },
+    "power:servo_horn": {
+      "valid": true,
+      "solids": 1
+    },
+    "power:link_rod": {
+      "valid": true,
+      "solids": 1
+    },
+    "power:link_pin_servo": {
+      "valid": true,
+      "solids": 1
+    },
+    "power:link_pin_thumb": {
+      "valid": true,
+      "solids": 1
+    }
+  },
+  "limits": [
+    "finite snapshots; no continuous sweep",
+    "no real spline, screw heads, wires, flexion motor, seals or socket",
+    "zero volume does not prove clearance or assembled connection"
+  ],
+  "duration_s": 51.74,
+  "status": "FAIL"
+}

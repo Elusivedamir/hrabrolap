@@ -1,0 +1,59 @@
+{
+  "script_version": "v0.5c",
+  "timestamp": "2026-11-10",
+  "poses": [
+    [
+      "rest",
+      0,
+      0,
+      0
+    ],
+    [
+      "swing25",
+      0.1,
+      0.25,
+      0
+    ],
+    [
+      "swing50",
+      0.1,
+      0.5,
+      0
+    ],
+    [
+      "swing75",
+      0.1,
+      0.75,
+      0
+    ],
+    [
+      "opposed",
+      0.1,
+      1.0,
+      0
+    ],
+    [
+      "pinch",
+      0.63,
+      1.0,
+      1.0
+    ],
+    [
+      "power",
+      1.0,
+      0.5,
+      0.4
+    ]
+  ],
+  "tested_occ_pairs": 64,
+  "candidate_aabb_pairs": 64,
+  "violations": [],
+  "duration_s": 16.62,
+  "exclusions": [
+    "intentional bolted part overlaps",
+    "unmodeled screw heads, wires",
+    "no sweeping collision continuous proof",
+    "frame attachments geometry only"
+  ],
+  "status": "no positive-volume intersections in tested pairs"
+}
