@@ -1,0 +1,21 @@
+{
+  "version": "v0.5i",
+  "scope": "64 straight-envelope extension spring route screening on isolated MCP",
+  "model_diameter_mm": 2,
+  "excluded_end_length_each_mm": 3,
+  "analytic_extension_samples_per_candidate": 61,
+  "collision_checked_angles_deg": [
+    0,
+    10,
+    20,
+    30,
+    40,
+    50,
+    60
+  ],
+  "candidates_monotonic": 64,
+  "inside_old_z_keepout_and_no_collision": 0,
+  "outside_old_z_keepout_and_no_collision": 16,
+  "inside_old_z_keepout_with_collisions": 48,
+  "status": "NO_APPROVED_ROUTE; no spring hooks, stiffness, disconnect or full shell"
+}
