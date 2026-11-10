@@ -1,0 +1,4 @@
+# Local version test on 2026-11-10; use a clean venv
+cadquery==2.8.0
+numpy==2.3.5
+matplotlib==3.10.8
