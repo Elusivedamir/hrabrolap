@@ -1,0 +1,31 @@
+{
+  "version": "v0.5j",
+  "scope": "solid annular envelope only, no real spring/legs",
+  "coil_geometry_mm": {
+    "outside_diameter": 6.6,
+    "inside_diameter": 3.7,
+    "axial_length": 2.3,
+    "z_bounds": [
+      -10.8,
+      -8.5
+    ]
+  },
+  "longer_pivot_mm": {
+    "diameter": 3,
+    "shaft_z_bounds": [
+      -11.5,
+      8.8
+    ],
+    "head_z_bounds": [
+      -12.6,
+      -11.5
+    ]
+  },
+  "poses": 61,
+  "body_checks": 732,
+  "coil_other_body_pair_checks": 610,
+  "coil_other_collision_count": 0,
+  "old_boot_z_min_mm": -10,
+  "head_below_old_boot_by_mm": 2.6,
+  "status": "LOCAL_COIL_ENVELOPE_PASS_ONLY; no legs, return torque, retention or IP"
+}
