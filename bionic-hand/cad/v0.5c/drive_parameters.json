@@ -1,0 +1,72 @@
+{
+  "version": "v0.5c",
+  "date": "2026-11-10",
+  "status": "CAD concept only; not wearable",
+  "drive": "MG90S 180 degree metal gear micro servo",
+  "voltage_v": [
+    4.8,
+    6
+  ],
+  "manufacturer_envelope_mm": [
+    22.8,
+    12.2,
+    28.5
+  ],
+  "motor_pivot_xyz_mm": [
+    -65.99519809,
+    29.65618623,
+    7.22131712
+  ],
+  "thumb_cmc_pivot_xyz_mm": [
+    -35,
+    12,
+    42
+  ],
+  "cmc_axis_xyz": [
+    -0.01760047,
+    0.88511706,
+    0.46503549
+  ],
+  "opposition_degrees": 89.055984,
+  "crank_radius_mm": 14.5,
+  "link_pin_to_pin_mm": 49.819675,
+  "crank_transmission": "equal-crank parallel-axis four-bar, 1:1",
+  "cmc_rotor_steel_diameter_mm": 8,
+  "nominal_bearing_opening_mm": 8.6,
+  "warning": "ring size is only geometry placeholder, NOT a validated shaft/bushing fit",
+  "servo_mount_holes": {
+    "x_mm": [
+      -85,
+      -52
+    ],
+    "z_mm": 0,
+    "diameter_mm": 3.3
+  },
+  "cmc_mount_holes": {
+    "x_mm": [
+      -49,
+      -43
+    ],
+    "z_mm": 36,
+    "diameter_mm": 3.3
+  },
+  "digit_joint": "MCP pinned 3 mm bearing; thumb flex drive absent",
+  "verification": {
+    "valid_cad_solids": 24,
+    "discrete_poses": 7,
+    "exact_occ_checked_pairs": 83,
+    "penetrations": 0,
+    "complete_sweep": false,
+    "fea": false,
+    "physical_load_tests": false,
+    "emg": false
+  },
+  "sources": [
+    "https://roboshop.spb.ru/mechanics/servoprivody/mg90s",
+    "https://www.rc-russia.ru/products/mg90s"
+  ],
+  "local_archives": [
+    "bionic_hand_v05c_PROJECT.zip",
+    "bionic_hand_v05c_VIDEO.zip"
+  ]
+}
