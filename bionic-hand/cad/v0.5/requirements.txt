@@ -1,0 +1,9 @@
+# CAD v0.5 generation environment
+# Tested in the model's Python 3.13 container on 2026-11-10.
+cadquery==2.8.0
+trimesh==4.11.1
+numpy==2.3.5
+# Optional for rendering animation (full animation script currently local):
+# vtk==9.6.2
+# Pillow==12.3.0
+# ffmpeg executable
