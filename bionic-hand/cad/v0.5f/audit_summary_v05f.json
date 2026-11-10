@@ -1,0 +1,76 @@
+{
+  "version": "v0.5f",
+  "date": "2026-11-10",
+  "generator": "build_simple_mcp_v05f.py",
+  "tool": "CadQuery / OCC",
+  "scope": "isolated local MCP five-solid mock only",
+  "steps": 21,
+  "theta_deg": [
+    0,
+    20
+  ],
+  "selected_y_mm": 3,
+  "selected_z_mm": 9.5,
+  "old_local_boot_z_max_mm": 10,
+  "proposed_local_boot_z_max_mm": 12,
+  "local_boot_expansion_status": "proposed; not validated with full hand external 85mm envelope",
+  "checks_per_pose": {
+    "solid_validity": 5,
+    "selected_nonintentional_overlap_pairs": 5
+  },
+  "summary": [
+    {
+      "y_mm": 2.5,
+      "invalid": 0,
+      "collision_poses": 0,
+      "boot_fail_poses": 0,
+      "stroke_mm": 1.233
+    },
+    {
+      "y_mm": 3,
+      "invalid": 0,
+      "collision_poses": 0,
+      "boot_fail_poses": 0,
+      "stroke_mm": 1.407
+    },
+    {
+      "y_mm": 3.5,
+      "invalid": 0,
+      "collision_poses": 0,
+      "boot_fail_poses": 3,
+      "stroke_mm": 1.58
+    },
+    {
+      "y_mm": 4,
+      "invalid": 0,
+      "collision_poses": 0,
+      "boot_fail_poses": 6,
+      "stroke_mm": 1.754
+    },
+    {
+      "y_mm": 7,
+      "invalid": 21,
+      "collision_poses": 0,
+      "boot_fail_poses": 21,
+      "stroke_mm": 2.796
+    }
+  ],
+  "computed_motor_torque_hypothesis": {
+    "tip_force_N": 0.5,
+    "tip_arm_mm": 58,
+    "drive_arm_mm": 3,
+    "spool_radius_mm": 3,
+    "efficiency": 0.6,
+    "required_Nm": 0.0483
+  },
+  "status": "local_geom_accepted_for_unloaded_demo_only",
+  "limitations": [
+    "Not the full v0.5d/36-solid CAD",
+    "No continuously verified motion",
+    "No cable attachment geometry or real Bowden sheath",
+    "No CMC transfer",
+    "No return spring",
+    "No full IP boot",
+    "No FEA, fatigue, strength, EMG, force or physical tests"
+  ]
+}
