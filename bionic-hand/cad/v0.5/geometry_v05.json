@@ -1,0 +1,132 @@
+{
+  "revision": "v0.5-anatomical-layout",
+  "date": "2026-11-10",
+  "units": "mm",
+  "status": "CAD concept, non-wearable; not structurally verified",
+  "reference_frame": "v0.4 STEP frame with provisional thumb standoff",
+  "coordinate_system": "x=distal, y=palmar flexion direction, z=width; positive z on index/thumb side",
+  "palm_envelope": {
+    "length": 122,
+    "width_preliminary": 85
+  },
+  "wrist_space_reserved": 50,
+  "digits": [
+    {
+      "name": "pinky",
+      "length": 61,
+      "segments": [
+        30.5,
+        15.25,
+        15.25
+      ],
+      "mcp": [
+        -10,
+        0,
+        -30.75
+      ],
+      "width": 11.5
+    },
+    {
+      "name": "ring",
+      "length": 78,
+      "segments": [
+        39,
+        22,
+        17
+      ],
+      "mcp": [
+        -3,
+        0,
+        -10.25
+      ],
+      "width": 14
+    },
+    {
+      "name": "middle",
+      "length": 84,
+      "segments": [
+        42,
+        23.7,
+        18.3
+      ],
+      "mcp": [
+        0,
+        0,
+        10.25
+      ],
+      "width": 15
+    },
+    {
+      "name": "index",
+      "length": 75,
+      "segments": [
+        37.5,
+        21.2,
+        16.3
+      ],
+      "mcp": [
+        -6,
+        0,
+        30.75
+      ],
+      "width": 14
+    }
+  ],
+  "thumb": {
+    "estimated_length": 58,
+    "segments": [
+      33,
+      25
+    ],
+    "base": [
+      -53,
+      11,
+      34.5
+    ],
+    "yaw_open_deg": -32,
+    "yaw_normal_closed_deg": -20,
+    "yaw_opposition_deg": 30,
+    "engineering_status": "kinematic hypothesis only"
+  },
+  "declared_joint_angles_at_fully_closed": {
+    "mcp": 80,
+    "pip_relative": 77.4,
+    "dip_relative": 59.7
+  },
+  "linkage_status": "prescribed motion, no designed actuator or valid linked four-bar kinematics for revised lengths",
+  "collision_verification": {
+    "tool": "CadQuery / OCC exact 3D BRep intersection",
+    "sampled_standard_closure": [
+      0,
+      0.25,
+      0.5,
+      0.75,
+      1
+    ],
+    "thumb_opposition_pose": {
+      "fingers": 0.25,
+      "thumb_yaw": 30,
+      "thumb_flex": 1
+    },
+    "checked_candidate_pairs": 74,
+    "positive_volume_intersections": 0,
+    "limits": "sampled poses only; omitted mounting heads/pins/drive/cables/skin clearance; not a continuous sweep guarantee"
+  },
+  "evidence_local_only": [
+    "bionic_hand_v05_project.zip",
+    "hand_v05_straight_reference.step",
+    "hand_v05_animation.mp4",
+    "build_v05.py",
+    "check_v05.py"
+  ],
+  "design_not_verified": [
+    "FEA",
+    "10kg capacity",
+    "motor fit",
+    "8 functional grips",
+    "EMG electrodes and skin-contact safety",
+    "IP rating",
+    "individual anthropometry",
+    "real socket interface"
+  ]
+}
