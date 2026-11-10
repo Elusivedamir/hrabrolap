@@ -1,0 +1,80 @@
+{
+  "version": "v0.5e",
+  "date": "2026-11-10",
+  "source": "thumb_flex_study_v05e.py",
+  "method": "Analytical planar route plus conservative circular MCP eye proxy, no 3D audit",
+  "n_tests_run_locally": 5,
+  "n_tests_passed_locally": 5,
+  "scad_export": "2D SVG successfully exported locally in OpenSCAD",
+  "boot_reserve_y_mm": [
+    -7,
+    7
+  ],
+  "mcp_range_evaluated_deg": [
+    0,
+    20
+  ],
+  "exploratory_only_deg": [
+    30,
+    45,
+    60
+  ],
+  "study_inputs": {
+    "guide_x_mm": -12,
+    "anchor_x_mm": 12,
+    "candidate_y_mm": [
+      5,
+      6,
+      7,
+      8
+    ],
+    "eye_proxy_radius_mm": 6.25,
+    "eye_clearance_mm": 0.75,
+    "spool_radius_assumed_mm": 3,
+    "efficiency_assumed": 0.6,
+    "tip_arm_assumed_mm": 58
+  },
+  "candidates": [
+    {
+      "y": 5,
+      "clear_eye": false,
+      "within_boot": false,
+      "tendon_travel_20_mm": 2.1011,
+      "spool_angle_deg": 40.1281,
+      "torque_5N_tip_Nm": 0.29
+    },
+    {
+      "y": 6,
+      "clear_eye": false,
+      "within_boot": false,
+      "tendon_travel_20_mm": 2.44839,
+      "spool_angle_deg": 46.7608,
+      "torque_5N_tip_Nm": 0.24167
+    },
+    {
+      "y": 7,
+      "clear_eye": true,
+      "within_boot": false,
+      "tendon_travel_20_mm": 2.79569,
+      "spool_angle_deg": 53.3937,
+      "torque_5N_tip_Nm": 0.20714
+    },
+    {
+      "y": 8,
+      "clear_eye": true,
+      "within_boot": false,
+      "tendon_travel_20_mm": 3.14298,
+      "spool_angle_deg": 60.0265,
+      "torque_5N_tip_Nm": 0.18125
+    }
+  ],
+  "accepted_candidates": [],
+  "status": "CONCEPTUAL_ROUTE_CONFLICT",
+  "limits": [
+    "Boot boundary is only reserved volume, not an installed boot",
+    "Eye is a 2D proxy, not real CAD interference check",
+    "No physical actuator or 3D tendon guide",
+    "MG90S 0.1765 N m is a stall comparison only, not continuous torque",
+    "No hardware, FEA, 10 kg, IP, EMG or safety validation"
+  ]
+}
