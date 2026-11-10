@@ -43,7 +43,7 @@ def frame(i):
     leak=cable_y_in_boot_x(a,Y)[1]>7+1e-9
     line.set_color('#ff6574' if leak else '#65e68a')
     endpoint.set_color('#ff6574' if leak else '#65e68a')
-    info.set_text(f'2D route hypothesis / MCP {a:4.1f}° / ΔL={wind:0.2f} mm\\n'+
+    info.set_text(f'2D route hypothesis / MCP {a:4.1f}° / ΔL={wind:0.2f} mm\n'+
                  ('OUTSIDE prior boot envelope' if leak else 'within prior boot-Y envelope')+
                  ' | fixed CMC-local guide')
     return shaft,line,endpoint,info
