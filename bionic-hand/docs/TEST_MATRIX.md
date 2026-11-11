@@ -1,3 +1,9 @@
+## v0.7b (2026-11-11)
+REL-01: 10 kg / 4 equal shares: 98.0665 N total, 24.516625 N/finger, 0.980665 Nm at 40 mm — analytical only.
+REL-02: r5.8 mm and assumed 0.6 efficiency: 281.80 N/finger; stroke 6.07375 mm / 60 degrees — analytical only.
+REL-03: 12/12 Python unit tests PASS locally; no physical verification.
+REL-04: emergency mechanical release with self-locking gearbox or jammed tendon — BLOCKED.
+
 ## v0.7a — только симуляция двухканальной ЭМГ / 2026-11-11
 
 | Тест | Что проверено | Статус |
