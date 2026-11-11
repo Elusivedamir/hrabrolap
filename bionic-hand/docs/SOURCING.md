@@ -1,3 +1,7 @@
+## v0.7p — unloaded service-hatch mock-up only (2026-11-11)
+
+[Geometry screen](../engineering/v0.7p/README.md): use ordinary screwdriver, soft-cord dummy, standard M3 screws/washers, hand-cut metal strip, soft-jaw vise and optionally non-load-bearing PETG gauge. Hypothetical Ø6 tool and Ø5.4 screw head are NOT verified SKUs. No vendor price, real dimensions, dust boot, rated anchor or purchase approval. No CNC needed for the unloaded demonstrator.
+
 ## v0.7o — no loaded anchor purchase (2026-11-11)
 
 [Access screen](../engineering/v0.7o/README.md) uses hypothetical Ø6 screwdriver and Ø5.4 head; neither a measured SKU nor a verified Russian price. For unpowered, unloaded access mock-up only: ordinary screwdriver, hand-cut metal strip, stock M3 screws/washers, soft dummy cord and bench clamp. Do not order a final tension-bearing anchor or claim fit until actual dimensions and five-finger CAD are verified.
