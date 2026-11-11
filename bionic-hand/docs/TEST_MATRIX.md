@@ -1,3 +1,7 @@
+## v0.7o — tool access (2026-11-11)
+
+**14/14 local Python stdlib tests PASS:** AABB overlap, service box, gap arithmetic and invalid inputs. **NOT RUN:** full 3D CAD, measured pitch/tool, moving boot, one-handed maintenance, five-finger motion, anchor strength, physical test, load and body safety. [Source](../engineering/v0.7o/README.md).
+
 ## v0.7n — anchor packaging (2026-11-11)
 
 **13/13 local stdlib unit tests PASS** for arithmetic and input rejection. Four example radii R4/5/6/8 FAIL combined illustrative width/axial constraints. **NOT RUN:** full 3D CAD, real head dimensions, one-handed access, cable retention/pull-out, fatigue, guarded jam/release, five-finger dust boot and human safety. [Source](../engineering/v0.7n/README.md).
