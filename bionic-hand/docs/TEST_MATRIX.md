@@ -1,3 +1,7 @@
+## v0.7m — cable termination (2026-11-11)
+
+**12/12 software unit tests PASS**, screening geometry/validation only. **NOT RUN physically:** anchor 3D envelope, actual stroke, one-handed service, rated pull-out, fatigue, jam release, five-finger/boot integration, electrical/socket review. Bare hub R4 mm REJECTED under assumed 30°+60°+15° angular allocation; R5+ not approved hardware. [Details](../engineering/v0.7m/README.md).
+
 ## v0.7l (2026-11-11)
 
 | ID | Check | Result | Status |
