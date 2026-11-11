@@ -1,3 +1,7 @@
+# v0.7l (2026-11-11) — geometry of cable winding
+
+[Reproducible script and report](../engineering/v0.7l/README.md): 12 geometric cases; 10/10 local tests. At bare hub R5 mm and cable Ø1.2 mm, effective R5.6 mm, 0.618 turns for CAD-only 21.7614 mm stroke, D/d=9.33 (NOT a safe bend rating). v0.7k's effective R5 must not be confused with bare hub R5. No physical measurements, termination, fatigue, force, safe release or purchase.
+
 # v0.7k (2026-11-11) — независимая проверка выбора привода
 
 [Отчёт и код](../engineering/v0.7k/README.md): 32 условных случая (1–4 Н, R5–R8, два мотора); 12/12 локальных Python-тестов. При 4 Н и R5 Pololu 5141 численно проходит принятые упрощённые пороги, в отличие от R6/R8. **R5 не проверен по изгибу троса, CAD, креплению или испытаниям. Нет реальных измерений, покупки и запуска.** Следующее: три физических замера v0.7j, радиус намотки и трение, независимое освобождение и аппаратная защита до включения.
