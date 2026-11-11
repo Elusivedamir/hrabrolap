@@ -1,3 +1,7 @@
+# v0.7b (2026-11-11): emergency release analytical gate
+
+[12 unit tests and report](../engineering/v0.7b/README.md). Self-locking gearbox remains locked on power loss; tendon jam is independently blocking. Assumed 10 kg / 4 fingers, 40 mm lever, r5.8 mm, efficiency 0.6 -> 281.80 N tendon per finger. **No physical release, no safe wearable or load rating.**
+
 # 2026-11-11 — v0.7a: первый программный каркас ЭМГ-безопасности (БЕЗ железа)
 
 [Реализован симулятор состояний двухканальной ЭМГ](../software/v0.7a/README.md). **14 локальных программных тестов пройдены:** включение только после нейтрального сигнала, фильтр неоднозначных/двойных жестов, задержка подтверждения, немедленная отмена команды при отключении, таймаут данных, блокировка перегрузки/температуры/питания, защёлка ошибки, ручной запрос освобождения и сброс только при выключенном разрешении. `hardware_power_permission=False` во всех ветвях. Сигналы синтетические. Это НЕ нательная ЭМГ, НЕ управление физическим мотором, НЕ проверенные восемь хватов и НЕ медицинская электробезопасность.
