@@ -1,0 +1,29 @@
+{
+  "cadquery": "2.7.0",
+  "states": 145,
+  "valid_solid_states": 3915,
+  "pairs": 50895,
+  "brep_candidates": 2561,
+  "limits_xyz_mm": [
+    [
+      -31.0,
+      32.0
+    ],
+    [
+      -26.0,
+      55.08948267366684
+    ],
+    [
+      0.0,
+      27.25
+    ]
+  ],
+  "envelope_xyz_mm": [
+    63.0,
+    81.08948267366685,
+    27.25
+  ],
+  "volume_limit_mm3": 0.01,
+  "negative_control_midstep_park_mm3": 15.035804418149969,
+  "errors": []
+}

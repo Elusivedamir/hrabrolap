@@ -1,0 +1,71 @@
+{
+  "status": "BENCH_CONCEPT_NO_HARDWARE_QUALIFICATION",
+  "payout_mm": [
+    0.0,
+    0.20444504226559013,
+    0.8038475772933678,
+    1.7573593128807146,
+    2.999999999999999,
+    4.447085729384876,
+    5.999999999999999,
+    7.552914270615124,
+    8.999999999999998,
+    10.242640687119284,
+    11.196152422706632,
+    11.79555495773441,
+    12.0
+  ],
+  "lever_step_deg": 15,
+  "step_count": 12,
+  "handle_radius_mm": 55,
+  "nominal_max_one_step_mm": 1.5529142706151253,
+  "stop_clearance_only_max_one_step_mm": 1.5971366050241924,
+  "loads": {
+    "bench_reference": {
+      "total_gate_N": 38.49001794597505,
+      "max_shaft_Nm": 0.2309401076758503,
+      "max_ideal_handle_N": 4.198911048651824,
+      "park_pin_force_N": 12.830005981991684,
+      "park_pin_average_single_shear_MPa": 1.8150745528289451,
+      "park_hole_nominal_bearing_MPa": 1.0691671651659738,
+      "step_work_J_bound_geometric": 0.06147381658955483,
+      "full_stroke_work_J": 0.4618802153517006
+    },
+    "10kg_combined_or_one_finger": {
+      "total_gate_N": 377.45813448989617,
+      "max_shaft_Nm": 2.264748806939377,
+      "max_ideal_handle_N": 41.1772510352614,
+      "park_pin_force_N": 125.81937816329874,
+      "park_pin_average_single_shear_MPa": 17.799800863499975,
+      "park_hole_nominal_bearing_MPa": 10.484948180274895,
+      "step_work_J_bound_geometric": 0.6028522034579578,
+      "full_stroke_work_J": 4.529497613878754
+    },
+    "10kg_combined_x2": {
+      "total_gate_N": 754.9162689797923,
+      "max_shaft_Nm": 4.529497613878754,
+      "max_ideal_handle_N": 82.3545020705228,
+      "park_pin_force_N": 251.63875632659747,
+      "park_pin_average_single_shear_MPa": 35.59960172699995,
+      "park_hole_nominal_bearing_MPa": 20.96989636054979,
+      "step_work_J_bound_geometric": 1.2057044069159155,
+      "full_stroke_work_J": 9.058995227757508
+    }
+  },
+  "one_jam_at_3mm_gate_travel": [
+    3.0,
+    12,
+    12,
+    12
+  ],
+  "if_jam_clears_after_full_command_local_uncontrolled_mm": 9.0,
+  "if_jam_clears_constant_force_upper_scenario_J": 3.3971232104090654,
+  "if_one_of_two_tethers_fails_at_rest_with_0_3mm_lash_mm": 0.3,
+  "if_both_tethers_fail_at_rest_mm": 12.0,
+  "assumptions": [
+    "controlled rotor and parking state transitions are ideal",
+    "outputs are tension-only and open with a return spring or applied torque",
+    "one live tether is assumed able to hold all load in its lane",
+    "mechanical interlock, dynamic damping and protected routing require hardware"
+  ]
+}
