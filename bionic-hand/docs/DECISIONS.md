@@ -191,3 +191,7 @@
 | D-085 | Сравнивать кандидатов по паспортному моменту и фактической тяге после направляющей | Номинальные обороты и обозначение N20 не определяют работоспособность | Есть расчёт двух эталонов, данные стенда ещё нужны |
 
 | D-07K | Не выбирать радиус барабана только по скорости: одновременно оценивать момент, RPM и допустимый изгиб троса; R5 пока только гипотеза | 32 расчётных сценария v0.7k; при R5 меньше момент, но выше RPM, геометрия и трос не проверены | Исследуется; закупка не утверждена |
+
+## D-07L — 2026-11-11
+
+For all motor/spool calculations distinguish **bare hub radius** from **cable centerline effective radius** (R_eff=R_hub+d/2 for single layer). v0.7k's R5 effective cannot be reused as v0.7l's R5 bare hub. No candidate cable diameter or minimum bend ratio approved; obtain actual cable datasheet and off-body tests before force-rated anchor or motor selection. [v0.7l](../engineering/v0.7l/README.md).
