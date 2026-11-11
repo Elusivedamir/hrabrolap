@@ -1,3 +1,5 @@
+> **v0.7o — [доступ инструмента между пальцами](engineering/v0.7o/README.md):** 14/14 Python tests. При условных ширине пальца 12 мм и шаге 17 мм зазор 5 мм меньше требуемых 7 мм для Ø6 инструмента с допусками. Только AABB/арифметика, НЕ 3D CAD и НЕ физическая сборка.
+
 > **v0.7m · [angular clearance for a replaceable unloaded cable anchor](engineering/v0.7m/README.md).** 12/12 unit tests; bare hub R4 mm fails assumed reserve/access/guard budget, R5+ only conditionally fits in 2D. No actual anchor, strength, 3D clearance or physical test.
 
 > **v0.7l · [проверка изгиба троса и намотки](engineering/v0.7l/README.md).** 12 геометрических вариантов, 10/10 тестов; выявлено несоответствие обозначений радиуса: R5 барабана не равно эффективному R5 троса. Никаких испытаний троса или крепления не было.
