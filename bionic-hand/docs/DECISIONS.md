@@ -1,3 +1,7 @@
+## v0.7n provisional decision (2026-11-11)
+
+A positive angular margin is not an anchor acceptance. Illustrative Ø5.4 mm screw head with ±0.5 mm placement allowance and 0.5 mm clearance per side requires 7.4 mm access width; two-sided illustrative stack is 9.6 mm. The 7 mm slot and 9 mm bay examples fail. Do not approve or purchase loaded anchor without actual measured dimensions, 3D clearance, rated termination and physical testing. [Details](../engineering/v0.7n/README.md).
+
 ## v0.7m provisional decision (2026-11-11)
 
 Reject bare hub R4 mm for the *hypothetical* angular budget (21.7614 mm stroke, Ø1.2 cable, 30° spare, 60° anchor, 15° guard). R5+ only passes an isolated 2D angular calculation. No acceptance of an anchor design, load, fatigue or five-finger fit. Prefer captive standard fasteners and replaceable hand-serviceable unloaded termination for first shape fixture; any tension-bearing termination requires manufacturer rating and physical pull-out/cycle tests. [Screen](../engineering/v0.7m/README.md).
