@@ -1,3 +1,7 @@
+## v0.7p provisional decision (2026-11-11)
+
+Do NOT approve an exterior anchor-service hatch from a positive width-only calculation. A hypothetical 10 mm opening has zero margin once Ø6 tool, 0.5 mm per side and two 1.5 mm edges are counted; an artificial moving screw box obstructs one proposed approach. Prefer serviceable removable cassette or relocation outside real moving MCP/boot envelope, unloaded and unpowered. No load-bearing or wearability approval. [Screen](../engineering/v0.7p/README.md).
+
 ## v0.7o provisional decision (2026-11-11)
 
 Do not put the replaceable anchor service screw between neighboring fingers until actual pitch, tool approach and boot clearance are modeled and physically tested. At hypothetical 17 mm pitch, 12 mm finger width and Ø6 mm tool with 0.5 mm/side allowance, service gap fails by 2 mm. Prefer investigating an externally accessible captive service hatch with standard screws. No load-bearing approval. [Screen](../engineering/v0.7o/README.md).
