@@ -1,0 +1,35 @@
+{
+  "version": "v0.6b",
+  "date": "2026-11-11",
+  "scope": "isolated v0.5h capstan, added previously absent cable",
+  "method": "CadQuery 3D cylinder chords representing Ø1.2mm rope, max step3deg; motor/cable anchor NOT modeled",
+  "original_web_width_mm": 10.4,
+  "original_angles_checked": 13,
+  "original_angles_deg": "0..60 step5",
+  "original_status": "FAIL_WITH_ADDED_CABLE",
+  "original_penetration_mm3_at_angle": {
+    "0": 0,
+    "30": 0.13842,
+    "45": 1.92139,
+    "60": 4.06531
+  },
+  "trial_web_width_mm": 5.6,
+  "trial_angles_checked": 61,
+  "trial_angles_deg": "0..60 step1",
+  "trial_all_valid_solids": true,
+  "trial_max_overlap_sum_mm3": 0.000064,
+  "nominal_web_each_side_at_M3_clearance_hole_mm": 1.15,
+  "local_unit_tests_passed": 5,
+  "status": "GEOMETRY_CANDIDATE_ONLY; STRENGTH_AND_FULL_ASSEMBLY_FAIL_GATE",
+  "not_verified": [
+    "actual continuous flexing tendon",
+    "end anchorage",
+    "temperature and fatigue",
+    "M3 structural load",
+    "spring and manual release",
+    "full five-finger assembly",
+    "waterproof enclosure",
+    "load rating",
+    "EMG and on-body safety"
+  ]
+}
