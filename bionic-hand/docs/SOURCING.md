@@ -1,3 +1,7 @@
+## v0.7l — no purchase approval (2026-11-11)
+
+[Spool screening](../engineering/v0.7l/README.md) considers Ø0.8/1.2/1.5 mm as hypothetical cable diameters. No material or exact product, maker minimum bend ratio, termination rating, fatigue data or delivered Russian price verified. For an unpowered shape gauge only: standard stock shaft, washers, common screws, hand-cut strip and non-load-bearing printed guide. Do not order final cable or load-bearing printed anchor from these numbers.
+
 ## v0.7j — измерение и кандидаты привода (2026-11-11)
 
 [Карточки деталей](../engineering/v0.7j/MEASURE.md): динамометр малого диапазона, Pololu 5139/5141 как измеримые эталоны, российская карточка N20 как непроверенный образец. В карточке N20 обнаружено противоречие напряжения 6/12 В. Закупка и стоимость полного модуля не подтверждены.
