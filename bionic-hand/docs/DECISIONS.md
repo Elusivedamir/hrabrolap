@@ -1,3 +1,7 @@
+## v0.7o provisional decision (2026-11-11)
+
+Do not put the replaceable anchor service screw between neighboring fingers until actual pitch, tool approach and boot clearance are modeled and physically tested. At hypothetical 17 mm pitch, 12 mm finger width and Ø6 mm tool with 0.5 mm/side allowance, service gap fails by 2 mm. Prefer investigating an externally accessible captive service hatch with standard screws. No load-bearing approval. [Screen](../engineering/v0.7o/README.md).
+
 ## v0.7n provisional decision (2026-11-11)
 
 A positive angular margin is not an anchor acceptance. Illustrative Ø5.4 mm screw head with ±0.5 mm placement allowance and 0.5 mm clearance per side requires 7.4 mm access width; two-sided illustrative stack is 9.6 mm. The 7 mm slot and 9 mm bay examples fail. Do not approve or purchase loaded anchor without actual measured dimensions, 3D clearance, rated termination and physical testing. [Details](../engineering/v0.7n/README.md).
