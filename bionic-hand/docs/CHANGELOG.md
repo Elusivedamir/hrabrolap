@@ -1,3 +1,7 @@
+## 2026-11-11 — v0.7p
+
+Added reproducible AABB exterior service hatch screening (16 passing local Python tests). Identified 10 mm hatch as zero-margin under illustrative assumptions; sample moving screw can block screwdriver approach. Fixed an initial erroneous test fixture on the y-boundary. Not actual 3D CAD, not physical testing. [Report](../engineering/v0.7p/README.md).
+
 ## 2026-11-11 — v0.7o
 
 Added reproducible stdlib AABB/tool-access screening and 14 passing local tests. Rejected illustrative 17 mm pitch / 12 mm width / Ø6 mm tool gap by 2 mm; no measured five-finger layout or real 3D CAD. [Report](../engineering/v0.7o/README.md).
