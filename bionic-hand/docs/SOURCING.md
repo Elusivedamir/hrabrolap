@@ -1,3 +1,7 @@
+## v0.7n — no loaded anchor order (2026-11-11)
+
+[Head and axial envelope screen](../engineering/v0.7n/README.md) rejects illustrative slot/bay sizes; screw head Ø5.4 mm, washer 0.8 mm and head height 3 mm are hypothetical, not selected SKUs. For unloaded fixture only: hand-cut metal strip, stock washers, captive screws, soft dummy cord and bench clamp. No vendor, verified Russian price, delivery, cable maker termination rating or purchase approval.
+
 ## v0.7m — no anchor purchasing approval (2026-11-11)
 
 [Angular packaging study](../engineering/v0.7m/README.md): candidate ordinary metal hub/shaft, captive fasteners, washers, hand-drilled metal strip, soft-cord dummy and non-load-bearing FDM gauge. **No actual supplier part, cable manufacturer's termination rating, price, delivery or fastener head geometry validated.** Do not order final load-bearing cable anchor.
