@@ -1,3 +1,7 @@
+## v0.7n — anchor packaging (2026-11-11)
+
+**13/13 local stdlib unit tests PASS** for arithmetic and input rejection. Four example radii R4/5/6/8 FAIL combined illustrative width/axial constraints. **NOT RUN:** full 3D CAD, real head dimensions, one-handed access, cable retention/pull-out, fatigue, guarded jam/release, five-finger dust boot and human safety. [Source](../engineering/v0.7n/README.md).
+
 ## v0.7m — cable termination (2026-11-11)
 
 **12/12 software unit tests PASS**, screening geometry/validation only. **NOT RUN physically:** anchor 3D envelope, actual stroke, one-handed service, rated pull-out, fatigue, jam release, five-finger/boot integration, electrical/socket review. Bare hub R4 mm REJECTED under assumed 30°+60°+15° angular allocation; R5+ not approved hardware. [Details](../engineering/v0.7m/README.md).
