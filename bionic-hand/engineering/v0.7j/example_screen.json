@@ -1,0 +1,251 @@
+{
+  "status": "SIMULATED_FORCE_ONLY_NO_PHYSICAL_MEASUREMENTS",
+  "cad_stroke_mm": 21.7613901229636,
+  "target_duration_s": 1.5,
+  "cases": [
+    {
+      "hypothetical_force_N": 1.0,
+      "candidates": [
+        {
+          "radius_mm": 6.0,
+          "motor": "Pololu 5139 (100:1 MP 6V)",
+          "mean_rpm": 23.089552044138703,
+          "peak_rpm_triangle_profile": 46.179104088277406,
+          "torque_with_reserve_Nm": 0.009000000000000001,
+          "torque_screen_limit_Nm": 0.0230456275,
+          "max_force_under_torque_rule_N": 2.560625277777777,
+          "conservative_linear_full_voltage_rpm": 158.81669700684003,
+          "linear_current_at_screen_torque_A": 0.12857944202213634,
+          "torque_screen": true,
+          "speed_screen": true,
+          "conditional_pass": true
+        },
+        {
+          "radius_mm": 6.0,
+          "motor": "Pololu 5141 (150:1 MP 6V)",
+          "mean_rpm": 23.089552044138703,
+          "peak_rpm_triangle_profile": 46.179104088277406,
+          "torque_with_reserve_Nm": 0.009000000000000001,
+          "torque_screen_limit_Nm": 0.0318716125,
+          "max_force_under_torque_rule_N": 3.5412902777777773,
+          "conservative_linear_full_voltage_rpm": 111.52851146141413,
+          "linear_current_at_screen_torque_A": 0.11235744269292935,
+          "torque_screen": true,
+          "speed_screen": true,
+          "conditional_pass": true
+        },
+        {
+          "radius_mm": 8.0,
+          "motor": "Pololu 5139 (100:1 MP 6V)",
+          "mean_rpm": 17.317164033104028,
+          "peak_rpm_triangle_profile": 34.634328066208056,
+          "torque_with_reserve_Nm": 0.012,
+          "torque_screen_limit_Nm": 0.0230456275,
+          "max_force_under_torque_rule_N": 1.9204689583333332,
+          "conservative_linear_full_voltage_rpm": 153.08892934245335,
+          "linear_current_at_screen_torque_A": 0.14810592269618178,
+          "torque_screen": true,
+          "speed_screen": true,
+          "conditional_pass": true
+        },
+        {
+          "radius_mm": 8.0,
+          "motor": "Pololu 5141 (150:1 MP 6V)",
+          "mean_rpm": 17.317164033104028,
+          "peak_rpm_triangle_profile": 34.634328066208056,
+          "torque_with_reserve_Nm": 0.012,
+          "torque_screen_limit_Nm": 0.0318716125,
+          "max_force_under_torque_rule_N": 2.6559677083333333,
+          "conservative_linear_full_voltage_rpm": 108.70468194855218,
+          "linear_current_at_screen_torque_A": 0.12647659025723912,
+          "torque_screen": true,
+          "speed_screen": true,
+          "conditional_pass": true
+        }
+      ]
+    },
+    {
+      "hypothetical_force_N": 2.0,
+      "candidates": [
+        {
+          "radius_mm": 6.0,
+          "motor": "Pololu 5139 (100:1 MP 6V)",
+          "mean_rpm": 23.089552044138703,
+          "peak_rpm_triangle_profile": 46.179104088277406,
+          "torque_with_reserve_Nm": 0.018000000000000002,
+          "torque_screen_limit_Nm": 0.0230456275,
+          "max_force_under_torque_rule_N": 2.560625277777777,
+          "conservative_linear_full_voltage_rpm": 141.63339401368003,
+          "linear_current_at_screen_torque_A": 0.18715888404427267,
+          "torque_screen": true,
+          "speed_screen": true,
+          "conditional_pass": true
+        },
+        {
+          "radius_mm": 6.0,
+          "motor": "Pololu 5141 (150:1 MP 6V)",
+          "mean_rpm": 23.089552044138703,
+          "peak_rpm_triangle_profile": 46.179104088277406,
+          "torque_with_reserve_Nm": 0.018000000000000002,
+          "torque_screen_limit_Nm": 0.0318716125,
+          "max_force_under_torque_rule_N": 3.5412902777777773,
+          "conservative_linear_full_voltage_rpm": 103.05702292282827,
+          "linear_current_at_screen_torque_A": 0.1547148853858587,
+          "torque_screen": true,
+          "speed_screen": true,
+          "conditional_pass": true
+        },
+        {
+          "radius_mm": 8.0,
+          "motor": "Pololu 5139 (100:1 MP 6V)",
+          "mean_rpm": 17.317164033104028,
+          "peak_rpm_triangle_profile": 34.634328066208056,
+          "torque_with_reserve_Nm": 0.024,
+          "torque_screen_limit_Nm": 0.0230456275,
+          "max_force_under_torque_rule_N": 1.9204689583333332,
+          "conservative_linear_full_voltage_rpm": 130.1778586849067,
+          "linear_current_at_screen_torque_A": 0.22621184539236353,
+          "torque_screen": false,
+          "speed_screen": true,
+          "conditional_pass": false
+        },
+        {
+          "radius_mm": 8.0,
+          "motor": "Pololu 5141 (150:1 MP 6V)",
+          "mean_rpm": 17.317164033104028,
+          "peak_rpm_triangle_profile": 34.634328066208056,
+          "torque_with_reserve_Nm": 0.024,
+          "torque_screen_limit_Nm": 0.0318716125,
+          "max_force_under_torque_rule_N": 2.6559677083333333,
+          "conservative_linear_full_voltage_rpm": 97.40936389710436,
+          "linear_current_at_screen_torque_A": 0.18295318051447823,
+          "torque_screen": true,
+          "speed_screen": true,
+          "conditional_pass": true
+        }
+      ]
+    },
+    {
+      "hypothetical_force_N": 3.0,
+      "candidates": [
+        {
+          "radius_mm": 6.0,
+          "motor": "Pololu 5139 (100:1 MP 6V)",
+          "mean_rpm": 23.089552044138703,
+          "peak_rpm_triangle_profile": 46.179104088277406,
+          "torque_with_reserve_Nm": 0.027000000000000003,
+          "torque_screen_limit_Nm": 0.0230456275,
+          "max_force_under_torque_rule_N": 2.560625277777777,
+          "conservative_linear_full_voltage_rpm": 124.45009102052006,
+          "linear_current_at_screen_torque_A": 0.24573832606640897,
+          "torque_screen": false,
+          "speed_screen": true,
+          "conditional_pass": false
+        },
+        {
+          "radius_mm": 6.0,
+          "motor": "Pololu 5141 (150:1 MP 6V)",
+          "mean_rpm": 23.089552044138703,
+          "peak_rpm_triangle_profile": 46.179104088277406,
+          "torque_with_reserve_Nm": 0.027000000000000003,
+          "torque_screen_limit_Nm": 0.0318716125,
+          "max_force_under_torque_rule_N": 3.5412902777777773,
+          "conservative_linear_full_voltage_rpm": 94.5855343842424,
+          "linear_current_at_screen_torque_A": 0.19707232807878802,
+          "torque_screen": true,
+          "speed_screen": true,
+          "conditional_pass": true
+        },
+        {
+          "radius_mm": 8.0,
+          "motor": "Pololu 5139 (100:1 MP 6V)",
+          "mean_rpm": 17.317164033104028,
+          "peak_rpm_triangle_profile": 34.634328066208056,
+          "torque_with_reserve_Nm": 0.036000000000000004,
+          "torque_screen_limit_Nm": 0.0230456275,
+          "max_force_under_torque_rule_N": 1.9204689583333332,
+          "conservative_linear_full_voltage_rpm": 107.26678802736006,
+          "linear_current_at_screen_torque_A": 0.30431776808854527,
+          "torque_screen": false,
+          "speed_screen": true,
+          "conditional_pass": false
+        },
+        {
+          "radius_mm": 8.0,
+          "motor": "Pololu 5141 (150:1 MP 6V)",
+          "mean_rpm": 17.317164033104028,
+          "peak_rpm_triangle_profile": 34.634328066208056,
+          "torque_with_reserve_Nm": 0.036000000000000004,
+          "torque_screen_limit_Nm": 0.0318716125,
+          "max_force_under_torque_rule_N": 2.6559677083333333,
+          "conservative_linear_full_voltage_rpm": 86.11404584565653,
+          "linear_current_at_screen_torque_A": 0.23942977077171737,
+          "torque_screen": false,
+          "speed_screen": true,
+          "conditional_pass": false
+        }
+      ]
+    },
+    {
+      "hypothetical_force_N": 4.0,
+      "candidates": [
+        {
+          "radius_mm": 6.0,
+          "motor": "Pololu 5139 (100:1 MP 6V)",
+          "mean_rpm": 23.089552044138703,
+          "peak_rpm_triangle_profile": 46.179104088277406,
+          "torque_with_reserve_Nm": 0.036000000000000004,
+          "torque_screen_limit_Nm": 0.0230456275,
+          "max_force_under_torque_rule_N": 2.560625277777777,
+          "conservative_linear_full_voltage_rpm": 107.26678802736006,
+          "linear_current_at_screen_torque_A": 0.30431776808854527,
+          "torque_screen": false,
+          "speed_screen": true,
+          "conditional_pass": false
+        },
+        {
+          "radius_mm": 6.0,
+          "motor": "Pololu 5141 (150:1 MP 6V)",
+          "mean_rpm": 23.089552044138703,
+          "peak_rpm_triangle_profile": 46.179104088277406,
+          "torque_with_reserve_Nm": 0.036000000000000004,
+          "torque_screen_limit_Nm": 0.0318716125,
+          "max_force_under_torque_rule_N": 3.5412902777777773,
+          "conservative_linear_full_voltage_rpm": 86.11404584565653,
+          "linear_current_at_screen_torque_A": 0.23942977077171737,
+          "torque_screen": false,
+          "speed_screen": true,
+          "conditional_pass": false
+        },
+        {
+          "radius_mm": 8.0,
+          "motor": "Pololu 5139 (100:1 MP 6V)",
+          "mean_rpm": 17.317164033104028,
+          "peak_rpm_triangle_profile": 34.634328066208056,
+          "torque_with_reserve_Nm": 0.048,
+          "torque_screen_limit_Nm": 0.0230456275,
+          "max_force_under_torque_rule_N": 1.9204689583333332,
+          "conservative_linear_full_voltage_rpm": 84.35571736981342,
+          "linear_current_at_screen_torque_A": 0.38242369078472704,
+          "torque_screen": false,
+          "speed_screen": true,
+          "conditional_pass": false
+        },
+        {
+          "radius_mm": 8.0,
+          "motor": "Pololu 5141 (150:1 MP 6V)",
+          "mean_rpm": 17.317164033104028,
+          "peak_rpm_triangle_profile": 34.634328066208056,
+          "torque_with_reserve_Nm": 0.048,
+          "torque_screen_limit_Nm": 0.0318716125,
+          "max_force_under_torque_rule_N": 2.6559677083333333,
+          "conservative_linear_full_voltage_rpm": 74.81872779420871,
+          "linear_current_at_screen_torque_A": 0.29590636102895645,
+          "torque_screen": false,
+          "speed_screen": true,
+          "conditional_pass": false
+        }
+      ]
+    }
+  ]
+}

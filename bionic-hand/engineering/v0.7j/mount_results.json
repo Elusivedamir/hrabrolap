@@ -1,0 +1,31 @@
+{
+  "status": "MOTOR_ENVELOPE_AND_UNPOWERED_ROUTING_ONLY",
+  "poses": 61,
+  "body_states": 1464,
+  "pairs": 16775,
+  "exact_brep_checks": 976,
+  "overlap_limit_mm3": 0.005,
+  "collisions": [],
+  "base_mm": [
+    158,
+    85,
+    8
+  ],
+  "motor_body_proxy_mm": [
+    10,
+    32.5,
+    12
+  ],
+  "spool_effective_radius_mm": 6,
+  "guide_xy_mm": [
+    11.0,
+    -38.0
+  ],
+  "omitted": [
+    "actual connector and wiring",
+    "mounting hardware",
+    "winding width and knots",
+    "return spring",
+    "guard, pulley bearing and emergency release"
+  ]
+}
