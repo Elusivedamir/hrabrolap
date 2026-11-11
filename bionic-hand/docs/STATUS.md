@@ -1,3 +1,7 @@
+# v0.7p (2026-11-11): exterior hatch clearance screen
+
+[Report and executable source](../engineering/v0.7p/README.md): 16/16 local tests after correcting one initial wrong test expectation. Hypothetical 8/10/12 mm openings leave -2/0/+2 mm margins for Ø6 tool plus margins and hatch edges. Artificial moving-fastener box blocks example straight path. No real MCP coordinates, moving boot or one-handed physical test; hatch NOT approved.
+
 # v0.7o (2026-11-11): neighboring finger tool-access screen
 
 [Reproducible report](../engineering/v0.7o/README.md): 14/14 local tests. Assumed 17 mm finger pitch minus 12 mm width gives 5 mm gap; hypothetical Ø6 mm screwdriver plus 0.5 mm/side requires 7 mm: -2 mm margin. Not measured spacing, not full 3D CAD, not physical test. Provisional option: external dorsal/palmar service hatch, NOT approved. No 10 kg or wearable claim.
