@@ -1,3 +1,7 @@
+## v0.7m — no anchor purchasing approval (2026-11-11)
+
+[Angular packaging study](../engineering/v0.7m/README.md): candidate ordinary metal hub/shaft, captive fasteners, washers, hand-drilled metal strip, soft-cord dummy and non-load-bearing FDM gauge. **No actual supplier part, cable manufacturer's termination rating, price, delivery or fastener head geometry validated.** Do not order final load-bearing cable anchor.
+
 ## v0.7l — no purchase approval (2026-11-11)
 
 [Spool screening](../engineering/v0.7l/README.md) considers Ø0.8/1.2/1.5 mm as hypothetical cable diameters. No material or exact product, maker minimum bend ratio, termination rating, fatigue data or delivered Russian price verified. For an unpowered shape gauge only: standard stock shaft, washers, common screws, hand-cut strip and non-load-bearing printed guide. Do not order final cable or load-bearing printed anchor from these numbers.
