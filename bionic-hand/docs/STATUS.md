@@ -1,3 +1,7 @@
+# v0.7o (2026-11-11): neighboring finger tool-access screen
+
+[Reproducible report](../engineering/v0.7o/README.md): 14/14 local tests. Assumed 17 mm finger pitch minus 12 mm width gives 5 mm gap; hypothetical Ø6 mm screwdriver plus 0.5 mm/side requires 7 mm: -2 mm margin. Not measured spacing, not full 3D CAD, not physical test. Provisional option: external dorsal/palmar service hatch, NOT approved. No 10 kg or wearable claim.
+
 # v0.7n (2026-11-11) — anchor head/axial envelope screen
 
 [Reproducible screen](../engineering/v0.7n/README.md): 13/13 local Python tests; illustrative 7 mm service slot misses assumed Ø5.4 head with two-sided 0.5 mm tolerance + 0.5 mm clearance by 0.4 mm; illustrative 9.6 mm axial stack exceeds hypothetical 9 mm bay by 0.6 mm. All R4/5/6/8 FAIL the combined assumptions despite R5+ positive angular budget. NOT 3D CAD, physical test or approved load-bearing anchor.
