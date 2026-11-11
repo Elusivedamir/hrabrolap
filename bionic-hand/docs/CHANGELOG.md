@@ -1,3 +1,7 @@
+## 2026-11-11 — v0.7l
+
+Added reproducible spool/cable centerline and bend ratio screening (12 parameter cases; 10/10 local tests). Corrected initially false unit-test expectation (actual R5 bare hub, Ø1.2 mm: 0.618 turns). Flagged bare-hub versus effective radius mismatch across v0.7k and v0.7l. No cable supplier rating or physical test. [Report](../engineering/v0.7l/README.md).
+
 ## 2026-11-11 — v0.7k
 
 Независимый анализ чувствительности выбора мотора к радиусу барабана и тяге: 32 условных случая, 12/12 локальных тестов. Выявлено, что R5 при 4 Н и Pololu 5141 проходит только числовой экран, но радиус, трос, компоновка и реальная тяга не проверены. [Исходники](../engineering/v0.7k/README.md).
