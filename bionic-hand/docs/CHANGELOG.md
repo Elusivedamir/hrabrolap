@@ -1,3 +1,7 @@
+## 2026-11-11 — v0.7m
+
+Added standard-library cable termination angular packaging screen and 12 passing local unit tests. Found bare R4 negative angular budget under explicit hypothetical reserve/access/guard sectors; R5+ conditional in 2D only. No loaded termination, FEA or physical tests. [Report](../engineering/v0.7m/README.md).
+
 ## 2026-11-11 — v0.7l
 
 Added reproducible spool/cable centerline and bend ratio screening (12 parameter cases; 10/10 local tests). Corrected initially false unit-test expectation (actual R5 bare hub, Ø1.2 mm: 0.618 turns). Flagged bare-hub versus effective radius mismatch across v0.7k and v0.7l. No cable supplier rating or physical test. [Report](../engineering/v0.7l/README.md).
