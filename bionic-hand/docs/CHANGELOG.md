@@ -1,3 +1,7 @@
+## 2026-11-11 — v0.7c
+
+Emergency release failure screening: documented hazards of bare quick-unhook, gearbox-lock versus distal jam, guarded captive clutch/brake candidate, 1-finger load sensitivity, idealized release work and seven required physical test gates. Design-only; no prototype or test claim. [Report](../engineering/v0.7c/README.md).
+
 ## 2026-11-11 v0.7b
 Added [analytical release gate](../engineering/v0.7b/README.md) with 12 locally passing Python unit tests. Identified self-locking gearbox and jammed cable as distinct unmitigated hazards. Model tension 281.80 N/finger under explicitly hypothetical equal 10 kg share and 0.6 efficiency. No hardware test.
 
