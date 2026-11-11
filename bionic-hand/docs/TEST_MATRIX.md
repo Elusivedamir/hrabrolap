@@ -1,3 +1,13 @@
+## v0.7l (2026-11-11)
+
+| ID | Check | Result | Status |
+|---|---|---|---|
+| R07L-01 | `python -m unittest -v test_cable_screen.py` | 10/10 after correcting a false test expectation | Local unit tests |
+| R07L-02 | `python cable_screen.py` | 12 hypothetical d/hub-radius combinations | Geometric arithmetic only |
+| R07L-03 | Actual cable bend specification, termination, fatigue, stroke, anchor, five-finger clearance | NOT RUN | BLOCKED |
+
+[Source and limitations](../engineering/v0.7l/README.md).
+
 ## v0.7k (2026-11-11)
 
 | ID | Проверка | Результат | Статус |
