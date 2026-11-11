@@ -1,0 +1,21 @@
+import unittest
+from clearance import Box,service_box,gap_needed,nominal_neighbor_gap,screen
+class Test(unittest.TestCase):
+ def test_touch_not_overlap(self):self.assertFalse(Box(0,1,0,1,0,1).overlaps(Box(1,2,0,1,0,1)))
+ def test_overlap(self):self.assertTrue(Box(0,2,0,2,0,2).overlaps(Box(1,3,1,3,1,3)))
+ def test_z_separated(self):self.assertFalse(Box(0,2,0,2,0,2).overlaps(Box(0,2,0,2,3,4)))
+ def test_service_width(self):self.assertAlmostEqual(service_box(0,0,0).xmax,3.5)
+ def test_service_reach(self):self.assertEqual(service_box(0,0,0).zmax,20)
+ def test_tool_larger(self):self.assertEqual(gap_needed(),7)
+ def test_head_larger(self):self.assertEqual(gap_needed(head_d=8),9)
+ def test_gap(self):self.assertEqual(nominal_neighbor_gap(),5)
+ def test_fail(self):self.assertFalse(screen()['pass'])
+ def test_pass(self):self.assertTrue(screen(pitch=19)['pass'])
+ def test_equal_pass(self):self.assertTrue(screen(pitch=19)['pass'])
+ def test_invalid_tool(self):
+  with self.assertRaises(ValueError):service_box(0,0,0,tool_d=0)
+ def test_invalid_allowance(self):
+  with self.assertRaises(ValueError):gap_needed(allowance=-1)
+ def test_invalid_pitch(self):
+  with self.assertRaises(ValueError):nominal_neighbor_gap(pitch=0)
+if __name__=='__main__':unittest.main()
