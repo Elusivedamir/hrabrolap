@@ -1,0 +1,2236 @@
+{
+  "status": "PACKAGING_SCREEN_ONLY_NO_HAND_INTEGRATION",
+  "reference": "cad/v0.5d/hand_v05d_reference.step.gz",
+  "reference_sha256": "179c8d0392a3e046bdb12aa1c132abed0a9279a7bdfaf40698090c5841597b45",
+  "reference_bodies": 25,
+  "reference_pose": "as-exported open CAD snapshot only",
+  "axes": "local x -> hand x; local y -> minus hand z; local z -> hand y",
+  "reserve_mm_length_width_depth": [
+    80.0,
+    53.5,
+    41.0
+  ],
+  "single_reserve_footprint_mm2": 4280.0,
+  "four_nonoverlap_reserves_mm2": 17120.0,
+  "palm_envelope_footprint_mm2": 10370,
+  "direct_axial_wrist_fit": false,
+  "four_nonoverlapping_rectangles_single_layer_fit_area_bound": false,
+  "placement_count": 81,
+  "nominal_noninterfering_reserves_by_height": {
+    "2": 0,
+    "8": 0,
+    "14": 0,
+    "20": 0,
+    "26": 0,
+    "32": 0,
+    "38": 0,
+    "44": 0,
+    "50": 9
+  },
+  "placements": [
+    {
+      "offset_xyz_mm": [
+        -110,
+        2,
+        -12
+      ],
+      "interferences": [
+        {
+          "reference_solid_zero_based": 0,
+          "volume_mm3": 5982.412
+        },
+        {
+          "reference_solid_zero_based": 1,
+          "volume_mm3": 7996.282
+        },
+        {
+          "reference_solid_zero_based": 2,
+          "volume_mm3": 3301.174
+        },
+        {
+          "reference_solid_zero_based": 19,
+          "volume_mm3": 241.566
+        },
+        {
+          "reference_solid_zero_based": 20,
+          "volume_mm3": 17.754
+        },
+        {
+          "reference_solid_zero_based": 21,
+          "volume_mm3": 31.645
+        }
+      ]
+    },
+    {
+      "offset_xyz_mm": [
+        -110,
+        2,
+        0
+      ],
+      "interferences": [
+        {
+          "reference_solid_zero_based": 0,
+          "volume_mm3": 4443.93
+        },
+        {
+          "reference_solid_zero_based": 1,
+          "volume_mm3": 7996.282
+        },
+        {
+          "reference_solid_zero_based": 2,
+          "volume_mm3": 3301.174
+        },
+        {
+          "reference_solid_zero_based": 19,
+          "volume_mm3": 241.566
+        },
+        {
+          "reference_solid_zero_based": 20,
+          "volume_mm3": 170.904
+        },
+        {
+          "reference_solid_zero_based": 21,
+          "volume_mm3": 31.645
+        }
+      ]
+    },
+    {
+      "offset_xyz_mm": [
+        -110,
+        2,
+        12
+      ],
+      "interferences": [
+        {
+          "reference_solid_zero_based": 0,
+          "volume_mm3": 5742.882
+        },
+        {
+          "reference_solid_zero_based": 1,
+          "volume_mm3": 7996.282
+        },
+        {
+          "reference_solid_zero_based": 2,
+          "volume_mm3": 3301.174
+        },
+        {
+          "reference_solid_zero_based": 3,
+          "volume_mm3": 343.077
+        },
+        {
+          "reference_solid_zero_based": 18,
+          "volume_mm3": 52.473
+        },
+        {
+          "reference_solid_zero_based": 19,
+          "volume_mm3": 241.566
+        },
+        {
+          "reference_solid_zero_based": 20,
+          "volume_mm3": 174.781
+        },
+        {
+          "reference_solid_zero_based": 21,
+          "volume_mm3": 31.645
+        }
+      ]
+    },
+    {
+      "offset_xyz_mm": [
+        -110,
+        8,
+        -12
+      ],
+      "interferences": [
+        {
+          "reference_solid_zero_based": 0,
+          "volume_mm3": 1475.383
+        },
+        {
+          "reference_solid_zero_based": 1,
+          "volume_mm3": 7912.213
+        },
+        {
+          "reference_solid_zero_based": 2,
+          "volume_mm3": 2116.64
+        },
+        {
+          "reference_solid_zero_based": 19,
+          "volume_mm3": 241.568
+        },
+        {
+          "reference_solid_zero_based": 20,
+          "volume_mm3": 58.508
+        },
+        {
+          "reference_solid_zero_based": 21,
+          "volume_mm3": 56.549
+        }
+      ]
+    },
+    {
+      "offset_xyz_mm": [
+        -110,
+        8,
+        0
+      ],
+      "interferences": [
+        {
+          "reference_solid_zero_based": 0,
+          "volume_mm3": 1848.765
+        },
+        {
+          "reference_solid_zero_based": 1,
+          "volume_mm3": 7912.213
+        },
+        {
+          "reference_solid_zero_based": 2,
+          "volume_mm3": 2116.64
+        },
+        {
+          "reference_solid_zero_based": 19,
+          "volume_mm3": 241.568
+        },
+        {
+          "reference_solid_zero_based": 20,
+          "volume_mm3": 214.404
+        },
+        {
+          "reference_solid_zero_based": 21,
+          "volume_mm3": 56.549
+        }
+      ]
+    },
+    {
+      "offset_xyz_mm": [
+        -110,
+        8,
+        12
+      ],
+      "interferences": [
+        {
+          "reference_solid_zero_based": 0,
+          "volume_mm3": 1494.383
+        },
+        {
+          "reference_solid_zero_based": 1,
+          "volume_mm3": 7912.213
+        },
+        {
+          "reference_solid_zero_based": 2,
+          "volume_mm3": 2116.64
+        },
+        {
+          "reference_solid_zero_based": 3,
+          "volume_mm3": 266.672
+        },
+        {
+          "reference_solid_zero_based": 18,
+          "volume_mm3": 52.473
+        },
+        {
+          "reference_solid_zero_based": 19,
+          "volume_mm3": 241.568
+        },
+        {
+          "reference_solid_zero_based": 20,
+          "volume_mm3": 218.28
+        },
+        {
+          "reference_solid_zero_based": 21,
+          "volume_mm3": 56.549
+        }
+      ]
+    },
+    {
+      "offset_xyz_mm": [
+        -110,
+        14,
+        -12
+      ],
+      "interferences": [
+        {
+          "reference_solid_zero_based": 0,
+          "volume_mm3": 560.031
+        },
+        {
+          "reference_solid_zero_based": 1,
+          "volume_mm3": 6455.697
+        },
+        {
+          "reference_solid_zero_based": 2,
+          "volume_mm3": 1534.023
+        },
+        {
+          "reference_solid_zero_based": 19,
+          "volume_mm3": 241.568
+        },
+        {
+          "reference_solid_zero_based": 20,
+          "volume_mm3": 58.508
+        },
+        {
+          "reference_solid_zero_based": 21,
+          "volume_mm3": 56.549
+        }
+      ]
+    },
+    {
+      "offset_xyz_mm": [
+        -110,
+        14,
+        0
+      ],
+      "interferences": [
+        {
+          "reference_solid_zero_based": 0,
+          "volume_mm3": 714.061
+        },
+        {
+          "reference_solid_zero_based": 1,
+          "volume_mm3": 6455.697
+        },
+        {
+          "reference_solid_zero_based": 2,
+          "volume_mm3": 1534.023
+        },
+        {
+          "reference_solid_zero_based": 19,
+          "volume_mm3": 241.568
+        },
+        {
+          "reference_solid_zero_based": 20,
+          "volume_mm3": 214.404
+        },
+        {
+          "reference_solid_zero_based": 21,
+          "volume_mm3": 56.549
+        }
+      ]
+    },
+    {
+      "offset_xyz_mm": [
+        -110,
+        14,
+        12
+      ],
+      "interferences": [
+        {
+          "reference_solid_zero_based": 0,
+          "volume_mm3": 567.031
+        },
+        {
+          "reference_solid_zero_based": 1,
+          "volume_mm3": 6455.697
+        },
+        {
+          "reference_solid_zero_based": 2,
+          "volume_mm3": 1534.023
+        },
+        {
+          "reference_solid_zero_based": 3,
+          "volume_mm3": 42.836
+        },
+        {
+          "reference_solid_zero_based": 18,
+          "volume_mm3": 52.473
+        },
+        {
+          "reference_solid_zero_based": 19,
+          "volume_mm3": 241.568
+        },
+        {
+          "reference_solid_zero_based": 20,
+          "volume_mm3": 218.28
+        },
+        {
+          "reference_solid_zero_based": 21,
+          "volume_mm3": 56.549
+        }
+      ]
+    },
+    {
+      "offset_xyz_mm": [
+        -110,
+        20,
+        -12
+      ],
+      "interferences": [
+        {
+          "reference_solid_zero_based": 1,
+          "volume_mm3": 4570.116
+        },
+        {
+          "reference_solid_zero_based": 2,
+          "volume_mm3": 849.313
+        },
+        {
+          "reference_solid_zero_based": 19,
+          "volume_mm3": 241.568
+        },
+        {
+          "reference_solid_zero_based": 20,
+          "volume_mm3": 58.508
+        },
+        {
+          "reference_solid_zero_based": 21,
+          "volume_mm3": 56.549
+        }
+      ]
+    },
+    {
+      "offset_xyz_mm": [
+        -110,
+        20,
+        0
+      ],
+      "interferences": [
+        {
+          "reference_solid_zero_based": 1,
+          "volume_mm3": 4570.116
+        },
+        {
+          "reference_solid_zero_based": 2,
+          "volume_mm3": 849.313
+        },
+        {
+          "reference_solid_zero_based": 19,
+          "volume_mm3": 241.568
+        },
+        {
+          "reference_solid_zero_based": 20,
+          "volume_mm3": 214.404
+        },
+        {
+          "reference_solid_zero_based": 21,
+          "volume_mm3": 56.549
+        }
+      ]
+    },
+    {
+      "offset_xyz_mm": [
+        -110,
+        20,
+        12
+      ],
+      "interferences": [
+        {
+          "reference_solid_zero_based": 1,
+          "volume_mm3": 4570.116
+        },
+        {
+          "reference_solid_zero_based": 2,
+          "volume_mm3": 849.313
+        },
+        {
+          "reference_solid_zero_based": 3,
+          "volume_mm3": 7.799
+        },
+        {
+          "reference_solid_zero_based": 18,
+          "volume_mm3": 52.473
+        },
+        {
+          "reference_solid_zero_based": 19,
+          "volume_mm3": 241.568
+        },
+        {
+          "reference_solid_zero_based": 20,
+          "volume_mm3": 218.28
+        },
+        {
+          "reference_solid_zero_based": 21,
+          "volume_mm3": 56.549
+        }
+      ]
+    },
+    {
+      "offset_xyz_mm": [
+        -110,
+        26,
+        -12
+      ],
+      "interferences": [
+        {
+          "reference_solid_zero_based": 1,
+          "volume_mm3": 2684.535
+        },
+        {
+          "reference_solid_zero_based": 2,
+          "volume_mm3": 389.362
+        },
+        {
+          "reference_solid_zero_based": 19,
+          "volume_mm3": 241.568
+        },
+        {
+          "reference_solid_zero_based": 20,
+          "volume_mm3": 58.508
+        },
+        {
+          "reference_solid_zero_based": 21,
+          "volume_mm3": 56.549
+        }
+      ]
+    },
+    {
+      "offset_xyz_mm": [
+        -110,
+        26,
+        0
+      ],
+      "interferences": [
+        {
+          "reference_solid_zero_based": 1,
+          "volume_mm3": 2684.535
+        },
+        {
+          "reference_solid_zero_based": 2,
+          "volume_mm3": 389.362
+        },
+        {
+          "reference_solid_zero_based": 19,
+          "volume_mm3": 241.568
+        },
+        {
+          "reference_solid_zero_based": 20,
+          "volume_mm3": 214.404
+        },
+        {
+          "reference_solid_zero_based": 21,
+          "volume_mm3": 56.549
+        }
+      ]
+    },
+    {
+      "offset_xyz_mm": [
+        -110,
+        26,
+        12
+      ],
+      "interferences": [
+        {
+          "reference_solid_zero_based": 1,
+          "volume_mm3": 2684.535
+        },
+        {
+          "reference_solid_zero_based": 2,
+          "volume_mm3": 389.362
+        },
+        {
+          "reference_solid_zero_based": 18,
+          "volume_mm3": 52.473
+        },
+        {
+          "reference_solid_zero_based": 19,
+          "volume_mm3": 241.568
+        },
+        {
+          "reference_solid_zero_based": 20,
+          "volume_mm3": 218.28
+        },
+        {
+          "reference_solid_zero_based": 21,
+          "volume_mm3": 56.549
+        }
+      ]
+    },
+    {
+      "offset_xyz_mm": [
+        -110,
+        32,
+        -12
+      ],
+      "interferences": [
+        {
+          "reference_solid_zero_based": 1,
+          "volume_mm3": 806.548
+        },
+        {
+          "reference_solid_zero_based": 2,
+          "volume_mm3": 53.198
+        },
+        {
+          "reference_solid_zero_based": 19,
+          "volume_mm3": 241.568
+        },
+        {
+          "reference_solid_zero_based": 20,
+          "volume_mm3": 58.508
+        },
+        {
+          "reference_solid_zero_based": 21,
+          "volume_mm3": 56.549
+        }
+      ]
+    },
+    {
+      "offset_xyz_mm": [
+        -110,
+        32,
+        0
+      ],
+      "interferences": [
+        {
+          "reference_solid_zero_based": 1,
+          "volume_mm3": 806.548
+        },
+        {
+          "reference_solid_zero_based": 2,
+          "volume_mm3": 53.198
+        },
+        {
+          "reference_solid_zero_based": 19,
+          "volume_mm3": 241.568
+        },
+        {
+          "reference_solid_zero_based": 20,
+          "volume_mm3": 214.404
+        },
+        {
+          "reference_solid_zero_based": 21,
+          "volume_mm3": 56.549
+        }
+      ]
+    },
+    {
+      "offset_xyz_mm": [
+        -110,
+        32,
+        12
+      ],
+      "interferences": [
+        {
+          "reference_solid_zero_based": 1,
+          "volume_mm3": 806.548
+        },
+        {
+          "reference_solid_zero_based": 2,
+          "volume_mm3": 53.198
+        },
+        {
+          "reference_solid_zero_based": 18,
+          "volume_mm3": 15.254
+        },
+        {
+          "reference_solid_zero_based": 19,
+          "volume_mm3": 241.568
+        },
+        {
+          "reference_solid_zero_based": 20,
+          "volume_mm3": 218.28
+        },
+        {
+          "reference_solid_zero_based": 21,
+          "volume_mm3": 56.549
+        }
+      ]
+    },
+    {
+      "offset_xyz_mm": [
+        -110,
+        38,
+        -12
+      ],
+      "interferences": [
+        {
+          "reference_solid_zero_based": 1,
+          "volume_mm3": 1.342
+        },
+        {
+          "reference_solid_zero_based": 19,
+          "volume_mm3": 238.705
+        },
+        {
+          "reference_solid_zero_based": 20,
+          "volume_mm3": 58.508
+        },
+        {
+          "reference_solid_zero_based": 21,
+          "volume_mm3": 56.549
+        }
+      ]
+    },
+    {
+      "offset_xyz_mm": [
+        -110,
+        38,
+        0
+      ],
+      "interferences": [
+        {
+          "reference_solid_zero_based": 1,
+          "volume_mm3": 1.342
+        },
+        {
+          "reference_solid_zero_based": 19,
+          "volume_mm3": 238.705
+        },
+        {
+          "reference_solid_zero_based": 20,
+          "volume_mm3": 190.868
+        },
+        {
+          "reference_solid_zero_based": 21,
+          "volume_mm3": 56.549
+        }
+      ]
+    },
+    {
+      "offset_xyz_mm": [
+        -110,
+        38,
+        12
+      ],
+      "interferences": [
+        {
+          "reference_solid_zero_based": 1,
+          "volume_mm3": 1.342
+        },
+        {
+          "reference_solid_zero_based": 19,
+          "volume_mm3": 238.705
+        },
+        {
+          "reference_solid_zero_based": 20,
+          "volume_mm3": 190.868
+        },
+        {
+          "reference_solid_zero_based": 21,
+          "volume_mm3": 56.549
+        }
+      ]
+    },
+    {
+      "offset_xyz_mm": [
+        -110,
+        44,
+        -12
+      ],
+      "interferences": [
+        {
+          "reference_solid_zero_based": 20,
+          "volume_mm3": 20.25
+        },
+        {
+          "reference_solid_zero_based": 21,
+          "volume_mm3": 16.918
+        }
+      ]
+    },
+    {
+      "offset_xyz_mm": [
+        -110,
+        44,
+        0
+      ],
+      "interferences": [
+        {
+          "reference_solid_zero_based": 20,
+          "volume_mm3": 20.25
+        },
+        {
+          "reference_solid_zero_based": 21,
+          "volume_mm3": 16.918
+        }
+      ]
+    },
+    {
+      "offset_xyz_mm": [
+        -110,
+        44,
+        12
+      ],
+      "interferences": [
+        {
+          "reference_solid_zero_based": 20,
+          "volume_mm3": 20.25
+        },
+        {
+          "reference_solid_zero_based": 21,
+          "volume_mm3": 16.918
+        }
+      ]
+    },
+    {
+      "offset_xyz_mm": [
+        -110,
+        50,
+        -12
+      ],
+      "interferences": []
+    },
+    {
+      "offset_xyz_mm": [
+        -110,
+        50,
+        0
+      ],
+      "interferences": []
+    },
+    {
+      "offset_xyz_mm": [
+        -110,
+        50,
+        12
+      ],
+      "interferences": []
+    },
+    {
+      "offset_xyz_mm": [
+        -96,
+        2,
+        -12
+      ],
+      "interferences": [
+        {
+          "reference_solid_zero_based": 0,
+          "volume_mm3": 3133.394
+        },
+        {
+          "reference_solid_zero_based": 1,
+          "volume_mm3": 7996.282
+        },
+        {
+          "reference_solid_zero_based": 2,
+          "volume_mm3": 3301.174
+        },
+        {
+          "reference_solid_zero_based": 19,
+          "volume_mm3": 241.566
+        },
+        {
+          "reference_solid_zero_based": 20,
+          "volume_mm3": 17.754
+        },
+        {
+          "reference_solid_zero_based": 21,
+          "volume_mm3": 31.645
+        }
+      ]
+    },
+    {
+      "offset_xyz_mm": [
+        -96,
+        2,
+        0
+      ],
+      "interferences": [
+        {
+          "reference_solid_zero_based": 0,
+          "volume_mm3": 707.894
+        },
+        {
+          "reference_solid_zero_based": 1,
+          "volume_mm3": 7996.282
+        },
+        {
+          "reference_solid_zero_based": 2,
+          "volume_mm3": 3301.174
+        },
+        {
+          "reference_solid_zero_based": 19,
+          "volume_mm3": 241.566
+        },
+        {
+          "reference_solid_zero_based": 20,
+          "volume_mm3": 207.533
+        },
+        {
+          "reference_solid_zero_based": 21,
+          "volume_mm3": 31.645
+        }
+      ]
+    },
+    {
+      "offset_xyz_mm": [
+        -96,
+        2,
+        12
+      ],
+      "interferences": [
+        {
+          "reference_solid_zero_based": 0,
+          "volume_mm3": 2867.864
+        },
+        {
+          "reference_solid_zero_based": 1,
+          "volume_mm3": 7996.282
+        },
+        {
+          "reference_solid_zero_based": 2,
+          "volume_mm3": 3301.174
+        },
+        {
+          "reference_solid_zero_based": 3,
+          "volume_mm3": 644.776
+        },
+        {
+          "reference_solid_zero_based": 18,
+          "volume_mm3": 310.57
+        },
+        {
+          "reference_solid_zero_based": 19,
+          "volume_mm3": 241.566
+        },
+        {
+          "reference_solid_zero_based": 20,
+          "volume_mm3": 394.578
+        },
+        {
+          "reference_solid_zero_based": 21,
+          "volume_mm3": 31.645
+        }
+      ]
+    },
+    {
+      "offset_xyz_mm": [
+        -96,
+        8,
+        -12
+      ],
+      "interferences": [
+        {
+          "reference_solid_zero_based": 1,
+          "volume_mm3": 7912.213
+        },
+        {
+          "reference_solid_zero_based": 2,
+          "volume_mm3": 2116.64
+        },
+        {
+          "reference_solid_zero_based": 19,
+          "volume_mm3": 241.568
+        },
+        {
+          "reference_solid_zero_based": 20,
+          "volume_mm3": 58.508
+        },
+        {
+          "reference_solid_zero_based": 21,
+          "volume_mm3": 56.549
+        }
+      ]
+    },
+    {
+      "offset_xyz_mm": [
+        -96,
+        8,
+        0
+      ],
+      "interferences": [
+        {
+          "reference_solid_zero_based": 1,
+          "volume_mm3": 7912.213
+        },
+        {
+          "reference_solid_zero_based": 2,
+          "volume_mm3": 2116.64
+        },
+        {
+          "reference_solid_zero_based": 19,
+          "volume_mm3": 241.568
+        },
+        {
+          "reference_solid_zero_based": 20,
+          "volume_mm3": 251.033
+        },
+        {
+          "reference_solid_zero_based": 21,
+          "volume_mm3": 56.549
+        }
+      ]
+    },
+    {
+      "offset_xyz_mm": [
+        -96,
+        8,
+        12
+      ],
+      "interferences": [
+        {
+          "reference_solid_zero_based": 1,
+          "volume_mm3": 7912.213
+        },
+        {
+          "reference_solid_zero_based": 2,
+          "volume_mm3": 2116.64
+        },
+        {
+          "reference_solid_zero_based": 3,
+          "volume_mm3": 568.371
+        },
+        {
+          "reference_solid_zero_based": 18,
+          "volume_mm3": 310.57
+        },
+        {
+          "reference_solid_zero_based": 19,
+          "volume_mm3": 241.568
+        },
+        {
+          "reference_solid_zero_based": 20,
+          "volume_mm3": 438.078
+        },
+        {
+          "reference_solid_zero_based": 21,
+          "volume_mm3": 56.549
+        }
+      ]
+    },
+    {
+      "offset_xyz_mm": [
+        -96,
+        14,
+        -12
+      ],
+      "interferences": [
+        {
+          "reference_solid_zero_based": 1,
+          "volume_mm3": 6455.697
+        },
+        {
+          "reference_solid_zero_based": 2,
+          "volume_mm3": 1534.023
+        },
+        {
+          "reference_solid_zero_based": 19,
+          "volume_mm3": 241.568
+        },
+        {
+          "reference_solid_zero_based": 20,
+          "volume_mm3": 58.508
+        },
+        {
+          "reference_solid_zero_based": 21,
+          "volume_mm3": 56.549
+        }
+      ]
+    },
+    {
+      "offset_xyz_mm": [
+        -96,
+        14,
+        0
+      ],
+      "interferences": [
+        {
+          "reference_solid_zero_based": 1,
+          "volume_mm3": 6455.697
+        },
+        {
+          "reference_solid_zero_based": 2,
+          "volume_mm3": 1534.023
+        },
+        {
+          "reference_solid_zero_based": 19,
+          "volume_mm3": 241.568
+        },
+        {
+          "reference_solid_zero_based": 20,
+          "volume_mm3": 251.033
+        },
+        {
+          "reference_solid_zero_based": 21,
+          "volume_mm3": 56.549
+        }
+      ]
+    },
+    {
+      "offset_xyz_mm": [
+        -96,
+        14,
+        12
+      ],
+      "interferences": [
+        {
+          "reference_solid_zero_based": 1,
+          "volume_mm3": 6455.697
+        },
+        {
+          "reference_solid_zero_based": 2,
+          "volume_mm3": 1534.023
+        },
+        {
+          "reference_solid_zero_based": 3,
+          "volume_mm3": 332.307
+        },
+        {
+          "reference_solid_zero_based": 18,
+          "volume_mm3": 206.462
+        },
+        {
+          "reference_solid_zero_based": 19,
+          "volume_mm3": 241.568
+        },
+        {
+          "reference_solid_zero_based": 20,
+          "volume_mm3": 438.078
+        },
+        {
+          "reference_solid_zero_based": 21,
+          "volume_mm3": 56.549
+        }
+      ]
+    },
+    {
+      "offset_xyz_mm": [
+        -96,
+        20,
+        -12
+      ],
+      "interferences": [
+        {
+          "reference_solid_zero_based": 1,
+          "volume_mm3": 4570.116
+        },
+        {
+          "reference_solid_zero_based": 2,
+          "volume_mm3": 849.313
+        },
+        {
+          "reference_solid_zero_based": 19,
+          "volume_mm3": 241.568
+        },
+        {
+          "reference_solid_zero_based": 20,
+          "volume_mm3": 58.508
+        },
+        {
+          "reference_solid_zero_based": 21,
+          "volume_mm3": 56.549
+        }
+      ]
+    },
+    {
+      "offset_xyz_mm": [
+        -96,
+        20,
+        0
+      ],
+      "interferences": [
+        {
+          "reference_solid_zero_based": 1,
+          "volume_mm3": 4570.116
+        },
+        {
+          "reference_solid_zero_based": 2,
+          "volume_mm3": 849.313
+        },
+        {
+          "reference_solid_zero_based": 19,
+          "volume_mm3": 241.568
+        },
+        {
+          "reference_solid_zero_based": 20,
+          "volume_mm3": 251.033
+        },
+        {
+          "reference_solid_zero_based": 21,
+          "volume_mm3": 56.549
+        }
+      ]
+    },
+    {
+      "offset_xyz_mm": [
+        -96,
+        20,
+        12
+      ],
+      "interferences": [
+        {
+          "reference_solid_zero_based": 1,
+          "volume_mm3": 4570.116
+        },
+        {
+          "reference_solid_zero_based": 2,
+          "volume_mm3": 849.313
+        },
+        {
+          "reference_solid_zero_based": 3,
+          "volume_mm3": 106.309
+        },
+        {
+          "reference_solid_zero_based": 18,
+          "volume_mm3": 154.5
+        },
+        {
+          "reference_solid_zero_based": 19,
+          "volume_mm3": 241.568
+        },
+        {
+          "reference_solid_zero_based": 20,
+          "volume_mm3": 438.078
+        },
+        {
+          "reference_solid_zero_based": 21,
+          "volume_mm3": 56.549
+        }
+      ]
+    },
+    {
+      "offset_xyz_mm": [
+        -96,
+        26,
+        -12
+      ],
+      "interferences": [
+        {
+          "reference_solid_zero_based": 1,
+          "volume_mm3": 2684.535
+        },
+        {
+          "reference_solid_zero_based": 2,
+          "volume_mm3": 389.362
+        },
+        {
+          "reference_solid_zero_based": 19,
+          "volume_mm3": 241.568
+        },
+        {
+          "reference_solid_zero_based": 20,
+          "volume_mm3": 58.508
+        },
+        {
+          "reference_solid_zero_based": 21,
+          "volume_mm3": 56.549
+        }
+      ]
+    },
+    {
+      "offset_xyz_mm": [
+        -96,
+        26,
+        0
+      ],
+      "interferences": [
+        {
+          "reference_solid_zero_based": 1,
+          "volume_mm3": 2684.535
+        },
+        {
+          "reference_solid_zero_based": 2,
+          "volume_mm3": 389.362
+        },
+        {
+          "reference_solid_zero_based": 19,
+          "volume_mm3": 241.568
+        },
+        {
+          "reference_solid_zero_based": 20,
+          "volume_mm3": 251.033
+        },
+        {
+          "reference_solid_zero_based": 21,
+          "volume_mm3": 56.549
+        }
+      ]
+    },
+    {
+      "offset_xyz_mm": [
+        -96,
+        26,
+        12
+      ],
+      "interferences": [
+        {
+          "reference_solid_zero_based": 1,
+          "volume_mm3": 2684.535
+        },
+        {
+          "reference_solid_zero_based": 2,
+          "volume_mm3": 389.362
+        },
+        {
+          "reference_solid_zero_based": 18,
+          "volume_mm3": 154.428
+        },
+        {
+          "reference_solid_zero_based": 19,
+          "volume_mm3": 241.568
+        },
+        {
+          "reference_solid_zero_based": 20,
+          "volume_mm3": 438.078
+        },
+        {
+          "reference_solid_zero_based": 21,
+          "volume_mm3": 56.549
+        }
+      ]
+    },
+    {
+      "offset_xyz_mm": [
+        -96,
+        32,
+        -12
+      ],
+      "interferences": [
+        {
+          "reference_solid_zero_based": 1,
+          "volume_mm3": 806.548
+        },
+        {
+          "reference_solid_zero_based": 2,
+          "volume_mm3": 53.198
+        },
+        {
+          "reference_solid_zero_based": 19,
+          "volume_mm3": 241.568
+        },
+        {
+          "reference_solid_zero_based": 20,
+          "volume_mm3": 58.508
+        },
+        {
+          "reference_solid_zero_based": 21,
+          "volume_mm3": 56.549
+        }
+      ]
+    },
+    {
+      "offset_xyz_mm": [
+        -96,
+        32,
+        0
+      ],
+      "interferences": [
+        {
+          "reference_solid_zero_based": 1,
+          "volume_mm3": 806.548
+        },
+        {
+          "reference_solid_zero_based": 2,
+          "volume_mm3": 53.198
+        },
+        {
+          "reference_solid_zero_based": 19,
+          "volume_mm3": 241.568
+        },
+        {
+          "reference_solid_zero_based": 20,
+          "volume_mm3": 251.033
+        },
+        {
+          "reference_solid_zero_based": 21,
+          "volume_mm3": 56.549
+        }
+      ]
+    },
+    {
+      "offset_xyz_mm": [
+        -96,
+        32,
+        12
+      ],
+      "interferences": [
+        {
+          "reference_solid_zero_based": 1,
+          "volume_mm3": 806.548
+        },
+        {
+          "reference_solid_zero_based": 2,
+          "volume_mm3": 53.198
+        },
+        {
+          "reference_solid_zero_based": 18,
+          "volume_mm3": 45.836
+        },
+        {
+          "reference_solid_zero_based": 19,
+          "volume_mm3": 241.568
+        },
+        {
+          "reference_solid_zero_based": 20,
+          "volume_mm3": 390.326
+        },
+        {
+          "reference_solid_zero_based": 21,
+          "volume_mm3": 56.549
+        }
+      ]
+    },
+    {
+      "offset_xyz_mm": [
+        -96,
+        38,
+        -12
+      ],
+      "interferences": [
+        {
+          "reference_solid_zero_based": 1,
+          "volume_mm3": 1.342
+        },
+        {
+          "reference_solid_zero_based": 19,
+          "volume_mm3": 238.705
+        },
+        {
+          "reference_solid_zero_based": 20,
+          "volume_mm3": 58.508
+        },
+        {
+          "reference_solid_zero_based": 21,
+          "volume_mm3": 56.549
+        }
+      ]
+    },
+    {
+      "offset_xyz_mm": [
+        -96,
+        38,
+        0
+      ],
+      "interferences": [
+        {
+          "reference_solid_zero_based": 1,
+          "volume_mm3": 1.342
+        },
+        {
+          "reference_solid_zero_based": 19,
+          "volume_mm3": 238.705
+        },
+        {
+          "reference_solid_zero_based": 20,
+          "volume_mm3": 200.772
+        },
+        {
+          "reference_solid_zero_based": 21,
+          "volume_mm3": 56.549
+        }
+      ]
+    },
+    {
+      "offset_xyz_mm": [
+        -96,
+        38,
+        12
+      ],
+      "interferences": [
+        {
+          "reference_solid_zero_based": 1,
+          "volume_mm3": 1.342
+        },
+        {
+          "reference_solid_zero_based": 19,
+          "volume_mm3": 238.705
+        },
+        {
+          "reference_solid_zero_based": 20,
+          "volume_mm3": 200.772
+        },
+        {
+          "reference_solid_zero_based": 21,
+          "volume_mm3": 56.549
+        }
+      ]
+    },
+    {
+      "offset_xyz_mm": [
+        -96,
+        44,
+        -12
+      ],
+      "interferences": [
+        {
+          "reference_solid_zero_based": 20,
+          "volume_mm3": 20.25
+        },
+        {
+          "reference_solid_zero_based": 21,
+          "volume_mm3": 16.918
+        }
+      ]
+    },
+    {
+      "offset_xyz_mm": [
+        -96,
+        44,
+        0
+      ],
+      "interferences": [
+        {
+          "reference_solid_zero_based": 20,
+          "volume_mm3": 20.25
+        },
+        {
+          "reference_solid_zero_based": 21,
+          "volume_mm3": 16.918
+        }
+      ]
+    },
+    {
+      "offset_xyz_mm": [
+        -96,
+        44,
+        12
+      ],
+      "interferences": [
+        {
+          "reference_solid_zero_based": 20,
+          "volume_mm3": 20.25
+        },
+        {
+          "reference_solid_zero_based": 21,
+          "volume_mm3": 16.918
+        }
+      ]
+    },
+    {
+      "offset_xyz_mm": [
+        -96,
+        50,
+        -12
+      ],
+      "interferences": []
+    },
+    {
+      "offset_xyz_mm": [
+        -96,
+        50,
+        0
+      ],
+      "interferences": []
+    },
+    {
+      "offset_xyz_mm": [
+        -96,
+        50,
+        12
+      ],
+      "interferences": []
+    },
+    {
+      "offset_xyz_mm": [
+        -82,
+        2,
+        -12
+      ],
+      "interferences": [
+        {
+          "reference_solid_zero_based": 0,
+          "volume_mm3": 2436.894
+        },
+        {
+          "reference_solid_zero_based": 1,
+          "volume_mm3": 7996.282
+        },
+        {
+          "reference_solid_zero_based": 2,
+          "volume_mm3": 3301.174
+        },
+        {
+          "reference_solid_zero_based": 4,
+          "volume_mm3": 27.116
+        },
+        {
+          "reference_solid_zero_based": 19,
+          "volume_mm3": 241.566
+        },
+        {
+          "reference_solid_zero_based": 20,
+          "volume_mm3": 17.754
+        },
+        {
+          "reference_solid_zero_based": 21,
+          "volume_mm3": 31.645
+        }
+      ]
+    },
+    {
+      "offset_xyz_mm": [
+        -82,
+        2,
+        0
+      ],
+      "interferences": [
+        {
+          "reference_solid_zero_based": 0,
+          "volume_mm3": 406.894
+        },
+        {
+          "reference_solid_zero_based": 1,
+          "volume_mm3": 7996.282
+        },
+        {
+          "reference_solid_zero_based": 2,
+          "volume_mm3": 3301.174
+        },
+        {
+          "reference_solid_zero_based": 19,
+          "volume_mm3": 241.566
+        },
+        {
+          "reference_solid_zero_based": 20,
+          "volume_mm3": 207.533
+        },
+        {
+          "reference_solid_zero_based": 21,
+          "volume_mm3": 31.645
+        }
+      ]
+    },
+    {
+      "offset_xyz_mm": [
+        -82,
+        2,
+        12
+      ],
+      "interferences": [
+        {
+          "reference_solid_zero_based": 0,
+          "volume_mm3": 2206.364
+        },
+        {
+          "reference_solid_zero_based": 1,
+          "volume_mm3": 7996.282
+        },
+        {
+          "reference_solid_zero_based": 2,
+          "volume_mm3": 3301.174
+        },
+        {
+          "reference_solid_zero_based": 3,
+          "volume_mm3": 644.776
+        },
+        {
+          "reference_solid_zero_based": 18,
+          "volume_mm3": 310.57
+        },
+        {
+          "reference_solid_zero_based": 19,
+          "volume_mm3": 241.566
+        },
+        {
+          "reference_solid_zero_based": 20,
+          "volume_mm3": 400.058
+        },
+        {
+          "reference_solid_zero_based": 21,
+          "volume_mm3": 31.645
+        }
+      ]
+    },
+    {
+      "offset_xyz_mm": [
+        -82,
+        8,
+        -12
+      ],
+      "interferences": [
+        {
+          "reference_solid_zero_based": 1,
+          "volume_mm3": 7912.213
+        },
+        {
+          "reference_solid_zero_based": 2,
+          "volume_mm3": 2116.64
+        },
+        {
+          "reference_solid_zero_based": 4,
+          "volume_mm3": 5.148
+        },
+        {
+          "reference_solid_zero_based": 19,
+          "volume_mm3": 241.568
+        },
+        {
+          "reference_solid_zero_based": 20,
+          "volume_mm3": 58.508
+        },
+        {
+          "reference_solid_zero_based": 21,
+          "volume_mm3": 56.549
+        }
+      ]
+    },
+    {
+      "offset_xyz_mm": [
+        -82,
+        8,
+        0
+      ],
+      "interferences": [
+        {
+          "reference_solid_zero_based": 1,
+          "volume_mm3": 7912.213
+        },
+        {
+          "reference_solid_zero_based": 2,
+          "volume_mm3": 2116.64
+        },
+        {
+          "reference_solid_zero_based": 19,
+          "volume_mm3": 241.568
+        },
+        {
+          "reference_solid_zero_based": 20,
+          "volume_mm3": 251.033
+        },
+        {
+          "reference_solid_zero_based": 21,
+          "volume_mm3": 56.549
+        }
+      ]
+    },
+    {
+      "offset_xyz_mm": [
+        -82,
+        8,
+        12
+      ],
+      "interferences": [
+        {
+          "reference_solid_zero_based": 1,
+          "volume_mm3": 7912.213
+        },
+        {
+          "reference_solid_zero_based": 2,
+          "volume_mm3": 2116.64
+        },
+        {
+          "reference_solid_zero_based": 3,
+          "volume_mm3": 568.371
+        },
+        {
+          "reference_solid_zero_based": 18,
+          "volume_mm3": 310.57
+        },
+        {
+          "reference_solid_zero_based": 19,
+          "volume_mm3": 241.568
+        },
+        {
+          "reference_solid_zero_based": 20,
+          "volume_mm3": 443.558
+        },
+        {
+          "reference_solid_zero_based": 21,
+          "volume_mm3": 56.549
+        }
+      ]
+    },
+    {
+      "offset_xyz_mm": [
+        -82,
+        14,
+        -12
+      ],
+      "interferences": [
+        {
+          "reference_solid_zero_based": 1,
+          "volume_mm3": 6455.697
+        },
+        {
+          "reference_solid_zero_based": 2,
+          "volume_mm3": 1534.023
+        },
+        {
+          "reference_solid_zero_based": 19,
+          "volume_mm3": 241.568
+        },
+        {
+          "reference_solid_zero_based": 20,
+          "volume_mm3": 58.508
+        },
+        {
+          "reference_solid_zero_based": 21,
+          "volume_mm3": 56.549
+        }
+      ]
+    },
+    {
+      "offset_xyz_mm": [
+        -82,
+        14,
+        0
+      ],
+      "interferences": [
+        {
+          "reference_solid_zero_based": 1,
+          "volume_mm3": 6455.697
+        },
+        {
+          "reference_solid_zero_based": 2,
+          "volume_mm3": 1534.023
+        },
+        {
+          "reference_solid_zero_based": 19,
+          "volume_mm3": 241.568
+        },
+        {
+          "reference_solid_zero_based": 20,
+          "volume_mm3": 251.033
+        },
+        {
+          "reference_solid_zero_based": 21,
+          "volume_mm3": 56.549
+        }
+      ]
+    },
+    {
+      "offset_xyz_mm": [
+        -82,
+        14,
+        12
+      ],
+      "interferences": [
+        {
+          "reference_solid_zero_based": 1,
+          "volume_mm3": 6455.697
+        },
+        {
+          "reference_solid_zero_based": 2,
+          "volume_mm3": 1534.023
+        },
+        {
+          "reference_solid_zero_based": 3,
+          "volume_mm3": 332.307
+        },
+        {
+          "reference_solid_zero_based": 18,
+          "volume_mm3": 206.462
+        },
+        {
+          "reference_solid_zero_based": 19,
+          "volume_mm3": 241.568
+        },
+        {
+          "reference_solid_zero_based": 20,
+          "volume_mm3": 443.558
+        },
+        {
+          "reference_solid_zero_based": 21,
+          "volume_mm3": 56.549
+        }
+      ]
+    },
+    {
+      "offset_xyz_mm": [
+        -82,
+        20,
+        -12
+      ],
+      "interferences": [
+        {
+          "reference_solid_zero_based": 1,
+          "volume_mm3": 4570.116
+        },
+        {
+          "reference_solid_zero_based": 2,
+          "volume_mm3": 849.313
+        },
+        {
+          "reference_solid_zero_based": 19,
+          "volume_mm3": 241.568
+        },
+        {
+          "reference_solid_zero_based": 20,
+          "volume_mm3": 58.508
+        },
+        {
+          "reference_solid_zero_based": 21,
+          "volume_mm3": 56.549
+        }
+      ]
+    },
+    {
+      "offset_xyz_mm": [
+        -82,
+        20,
+        0
+      ],
+      "interferences": [
+        {
+          "reference_solid_zero_based": 1,
+          "volume_mm3": 4570.116
+        },
+        {
+          "reference_solid_zero_based": 2,
+          "volume_mm3": 849.313
+        },
+        {
+          "reference_solid_zero_based": 19,
+          "volume_mm3": 241.568
+        },
+        {
+          "reference_solid_zero_based": 20,
+          "volume_mm3": 251.033
+        },
+        {
+          "reference_solid_zero_based": 21,
+          "volume_mm3": 56.549
+        }
+      ]
+    },
+    {
+      "offset_xyz_mm": [
+        -82,
+        20,
+        12
+      ],
+      "interferences": [
+        {
+          "reference_solid_zero_based": 1,
+          "volume_mm3": 4570.116
+        },
+        {
+          "reference_solid_zero_based": 2,
+          "volume_mm3": 849.313
+        },
+        {
+          "reference_solid_zero_based": 3,
+          "volume_mm3": 106.309
+        },
+        {
+          "reference_solid_zero_based": 18,
+          "volume_mm3": 154.5
+        },
+        {
+          "reference_solid_zero_based": 19,
+          "volume_mm3": 241.568
+        },
+        {
+          "reference_solid_zero_based": 20,
+          "volume_mm3": 443.558
+        },
+        {
+          "reference_solid_zero_based": 21,
+          "volume_mm3": 56.549
+        }
+      ]
+    },
+    {
+      "offset_xyz_mm": [
+        -82,
+        26,
+        -12
+      ],
+      "interferences": [
+        {
+          "reference_solid_zero_based": 1,
+          "volume_mm3": 2684.535
+        },
+        {
+          "reference_solid_zero_based": 2,
+          "volume_mm3": 389.362
+        },
+        {
+          "reference_solid_zero_based": 19,
+          "volume_mm3": 241.568
+        },
+        {
+          "reference_solid_zero_based": 20,
+          "volume_mm3": 58.508
+        },
+        {
+          "reference_solid_zero_based": 21,
+          "volume_mm3": 56.549
+        }
+      ]
+    },
+    {
+      "offset_xyz_mm": [
+        -82,
+        26,
+        0
+      ],
+      "interferences": [
+        {
+          "reference_solid_zero_based": 1,
+          "volume_mm3": 2684.535
+        },
+        {
+          "reference_solid_zero_based": 2,
+          "volume_mm3": 389.362
+        },
+        {
+          "reference_solid_zero_based": 19,
+          "volume_mm3": 241.568
+        },
+        {
+          "reference_solid_zero_based": 20,
+          "volume_mm3": 251.033
+        },
+        {
+          "reference_solid_zero_based": 21,
+          "volume_mm3": 56.549
+        }
+      ]
+    },
+    {
+      "offset_xyz_mm": [
+        -82,
+        26,
+        12
+      ],
+      "interferences": [
+        {
+          "reference_solid_zero_based": 1,
+          "volume_mm3": 2684.535
+        },
+        {
+          "reference_solid_zero_based": 2,
+          "volume_mm3": 389.362
+        },
+        {
+          "reference_solid_zero_based": 18,
+          "volume_mm3": 154.428
+        },
+        {
+          "reference_solid_zero_based": 19,
+          "volume_mm3": 241.568
+        },
+        {
+          "reference_solid_zero_based": 20,
+          "volume_mm3": 443.558
+        },
+        {
+          "reference_solid_zero_based": 21,
+          "volume_mm3": 56.549
+        }
+      ]
+    },
+    {
+      "offset_xyz_mm": [
+        -82,
+        32,
+        -12
+      ],
+      "interferences": [
+        {
+          "reference_solid_zero_based": 1,
+          "volume_mm3": 806.548
+        },
+        {
+          "reference_solid_zero_based": 2,
+          "volume_mm3": 53.198
+        },
+        {
+          "reference_solid_zero_based": 19,
+          "volume_mm3": 241.568
+        },
+        {
+          "reference_solid_zero_based": 20,
+          "volume_mm3": 58.508
+        },
+        {
+          "reference_solid_zero_based": 21,
+          "volume_mm3": 56.549
+        }
+      ]
+    },
+    {
+      "offset_xyz_mm": [
+        -82,
+        32,
+        0
+      ],
+      "interferences": [
+        {
+          "reference_solid_zero_based": 1,
+          "volume_mm3": 806.548
+        },
+        {
+          "reference_solid_zero_based": 2,
+          "volume_mm3": 53.198
+        },
+        {
+          "reference_solid_zero_based": 19,
+          "volume_mm3": 241.568
+        },
+        {
+          "reference_solid_zero_based": 20,
+          "volume_mm3": 251.033
+        },
+        {
+          "reference_solid_zero_based": 21,
+          "volume_mm3": 56.549
+        }
+      ]
+    },
+    {
+      "offset_xyz_mm": [
+        -82,
+        32,
+        12
+      ],
+      "interferences": [
+        {
+          "reference_solid_zero_based": 1,
+          "volume_mm3": 806.548
+        },
+        {
+          "reference_solid_zero_based": 2,
+          "volume_mm3": 53.198
+        },
+        {
+          "reference_solid_zero_based": 18,
+          "volume_mm3": 45.836
+        },
+        {
+          "reference_solid_zero_based": 19,
+          "volume_mm3": 241.568
+        },
+        {
+          "reference_solid_zero_based": 20,
+          "volume_mm3": 390.387
+        },
+        {
+          "reference_solid_zero_based": 21,
+          "volume_mm3": 56.549
+        }
+      ]
+    },
+    {
+      "offset_xyz_mm": [
+        -82,
+        38,
+        -12
+      ],
+      "interferences": [
+        {
+          "reference_solid_zero_based": 1,
+          "volume_mm3": 1.342
+        },
+        {
+          "reference_solid_zero_based": 19,
+          "volume_mm3": 238.705
+        },
+        {
+          "reference_solid_zero_based": 20,
+          "volume_mm3": 58.508
+        },
+        {
+          "reference_solid_zero_based": 21,
+          "volume_mm3": 56.549
+        }
+      ]
+    },
+    {
+      "offset_xyz_mm": [
+        -82,
+        38,
+        0
+      ],
+      "interferences": [
+        {
+          "reference_solid_zero_based": 1,
+          "volume_mm3": 1.342
+        },
+        {
+          "reference_solid_zero_based": 19,
+          "volume_mm3": 238.705
+        },
+        {
+          "reference_solid_zero_based": 20,
+          "volume_mm3": 200.772
+        },
+        {
+          "reference_solid_zero_based": 21,
+          "volume_mm3": 56.549
+        }
+      ]
+    },
+    {
+      "offset_xyz_mm": [
+        -82,
+        38,
+        12
+      ],
+      "interferences": [
+        {
+          "reference_solid_zero_based": 1,
+          "volume_mm3": 1.342
+        },
+        {
+          "reference_solid_zero_based": 19,
+          "volume_mm3": 238.705
+        },
+        {
+          "reference_solid_zero_based": 20,
+          "volume_mm3": 200.772
+        },
+        {
+          "reference_solid_zero_based": 21,
+          "volume_mm3": 56.549
+        }
+      ]
+    },
+    {
+      "offset_xyz_mm": [
+        -82,
+        44,
+        -12
+      ],
+      "interferences": [
+        {
+          "reference_solid_zero_based": 20,
+          "volume_mm3": 20.25
+        },
+        {
+          "reference_solid_zero_based": 21,
+          "volume_mm3": 16.918
+        }
+      ]
+    },
+    {
+      "offset_xyz_mm": [
+        -82,
+        44,
+        0
+      ],
+      "interferences": [
+        {
+          "reference_solid_zero_based": 20,
+          "volume_mm3": 20.25
+        },
+        {
+          "reference_solid_zero_based": 21,
+          "volume_mm3": 16.918
+        }
+      ]
+    },
+    {
+      "offset_xyz_mm": [
+        -82,
+        44,
+        12
+      ],
+      "interferences": [
+        {
+          "reference_solid_zero_based": 20,
+          "volume_mm3": 20.25
+        },
+        {
+          "reference_solid_zero_based": 21,
+          "volume_mm3": 16.918
+        }
+      ]
+    },
+    {
+      "offset_xyz_mm": [
+        -82,
+        50,
+        -12
+      ],
+      "interferences": []
+    },
+    {
+      "offset_xyz_mm": [
+        -82,
+        50,
+        0
+      ],
+      "interferences": []
+    },
+    {
+      "offset_xyz_mm": [
+        -82,
+        50,
+        12
+      ],
+      "interferences": []
+    }
+  ]
+}

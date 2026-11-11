@@ -1,0 +1,607 @@
+{
+  "status": "CALCULATION_ONLY_NO_PHYSICAL_QUALIFICATION",
+  "design": {
+    "stroke_mm": 8.0,
+    "pitch_mm": 1.0,
+    "screw_diameter_mm": 6.0,
+    "thread_half_angle_deg": 30.0,
+    "collar_radius_mm": 4.8,
+    "handle_radius_mm": 19.0,
+    "pin_radius_mm": 12.0,
+    "pin_diameter_mm": 4.0,
+    "plate_thickness_mm": 4.0,
+    "index_positions": 6,
+    "cable_offset_mm": 12.0,
+    "guide_spacing_mm": 22.0,
+    "guide_side_clearance_mm": 0.4,
+    "brake_radius_mm": 17.0,
+    "brake_target_min_Nm": 0.035,
+    "brake_target_max_Nm": 0.06
+  },
+  "reference_load_N": 98.06649999999999,
+  "reference_payout_mm": 6.073745796940266,
+  "extra_geometric_stroke_mm": 1.9262542030597336,
+  "full_travel_turns": 8.0,
+  "index_increment_mm_if_catch_engages": 0.16666666666666666,
+  "thread_mu_threshold_collar_mu_0": 0.05152143287881894,
+  "equal_four_fingers_work_J_if_constant": 6.846333243628077,
+  "distal_jam_payout_at_joint_mm": 0.0,
+  "cases": {
+    "guarded_fixture_instrument_range_candidate_only": {
+      "input_tendon_N": 50.0,
+      "work_J_if_constant_over_reference_stroke": 0.3036872898470133,
+      "work_J_if_constant_over_full_stop": 0.4,
+      "guide_at_mu_0_25": {
+        "yaw_moment_Nm": 0.6,
+        "nominal_normal_each_N": 27.272727272727273,
+        "nominal_drag_N": 13.636363636363637
+      },
+      "pin": {
+        "frictionless_backdrive_Nm": 0.007957747154594767,
+        "ideal_pin_tangent_N": 0.6631455962162306,
+        "ideal_single_shear_MPa": 0.05277144981371759,
+        "ideal_plate_bearing_MPa": 0.04144659976351441
+      },
+      "brake": {
+        "brake_target_min_Nm": 0.035,
+        "margin_if_target_min_measured_Nm": 0.027042252845405235,
+        "shoe_normal_N_if_mu_0_2": 10.294117647058824
+      },
+      "screw_nominal_tension_MPa_at_20_1mm2": 2.487562189054726,
+      "payout_friction_sweep": [
+        {
+          "thread_mu": 0.0,
+          "collar_mu": 0.0,
+          "payout_torque_Nm": -0.007957747154594767,
+          "payout_tangential_handle_N_no_brake": -0.4188287976102509,
+          "payout_tangential_handle_N_with_max_brake": 2.739065939231854,
+          "can_backdrive_ideal": true
+        },
+        {
+          "thread_mu": 0.0,
+          "collar_mu": 0.05,
+          "payout_torque_Nm": 0.0040422528454052324,
+          "payout_tangential_handle_N_no_brake": 0.21275014975817014,
+          "payout_tangential_handle_N_with_max_brake": 3.370644886600275,
+          "can_backdrive_ideal": false
+        },
+        {
+          "thread_mu": 0.0,
+          "collar_mu": 0.15,
+          "payout_torque_Nm": 0.02804225284540523,
+          "payout_tangential_handle_N_no_brake": 1.4759080444950121,
+          "payout_tangential_handle_N_with_max_brake": 4.633802781337118,
+          "can_backdrive_ideal": false
+        },
+        {
+          "thread_mu": 0.03,
+          "collar_mu": 0.0,
+          "payout_torque_Nm": -0.003317258290115365,
+          "payout_tangential_handle_N_no_brake": -0.17459254158501922,
+          "payout_tangential_handle_N_with_max_brake": 2.983302195257086,
+          "can_backdrive_ideal": true
+        },
+        {
+          "thread_mu": 0.03,
+          "collar_mu": 0.05,
+          "payout_torque_Nm": 0.008682741709884634,
+          "payout_tangential_handle_N_no_brake": 0.45698640578340183,
+          "payout_tangential_handle_N_with_max_brake": 3.614881142625507,
+          "can_backdrive_ideal": false
+        },
+        {
+          "thread_mu": 0.03,
+          "collar_mu": 0.15,
+          "payout_torque_Nm": 0.03268274170988463,
+          "payout_tangential_handle_N_no_brake": 1.7201443005202437,
+          "payout_tangential_handle_N_with_max_brake": 4.878039037362349,
+          "can_backdrive_ideal": false
+        },
+        {
+          "thread_mu": 0.06,
+          "collar_mu": 0.0,
+          "payout_torque_Nm": 0.0013041823150088082,
+          "payout_tangential_handle_N_no_brake": 0.0686411744741478,
+          "payout_tangential_handle_N_with_max_brake": 3.2265359113162533,
+          "can_backdrive_ideal": false
+        },
+        {
+          "thread_mu": 0.06,
+          "collar_mu": 0.05,
+          "payout_torque_Nm": 0.013304182315008808,
+          "payout_tangential_handle_N_no_brake": 0.7002201218425689,
+          "payout_tangential_handle_N_with_max_brake": 3.858114858684674,
+          "can_backdrive_ideal": false
+        },
+        {
+          "thread_mu": 0.06,
+          "collar_mu": 0.15,
+          "payout_torque_Nm": 0.0373041823150088,
+          "payout_tangential_handle_N_no_brake": 1.9633780165794106,
+          "payout_tangential_handle_N_with_max_brake": 5.121272753421516,
+          "can_backdrive_ideal": false
+        },
+        {
+          "thread_mu": 0.12,
+          "collar_mu": 0.0,
+          "payout_torque_Nm": 0.010490385964652973,
+          "payout_tangential_handle_N_no_brake": 0.5521255770869986,
+          "payout_tangential_handle_N_with_max_brake": 3.7100203139291037,
+          "can_backdrive_ideal": false
+        },
+        {
+          "thread_mu": 0.12,
+          "collar_mu": 0.05,
+          "payout_torque_Nm": 0.022490385964652974,
+          "payout_tangential_handle_N_no_brake": 1.1837045244554196,
+          "payout_tangential_handle_N_with_max_brake": 4.3415992612975245,
+          "can_backdrive_ideal": false
+        },
+        {
+          "thread_mu": 0.12,
+          "collar_mu": 0.15,
+          "payout_torque_Nm": 0.04649038596465297,
+          "payout_tangential_handle_N_no_brake": 2.4468624191922617,
+          "payout_tangential_handle_N_with_max_brake": 5.604757156034367,
+          "can_backdrive_ideal": false
+        },
+        {
+          "thread_mu": 0.25,
+          "collar_mu": 0.0,
+          "payout_torque_Nm": 0.03013843168753424,
+          "payout_tangential_handle_N_no_brake": 1.5862332467123286,
+          "payout_tangential_handle_N_with_max_brake": 4.744127983554434,
+          "can_backdrive_ideal": false
+        },
+        {
+          "thread_mu": 0.25,
+          "collar_mu": 0.05,
+          "payout_torque_Nm": 0.042138431687534235,
+          "payout_tangential_handle_N_no_brake": 2.217812194080749,
+          "payout_tangential_handle_N_with_max_brake": 5.3757069309228545,
+          "can_backdrive_ideal": false
+        },
+        {
+          "thread_mu": 0.25,
+          "collar_mu": 0.15,
+          "payout_torque_Nm": 0.06613843168753424,
+          "payout_tangential_handle_N_no_brake": 3.4809700888175916,
+          "payout_tangential_handle_N_with_max_brake": 6.638864825659698,
+          "can_backdrive_ideal": false
+        }
+      ]
+    },
+    "10kg_equal_one_of_four": {
+      "input_tendon_N": 281.80028735632186,
+      "work_J_if_constant_over_reference_stroke": 1.7115833109070193,
+      "work_J_if_constant_over_full_stop": 2.2544022988505747,
+      "guide_at_mu_0_25": {
+        "yaw_moment_Nm": 3.3816034482758623,
+        "nominal_normal_each_N": 153.70924764890285,
+        "nominal_drag_N": 76.85462382445142
+      },
+      "pin": {
+        "frictionless_backdrive_Nm": 0.044849908697475155,
+        "ideal_pin_tangent_N": 3.737492391456263,
+        "ideal_single_shear_MPa": 0.2974201944343067,
+        "ideal_plate_bearing_MPa": 0.23359327446601644
+      },
+      "brake": {
+        "brake_target_min_Nm": 0.035,
+        "margin_if_target_min_measured_Nm": -0.009849908697475152,
+        "shoe_normal_N_if_mu_0_2": 10.294117647058824
+      },
+      "screw_nominal_tension_MPa_at_20_1mm2": 14.019914793846858,
+      "payout_friction_sweep": [
+        {
+          "thread_mu": 0.0,
+          "collar_mu": 0.0,
+          "payout_torque_Nm": -0.044849908697475155,
+          "payout_tangential_handle_N_no_brake": -2.360521510393429,
+          "payout_tangential_handle_N_with_max_brake": 0.7973732264486759,
+          "can_backdrive_ideal": true
+        },
+        {
+          "thread_mu": 0.0,
+          "collar_mu": 0.05,
+          "payout_torque_Nm": 0.022782160268042084,
+          "payout_tangential_handle_N_no_brake": 1.199061066739057,
+          "payout_tangential_handle_N_with_max_brake": 4.356955803581163,
+          "can_backdrive_ideal": false
+        },
+        {
+          "thread_mu": 0.0,
+          "collar_mu": 0.15,
+          "payout_torque_Nm": 0.15804629819907656,
+          "payout_tangential_handle_N_no_brake": 8.31822622100403,
+          "payout_tangential_handle_N_with_max_brake": 11.476120957846135,
+          "can_backdrive_ideal": false
+        },
+        {
+          "thread_mu": 0.03,
+          "collar_mu": 0.0,
+          "payout_torque_Nm": -0.018696086787793015,
+          "payout_tangential_handle_N_no_brake": -0.9840045677785798,
+          "payout_tangential_handle_N_with_max_brake": 2.1738901690635255,
+          "can_backdrive_ideal": true
+        },
+        {
+          "thread_mu": 0.03,
+          "collar_mu": 0.05,
+          "payout_torque_Nm": 0.04893598217772423,
+          "payout_tangential_handle_N_no_brake": 2.5755780093539067,
+          "payout_tangential_handle_N_with_max_brake": 5.7334727461960115,
+          "can_backdrive_ideal": false
+        },
+        {
+          "thread_mu": 0.03,
+          "collar_mu": 0.15,
+          "payout_torque_Nm": 0.18420012010875872,
+          "payout_tangential_handle_N_no_brake": 9.694743163618881,
+          "payout_tangential_handle_N_with_max_brake": 12.852637900460985,
+          "can_backdrive_ideal": false
+        },
+        {
+          "thread_mu": 0.06,
+          "collar_mu": 0.0,
+          "payout_torque_Nm": 0.007350379022690304,
+          "payout_tangential_handle_N_no_brake": 0.3868620538258055,
+          "payout_tangential_handle_N_with_max_brake": 3.5447567906679103,
+          "can_backdrive_ideal": false
+        },
+        {
+          "thread_mu": 0.06,
+          "collar_mu": 0.05,
+          "payout_torque_Nm": 0.07498244798820755,
+          "payout_tangential_handle_N_no_brake": 3.9464446309582923,
+          "payout_tangential_handle_N_with_max_brake": 7.104339367800398,
+          "can_backdrive_ideal": false
+        },
+        {
+          "thread_mu": 0.06,
+          "collar_mu": 0.15,
+          "payout_torque_Nm": 0.21024658591924203,
+          "payout_tangential_handle_N_no_brake": 11.065609785223264,
+          "payout_tangential_handle_N_with_max_brake": 14.223504522065369,
+          "can_backdrive_ideal": false
+        },
+        {
+          "thread_mu": 0.12,
+          "collar_mu": 0.0,
+          "payout_torque_Nm": 0.05912387558635867,
+          "payout_tangential_handle_N_no_brake": 3.111782925597825,
+          "payout_tangential_handle_N_with_max_brake": 6.26967766243993,
+          "can_backdrive_ideal": false
+        },
+        {
+          "thread_mu": 0.12,
+          "collar_mu": 0.05,
+          "payout_torque_Nm": 0.12675594455187592,
+          "payout_tangential_handle_N_no_brake": 6.671365502730311,
+          "payout_tangential_handle_N_with_max_brake": 9.829260239572417,
+          "can_backdrive_ideal": false
+        },
+        {
+          "thread_mu": 0.12,
+          "collar_mu": 0.15,
+          "payout_torque_Nm": 0.26202008248291037,
+          "payout_tangential_handle_N_no_brake": 13.790530656995283,
+          "payout_tangential_handle_N_with_max_brake": 16.94842539383739,
+          "can_backdrive_ideal": false
+        },
+        {
+          "thread_mu": 0.25,
+          "collar_mu": 0.0,
+          "payout_torque_Nm": 0.16986037420032052,
+          "payout_tangential_handle_N_no_brake": 8.940019694753712,
+          "payout_tangential_handle_N_with_max_brake": 12.097914431595816,
+          "can_backdrive_ideal": false
+        },
+        {
+          "thread_mu": 0.25,
+          "collar_mu": 0.05,
+          "payout_torque_Nm": 0.23749244316583776,
+          "payout_tangential_handle_N_no_brake": 12.499602271886198,
+          "payout_tangential_handle_N_with_max_brake": 15.657497008728305,
+          "can_backdrive_ideal": false
+        },
+        {
+          "thread_mu": 0.25,
+          "collar_mu": 0.15,
+          "payout_torque_Nm": 0.37275658109687226,
+          "payout_tangential_handle_N_no_brake": 19.618767426151173,
+          "payout_tangential_handle_N_with_max_brake": 22.776662162993276,
+          "can_backdrive_ideal": false
+        }
+      ]
+    },
+    "10kg_one_of_four_x1": {
+      "input_tendon_N": 1127.2011494252874,
+      "work_J_if_constant_over_reference_stroke": 6.846333243628077,
+      "work_J_if_constant_over_full_stop": 9.017609195402299,
+      "guide_at_mu_0_25": {
+        "yaw_moment_Nm": 13.52641379310345,
+        "nominal_normal_each_N": 614.8369905956114,
+        "nominal_drag_N": 307.4184952978057
+      },
+      "pin": {
+        "frictionless_backdrive_Nm": 0.17939963478990062,
+        "ideal_pin_tangent_N": 14.949969565825052,
+        "ideal_single_shear_MPa": 1.1896807777372267,
+        "ideal_plate_bearing_MPa": 0.9343730978640657
+      },
+      "brake": {
+        "brake_target_min_Nm": 0.035,
+        "margin_if_target_min_measured_Nm": -0.14439963478990062,
+        "shoe_normal_N_if_mu_0_2": 10.294117647058824
+      },
+      "screw_nominal_tension_MPa_at_20_1mm2": 56.079659175387434,
+      "payout_friction_sweep": [
+        {
+          "thread_mu": 0.0,
+          "collar_mu": 0.0,
+          "payout_torque_Nm": -0.17939963478990062,
+          "payout_tangential_handle_N_no_brake": -9.442086041573717,
+          "payout_tangential_handle_N_with_max_brake": -6.284191304731612,
+          "can_backdrive_ideal": true
+        },
+        {
+          "thread_mu": 0.0,
+          "collar_mu": 0.05,
+          "payout_torque_Nm": 0.09112864107216834,
+          "payout_tangential_handle_N_no_brake": 4.796244266956228,
+          "payout_tangential_handle_N_with_max_brake": 7.954139003798334,
+          "can_backdrive_ideal": false
+        },
+        {
+          "thread_mu": 0.0,
+          "collar_mu": 0.15,
+          "payout_torque_Nm": 0.6321851927963063,
+          "payout_tangential_handle_N_no_brake": 33.27290488401612,
+          "payout_tangential_handle_N_with_max_brake": 36.430799620858224,
+          "can_backdrive_ideal": false
+        },
+        {
+          "thread_mu": 0.03,
+          "collar_mu": 0.0,
+          "payout_torque_Nm": -0.07478434715117206,
+          "payout_tangential_handle_N_no_brake": -3.9360182711143192,
+          "payout_tangential_handle_N_with_max_brake": -0.7781235342722139,
+          "can_backdrive_ideal": true
+        },
+        {
+          "thread_mu": 0.03,
+          "collar_mu": 0.05,
+          "payout_torque_Nm": 0.1957439287108969,
+          "payout_tangential_handle_N_no_brake": 10.302312037415627,
+          "payout_tangential_handle_N_with_max_brake": 13.460206774257733,
+          "can_backdrive_ideal": false
+        },
+        {
+          "thread_mu": 0.03,
+          "collar_mu": 0.15,
+          "payout_torque_Nm": 0.7368004804350349,
+          "payout_tangential_handle_N_no_brake": 38.778972654475524,
+          "payout_tangential_handle_N_with_max_brake": 41.93686739131763,
+          "can_backdrive_ideal": false
+        },
+        {
+          "thread_mu": 0.06,
+          "collar_mu": 0.0,
+          "payout_torque_Nm": 0.029401516090761217,
+          "payout_tangential_handle_N_no_brake": 1.547448215303222,
+          "payout_tangential_handle_N_with_max_brake": 4.705342952145328,
+          "can_backdrive_ideal": false
+        },
+        {
+          "thread_mu": 0.06,
+          "collar_mu": 0.05,
+          "payout_torque_Nm": 0.2999297919528302,
+          "payout_tangential_handle_N_no_brake": 15.78577852383317,
+          "payout_tangential_handle_N_with_max_brake": 18.943673260675276,
+          "can_backdrive_ideal": false
+        },
+        {
+          "thread_mu": 0.06,
+          "collar_mu": 0.15,
+          "payout_torque_Nm": 0.8409863436769681,
+          "payout_tangential_handle_N_no_brake": 44.26243914089306,
+          "payout_tangential_handle_N_with_max_brake": 47.42033387773516,
+          "can_backdrive_ideal": false
+        },
+        {
+          "thread_mu": 0.12,
+          "collar_mu": 0.0,
+          "payout_torque_Nm": 0.23649550234543468,
+          "payout_tangential_handle_N_no_brake": 12.4471317023913,
+          "payout_tangential_handle_N_with_max_brake": 15.605026439233402,
+          "can_backdrive_ideal": false
+        },
+        {
+          "thread_mu": 0.12,
+          "collar_mu": 0.05,
+          "payout_torque_Nm": 0.5070237782075037,
+          "payout_tangential_handle_N_no_brake": 26.685462010921245,
+          "payout_tangential_handle_N_with_max_brake": 29.843356747763348,
+          "can_backdrive_ideal": false
+        },
+        {
+          "thread_mu": 0.12,
+          "collar_mu": 0.15,
+          "payout_torque_Nm": 1.0480803299316415,
+          "payout_tangential_handle_N_no_brake": 55.162122627981134,
+          "payout_tangential_handle_N_with_max_brake": 58.32001736482324,
+          "can_backdrive_ideal": false
+        },
+        {
+          "thread_mu": 0.25,
+          "collar_mu": 0.0,
+          "payout_torque_Nm": 0.6794414968012821,
+          "payout_tangential_handle_N_no_brake": 35.76007877901485,
+          "payout_tangential_handle_N_with_max_brake": 38.91797351585696,
+          "can_backdrive_ideal": false
+        },
+        {
+          "thread_mu": 0.25,
+          "collar_mu": 0.05,
+          "payout_torque_Nm": 0.949969772663351,
+          "payout_tangential_handle_N_no_brake": 49.99840908754479,
+          "payout_tangential_handle_N_with_max_brake": 53.156303824386896,
+          "can_backdrive_ideal": false
+        },
+        {
+          "thread_mu": 0.25,
+          "collar_mu": 0.15,
+          "payout_torque_Nm": 1.491026324387489,
+          "payout_tangential_handle_N_no_brake": 78.47506970460469,
+          "payout_tangential_handle_N_with_max_brake": 81.6329644414468,
+          "can_backdrive_ideal": false
+        }
+      ]
+    },
+    "10kg_one_of_four_x2": {
+      "input_tendon_N": 2254.402298850575,
+      "work_J_if_constant_over_reference_stroke": 13.692666487256155,
+      "work_J_if_constant_over_full_stop": 18.035218390804598,
+      "guide_at_mu_0_25": {
+        "yaw_moment_Nm": 27.0528275862069,
+        "nominal_normal_each_N": 1229.6739811912228,
+        "nominal_drag_N": 614.8369905956114
+      },
+      "pin": {
+        "frictionless_backdrive_Nm": 0.35879926957980124,
+        "ideal_pin_tangent_N": 29.899939131650104,
+        "ideal_single_shear_MPa": 2.3793615554744534,
+        "ideal_plate_bearing_MPa": 1.8687461957281315
+      },
+      "brake": {
+        "brake_target_min_Nm": 0.035,
+        "margin_if_target_min_measured_Nm": -0.3237992695798012,
+        "shoe_normal_N_if_mu_0_2": 10.294117647058824
+      },
+      "screw_nominal_tension_MPa_at_20_1mm2": 112.15931835077487,
+      "payout_friction_sweep": [
+        {
+          "thread_mu": 0.0,
+          "collar_mu": 0.0,
+          "payout_torque_Nm": -0.35879926957980124,
+          "payout_tangential_handle_N_no_brake": -18.884172083147433,
+          "payout_tangential_handle_N_with_max_brake": -15.726277346305329,
+          "can_backdrive_ideal": true
+        },
+        {
+          "thread_mu": 0.0,
+          "collar_mu": 0.05,
+          "payout_torque_Nm": 0.18225728214433667,
+          "payout_tangential_handle_N_no_brake": 9.592488533912457,
+          "payout_tangential_handle_N_with_max_brake": 12.750383270754561,
+          "can_backdrive_ideal": false
+        },
+        {
+          "thread_mu": 0.0,
+          "collar_mu": 0.15,
+          "payout_torque_Nm": 1.2643703855926125,
+          "payout_tangential_handle_N_no_brake": 66.54580976803224,
+          "payout_tangential_handle_N_with_max_brake": 69.70370450487435,
+          "can_backdrive_ideal": false
+        },
+        {
+          "thread_mu": 0.03,
+          "collar_mu": 0.0,
+          "payout_torque_Nm": -0.14956869430234412,
+          "payout_tangential_handle_N_no_brake": -7.8720365422286385,
+          "payout_tangential_handle_N_with_max_brake": -4.714141805386533,
+          "can_backdrive_ideal": true
+        },
+        {
+          "thread_mu": 0.03,
+          "collar_mu": 0.05,
+          "payout_torque_Nm": 0.3914878574217938,
+          "payout_tangential_handle_N_no_brake": 20.604624074831253,
+          "payout_tangential_handle_N_with_max_brake": 23.76251881167336,
+          "can_backdrive_ideal": false
+        },
+        {
+          "thread_mu": 0.03,
+          "collar_mu": 0.15,
+          "payout_torque_Nm": 1.4736009608700698,
+          "payout_tangential_handle_N_no_brake": 77.55794530895105,
+          "payout_tangential_handle_N_with_max_brake": 80.71584004579314,
+          "can_backdrive_ideal": false
+        },
+        {
+          "thread_mu": 0.06,
+          "collar_mu": 0.0,
+          "payout_torque_Nm": 0.058803032181522434,
+          "payout_tangential_handle_N_no_brake": 3.094896430606444,
+          "payout_tangential_handle_N_with_max_brake": 6.2527911674485495,
+          "can_backdrive_ideal": false
+        },
+        {
+          "thread_mu": 0.06,
+          "collar_mu": 0.05,
+          "payout_torque_Nm": 0.5998595839056604,
+          "payout_tangential_handle_N_no_brake": 31.57155704766634,
+          "payout_tangential_handle_N_with_max_brake": 34.72945178450845,
+          "can_backdrive_ideal": false
+        },
+        {
+          "thread_mu": 0.06,
+          "collar_mu": 0.15,
+          "payout_torque_Nm": 1.6819726873539362,
+          "payout_tangential_handle_N_no_brake": 88.52487828178612,
+          "payout_tangential_handle_N_with_max_brake": 91.68277301862823,
+          "can_backdrive_ideal": false
+        },
+        {
+          "thread_mu": 0.12,
+          "collar_mu": 0.0,
+          "payout_torque_Nm": 0.47299100469086935,
+          "payout_tangential_handle_N_no_brake": 24.8942634047826,
+          "payout_tangential_handle_N_with_max_brake": 28.0521581416247,
+          "can_backdrive_ideal": false
+        },
+        {
+          "thread_mu": 0.12,
+          "collar_mu": 0.05,
+          "payout_torque_Nm": 1.0140475564150073,
+          "payout_tangential_handle_N_no_brake": 53.37092402184249,
+          "payout_tangential_handle_N_with_max_brake": 56.5288187586846,
+          "can_backdrive_ideal": false
+        },
+        {
+          "thread_mu": 0.12,
+          "collar_mu": 0.15,
+          "payout_torque_Nm": 2.096160659863283,
+          "payout_tangential_handle_N_no_brake": 110.32424525596227,
+          "payout_tangential_handle_N_with_max_brake": 113.48213999280436,
+          "can_backdrive_ideal": false
+        },
+        {
+          "thread_mu": 0.25,
+          "collar_mu": 0.0,
+          "payout_torque_Nm": 1.3588829936025641,
+          "payout_tangential_handle_N_no_brake": 71.5201575580297,
+          "payout_tangential_handle_N_with_max_brake": 74.6780522948718,
+          "can_backdrive_ideal": false
+        },
+        {
+          "thread_mu": 0.25,
+          "collar_mu": 0.05,
+          "payout_torque_Nm": 1.899939545326702,
+          "payout_tangential_handle_N_no_brake": 99.99681817508959,
+          "payout_tangential_handle_N_with_max_brake": 103.1547129119317,
+          "can_backdrive_ideal": false
+        },
+        {
+          "thread_mu": 0.25,
+          "collar_mu": 0.15,
+          "payout_torque_Nm": 2.982052648774978,
+          "payout_tangential_handle_N_no_brake": 156.95013940920938,
+          "payout_tangential_handle_N_with_max_brake": 160.1080341460515,
+          "can_backdrive_ideal": false
+        }
+      ]
+    }
+  }
+}

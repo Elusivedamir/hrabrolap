@@ -1,0 +1,51 @@
+{
+  "cadquery_version": "2.7.0",
+  "bodies_per_pose": 40,
+  "poses_pin_withdrawn": 101,
+  "poses_pin_engaged": 49,
+  "body_states": 6000,
+  "pairs": 117000,
+  "brep_candidates": 3496,
+  "overlap_limit_mm3": 0.01,
+  "envelope_home_mm": [
+    80.0,
+    44.5,
+    41.0
+  ],
+  "status": "REJECTED_FIRST_ITERATION_BEFORE_CLEARANCE_FIXES",
+  "error_count": 300,
+  "pair_summary": [
+    {
+      "pair": [
+        "guard_fixed_cable_cover",
+        "pin_shank"
+      ],
+      "count": 101,
+      "max_overlap_mm3": 17.12598
+    },
+    {
+      "pair": [
+        "guard_fixed_cable_cover",
+        "pin_pull_pad"
+      ],
+      "count": 101,
+      "max_overlap_mm3": 30.9281
+    },
+    {
+      "pair": [
+        "frame_thrust_bridge",
+        "pin_spring_shoulder"
+      ],
+      "count": 49,
+      "max_overlap_mm3": 0.20895
+    },
+    {
+      "pair": [
+        "frame_thrust_bridge",
+        "spring_travel_envelope"
+      ],
+      "count": 49,
+      "max_overlap_mm3": 0.20895
+    }
+  ]
+}

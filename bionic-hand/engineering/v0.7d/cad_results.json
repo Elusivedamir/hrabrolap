@@ -1,0 +1,18 @@
+{
+  "cadquery_version": "2.7.0",
+  "bodies_per_pose": 44,
+  "poses_pin_withdrawn": 101,
+  "poses_pin_engaged": 49,
+  "poses_pin_transition": 20,
+  "misaligned_pin_negative_control_mm3": 37.69911184307751,
+  "body_states": 7480,
+  "pairs": 160820,
+  "brep_candidates": 5032,
+  "overlap_limit_mm3": 0.01,
+  "errors": [],
+  "envelope_home_mm": [
+    80.0,
+    53.5,
+    41.0
+  ]
+}

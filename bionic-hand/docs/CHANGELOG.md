@@ -1,3 +1,7 @@
+## 2026-11-11 — v0.7d
+
+Разработан одноканальный стендовый узел аварийного ослабления троса с ходом 8 мм, винтом М6×1, стальным индексным диском и отдельной фрикционной колодкой. Устранены пересечения штифта/пружины с крышкой/опорой. Проверены 12 расчётных сценариев, 170 CAD-поз и 81 компоновочное размещение на STEP v0.5d. Опубликованы исходники, STEP обеих поз, STL примерки, ведомость и протокол стенда. Компактное размещение и запас тормоза для целевой нагрузки не получены. Реальное освобождение, FEA, сборка одной рукой и IP не испытаны. [Пакет этапа](../engineering/v0.7d/README.md).
+
 ## 2026-11-11 — v0.7c
 
 Emergency release failure screening: documented hazards of bare quick-unhook, gearbox-lock versus distal jam, guarded captive clutch/brake candidate, 1-finger load sensitivity, idealized release work and seven required physical test gates. Design-only; no prototype or test claim. [Report](../engineering/v0.7c/README.md).
