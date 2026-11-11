@@ -17,7 +17,7 @@ CABLE_R=0.6       # Ø1.2 nominal, material not selected
 R_CENTER=5.8      # radius of drum 5.2 + half rope diameter
 Z=10.2
 SAMPLES=list(range(0,61,5))
-HALF_WIDTHS=(5.2,2.4)
+HALF_WIDTHS=(5.2,2.8)
 
 def cable_segments(deg):
     q=math.radians(deg)
@@ -55,26 +55,27 @@ def intersection_sum(segments,solid):
 
 def audit(export=True):
     rows=[]
-    for deg in SAMPLES:
-        tubes=cable_segments(deg)
-        row={'mcp_deg':deg,'cable_segment_count':len(tubes)}
-        for width in HALF_WIDTHS:
+    for width in HALF_WIDTHS:
+        tested=(range(0,61,5) if width==5.2 else range(61))
+        for deg in tested:
+            tubes=cable_segments(deg)
             cap=reel(deg,width)
-            row['w'+str(width)]={
+            rows.append({
+                'mcp_deg':deg,'half_width_mm':width,
+                'cable_segment_count':len(tubes),
                 'shape_valid':cap.isValid() and len(cap.Solids())==1,
-                'penetration_sum_mm3':round(intersection_sum(tubes,cap),5)}
-        rows.append(row)
+                'penetration_sum_mm3':round(intersection_sum(tubes,cap),5)})
     result={
       'version':'v0.6b','date':'2026-11-11',
       'reference':'v0.5h isolated geometry; NOT complete hand',
       'method':'CadQuery cylindrical cable chords, radius 0.6mm, arc segments ≤3 degrees; intentional groove contact not separately load-modelled',
-      'sampled_mcp_degrees':SAMPLES,'cable_center_radius_mm':R_CENTER,
-      'original_arm_full_width_mm':10.4,'test_arm_full_width_mm':4.8,
+      'sampled_reference_deg':list(range(0,61,5)), 'sampled_trial_deg':list(range(61)),'cable_center_radius_mm':R_CENTER,
+      'original_arm_full_width_mm':10.4,'test_arm_full_width_mm':5.6,
       'rows':rows,
-      'old_variant_collides':any(x['w5.2']['penetration_sum_mm3']>.02 for x in rows),
+      'old_variant_collides':any(x['half_width_mm']==5.2 and x['penetration_sum_mm3']>.02 for x in rows),
       'slim_geometric_candidate_passes_samples':all(
-          x['w2.4']['shape_valid'] and x['w2.4']['penetration_sum_mm3']<=.02 for x in rows),
-      'critical_blocker':'trial 4.8mm web leaves only 0.75mm nominal side wall per Ø3.3 bolt hole, NOT load-worthy',
+          x['shape_valid'] and x['penetration_sum_mm3']<=.02 for x in rows if x['half_width_mm']==2.8),
+      'critical_blocker':'trial 5.6mm web leaves only 1.15mm nominal side wall per Ø3.3 bolt hole, NOT load-worthy',
       'not_proved':['cable/winch end anchor','strand wear or friction',
       'functional automatic return and power-off release','fastener loads or preload',
       'full 5 finger CAD','dynamic forces','FEA and fatigue','IP','safe on-body use'],
@@ -83,10 +84,11 @@ def audit(export=True):
     assert result['old_variant_collides'] and result['slim_geometric_candidate_passes_samples']
     (HERE/'cable_sweep_v06b.json').write_text(json.dumps(result,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
     if export:
-        cq.exporters.export(reel(0,2.4),str(HERE/'FDM_SHAPE_ONLY_NARROW_CAPSTAN.stl'),tolerance=.1,angularTolerance=.1)
+        cq.exporters.export(reel(0,2.8),str(HERE/'FDM_SHAPE_ONLY_NARROW_CAPSTAN.stl'),tolerance=.1,angularTolerance=.1)
         cq.exporters.export(reel(0,2.4),str(HERE/'FDM_SHAPE_ONLY_NARROW_CAPSTAN.step'))
     print(result['status'])
-    for row in rows:print(row['mcp_deg'],row['w5.2']['penetration_sum_mm3'],row['w2.4']['penetration_sum_mm3'])
+    for row in rows:
+        if row['mcp_deg']%5==0: print(row['half_width_mm'],row['mcp_deg'],row['penetration_sum_mm3'])
     return result
 
 if __name__=='__main__':audit()
