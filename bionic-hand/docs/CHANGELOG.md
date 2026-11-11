@@ -1,3 +1,6 @@
+## 2026-11-11 v0.7b
+Added [analytical release gate](../engineering/v0.7b/README.md) with 12 locally passing Python unit tests. Identified self-locking gearbox and jammed cable as distinct unmitigated hazards. Model tension 281.80 N/finger under explicitly hypothetical equal 10 kg share and 0.6 efficiency. No hardware test.
+
 ## 2026-11-11 — v0.7a: минимальная программная EMG safety-модель без аппаратных выходов
 
 - Создан отдельный модуль 2-канальной синтетической ЭМГ: DISARMED/READY/FAULT, нейтральное включение, debounce, отбрасывание двойных сигналов, таймаут и защёлки отключений.
