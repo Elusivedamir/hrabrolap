@@ -1,3 +1,7 @@
+## v0.7p — exterior service hatch (2026-11-11)
+
+**16/16 local Python stdlib tests PASS** after correcting one initially invalid fixture assumption. Arithmetic window margins and hypothetical AABB tool-path intersections only. **NOT RUN:** real 3D five-finger swept volume, measured dimensions, one-handed maintenance, moving boot, emergency release, pull-out/fatigue, electrical and body tests. [Source](../engineering/v0.7p/README.md).
+
 ## v0.7o — tool access (2026-11-11)
 
 **14/14 local Python stdlib tests PASS:** AABB overlap, service box, gap arithmetic and invalid inputs. **NOT RUN:** full 3D CAD, measured pitch/tool, moving boot, one-handed maintenance, five-finger motion, anchor strength, physical test, load and body safety. [Source](../engineering/v0.7o/README.md).
