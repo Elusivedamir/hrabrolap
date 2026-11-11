@@ -1,3 +1,7 @@
+# v0.7c (2026-11-11): emergency-release architecture safety review
+
+[Design study](../engineering/v0.7c/README.md): rejected bare quick-unhook under tendon load; gearbox decoupling does NOT resolve distal tendon jam. Screened idealized equal-share and one-finger-load cases and energy, all explicitly assumptions. **No physical tests; no approved release design.** Next: captive guarded clutch/brake and five-finger packaging with physical bench fixture.
+
 # v0.7b (2026-11-11): emergency release analytical gate
 
 [12 unit tests and report](../engineering/v0.7b/README.md). Self-locking gearbox remains locked on power loss; tendon jam is independently blocking. Assumed 10 kg / 4 fingers, 40 mm lever, r5.8 mm, efficiency 0.6 -> 281.80 N tendon per finger. **No physical release, no safe wearable or load rating.**
