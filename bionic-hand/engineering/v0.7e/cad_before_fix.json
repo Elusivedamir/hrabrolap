@@ -1,0 +1,27 @@
+{
+  "status": "REJECTED_FIRST_ITERATION",
+  "pose_count": 91,
+  "total_error_records": 166,
+  "by_body_or_pair": [
+    {
+      "names": [
+        "drive_slot_captive"
+      ],
+      "count": 91
+    },
+    {
+      "names": [
+        "frame_upper_ear",
+        "brake_spring_reserve"
+      ],
+      "count": 45
+    },
+    {
+      "names": [
+        "frame_proximal_block",
+        "screw_head_reference"
+      ],
+      "count": 30
+    }
+  ]
+}

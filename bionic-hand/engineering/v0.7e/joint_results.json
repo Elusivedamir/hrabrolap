@@ -1,0 +1,114 @@
+{
+  "status": "ANALYTICAL_SCREEN_NO_LOAD_RATING",
+  "design": {
+    "radius_mm": 12.0,
+    "maximum_deg": 60.0,
+    "follower_diameter_mm": 4.0,
+    "screw_diameter_mm": 4.0,
+    "pitch_mm": 0.7,
+    "brake_min_Nm": 0.02,
+    "brake_max_Nm": 0.035
+  },
+  "jam_is_a_frozen_drive_sector_not_seized_main_pivot": true,
+  "candidate_brake_setpoint_is_unmeasured": true,
+  "jam_cases": [
+    {
+      "frozen_drive_deg": 0,
+      "stroke_to_open_mm": 0.0,
+      "turns_to_open": 0.0,
+      "final_finger_deg": 0.0
+    },
+    {
+      "frozen_drive_deg": 15,
+      "stroke_to_open_mm": 2.8941714587697502,
+      "turns_to_open": 4.134530655385357,
+      "final_finger_deg": 1.7763568394002505e-15
+    },
+    {
+      "frozen_drive_deg": 30,
+      "stroke_to_open_mm": 5.999999999999999,
+      "turns_to_open": 8.571428571428571,
+      "final_finger_deg": 0.0
+    },
+    {
+      "frozen_drive_deg": 45,
+      "stroke_to_open_mm": 9.105828541230249,
+      "turns_to_open": 13.008326487471784,
+      "final_finger_deg": 0.0
+    },
+    {
+      "frozen_drive_deg": 60,
+      "stroke_to_open_mm": 11.999999999999998,
+      "turns_to_open": 17.142857142857142,
+      "final_finger_deg": 0.0
+    }
+  ],
+  "radius_tradeoff": [
+    {
+      "radius_mm": 8,
+      "full_stroke_mm": 7.999999999999999,
+      "full_10kg_one_finger_force_N": 566.1872017348443
+    },
+    {
+      "radius_mm": 10,
+      "full_stroke_mm": 9.999999999999998,
+      "full_10kg_one_finger_force_N": 452.94976138787536
+    },
+    {
+      "radius_mm": 12,
+      "full_stroke_mm": 11.999999999999998,
+      "full_10kg_one_finger_force_N": 377.45813448989617
+    },
+    {
+      "radius_mm": 14,
+      "full_stroke_mm": 13.999999999999998,
+      "full_10kg_one_finger_force_N": 323.5355438484824
+    }
+  ],
+  "scenarios": {
+    "bench_screen_only": {
+      "assumed_mcp_moment_Nm": 0.1,
+      "max_ideal_gate_force_N": 9.622504486493762,
+      "frictionless_backdrive_Nm": 0.0010720284077645956,
+      "margin_if_brake_min_measured_Nm": 0.018927971592235405,
+      "pin": {
+        "pin_nominal_bending_MPa": 3.8286728848735554,
+        "pin_average_shear_MPa": 0.7657345769747111,
+        "assumed_pin_load_offset_mm": 2.5
+      }
+    },
+    "equal_10kg_one_finger": {
+      "assumed_mcp_moment_Nm": 0.9806649999999999,
+      "max_ideal_gate_force_N": 94.36453362247404,
+      "frictionless_backdrive_Nm": 0.01051300738500467,
+      "margin_if_brake_min_measured_Nm": 0.00948699261499533,
+      "pin": {
+        "pin_nominal_bending_MPa": 37.54645494644525,
+        "pin_average_shear_MPa": 7.509290989289051,
+        "assumed_pin_load_offset_mm": 2.5
+      }
+    },
+    "full_10kg_one_finger": {
+      "assumed_mcp_moment_Nm": 3.9226599999999996,
+      "max_ideal_gate_force_N": 377.45813448989617,
+      "frictionless_backdrive_Nm": 0.04205202954001868,
+      "margin_if_brake_min_measured_Nm": -0.02205202954001868,
+      "pin": {
+        "pin_nominal_bending_MPa": 150.185819785781,
+        "pin_average_shear_MPa": 30.037163957156203,
+        "assumed_pin_load_offset_mm": 2.5
+      }
+    },
+    "full_10kg_one_finger_x2": {
+      "assumed_mcp_moment_Nm": 7.845319999999999,
+      "max_ideal_gate_force_N": 754.9162689797923,
+      "frictionless_backdrive_Nm": 0.08410405908003736,
+      "margin_if_brake_min_measured_Nm": -0.06410405908003736,
+      "pin": {
+        "pin_nominal_bending_MPa": 300.371639571562,
+        "pin_average_shear_MPa": 60.074327914312406,
+        "assumed_pin_load_offset_mm": 2.5
+      }
+    }
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "scope": "width screen, not BRep assembly or true joint-axis reconstruction",
+  "reference_sha256": "179c8d0392a3e046bdb12aa1c132abed0a9279a7bdfaf40698090c5841597b45",
+  "proximal_open_bounding_box_centers_z_mm": {
+    "little": -30.75,
+    "ring": -10.250000000000002,
+    "middle": 10.250000000000002,
+    "index": 30.75
+  },
+  "nominal_lane_pitch_mm": [
+    20.5,
+    20.500000000000004,
+    20.5
+  ],
+  "module_width_mm": 19.6,
+  "bare_nominal_gap_mm": 0.8999999999999986,
+  "boot_reserve_per_facing_side_mm": 0.5,
+  "gap_with_boots_mm": -0.10000000000000142,
+  "tolerance_allowance_per_lane_mm": 0.2,
+  "target_operating_gap_mm": 0.25,
+  "margin_with_boot_tolerance_and_target_gap_mm": -0.7500000000000014,
+  "envelope_target_module_max_mm_for_assumed_reserves": 18.85
+}

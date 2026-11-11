@@ -1,0 +1,94 @@
+{
+  "cadquery": "2.7.0",
+  "pose_count": 91,
+  "solid_states": 1729,
+  "solid_pairs": 15561,
+  "solid_brep_candidates": 3653,
+  "cable_brep_candidates": 728,
+  "axis_bounds_mm": [
+    [
+      -34.75,
+      35.5
+    ],
+    [
+      -14.45303983041932,
+      31.212812921102035
+    ],
+    [
+      -8.8,
+      10.8
+    ]
+  ],
+  "adjacent_lane_pitch_mm": 20.5,
+  "bare_axial_width_mm": 19.6,
+  "negative_control_gate_follower_mm3": 0.5990042501515409,
+  "frozen_drive_open_samples": [
+    {
+      "drive_frozen_deg": 0,
+      "finger_deg": 0,
+      "gate_relative_deg": 0
+    },
+    {
+      "drive_frozen_deg": 5,
+      "finger_deg": 0,
+      "gate_relative_deg": 5
+    },
+    {
+      "drive_frozen_deg": 10,
+      "finger_deg": 0,
+      "gate_relative_deg": 10
+    },
+    {
+      "drive_frozen_deg": 15,
+      "finger_deg": 0,
+      "gate_relative_deg": 15
+    },
+    {
+      "drive_frozen_deg": 20,
+      "finger_deg": 0,
+      "gate_relative_deg": 20
+    },
+    {
+      "drive_frozen_deg": 25,
+      "finger_deg": 0,
+      "gate_relative_deg": 25
+    },
+    {
+      "drive_frozen_deg": 30,
+      "finger_deg": 0,
+      "gate_relative_deg": 30
+    },
+    {
+      "drive_frozen_deg": 35,
+      "finger_deg": 0,
+      "gate_relative_deg": 35
+    },
+    {
+      "drive_frozen_deg": 40,
+      "finger_deg": 0,
+      "gate_relative_deg": 40
+    },
+    {
+      "drive_frozen_deg": 45,
+      "finger_deg": 0,
+      "gate_relative_deg": 45
+    },
+    {
+      "drive_frozen_deg": 50,
+      "finger_deg": 0,
+      "gate_relative_deg": 50
+    },
+    {
+      "drive_frozen_deg": 55,
+      "finger_deg": 0,
+      "gate_relative_deg": 55
+    },
+    {
+      "drive_frozen_deg": 60,
+      "finger_deg": 0,
+      "gate_relative_deg": 60
+    }
+  ],
+  "volume_threshold_mm3": 0.01,
+  "errors": []
+}
