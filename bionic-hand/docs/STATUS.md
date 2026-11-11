@@ -1,3 +1,7 @@
+# v0.7m (2026-11-11): cable anchor packaging screen
+
+[Reproducible angular budget](../engineering/v0.7m/README.md): with 21.7614 mm CAD stroke, Ø1.2 mm hypothetical cable and assumed 30° reserve/60° anchor/15° guard, bare hub R4 fails by 16.05°; R5 passes 2D by 32.35°. **12 local unit tests passed; physical anchor, 3D clearance, retention strength and actual measured stroke NOT tested.**
+
 # v0.7l (2026-11-11) — geometry of cable winding
 
 [Reproducible script and report](../engineering/v0.7l/README.md): 12 geometric cases; 10/10 local tests. At bare hub R5 mm and cable Ø1.2 mm, effective R5.6 mm, 0.618 turns for CAD-only 21.7614 mm stroke, D/d=9.33 (NOT a safe bend rating). v0.7k's effective R5 must not be confused with bare hub R5. No physical measurements, termination, fatigue, force, safe release or purchase.
