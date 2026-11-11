@@ -1,3 +1,7 @@
+## 2026-11-11 — v0.7o
+
+Added reproducible stdlib AABB/tool-access screening and 14 passing local tests. Rejected illustrative 17 mm pitch / 12 mm width / Ø6 mm tool gap by 2 mm; no measured five-finger layout or real 3D CAD. [Report](../engineering/v0.7o/README.md).
+
 ## 2026-11-11 — v0.7n
 
 Added independent anchor-head service width and axial-stack arithmetic rejection screen, reproducible Python source and 13 passing tests. Exposed new packaging failure despite v0.7m angular clearance. No 3D integration, physical test or approved cable termination. [Report](../engineering/v0.7n/README.md).
