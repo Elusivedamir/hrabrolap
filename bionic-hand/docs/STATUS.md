@@ -1,3 +1,7 @@
+# v0.7n (2026-11-11) — anchor head/axial envelope screen
+
+[Reproducible screen](../engineering/v0.7n/README.md): 13/13 local Python tests; illustrative 7 mm service slot misses assumed Ø5.4 head with two-sided 0.5 mm tolerance + 0.5 mm clearance by 0.4 mm; illustrative 9.6 mm axial stack exceeds hypothetical 9 mm bay by 0.6 mm. All R4/5/6/8 FAIL the combined assumptions despite R5+ positive angular budget. NOT 3D CAD, physical test or approved load-bearing anchor.
+
 # v0.7m (2026-11-11): cable anchor packaging screen
 
 [Reproducible angular budget](../engineering/v0.7m/README.md): with 21.7614 mm CAD stroke, Ø1.2 mm hypothetical cable and assumed 30° reserve/60° anchor/15° guard, bare hub R4 fails by 16.05°; R5 passes 2D by 32.35°. **12 local unit tests passed; physical anchor, 3D clearance, retention strength and actual measured stroke NOT tested.**
