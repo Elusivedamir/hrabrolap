@@ -1,3 +1,5 @@
+> **v0.7m · [angular clearance for a replaceable unloaded cable anchor](engineering/v0.7m/README.md).** 12/12 unit tests; bare hub R4 mm fails assumed reserve/access/guard budget, R5+ only conditionally fits in 2D. No actual anchor, strength, 3D clearance or physical test.
+
 > **v0.7l · [проверка изгиба троса и намотки](engineering/v0.7l/README.md).** 12 геометрических вариантов, 10/10 тестов; выявлено несоответствие обозначений радиуса: R5 барабана не равно эффективному R5 троса. Никаких испытаний троса или крепления не было.
 
 > **v0.7k · [проверка чувствительности выбора мотора и барабана](engineering/v0.7k/README.md).** 32 расчётных случая, 12 unit-тестов. Уменьшение радиуса снижает момент, но увеличивает требуемую скорость; реальная сила и ход пока не измерены.
