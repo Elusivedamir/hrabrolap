@@ -1,3 +1,7 @@
+## 2026-11-11 — v0.7n
+
+Added independent anchor-head service width and axial-stack arithmetic rejection screen, reproducible Python source and 13 passing tests. Exposed new packaging failure despite v0.7m angular clearance. No 3D integration, physical test or approved cable termination. [Report](../engineering/v0.7n/README.md).
+
 ## 2026-11-11 — v0.7m
 
 Added standard-library cable termination angular packaging screen and 12 passing local unit tests. Found bare R4 negative angular budget under explicit hypothetical reserve/access/guard sectors; R5+ conditional in 2D only. No loaded termination, FEA or physical tests. [Report](../engineering/v0.7m/README.md).
