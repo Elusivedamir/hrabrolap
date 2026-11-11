@@ -1,0 +1,7701 @@
+{
+  "scope": "rigid swept cartridge box, 5 isolated MCP poses, alternative mounts; no load linkage",
+  "isolated_mounts": 36,
+  "mcp_poses_per_mount": 5,
+  "without_penetration": 0,
+  "reserve_left_in_axial_18_85mm_target_mm": 2.6000000000000014,
+  "mounts": [
+    {
+      "mount_offset_xyz_mm": [
+        -8.0,
+        9.4,
+        -4.0
+      ],
+      "hits": [
+        {
+          "joint_pose_deg": [
+            0,
+            0
+          ],
+          "part": "frame_upper_ear",
+          "volume_mm3": 68.8772
+        },
+        {
+          "joint_pose_deg": [
+            0,
+            0
+          ],
+          "part": "pin_pivot",
+          "volume_mm3": 9.2444
+        },
+        {
+          "joint_pose_deg": [
+            0,
+            0
+          ],
+          "part": "drive_drum",
+          "volume_mm3": 14.7861
+        },
+        {
+          "joint_pose_deg": [
+            0,
+            0
+          ],
+          "part": "drive_link",
+          "volume_mm3": 223.4188
+        },
+        {
+          "joint_pose_deg": [
+            0,
+            0
+          ],
+          "part": "drive_proximal_post",
+          "volume_mm3": 201.7982
+        },
+        {
+          "joint_pose_deg": [
+            0,
+            0
+          ],
+          "part": "drive_slot_captive",
+          "volume_mm3": 54.4177
+        },
+        {
+          "joint_pose_deg": [
+            0,
+            0
+          ],
+          "part": "finger_carrier",
+          "volume_mm3": 68.694
+        },
+        {
+          "joint_pose_deg": [
+            0,
+            0
+          ],
+          "part": "pin_follower",
+          "volume_mm3": 48.3805
+        },
+        {
+          "joint_pose_deg": [
+            30,
+            0
+          ],
+          "part": "frame_upper_ear",
+          "volume_mm3": 234.8712
+        },
+        {
+          "joint_pose_deg": [
+            30,
+            0
+          ],
+          "part": "pin_pivot",
+          "volume_mm3": 9.2444
+        },
+        {
+          "joint_pose_deg": [
+            30,
+            0
+          ],
+          "part": "drive_drum",
+          "volume_mm3": 14.7861
+        },
+        {
+          "joint_pose_deg": [
+            30,
+            0
+          ],
+          "part": "drive_link",
+          "volume_mm3": 223.4188
+        },
+        {
+          "joint_pose_deg": [
+            30,
+            0
+          ],
+          "part": "drive_proximal_post",
+          "volume_mm3": 201.7982
+        },
+        {
+          "joint_pose_deg": [
+            30,
+            0
+          ],
+          "part": "drive_slot_captive",
+          "volume_mm3": 54.4177
+        },
+        {
+          "joint_pose_deg": [
+            30,
+            0
+          ],
+          "part": "finger_carrier",
+          "volume_mm3": 68.694
+        },
+        {
+          "joint_pose_deg": [
+            30,
+            0
+          ],
+          "part": "pin_follower",
+          "volume_mm3": 48.3805
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            0
+          ],
+          "part": "frame_upper_ear",
+          "volume_mm3": 216.6946
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            0
+          ],
+          "part": "pin_pivot",
+          "volume_mm3": 9.2444
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            0
+          ],
+          "part": "drive_drum",
+          "volume_mm3": 14.7861
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            0
+          ],
+          "part": "drive_link",
+          "volume_mm3": 223.4188
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            0
+          ],
+          "part": "drive_proximal_post",
+          "volume_mm3": 201.7982
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            0
+          ],
+          "part": "drive_slot_captive",
+          "volume_mm3": 54.4177
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            0
+          ],
+          "part": "finger_carrier",
+          "volume_mm3": 68.694
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            0
+          ],
+          "part": "pin_follower",
+          "volume_mm3": 48.3805
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            30
+          ],
+          "part": "frame_upper_ear",
+          "volume_mm3": 216.6946
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            30
+          ],
+          "part": "pin_pivot",
+          "volume_mm3": 9.2444
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            30
+          ],
+          "part": "drive_drum",
+          "volume_mm3": 14.7861
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            30
+          ],
+          "part": "drive_link",
+          "volume_mm3": 223.4188
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            30
+          ],
+          "part": "drive_proximal_post",
+          "volume_mm3": 201.7982
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            30
+          ],
+          "part": "drive_slot_captive",
+          "volume_mm3": 54.4177
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            30
+          ],
+          "part": "finger_carrier",
+          "volume_mm3": 63.6853
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            30
+          ],
+          "part": "pin_follower",
+          "volume_mm3": 48.3805
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            60
+          ],
+          "part": "frame_upper_ear",
+          "volume_mm3": 216.6946
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            60
+          ],
+          "part": "pin_pivot",
+          "volume_mm3": 9.2444
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            60
+          ],
+          "part": "drive_drum",
+          "volume_mm3": 14.7861
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            60
+          ],
+          "part": "drive_link",
+          "volume_mm3": 223.4188
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            60
+          ],
+          "part": "drive_proximal_post",
+          "volume_mm3": 201.7982
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            60
+          ],
+          "part": "drive_slot_captive",
+          "volume_mm3": 54.4177
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            60
+          ],
+          "part": "finger_carrier",
+          "volume_mm3": 53.0471
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            60
+          ],
+          "part": "pin_follower",
+          "volume_mm3": 33.2897
+        }
+      ]
+    },
+    {
+      "mount_offset_xyz_mm": [
+        -8.0,
+        9.4,
+        -2.0
+      ],
+      "hits": [
+        {
+          "joint_pose_deg": [
+            0,
+            0
+          ],
+          "part": "frame_upper_ear",
+          "volume_mm3": 68.8772
+        },
+        {
+          "joint_pose_deg": [
+            0,
+            0
+          ],
+          "part": "pin_pivot",
+          "volume_mm3": 8.036
+        },
+        {
+          "joint_pose_deg": [
+            0,
+            0
+          ],
+          "part": "drive_link",
+          "volume_mm3": 68.2668
+        },
+        {
+          "joint_pose_deg": [
+            0,
+            0
+          ],
+          "part": "drive_proximal_post",
+          "volume_mm3": 201.7982
+        },
+        {
+          "joint_pose_deg": [
+            0,
+            0
+          ],
+          "part": "drive_slot_captive",
+          "volume_mm3": 54.4177
+        },
+        {
+          "joint_pose_deg": [
+            0,
+            0
+          ],
+          "part": "finger_carrier",
+          "volume_mm3": 68.694
+        },
+        {
+          "joint_pose_deg": [
+            0,
+            0
+          ],
+          "part": "pin_follower",
+          "volume_mm3": 48.3805
+        },
+        {
+          "joint_pose_deg": [
+            30,
+            0
+          ],
+          "part": "frame_upper_ear",
+          "volume_mm3": 234.8712
+        },
+        {
+          "joint_pose_deg": [
+            30,
+            0
+          ],
+          "part": "pin_pivot",
+          "volume_mm3": 8.036
+        },
+        {
+          "joint_pose_deg": [
+            30,
+            0
+          ],
+          "part": "drive_link",
+          "volume_mm3": 68.2668
+        },
+        {
+          "joint_pose_deg": [
+            30,
+            0
+          ],
+          "part": "drive_proximal_post",
+          "volume_mm3": 201.7982
+        },
+        {
+          "joint_pose_deg": [
+            30,
+            0
+          ],
+          "part": "drive_slot_captive",
+          "volume_mm3": 54.4177
+        },
+        {
+          "joint_pose_deg": [
+            30,
+            0
+          ],
+          "part": "finger_carrier",
+          "volume_mm3": 68.694
+        },
+        {
+          "joint_pose_deg": [
+            30,
+            0
+          ],
+          "part": "pin_follower",
+          "volume_mm3": 48.3805
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            0
+          ],
+          "part": "frame_upper_ear",
+          "volume_mm3": 216.6946
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            0
+          ],
+          "part": "pin_pivot",
+          "volume_mm3": 8.036
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            0
+          ],
+          "part": "drive_link",
+          "volume_mm3": 68.2668
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            0
+          ],
+          "part": "drive_proximal_post",
+          "volume_mm3": 201.7982
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            0
+          ],
+          "part": "drive_slot_captive",
+          "volume_mm3": 54.4177
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            0
+          ],
+          "part": "finger_carrier",
+          "volume_mm3": 68.694
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            0
+          ],
+          "part": "pin_follower",
+          "volume_mm3": 48.3805
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            30
+          ],
+          "part": "frame_upper_ear",
+          "volume_mm3": 216.6946
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            30
+          ],
+          "part": "pin_pivot",
+          "volume_mm3": 8.036
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            30
+          ],
+          "part": "drive_link",
+          "volume_mm3": 68.2668
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            30
+          ],
+          "part": "drive_proximal_post",
+          "volume_mm3": 201.7982
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            30
+          ],
+          "part": "drive_slot_captive",
+          "volume_mm3": 54.4177
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            30
+          ],
+          "part": "finger_carrier",
+          "volume_mm3": 63.6853
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            30
+          ],
+          "part": "pin_follower",
+          "volume_mm3": 48.3805
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            60
+          ],
+          "part": "frame_upper_ear",
+          "volume_mm3": 216.6946
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            60
+          ],
+          "part": "pin_pivot",
+          "volume_mm3": 8.036
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            60
+          ],
+          "part": "drive_link",
+          "volume_mm3": 68.2668
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            60
+          ],
+          "part": "drive_proximal_post",
+          "volume_mm3": 201.7982
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            60
+          ],
+          "part": "drive_slot_captive",
+          "volume_mm3": 54.4177
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            60
+          ],
+          "part": "finger_carrier",
+          "volume_mm3": 53.0471
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            60
+          ],
+          "part": "pin_follower",
+          "volume_mm3": 33.2897
+        }
+      ]
+    },
+    {
+      "mount_offset_xyz_mm": [
+        -8.0,
+        9.4,
+        0
+      ],
+      "hits": [
+        {
+          "joint_pose_deg": [
+            0,
+            0
+          ],
+          "part": "frame_upper_ear",
+          "volume_mm3": 68.8772
+        },
+        {
+          "joint_pose_deg": [
+            0,
+            0
+          ],
+          "part": "pin_pivot",
+          "volume_mm3": 6.8276
+        },
+        {
+          "joint_pose_deg": [
+            0,
+            0
+          ],
+          "part": "drive_proximal_post",
+          "volume_mm3": 167.4912
+        },
+        {
+          "joint_pose_deg": [
+            0,
+            0
+          ],
+          "part": "drive_slot_captive",
+          "volume_mm3": 48.976
+        },
+        {
+          "joint_pose_deg": [
+            0,
+            0
+          ],
+          "part": "pin_follower",
+          "volume_mm3": 45.2389
+        },
+        {
+          "joint_pose_deg": [
+            30,
+            0
+          ],
+          "part": "frame_upper_ear",
+          "volume_mm3": 234.8712
+        },
+        {
+          "joint_pose_deg": [
+            30,
+            0
+          ],
+          "part": "pin_pivot",
+          "volume_mm3": 6.8276
+        },
+        {
+          "joint_pose_deg": [
+            30,
+            0
+          ],
+          "part": "drive_proximal_post",
+          "volume_mm3": 167.4912
+        },
+        {
+          "joint_pose_deg": [
+            30,
+            0
+          ],
+          "part": "drive_slot_captive",
+          "volume_mm3": 48.976
+        },
+        {
+          "joint_pose_deg": [
+            30,
+            0
+          ],
+          "part": "pin_follower",
+          "volume_mm3": 45.2389
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            0
+          ],
+          "part": "frame_upper_ear",
+          "volume_mm3": 216.6946
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            0
+          ],
+          "part": "pin_pivot",
+          "volume_mm3": 6.8276
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            0
+          ],
+          "part": "drive_proximal_post",
+          "volume_mm3": 167.4912
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            0
+          ],
+          "part": "drive_slot_captive",
+          "volume_mm3": 48.976
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            0
+          ],
+          "part": "pin_follower",
+          "volume_mm3": 45.2389
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            30
+          ],
+          "part": "frame_upper_ear",
+          "volume_mm3": 216.6946
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            30
+          ],
+          "part": "pin_pivot",
+          "volume_mm3": 6.8276
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            30
+          ],
+          "part": "drive_proximal_post",
+          "volume_mm3": 167.4912
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            30
+          ],
+          "part": "drive_slot_captive",
+          "volume_mm3": 48.976
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            30
+          ],
+          "part": "pin_follower",
+          "volume_mm3": 45.2389
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            60
+          ],
+          "part": "frame_upper_ear",
+          "volume_mm3": 216.6946
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            60
+          ],
+          "part": "pin_pivot",
+          "volume_mm3": 6.8276
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            60
+          ],
+          "part": "drive_proximal_post",
+          "volume_mm3": 167.4912
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            60
+          ],
+          "part": "drive_slot_captive",
+          "volume_mm3": 48.976
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            60
+          ],
+          "part": "pin_follower",
+          "volume_mm3": 31.1281
+        }
+      ]
+    },
+    {
+      "mount_offset_xyz_mm": [
+        -8.0,
+        9.4,
+        2.0
+      ],
+      "hits": [
+        {
+          "joint_pose_deg": [
+            0,
+            0
+          ],
+          "part": "frame_upper_ear",
+          "volume_mm3": 68.8772
+        },
+        {
+          "joint_pose_deg": [
+            0,
+            0
+          ],
+          "part": "pin_pivot",
+          "volume_mm3": 5.6192
+        },
+        {
+          "joint_pose_deg": [
+            0,
+            0
+          ],
+          "part": "drive_proximal_post",
+          "volume_mm3": 120.1712
+        },
+        {
+          "joint_pose_deg": [
+            0,
+            0
+          ],
+          "part": "pin_follower",
+          "volume_mm3": 20.1062
+        },
+        {
+          "joint_pose_deg": [
+            30,
+            0
+          ],
+          "part": "frame_upper_ear",
+          "volume_mm3": 234.8712
+        },
+        {
+          "joint_pose_deg": [
+            30,
+            0
+          ],
+          "part": "pin_pivot",
+          "volume_mm3": 5.6192
+        },
+        {
+          "joint_pose_deg": [
+            30,
+            0
+          ],
+          "part": "drive_proximal_post",
+          "volume_mm3": 120.1712
+        },
+        {
+          "joint_pose_deg": [
+            30,
+            0
+          ],
+          "part": "pin_follower",
+          "volume_mm3": 20.1062
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            0
+          ],
+          "part": "frame_upper_ear",
+          "volume_mm3": 216.6946
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            0
+          ],
+          "part": "pin_pivot",
+          "volume_mm3": 5.6192
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            0
+          ],
+          "part": "drive_proximal_post",
+          "volume_mm3": 120.1712
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            0
+          ],
+          "part": "pin_follower",
+          "volume_mm3": 20.1062
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            30
+          ],
+          "part": "frame_upper_ear",
+          "volume_mm3": 216.6946
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            30
+          ],
+          "part": "pin_pivot",
+          "volume_mm3": 5.6192
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            30
+          ],
+          "part": "drive_proximal_post",
+          "volume_mm3": 120.1712
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            30
+          ],
+          "part": "pin_follower",
+          "volume_mm3": 20.1062
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            60
+          ],
+          "part": "frame_upper_ear",
+          "volume_mm3": 216.6946
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            60
+          ],
+          "part": "pin_pivot",
+          "volume_mm3": 5.6192
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            60
+          ],
+          "part": "drive_proximal_post",
+          "volume_mm3": 120.1712
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            60
+          ],
+          "part": "pin_follower",
+          "volume_mm3": 13.8347
+        }
+      ]
+    },
+    {
+      "mount_offset_xyz_mm": [
+        -8.0,
+        11.4,
+        -4.0
+      ],
+      "hits": [
+        {
+          "joint_pose_deg": [
+            0,
+            0
+          ],
+          "part": "drive_drum",
+          "volume_mm3": 3.3627
+        },
+        {
+          "joint_pose_deg": [
+            0,
+            0
+          ],
+          "part": "drive_link",
+          "volume_mm3": 185.4262
+        },
+        {
+          "joint_pose_deg": [
+            0,
+            0
+          ],
+          "part": "drive_proximal_post",
+          "volume_mm3": 201.7982
+        },
+        {
+          "joint_pose_deg": [
+            0,
+            0
+          ],
+          "part": "drive_slot_captive",
+          "volume_mm3": 54.4177
+        },
+        {
+          "joint_pose_deg": [
+            0,
+            0
+          ],
+          "part": "finger_carrier",
+          "volume_mm3": 50.3743
+        },
+        {
+          "joint_pose_deg": [
+            0,
+            0
+          ],
+          "part": "pin_follower",
+          "volume_mm3": 48.3805
+        },
+        {
+          "joint_pose_deg": [
+            30,
+            0
+          ],
+          "part": "frame_upper_ear",
+          "volume_mm3": 185.4945
+        },
+        {
+          "joint_pose_deg": [
+            30,
+            0
+          ],
+          "part": "drive_drum",
+          "volume_mm3": 3.3627
+        },
+        {
+          "joint_pose_deg": [
+            30,
+            0
+          ],
+          "part": "drive_link",
+          "volume_mm3": 185.4262
+        },
+        {
+          "joint_pose_deg": [
+            30,
+            0
+          ],
+          "part": "drive_proximal_post",
+          "volume_mm3": 201.7982
+        },
+        {
+          "joint_pose_deg": [
+            30,
+            0
+          ],
+          "part": "drive_slot_captive",
+          "volume_mm3": 54.4177
+        },
+        {
+          "joint_pose_deg": [
+            30,
+            0
+          ],
+          "part": "finger_carrier",
+          "volume_mm3": 50.3743
+        },
+        {
+          "joint_pose_deg": [
+            30,
+            0
+          ],
+          "part": "pin_follower",
+          "volume_mm3": 48.3805
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            0
+          ],
+          "part": "frame_upper_ear",
+          "volume_mm3": 212.0555
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            0
+          ],
+          "part": "drive_drum",
+          "volume_mm3": 3.3627
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            0
+          ],
+          "part": "drive_link",
+          "volume_mm3": 185.4262
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            0
+          ],
+          "part": "drive_proximal_post",
+          "volume_mm3": 201.7982
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            0
+          ],
+          "part": "drive_slot_captive",
+          "volume_mm3": 54.4177
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            0
+          ],
+          "part": "finger_carrier",
+          "volume_mm3": 50.3743
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            0
+          ],
+          "part": "pin_follower",
+          "volume_mm3": 48.3805
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            30
+          ],
+          "part": "frame_upper_ear",
+          "volume_mm3": 212.0555
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            30
+          ],
+          "part": "drive_drum",
+          "volume_mm3": 3.3627
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            30
+          ],
+          "part": "drive_link",
+          "volume_mm3": 185.4262
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            30
+          ],
+          "part": "drive_proximal_post",
+          "volume_mm3": 201.7982
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            30
+          ],
+          "part": "drive_slot_captive",
+          "volume_mm3": 54.4177
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            30
+          ],
+          "part": "finger_carrier",
+          "volume_mm3": 53.8411
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            30
+          ],
+          "part": "pin_follower",
+          "volume_mm3": 48.3805
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            60
+          ],
+          "part": "frame_upper_ear",
+          "volume_mm3": 212.0555
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            60
+          ],
+          "part": "drive_drum",
+          "volume_mm3": 3.3627
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            60
+          ],
+          "part": "drive_link",
+          "volume_mm3": 185.4262
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            60
+          ],
+          "part": "drive_proximal_post",
+          "volume_mm3": 201.7982
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            60
+          ],
+          "part": "drive_slot_captive",
+          "volume_mm3": 54.4177
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            60
+          ],
+          "part": "finger_carrier",
+          "volume_mm3": 40.9617
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            60
+          ],
+          "part": "pin_follower",
+          "volume_mm3": 33.2897
+        }
+      ]
+    },
+    {
+      "mount_offset_xyz_mm": [
+        -8.0,
+        11.4,
+        -2.0
+      ],
+      "hits": [
+        {
+          "joint_pose_deg": [
+            0,
+            0
+          ],
+          "part": "drive_link",
+          "volume_mm3": 56.658
+        },
+        {
+          "joint_pose_deg": [
+            0,
+            0
+          ],
+          "part": "drive_proximal_post",
+          "volume_mm3": 201.7982
+        },
+        {
+          "joint_pose_deg": [
+            0,
+            0
+          ],
+          "part": "drive_slot_captive",
+          "volume_mm3": 54.4177
+        },
+        {
+          "joint_pose_deg": [
+            0,
+            0
+          ],
+          "part": "finger_carrier",
+          "volume_mm3": 50.3743
+        },
+        {
+          "joint_pose_deg": [
+            0,
+            0
+          ],
+          "part": "pin_follower",
+          "volume_mm3": 48.3805
+        },
+        {
+          "joint_pose_deg": [
+            30,
+            0
+          ],
+          "part": "frame_upper_ear",
+          "volume_mm3": 185.4945
+        },
+        {
+          "joint_pose_deg": [
+            30,
+            0
+          ],
+          "part": "drive_link",
+          "volume_mm3": 56.658
+        },
+        {
+          "joint_pose_deg": [
+            30,
+            0
+          ],
+          "part": "drive_proximal_post",
+          "volume_mm3": 201.7982
+        },
+        {
+          "joint_pose_deg": [
+            30,
+            0
+          ],
+          "part": "drive_slot_captive",
+          "volume_mm3": 54.4177
+        },
+        {
+          "joint_pose_deg": [
+            30,
+            0
+          ],
+          "part": "finger_carrier",
+          "volume_mm3": 50.3743
+        },
+        {
+          "joint_pose_deg": [
+            30,
+            0
+          ],
+          "part": "pin_follower",
+          "volume_mm3": 48.3805
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            0
+          ],
+          "part": "frame_upper_ear",
+          "volume_mm3": 212.0555
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            0
+          ],
+          "part": "drive_link",
+          "volume_mm3": 56.658
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            0
+          ],
+          "part": "drive_proximal_post",
+          "volume_mm3": 201.7982
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            0
+          ],
+          "part": "drive_slot_captive",
+          "volume_mm3": 54.4177
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            0
+          ],
+          "part": "finger_carrier",
+          "volume_mm3": 50.3743
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            0
+          ],
+          "part": "pin_follower",
+          "volume_mm3": 48.3805
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            30
+          ],
+          "part": "frame_upper_ear",
+          "volume_mm3": 212.0555
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            30
+          ],
+          "part": "drive_link",
+          "volume_mm3": 56.658
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            30
+          ],
+          "part": "drive_proximal_post",
+          "volume_mm3": 201.7982
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            30
+          ],
+          "part": "drive_slot_captive",
+          "volume_mm3": 54.4177
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            30
+          ],
+          "part": "finger_carrier",
+          "volume_mm3": 53.8411
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            30
+          ],
+          "part": "pin_follower",
+          "volume_mm3": 48.3805
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            60
+          ],
+          "part": "frame_upper_ear",
+          "volume_mm3": 212.0555
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            60
+          ],
+          "part": "drive_link",
+          "volume_mm3": 56.658
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            60
+          ],
+          "part": "drive_proximal_post",
+          "volume_mm3": 201.7982
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            60
+          ],
+          "part": "drive_slot_captive",
+          "volume_mm3": 54.4177
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            60
+          ],
+          "part": "finger_carrier",
+          "volume_mm3": 40.9617
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            60
+          ],
+          "part": "pin_follower",
+          "volume_mm3": 33.2897
+        }
+      ]
+    },
+    {
+      "mount_offset_xyz_mm": [
+        -8.0,
+        11.4,
+        0
+      ],
+      "hits": [
+        {
+          "joint_pose_deg": [
+            0,
+            0
+          ],
+          "part": "drive_proximal_post",
+          "volume_mm3": 167.4912
+        },
+        {
+          "joint_pose_deg": [
+            0,
+            0
+          ],
+          "part": "drive_slot_captive",
+          "volume_mm3": 48.976
+        },
+        {
+          "joint_pose_deg": [
+            0,
+            0
+          ],
+          "part": "pin_follower",
+          "volume_mm3": 45.2389
+        },
+        {
+          "joint_pose_deg": [
+            30,
+            0
+          ],
+          "part": "frame_upper_ear",
+          "volume_mm3": 185.4945
+        },
+        {
+          "joint_pose_deg": [
+            30,
+            0
+          ],
+          "part": "drive_proximal_post",
+          "volume_mm3": 167.4912
+        },
+        {
+          "joint_pose_deg": [
+            30,
+            0
+          ],
+          "part": "drive_slot_captive",
+          "volume_mm3": 48.976
+        },
+        {
+          "joint_pose_deg": [
+            30,
+            0
+          ],
+          "part": "pin_follower",
+          "volume_mm3": 45.2389
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            0
+          ],
+          "part": "frame_upper_ear",
+          "volume_mm3": 212.0555
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            0
+          ],
+          "part": "drive_proximal_post",
+          "volume_mm3": 167.4912
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            0
+          ],
+          "part": "drive_slot_captive",
+          "volume_mm3": 48.976
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            0
+          ],
+          "part": "pin_follower",
+          "volume_mm3": 45.2389
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            30
+          ],
+          "part": "frame_upper_ear",
+          "volume_mm3": 212.0555
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            30
+          ],
+          "part": "drive_proximal_post",
+          "volume_mm3": 167.4912
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            30
+          ],
+          "part": "drive_slot_captive",
+          "volume_mm3": 48.976
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            30
+          ],
+          "part": "pin_follower",
+          "volume_mm3": 45.2389
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            60
+          ],
+          "part": "frame_upper_ear",
+          "volume_mm3": 212.0555
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            60
+          ],
+          "part": "drive_proximal_post",
+          "volume_mm3": 167.4912
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            60
+          ],
+          "part": "drive_slot_captive",
+          "volume_mm3": 48.976
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            60
+          ],
+          "part": "pin_follower",
+          "volume_mm3": 31.1281
+        }
+      ]
+    },
+    {
+      "mount_offset_xyz_mm": [
+        -8.0,
+        11.4,
+        2.0
+      ],
+      "hits": [
+        {
+          "joint_pose_deg": [
+            0,
+            0
+          ],
+          "part": "drive_proximal_post",
+          "volume_mm3": 120.1712
+        },
+        {
+          "joint_pose_deg": [
+            0,
+            0
+          ],
+          "part": "pin_follower",
+          "volume_mm3": 20.1062
+        },
+        {
+          "joint_pose_deg": [
+            30,
+            0
+          ],
+          "part": "frame_upper_ear",
+          "volume_mm3": 185.4945
+        },
+        {
+          "joint_pose_deg": [
+            30,
+            0
+          ],
+          "part": "drive_proximal_post",
+          "volume_mm3": 120.1712
+        },
+        {
+          "joint_pose_deg": [
+            30,
+            0
+          ],
+          "part": "pin_follower",
+          "volume_mm3": 20.1062
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            0
+          ],
+          "part": "frame_upper_ear",
+          "volume_mm3": 212.0555
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            0
+          ],
+          "part": "drive_proximal_post",
+          "volume_mm3": 120.1712
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            0
+          ],
+          "part": "pin_follower",
+          "volume_mm3": 20.1062
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            30
+          ],
+          "part": "frame_upper_ear",
+          "volume_mm3": 212.0555
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            30
+          ],
+          "part": "drive_proximal_post",
+          "volume_mm3": 120.1712
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            30
+          ],
+          "part": "pin_follower",
+          "volume_mm3": 20.1062
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            60
+          ],
+          "part": "frame_upper_ear",
+          "volume_mm3": 212.0555
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            60
+          ],
+          "part": "drive_proximal_post",
+          "volume_mm3": 120.1712
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            60
+          ],
+          "part": "pin_follower",
+          "volume_mm3": 13.8347
+        }
+      ]
+    },
+    {
+      "mount_offset_xyz_mm": [
+        -8.0,
+        13.4,
+        -4.0
+      ],
+      "hits": [
+        {
+          "joint_pose_deg": [
+            0,
+            0
+          ],
+          "part": "drive_link",
+          "volume_mm3": 145.4845
+        },
+        {
+          "joint_pose_deg": [
+            0,
+            0
+          ],
+          "part": "drive_proximal_post",
+          "volume_mm3": 201.7982
+        },
+        {
+          "joint_pose_deg": [
+            0,
+            0
+          ],
+          "part": "drive_slot_captive",
+          "volume_mm3": 54.4177
+        },
+        {
+          "joint_pose_deg": [
+            0,
+            0
+          ],
+          "part": "finger_carrier",
+          "volume_mm3": 37.9035
+        },
+        {
+          "joint_pose_deg": [
+            0,
+            0
+          ],
+          "part": "pin_follower",
+          "volume_mm3": 48.3805
+        },
+        {
+          "joint_pose_deg": [
+            30,
+            0
+          ],
+          "part": "frame_upper_ear",
+          "volume_mm3": 136.5569
+        },
+        {
+          "joint_pose_deg": [
+            30,
+            0
+          ],
+          "part": "drive_link",
+          "volume_mm3": 145.4845
+        },
+        {
+          "joint_pose_deg": [
+            30,
+            0
+          ],
+          "part": "drive_proximal_post",
+          "volume_mm3": 201.7982
+        },
+        {
+          "joint_pose_deg": [
+            30,
+            0
+          ],
+          "part": "drive_slot_captive",
+          "volume_mm3": 54.4177
+        },
+        {
+          "joint_pose_deg": [
+            30,
+            0
+          ],
+          "part": "finger_carrier",
+          "volume_mm3": 37.9035
+        },
+        {
+          "joint_pose_deg": [
+            30,
+            0
+          ],
+          "part": "pin_follower",
+          "volume_mm3": 48.3805
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            0
+          ],
+          "part": "frame_upper_ear",
+          "volume_mm3": 205.7301
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            0
+          ],
+          "part": "drive_link",
+          "volume_mm3": 145.4845
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            0
+          ],
+          "part": "drive_proximal_post",
+          "volume_mm3": 201.7982
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            0
+          ],
+          "part": "drive_slot_captive",
+          "volume_mm3": 54.4177
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            0
+          ],
+          "part": "finger_carrier",
+          "volume_mm3": 37.9035
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            0
+          ],
+          "part": "pin_follower",
+          "volume_mm3": 48.3805
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            30
+          ],
+          "part": "frame_upper_ear",
+          "volume_mm3": 205.7301
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            30
+          ],
+          "part": "drive_link",
+          "volume_mm3": 145.4845
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            30
+          ],
+          "part": "drive_proximal_post",
+          "volume_mm3": 201.7982
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            30
+          ],
+          "part": "drive_slot_captive",
+          "volume_mm3": 54.4177
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            30
+          ],
+          "part": "finger_carrier",
+          "volume_mm3": 43.0411
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            30
+          ],
+          "part": "pin_follower",
+          "volume_mm3": 48.3805
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            60
+          ],
+          "part": "frame_upper_ear",
+          "volume_mm3": 205.7301
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            60
+          ],
+          "part": "drive_link",
+          "volume_mm3": 145.4845
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            60
+          ],
+          "part": "drive_proximal_post",
+          "volume_mm3": 201.7982
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            60
+          ],
+          "part": "drive_slot_captive",
+          "volume_mm3": 54.4177
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            60
+          ],
+          "part": "finger_carrier",
+          "volume_mm3": 28.495
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            60
+          ],
+          "part": "pin_follower",
+          "volume_mm3": 33.2897
+        }
+      ]
+    },
+    {
+      "mount_offset_xyz_mm": [
+        -8.0,
+        13.4,
+        -2.0
+      ],
+      "hits": [
+        {
+          "joint_pose_deg": [
+            0,
+            0
+          ],
+          "part": "drive_link",
+          "volume_mm3": 44.4536
+        },
+        {
+          "joint_pose_deg": [
+            0,
+            0
+          ],
+          "part": "drive_proximal_post",
+          "volume_mm3": 201.7982
+        },
+        {
+          "joint_pose_deg": [
+            0,
+            0
+          ],
+          "part": "drive_slot_captive",
+          "volume_mm3": 54.4177
+        },
+        {
+          "joint_pose_deg": [
+            0,
+            0
+          ],
+          "part": "finger_carrier",
+          "volume_mm3": 37.9035
+        },
+        {
+          "joint_pose_deg": [
+            0,
+            0
+          ],
+          "part": "pin_follower",
+          "volume_mm3": 48.3805
+        },
+        {
+          "joint_pose_deg": [
+            30,
+            0
+          ],
+          "part": "frame_upper_ear",
+          "volume_mm3": 136.5569
+        },
+        {
+          "joint_pose_deg": [
+            30,
+            0
+          ],
+          "part": "drive_link",
+          "volume_mm3": 44.4536
+        },
+        {
+          "joint_pose_deg": [
+            30,
+            0
+          ],
+          "part": "drive_proximal_post",
+          "volume_mm3": 201.7982
+        },
+        {
+          "joint_pose_deg": [
+            30,
+            0
+          ],
+          "part": "drive_slot_captive",
+          "volume_mm3": 54.4177
+        },
+        {
+          "joint_pose_deg": [
+            30,
+            0
+          ],
+          "part": "finger_carrier",
+          "volume_mm3": 37.9035
+        },
+        {
+          "joint_pose_deg": [
+            30,
+            0
+          ],
+          "part": "pin_follower",
+          "volume_mm3": 48.3805
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            0
+          ],
+          "part": "frame_upper_ear",
+          "volume_mm3": 205.7301
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            0
+          ],
+          "part": "drive_link",
+          "volume_mm3": 44.4536
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            0
+          ],
+          "part": "drive_proximal_post",
+          "volume_mm3": 201.7982
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            0
+          ],
+          "part": "drive_slot_captive",
+          "volume_mm3": 54.4177
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            0
+          ],
+          "part": "finger_carrier",
+          "volume_mm3": 37.9035
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            0
+          ],
+          "part": "pin_follower",
+          "volume_mm3": 48.3805
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            30
+          ],
+          "part": "frame_upper_ear",
+          "volume_mm3": 205.7301
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            30
+          ],
+          "part": "drive_link",
+          "volume_mm3": 44.4536
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            30
+          ],
+          "part": "drive_proximal_post",
+          "volume_mm3": 201.7982
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            30
+          ],
+          "part": "drive_slot_captive",
+          "volume_mm3": 54.4177
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            30
+          ],
+          "part": "finger_carrier",
+          "volume_mm3": 43.0411
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            30
+          ],
+          "part": "pin_follower",
+          "volume_mm3": 48.3805
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            60
+          ],
+          "part": "frame_upper_ear",
+          "volume_mm3": 205.7301
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            60
+          ],
+          "part": "drive_link",
+          "volume_mm3": 44.4536
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            60
+          ],
+          "part": "drive_proximal_post",
+          "volume_mm3": 201.7982
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            60
+          ],
+          "part": "drive_slot_captive",
+          "volume_mm3": 54.4177
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            60
+          ],
+          "part": "finger_carrier",
+          "volume_mm3": 28.495
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            60
+          ],
+          "part": "pin_follower",
+          "volume_mm3": 33.2897
+        }
+      ]
+    },
+    {
+      "mount_offset_xyz_mm": [
+        -8.0,
+        13.4,
+        0
+      ],
+      "hits": [
+        {
+          "joint_pose_deg": [
+            0,
+            0
+          ],
+          "part": "drive_proximal_post",
+          "volume_mm3": 167.4912
+        },
+        {
+          "joint_pose_deg": [
+            0,
+            0
+          ],
+          "part": "drive_slot_captive",
+          "volume_mm3": 48.976
+        },
+        {
+          "joint_pose_deg": [
+            0,
+            0
+          ],
+          "part": "pin_follower",
+          "volume_mm3": 45.2389
+        },
+        {
+          "joint_pose_deg": [
+            30,
+            0
+          ],
+          "part": "frame_upper_ear",
+          "volume_mm3": 136.5569
+        },
+        {
+          "joint_pose_deg": [
+            30,
+            0
+          ],
+          "part": "drive_proximal_post",
+          "volume_mm3": 167.4912
+        },
+        {
+          "joint_pose_deg": [
+            30,
+            0
+          ],
+          "part": "drive_slot_captive",
+          "volume_mm3": 48.976
+        },
+        {
+          "joint_pose_deg": [
+            30,
+            0
+          ],
+          "part": "pin_follower",
+          "volume_mm3": 45.2389
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            0
+          ],
+          "part": "frame_upper_ear",
+          "volume_mm3": 205.7301
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            0
+          ],
+          "part": "drive_proximal_post",
+          "volume_mm3": 167.4912
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            0
+          ],
+          "part": "drive_slot_captive",
+          "volume_mm3": 48.976
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            0
+          ],
+          "part": "pin_follower",
+          "volume_mm3": 45.2389
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            30
+          ],
+          "part": "frame_upper_ear",
+          "volume_mm3": 205.7301
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            30
+          ],
+          "part": "drive_proximal_post",
+          "volume_mm3": 167.4912
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            30
+          ],
+          "part": "drive_slot_captive",
+          "volume_mm3": 48.976
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            30
+          ],
+          "part": "pin_follower",
+          "volume_mm3": 45.2389
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            60
+          ],
+          "part": "frame_upper_ear",
+          "volume_mm3": 205.7301
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            60
+          ],
+          "part": "drive_proximal_post",
+          "volume_mm3": 167.4912
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            60
+          ],
+          "part": "drive_slot_captive",
+          "volume_mm3": 48.976
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            60
+          ],
+          "part": "pin_follower",
+          "volume_mm3": 31.1281
+        }
+      ]
+    },
+    {
+      "mount_offset_xyz_mm": [
+        -8.0,
+        13.4,
+        2.0
+      ],
+      "hits": [
+        {
+          "joint_pose_deg": [
+            0,
+            0
+          ],
+          "part": "drive_proximal_post",
+          "volume_mm3": 120.1712
+        },
+        {
+          "joint_pose_deg": [
+            0,
+            0
+          ],
+          "part": "pin_follower",
+          "volume_mm3": 20.1062
+        },
+        {
+          "joint_pose_deg": [
+            30,
+            0
+          ],
+          "part": "frame_upper_ear",
+          "volume_mm3": 136.5569
+        },
+        {
+          "joint_pose_deg": [
+            30,
+            0
+          ],
+          "part": "drive_proximal_post",
+          "volume_mm3": 120.1712
+        },
+        {
+          "joint_pose_deg": [
+            30,
+            0
+          ],
+          "part": "pin_follower",
+          "volume_mm3": 20.1062
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            0
+          ],
+          "part": "frame_upper_ear",
+          "volume_mm3": 205.7301
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            0
+          ],
+          "part": "drive_proximal_post",
+          "volume_mm3": 120.1712
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            0
+          ],
+          "part": "pin_follower",
+          "volume_mm3": 20.1062
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            30
+          ],
+          "part": "frame_upper_ear",
+          "volume_mm3": 205.7301
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            30
+          ],
+          "part": "drive_proximal_post",
+          "volume_mm3": 120.1712
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            30
+          ],
+          "part": "pin_follower",
+          "volume_mm3": 20.1062
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            60
+          ],
+          "part": "frame_upper_ear",
+          "volume_mm3": 205.7301
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            60
+          ],
+          "part": "drive_proximal_post",
+          "volume_mm3": 120.1712
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            60
+          ],
+          "part": "pin_follower",
+          "volume_mm3": 13.8347
+        }
+      ]
+    },
+    {
+      "mount_offset_xyz_mm": [
+        -5.95,
+        9.4,
+        -4.0
+      ],
+      "hits": [
+        {
+          "joint_pose_deg": [
+            0,
+            0
+          ],
+          "part": "frame_upper_ear",
+          "volume_mm3": 63.6702
+        },
+        {
+          "joint_pose_deg": [
+            0,
+            0
+          ],
+          "part": "pin_pivot",
+          "volume_mm3": 9.2444
+        },
+        {
+          "joint_pose_deg": [
+            0,
+            0
+          ],
+          "part": "drive_drum",
+          "volume_mm3": 14.7861
+        },
+        {
+          "joint_pose_deg": [
+            0,
+            0
+          ],
+          "part": "drive_link",
+          "volume_mm3": 223.4188
+        },
+        {
+          "joint_pose_deg": [
+            0,
+            0
+          ],
+          "part": "drive_proximal_post",
+          "volume_mm3": 201.7982
+        },
+        {
+          "joint_pose_deg": [
+            0,
+            0
+          ],
+          "part": "drive_slot_captive",
+          "volume_mm3": 61.6406
+        },
+        {
+          "joint_pose_deg": [
+            0,
+            0
+          ],
+          "part": "finger_carrier",
+          "volume_mm3": 71.4615
+        },
+        {
+          "joint_pose_deg": [
+            0,
+            0
+          ],
+          "part": "pin_follower",
+          "volume_mm3": 48.3805
+        },
+        {
+          "joint_pose_deg": [
+            30,
+            0
+          ],
+          "part": "frame_upper_ear",
+          "volume_mm3": 209.9193
+        },
+        {
+          "joint_pose_deg": [
+            30,
+            0
+          ],
+          "part": "pin_pivot",
+          "volume_mm3": 9.2444
+        },
+        {
+          "joint_pose_deg": [
+            30,
+            0
+          ],
+          "part": "drive_drum",
+          "volume_mm3": 14.7861
+        },
+        {
+          "joint_pose_deg": [
+            30,
+            0
+          ],
+          "part": "drive_link",
+          "volume_mm3": 223.4188
+        },
+        {
+          "joint_pose_deg": [
+            30,
+            0
+          ],
+          "part": "drive_proximal_post",
+          "volume_mm3": 201.7982
+        },
+        {
+          "joint_pose_deg": [
+            30,
+            0
+          ],
+          "part": "drive_slot_captive",
+          "volume_mm3": 61.6406
+        },
+        {
+          "joint_pose_deg": [
+            30,
+            0
+          ],
+          "part": "finger_carrier",
+          "volume_mm3": 71.4615
+        },
+        {
+          "joint_pose_deg": [
+            30,
+            0
+          ],
+          "part": "pin_follower",
+          "volume_mm3": 48.3805
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            0
+          ],
+          "part": "frame_upper_ear",
+          "volume_mm3": 216.6946
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            0
+          ],
+          "part": "pin_pivot",
+          "volume_mm3": 9.2444
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            0
+          ],
+          "part": "drive_drum",
+          "volume_mm3": 14.7861
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            0
+          ],
+          "part": "drive_link",
+          "volume_mm3": 223.4188
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            0
+          ],
+          "part": "drive_proximal_post",
+          "volume_mm3": 201.7982
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            0
+          ],
+          "part": "drive_slot_captive",
+          "volume_mm3": 61.6406
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            0
+          ],
+          "part": "finger_carrier",
+          "volume_mm3": 71.4615
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            0
+          ],
+          "part": "pin_follower",
+          "volume_mm3": 48.3805
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            30
+          ],
+          "part": "frame_upper_ear",
+          "volume_mm3": 216.6946
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            30
+          ],
+          "part": "pin_pivot",
+          "volume_mm3": 9.2444
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            30
+          ],
+          "part": "drive_drum",
+          "volume_mm3": 14.7861
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            30
+          ],
+          "part": "drive_link",
+          "volume_mm3": 223.4188
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            30
+          ],
+          "part": "drive_proximal_post",
+          "volume_mm3": 201.7982
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            30
+          ],
+          "part": "drive_slot_captive",
+          "volume_mm3": 61.6406
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            30
+          ],
+          "part": "finger_carrier",
+          "volume_mm3": 63.6853
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            30
+          ],
+          "part": "pin_follower",
+          "volume_mm3": 48.3805
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            60
+          ],
+          "part": "frame_upper_ear",
+          "volume_mm3": 216.6946
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            60
+          ],
+          "part": "pin_pivot",
+          "volume_mm3": 9.2444
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            60
+          ],
+          "part": "drive_drum",
+          "volume_mm3": 14.7861
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            60
+          ],
+          "part": "drive_link",
+          "volume_mm3": 223.4188
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            60
+          ],
+          "part": "drive_proximal_post",
+          "volume_mm3": 201.7982
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            60
+          ],
+          "part": "drive_slot_captive",
+          "volume_mm3": 61.6406
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            60
+          ],
+          "part": "finger_carrier",
+          "volume_mm3": 62.4251
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            60
+          ],
+          "part": "pin_follower",
+          "volume_mm3": 48.3805
+        }
+      ]
+    },
+    {
+      "mount_offset_xyz_mm": [
+        -5.95,
+        9.4,
+        -2.0
+      ],
+      "hits": [
+        {
+          "joint_pose_deg": [
+            0,
+            0
+          ],
+          "part": "frame_upper_ear",
+          "volume_mm3": 63.6702
+        },
+        {
+          "joint_pose_deg": [
+            0,
+            0
+          ],
+          "part": "pin_pivot",
+          "volume_mm3": 8.036
+        },
+        {
+          "joint_pose_deg": [
+            0,
+            0
+          ],
+          "part": "drive_link",
+          "volume_mm3": 68.2668
+        },
+        {
+          "joint_pose_deg": [
+            0,
+            0
+          ],
+          "part": "drive_proximal_post",
+          "volume_mm3": 201.7982
+        },
+        {
+          "joint_pose_deg": [
+            0,
+            0
+          ],
+          "part": "drive_slot_captive",
+          "volume_mm3": 61.6406
+        },
+        {
+          "joint_pose_deg": [
+            0,
+            0
+          ],
+          "part": "finger_carrier",
+          "volume_mm3": 71.4615
+        },
+        {
+          "joint_pose_deg": [
+            0,
+            0
+          ],
+          "part": "pin_follower",
+          "volume_mm3": 48.3805
+        },
+        {
+          "joint_pose_deg": [
+            30,
+            0
+          ],
+          "part": "frame_upper_ear",
+          "volume_mm3": 209.9193
+        },
+        {
+          "joint_pose_deg": [
+            30,
+            0
+          ],
+          "part": "pin_pivot",
+          "volume_mm3": 8.036
+        },
+        {
+          "joint_pose_deg": [
+            30,
+            0
+          ],
+          "part": "drive_link",
+          "volume_mm3": 68.2668
+        },
+        {
+          "joint_pose_deg": [
+            30,
+            0
+          ],
+          "part": "drive_proximal_post",
+          "volume_mm3": 201.7982
+        },
+        {
+          "joint_pose_deg": [
+            30,
+            0
+          ],
+          "part": "drive_slot_captive",
+          "volume_mm3": 61.6406
+        },
+        {
+          "joint_pose_deg": [
+            30,
+            0
+          ],
+          "part": "finger_carrier",
+          "volume_mm3": 71.4615
+        },
+        {
+          "joint_pose_deg": [
+            30,
+            0
+          ],
+          "part": "pin_follower",
+          "volume_mm3": 48.3805
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            0
+          ],
+          "part": "frame_upper_ear",
+          "volume_mm3": 216.6946
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            0
+          ],
+          "part": "pin_pivot",
+          "volume_mm3": 8.036
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            0
+          ],
+          "part": "drive_link",
+          "volume_mm3": 68.2668
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            0
+          ],
+          "part": "drive_proximal_post",
+          "volume_mm3": 201.7982
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            0
+          ],
+          "part": "drive_slot_captive",
+          "volume_mm3": 61.6406
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            0
+          ],
+          "part": "finger_carrier",
+          "volume_mm3": 71.4615
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            0
+          ],
+          "part": "pin_follower",
+          "volume_mm3": 48.3805
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            30
+          ],
+          "part": "frame_upper_ear",
+          "volume_mm3": 216.6946
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            30
+          ],
+          "part": "pin_pivot",
+          "volume_mm3": 8.036
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            30
+          ],
+          "part": "drive_link",
+          "volume_mm3": 68.2668
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            30
+          ],
+          "part": "drive_proximal_post",
+          "volume_mm3": 201.7982
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            30
+          ],
+          "part": "drive_slot_captive",
+          "volume_mm3": 61.6406
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            30
+          ],
+          "part": "finger_carrier",
+          "volume_mm3": 63.6853
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            30
+          ],
+          "part": "pin_follower",
+          "volume_mm3": 48.3805
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            60
+          ],
+          "part": "frame_upper_ear",
+          "volume_mm3": 216.6946
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            60
+          ],
+          "part": "pin_pivot",
+          "volume_mm3": 8.036
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            60
+          ],
+          "part": "drive_link",
+          "volume_mm3": 68.2668
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            60
+          ],
+          "part": "drive_proximal_post",
+          "volume_mm3": 201.7982
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            60
+          ],
+          "part": "drive_slot_captive",
+          "volume_mm3": 61.6406
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            60
+          ],
+          "part": "finger_carrier",
+          "volume_mm3": 62.4251
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            60
+          ],
+          "part": "pin_follower",
+          "volume_mm3": 48.3805
+        }
+      ]
+    },
+    {
+      "mount_offset_xyz_mm": [
+        -5.95,
+        9.4,
+        0
+      ],
+      "hits": [
+        {
+          "joint_pose_deg": [
+            0,
+            0
+          ],
+          "part": "frame_upper_ear",
+          "volume_mm3": 63.6702
+        },
+        {
+          "joint_pose_deg": [
+            0,
+            0
+          ],
+          "part": "pin_pivot",
+          "volume_mm3": 6.8276
+        },
+        {
+          "joint_pose_deg": [
+            0,
+            0
+          ],
+          "part": "drive_proximal_post",
+          "volume_mm3": 167.4912
+        },
+        {
+          "joint_pose_deg": [
+            0,
+            0
+          ],
+          "part": "drive_slot_captive",
+          "volume_mm3": 55.4765
+        },
+        {
+          "joint_pose_deg": [
+            0,
+            0
+          ],
+          "part": "pin_follower",
+          "volume_mm3": 45.2389
+        },
+        {
+          "joint_pose_deg": [
+            30,
+            0
+          ],
+          "part": "frame_upper_ear",
+          "volume_mm3": 209.9193
+        },
+        {
+          "joint_pose_deg": [
+            30,
+            0
+          ],
+          "part": "pin_pivot",
+          "volume_mm3": 6.8276
+        },
+        {
+          "joint_pose_deg": [
+            30,
+            0
+          ],
+          "part": "drive_proximal_post",
+          "volume_mm3": 167.4912
+        },
+        {
+          "joint_pose_deg": [
+            30,
+            0
+          ],
+          "part": "drive_slot_captive",
+          "volume_mm3": 55.4765
+        },
+        {
+          "joint_pose_deg": [
+            30,
+            0
+          ],
+          "part": "pin_follower",
+          "volume_mm3": 45.2389
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            0
+          ],
+          "part": "frame_upper_ear",
+          "volume_mm3": 216.6946
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            0
+          ],
+          "part": "pin_pivot",
+          "volume_mm3": 6.8276
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            0
+          ],
+          "part": "drive_proximal_post",
+          "volume_mm3": 167.4912
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            0
+          ],
+          "part": "drive_slot_captive",
+          "volume_mm3": 55.4765
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            0
+          ],
+          "part": "pin_follower",
+          "volume_mm3": 45.2389
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            30
+          ],
+          "part": "frame_upper_ear",
+          "volume_mm3": 216.6946
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            30
+          ],
+          "part": "pin_pivot",
+          "volume_mm3": 6.8276
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            30
+          ],
+          "part": "drive_proximal_post",
+          "volume_mm3": 167.4912
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            30
+          ],
+          "part": "drive_slot_captive",
+          "volume_mm3": 55.4765
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            30
+          ],
+          "part": "pin_follower",
+          "volume_mm3": 45.2389
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            60
+          ],
+          "part": "frame_upper_ear",
+          "volume_mm3": 216.6946
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            60
+          ],
+          "part": "pin_pivot",
+          "volume_mm3": 6.8276
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            60
+          ],
+          "part": "drive_proximal_post",
+          "volume_mm3": 167.4912
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            60
+          ],
+          "part": "drive_slot_captive",
+          "volume_mm3": 55.4765
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            60
+          ],
+          "part": "pin_follower",
+          "volume_mm3": 45.2389
+        }
+      ]
+    },
+    {
+      "mount_offset_xyz_mm": [
+        -5.95,
+        9.4,
+        2.0
+      ],
+      "hits": [
+        {
+          "joint_pose_deg": [
+            0,
+            0
+          ],
+          "part": "frame_upper_ear",
+          "volume_mm3": 63.6702
+        },
+        {
+          "joint_pose_deg": [
+            0,
+            0
+          ],
+          "part": "pin_pivot",
+          "volume_mm3": 5.6192
+        },
+        {
+          "joint_pose_deg": [
+            0,
+            0
+          ],
+          "part": "drive_proximal_post",
+          "volume_mm3": 120.1712
+        },
+        {
+          "joint_pose_deg": [
+            0,
+            0
+          ],
+          "part": "pin_follower",
+          "volume_mm3": 20.1062
+        },
+        {
+          "joint_pose_deg": [
+            30,
+            0
+          ],
+          "part": "frame_upper_ear",
+          "volume_mm3": 209.9193
+        },
+        {
+          "joint_pose_deg": [
+            30,
+            0
+          ],
+          "part": "pin_pivot",
+          "volume_mm3": 5.6192
+        },
+        {
+          "joint_pose_deg": [
+            30,
+            0
+          ],
+          "part": "drive_proximal_post",
+          "volume_mm3": 120.1712
+        },
+        {
+          "joint_pose_deg": [
+            30,
+            0
+          ],
+          "part": "pin_follower",
+          "volume_mm3": 20.1062
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            0
+          ],
+          "part": "frame_upper_ear",
+          "volume_mm3": 216.6946
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            0
+          ],
+          "part": "pin_pivot",
+          "volume_mm3": 5.6192
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            0
+          ],
+          "part": "drive_proximal_post",
+          "volume_mm3": 120.1712
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            0
+          ],
+          "part": "pin_follower",
+          "volume_mm3": 20.1062
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            30
+          ],
+          "part": "frame_upper_ear",
+          "volume_mm3": 216.6946
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            30
+          ],
+          "part": "pin_pivot",
+          "volume_mm3": 5.6192
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            30
+          ],
+          "part": "drive_proximal_post",
+          "volume_mm3": 120.1712
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            30
+          ],
+          "part": "pin_follower",
+          "volume_mm3": 20.1062
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            60
+          ],
+          "part": "frame_upper_ear",
+          "volume_mm3": 216.6946
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            60
+          ],
+          "part": "pin_pivot",
+          "volume_mm3": 5.6192
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            60
+          ],
+          "part": "drive_proximal_post",
+          "volume_mm3": 120.1712
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            60
+          ],
+          "part": "pin_follower",
+          "volume_mm3": 20.1062
+        }
+      ]
+    },
+    {
+      "mount_offset_xyz_mm": [
+        -5.95,
+        11.4,
+        -4.0
+      ],
+      "hits": [
+        {
+          "joint_pose_deg": [
+            0,
+            0
+          ],
+          "part": "drive_drum",
+          "volume_mm3": 3.3627
+        },
+        {
+          "joint_pose_deg": [
+            0,
+            0
+          ],
+          "part": "drive_link",
+          "volume_mm3": 185.4262
+        },
+        {
+          "joint_pose_deg": [
+            0,
+            0
+          ],
+          "part": "drive_proximal_post",
+          "volume_mm3": 201.7982
+        },
+        {
+          "joint_pose_deg": [
+            0,
+            0
+          ],
+          "part": "drive_slot_captive",
+          "volume_mm3": 61.6406
+        },
+        {
+          "joint_pose_deg": [
+            0,
+            0
+          ],
+          "part": "finger_carrier",
+          "volume_mm3": 50.3743
+        },
+        {
+          "joint_pose_deg": [
+            0,
+            0
+          ],
+          "part": "pin_follower",
+          "volume_mm3": 48.3805
+        },
+        {
+          "joint_pose_deg": [
+            30,
+            0
+          ],
+          "part": "frame_upper_ear",
+          "volume_mm3": 160.5425
+        },
+        {
+          "joint_pose_deg": [
+            30,
+            0
+          ],
+          "part": "drive_drum",
+          "volume_mm3": 3.3627
+        },
+        {
+          "joint_pose_deg": [
+            30,
+            0
+          ],
+          "part": "drive_link",
+          "volume_mm3": 185.4262
+        },
+        {
+          "joint_pose_deg": [
+            30,
+            0
+          ],
+          "part": "drive_proximal_post",
+          "volume_mm3": 201.7982
+        },
+        {
+          "joint_pose_deg": [
+            30,
+            0
+          ],
+          "part": "drive_slot_captive",
+          "volume_mm3": 61.6406
+        },
+        {
+          "joint_pose_deg": [
+            30,
+            0
+          ],
+          "part": "finger_carrier",
+          "volume_mm3": 50.3743
+        },
+        {
+          "joint_pose_deg": [
+            30,
+            0
+          ],
+          "part": "pin_follower",
+          "volume_mm3": 48.3805
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            0
+          ],
+          "part": "frame_upper_ear",
+          "volume_mm3": 212.0555
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            0
+          ],
+          "part": "drive_drum",
+          "volume_mm3": 3.3627
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            0
+          ],
+          "part": "drive_link",
+          "volume_mm3": 185.4262
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            0
+          ],
+          "part": "drive_proximal_post",
+          "volume_mm3": 201.7982
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            0
+          ],
+          "part": "drive_slot_captive",
+          "volume_mm3": 61.6406
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            0
+          ],
+          "part": "finger_carrier",
+          "volume_mm3": 50.3743
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            0
+          ],
+          "part": "pin_follower",
+          "volume_mm3": 48.3805
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            30
+          ],
+          "part": "frame_upper_ear",
+          "volume_mm3": 212.0555
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            30
+          ],
+          "part": "drive_drum",
+          "volume_mm3": 3.3627
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            30
+          ],
+          "part": "drive_link",
+          "volume_mm3": 185.4262
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            30
+          ],
+          "part": "drive_proximal_post",
+          "volume_mm3": 201.7982
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            30
+          ],
+          "part": "drive_slot_captive",
+          "volume_mm3": 61.6406
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            30
+          ],
+          "part": "finger_carrier",
+          "volume_mm3": 53.8411
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            30
+          ],
+          "part": "pin_follower",
+          "volume_mm3": 48.3805
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            60
+          ],
+          "part": "frame_upper_ear",
+          "volume_mm3": 212.0555
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            60
+          ],
+          "part": "drive_drum",
+          "volume_mm3": 3.3627
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            60
+          ],
+          "part": "drive_link",
+          "volume_mm3": 185.4262
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            60
+          ],
+          "part": "drive_proximal_post",
+          "volume_mm3": 201.7982
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            60
+          ],
+          "part": "drive_slot_captive",
+          "volume_mm3": 61.6406
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            60
+          ],
+          "part": "finger_carrier",
+          "volume_mm3": 50.3397
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            60
+          ],
+          "part": "pin_follower",
+          "volume_mm3": 48.3805
+        }
+      ]
+    },
+    {
+      "mount_offset_xyz_mm": [
+        -5.95,
+        11.4,
+        -2.0
+      ],
+      "hits": [
+        {
+          "joint_pose_deg": [
+            0,
+            0
+          ],
+          "part": "drive_link",
+          "volume_mm3": 56.658
+        },
+        {
+          "joint_pose_deg": [
+            0,
+            0
+          ],
+          "part": "drive_proximal_post",
+          "volume_mm3": 201.7982
+        },
+        {
+          "joint_pose_deg": [
+            0,
+            0
+          ],
+          "part": "drive_slot_captive",
+          "volume_mm3": 61.6406
+        },
+        {
+          "joint_pose_deg": [
+            0,
+            0
+          ],
+          "part": "finger_carrier",
+          "volume_mm3": 50.3743
+        },
+        {
+          "joint_pose_deg": [
+            0,
+            0
+          ],
+          "part": "pin_follower",
+          "volume_mm3": 48.3805
+        },
+        {
+          "joint_pose_deg": [
+            30,
+            0
+          ],
+          "part": "frame_upper_ear",
+          "volume_mm3": 160.5425
+        },
+        {
+          "joint_pose_deg": [
+            30,
+            0
+          ],
+          "part": "drive_link",
+          "volume_mm3": 56.658
+        },
+        {
+          "joint_pose_deg": [
+            30,
+            0
+          ],
+          "part": "drive_proximal_post",
+          "volume_mm3": 201.7982
+        },
+        {
+          "joint_pose_deg": [
+            30,
+            0
+          ],
+          "part": "drive_slot_captive",
+          "volume_mm3": 61.6406
+        },
+        {
+          "joint_pose_deg": [
+            30,
+            0
+          ],
+          "part": "finger_carrier",
+          "volume_mm3": 50.3743
+        },
+        {
+          "joint_pose_deg": [
+            30,
+            0
+          ],
+          "part": "pin_follower",
+          "volume_mm3": 48.3805
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            0
+          ],
+          "part": "frame_upper_ear",
+          "volume_mm3": 212.0555
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            0
+          ],
+          "part": "drive_link",
+          "volume_mm3": 56.658
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            0
+          ],
+          "part": "drive_proximal_post",
+          "volume_mm3": 201.7982
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            0
+          ],
+          "part": "drive_slot_captive",
+          "volume_mm3": 61.6406
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            0
+          ],
+          "part": "finger_carrier",
+          "volume_mm3": 50.3743
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            0
+          ],
+          "part": "pin_follower",
+          "volume_mm3": 48.3805
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            30
+          ],
+          "part": "frame_upper_ear",
+          "volume_mm3": 212.0555
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            30
+          ],
+          "part": "drive_link",
+          "volume_mm3": 56.658
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            30
+          ],
+          "part": "drive_proximal_post",
+          "volume_mm3": 201.7982
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            30
+          ],
+          "part": "drive_slot_captive",
+          "volume_mm3": 61.6406
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            30
+          ],
+          "part": "finger_carrier",
+          "volume_mm3": 53.8411
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            30
+          ],
+          "part": "pin_follower",
+          "volume_mm3": 48.3805
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            60
+          ],
+          "part": "frame_upper_ear",
+          "volume_mm3": 212.0555
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            60
+          ],
+          "part": "drive_link",
+          "volume_mm3": 56.658
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            60
+          ],
+          "part": "drive_proximal_post",
+          "volume_mm3": 201.7982
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            60
+          ],
+          "part": "drive_slot_captive",
+          "volume_mm3": 61.6406
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            60
+          ],
+          "part": "finger_carrier",
+          "volume_mm3": 50.3397
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            60
+          ],
+          "part": "pin_follower",
+          "volume_mm3": 48.3805
+        }
+      ]
+    },
+    {
+      "mount_offset_xyz_mm": [
+        -5.95,
+        11.4,
+        0
+      ],
+      "hits": [
+        {
+          "joint_pose_deg": [
+            0,
+            0
+          ],
+          "part": "drive_proximal_post",
+          "volume_mm3": 167.4912
+        },
+        {
+          "joint_pose_deg": [
+            0,
+            0
+          ],
+          "part": "drive_slot_captive",
+          "volume_mm3": 55.4765
+        },
+        {
+          "joint_pose_deg": [
+            0,
+            0
+          ],
+          "part": "pin_follower",
+          "volume_mm3": 45.2389
+        },
+        {
+          "joint_pose_deg": [
+            30,
+            0
+          ],
+          "part": "frame_upper_ear",
+          "volume_mm3": 160.5425
+        },
+        {
+          "joint_pose_deg": [
+            30,
+            0
+          ],
+          "part": "drive_proximal_post",
+          "volume_mm3": 167.4912
+        },
+        {
+          "joint_pose_deg": [
+            30,
+            0
+          ],
+          "part": "drive_slot_captive",
+          "volume_mm3": 55.4765
+        },
+        {
+          "joint_pose_deg": [
+            30,
+            0
+          ],
+          "part": "pin_follower",
+          "volume_mm3": 45.2389
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            0
+          ],
+          "part": "frame_upper_ear",
+          "volume_mm3": 212.0555
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            0
+          ],
+          "part": "drive_proximal_post",
+          "volume_mm3": 167.4912
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            0
+          ],
+          "part": "drive_slot_captive",
+          "volume_mm3": 55.4765
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            0
+          ],
+          "part": "pin_follower",
+          "volume_mm3": 45.2389
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            30
+          ],
+          "part": "frame_upper_ear",
+          "volume_mm3": 212.0555
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            30
+          ],
+          "part": "drive_proximal_post",
+          "volume_mm3": 167.4912
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            30
+          ],
+          "part": "drive_slot_captive",
+          "volume_mm3": 55.4765
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            30
+          ],
+          "part": "pin_follower",
+          "volume_mm3": 45.2389
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            60
+          ],
+          "part": "frame_upper_ear",
+          "volume_mm3": 212.0555
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            60
+          ],
+          "part": "drive_proximal_post",
+          "volume_mm3": 167.4912
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            60
+          ],
+          "part": "drive_slot_captive",
+          "volume_mm3": 55.4765
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            60
+          ],
+          "part": "pin_follower",
+          "volume_mm3": 45.2389
+        }
+      ]
+    },
+    {
+      "mount_offset_xyz_mm": [
+        -5.95,
+        11.4,
+        2.0
+      ],
+      "hits": [
+        {
+          "joint_pose_deg": [
+            0,
+            0
+          ],
+          "part": "drive_proximal_post",
+          "volume_mm3": 120.1712
+        },
+        {
+          "joint_pose_deg": [
+            0,
+            0
+          ],
+          "part": "pin_follower",
+          "volume_mm3": 20.1062
+        },
+        {
+          "joint_pose_deg": [
+            30,
+            0
+          ],
+          "part": "frame_upper_ear",
+          "volume_mm3": 160.5425
+        },
+        {
+          "joint_pose_deg": [
+            30,
+            0
+          ],
+          "part": "drive_proximal_post",
+          "volume_mm3": 120.1712
+        },
+        {
+          "joint_pose_deg": [
+            30,
+            0
+          ],
+          "part": "pin_follower",
+          "volume_mm3": 20.1062
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            0
+          ],
+          "part": "frame_upper_ear",
+          "volume_mm3": 212.0555
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            0
+          ],
+          "part": "drive_proximal_post",
+          "volume_mm3": 120.1712
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            0
+          ],
+          "part": "pin_follower",
+          "volume_mm3": 20.1062
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            30
+          ],
+          "part": "frame_upper_ear",
+          "volume_mm3": 212.0555
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            30
+          ],
+          "part": "drive_proximal_post",
+          "volume_mm3": 120.1712
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            30
+          ],
+          "part": "pin_follower",
+          "volume_mm3": 20.1062
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            60
+          ],
+          "part": "frame_upper_ear",
+          "volume_mm3": 212.0555
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            60
+          ],
+          "part": "drive_proximal_post",
+          "volume_mm3": 120.1712
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            60
+          ],
+          "part": "pin_follower",
+          "volume_mm3": 20.1062
+        }
+      ]
+    },
+    {
+      "mount_offset_xyz_mm": [
+        -5.95,
+        13.4,
+        -4.0
+      ],
+      "hits": [
+        {
+          "joint_pose_deg": [
+            0,
+            0
+          ],
+          "part": "drive_link",
+          "volume_mm3": 145.4845
+        },
+        {
+          "joint_pose_deg": [
+            0,
+            0
+          ],
+          "part": "drive_proximal_post",
+          "volume_mm3": 201.7982
+        },
+        {
+          "joint_pose_deg": [
+            0,
+            0
+          ],
+          "part": "drive_slot_captive",
+          "volume_mm3": 61.6406
+        },
+        {
+          "joint_pose_deg": [
+            0,
+            0
+          ],
+          "part": "finger_carrier",
+          "volume_mm3": 37.9035
+        },
+        {
+          "joint_pose_deg": [
+            0,
+            0
+          ],
+          "part": "pin_follower",
+          "volume_mm3": 48.3805
+        },
+        {
+          "joint_pose_deg": [
+            30,
+            0
+          ],
+          "part": "frame_upper_ear",
+          "volume_mm3": 111.6049
+        },
+        {
+          "joint_pose_deg": [
+            30,
+            0
+          ],
+          "part": "drive_link",
+          "volume_mm3": 145.4845
+        },
+        {
+          "joint_pose_deg": [
+            30,
+            0
+          ],
+          "part": "drive_proximal_post",
+          "volume_mm3": 201.7982
+        },
+        {
+          "joint_pose_deg": [
+            30,
+            0
+          ],
+          "part": "drive_slot_captive",
+          "volume_mm3": 61.6406
+        },
+        {
+          "joint_pose_deg": [
+            30,
+            0
+          ],
+          "part": "finger_carrier",
+          "volume_mm3": 37.9035
+        },
+        {
+          "joint_pose_deg": [
+            30,
+            0
+          ],
+          "part": "pin_follower",
+          "volume_mm3": 48.3805
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            0
+          ],
+          "part": "frame_upper_ear",
+          "volume_mm3": 205.7301
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            0
+          ],
+          "part": "drive_link",
+          "volume_mm3": 145.4845
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            0
+          ],
+          "part": "drive_proximal_post",
+          "volume_mm3": 201.7982
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            0
+          ],
+          "part": "drive_slot_captive",
+          "volume_mm3": 61.6406
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            0
+          ],
+          "part": "finger_carrier",
+          "volume_mm3": 37.9035
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            0
+          ],
+          "part": "pin_follower",
+          "volume_mm3": 48.3805
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            30
+          ],
+          "part": "frame_upper_ear",
+          "volume_mm3": 205.7301
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            30
+          ],
+          "part": "drive_link",
+          "volume_mm3": 145.4845
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            30
+          ],
+          "part": "drive_proximal_post",
+          "volume_mm3": 201.7982
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            30
+          ],
+          "part": "drive_slot_captive",
+          "volume_mm3": 61.6406
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            30
+          ],
+          "part": "finger_carrier",
+          "volume_mm3": 43.0411
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            30
+          ],
+          "part": "pin_follower",
+          "volume_mm3": 48.3805
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            60
+          ],
+          "part": "frame_upper_ear",
+          "volume_mm3": 205.7301
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            60
+          ],
+          "part": "drive_link",
+          "volume_mm3": 145.4845
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            60
+          ],
+          "part": "drive_proximal_post",
+          "volume_mm3": 201.7982
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            60
+          ],
+          "part": "drive_slot_captive",
+          "volume_mm3": 61.6406
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            60
+          ],
+          "part": "finger_carrier",
+          "volume_mm3": 37.869
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            60
+          ],
+          "part": "pin_follower",
+          "volume_mm3": 48.3805
+        }
+      ]
+    },
+    {
+      "mount_offset_xyz_mm": [
+        -5.95,
+        13.4,
+        -2.0
+      ],
+      "hits": [
+        {
+          "joint_pose_deg": [
+            0,
+            0
+          ],
+          "part": "drive_link",
+          "volume_mm3": 44.4536
+        },
+        {
+          "joint_pose_deg": [
+            0,
+            0
+          ],
+          "part": "drive_proximal_post",
+          "volume_mm3": 201.7982
+        },
+        {
+          "joint_pose_deg": [
+            0,
+            0
+          ],
+          "part": "drive_slot_captive",
+          "volume_mm3": 61.6406
+        },
+        {
+          "joint_pose_deg": [
+            0,
+            0
+          ],
+          "part": "finger_carrier",
+          "volume_mm3": 37.9035
+        },
+        {
+          "joint_pose_deg": [
+            0,
+            0
+          ],
+          "part": "pin_follower",
+          "volume_mm3": 48.3805
+        },
+        {
+          "joint_pose_deg": [
+            30,
+            0
+          ],
+          "part": "frame_upper_ear",
+          "volume_mm3": 111.6049
+        },
+        {
+          "joint_pose_deg": [
+            30,
+            0
+          ],
+          "part": "drive_link",
+          "volume_mm3": 44.4536
+        },
+        {
+          "joint_pose_deg": [
+            30,
+            0
+          ],
+          "part": "drive_proximal_post",
+          "volume_mm3": 201.7982
+        },
+        {
+          "joint_pose_deg": [
+            30,
+            0
+          ],
+          "part": "drive_slot_captive",
+          "volume_mm3": 61.6406
+        },
+        {
+          "joint_pose_deg": [
+            30,
+            0
+          ],
+          "part": "finger_carrier",
+          "volume_mm3": 37.9035
+        },
+        {
+          "joint_pose_deg": [
+            30,
+            0
+          ],
+          "part": "pin_follower",
+          "volume_mm3": 48.3805
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            0
+          ],
+          "part": "frame_upper_ear",
+          "volume_mm3": 205.7301
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            0
+          ],
+          "part": "drive_link",
+          "volume_mm3": 44.4536
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            0
+          ],
+          "part": "drive_proximal_post",
+          "volume_mm3": 201.7982
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            0
+          ],
+          "part": "drive_slot_captive",
+          "volume_mm3": 61.6406
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            0
+          ],
+          "part": "finger_carrier",
+          "volume_mm3": 37.9035
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            0
+          ],
+          "part": "pin_follower",
+          "volume_mm3": 48.3805
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            30
+          ],
+          "part": "frame_upper_ear",
+          "volume_mm3": 205.7301
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            30
+          ],
+          "part": "drive_link",
+          "volume_mm3": 44.4536
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            30
+          ],
+          "part": "drive_proximal_post",
+          "volume_mm3": 201.7982
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            30
+          ],
+          "part": "drive_slot_captive",
+          "volume_mm3": 61.6406
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            30
+          ],
+          "part": "finger_carrier",
+          "volume_mm3": 43.0411
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            30
+          ],
+          "part": "pin_follower",
+          "volume_mm3": 48.3805
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            60
+          ],
+          "part": "frame_upper_ear",
+          "volume_mm3": 205.7301
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            60
+          ],
+          "part": "drive_link",
+          "volume_mm3": 44.4536
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            60
+          ],
+          "part": "drive_proximal_post",
+          "volume_mm3": 201.7982
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            60
+          ],
+          "part": "drive_slot_captive",
+          "volume_mm3": 61.6406
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            60
+          ],
+          "part": "finger_carrier",
+          "volume_mm3": 37.869
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            60
+          ],
+          "part": "pin_follower",
+          "volume_mm3": 48.3805
+        }
+      ]
+    },
+    {
+      "mount_offset_xyz_mm": [
+        -5.95,
+        13.4,
+        0
+      ],
+      "hits": [
+        {
+          "joint_pose_deg": [
+            0,
+            0
+          ],
+          "part": "drive_proximal_post",
+          "volume_mm3": 167.4912
+        },
+        {
+          "joint_pose_deg": [
+            0,
+            0
+          ],
+          "part": "drive_slot_captive",
+          "volume_mm3": 55.4765
+        },
+        {
+          "joint_pose_deg": [
+            0,
+            0
+          ],
+          "part": "pin_follower",
+          "volume_mm3": 45.2389
+        },
+        {
+          "joint_pose_deg": [
+            30,
+            0
+          ],
+          "part": "frame_upper_ear",
+          "volume_mm3": 111.6049
+        },
+        {
+          "joint_pose_deg": [
+            30,
+            0
+          ],
+          "part": "drive_proximal_post",
+          "volume_mm3": 167.4912
+        },
+        {
+          "joint_pose_deg": [
+            30,
+            0
+          ],
+          "part": "drive_slot_captive",
+          "volume_mm3": 55.4765
+        },
+        {
+          "joint_pose_deg": [
+            30,
+            0
+          ],
+          "part": "pin_follower",
+          "volume_mm3": 45.2389
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            0
+          ],
+          "part": "frame_upper_ear",
+          "volume_mm3": 205.7301
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            0
+          ],
+          "part": "drive_proximal_post",
+          "volume_mm3": 167.4912
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            0
+          ],
+          "part": "drive_slot_captive",
+          "volume_mm3": 55.4765
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            0
+          ],
+          "part": "pin_follower",
+          "volume_mm3": 45.2389
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            30
+          ],
+          "part": "frame_upper_ear",
+          "volume_mm3": 205.7301
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            30
+          ],
+          "part": "drive_proximal_post",
+          "volume_mm3": 167.4912
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            30
+          ],
+          "part": "drive_slot_captive",
+          "volume_mm3": 55.4765
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            30
+          ],
+          "part": "pin_follower",
+          "volume_mm3": 45.2389
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            60
+          ],
+          "part": "frame_upper_ear",
+          "volume_mm3": 205.7301
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            60
+          ],
+          "part": "drive_proximal_post",
+          "volume_mm3": 167.4912
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            60
+          ],
+          "part": "drive_slot_captive",
+          "volume_mm3": 55.4765
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            60
+          ],
+          "part": "pin_follower",
+          "volume_mm3": 45.2389
+        }
+      ]
+    },
+    {
+      "mount_offset_xyz_mm": [
+        -5.95,
+        13.4,
+        2.0
+      ],
+      "hits": [
+        {
+          "joint_pose_deg": [
+            0,
+            0
+          ],
+          "part": "drive_proximal_post",
+          "volume_mm3": 120.1712
+        },
+        {
+          "joint_pose_deg": [
+            0,
+            0
+          ],
+          "part": "pin_follower",
+          "volume_mm3": 20.1062
+        },
+        {
+          "joint_pose_deg": [
+            30,
+            0
+          ],
+          "part": "frame_upper_ear",
+          "volume_mm3": 111.6049
+        },
+        {
+          "joint_pose_deg": [
+            30,
+            0
+          ],
+          "part": "drive_proximal_post",
+          "volume_mm3": 120.1712
+        },
+        {
+          "joint_pose_deg": [
+            30,
+            0
+          ],
+          "part": "pin_follower",
+          "volume_mm3": 20.1062
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            0
+          ],
+          "part": "frame_upper_ear",
+          "volume_mm3": 205.7301
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            0
+          ],
+          "part": "drive_proximal_post",
+          "volume_mm3": 120.1712
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            0
+          ],
+          "part": "pin_follower",
+          "volume_mm3": 20.1062
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            30
+          ],
+          "part": "frame_upper_ear",
+          "volume_mm3": 205.7301
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            30
+          ],
+          "part": "drive_proximal_post",
+          "volume_mm3": 120.1712
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            30
+          ],
+          "part": "pin_follower",
+          "volume_mm3": 20.1062
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            60
+          ],
+          "part": "frame_upper_ear",
+          "volume_mm3": 205.7301
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            60
+          ],
+          "part": "drive_proximal_post",
+          "volume_mm3": 120.1712
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            60
+          ],
+          "part": "pin_follower",
+          "volume_mm3": 20.1062
+        }
+      ]
+    },
+    {
+      "mount_offset_xyz_mm": [
+        -3.5,
+        9.4,
+        -4.0
+      ],
+      "hits": [
+        {
+          "joint_pose_deg": [
+            0,
+            0
+          ],
+          "part": "frame_upper_ear",
+          "volume_mm3": 57.4472
+        },
+        {
+          "joint_pose_deg": [
+            0,
+            0
+          ],
+          "part": "pin_pivot",
+          "volume_mm3": 9.2444
+        },
+        {
+          "joint_pose_deg": [
+            0,
+            0
+          ],
+          "part": "drive_drum",
+          "volume_mm3": 14.7861
+        },
+        {
+          "joint_pose_deg": [
+            0,
+            0
+          ],
+          "part": "drive_link",
+          "volume_mm3": 222.8476
+        },
+        {
+          "joint_pose_deg": [
+            0,
+            0
+          ],
+          "part": "drive_proximal_post",
+          "volume_mm3": 201.7982
+        },
+        {
+          "joint_pose_deg": [
+            0,
+            0
+          ],
+          "part": "drive_slot_captive",
+          "volume_mm3": 66.8009
+        },
+        {
+          "joint_pose_deg": [
+            0,
+            0
+          ],
+          "part": "finger_carrier",
+          "volume_mm3": 74.769
+        },
+        {
+          "joint_pose_deg": [
+            0,
+            0
+          ],
+          "part": "pin_follower",
+          "volume_mm3": 48.3805
+        },
+        {
+          "joint_pose_deg": [
+            30,
+            0
+          ],
+          "part": "frame_upper_ear",
+          "volume_mm3": 180.0986
+        },
+        {
+          "joint_pose_deg": [
+            30,
+            0
+          ],
+          "part": "pin_pivot",
+          "volume_mm3": 9.2444
+        },
+        {
+          "joint_pose_deg": [
+            30,
+            0
+          ],
+          "part": "drive_drum",
+          "volume_mm3": 14.7861
+        },
+        {
+          "joint_pose_deg": [
+            30,
+            0
+          ],
+          "part": "drive_link",
+          "volume_mm3": 222.8476
+        },
+        {
+          "joint_pose_deg": [
+            30,
+            0
+          ],
+          "part": "drive_proximal_post",
+          "volume_mm3": 201.7982
+        },
+        {
+          "joint_pose_deg": [
+            30,
+            0
+          ],
+          "part": "drive_slot_captive",
+          "volume_mm3": 66.8009
+        },
+        {
+          "joint_pose_deg": [
+            30,
+            0
+          ],
+          "part": "finger_carrier",
+          "volume_mm3": 74.769
+        },
+        {
+          "joint_pose_deg": [
+            30,
+            0
+          ],
+          "part": "pin_follower",
+          "volume_mm3": 48.3805
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            0
+          ],
+          "part": "frame_upper_ear",
+          "volume_mm3": 216.6946
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            0
+          ],
+          "part": "pin_pivot",
+          "volume_mm3": 9.2444
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            0
+          ],
+          "part": "drive_drum",
+          "volume_mm3": 14.7861
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            0
+          ],
+          "part": "drive_link",
+          "volume_mm3": 222.8476
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            0
+          ],
+          "part": "drive_proximal_post",
+          "volume_mm3": 201.7982
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            0
+          ],
+          "part": "drive_slot_captive",
+          "volume_mm3": 66.8009
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            0
+          ],
+          "part": "finger_carrier",
+          "volume_mm3": 74.769
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            0
+          ],
+          "part": "pin_follower",
+          "volume_mm3": 48.3805
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            30
+          ],
+          "part": "frame_upper_ear",
+          "volume_mm3": 216.6946
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            30
+          ],
+          "part": "pin_pivot",
+          "volume_mm3": 9.2444
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            30
+          ],
+          "part": "drive_drum",
+          "volume_mm3": 14.7861
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            30
+          ],
+          "part": "drive_link",
+          "volume_mm3": 222.8476
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            30
+          ],
+          "part": "drive_proximal_post",
+          "volume_mm3": 201.7982
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            30
+          ],
+          "part": "drive_slot_captive",
+          "volume_mm3": 66.8009
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            30
+          ],
+          "part": "finger_carrier",
+          "volume_mm3": 63.6853
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            30
+          ],
+          "part": "pin_follower",
+          "volume_mm3": 48.3805
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            60
+          ],
+          "part": "frame_upper_ear",
+          "volume_mm3": 216.6946
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            60
+          ],
+          "part": "pin_pivot",
+          "volume_mm3": 9.2444
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            60
+          ],
+          "part": "drive_drum",
+          "volume_mm3": 14.7861
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            60
+          ],
+          "part": "drive_link",
+          "volume_mm3": 222.8476
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            60
+          ],
+          "part": "drive_proximal_post",
+          "volume_mm3": 201.7982
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            60
+          ],
+          "part": "drive_slot_captive",
+          "volume_mm3": 66.8009
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            60
+          ],
+          "part": "finger_carrier",
+          "volume_mm3": 62.4597
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            60
+          ],
+          "part": "pin_follower",
+          "volume_mm3": 48.3805
+        }
+      ]
+    },
+    {
+      "mount_offset_xyz_mm": [
+        -3.5,
+        9.4,
+        -2.0
+      ],
+      "hits": [
+        {
+          "joint_pose_deg": [
+            0,
+            0
+          ],
+          "part": "frame_upper_ear",
+          "volume_mm3": 57.4472
+        },
+        {
+          "joint_pose_deg": [
+            0,
+            0
+          ],
+          "part": "pin_pivot",
+          "volume_mm3": 8.036
+        },
+        {
+          "joint_pose_deg": [
+            0,
+            0
+          ],
+          "part": "drive_link",
+          "volume_mm3": 68.0923
+        },
+        {
+          "joint_pose_deg": [
+            0,
+            0
+          ],
+          "part": "drive_proximal_post",
+          "volume_mm3": 201.7982
+        },
+        {
+          "joint_pose_deg": [
+            0,
+            0
+          ],
+          "part": "drive_slot_captive",
+          "volume_mm3": 66.8009
+        },
+        {
+          "joint_pose_deg": [
+            0,
+            0
+          ],
+          "part": "finger_carrier",
+          "volume_mm3": 74.769
+        },
+        {
+          "joint_pose_deg": [
+            0,
+            0
+          ],
+          "part": "pin_follower",
+          "volume_mm3": 48.3805
+        },
+        {
+          "joint_pose_deg": [
+            30,
+            0
+          ],
+          "part": "frame_upper_ear",
+          "volume_mm3": 180.0986
+        },
+        {
+          "joint_pose_deg": [
+            30,
+            0
+          ],
+          "part": "pin_pivot",
+          "volume_mm3": 8.036
+        },
+        {
+          "joint_pose_deg": [
+            30,
+            0
+          ],
+          "part": "drive_link",
+          "volume_mm3": 68.0923
+        },
+        {
+          "joint_pose_deg": [
+            30,
+            0
+          ],
+          "part": "drive_proximal_post",
+          "volume_mm3": 201.7982
+        },
+        {
+          "joint_pose_deg": [
+            30,
+            0
+          ],
+          "part": "drive_slot_captive",
+          "volume_mm3": 66.8009
+        },
+        {
+          "joint_pose_deg": [
+            30,
+            0
+          ],
+          "part": "finger_carrier",
+          "volume_mm3": 74.769
+        },
+        {
+          "joint_pose_deg": [
+            30,
+            0
+          ],
+          "part": "pin_follower",
+          "volume_mm3": 48.3805
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            0
+          ],
+          "part": "frame_upper_ear",
+          "volume_mm3": 216.6946
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            0
+          ],
+          "part": "pin_pivot",
+          "volume_mm3": 8.036
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            0
+          ],
+          "part": "drive_link",
+          "volume_mm3": 68.0923
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            0
+          ],
+          "part": "drive_proximal_post",
+          "volume_mm3": 201.7982
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            0
+          ],
+          "part": "drive_slot_captive",
+          "volume_mm3": 66.8009
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            0
+          ],
+          "part": "finger_carrier",
+          "volume_mm3": 74.769
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            0
+          ],
+          "part": "pin_follower",
+          "volume_mm3": 48.3805
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            30
+          ],
+          "part": "frame_upper_ear",
+          "volume_mm3": 216.6946
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            30
+          ],
+          "part": "pin_pivot",
+          "volume_mm3": 8.036
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            30
+          ],
+          "part": "drive_link",
+          "volume_mm3": 68.0923
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            30
+          ],
+          "part": "drive_proximal_post",
+          "volume_mm3": 201.7982
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            30
+          ],
+          "part": "drive_slot_captive",
+          "volume_mm3": 66.8009
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            30
+          ],
+          "part": "finger_carrier",
+          "volume_mm3": 63.6853
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            30
+          ],
+          "part": "pin_follower",
+          "volume_mm3": 48.3805
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            60
+          ],
+          "part": "frame_upper_ear",
+          "volume_mm3": 216.6946
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            60
+          ],
+          "part": "pin_pivot",
+          "volume_mm3": 8.036
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            60
+          ],
+          "part": "drive_link",
+          "volume_mm3": 68.0923
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            60
+          ],
+          "part": "drive_proximal_post",
+          "volume_mm3": 201.7982
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            60
+          ],
+          "part": "drive_slot_captive",
+          "volume_mm3": 66.8009
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            60
+          ],
+          "part": "finger_carrier",
+          "volume_mm3": 62.4597
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            60
+          ],
+          "part": "pin_follower",
+          "volume_mm3": 48.3805
+        }
+      ]
+    },
+    {
+      "mount_offset_xyz_mm": [
+        -3.5,
+        9.4,
+        0
+      ],
+      "hits": [
+        {
+          "joint_pose_deg": [
+            0,
+            0
+          ],
+          "part": "frame_upper_ear",
+          "volume_mm3": 57.4472
+        },
+        {
+          "joint_pose_deg": [
+            0,
+            0
+          ],
+          "part": "pin_pivot",
+          "volume_mm3": 6.8276
+        },
+        {
+          "joint_pose_deg": [
+            0,
+            0
+          ],
+          "part": "drive_proximal_post",
+          "volume_mm3": 167.4912
+        },
+        {
+          "joint_pose_deg": [
+            0,
+            0
+          ],
+          "part": "drive_slot_captive",
+          "volume_mm3": 60.1209
+        },
+        {
+          "joint_pose_deg": [
+            0,
+            0
+          ],
+          "part": "pin_follower",
+          "volume_mm3": 45.2389
+        },
+        {
+          "joint_pose_deg": [
+            30,
+            0
+          ],
+          "part": "frame_upper_ear",
+          "volume_mm3": 180.0986
+        },
+        {
+          "joint_pose_deg": [
+            30,
+            0
+          ],
+          "part": "pin_pivot",
+          "volume_mm3": 6.8276
+        },
+        {
+          "joint_pose_deg": [
+            30,
+            0
+          ],
+          "part": "drive_proximal_post",
+          "volume_mm3": 167.4912
+        },
+        {
+          "joint_pose_deg": [
+            30,
+            0
+          ],
+          "part": "drive_slot_captive",
+          "volume_mm3": 60.1209
+        },
+        {
+          "joint_pose_deg": [
+            30,
+            0
+          ],
+          "part": "pin_follower",
+          "volume_mm3": 45.2389
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            0
+          ],
+          "part": "frame_upper_ear",
+          "volume_mm3": 216.6946
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            0
+          ],
+          "part": "pin_pivot",
+          "volume_mm3": 6.8276
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            0
+          ],
+          "part": "drive_proximal_post",
+          "volume_mm3": 167.4912
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            0
+          ],
+          "part": "drive_slot_captive",
+          "volume_mm3": 60.1209
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            0
+          ],
+          "part": "pin_follower",
+          "volume_mm3": 45.2389
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            30
+          ],
+          "part": "frame_upper_ear",
+          "volume_mm3": 216.6946
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            30
+          ],
+          "part": "pin_pivot",
+          "volume_mm3": 6.8276
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            30
+          ],
+          "part": "drive_proximal_post",
+          "volume_mm3": 167.4912
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            30
+          ],
+          "part": "drive_slot_captive",
+          "volume_mm3": 60.1209
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            30
+          ],
+          "part": "pin_follower",
+          "volume_mm3": 45.2389
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            60
+          ],
+          "part": "frame_upper_ear",
+          "volume_mm3": 216.6946
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            60
+          ],
+          "part": "pin_pivot",
+          "volume_mm3": 6.8276
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            60
+          ],
+          "part": "drive_proximal_post",
+          "volume_mm3": 167.4912
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            60
+          ],
+          "part": "drive_slot_captive",
+          "volume_mm3": 60.1209
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            60
+          ],
+          "part": "pin_follower",
+          "volume_mm3": 45.2389
+        }
+      ]
+    },
+    {
+      "mount_offset_xyz_mm": [
+        -3.5,
+        9.4,
+        2.0
+      ],
+      "hits": [
+        {
+          "joint_pose_deg": [
+            0,
+            0
+          ],
+          "part": "frame_upper_ear",
+          "volume_mm3": 57.4472
+        },
+        {
+          "joint_pose_deg": [
+            0,
+            0
+          ],
+          "part": "pin_pivot",
+          "volume_mm3": 5.6192
+        },
+        {
+          "joint_pose_deg": [
+            0,
+            0
+          ],
+          "part": "drive_proximal_post",
+          "volume_mm3": 120.1712
+        },
+        {
+          "joint_pose_deg": [
+            0,
+            0
+          ],
+          "part": "pin_follower",
+          "volume_mm3": 20.1062
+        },
+        {
+          "joint_pose_deg": [
+            30,
+            0
+          ],
+          "part": "frame_upper_ear",
+          "volume_mm3": 180.0986
+        },
+        {
+          "joint_pose_deg": [
+            30,
+            0
+          ],
+          "part": "pin_pivot",
+          "volume_mm3": 5.6192
+        },
+        {
+          "joint_pose_deg": [
+            30,
+            0
+          ],
+          "part": "drive_proximal_post",
+          "volume_mm3": 120.1712
+        },
+        {
+          "joint_pose_deg": [
+            30,
+            0
+          ],
+          "part": "pin_follower",
+          "volume_mm3": 20.1062
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            0
+          ],
+          "part": "frame_upper_ear",
+          "volume_mm3": 216.6946
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            0
+          ],
+          "part": "pin_pivot",
+          "volume_mm3": 5.6192
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            0
+          ],
+          "part": "drive_proximal_post",
+          "volume_mm3": 120.1712
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            0
+          ],
+          "part": "pin_follower",
+          "volume_mm3": 20.1062
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            30
+          ],
+          "part": "frame_upper_ear",
+          "volume_mm3": 216.6946
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            30
+          ],
+          "part": "pin_pivot",
+          "volume_mm3": 5.6192
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            30
+          ],
+          "part": "drive_proximal_post",
+          "volume_mm3": 120.1712
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            30
+          ],
+          "part": "pin_follower",
+          "volume_mm3": 20.1062
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            60
+          ],
+          "part": "frame_upper_ear",
+          "volume_mm3": 216.6946
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            60
+          ],
+          "part": "pin_pivot",
+          "volume_mm3": 5.6192
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            60
+          ],
+          "part": "drive_proximal_post",
+          "volume_mm3": 120.1712
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            60
+          ],
+          "part": "pin_follower",
+          "volume_mm3": 20.1062
+        }
+      ]
+    },
+    {
+      "mount_offset_xyz_mm": [
+        -3.5,
+        11.4,
+        -4.0
+      ],
+      "hits": [
+        {
+          "joint_pose_deg": [
+            0,
+            0
+          ],
+          "part": "drive_drum",
+          "volume_mm3": 3.3627
+        },
+        {
+          "joint_pose_deg": [
+            0,
+            0
+          ],
+          "part": "drive_link",
+          "volume_mm3": 184.855
+        },
+        {
+          "joint_pose_deg": [
+            0,
+            0
+          ],
+          "part": "drive_proximal_post",
+          "volume_mm3": 201.7982
+        },
+        {
+          "joint_pose_deg": [
+            0,
+            0
+          ],
+          "part": "drive_slot_captive",
+          "volume_mm3": 66.8009
+        },
+        {
+          "joint_pose_deg": [
+            0,
+            0
+          ],
+          "part": "finger_carrier",
+          "volume_mm3": 50.3743
+        },
+        {
+          "joint_pose_deg": [
+            0,
+            0
+          ],
+          "part": "pin_follower",
+          "volume_mm3": 48.3805
+        },
+        {
+          "joint_pose_deg": [
+            30,
+            0
+          ],
+          "part": "frame_upper_ear",
+          "volume_mm3": 130.7219
+        },
+        {
+          "joint_pose_deg": [
+            30,
+            0
+          ],
+          "part": "drive_drum",
+          "volume_mm3": 3.3627
+        },
+        {
+          "joint_pose_deg": [
+            30,
+            0
+          ],
+          "part": "drive_link",
+          "volume_mm3": 184.855
+        },
+        {
+          "joint_pose_deg": [
+            30,
+            0
+          ],
+          "part": "drive_proximal_post",
+          "volume_mm3": 201.7982
+        },
+        {
+          "joint_pose_deg": [
+            30,
+            0
+          ],
+          "part": "drive_slot_captive",
+          "volume_mm3": 66.8009
+        },
+        {
+          "joint_pose_deg": [
+            30,
+            0
+          ],
+          "part": "finger_carrier",
+          "volume_mm3": 50.3743
+        },
+        {
+          "joint_pose_deg": [
+            30,
+            0
+          ],
+          "part": "pin_follower",
+          "volume_mm3": 48.3805
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            0
+          ],
+          "part": "frame_upper_ear",
+          "volume_mm3": 212.0555
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            0
+          ],
+          "part": "drive_drum",
+          "volume_mm3": 3.3627
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            0
+          ],
+          "part": "drive_link",
+          "volume_mm3": 184.855
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            0
+          ],
+          "part": "drive_proximal_post",
+          "volume_mm3": 201.7982
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            0
+          ],
+          "part": "drive_slot_captive",
+          "volume_mm3": 66.8009
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            0
+          ],
+          "part": "finger_carrier",
+          "volume_mm3": 50.3743
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            0
+          ],
+          "part": "pin_follower",
+          "volume_mm3": 48.3805
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            30
+          ],
+          "part": "frame_upper_ear",
+          "volume_mm3": 212.0555
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            30
+          ],
+          "part": "drive_drum",
+          "volume_mm3": 3.3627
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            30
+          ],
+          "part": "drive_link",
+          "volume_mm3": 184.855
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            30
+          ],
+          "part": "drive_proximal_post",
+          "volume_mm3": 201.7982
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            30
+          ],
+          "part": "drive_slot_captive",
+          "volume_mm3": 66.8009
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            30
+          ],
+          "part": "finger_carrier",
+          "volume_mm3": 53.8411
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            30
+          ],
+          "part": "pin_follower",
+          "volume_mm3": 48.3805
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            60
+          ],
+          "part": "frame_upper_ear",
+          "volume_mm3": 212.0555
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            60
+          ],
+          "part": "drive_drum",
+          "volume_mm3": 3.3627
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            60
+          ],
+          "part": "drive_link",
+          "volume_mm3": 184.855
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            60
+          ],
+          "part": "drive_proximal_post",
+          "volume_mm3": 201.7982
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            60
+          ],
+          "part": "drive_slot_captive",
+          "volume_mm3": 66.8009
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            60
+          ],
+          "part": "finger_carrier",
+          "volume_mm3": 50.3743
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            60
+          ],
+          "part": "pin_follower",
+          "volume_mm3": 48.3805
+        }
+      ]
+    },
+    {
+      "mount_offset_xyz_mm": [
+        -3.5,
+        11.4,
+        -2.0
+      ],
+      "hits": [
+        {
+          "joint_pose_deg": [
+            0,
+            0
+          ],
+          "part": "drive_link",
+          "volume_mm3": 56.4835
+        },
+        {
+          "joint_pose_deg": [
+            0,
+            0
+          ],
+          "part": "drive_proximal_post",
+          "volume_mm3": 201.7982
+        },
+        {
+          "joint_pose_deg": [
+            0,
+            0
+          ],
+          "part": "drive_slot_captive",
+          "volume_mm3": 66.8009
+        },
+        {
+          "joint_pose_deg": [
+            0,
+            0
+          ],
+          "part": "finger_carrier",
+          "volume_mm3": 50.3743
+        },
+        {
+          "joint_pose_deg": [
+            0,
+            0
+          ],
+          "part": "pin_follower",
+          "volume_mm3": 48.3805
+        },
+        {
+          "joint_pose_deg": [
+            30,
+            0
+          ],
+          "part": "frame_upper_ear",
+          "volume_mm3": 130.7219
+        },
+        {
+          "joint_pose_deg": [
+            30,
+            0
+          ],
+          "part": "drive_link",
+          "volume_mm3": 56.4835
+        },
+        {
+          "joint_pose_deg": [
+            30,
+            0
+          ],
+          "part": "drive_proximal_post",
+          "volume_mm3": 201.7982
+        },
+        {
+          "joint_pose_deg": [
+            30,
+            0
+          ],
+          "part": "drive_slot_captive",
+          "volume_mm3": 66.8009
+        },
+        {
+          "joint_pose_deg": [
+            30,
+            0
+          ],
+          "part": "finger_carrier",
+          "volume_mm3": 50.3743
+        },
+        {
+          "joint_pose_deg": [
+            30,
+            0
+          ],
+          "part": "pin_follower",
+          "volume_mm3": 48.3805
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            0
+          ],
+          "part": "frame_upper_ear",
+          "volume_mm3": 212.0555
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            0
+          ],
+          "part": "drive_link",
+          "volume_mm3": 56.4835
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            0
+          ],
+          "part": "drive_proximal_post",
+          "volume_mm3": 201.7982
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            0
+          ],
+          "part": "drive_slot_captive",
+          "volume_mm3": 66.8009
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            0
+          ],
+          "part": "finger_carrier",
+          "volume_mm3": 50.3743
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            0
+          ],
+          "part": "pin_follower",
+          "volume_mm3": 48.3805
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            30
+          ],
+          "part": "frame_upper_ear",
+          "volume_mm3": 212.0555
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            30
+          ],
+          "part": "drive_link",
+          "volume_mm3": 56.4835
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            30
+          ],
+          "part": "drive_proximal_post",
+          "volume_mm3": 201.7982
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            30
+          ],
+          "part": "drive_slot_captive",
+          "volume_mm3": 66.8009
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            30
+          ],
+          "part": "finger_carrier",
+          "volume_mm3": 53.8411
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            30
+          ],
+          "part": "pin_follower",
+          "volume_mm3": 48.3805
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            60
+          ],
+          "part": "frame_upper_ear",
+          "volume_mm3": 212.0555
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            60
+          ],
+          "part": "drive_link",
+          "volume_mm3": 56.4835
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            60
+          ],
+          "part": "drive_proximal_post",
+          "volume_mm3": 201.7982
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            60
+          ],
+          "part": "drive_slot_captive",
+          "volume_mm3": 66.8009
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            60
+          ],
+          "part": "finger_carrier",
+          "volume_mm3": 50.3743
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            60
+          ],
+          "part": "pin_follower",
+          "volume_mm3": 48.3805
+        }
+      ]
+    },
+    {
+      "mount_offset_xyz_mm": [
+        -3.5,
+        11.4,
+        0
+      ],
+      "hits": [
+        {
+          "joint_pose_deg": [
+            0,
+            0
+          ],
+          "part": "drive_proximal_post",
+          "volume_mm3": 167.4912
+        },
+        {
+          "joint_pose_deg": [
+            0,
+            0
+          ],
+          "part": "drive_slot_captive",
+          "volume_mm3": 60.1209
+        },
+        {
+          "joint_pose_deg": [
+            0,
+            0
+          ],
+          "part": "pin_follower",
+          "volume_mm3": 45.2389
+        },
+        {
+          "joint_pose_deg": [
+            30,
+            0
+          ],
+          "part": "frame_upper_ear",
+          "volume_mm3": 130.7219
+        },
+        {
+          "joint_pose_deg": [
+            30,
+            0
+          ],
+          "part": "drive_proximal_post",
+          "volume_mm3": 167.4912
+        },
+        {
+          "joint_pose_deg": [
+            30,
+            0
+          ],
+          "part": "drive_slot_captive",
+          "volume_mm3": 60.1209
+        },
+        {
+          "joint_pose_deg": [
+            30,
+            0
+          ],
+          "part": "pin_follower",
+          "volume_mm3": 45.2389
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            0
+          ],
+          "part": "frame_upper_ear",
+          "volume_mm3": 212.0555
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            0
+          ],
+          "part": "drive_proximal_post",
+          "volume_mm3": 167.4912
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            0
+          ],
+          "part": "drive_slot_captive",
+          "volume_mm3": 60.1209
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            0
+          ],
+          "part": "pin_follower",
+          "volume_mm3": 45.2389
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            30
+          ],
+          "part": "frame_upper_ear",
+          "volume_mm3": 212.0555
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            30
+          ],
+          "part": "drive_proximal_post",
+          "volume_mm3": 167.4912
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            30
+          ],
+          "part": "drive_slot_captive",
+          "volume_mm3": 60.1209
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            30
+          ],
+          "part": "pin_follower",
+          "volume_mm3": 45.2389
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            60
+          ],
+          "part": "frame_upper_ear",
+          "volume_mm3": 212.0555
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            60
+          ],
+          "part": "drive_proximal_post",
+          "volume_mm3": 167.4912
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            60
+          ],
+          "part": "drive_slot_captive",
+          "volume_mm3": 60.1209
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            60
+          ],
+          "part": "pin_follower",
+          "volume_mm3": 45.2389
+        }
+      ]
+    },
+    {
+      "mount_offset_xyz_mm": [
+        -3.5,
+        11.4,
+        2.0
+      ],
+      "hits": [
+        {
+          "joint_pose_deg": [
+            0,
+            0
+          ],
+          "part": "drive_proximal_post",
+          "volume_mm3": 120.1712
+        },
+        {
+          "joint_pose_deg": [
+            0,
+            0
+          ],
+          "part": "pin_follower",
+          "volume_mm3": 20.1062
+        },
+        {
+          "joint_pose_deg": [
+            30,
+            0
+          ],
+          "part": "frame_upper_ear",
+          "volume_mm3": 130.7219
+        },
+        {
+          "joint_pose_deg": [
+            30,
+            0
+          ],
+          "part": "drive_proximal_post",
+          "volume_mm3": 120.1712
+        },
+        {
+          "joint_pose_deg": [
+            30,
+            0
+          ],
+          "part": "pin_follower",
+          "volume_mm3": 20.1062
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            0
+          ],
+          "part": "frame_upper_ear",
+          "volume_mm3": 212.0555
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            0
+          ],
+          "part": "drive_proximal_post",
+          "volume_mm3": 120.1712
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            0
+          ],
+          "part": "pin_follower",
+          "volume_mm3": 20.1062
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            30
+          ],
+          "part": "frame_upper_ear",
+          "volume_mm3": 212.0555
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            30
+          ],
+          "part": "drive_proximal_post",
+          "volume_mm3": 120.1712
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            30
+          ],
+          "part": "pin_follower",
+          "volume_mm3": 20.1062
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            60
+          ],
+          "part": "frame_upper_ear",
+          "volume_mm3": 212.0555
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            60
+          ],
+          "part": "drive_proximal_post",
+          "volume_mm3": 120.1712
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            60
+          ],
+          "part": "pin_follower",
+          "volume_mm3": 20.1062
+        }
+      ]
+    },
+    {
+      "mount_offset_xyz_mm": [
+        -3.5,
+        13.4,
+        -4.0
+      ],
+      "hits": [
+        {
+          "joint_pose_deg": [
+            0,
+            0
+          ],
+          "part": "drive_link",
+          "volume_mm3": 144.9134
+        },
+        {
+          "joint_pose_deg": [
+            0,
+            0
+          ],
+          "part": "drive_proximal_post",
+          "volume_mm3": 201.7982
+        },
+        {
+          "joint_pose_deg": [
+            0,
+            0
+          ],
+          "part": "drive_slot_captive",
+          "volume_mm3": 66.8009
+        },
+        {
+          "joint_pose_deg": [
+            0,
+            0
+          ],
+          "part": "finger_carrier",
+          "volume_mm3": 37.9035
+        },
+        {
+          "joint_pose_deg": [
+            0,
+            0
+          ],
+          "part": "pin_follower",
+          "volume_mm3": 48.3805
+        },
+        {
+          "joint_pose_deg": [
+            30,
+            0
+          ],
+          "part": "frame_upper_ear",
+          "volume_mm3": 83.1814
+        },
+        {
+          "joint_pose_deg": [
+            30,
+            0
+          ],
+          "part": "drive_link",
+          "volume_mm3": 144.9134
+        },
+        {
+          "joint_pose_deg": [
+            30,
+            0
+          ],
+          "part": "drive_proximal_post",
+          "volume_mm3": 201.7982
+        },
+        {
+          "joint_pose_deg": [
+            30,
+            0
+          ],
+          "part": "drive_slot_captive",
+          "volume_mm3": 66.8009
+        },
+        {
+          "joint_pose_deg": [
+            30,
+            0
+          ],
+          "part": "finger_carrier",
+          "volume_mm3": 37.9035
+        },
+        {
+          "joint_pose_deg": [
+            30,
+            0
+          ],
+          "part": "pin_follower",
+          "volume_mm3": 48.3805
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            0
+          ],
+          "part": "frame_upper_ear",
+          "volume_mm3": 205.4924
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            0
+          ],
+          "part": "drive_link",
+          "volume_mm3": 144.9134
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            0
+          ],
+          "part": "drive_proximal_post",
+          "volume_mm3": 201.7982
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            0
+          ],
+          "part": "drive_slot_captive",
+          "volume_mm3": 66.8009
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            0
+          ],
+          "part": "finger_carrier",
+          "volume_mm3": 37.9035
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            0
+          ],
+          "part": "pin_follower",
+          "volume_mm3": 48.3805
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            30
+          ],
+          "part": "frame_upper_ear",
+          "volume_mm3": 205.4924
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            30
+          ],
+          "part": "drive_link",
+          "volume_mm3": 144.9134
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            30
+          ],
+          "part": "drive_proximal_post",
+          "volume_mm3": 201.7982
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            30
+          ],
+          "part": "drive_slot_captive",
+          "volume_mm3": 66.8009
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            30
+          ],
+          "part": "finger_carrier",
+          "volume_mm3": 43.0411
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            30
+          ],
+          "part": "pin_follower",
+          "volume_mm3": 48.3805
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            60
+          ],
+          "part": "frame_upper_ear",
+          "volume_mm3": 205.4924
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            60
+          ],
+          "part": "drive_link",
+          "volume_mm3": 144.9134
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            60
+          ],
+          "part": "drive_proximal_post",
+          "volume_mm3": 201.7982
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            60
+          ],
+          "part": "drive_slot_captive",
+          "volume_mm3": 66.8009
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            60
+          ],
+          "part": "finger_carrier",
+          "volume_mm3": 37.9035
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            60
+          ],
+          "part": "pin_follower",
+          "volume_mm3": 48.3805
+        }
+      ]
+    },
+    {
+      "mount_offset_xyz_mm": [
+        -3.5,
+        13.4,
+        -2.0
+      ],
+      "hits": [
+        {
+          "joint_pose_deg": [
+            0,
+            0
+          ],
+          "part": "drive_link",
+          "volume_mm3": 44.2791
+        },
+        {
+          "joint_pose_deg": [
+            0,
+            0
+          ],
+          "part": "drive_proximal_post",
+          "volume_mm3": 201.7982
+        },
+        {
+          "joint_pose_deg": [
+            0,
+            0
+          ],
+          "part": "drive_slot_captive",
+          "volume_mm3": 66.8009
+        },
+        {
+          "joint_pose_deg": [
+            0,
+            0
+          ],
+          "part": "finger_carrier",
+          "volume_mm3": 37.9035
+        },
+        {
+          "joint_pose_deg": [
+            0,
+            0
+          ],
+          "part": "pin_follower",
+          "volume_mm3": 48.3805
+        },
+        {
+          "joint_pose_deg": [
+            30,
+            0
+          ],
+          "part": "frame_upper_ear",
+          "volume_mm3": 83.1814
+        },
+        {
+          "joint_pose_deg": [
+            30,
+            0
+          ],
+          "part": "drive_link",
+          "volume_mm3": 44.2791
+        },
+        {
+          "joint_pose_deg": [
+            30,
+            0
+          ],
+          "part": "drive_proximal_post",
+          "volume_mm3": 201.7982
+        },
+        {
+          "joint_pose_deg": [
+            30,
+            0
+          ],
+          "part": "drive_slot_captive",
+          "volume_mm3": 66.8009
+        },
+        {
+          "joint_pose_deg": [
+            30,
+            0
+          ],
+          "part": "finger_carrier",
+          "volume_mm3": 37.9035
+        },
+        {
+          "joint_pose_deg": [
+            30,
+            0
+          ],
+          "part": "pin_follower",
+          "volume_mm3": 48.3805
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            0
+          ],
+          "part": "frame_upper_ear",
+          "volume_mm3": 205.4924
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            0
+          ],
+          "part": "drive_link",
+          "volume_mm3": 44.2791
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            0
+          ],
+          "part": "drive_proximal_post",
+          "volume_mm3": 201.7982
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            0
+          ],
+          "part": "drive_slot_captive",
+          "volume_mm3": 66.8009
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            0
+          ],
+          "part": "finger_carrier",
+          "volume_mm3": 37.9035
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            0
+          ],
+          "part": "pin_follower",
+          "volume_mm3": 48.3805
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            30
+          ],
+          "part": "frame_upper_ear",
+          "volume_mm3": 205.4924
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            30
+          ],
+          "part": "drive_link",
+          "volume_mm3": 44.2791
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            30
+          ],
+          "part": "drive_proximal_post",
+          "volume_mm3": 201.7982
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            30
+          ],
+          "part": "drive_slot_captive",
+          "volume_mm3": 66.8009
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            30
+          ],
+          "part": "finger_carrier",
+          "volume_mm3": 43.0411
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            30
+          ],
+          "part": "pin_follower",
+          "volume_mm3": 48.3805
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            60
+          ],
+          "part": "frame_upper_ear",
+          "volume_mm3": 205.4924
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            60
+          ],
+          "part": "drive_link",
+          "volume_mm3": 44.2791
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            60
+          ],
+          "part": "drive_proximal_post",
+          "volume_mm3": 201.7982
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            60
+          ],
+          "part": "drive_slot_captive",
+          "volume_mm3": 66.8009
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            60
+          ],
+          "part": "finger_carrier",
+          "volume_mm3": 37.9035
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            60
+          ],
+          "part": "pin_follower",
+          "volume_mm3": 48.3805
+        }
+      ]
+    },
+    {
+      "mount_offset_xyz_mm": [
+        -3.5,
+        13.4,
+        0
+      ],
+      "hits": [
+        {
+          "joint_pose_deg": [
+            0,
+            0
+          ],
+          "part": "drive_proximal_post",
+          "volume_mm3": 167.4912
+        },
+        {
+          "joint_pose_deg": [
+            0,
+            0
+          ],
+          "part": "drive_slot_captive",
+          "volume_mm3": 60.1209
+        },
+        {
+          "joint_pose_deg": [
+            0,
+            0
+          ],
+          "part": "pin_follower",
+          "volume_mm3": 45.2389
+        },
+        {
+          "joint_pose_deg": [
+            30,
+            0
+          ],
+          "part": "frame_upper_ear",
+          "volume_mm3": 83.1814
+        },
+        {
+          "joint_pose_deg": [
+            30,
+            0
+          ],
+          "part": "drive_proximal_post",
+          "volume_mm3": 167.4912
+        },
+        {
+          "joint_pose_deg": [
+            30,
+            0
+          ],
+          "part": "drive_slot_captive",
+          "volume_mm3": 60.1209
+        },
+        {
+          "joint_pose_deg": [
+            30,
+            0
+          ],
+          "part": "pin_follower",
+          "volume_mm3": 45.2389
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            0
+          ],
+          "part": "frame_upper_ear",
+          "volume_mm3": 205.4924
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            0
+          ],
+          "part": "drive_proximal_post",
+          "volume_mm3": 167.4912
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            0
+          ],
+          "part": "drive_slot_captive",
+          "volume_mm3": 60.1209
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            0
+          ],
+          "part": "pin_follower",
+          "volume_mm3": 45.2389
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            30
+          ],
+          "part": "frame_upper_ear",
+          "volume_mm3": 205.4924
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            30
+          ],
+          "part": "drive_proximal_post",
+          "volume_mm3": 167.4912
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            30
+          ],
+          "part": "drive_slot_captive",
+          "volume_mm3": 60.1209
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            30
+          ],
+          "part": "pin_follower",
+          "volume_mm3": 45.2389
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            60
+          ],
+          "part": "frame_upper_ear",
+          "volume_mm3": 205.4924
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            60
+          ],
+          "part": "drive_proximal_post",
+          "volume_mm3": 167.4912
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            60
+          ],
+          "part": "drive_slot_captive",
+          "volume_mm3": 60.1209
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            60
+          ],
+          "part": "pin_follower",
+          "volume_mm3": 45.2389
+        }
+      ]
+    },
+    {
+      "mount_offset_xyz_mm": [
+        -3.5,
+        13.4,
+        2.0
+      ],
+      "hits": [
+        {
+          "joint_pose_deg": [
+            0,
+            0
+          ],
+          "part": "drive_proximal_post",
+          "volume_mm3": 120.1712
+        },
+        {
+          "joint_pose_deg": [
+            0,
+            0
+          ],
+          "part": "pin_follower",
+          "volume_mm3": 20.1062
+        },
+        {
+          "joint_pose_deg": [
+            30,
+            0
+          ],
+          "part": "frame_upper_ear",
+          "volume_mm3": 83.1814
+        },
+        {
+          "joint_pose_deg": [
+            30,
+            0
+          ],
+          "part": "drive_proximal_post",
+          "volume_mm3": 120.1712
+        },
+        {
+          "joint_pose_deg": [
+            30,
+            0
+          ],
+          "part": "pin_follower",
+          "volume_mm3": 20.1062
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            0
+          ],
+          "part": "frame_upper_ear",
+          "volume_mm3": 205.4924
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            0
+          ],
+          "part": "drive_proximal_post",
+          "volume_mm3": 120.1712
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            0
+          ],
+          "part": "pin_follower",
+          "volume_mm3": 20.1062
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            30
+          ],
+          "part": "frame_upper_ear",
+          "volume_mm3": 205.4924
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            30
+          ],
+          "part": "drive_proximal_post",
+          "volume_mm3": 120.1712
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            30
+          ],
+          "part": "pin_follower",
+          "volume_mm3": 20.1062
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            60
+          ],
+          "part": "frame_upper_ear",
+          "volume_mm3": 205.4924
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            60
+          ],
+          "part": "drive_proximal_post",
+          "volume_mm3": 120.1712
+        },
+        {
+          "joint_pose_deg": [
+            60,
+            60
+          ],
+          "part": "pin_follower",
+          "volume_mm3": 20.1062
+        }
+      ]
+    }
+  ]
+}

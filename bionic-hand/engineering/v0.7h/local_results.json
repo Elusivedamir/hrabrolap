@@ -1,0 +1,102 @@
+{
+  "status": "BENCH_CAD_AND_QUASISTATIC_SCREEN",
+  "pitch_mm": 1.5,
+  "max_nominal_one_stroke_mm": 1.5,
+  "conditional_one_stroke_with_play_mm": 1.7799999999999998,
+  "nominal_simultaneous_minimum_overlap_mm": 0.9750000000000001,
+  "conditional_adverse_minimum_overlap_mm": 0.825,
+  "load_screen_at_adverse_overlap": {
+    "bench_one_MCP": {
+      "load_N": 9.622504486493762,
+      "nominal_face_pressure_MPa": 3.6448880630658187,
+      "nominal_single_tooth_two_path_shear_MPa": 3.304431485746484
+    },
+    "10kg_one_finger": {
+      "load_N": 377.45813448989617,
+      "nominal_face_pressure_MPa": 142.97656609465764,
+      "nominal_single_tooth_two_path_shear_MPa": 129.62161211878302
+    },
+    "10kg_one_finger_x2": {
+      "load_N": 754.9162689797923,
+      "nominal_face_pressure_MPa": 285.9531321893153,
+      "nominal_single_tooth_two_path_shear_MPa": 259.24322423756604
+    }
+  },
+  "aligned_jam_3mm": {
+    "after_clearing_mm": 3.0,
+    "uncommanded_nominal_mm": 0.0
+  },
+  "between_jam_3_7mm": {
+    "after_clearing_mm": 4.5,
+    "uncommanded_nominal_mm": 0.7999999999999998,
+    "with_play_mm": 1.0799999999999996
+  },
+  "first_fresh_pulse_after_settling_mm": 6.0,
+  "common_nominal_schedule": [
+    {
+      "central_index": 0,
+      "central_mm": 0.0,
+      "local_mm": 0.0
+    },
+    {
+      "central_index": 1,
+      "central_mm": 0.20444504226559013,
+      "local_mm": 0.0
+    },
+    {
+      "central_index": 2,
+      "central_mm": 0.8038475772933678,
+      "local_mm": 0.0
+    },
+    {
+      "central_index": 3,
+      "central_mm": 1.7573593128807146,
+      "local_mm": 1.5
+    },
+    {
+      "central_index": 4,
+      "central_mm": 2.999999999999999,
+      "local_mm": 2.999999999999999
+    },
+    {
+      "central_index": 5,
+      "central_mm": 4.447085729384876,
+      "local_mm": 2.999999999999999
+    },
+    {
+      "central_index": 6,
+      "central_mm": 5.999999999999999,
+      "local_mm": 4.499999999999999
+    },
+    {
+      "central_index": 7,
+      "central_mm": 7.552914270615124,
+      "local_mm": 5.999999999999999
+    },
+    {
+      "central_index": 8,
+      "central_mm": 8.999999999999998,
+      "local_mm": 7.499999999999999
+    },
+    {
+      "central_index": 9,
+      "central_mm": 10.242640687119284,
+      "local_mm": 9.0
+    },
+    {
+      "central_index": 10,
+      "central_mm": 11.196152422706632,
+      "local_mm": 10.5
+    },
+    {
+      "central_index": 11,
+      "central_mm": 11.79555495773441,
+      "local_mm": 10.5
+    },
+    {
+      "central_index": 12,
+      "central_mm": 12.0,
+      "local_mm": 12.0
+    }
+  ]
+}

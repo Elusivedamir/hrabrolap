@@ -1,0 +1,32 @@
+{
+  "cadquery": "2.7.0",
+  "poses": 309,
+  "valid_bodies": 4944,
+  "pairs": 37080,
+  "brep_candidates": 4173,
+  "envelope_mm": [
+    28.1,
+    15.8,
+    16.25
+  ],
+  "limits_xyz_mm": [
+    [
+      -13.5,
+      14.600000000000001
+    ],
+    [
+      -7.25,
+      8.55
+    ],
+    [
+      -0.5,
+      15.75
+    ]
+  ],
+  "volume_threshold_mm3": 0.005,
+  "barrier_sample_count": 35,
+  "minimum_barrier_collision_mm3": 0.05669999999999978,
+  "blocked_shuttle_overtravel_mm3": 0.8969999999999992,
+  "blocked_park_at_non_indexed_position_mm3": 3.6607999999999987,
+  "errors": []
+}
