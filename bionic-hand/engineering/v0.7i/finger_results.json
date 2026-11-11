@@ -1,0 +1,34 @@
+{
+  "status": "UNLOADED_JIG_MODEL_ONLY",
+  "angles_per_anchor": 61,
+  "anchors": 3,
+  "valid_body_states": 2562,
+  "pairs": 16653,
+  "brep_candidates": 2379,
+  "overlap_limit_mm3": 0.005,
+  "errors": [],
+  "cord_proxy": {
+    "guide_xy_mm": [
+      11.0,
+      -38.0
+    ],
+    "radius_mm": 0.45,
+    "tracks": [
+      {
+        "anchor_mm": 17.0,
+        "payout_mm": 15.059335482205466,
+        "minimum_closing_moment_arm_mm": 6.879256471016498
+      },
+      {
+        "anchor_mm": 23.0,
+        "payout_mm": 21.7613901229636,
+        "minimum_closing_moment_arm_mm": 12.04619786051955
+      },
+      {
+        "anchor_mm": 29.0,
+        "payout_mm": 28.695438322193212,
+        "minimum_closing_moment_arm_mm": 20.576298109591995
+      }
+    ]
+  }
+}
