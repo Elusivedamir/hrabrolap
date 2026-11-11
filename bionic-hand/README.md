@@ -1,3 +1,5 @@
+> **v0.7p — [наружный лючок: доступ инструмента](engineering/v0.7p/README.md).** 16/16 stdlib tests; условные окна 8/10/12 мм дают −2/0/+2 мм запаса при Ø6 инструменте, 0,5 мм на сторону и кромках 1,5 мм. Искусственный движущийся крепёж перекрывает прямой путь. **Не 3D CAD, не физический тест.**
+
 > **v0.7o — [доступ инструмента между пальцами](engineering/v0.7o/README.md):** 14/14 Python tests. При условных ширине пальца 12 мм и шаге 17 мм зазор 5 мм меньше требуемых 7 мм для Ø6 инструмента с допусками. Только AABB/арифметика, НЕ 3D CAD и НЕ физическая сборка.
 
 > **v0.7m · [angular clearance for a replaceable unloaded cable anchor](engineering/v0.7m/README.md).** 12/12 unit tests; bare hub R4 mm fails assumed reserve/access/guard budget, R5+ only conditionally fits in 2D. No actual anchor, strength, 3D clearance or physical test.
