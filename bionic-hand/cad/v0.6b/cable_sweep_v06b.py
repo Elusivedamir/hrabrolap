@@ -85,7 +85,7 @@ def audit(export=True):
     (HERE/'cable_sweep_v06b.json').write_text(json.dumps(result,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
     if export:
         cq.exporters.export(reel(0,2.8),str(HERE/'FDM_SHAPE_ONLY_NARROW_CAPSTAN.stl'),tolerance=.1,angularTolerance=.1)
-        cq.exporters.export(reel(0,2.4),str(HERE/'FDM_SHAPE_ONLY_NARROW_CAPSTAN.step'))
+        cq.exporters.export(reel(0,2.8),str(HERE/'FDM_SHAPE_ONLY_NARROW_CAPSTAN.step'))
     print(result['status'])
     for row in rows:
         if row['mcp_deg']%5==0: print(row['half_width_mm'],row['mcp_deg'],row['penetration_sum_mm3'])
