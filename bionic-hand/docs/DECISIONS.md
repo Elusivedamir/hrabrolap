@@ -1,3 +1,7 @@
+## v0.7m provisional decision (2026-11-11)
+
+Reject bare hub R4 mm for the *hypothetical* angular budget (21.7614 mm stroke, Ø1.2 cable, 30° spare, 60° anchor, 15° guard). R5+ only passes an isolated 2D angular calculation. No acceptance of an anchor design, load, fatigue or five-finger fit. Prefer captive standard fasteners and replaceable hand-serviceable unloaded termination for first shape fixture; any tension-bearing termination requires manufacturer rating and physical pull-out/cycle tests. [Screen](../engineering/v0.7m/README.md).
+
 # Реестр инженерных решений
 
 | ID | Решение | Обоснование | Статус |
